@@ -1,0 +1,688 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>業務上の規制 — 宅建士試験 2026年度</title>
+
+<style>
+  :root {
+    --paper:#EBEDE9; --surface:#F8F9F6; --sunk:#E1E4DE; --ink:#151F2A; --muted:#5D6B78;
+    --rule:#CDD2CB; --hair:#DCE0D9; --accent:#B8342A; --accent-soft:#F3DEDB;
+    --blue:#2A5F86; --blue-soft:#DCE6EE;
+    --font-display:"Hiragino Mincho ProN","Yu Mincho","YuMincho","Noto Serif JP",serif;
+    --font-body:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","YuGothic","Noto Sans JP",system-ui,sans-serif;
+    --font-mono:ui-monospace,"SFMono-Regular","SF Mono",Menlo,Consolas,monospace;
+    --measure:68ch;
+    --s1:.35rem; --s2:.7rem; --s3:1.1rem; --s4:1.7rem; --s5:2.6rem; --s6:4rem;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper:#0D1B29; --surface:#132534; --sunk:#0A1622; --ink:#DAE4EC; --muted:#8CA1B3;
+      --rule:#26415A; --hair:#1D3448; --accent:#FF7059; --accent-soft:#3A1F1D;
+      --blue:#6FB6DC; --blue-soft:#14293A;
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper:#0D1B29; --surface:#132534; --sunk:#0A1622; --ink:#DAE4EC; --muted:#8CA1B3;
+    --rule:#26415A; --hair:#1D3448; --accent:#FF7059; --accent-soft:#3A1F1D;
+    --blue:#6FB6DC; --blue-soft:#14293A;
+  }
+
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--paper); color:var(--ink); font-family:var(--font-body);
+    font-size:16px; line-height:1.9; -webkit-font-smoothing:antialiased; font-feature-settings:"palt" 1; }
+
+  .wrap { display:grid; grid-template-columns:15.5rem minmax(0,1fr); gap:var(--s6);
+    max-width:80rem; margin:0 auto; padding:0 var(--s4) var(--s6); align-items:start; }
+  @media (max-width:60rem){ .wrap{ grid-template-columns:minmax(0,1fr); gap:var(--s4); padding:0 var(--s3) var(--s5);} }
+
+  .masthead { grid-column:1/-1; padding:var(--s5) 0 var(--s4); border-bottom:2px solid var(--ink);
+    margin-bottom:var(--s2); display:flex; flex-wrap:wrap; align-items:flex-end; justify-content:space-between; gap:var(--s3); }
+  .eyebrow { font-family:var(--font-mono); font-size:.72rem; letter-spacing:.16em; text-transform:uppercase;
+    color:var(--muted); display:flex; align-items:center; gap:.6em; }
+  .eyebrow::before { content:""; width:2.2rem; height:1px; background:var(--accent); }
+  h1 { font-family:var(--font-display); font-weight:600; font-size:clamp(2rem,1.4rem + 2.6vw,3.1rem);
+    line-height:1.2; letter-spacing:.04em; margin:var(--s2) 0 var(--s3); text-wrap:balance; }
+  .facts { display:flex; flex-wrap:wrap; gap:0 var(--s3); font-size:.82rem; color:var(--muted); list-style:none; margin:0; padding:0; }
+  .facts b { font-family:var(--font-mono); font-variant-numeric:tabular-nums; color:var(--ink); font-weight:600; }
+  .toggles { display:flex; gap:var(--s1); }
+  button { font-family:var(--font-body); font-size:.78rem; color:var(--muted); background:var(--surface);
+    border:1px solid var(--rule); border-radius:2px; padding:.4em .9em; cursor:pointer; transition:color .15s,border-color .15s; }
+  button:hover { color:var(--ink); border-color:var(--ink); }
+  button:focus-visible { outline:2px solid var(--accent); outline-offset:2px; }
+  button[aria-pressed="true"] { color:var(--accent); border-color:var(--accent); }
+
+  nav.rail { position:sticky; top:var(--s3); font-size:.82rem; max-height:calc(100vh - 3rem); overflow-y:auto; padding-bottom:var(--s3); }
+  nav.rail h2 { font-family:var(--font-mono); font-size:.68rem; letter-spacing:.16em; text-transform:uppercase; color:var(--muted); margin:0 0 var(--s2); font-weight:500; }
+  nav.rail ol { list-style:none; margin:0; padding:0; display:flex; flex-direction:column; }
+  nav.rail a { display:block; padding:.3em 0 .3em .9em; color:var(--muted); text-decoration:none; border-left:2px solid var(--hair); line-height:1.5; }
+  nav.rail a:hover { color:var(--ink); border-left-color:var(--rule); }
+  nav.rail a.on { color:var(--ink); border-left-color:var(--accent); font-weight:600; }
+  nav.rail a .num { font-family:var(--font-mono); font-size:.72rem; color:var(--muted); margin-right:.5em; }
+  @media (max-width:60rem){
+    nav.rail{ position:static; max-height:none; border-bottom:1px solid var(--rule); padding-bottom:var(--s3); }
+    nav.rail ol{ display:grid; grid-template-columns:repeat(auto-fill,minmax(9rem,1fr)); gap:0 var(--s2); }
+  }
+
+  main { min-width:0; }
+  section { padding-top:var(--s5); scroll-margin-top:var(--s3); }
+  section > * { max-width:var(--measure); }
+  section > figure, section > .scroll { max-width:none; }
+
+  h2.sec { font-family:var(--font-display); font-size:clamp(1.45rem,1.2rem + .9vw,1.9rem); font-weight:600;
+    letter-spacing:.04em; margin:0 0 var(--s3); padding-bottom:var(--s2); border-bottom:1px solid var(--rule);
+    display:flex; align-items:baseline; gap:.7em; max-width:none; }
+  h2.sec .num { font-family:var(--font-mono); font-size:.8rem; letter-spacing:.1em; color:var(--accent); font-weight:500; }
+  h3 { font-family:var(--font-body); font-size:1.06rem; font-weight:700; letter-spacing:.02em;
+    margin:var(--s4) 0 var(--s2); padding-left:.7em; border-left:3px solid var(--ink); }
+  p { margin:0 0 var(--s3); }
+  a { color:var(--blue); text-underline-offset:.2em; }
+  em { font-style:normal; background:linear-gradient(transparent 62%, var(--accent-soft) 62%); font-weight:600; }
+  ul, ol { margin:0 0 var(--s3); padding-left:1.3em; }
+  li { margin-bottom:var(--s1); }
+  .lead { font-size:1.05rem; color:var(--muted); }
+
+  .call { max-width:var(--measure); margin:0 0 var(--s3); padding:var(--s3) var(--s3) var(--s3) var(--s4);
+    background:var(--surface); border:1px solid var(--hair); border-left:3px solid var(--rule); border-radius:2px; font-size:.94rem; }
+  .call > :last-child { margin-bottom:0; }
+  .call .tag { display:block; font-family:var(--font-mono); font-size:.68rem; letter-spacing:.16em; text-transform:uppercase; color:var(--muted); margin-bottom:var(--s1); }
+  .call.trap { border-left-color:var(--accent); background:var(--accent-soft); }
+  .call.trap .tag { color:var(--accent); }
+  .call.exam { border-left-color:var(--ink); }
+  .call.exam .tag { color:var(--ink); }
+  .call.rev { border-left-color:var(--accent); }
+  .call.rev .tag { color:var(--accent); }
+  .call.tip { border-left-color:var(--blue); background:var(--blue-soft); }
+  .call.tip .tag { color:var(--blue); }
+
+  .scroll { overflow-x:auto; margin:0 0 var(--s3); -webkit-overflow-scrolling:touch; }
+  table { border-collapse:collapse; width:100%; font-size:.88rem; line-height:1.6; }
+  caption { text-align:left; font-size:.78rem; color:var(--muted); padding-bottom:var(--s1); font-family:var(--font-mono); letter-spacing:.08em; }
+  th, td { padding:.62em .8em; text-align:left; vertical-align:top; border-bottom:1px solid var(--hair); }
+  thead th { font-size:.74rem; letter-spacing:.1em; color:var(--muted); font-weight:600; border-bottom:1px solid var(--ink); white-space:nowrap; }
+  tbody tr:hover { background:var(--surface); }
+  td.n, th.n { text-align:center; font-family:var(--font-mono); font-variant-numeric:tabular-nums; white-space:nowrap; }
+  .no { color:var(--accent); font-weight:700; }
+  .yes { color:var(--muted); }
+  .tri { color:var(--blue); }
+  table.baikai tbody td:first-child { white-space:nowrap; font-weight:600; }
+  table.baikai thead th:nth-child(4) { color:var(--accent); }
+
+  figure { margin:0 0 var(--s4); }
+  figure svg { display:block; width:100%; height:auto; }
+  figcaption { font-size:.78rem; color:var(--muted); font-family:var(--font-mono); letter-spacing:.06em; margin-top:var(--s2); padding-top:var(--s1); border-top:1px solid var(--hair); }
+  .plate { background:var(--surface); border:1px solid var(--hair); border-radius:2px; padding:var(--s3); }
+  .svg-ink { fill:none; stroke:var(--ink); stroke-width:1.4; }
+  .svg-hair { fill:none; stroke:var(--rule); stroke-width:1; }
+  .svg-dim { fill:none; stroke:var(--blue); stroke-width:1; }
+  .svg-acc { fill:none; stroke:var(--accent); stroke-width:1.6; }
+  .svg-fill { fill:var(--sunk); stroke:var(--rule); stroke-width:1; }
+  .svg-accfill { fill:var(--accent-soft); stroke:var(--accent); stroke-width:1.2; }
+  .svg-bluefill { fill:var(--blue-soft); stroke:var(--blue); stroke-width:1.2; }
+  text { font-family:var(--font-body); fill:var(--ink); font-size:12px; }
+  text.lbl { font-family:var(--font-mono); fill:var(--muted); font-size:10.5px; letter-spacing:.06em; }
+  text.dimt { font-family:var(--font-mono); fill:var(--blue); font-size:11px; }
+  text.acct { fill:var(--accent); font-size:11.5px; font-weight:700; }
+  text.mark { font-size:16px; font-weight:700; }
+
+  .nums { display:grid; grid-template-columns:repeat(auto-fill,minmax(11.5rem,1fr)); gap:var(--s2); }
+  .nc { background:var(--surface); border:1px solid var(--hair); border-radius:2px; padding:var(--s3) var(--s3) var(--s2); display:flex; flex-direction:column; gap:var(--s1); }
+  .nc .v { font-family:var(--font-mono); font-variant-numeric:tabular-nums; font-size:1.3rem; font-weight:600; line-height:1.2; color:var(--accent); }
+  .nc .d { font-size:.8rem; color:var(--muted); line-height:1.6; }
+  .nums.masked .v { color:transparent; background:var(--rule); border-radius:2px; user-select:none; }
+  .nums.masked .nc:hover .v, .nums.masked .nc:focus-within .v { color:var(--accent); background:transparent; }
+  .nc:focus-visible { outline:2px solid var(--accent); outline-offset:2px; }
+  .masthead-note { font-size:.78rem; color:var(--muted); margin-bottom:var(--s2); }
+
+  table.traps td:first-child { color:var(--muted); }
+  table.traps td:first-child::before { content:"「"; }
+  table.traps td:first-child::after { content:"」"; }
+  table.traps td:last-child strong { color:var(--accent); }
+
+  footer { grid-column:1/-1; margin-top:var(--s6); padding-top:var(--s3); border-top:1px solid var(--rule); font-size:.8rem; color:var(--muted); }
+  footer ul { list-style:none; padding:0; }
+  footer li { margin-bottom:var(--s1); }
+  .sibling { display:flex; flex-wrap:wrap; gap:var(--s2); margin-top:var(--s3); }
+  .sibling a { font-size:.8rem; text-decoration:none; border:1px solid var(--rule); border-radius:2px; padding:.35em .8em; color:var(--muted); }
+  .sibling a:hover { color:var(--ink); border-color:var(--ink); }
+
+  @media (prefers-reduced-motion: reduce){ *{ transition:none !important; animation:none !important; scroll-behavior:auto !important; } }
+  html { scroll-behavior:smooth; }
+  .eyebrow a { color:var(--accent); text-decoration:none; }
+  .eyebrow a:hover { text-decoration:underline; text-underline-offset:.2em; }
+  nav.rail a.home { border-left:none; padding:0 0 var(--s2); color:var(--accent);
+    font-family:var(--font-mono); font-size:.72rem; letter-spacing:.1em; }
+  nav.rail a.home:hover { color:var(--accent); text-decoration:underline; text-underline-offset:.2em; }
+</style>
+
+<div class="wrap">
+
+  <header class="masthead">
+    <div>
+      <div class="eyebrow"><a href="../index.html">← 総目次</a> &nbsp;/&nbsp; 02 宅建業法 &nbsp;/&nbsp; 宅建士試験 2026年度</div>
+      <h1>業務上の規制</h1>
+      <ul class="facts">
+        <li>法令基準日 <b>2026-04-01</b></li>
+        <li>出題数 <b>約3問</b></li>
+        <li>目標 <b>全問正解</b></li>
+        <li>更新 <b>2026-08-09</b></li>
+      </ul>
+    </div>
+    <div class="toggles">
+      <button id="mask" type="button" aria-pressed="false">数値を隠す</button>
+      <button id="theme" type="button">配色切替</button>
+    </div>
+  </header>
+
+  <nav class="rail" aria-label="目次">
+    <a class="home" href="../index.html">← 総目次</a>
+    <h2>Contents</h2>
+    <ol>
+      <li><a href="#overview"><span class="num">00</span>全体像</a></li>
+      <li><a href="#kokoku"><span class="num">01</span>誇大広告等の禁止</a></li>
+      <li><a href="#jiki"><span class="num">02</span>広告・契約の時期制限</a></li>
+      <li><a href="#taiyou"><span class="num">03</span>取引態様の明示</a></li>
+      <li><a href="#baikai"><span class="num">04</span>媒介契約の3類型</a></li>
+      <li><a href="#shomen"><span class="num">05</span>媒介契約書面</a></li>
+      <li><a href="#reins"><span class="num">06</span>指定流通機構</a></li>
+      <li><a href="#sonota"><span class="num">07</span>その他の禁止行為</a></li>
+      <li><a href="#annaijo"><span class="num">08</span>案内所と標識</a></li>
+      <li><a href="#deru"><span class="num">09</span>よく出る論点</a></li>
+      <li><a href="#hikkake"><span class="num">10</span>ひっかけ一覧</a></li>
+      <li><a href="#suji"><span class="num">11</span>数字まとめ</a></li>
+    </ol>
+  </nav>
+
+  <main>
+
+    <!-- 00 -->
+    <section id="overview">
+      <h2 class="sec"><span class="num">00</span>全体像</h2>
+      <p class="lead">契約に至るまでの各段階に規制がかかる。<em>広告 → 媒介契約 → 勧誘 → 契約</em>の順に、どの段階の話かを意識して読む。</p>
+
+      <div class="scroll">
+        <table>
+          <thead><tr><th>段階</th><th>規制</th><th>条文</th></tr></thead>
+          <tbody>
+            <tr><td rowspan="3"><strong>広告</strong></td><td>誇大広告等の禁止</td><td class="n">32条</td></tr>
+            <tr><td>広告開始時期の制限</td><td class="n">33条</td></tr>
+            <tr><td>取引態様の明示</td><td class="n">34条</td></tr>
+            <tr><td rowspan="2"><strong>媒介契約</strong></td><td>媒介契約の規制（3類型・書面交付）</td><td class="n">34条の2</td></tr>
+            <tr><td>指定流通機構への登録</td><td class="n">34条の2第5項</td></tr>
+            <tr><td rowspan="3"><strong>勧誘</strong></td><td>重要な事実の不告知等の禁止</td><td class="n">47条</td></tr>
+            <tr><td>断定的判断の提供・威迫行為の禁止</td><td class="n">47条の2</td></tr>
+            <tr><td>手付貸与等による契約締結の誘引の禁止</td><td class="n">47条</td></tr>
+            <tr><td rowspan="2"><strong>契約</strong></td><td>契約締結時期の制限</td><td class="n">36条</td></tr>
+            <tr><td>供託所等の説明</td><td class="n">35条の2</td></tr>
+            <tr><td><strong>全体</strong></td><td>業務処理の原則・従業者証明書・守秘義務・不当な履行遅延の禁止</td><td class="n">31条・48条・45条・44条</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>0-1　従業者証明書</h3>
+      <div class="scroll">
+        <table>
+          <thead><tr><th>論点</th><th>内容</th></tr></thead>
+          <tbody>
+            <tr><td>携帯義務</td><td>宅建業者は、従業者に<strong>従業者証明書を携帯させなければ</strong>業務に従事させてはならない</td></tr>
+            <tr><td>対象者</td><td>アルバイト・パート、非常勤の役員、<strong>代表者</strong>も含む</td></tr>
+            <tr><td>提示</td><td>取引の関係者から<strong>請求があったとき</strong>に提示</td></tr>
+            <tr><td class="no">宅建士証での代用</td><td class="no"><strong>できない</strong>。宅建士証と従業者証明書は別物</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="call trap">
+        <span class="tag">ひっかけ</span>
+        <p><strong>宅建士証を提示しても従業者証明書の代わりにはならない。</strong>毎年のように出る。<br>
+        従業者名簿・帳簿・標識といった<a href="免許制度.html#jimusho">事務所の5点セット</a>と混ぜた出題も多いので、あわせて確認する。</p>
+      </div>
+    </section>
+
+    <!-- 01 -->
+    <section id="kokoku">
+      <h2 class="sec"><span class="num">01</span>誇大広告等の禁止</h2>
+
+      <div class="scroll">
+        <table>
+          <thead><tr><th>論点</th><th>内容</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><strong>対象事項</strong></td>
+              <td>① 所在・規模・形質<br>② 現在もしくは将来の<strong>利用の制限・環境・交通その他の利便</strong><br>③ 代金等の対価の額・支払方法<br>④ 代金等に関する<strong>金銭の貸借のあっせん</strong></td>
+            </tr>
+            <tr><td>禁止される表示</td><td>著しく事実に相違する表示／実際のものより著しく<strong>優良・有利</strong>であると人を誤認させるような表示</td></tr>
+            <tr><td class="no">成立時期</td><td class="no"><strong>広告をした時点で違反が成立</strong>。注文がなくても、契約が成立しなくても、損害が発生しなくても違反</td></tr>
+            <tr><td>おとり広告</td><td>存在しない物件、取引する意思のない物件の広告も誇大広告に<strong>該当する</strong></td></tr>
+            <tr><td>罰則</td><td><strong>6月以下の拘禁刑</strong>または <strong>100万円以下の罰金</strong>（併科あり）。あわせて監督処分の対象</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="call exam">
+        <span class="tag">よく出る</span>
+        <p><strong>「結果」は問われない。</strong>誰も誤認しなかった、問い合わせがなかった、契約に至らなかった、実害が出なかった — いずれも違反であることに変わりはない。<br>
+        「将来の環境」も対象なので、「近くに駅ができる予定」といった不確実な将来利益をうたう広告も規制される。</p>
+      </div>
+    </section>
+
+    <!-- 02 -->
+    <section id="jiki">
+      <h2 class="sec"><span class="num">02</span>広告・契約の時期制限</h2>
+      <p class="lead">工事完了前の物件について、<em>広告はすべて禁止、契約は貸借だけ例外的にできる</em>。この非対称がこの分野の最頻出論点。</p>
+
+      <figure class="plate">
+        <svg viewBox="0 0 720 240" role="img" aria-label="工事完了前の物件について、広告は自ら売買・交換、代理媒介による売買・交換・貸借のすべてが許可等の前は禁止される。契約締結の制限は貸借の代理・媒介だけが対象外で、許可等の前でも契約できる。">
+          <text x="24" y="28" class="lbl">開発許可・建築確認等の処分を受ける前にできるか</text>
+
+          <text x="230" y="60" text-anchor="middle" class="lbl">売買</text>
+          <text x="380" y="60" text-anchor="middle" class="lbl">交換</text>
+          <text x="530" y="60" text-anchor="middle" class="lbl">貸借</text>
+
+          <!-- 広告 -->
+          <text x="24" y="100" class="acct">広告（33条）</text>
+          <rect x="160" y="74" width="140" height="42" class="svg-accfill" rx="2"/>
+          <text x="230" y="101" text-anchor="middle" class="mark" fill="var(--accent)">✕</text>
+          <rect x="310" y="74" width="140" height="42" class="svg-accfill" rx="2"/>
+          <text x="380" y="101" text-anchor="middle" class="mark" fill="var(--accent)">✕</text>
+          <rect x="460" y="74" width="140" height="42" class="svg-accfill" rx="2"/>
+          <text x="530" y="101" text-anchor="middle" class="mark" fill="var(--accent)">✕</text>
+          <text x="614" y="100" class="lbl">すべて禁止</text>
+
+          <!-- 契約 -->
+          <text x="24" y="156" class="dimt">契約締結（36条）</text>
+          <rect x="160" y="130" width="140" height="42" class="svg-accfill" rx="2"/>
+          <text x="230" y="157" text-anchor="middle" class="mark" fill="var(--accent)">✕</text>
+          <rect x="310" y="130" width="140" height="42" class="svg-accfill" rx="2"/>
+          <text x="380" y="157" text-anchor="middle" class="mark" fill="var(--accent)">✕</text>
+          <rect x="460" y="130" width="140" height="42" class="svg-bluefill" rx="2"/>
+          <text x="530" y="157" text-anchor="middle" class="mark" fill="var(--blue)">○</text>
+          <text x="614" y="150" class="dimt">貸借だけ</text>
+          <text x="614" y="166" class="lbl">締結できる</text>
+
+          <text x="24" y="204" class="lbl">「許可申請中」と明示しても広告はできない</text>
+          <text x="24" y="224" class="lbl">貸借の「広告」は禁止だが、貸借の「契約」はできる — ここがねじれている</text>
+        </svg>
+        <figcaption>Fig.1 — 広告は全面禁止、契約は貸借だけ穴が開く</figcaption>
+      </figure>
+
+      <div class="call tip">
+        <span class="tag">覚え方</span>
+        <p><strong>「広告は8パターン全部ダメ、契約は貸借の代理・媒介だけセーフ」。</strong>8パターンとは、自ら・代理・媒介 × 売買・交換・貸借の9通りから、そもそも取引にあたらない「自ら貸借」を除いたもの。<br>
+        貸借の契約だけが許されるのは、建物が完成しなくても入居時期を調整すれば足り、買主のように多額の代金を先に払う危険が小さいから、と理解する。</p>
+      </div>
+
+      <div class="call trap">
+        <span class="tag">ひっかけ</span>
+        <p><strong>「建築確認申請中である旨を明示すれば広告できる」は誤り。</strong>処分があった後でなければ一切広告できない。<br>
+        逆に<strong>「貸借の媒介でも建築確認前は契約できない」も誤り</strong>。貸借の代理・媒介は36条の対象外。</p>
+      </div>
+    </section>
+
+    <!-- 03 -->
+    <section id="taiyou">
+      <h2 class="sec"><span class="num">03</span>取引態様の明示</h2>
+
+      <div class="scroll">
+        <table>
+          <thead><tr><th>いつ</th><th>内容</th></tr></thead>
+          <tbody>
+            <tr><td><strong>広告をするとき</strong></td><td>自ら売主・自ら交換の当事者・代理・媒介のいずれであるかを明示する</td></tr>
+            <tr><td><strong>注文を受けたとき</strong></td><td class="no"><strong>遅滞なく</strong>、取引態様の別を明示する</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="call trap">
+        <span class="tag">ひっかけ</span>
+        <p><strong>広告時に明示していても、注文を受けたら改めて明示が必要。</strong>2回いる。「広告に明示したので注文時の明示は不要」は誤り。<br>
+        なお明示の方法に決まりはなく、<strong>口頭でもよい</strong>。書面が必要という選択肢も誤り。</p>
+      </div>
+    </section>
+
+    <!-- 04 -->
+    <section id="baikai">
+      <h2 class="sec"><span class="num">04</span>媒介契約の3類型</h2>
+
+      <div class="scroll">
+        <table class="baikai">
+          <caption>右にいくほど依頼者の自由が減り、業者の義務が重くなる</caption>
+          <thead><tr><th>項目</th><th>一般媒介</th><th>専任媒介</th><th>専属専任媒介</th></tr></thead>
+          <tbody>
+            <tr>
+              <td>他の業者に重ねて依頼</td>
+              <td class="n tri">できる</td>
+              <td class="n no">できない</td>
+              <td class="n no">できない</td>
+            </tr>
+            <tr>
+              <td><strong>自己発見取引</strong></td>
+              <td class="n tri">できる</td>
+              <td class="n tri">できる</td>
+              <td class="n no">できない</td>
+            </tr>
+            <tr>
+              <td>有効期間</td>
+              <td class="n">制限なし</td>
+              <td class="n no">3か月以内</td>
+              <td class="n no">3か月以内</td>
+            </tr>
+            <tr>
+              <td><strong>業務処理状況の報告</strong></td>
+              <td class="n">義務なし</td>
+              <td class="n no">2週間に1回以上</td>
+              <td class="n no">1週間に1回以上</td>
+            </tr>
+            <tr>
+              <td><strong>指定流通機構への登録</strong></td>
+              <td class="n">義務なし</td>
+              <td class="n no">契約日から7日以内</td>
+              <td class="n no">契約日から5日以内</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="call tip">
+        <span class="tag">覚え方</span>
+        <p><strong>「専任は7日・2週間、専属専任は5日・1週間」。</strong>専属専任のほうが依頼者を強く縛るぶん、業者の義務も重い（早く登録し、頻繁に報告する）。<br>
+        <strong>自己発見取引ができなくなるのが「専属」の意味</strong>。専属専任だけが、依頼者が自分で見つけた相手とも直接契約できない。</p>
+      </div>
+
+      <div class="scroll">
+        <table>
+          <thead><tr><th>論点</th><th>内容</th></tr></thead>
+          <tbody>
+            <tr><td>登録期間の日数</td><td class="no">休業日は<strong>算入しない</strong></td></tr>
+            <tr><td>有効期間の超過</td><td>3か月を超える定めをしても、<strong>3か月に短縮される</strong>（契約全体が無効になるわけではない）</td></tr>
+            <tr><td>更新</td><td class="no"><strong>依頼者からの申出</strong>があった場合に限り更新できる。<strong>自動更新の特約は無効</strong></td></tr>
+            <tr><td>更新後の期間</td><td>更新後も <strong>3か月以内</strong></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="call trap">
+        <span class="tag">ひっかけ</span>
+        <p><strong>「依頼者の申出」がなければ更新できない。</strong>業者からの申出や、自動更新の特約は認められない。<br>
+        <strong>3か月を超える定めをした場合、媒介契約が無効になるのではなく期間だけが3か月になる</strong>点も狙われる。</p>
+      </div>
+    </section>
+
+    <!-- 05 -->
+    <section id="shomen">
+      <h2 class="sec"><span class="num">05</span>媒介契約書面（34条の2書面）</h2>
+
+      <div class="scroll">
+        <table>
+          <thead><tr><th>論点</th><th>内容</th></tr></thead>
+          <tbody>
+            <tr><td>交付の相手</td><td>依頼者</td></tr>
+            <tr><td>時期</td><td>媒介契約を締結したときは<strong>遅滞なく</strong></td></tr>
+            <tr><td class="no"><strong>記名押印</strong></td><td class="no"><strong>宅建業者</strong>が記名押印する。<strong>宅建士ではない</strong></td></tr>
+            <tr><td>電磁的方法</td><td>依頼者の<strong>承諾</strong>を得れば、書面の交付に代えて電磁的方法により提供できる</td></tr>
+            <tr><td>3類型すべて</td><td class="no">一般媒介契約でも<strong>書面の交付は必要</strong></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>5-1　主な記載事項</h3>
+      <ul>
+        <li>宅地・建物を特定するために必要な表示</li>
+        <li><strong>売買すべき価額</strong>または評価額</li>
+        <li>媒介契約の種類（一般・専任・専属専任の別）</li>
+        <li><strong>既存の建物</strong>のときは、<strong>建物状況調査を実施する者のあっせん</strong>に関する事項</li>
+        <li>有効期間・解除に関する事項</li>
+        <li>指定流通機構への登録に関する事項</li>
+        <li>報酬に関する事項</li>
+        <li>依頼者が<strong>他の業者に重ねて依頼した場合の措置</strong>、<strong>直接契約した場合の措置</strong></li>
+        <li><strong>標準媒介契約約款に基づくものかどうか</strong>の別</li>
+      </ul>
+
+      <div class="call exam">
+        <span class="tag">よく出る</span>
+        <p><strong>価額について意見を述べるときは、その根拠を明らかにしなければならない。</strong>根拠の明示は<strong>口頭でもよい</strong>（書面である必要はない）。<br>
+        <strong>建物状況調査のあっせん</strong>は、既存建物のときに媒介契約書面へ記載する。あっせんを行うか否かを書くのであって、調査の実施自体が義務なのではない。</p>
+      </div>
+
+      <div class="call trap">
+        <span class="tag">ひっかけ</span>
+        <p><strong>媒介契約書面は「宅建業者」の記名押印。</strong>35条書面・37条書面が「宅建士の記名」なのと対照的で、ここを入れ替える出題が定番。<br>
+        しかも媒介契約書面は<strong>押印がまだ必要</strong>（35条・37条は2022年に押印廃止）。3つ並べて整理する。</p>
+      </div>
+    </section>
+
+    <!-- 06 -->
+    <section id="reins">
+      <h2 class="sec"><span class="num">06</span>指定流通機構（レインズ）</h2>
+
+      <div class="call rev">
+        <span class="tag">改正</span>
+        <p><strong>2025年1月1日施行の規則改正で、いわゆる「囲い込み」防止のルールが加わりました。</strong>物件をレインズに登録した業者は、<strong>物件の「取引状況」（公開中／書面による購入申込みあり／売主都合で一時紹介停止中）を登録し、変化があれば更新する</strong>ことが義務づけられています。<br>
+        虚偽の登録などが確認された場合は是正が指示され、悪質・反復する場合は<strong>指示処分、業務停止、免許取消しの対象</strong>となります。売主は自分の物件の状況を確認できるようになりました。</p>
+      </div>
+
+      <div class="scroll">
+        <table>
+          <thead><tr><th>論点</th><th>内容</th></tr></thead>
+          <tbody>
+            <tr><td>登録期限</td><td>専任媒介 <strong>7日以内</strong>／専属専任媒介 <strong>5日以内</strong>（休業日を除く）</td></tr>
+            <tr>
+              <td><strong>登録事項</strong></td>
+              <td>① 所在・規模・形質<br>② <strong>売買すべき価額</strong>（交換のときは評価額）<br>③ 法令に基づく制限で主要なもの<br>④ <strong>専属専任媒介契約であるときはその旨</strong><br>⑤ <strong>取引状況</strong> <span class="no">（2025年1月〜）</span></td>
+            </tr>
+            <tr><td class="no">登録しない事項</td><td class="no"><strong>依頼者の氏名</strong>は登録事項ではない</td></tr>
+            <tr><td>登録済証</td><td>登録した業者は、機構が発行する<strong>登録を証する書面</strong>を<strong>遅滞なく依頼者に引き渡す</strong></td></tr>
+            <tr><td>成約の通知</td><td>売買・交換の契約が成立したときは<strong>遅滞なく</strong>、① 登録番号 ② 取引価格 ③ 契約の成立した年月日 を機構に通知する</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="call trap">
+        <span class="tag">ひっかけ</span>
+        <p><strong>登録事項に「依頼者の氏名」は入らない。</strong>入れる選択肢が定番。<br>
+        成約の通知事項は<strong>「登録番号・取引価格・成立年月日」の3つ</strong>。買主の氏名は通知しない。</p>
+      </div>
+    </section>
+
+    <!-- 07 -->
+    <section id="sonota">
+      <h2 class="sec"><span class="num">07</span>その他の禁止行為</h2>
+
+      <div class="scroll">
+        <table>
+          <thead><tr><th>規制</th><th>内容</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><strong>重要な事実の不告知等</strong><br><span class="lbl">47条1号</span></td>
+              <td>重要事項等について、<strong>故意に</strong>事実を告げず、または不実のことを告げる行為。<br>罰則は <strong>2年以下の拘禁刑</strong>または <strong>300万円以下の罰金</strong>（併科あり）／法人は <strong>1億円以下</strong></td>
+            </tr>
+            <tr>
+              <td><strong>手付貸与等の禁止</strong><br><span class="lbl">47条3号</span></td>
+              <td>手付について<strong>貸付けその他信用の供与</strong>をすることにより契約の締結を誘引する行為。<br class="no"><strong>手付の分割払い・後払い・約束手形の受領は違反</strong>／<span class="tri">手付金の減額・手付金の借入れのあっせんは違反にならない</span></td>
+            </tr>
+            <tr>
+              <td><strong>断定的判断の提供</strong><br><span class="lbl">47条の2</span></td>
+              <td>利益を生ずることが確実であると誤解させるべき<strong>断定的判断</strong>を提供する行為。<span class="no">故意でなくても違反</span></td>
+            </tr>
+            <tr>
+              <td>威迫行為の禁止</td>
+              <td>相手方を<strong>威迫</strong>する行為。深夜・長時間の勧誘により私生活・業務の平穏を害する行為も禁止</td>
+            </tr>
+            <tr>
+              <td>勧誘の際の禁止行為</td>
+              <td>勧誘に先立って<strong>商号・氏名・勧誘目的</strong>を告げない勧誘／<strong>相手方が契約しない旨の意思を表示したのに勧誘を継続</strong>する行為</td>
+            </tr>
+            <tr>
+              <td><strong>守秘義務</strong><br><span class="lbl">45条</span></td>
+              <td>業務上知り得た秘密を<strong>正当な理由</strong>なく他に漏らしてはならない。<span class="no">宅建業を営まなくなった後も同様</span>。従業者も同じ</td>
+            </tr>
+            <tr>
+              <td><strong>不当な履行遅延の禁止</strong><br><span class="lbl">44条</span></td>
+              <td class="no">対象は <strong>① 登記 ② 引渡し ③ 対価の支払</strong> の3つだけ</td>
+            </tr>
+            <tr>
+              <td><strong>供託所等の説明</strong><br><span class="lbl">35条の2</span></td>
+              <td>契約が成立するまでに、相手方に営業保証金を供託した供託所等について<strong>説明するようにしなければならない</strong>。<br><span class="tri">書面の交付は不要／宅建士でなくてよい／相手方が宅建業者なら不要</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="call trap">
+        <span class="tag">ひっかけ</span>
+        <p><strong>手付の「貸与」は違反、「減額」は違反にならない。</strong>手付を安くするのは業者が損をするだけで、買主を借金漬けにするわけではないから。<br>
+        <strong>不当な履行遅延の対象は登記・引渡し・対価の支払の3つだけ。</strong>「重要事項説明の遅延」などを混ぜた選択肢は誤り。<br>
+        <strong>守秘義務は廃業後も続く。</strong>「宅建業を営まなくなれば義務はなくなる」は誤り。</p>
+      </div>
+    </section>
+
+    <!-- 08 -->
+    <section id="annaijo">
+      <h2 class="sec"><span class="num">08</span>案内所と標識</h2>
+
+      <div class="scroll">
+        <table>
+          <thead><tr><th>場所</th><th class="n">標識</th><th class="n">専任の宅建士</th><th class="n">届出</th></tr></thead>
+          <tbody>
+            <tr><td>事務所</td><td class="n no">必要</td><td class="n">5人に1人以上</td><td class="n yes">不要</td></tr>
+            <tr><td><strong>契約を締結し、または申込みを受ける</strong>案内所</td><td class="n no">必要</td><td class="n no">1人以上</td><td class="n no">必要</td></tr>
+            <tr><td>契約も申込みもしない案内所（単なる展示会場等）</td><td class="n no">必要</td><td class="n yes">不要</td><td class="n yes">不要</td></tr>
+            <tr><td>他の業者が売主である物件の所在場所</td><td class="n no">売主の標識が必要</td><td class="n yes">—</td><td class="n yes">—</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="scroll">
+        <table>
+          <thead><tr><th>論点</th><th>内容</th></tr></thead>
+          <tbody>
+            <tr><td>届出の時期</td><td>業務を開始する日の <strong>10日前まで</strong></td></tr>
+            <tr><td class="no">届出先</td><td class="no"><strong>免許権者</strong> および <strong>案内所の所在地を管轄する都道府県知事</strong> の<strong>2か所</strong></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="call tip">
+        <span class="tag">覚え方</span>
+        <p><strong>標識はどこでも必要、専任宅建士と届出は「契約するところ」だけ。</strong>契約が成立する場所にだけ、責任者を置いて役所に知らせる、と考えればよい。</p>
+      </div>
+    </section>
+
+    <!-- 09 -->
+    <section id="deru">
+      <h2 class="sec"><span class="num">09</span>よく出る論点</h2>
+      <div class="scroll">
+        <table>
+          <thead><tr><th class="n">順位</th><th>論点</th><th>要点</th></tr></thead>
+          <tbody>
+            <tr><td class="n">1</td><td><strong>媒介契約の3類型</strong></td><td>7日/5日・2週間/1週間・3か月・自動更新不可</td></tr>
+            <tr><td class="n">2</td><td>広告・契約の時期制限</td><td>広告は全面禁止／契約は貸借のみ可</td></tr>
+            <tr><td class="n">3</td><td>媒介契約書面</td><td>業者の記名押印／一般でも必要／価額の根拠</td></tr>
+            <tr><td class="n">4</td><td>指定流通機構</td><td>登録事項・登録済証・成約通知3点・<span class="no">取引状況の登録</span></td></tr>
+            <tr><td class="n">5</td><td>誇大広告</td><td>結果を問わず違反／将来の環境も対象／おとり広告</td></tr>
+            <tr><td class="n">6</td><td>手付貸与等の禁止</td><td>分割払いは違反・減額は適法</td></tr>
+            <tr><td class="n">7</td><td>案内所</td><td>10日前まで・2か所へ届出／標識はどこでも必要</td></tr>
+            <tr><td class="n">8</td><td>取引態様の明示</td><td>広告時と注文時の2回</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 10 -->
+    <section id="hikkake">
+      <h2 class="sec"><span class="num">10</span>ひっかけ一覧</h2>
+      <div class="scroll">
+        <table class="traps">
+          <thead><tr><th>こう書かれたら疑う</th><th>正しくは</th></tr></thead>
+          <tbody>
+            <tr><td>誇大広告でも契約が成立しなければ違反にならない</td><td><strong>広告をした時点で違反</strong></td></tr>
+            <tr><td>建築確認申請中である旨を明示すれば広告できる</td><td>処分後でなければ<strong>一切広告できない</strong></td></tr>
+            <tr><td>建築確認前は貸借の媒介契約も締結できない</td><td><strong>貸借の代理・媒介は締結できる</strong></td></tr>
+            <tr><td>広告に取引態様を明示していれば注文時の明示は不要</td><td>注文を受けたときも<strong>遅滞なく明示</strong>する</td></tr>
+            <tr><td>媒介契約書面には宅建士が記名する</td><td><strong>宅建業者</strong>が記名押印する</td></tr>
+            <tr><td>一般媒介契約では書面の交付は不要</td><td><strong>3類型すべて必要</strong></td></tr>
+            <tr><td>専任媒介契約は自動更新の特約ができる</td><td><strong>依頼者の申出</strong>がなければ更新できない</td></tr>
+            <tr><td>有効期間を6か月とした媒介契約は無効である</td><td>契約は有効で、期間が <strong>3か月</strong> に短縮される</td></tr>
+            <tr><td>専属専任媒介では依頼者が自分で見つけた相手と契約できる</td><td><strong>できない</strong>（自己発見取引の禁止）</td></tr>
+            <tr><td>専任媒介の登録期限は5日以内</td><td><strong>7日以内</strong>（5日は専属専任）</td></tr>
+            <tr><td>指定流通機構には依頼者の氏名も登録する</td><td><strong>登録事項ではない</strong></td></tr>
+            <tr><td>価額の根拠は書面で明らかにしなければならない</td><td><strong>口頭でもよい</strong></td></tr>
+            <tr><td>手付金を減額して契約を勧めるのは違反である</td><td><strong>減額は違反にならない</strong>（分割払い・後払いは違反）</td></tr>
+            <tr><td>廃業すれば守秘義務はなくなる</td><td><strong>営まなくなった後も</strong>義務は続く</td></tr>
+            <tr><td>宅建士証を提示すれば従業者証明書の提示は不要</td><td><strong>代用できない</strong></td></tr>
+            <tr><td>供託所等の説明は宅建士が書面を交付して行う</td><td>宅建士でなくてよく、<strong>書面も不要</strong></td></tr>
+            <tr><td>案内所の届出は所在地の知事にすれば足りる</td><td><strong>免許権者にも</strong>、<strong>10日前まで</strong>に</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 11 -->
+    <section id="suji">
+      <h2 class="sec"><span class="num">11</span>数字まとめ</h2>
+      <p class="masthead-note">右上の「数値を隠す」で自己テストできる。</p>
+      <div class="nums" id="numgrid">
+        <div class="nc" tabindex="0"><span class="v">3か月</span><span class="d">専任・専属専任媒介契約の有効期間の上限</span></div>
+        <div class="nc" tabindex="0"><span class="v">7日以内</span><span class="d">専任媒介の指定流通機構への登録（休業日を除く）</span></div>
+        <div class="nc" tabindex="0"><span class="v">5日以内</span><span class="d">専属専任媒介の指定流通機構への登録（休業日を除く）</span></div>
+        <div class="nc" tabindex="0"><span class="v">2週間に1回</span><span class="d">専任媒介の業務処理状況の報告</span></div>
+        <div class="nc" tabindex="0"><span class="v">1週間に1回</span><span class="d">専属専任媒介の業務処理状況の報告</span></div>
+        <div class="nc" tabindex="0"><span class="v">10日前まで</span><span class="d">案内所等の届出（免許権者と所在地の知事へ）</span></div>
+        <div class="nc" tabindex="0"><span class="v">6月以下 / 100万円</span><span class="d">誇大広告等の禁止に違反した場合の罰則</span></div>
+        <div class="nc" tabindex="0"><span class="v">2年以下 / 300万円</span><span class="d">重要な事実の不告知等の罰則（法人は1億円）</span></div>
+        <div class="nc" tabindex="0"><span class="v">3つ</span><span class="d">不当な履行遅延の対象 — 登記・引渡し・対価の支払</span></div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <h4>出典</h4>
+    <ul>
+      <li>宅地建物取引業法（昭和27年法律第176号）第31条〜第50条 — <a href="https://laws.e-gov.go.jp/law/327AC1000000176">e-Gov法令検索</a></li>
+      <li>囲い込み防止・レインズへの取引状況の登録義務化（2025年1月1日施行） — <a href="https://biz.homes.jp/column/topics-00197">解説</a>／<a href="https://hike.or.jp/takken/jouhou/20250101reins/">解説</a></li>
+      <li>国土交通省 不動産業（宅地建物取引業法） — <a href="https://www.mlit.go.jp/totikensangyo/const/1_6_bf_000030.html">mlit.go.jp</a></li>
+    </ul>
+    <div class="sibling">
+      <a href="../index.html">総目次</a>
+      <a href="免許制度.html">免許制度</a>
+      <a href="宅地建物取引士.html">宅地建物取引士</a>
+      <a href="営業保証金と保証協会.html">← 営業保証金と保証協会</a>
+    </div>
+  </footer>
+
+</div>
+
+<script>
+  (function () {
+    var root = document.documentElement;
+    document.getElementById('theme').addEventListener('click', function () {
+      if (root.getAttribute('data-theme')) { root.removeAttribute('data-theme'); return; }
+      var dark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      root.setAttribute('data-theme', dark ? 'light' : 'dark');
+    });
+    var maskBtn = document.getElementById('mask');
+    var grid = document.getElementById('numgrid');
+    maskBtn.addEventListener('click', function () {
+      var on = grid.classList.toggle('masked');
+      maskBtn.setAttribute('aria-pressed', String(on));
+      maskBtn.textContent = on ? '数値を表示' : '数値を隠す';
+    });
+    var links = Array.prototype.slice.call(document.querySelectorAll('nav.rail ol a'));
+    var map = {};
+    links.forEach(function (a) { map[a.getAttribute('href').slice(1)] = a; });
+    var seen = [];
+    var obs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        var i = seen.indexOf(e.target.id);
+        if (e.isIntersecting && i < 0) seen.push(e.target.id);
+        if (!e.isIntersecting && i >= 0) seen.splice(i, 1);
+      });
+      links.forEach(function (a) { a.classList.remove('on'); });
+      if (seen.length) {
+        var order = Object.keys(map);
+        seen.sort(function (a, b) { return order.indexOf(a) - order.indexOf(b); });
+        map[seen[0]].classList.add('on');
+      }
+    }, { rootMargin: '-10% 0px -70% 0px' });
+    document.querySelectorAll('main section').forEach(function (s) { obs.observe(s); });
+  })();
+</script>

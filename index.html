@@ -1,0 +1,525 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>宅建士試験 2026年度 学習ドキュメント</title>
+
+<style>
+  :root {
+    --paper:#EBEDE9; --surface:#F8F9F6; --sunk:#E1E4DE; --ink:#151F2A; --muted:#5D6B78;
+    --rule:#CDD2CB; --hair:#DCE0D9; --accent:#B8342A; --accent-soft:#F3DEDB;
+    --blue:#2A5F86; --blue-soft:#DCE6EE;
+    --font-display:"Hiragino Mincho ProN","Yu Mincho","YuMincho","Noto Serif JP",serif;
+    --font-body:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","YuGothic","Noto Sans JP",system-ui,sans-serif;
+    --font-mono:ui-monospace,"SFMono-Regular","SF Mono",Menlo,Consolas,monospace;
+    --s1:.35rem; --s2:.7rem; --s3:1.1rem; --s4:1.7rem; --s5:2.6rem; --s6:4rem;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper:#0D1B29; --surface:#132534; --sunk:#0A1622; --ink:#DAE4EC; --muted:#8CA1B3;
+      --rule:#26415A; --hair:#1D3448; --accent:#FF7059; --accent-soft:#3A1F1D;
+      --blue:#6FB6DC; --blue-soft:#14293A;
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper:#0D1B29; --surface:#132534; --sunk:#0A1622; --ink:#DAE4EC; --muted:#8CA1B3;
+    --rule:#26415A; --hair:#1D3448; --accent:#FF7059; --accent-soft:#3A1F1D;
+    --blue:#6FB6DC; --blue-soft:#14293A;
+  }
+
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--paper); color:var(--ink); font-family:var(--font-body);
+    font-size:16px; line-height:1.9; -webkit-font-smoothing:antialiased; font-feature-settings:"palt" 1; }
+
+  .wrap { max-width:64rem; margin:0 auto; padding:0 var(--s4) var(--s6); }
+  @media (max-width:48rem){ .wrap{ padding:0 var(--s3) var(--s5);} }
+
+  /* masthead */
+  header.top { padding:var(--s6) 0 var(--s4); border-bottom:2px solid var(--ink); margin-bottom:var(--s4);
+    display:flex; flex-wrap:wrap; align-items:flex-end; justify-content:space-between; gap:var(--s3); }
+  .eyebrow { font-family:var(--font-mono); font-size:.72rem; letter-spacing:.16em; text-transform:uppercase;
+    color:var(--muted); display:flex; align-items:center; gap:.6em; }
+  .eyebrow::before { content:""; width:2.2rem; height:1px; background:var(--accent); }
+  h1 { font-family:var(--font-display); font-weight:600; font-size:clamp(2rem,1.3rem + 3vw,3.2rem);
+    line-height:1.15; letter-spacing:.04em; margin:var(--s2) 0 var(--s2); text-wrap:balance; }
+  .sub { color:var(--muted); font-size:.9rem; margin:0; }
+  button { font-family:var(--font-body); font-size:.78rem; color:var(--muted); background:var(--surface);
+    border:1px solid var(--rule); border-radius:2px; padding:.4em .9em; cursor:pointer; transition:color .15s,border-color .15s; }
+  button:hover { color:var(--ink); border-color:var(--ink); }
+  button:focus-visible { outline:2px solid var(--accent); outline-offset:2px; }
+
+  /* stat row */
+  .stats { display:grid; grid-template-columns:repeat(auto-fit,minmax(11rem,1fr)); gap:var(--s2); margin-bottom:var(--s5); }
+  .stat { background:var(--surface); border:1px solid var(--hair); border-top:3px solid var(--rule);
+    border-radius:2px; padding:var(--s3); }
+  .stat.hot { border-top-color:var(--accent); }
+  .stat .k { font-family:var(--font-mono); font-size:.68rem; letter-spacing:.14em; text-transform:uppercase;
+    color:var(--muted); display:block; margin-bottom:var(--s1); }
+  .stat .v { font-family:var(--font-mono); font-variant-numeric:tabular-nums; font-size:2rem; font-weight:600;
+    line-height:1.1; letter-spacing:-.02em; display:block; }
+  .stat.hot .v { color:var(--accent); }
+  .stat .u { font-size:.85rem; color:var(--muted); margin-left:.3em; font-family:var(--font-body); }
+  .stat .n { font-size:.78rem; color:var(--muted); display:block; margin-top:var(--s1); line-height:1.5; }
+
+  /* progress meter */
+  section { margin-bottom:var(--s5); }
+  h2 { font-family:var(--font-display); font-size:1.35rem; font-weight:600; letter-spacing:.04em;
+    margin:0 0 var(--s3); padding-bottom:var(--s2); border-bottom:1px solid var(--rule);
+    display:flex; align-items:baseline; gap:.7em; }
+  h2 .num { font-family:var(--font-mono); font-size:.75rem; letter-spacing:.1em; color:var(--accent); font-weight:500; }
+  h2 .cnt { font-family:var(--font-mono); font-size:.75rem; color:var(--muted); margin-left:auto; font-weight:400; }
+
+  .meter { background:var(--surface); border:1px solid var(--hair); border-radius:2px; padding:var(--s3); }
+  .band { display:grid; grid-template-columns:9.5rem 1fr; gap:var(--s2) var(--s3); align-items:center; margin-bottom:var(--s2); }
+  .band:last-of-type { margin-bottom:0; }
+  .band .name { font-size:.84rem; }
+  .band .name b { font-family:var(--font-mono); font-size:.72rem; color:var(--muted); display:block; letter-spacing:.1em; }
+  .cells { display:flex; flex-wrap:wrap; gap:3px; }
+  .cell { width:13px; height:20px; border-radius:1px; }
+  .cell.done { background:var(--accent); }
+  .cell.todo { background:transparent; border:1px solid var(--rule); }
+  @media (max-width:38rem){
+    .band { grid-template-columns:1fr; gap:var(--s1); }
+    .cell { width:11px; height:17px; }
+  }
+  .legend { display:flex; gap:var(--s3); margin-top:var(--s3); padding-top:var(--s2);
+    border-top:1px solid var(--hair); font-size:.78rem; color:var(--muted); }
+  .legend span { display:flex; align-items:center; gap:.45em; }
+  .swatch { width:11px; height:16px; border-radius:1px; display:inline-block; }
+  .swatch.done { background:var(--accent); }
+  .swatch.todo { border:1px solid var(--rule); }
+
+  /* doc list */
+  .group { margin-bottom:var(--s5); }
+  .docs { display:flex; flex-direction:column; gap:1px; background:var(--hair); border:1px solid var(--hair); border-radius:2px; overflow:hidden; }
+  .doc { background:var(--surface); display:grid; grid-template-columns:1fr 4rem auto; gap:var(--s3);
+    align-items:center; padding:.75em var(--s3); transition:background .12s; }
+  .doc:hover { background:var(--paper); }
+  .doc .t { min-width:0; }
+  .doc .t a { font-size:.95rem; color:var(--ink); text-decoration:none; font-weight:600; }
+  .doc .t a:hover { color:var(--accent); text-decoration:underline; text-underline-offset:.2em; }
+  .doc .t .d { display:block; font-size:.78rem; color:var(--muted); line-height:1.5; margin-top:.1em; }
+  .doc .q { font-family:var(--font-mono); font-variant-numeric:tabular-nums; font-size:.8rem;
+    color:var(--muted); text-align:right; white-space:nowrap; }
+  .doc .t .dr { display:inline-block; font-family:var(--font-mono); font-size:.66rem; letter-spacing:.06em;
+    color:var(--accent); border:1px solid var(--accent); border-radius:2px; padding:0 .4em; margin-top:.4em; }
+  .doc .local { font-family:var(--font-mono); font-size:.68rem; color:var(--muted); text-decoration:none;
+    border:1px solid var(--rule); border-radius:2px; padding:.2em .55em; white-space:nowrap; }
+  .doc .local:hover { color:var(--ink); border-color:var(--ink); }
+  .doc.hub { background:var(--accent-soft); }
+  .doc.hub .t a { color:var(--accent); }
+  @media (max-width:38rem){
+    .doc { grid-template-columns:1fr auto; gap:var(--s2); }
+    .doc .q { grid-column:2; }
+    .doc .local { grid-column:1 / -1; justify-self:start; }
+  }
+  .pending { background:var(--surface); border:1px dashed var(--rule); border-radius:2px;
+    padding:var(--s3); font-size:.86rem; color:var(--muted); }
+  .pending b { color:var(--ink); }
+
+  /* tables */
+  .scroll { overflow-x:auto; }
+  table { border-collapse:collapse; width:100%; font-size:.86rem; line-height:1.6; }
+  th, td { padding:.55em .7em; text-align:left; vertical-align:top; border-bottom:1px solid var(--hair); }
+  thead th { font-size:.72rem; letter-spacing:.08em; color:var(--muted); font-weight:600; border-bottom:1px solid var(--ink); white-space:nowrap; }
+  td.n { text-align:center; font-family:var(--font-mono); white-space:nowrap; }
+  .no { color:var(--accent); font-weight:700; }
+
+  .call { background:var(--surface); border:1px solid var(--hair); border-left:3px solid var(--accent);
+    border-radius:2px; padding:var(--s3) var(--s3) var(--s3) var(--s4); font-size:.9rem; margin-bottom:var(--s3); }
+  .call .tag { display:block; font-family:var(--font-mono); font-size:.68rem; letter-spacing:.16em;
+    text-transform:uppercase; color:var(--accent); margin-bottom:var(--s1); }
+  .call p { margin:0; }
+
+  footer { margin-top:var(--s6); padding-top:var(--s3); border-top:1px solid var(--rule);
+    font-size:.78rem; color:var(--muted); }
+  footer a { color:var(--blue); }
+
+  @media (prefers-reduced-motion: reduce){ *{ transition:none !important; } }
+</style>
+
+<div class="wrap">
+
+  <header class="top">
+    <div>
+      <div class="eyebrow">Index &nbsp;/&nbsp; 令和8年度</div>
+      <h1>宅建士試験 2026年度<br>学習ドキュメント</h1>
+      <p class="sub">法令基準日 2026年4月1日 ／ 試験日 2026年10月18日(日) <b>13:10–15:00</b>（登録講習修了者・<b>45問</b>）</p>
+    </div>
+    <button id="theme" type="button">配色切替</button>
+  </header>
+
+  <div class="stats">
+    <div class="stat hot">
+      <span class="k">試験日まで</span>
+      <span class="v">63<span class="u">日</span></span>
+      <span class="n">2026-08-16 時点／合格発表 11月25日(水)</span>
+    </div>
+    <div class="stat hot">
+      <span class="k">カバー済み</span>
+      <span class="v">45<span class="u">/ 45問</span></span>
+      <span class="n">01〜04 のすべてが完了。以降は過去問と直前期の更新</span>
+    </div>
+    <div class="stat">
+      <span class="k">ドキュメント</span>
+      <span class="v">38<span class="u">本</span></span>
+      <span class="n">うち横断早見表 4本</span>
+    </div>
+    <div class="stat">
+      <span class="k">目標点</span>
+      <span class="v">33<span class="u">/ 45</span></span>
+      <span class="n">令和7年度の免除者の合格点は28点・合格率24.2%</span>
+    </div>
+  </div>
+
+  <section>
+    <h2><span class="num">Progress</span>出題数ベースの進捗<span class="cnt">1マス＝1問</span></h2>
+    <div class="meter">
+      <div class="band">
+        <div class="name">01 権利関係<b>14問 / 完了</b></div>
+        <div class="cells" role="img" aria-label="権利関係14問はすべてカバー済み">
+          <i class="cell done"></i><i class="cell done"></i><i class="cell done"></i><i class="cell done"></i><i class="cell done"></i><i class="cell done"></i><i class="cell done"></i><i class="cell done"></i><i class="cell done"></i><i class="cell done"></i><i class="cell done"></i><i class="cell done"></i><i class="cell done"></i><i class="cell done"></i>
+        </div>
+      </div>
+      <div class="band">
+        <div class="name">02 宅建業法<b>20問 / 完了</b></div>
+        <div class="cells" role="img" aria-label="宅建業法20問はすべてカバー済み">
+          <i class="cell done"></i><i class="cell done"></i><i class="cell done"></i><i class="cell done"></i><i class="cell done"></i><i class="cell done"></i><i class="cell done"></i><i class="cell done"></i><i class="cell done"></i><i class="cell done"></i><i class="cell done"></i><i class="cell done"></i><i class="cell done"></i><i class="cell done"></i><i class="cell done"></i><i class="cell done"></i><i class="cell done"></i><i class="cell done"></i><i class="cell done"></i><i class="cell done"></i>
+        </div>
+      </div>
+      <div class="band">
+        <div class="name">03 法令上の制限<b>8問 / 完了</b></div>
+        <div class="cells" role="img" aria-label="法令上の制限8問はすべてカバー済み">
+          <i class="cell done"></i><i class="cell done"></i><i class="cell done"></i><i class="cell done"></i><i class="cell done"></i><i class="cell done"></i><i class="cell done"></i><i class="cell done"></i>
+        </div>
+      </div>
+      <div class="band">
+        <div class="name">04 税その他<b>3問 / 完了</b></div>
+        <div class="cells" role="img" aria-label="税その他3問はすべてカバー済み">
+          <i class="cell done"></i><i class="cell done"></i><i class="cell done"></i>
+        </div>
+      </div>
+      <div class="legend">
+        <span><i class="swatch done"></i>ドキュメント作成済み 45問</span>
+        <span><i class="swatch todo"></i>未着手 0問</span>
+        <span><i class="swatch todo" style="border-style:dashed"></i>5問免除のため対象外 5問</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 01 -->
+  <section class="group">
+    <h2><span class="num">01</span>権利関係<span class="cnt">14問 ／ 16本 ／ ドリル400肢</span></h2>
+    <div class="docs">
+      <div class="doc hub">
+        <div class="t"><a href="01_権利関係/横断早見表.html">横断早見表</a>
+          <span class="d">第三者保護と登記の要否、対抗要件、決議の割合、期間の衝突を1枚に集約</span></div>
+        <div class="q">—</div>
+        <a class="local" href="01_権利関係/横断早見表.html">ローカル</a>
+      </div>
+      <div class="doc">
+        <div class="t"><a href="01_権利関係/借地借家法.html">借地借家法</a>
+          <span class="d">借地の30・20・10年、定期借地権3類型、借家の更新拒絶と定期建物賃貸借</span><span class="dr">○× 36肢</span></div>
+        <div class="q">2問</div>
+        <a class="local" href="01_権利関係/借地借家法.html">ローカル</a>
+      </div>
+      <div class="doc">
+        <div class="t"><a href="01_権利関係/区分所有法.html">区分所有法</a>
+          <span class="d">2026年4月施行の大改正に対応。決議要件の4段階と建替え緩和の客観的事由</span><span class="dr">○× 34肢</span></div>
+        <div class="q">1問</div>
+        <a class="local" href="01_権利関係/区分所有法.html">ローカル</a>
+      </div>
+      <div class="doc">
+        <div class="t"><a href="01_権利関係/不動産登記法.html">不動産登記法</a>
+          <span class="d">2026年4月施行の住所等変更登記の義務化。相続登記との期間・過料の違い</span></div>
+        <div class="q">1問</div>
+        <a class="local" href="01_権利関係/不動産登記法.html">ローカル</a>
+      </div>
+      <div class="doc">
+        <div class="t"><a href="01_権利関係/制限行為能力者と意思表示.html">制限行為能力者と意思表示</a>
+          <span class="d">4類型の比較、催告権の反転、第三者保護の3段階</span><span class="dr">○× 36肢</span></div>
+        <div class="q">2問</div>
+        <a class="local" href="01_権利関係/制限行為能力者と意思表示.html">ローカル</a>
+      </div>
+      <div class="doc">
+        <div class="t"><a href="01_権利関係/代理.html">代理</a>
+          <span class="d">代理権消滅事由のマトリクス、無権代理における相手方の3手段</span><span class="dr">○× 32肢</span></div>
+        <div class="q">1問</div>
+        <a class="local" href="01_権利関係/代理.html">ローカル</a>
+      </div>
+      <div class="doc">
+        <div class="t"><a href="01_権利関係/時効.html">時効</a>
+          <span class="d">取得時効の10年20年、消滅時効の二本立て、完成猶予と更新の違い</span><span class="dr">○× 32肢</span></div>
+        <div class="q">1問</div>
+        <a class="local" href="01_権利関係/時効.html">ローカル</a>
+      </div>
+      <div class="doc">
+        <div class="t"><a href="01_権利関係/物権変動と対抗要件.html">物権変動と対抗要件</a>
+          <span class="d">取消し・解除・時効の前後で処理が切り替わる構造、相続と登記</span><span class="dr">○× 32肢</span></div>
+        <div class="q">1〜2問</div>
+        <a class="local" href="01_権利関係/物権変動と対抗要件.html">ローカル</a>
+      </div>
+      <div class="doc">
+        <div class="t"><a href="01_権利関係/共有と相隣関係.html">共有と相隣関係</a>
+          <span class="d">保存・管理・変更の3段階、所在等不明共有者、相隣関係の数字</span><span class="dr">○× 32肢</span></div>
+        <div class="q">1問</div>
+        <a class="local" href="01_権利関係/共有と相隣関係.html">ローカル</a>
+      </div>
+      <div class="doc">
+        <div class="t"><a href="01_権利関係/抵当権と担保物権.html">抵当権と担保物権</a>
+          <span class="d">法定地上権の3要件、効力の及ぶ範囲、物上代位、根抵当権</span><span class="dr">○× 34肢</span></div>
+        <div class="q">1〜2問</div>
+        <a class="local" href="01_権利関係/抵当権と担保物権.html">ローカル</a>
+      </div>
+      <div class="doc">
+        <div class="t"><a href="01_権利関係/債務不履行と解除.html">債務不履行と解除</a>
+          <span class="d">損害賠償と解除で分かれた帰責事由、危険負担、同時履行の抗弁権</span><span class="dr">○× 32肢</span></div>
+        <div class="q">1問</div>
+        <a class="local" href="01_権利関係/債務不履行と解除.html">ローカル</a>
+      </div>
+      <div class="doc">
+        <div class="t"><a href="01_権利関係/売買と契約各論.html">売買と契約各論</a>
+          <span class="d">契約不適合責任の4つの手段、通知期間、請負・委任・贈与・使用貸借</span><span class="dr">○× 34肢</span></div>
+        <div class="q">1〜2問</div>
+        <a class="local" href="01_権利関係/売買と契約各論.html">ローカル</a>
+      </div>
+      <div class="doc">
+        <div class="t"><a href="01_権利関係/賃貸借.html">賃貸借</a>
+          <span class="d">民法と借地借家法の切り分け、必要費と有益費、転貸と解除、敷金の承継</span><span class="dr">○× 32肢</span></div>
+        <div class="q">1問</div>
+        <a class="local" href="01_権利関係/賃貸借.html">ローカル</a>
+      </div>
+      <div class="doc">
+        <div class="t"><a href="01_権利関係/債権総論.html">債権総論</a>
+          <span class="d">連帯債務の絶対効と相対効、保証と連帯保証の対比、債権譲渡の対抗要件</span></div>
+        <div class="q">1〜2問</div>
+        <a class="local" href="01_権利関係/債権総論.html">ローカル</a>
+      </div>
+      <div class="doc">
+        <div class="t"><a href="01_権利関係/不法行為.html">不法行為</a>
+          <span class="d">土地工作物責任の二段構え、使用者責任、失火責任法、債務不履行との対比</span></div>
+        <div class="q">1問</div>
+        <a class="local" href="01_権利関係/不法行為.html">ローカル</a>
+      </div>
+      <div class="doc">
+        <div class="t"><a href="01_権利関係/相続.html">相続</a>
+          <span class="d">相続人の順位と法定相続分、代襲相続の原因、遺言と遺留分、配偶者居住権</span><span class="dr">○× 34肢</span></div>
+        <div class="q">1問</div>
+        <a class="local" href="01_権利関係/相続.html">ローカル</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 02 -->
+  <section class="group">
+    <h2><span class="num">02</span>宅建業法<span class="cnt">20問 ／ 11本</span></h2>
+    <div class="docs">
+      <div class="doc hub">
+        <div class="t"><a href="02_宅建業法/横断早見表.html">横断早見表</a>
+          <span class="d">免許と宅建士、営業保証金と保証協会、3つの書面、期限の衝突を1枚に</span></div>
+        <div class="q">—</div>
+        <a class="local" href="02_宅建業法/横断早見表.html">ローカル</a>
+      </div>
+      <div class="doc">
+        <div class="t"><a href="02_宅建業法/免許制度.html">免許制度</a>
+          <span class="d">3要件による免許の要否、取引の該当性マトリクス、欠格要件、廃業等の届出</span></div>
+        <div class="q">3問</div>
+        <a class="local" href="02_宅建業法/免許制度.html">ローカル</a>
+      </div>
+      <div class="doc">
+        <div class="t"><a href="02_宅建業法/宅地建物取引士.html">宅地建物取引士</a>
+          <span class="d">合格・登録・宅建士証の3段階、登録の移転、免許制度との対比</span></div>
+        <div class="q">2問</div>
+        <a class="local" href="02_宅建業法/宅地建物取引士.html">ローカル</a>
+      </div>
+      <div class="doc">
+        <div class="t"><a href="02_宅建業法/営業保証金と保証協会.html">営業保証金と保証協会</a>
+          <span class="d">2制度のお金の流れ、金額・期限・還付手続の対比</span></div>
+        <div class="q">2問</div>
+        <a class="local" href="02_宅建業法/営業保証金と保証協会.html">ローカル</a>
+      </div>
+      <div class="doc">
+        <div class="t"><a href="02_宅建業法/業務上の規制.html">業務上の規制</a>
+          <span class="d">広告と契約の時期制限、媒介契約3類型、囲い込み防止</span></div>
+        <div class="q">3問</div>
+        <a class="local" href="02_宅建業法/業務上の規制.html">ローカル</a>
+      </div>
+      <div class="doc">
+        <div class="t"><a href="02_宅建業法/35条書面.html">35条書面（重要事項説明）</a>
+          <span class="d">売買・建物貸借・宅地貸借の3列マトリクス、区分所有建物の追加事項</span></div>
+        <div class="q">2〜3問</div>
+        <a class="local" href="02_宅建業法/35条書面.html">ローカル</a>
+      </div>
+      <div class="doc">
+        <div class="t"><a href="02_宅建業法/37条書面.html">37条書面</a>
+          <span class="d">35条との対比、必要的・任意的記載事項、どちらの書面かの切り分け</span></div>
+        <div class="q">1〜2問</div>
+        <a class="local" href="02_宅建業法/37条書面.html">ローカル</a>
+      </div>
+      <div class="doc">
+        <div class="t"><a href="02_宅建業法/8種制限.html">8種制限</a>
+          <span class="d">適用場面、クーリング・オフの判定、手付金等の保全措置の閾値</span></div>
+        <div class="q">3問</div>
+        <a class="local" href="02_宅建業法/8種制限.html">ローカル</a>
+      </div>
+      <div class="doc">
+        <div class="t"><a href="02_宅建業法/報酬額の制限.html">報酬額の制限</a>
+          <span class="d">計算手順と速算式、空家等の特例、計算例4問</span></div>
+        <div class="q">1問</div>
+        <a class="local" href="02_宅建業法/報酬額の制限.html">ローカル</a>
+      </div>
+      <div class="doc">
+        <div class="t"><a href="02_宅建業法/監督処分と罰則.html">監督処分と罰則</a>
+          <span class="d">3段階の処分、処分権者、必要的取消し、聴聞と公告、罰則の重さ</span></div>
+        <div class="q">1問</div>
+        <a class="local" href="02_宅建業法/監督処分と罰則.html">ローカル</a>
+      </div>
+      <div class="doc">
+        <div class="t"><a href="02_宅建業法/住宅瑕疵担保履行法.html">住宅瑕疵担保履行法</a>
+          <span class="d">品確法との2階建て構造、基準日3月31日・3週間・50日</span></div>
+        <div class="q">1問</div>
+        <a class="local" href="02_宅建業法/住宅瑕疵担保履行法.html">ローカル</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 03 -->
+  <section class="group">
+    <h2><span class="num">03</span>法令上の制限<span class="cnt">8問 ／ 7本</span></h2>
+    <div class="docs">
+      <div class="doc hub">
+        <div class="t"><a href="03_法令上の制限/その他の法令と早見表.html">その他の法令と横断早見表</a>
+          <span class="d">許可か届出か・誰に・いつまでにを一覧化、開発許可と国土法の面積要件の衝突</span></div>
+        <div class="q">—</div>
+        <a class="local" href="03_法令上の制限/その他の法令と早見表.html">ローカル</a>
+      </div>
+      <div class="doc">
+        <div class="t"><a href="03_法令上の制限/都市計画法.html">都市計画法</a>
+          <span class="d">区域の入れ子構造、開発許可の面積要件、準都市計画区域の8種類</span></div>
+        <div class="q">2問</div>
+        <a class="local" href="03_法令上の制限/都市計画法.html">ローカル</a>
+      </div>
+      <div class="doc">
+        <div class="t"><a href="03_法令上の制限/建築基準法.html">建築基準法</a>
+          <span class="d">建築確認の区分再編、単体規定と集団規定、斜線制限のマトリクス</span></div>
+        <div class="q">2問</div>
+        <a class="local" href="03_法令上の制限/建築基準法.html">ローカル</a>
+      </div>
+      <div class="doc">
+        <div class="t"><a href="03_法令上の制限/国土利用計画法.html">国土利用計画法</a>
+          <span class="d">事後届出の面積要件とタイムライン、事前届出との違い</span></div>
+        <div class="q">1問</div>
+        <a class="local" href="03_法令上の制限/国土利用計画法.html">ローカル</a>
+      </div>
+      <div class="doc">
+        <div class="t"><a href="03_法令上の制限/農地法.html">農地法</a>
+          <span class="d">3条・4条・5条を2軸で振り分け、許可権者と市街化区域の特例</span></div>
+        <div class="q">1問</div>
+        <a class="local" href="03_法令上の制限/農地法.html">ローカル</a>
+      </div>
+      <div class="doc">
+        <div class="t"><a href="03_法令上の制限/土地区画整理法.html">土地区画整理法</a>
+          <span class="d">仮換地の使用収益と処分、換地処分の効果が生じる時点</span></div>
+        <div class="q">1問</div>
+        <a class="local" href="03_法令上の制限/土地区画整理法.html">ローカル</a>
+      </div>
+      <div class="doc">
+        <div class="t"><a href="03_法令上の制限/盛土規制法.html">盛土規制法</a>
+          <span class="d">3つの区域、崖の高さの断面図、許可・届出の規模一覧</span></div>
+        <div class="q">1問</div>
+        <a class="local" href="03_法令上の制限/盛土規制法.html">ローカル</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 04 -->
+  <section class="group">
+    <h2><span class="num">04</span>税その他<span class="cnt">3問 ／ 4本</span></h2>
+    <div class="docs">
+      <div class="doc hub">
+        <div class="t"><a href="04_税その他/横断早見表.html">横断早見表</a>
+          <span class="d">6税の課税主体・課税標準・税率、床面積40/50/120/240/280の衝突を1枚に</span></div>
+        <div class="q">—</div>
+        <a class="local" href="04_税その他/横断早見表.html">ローカル</a>
+      </div>
+      <div class="doc">
+        <div class="t"><a href="04_税その他/国税.html">国税</a>
+          <span class="d">印紙税の記載金額の判定、登録免許税の軽減税率、譲渡所得と居住用財産の特例</span></div>
+        <div class="q">1問</div>
+        <a class="local" href="04_税その他/国税.html">ローカル</a>
+      </div>
+      <div class="doc">
+        <div class="t"><a href="04_税その他/地方税.html">地方税</a>
+          <span class="d">不動産取得税と固定資産税の対比、住宅用地の1/6・1/3、免税点と縦覧</span></div>
+        <div class="q">1問</div>
+        <a class="local" href="04_税その他/地方税.html">ローカル</a>
+      </div>
+      <div class="doc">
+        <div class="t"><a href="04_税その他/価格の評定.html">価格の評定</a>
+          <span class="d">地価公示の手続と「規準／指標」の違い、4つの価格の種類と鑑定評価3手法</span></div>
+        <div class="q">1問</div>
+        <a class="local" href="04_税その他/価格の評定.html">ローカル</a>
+      </div>
+    </div>
+    <div class="pending">
+      問46〜50の<b>5問免除科目</b>（住宅金融支援機構・景品表示法・統計・土地・建物）は<b>登録講習修了により解答しないため、資料を作らない</b>。
+    </div>
+  </section>
+
+  <!-- 改正 -->
+  <section>
+    <h2><span class="num">Update</span>2026年度の重要改正<span class="cnt">法令基準日 2026-04-01</span></h2>
+    <div class="scroll">
+      <table>
+        <thead><tr><th>改正</th><th class="n">施行</th><th>内容</th><th class="n">分野</th></tr></thead>
+        <tbody>
+          <tr><td class="no">区分所有法の大改正</td><td class="n">2026/4/1</td><td>約24年ぶり。管理・再生に関する決議要件などが見直された（令和7年法律第47号）</td><td class="n">01</td></tr>
+          <tr><td class="no">管理業者管理者方式の説明義務化</td><td class="n">2026/4/1</td><td>区分所有建物の<b>売買・交換</b>の重要事項説明に追加。貸借は対象外</td><td class="n">02</td></tr>
+          <tr><td>住所等変更登記の義務化</td><td class="n">2026/4/1</td><td>変更から2年以内に申請。過料5万円以下。既存分は2028/3/31まで猶予</td><td class="n">01</td></tr>
+          <tr><td>拘禁刑への一本化</td><td class="n">2025/6/1</td><td>「懲役」の表記がすべて「拘禁刑」に。欠格要件・罰則の条文が変わる</td><td class="n">02</td></tr>
+          <tr><td>従業者名簿の記載事項の削減</td><td class="n">2025/4/1</td><td>生年月日・住所・性別を削除</td><td class="n">02</td></tr>
+          <tr><td>建築確認の区分再編</td><td class="n">2025/4/1</td><td>4号建築物を廃止。新2号は「階数2以上 or 200㎡超」で構造を問わない</td><td class="n">03</td></tr>
+          <tr><td>囲い込み防止</td><td class="n">2025/1/1</td><td>レインズへの取引状況の登録を義務化</td><td class="n">02</td></tr>
+          <tr><td>低廉な空家等の報酬特例</td><td class="n">2024/7/1</td><td>800万円以下で33万円（代理66万円）。長期の空家等の貸借は貸主から2.2か月分</td><td class="n">02</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="num">Notes</span>この資料集の方針</h2>
+    <div class="call">
+      <span class="tag">読み方</span>
+      <p>各ドキュメントは <b>00 全体像 → 本文 → よく出る論点 → ひっかけ一覧 → 数字まとめ</b> の順で並んでいます。初見なら頭から、復習なら「ひっかけ一覧」と「数字まとめ」だけで足ります。数字まとめは右上の<b>「数値を隠す」</b>で伏せられるので、そのまま自己テストに使えます。</p>
+    </div>
+    <div class="call">
+      <span class="tag">前提</span>
+      <p><b>登録講習修了者（5問免除）を前提に組んでいます。</b>解答するのは45問で、問46〜50は対象外。試験時間も13:10開始です。出題構成・目標点・進捗はすべて45問ベースで、5問免除科目の教材は作成しません。</p>
+    </div>
+    <div class="scroll">
+      <table>
+        <thead><tr><th>方針</th><th>内容</th></tr></thead>
+        <tbody>
+          <tr><td>形式</td><td>単一ファイルのHTML。外部リクエストがゼロなので<b>オフラインで動く</b>。AirDropでスマホに送ればログインなしで読める</td></tr>
+          <tr><td>視覚化</td><td>図はインラインSVGとCSSで描画。Mermaid等の外部依存は使わない</td></tr>
+          <tr><td>正確性</td><td>数値・期限は一次情報（e-Gov・国土交通省・法務省）で確認。裏が取れないものは断定しない</td></tr>
+          <tr><td>改正</td><td>改正点には「改正」ラベルを付け、<b>改正前はどうだったか</b>も併記。過去問演習時の混乱を防ぐため</td></tr>
+          <tr><td>配色</td><td>朱は<b>ひっかけと改正にだけ</b>使用。ライトは製図のインク、ダークは青焼き図面</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <footer>
+    <p>試験情報の出典：<a href="https://www.retio.or.jp/exam/schedule/">不動産適正取引推進機構（RETIO）</a>／条文：<a href="https://laws.e-gov.go.jp/">e-Gov法令検索</a><br>
+    最終更新 2026-08-16</p>
+  </footer>
+
+</div>
+
+<script>
+  document.getElementById('theme').addEventListener('click', function () {
+    var root = document.documentElement;
+    if (root.getAttribute('data-theme')) { root.removeAttribute('data-theme'); return; }
+    var dark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    root.setAttribute('data-theme', dark ? 'light' : 'dark');
+  });
+</script>

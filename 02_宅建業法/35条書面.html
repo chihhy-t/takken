@@ -1,0 +1,597 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>35条書面（重要事項説明） — 宅建士試験 2026年度</title>
+
+<style>
+  :root {
+    --paper:#EBEDE9; --surface:#F8F9F6; --sunk:#E1E4DE; --ink:#151F2A; --muted:#5D6B78;
+    --rule:#CDD2CB; --hair:#DCE0D9; --accent:#B8342A; --accent-soft:#F3DEDB;
+    --blue:#2A5F86; --blue-soft:#DCE6EE;
+    --font-display:"Hiragino Mincho ProN","Yu Mincho","YuMincho","Noto Serif JP",serif;
+    --font-body:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","YuGothic","Noto Sans JP",system-ui,sans-serif;
+    --font-mono:ui-monospace,"SFMono-Regular","SF Mono",Menlo,Consolas,monospace;
+    --measure:68ch;
+    --s1:.35rem; --s2:.7rem; --s3:1.1rem; --s4:1.7rem; --s5:2.6rem; --s6:4rem;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper:#0D1B29; --surface:#132534; --sunk:#0A1622; --ink:#DAE4EC; --muted:#8CA1B3;
+      --rule:#26415A; --hair:#1D3448; --accent:#FF7059; --accent-soft:#3A1F1D;
+      --blue:#6FB6DC; --blue-soft:#14293A;
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper:#0D1B29; --surface:#132534; --sunk:#0A1622; --ink:#DAE4EC; --muted:#8CA1B3;
+    --rule:#26415A; --hair:#1D3448; --accent:#FF7059; --accent-soft:#3A1F1D;
+    --blue:#6FB6DC; --blue-soft:#14293A;
+  }
+
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--paper); color:var(--ink); font-family:var(--font-body);
+    font-size:16px; line-height:1.9; -webkit-font-smoothing:antialiased; font-feature-settings:"palt" 1; }
+
+  .wrap { display:grid; grid-template-columns:15.5rem minmax(0,1fr); gap:var(--s6);
+    max-width:82rem; margin:0 auto; padding:0 var(--s4) var(--s6); align-items:start; }
+  @media (max-width:60rem){ .wrap{ grid-template-columns:minmax(0,1fr); gap:var(--s4); padding:0 var(--s3) var(--s5);} }
+
+  .masthead { grid-column:1/-1; padding:var(--s5) 0 var(--s4); border-bottom:2px solid var(--ink);
+    margin-bottom:var(--s2); display:flex; flex-wrap:wrap; align-items:flex-end; justify-content:space-between; gap:var(--s3); }
+  .eyebrow { font-family:var(--font-mono); font-size:.72rem; letter-spacing:.16em; text-transform:uppercase;
+    color:var(--muted); display:flex; align-items:center; gap:.6em; }
+  .eyebrow::before { content:""; width:2.2rem; height:1px; background:var(--accent); }
+  h1 { font-family:var(--font-display); font-weight:600; font-size:clamp(1.9rem,1.3rem + 2.4vw,2.9rem);
+    line-height:1.2; letter-spacing:.04em; margin:var(--s2) 0 var(--s3); text-wrap:balance; }
+  .facts { display:flex; flex-wrap:wrap; gap:0 var(--s3); font-size:.82rem; color:var(--muted); list-style:none; margin:0; padding:0; }
+  .facts b { font-family:var(--font-mono); font-variant-numeric:tabular-nums; color:var(--ink); font-weight:600; }
+  .toggles { display:flex; gap:var(--s1); }
+  button { font-family:var(--font-body); font-size:.78rem; color:var(--muted); background:var(--surface);
+    border:1px solid var(--rule); border-radius:2px; padding:.4em .9em; cursor:pointer; transition:color .15s,border-color .15s; }
+  button:hover { color:var(--ink); border-color:var(--ink); }
+  button:focus-visible { outline:2px solid var(--accent); outline-offset:2px; }
+  button[aria-pressed="true"] { color:var(--accent); border-color:var(--accent); }
+
+  nav.rail { position:sticky; top:var(--s3); font-size:.82rem; max-height:calc(100vh - 3rem); overflow-y:auto; padding-bottom:var(--s3); }
+  nav.rail h2 { font-family:var(--font-mono); font-size:.68rem; letter-spacing:.16em; text-transform:uppercase; color:var(--muted); margin:0 0 var(--s2); font-weight:500; }
+  nav.rail ol { list-style:none; margin:0; padding:0; display:flex; flex-direction:column; }
+  nav.rail a { display:block; padding:.3em 0 .3em .9em; color:var(--muted); text-decoration:none; border-left:2px solid var(--hair); line-height:1.5; }
+  nav.rail a:hover { color:var(--ink); border-left-color:var(--rule); }
+  nav.rail a.on { color:var(--ink); border-left-color:var(--accent); font-weight:600; }
+  nav.rail a .num { font-family:var(--font-mono); font-size:.72rem; color:var(--muted); margin-right:.5em; }
+  @media (max-width:60rem){
+    nav.rail{ position:static; max-height:none; border-bottom:1px solid var(--rule); padding-bottom:var(--s3); }
+    nav.rail ol{ display:grid; grid-template-columns:repeat(auto-fill,minmax(9rem,1fr)); gap:0 var(--s2); }
+  }
+
+  main { min-width:0; }
+  section { padding-top:var(--s5); scroll-margin-top:var(--s3); }
+  section > * { max-width:var(--measure); }
+  section > figure, section > .scroll { max-width:none; }
+
+  h2.sec { font-family:var(--font-display); font-size:clamp(1.45rem,1.2rem + .9vw,1.9rem); font-weight:600;
+    letter-spacing:.04em; margin:0 0 var(--s3); padding-bottom:var(--s2); border-bottom:1px solid var(--rule);
+    display:flex; align-items:baseline; gap:.7em; max-width:none; }
+  h2.sec .num { font-family:var(--font-mono); font-size:.8rem; letter-spacing:.1em; color:var(--accent); font-weight:500; }
+  h3 { font-family:var(--font-body); font-size:1.06rem; font-weight:700; letter-spacing:.02em;
+    margin:var(--s4) 0 var(--s2); padding-left:.7em; border-left:3px solid var(--ink); }
+  p { margin:0 0 var(--s3); }
+  a { color:var(--blue); text-underline-offset:.2em; }
+  em { font-style:normal; background:linear-gradient(transparent 62%, var(--accent-soft) 62%); font-weight:600; }
+  ul, ol { margin:0 0 var(--s3); padding-left:1.3em; }
+  li { margin-bottom:var(--s1); }
+  .lead { font-size:1.05rem; color:var(--muted); }
+
+  .call { max-width:var(--measure); margin:0 0 var(--s3); padding:var(--s3) var(--s3) var(--s3) var(--s4);
+    background:var(--surface); border:1px solid var(--hair); border-left:3px solid var(--rule); border-radius:2px; font-size:.94rem; }
+  .call > :last-child { margin-bottom:0; }
+  .call .tag { display:block; font-family:var(--font-mono); font-size:.68rem; letter-spacing:.16em; text-transform:uppercase; color:var(--muted); margin-bottom:var(--s1); }
+  .call.trap { border-left-color:var(--accent); background:var(--accent-soft); }
+  .call.trap .tag { color:var(--accent); }
+  .call.exam { border-left-color:var(--ink); }
+  .call.exam .tag { color:var(--ink); }
+  .call.rev { border-left-color:var(--accent); }
+  .call.rev .tag { color:var(--accent); }
+  .call.tip { border-left-color:var(--blue); background:var(--blue-soft); }
+  .call.tip .tag { color:var(--blue); }
+
+  .scroll { overflow-x:auto; margin:0 0 var(--s3); -webkit-overflow-scrolling:touch; }
+  table { border-collapse:collapse; width:100%; font-size:.88rem; line-height:1.6; }
+  caption { text-align:left; font-size:.78rem; color:var(--muted); padding-bottom:var(--s1); font-family:var(--font-mono); letter-spacing:.08em; }
+  th, td { padding:.55em .7em; text-align:left; vertical-align:top; border-bottom:1px solid var(--hair); }
+  thead th { font-size:.74rem; letter-spacing:.08em; color:var(--muted); font-weight:600; border-bottom:1px solid var(--ink); }
+  tbody tr:hover { background:var(--surface); }
+  td.n, th.n { text-align:center; font-family:var(--font-mono); font-variant-numeric:tabular-nums; white-space:nowrap; }
+  .no { color:var(--accent); font-weight:700; }
+  .yes { color:var(--muted); }
+  .tri { color:var(--blue); }
+  table.matrix { font-size:.84rem; }
+  table.matrix th.g { text-align:center; white-space:nowrap; width:5.5rem; }
+  table.matrix td.n { width:5.5rem; font-size:.95rem; }
+  table.matrix tbody td:first-child { min-width:20rem; }
+  table.matrix tr.hi { background:var(--accent-soft); }
+  .newtag { display:inline-block; font-family:var(--font-mono); font-size:.64rem; letter-spacing:.1em;
+    color:var(--accent); border:1px solid var(--accent); border-radius:2px; padding:0 .4em; margin-left:.4em; vertical-align:middle; }
+
+  figure { margin:0 0 var(--s4); }
+  figure svg { display:block; width:100%; height:auto; }
+  figcaption { font-size:.78rem; color:var(--muted); font-family:var(--font-mono); letter-spacing:.06em; margin-top:var(--s2); padding-top:var(--s1); border-top:1px solid var(--hair); }
+  .plate { background:var(--surface); border:1px solid var(--hair); border-radius:2px; padding:var(--s3); }
+  .svg-ink { fill:none; stroke:var(--ink); stroke-width:1.4; }
+  .svg-hair { fill:none; stroke:var(--rule); stroke-width:1; }
+  .svg-dim { fill:none; stroke:var(--blue); stroke-width:1; }
+  .svg-acc { fill:none; stroke:var(--accent); stroke-width:1.6; }
+  .svg-fill { fill:var(--sunk); stroke:var(--rule); stroke-width:1; }
+  .svg-accfill { fill:var(--accent-soft); stroke:var(--accent); stroke-width:1.2; }
+  .svg-bluefill { fill:var(--blue-soft); stroke:var(--blue); stroke-width:1.2; }
+  text { font-family:var(--font-body); fill:var(--ink); font-size:12px; }
+  text.lbl { font-family:var(--font-mono); fill:var(--muted); font-size:10.5px; letter-spacing:.06em; }
+  text.dimt { font-family:var(--font-mono); fill:var(--blue); font-size:11px; }
+  text.acct { fill:var(--accent); font-size:11.5px; font-weight:700; }
+
+  .nums { display:grid; grid-template-columns:repeat(auto-fill,minmax(11.5rem,1fr)); gap:var(--s2); }
+  .nc { background:var(--surface); border:1px solid var(--hair); border-radius:2px; padding:var(--s3) var(--s3) var(--s2); display:flex; flex-direction:column; gap:var(--s1); }
+  .nc .v { font-family:var(--font-mono); font-variant-numeric:tabular-nums; font-size:1.3rem; font-weight:600; line-height:1.2; color:var(--accent); }
+  .nc .d { font-size:.8rem; color:var(--muted); line-height:1.6; }
+  .nums.masked .v { color:transparent; background:var(--rule); border-radius:2px; user-select:none; }
+  .nums.masked .nc:hover .v, .nums.masked .nc:focus-within .v { color:var(--accent); background:transparent; }
+  .nc:focus-visible { outline:2px solid var(--accent); outline-offset:2px; }
+  .masthead-note { font-size:.78rem; color:var(--muted); margin-bottom:var(--s2); }
+
+  table.traps td:first-child { color:var(--muted); }
+  table.traps td:first-child::before { content:"「"; }
+  table.traps td:first-child::after { content:"」"; }
+  table.traps td:last-child strong { color:var(--accent); }
+
+  footer { grid-column:1/-1; margin-top:var(--s6); padding-top:var(--s3); border-top:1px solid var(--rule); font-size:.8rem; color:var(--muted); }
+  footer ul { list-style:none; padding:0; }
+  footer li { margin-bottom:var(--s1); }
+  .sibling { display:flex; flex-wrap:wrap; gap:var(--s2); margin-top:var(--s3); }
+  .sibling a { font-size:.8rem; text-decoration:none; border:1px solid var(--rule); border-radius:2px; padding:.35em .8em; color:var(--muted); }
+  .sibling a:hover { color:var(--ink); border-color:var(--ink); }
+
+  @media (prefers-reduced-motion: reduce){ *{ transition:none !important; animation:none !important; scroll-behavior:auto !important; } }
+  html { scroll-behavior:smooth; }
+  .eyebrow a { color:var(--accent); text-decoration:none; }
+  .eyebrow a:hover { text-decoration:underline; text-underline-offset:.2em; }
+  nav.rail a.home { border-left:none; padding:0 0 var(--s2); color:var(--accent);
+    font-family:var(--font-mono); font-size:.72rem; letter-spacing:.1em; }
+  nav.rail a.home:hover { color:var(--accent); text-decoration:underline; text-underline-offset:.2em; }
+</style>
+
+<div class="wrap">
+
+  <header class="masthead">
+    <div>
+      <div class="eyebrow"><a href="../index.html">← 総目次</a> &nbsp;/&nbsp; 02 宅建業法 &nbsp;/&nbsp; 宅建士試験 2026年度</div>
+      <h1>35条書面（重要事項説明）</h1>
+      <ul class="facts">
+        <li>法令基準日 <b>2026-04-01</b></li>
+        <li>出題数 <b>2〜3問</b></li>
+        <li>目標 <b>全問正解</b></li>
+        <li>更新 <b>2026-08-09</b></li>
+      </ul>
+    </div>
+    <div class="toggles">
+      <button id="mask" type="button" aria-pressed="false">数値を隠す</button>
+      <button id="theme" type="button">配色切替</button>
+    </div>
+  </header>
+
+  <nav class="rail" aria-label="目次">
+    <a class="home" href="../index.html">← 総目次</a>
+    <h2>Contents</h2>
+    <ol>
+      <li><a href="#overview"><span class="num">00</span>基本ルール</a></li>
+      <li><a href="#matrix"><span class="num">01</span>説明事項マトリクス</a></li>
+      <li><a href="#bukken"><span class="num">02</span>物件に関する事項</a></li>
+      <li><a href="#jouken"><span class="num">03</span>取引条件に関する事項</a></li>
+      <li><a href="#kubun"><span class="num">04</span>区分所有建物の追加</a></li>
+      <li><a href="#it"><span class="num">05</span>IT重説・電磁的方法</a></li>
+      <li><a href="#deru"><span class="num">06</span>よく出る論点</a></li>
+      <li><a href="#hikkake"><span class="num">07</span>ひっかけ一覧</a></li>
+      <li><a href="#suji"><span class="num">08</span>数字まとめ</a></li>
+    </ol>
+  </nav>
+
+  <main>
+
+    <!-- 00 -->
+    <section id="overview">
+      <h2 class="sec"><span class="num">00</span>基本ルール</h2>
+      <p class="lead">宅建業法の最頻出テーマ。まず<em>誰が・いつ・誰に</em>を固めてから、説明事項の中身に入る。</p>
+
+      <figure class="plate">
+        <svg viewBox="0 0 720 210" role="img" aria-label="重要事項説明は、契約が成立するまでの間に、宅建士が宅建士証を提示して、これから取得または借りようとする者に対して行う。売主や貸主には説明しない。書面の交付は宅建業者の義務、説明と記名は宅建士が行う。">
+          <line x1="60" y1="70" x2="660" y2="70" class="svg-ink"/>
+          <circle cx="120" cy="70" r="6" class="svg-acc" fill="var(--paper)"/>
+          <text x="120" y="52" text-anchor="middle" class="acct">重要事項説明</text>
+          <circle cx="600" cy="70" r="6" class="svg-ink" fill="var(--paper)"/>
+          <text x="600" y="52" text-anchor="middle">契約の成立</text>
+          <path d="M128 96 H 592" class="svg-dim"/>
+          <path d="M132 92 L128 96 L132 100 M588 92 L592 96 L588 100" class="svg-dim"/>
+          <text x="360" y="90" text-anchor="middle" class="dimt">契約が成立するまでの間</text>
+
+          <rect x="40" y="120" width="200" height="66" class="svg-accfill" rx="2"/>
+          <text x="140" y="142" text-anchor="middle">説明する人</text>
+          <text x="140" y="160" text-anchor="middle" class="lbl">宅地建物取引士</text>
+          <text x="140" y="176" text-anchor="middle" class="lbl">専任でなくてよい</text>
+
+          <rect x="260" y="120" width="200" height="66" class="svg-bluefill" rx="2"/>
+          <text x="360" y="142" text-anchor="middle">説明される人</text>
+          <text x="360" y="160" text-anchor="middle" class="lbl">買主・借主・交換で取得する者</text>
+          <text x="360" y="176" text-anchor="middle" class="dimt">売主・貸主には説明しない</text>
+
+          <rect x="480" y="120" width="200" height="66" class="svg-fill" rx="2"/>
+          <text x="580" y="142" text-anchor="middle">交付する人</text>
+          <text x="580" y="160" text-anchor="middle" class="lbl">宅地建物取引業者</text>
+          <text x="580" y="176" text-anchor="middle" class="lbl">記名は宅建士</text>
+        </svg>
+        <figcaption>Fig.1 — 誰が・いつ・誰に</figcaption>
+      </figure>
+
+      <div class="scroll">
+        <table>
+          <thead><tr><th>論点</th><th>内容</th></tr></thead>
+          <tbody>
+            <tr><td><strong>説明する者</strong></td><td>宅地建物取引士。<strong>専任である必要はない</strong></td></tr>
+            <tr><td><strong>記名</strong></td><td>宅建士が記名する。<span class="no">押印は2022年5月18日施行の改正で廃止</span></td></tr>
+            <tr><td>書面の交付義務者</td><td class="no"><strong>宅建業者</strong>（交付自体は宅建士でなくてもできる）</td></tr>
+            <tr><td><strong>時期</strong></td><td>契約が成立する<strong>までの間</strong></td></tr>
+            <tr>
+              <td><strong>相手方</strong></td>
+              <td>売買・交換 → <strong>取得しようとする者（買主）</strong><br>貸借 → <strong>借りようとする者（借主）</strong><br><span class="no">売主・貸主には説明しない</span></td>
+            </tr>
+            <tr><td>宅建士証の提示</td><td class="no"><strong>請求がなくても提示</strong>しなければならない</td></tr>
+            <tr><td><strong>相手方が宅建業者のとき</strong></td><td class="no"><strong>書面の交付のみでよく、説明は不要</strong>（宅建業者間取引）</td></tr>
+            <tr><td>複数の業者が関与するとき</td><td>関与するすべての業者が説明義務を負う。<strong>宅建士が共同で1通の書面に記名</strong>してもよい</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="call trap">
+        <span class="tag">ひっかけ</span>
+        <p><strong>説明するのは「これから買う人・借りる人」だけ。</strong>売主・貸主に説明する必要はない。代理・媒介であっても同じ。<br>
+        <strong>相手が宅建業者なら説明不要（書面の交付は必要）。</strong>「交付も不要」は誤り。</p>
+      </div>
+    </section>
+
+    <!-- 01 -->
+    <section id="matrix">
+      <h2 class="sec"><span class="num">01</span>説明事項マトリクス</h2>
+      <p class="lead">この分野の得点はほぼ<em>「その取引で説明が要る事項かどうか」</em>で決まる。<em>✕が付くところだけ</em>を覚える。</p>
+
+      <div class="scroll">
+        <table class="matrix">
+          <caption>○＝説明が必要 ／ ✕＝説明が不要</caption>
+          <thead>
+            <tr>
+              <th>説明事項</th>
+              <th class="g">売買<br>交換</th>
+              <th class="g">建物の<br>貸借</th>
+              <th class="g">宅地の<br>貸借</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td colspan="4" class="lbl" style="background:var(--sunk)">物件に関する事項</td></tr>
+            <tr><td>登記された権利の種類・内容、登記名義人</td><td class="n">○</td><td class="n">○</td><td class="n">○</td></tr>
+            <tr class="hi"><td>法令に基づく制限の概要</td><td class="n">○</td><td class="n tri">一部のみ</td><td class="n tri">一部のみ</td></tr>
+            <tr class="hi"><td><strong>私道に関する負担</strong></td><td class="n">○</td><td class="n no">✕</td><td class="n">○</td></tr>
+            <tr><td>飲用水・電気・ガスの供給、排水施設の整備状況</td><td class="n">○</td><td class="n">○</td><td class="n">○</td></tr>
+            <tr><td>未完成物件のときは工事完了時の形状・構造等</td><td class="n">○</td><td class="n">○</td><td class="n">○</td></tr>
+            <tr><td>既存建物のとき — <strong>建物状況調査</strong>の実施の有無と結果の概要</td><td class="n">○</td><td class="n">○</td><td class="n">—</td></tr>
+            <tr class="hi"><td>既存建物のとき — <strong>建築・維持保全の状況に関する書類の保存状況</strong></td><td class="n">○</td><td class="n no">✕</td><td class="n">—</td></tr>
+            <tr><td>造成宅地防災区域内か</td><td class="n">○</td><td class="n">○</td><td class="n">○</td></tr>
+            <tr><td>土砂災害警戒区域内か</td><td class="n">○</td><td class="n">○</td><td class="n">○</td></tr>
+            <tr><td>津波災害警戒区域内か</td><td class="n">○</td><td class="n">○</td><td class="n">○</td></tr>
+            <tr><td><strong>水害ハザードマップ</strong>における所在地</td><td class="n">○</td><td class="n">○</td><td class="n">○</td></tr>
+            <tr><td>石綿使用調査の内容（記録があるとき）</td><td class="n">○</td><td class="n">○</td><td class="n">—</td></tr>
+            <tr><td>耐震診断の内容（昭和56年6月1日以降着工のものを除く）</td><td class="n">○</td><td class="n">○</td><td class="n">—</td></tr>
+            <tr class="hi"><td><strong>住宅性能評価</strong>を受けた新築住宅であるとき</td><td class="n">○</td><td class="n no">✕</td><td class="n no">✕</td></tr>
+
+            <tr><td colspan="4" class="lbl" style="background:var(--sunk)">取引条件に関する事項</td></tr>
+            <tr><td>代金・借賃以外に授受される金銭の額と目的</td><td class="n">○</td><td class="n">○</td><td class="n">○</td></tr>
+            <tr><td>契約の解除に関する事項</td><td class="n">○</td><td class="n">○</td><td class="n">○</td></tr>
+            <tr><td>損害賠償額の予定・違約金に関する事項</td><td class="n">○</td><td class="n">○</td><td class="n">○</td></tr>
+            <tr><td>支払金・預り金の保全措置の概要</td><td class="n">○</td><td class="n">○</td><td class="n">○</td></tr>
+            <tr class="hi"><td><strong>手付金等の保全措置</strong>の概要</td><td class="n">○</td><td class="n no">✕</td><td class="n no">✕</td></tr>
+            <tr class="hi"><td><strong>金銭の貸借のあっせん</strong>の内容と不成立のときの措置</td><td class="n">○</td><td class="n no">✕</td><td class="n no">✕</td></tr>
+            <tr class="hi"><td><strong>契約不適合責任の履行に関する措置</strong>の概要</td><td class="n">○</td><td class="n no">✕</td><td class="n no">✕</td></tr>
+            <tr class="hi"><td><strong>割賦販売</strong>のときの現金販売価格・割賦販売価格等</td><td class="n">○</td><td class="n no">✕</td><td class="n no">✕</td></tr>
+
+            <tr><td colspan="4" class="lbl" style="background:var(--sunk)">貸借のときだけ必要な事項</td></tr>
+            <tr class="hi"><td><strong>契約期間・契約の更新</strong>に関する事項</td><td class="n no">✕</td><td class="n">○</td><td class="n">○</td></tr>
+            <tr class="hi"><td><strong>定期借地権・定期建物賃貸借・終身建物賃貸借</strong>であるときはその旨</td><td class="n no">✕</td><td class="n">○</td><td class="n">○</td></tr>
+            <tr class="hi"><td><strong>用途その他の利用の制限</strong>に関する事項</td><td class="n no">✕</td><td class="n">○</td><td class="n">○</td></tr>
+            <tr class="hi"><td><strong>敷金等の精算</strong>に関する事項</td><td class="n no">✕</td><td class="n">○</td><td class="n">○</td></tr>
+            <tr class="hi"><td><strong>管理の委託を受けている者</strong>の氏名・住所</td><td class="n no">✕</td><td class="n">○</td><td class="n">○</td></tr>
+            <tr class="hi"><td>契約終了時における<strong>建物の取壊し</strong>に関する事項</td><td class="n no">✕</td><td class="n no">✕</td><td class="n">○</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="call tip">
+        <span class="tag">覚え方</span>
+        <p>柱は3本だけ。<br>
+        ① <strong>「お金を大きく動かす話」は売買だけ</strong> — 手付金等の保全、住宅ローンのあっせん、契約不適合責任の措置、割賦販売。借主は代金を払わないので不要。<br>
+        ② <strong>「借りるときの条件」は貸借だけ</strong> — 期間・更新、定期借家か、用途制限、敷金の精算、管理会社。買主は所有者になるので不要。<br>
+        ③ <strong>「土地に関する話」は建物の貸借で落ちる</strong> — 私道の負担。建物を借りる人に私道は関係ない。</p>
+      </div>
+
+      <div class="call trap">
+        <span class="tag">ひっかけ</span>
+        <p><strong>「私道に関する負担」は、建物の貸借だけ不要。</strong>宅地の貸借では必要。この1マスが定番の出題ポイント。<br>
+        <strong>建物の取壊しに関する事項は「宅地の貸借」だけ。</strong>借地上に建てた建物を契約終了時にどうするかの話なので、建物の貸借では出てこない。</p>
+      </div>
+    </section>
+
+    <!-- 02 -->
+    <section id="bukken">
+      <h2 class="sec"><span class="num">02</span>物件に関する事項の注意点</h2>
+
+      <div class="scroll">
+        <table>
+          <thead><tr><th>事項</th><th>注意点</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><strong>登記された権利</strong></td>
+              <td>登記されている権利の種類・内容と<strong>登記名義人</strong>を説明する。<span class="no">移転登記の申請時期は35条では説明しない</span>（37条の記載事項）</td>
+            </tr>
+            <tr>
+              <td><strong>建物状況調査</strong><br><span class="lbl">インスペクション</span></td>
+              <td>実施しているかどうか、実施している場合はその結果の概要。<br>「実施している」とされるのは調査から <strong>1年以内</strong>（鉄筋コンクリート造・鉄骨鉄筋コンクリート造の共同住宅等は <strong>2年以内</strong>）のもの。<br><span class="no">業者に調査の実施義務はない</span></td>
+            </tr>
+            <tr>
+              <td><strong>水害ハザードマップ</strong></td>
+              <td>市町村が配布する水害ハザードマップにおける当該宅地建物の<strong>所在地</strong>を説明する。<br><span class="tri">ハザードマップが作成されていない場合はその旨を説明すればよい</span></td>
+            </tr>
+            <tr>
+              <td><strong>石綿使用調査</strong></td>
+              <td>調査の<strong>記録があるとき</strong>にその内容を説明する。<span class="no">業者に調査の実施義務はない</span></td>
+            </tr>
+            <tr>
+              <td><strong>耐震診断</strong></td>
+              <td>耐震診断を受けたものであるときはその内容。<strong>昭和56年6月1日以降に新築の工事に着手したもの</strong>は対象外。<span class="no">業者に診断の実施義務はない</span></td>
+            </tr>
+            <tr>
+              <td>各種の災害警戒区域</td>
+              <td>造成宅地防災区域・土砂災害警戒区域・津波災害警戒区域の<strong>いずれも、区域内にあるときはその旨</strong>を説明する。売買・貸借を問わない</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="call exam">
+        <span class="tag">よく出る</span>
+        <p><strong>建物状況調査・石綿調査・耐震診断のいずれも、業者に「実施する義務」はない。</strong>あるのは「実施済みなら説明する義務」だけ。<br>
+        「石綿の使用の有無の調査を自ら実施しなければならない」は毎年のように出る誤りの選択肢。</p>
+      </div>
+    </section>
+
+    <!-- 03 -->
+    <section id="jouken">
+      <h2 class="sec"><span class="num">03</span>取引条件に関する事項の注意点</h2>
+
+      <div class="scroll">
+        <table>
+          <thead><tr><th>事項</th><th>注意点</th></tr></thead>
+          <tbody>
+            <tr>
+              <td>代金・借賃<strong>以外</strong>に授受される金銭</td>
+              <td class="no"><strong>額と授受の目的</strong>を説明する。手付金・敷金・礼金などが該当。<br><strong>代金・借賃そのものの額は35条の説明事項ではない</strong>（37条の記載事項）</td>
+            </tr>
+            <tr>
+              <td>支払金・預り金の<strong>保全措置</strong></td>
+              <td>措置を<strong>講ずるかどうか</strong>、講ずる場合はその概要。<span class="tri">売買・貸借とも必要</span></td>
+            </tr>
+            <tr>
+              <td><strong>手付金等の保全措置</strong></td>
+              <td>売買・交換のみ。<a href="8種制限.html">8種制限</a>の保全措置の概要を説明する</td>
+            </tr>
+            <tr>
+              <td>金銭の貸借のあっせん</td>
+              <td>あっせんの内容と、<strong>あっせんが成立しないときの措置</strong>。ローン特約の内容にあたる</td>
+            </tr>
+            <tr>
+              <td>契約不適合責任の<strong>履行に関する措置</strong></td>
+              <td class="no">保証保険契約の締結など、履行を確保する<strong>措置を講ずるかどうか</strong>とその概要。<br><strong>契約不適合責任の内容そのものは35条の説明事項ではない</strong></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="call trap">
+        <span class="tag">ひっかけ</span>
+        <p><strong>代金の額は35条では説明しない。</strong>35条は「代金以外に授受される金銭」を扱う。代金の額・支払時期は37条書面の必要的記載事項。<br>
+        <strong>契約不適合責任も同様</strong>で、35条で説明するのは「責任の履行を確保する措置を講ずるか」であって、責任の内容ではない。</p>
+      </div>
+    </section>
+
+    <!-- 04 -->
+    <section id="kubun">
+      <h2 class="sec"><span class="num">04</span>区分所有建物（マンション）の追加事項</h2>
+
+      <div class="call rev">
+        <span class="tag">2026年4月1日施行 — 今年の目玉</span>
+        <p>宅建業法施行規則の改正により、<strong>区分所有建物の売買・交換</strong>の重要事項説明に、<strong>管理者等がマンション管理業者であるか否か（いわゆる「管理業者管理者方式」を採用しているか否か）</strong>の説明が追加されました。<br>
+        <strong>貸借には適用されません。</strong>改正初年度なので、出題される可能性が高い論点です。</p>
+      </div>
+
+      <div class="scroll">
+        <table class="matrix">
+          <caption>区分所有建物のときに追加される事項</caption>
+          <thead><tr><th>追加事項</th><th class="g">売買<br>交換</th><th class="g">貸借</th></tr></thead>
+          <tbody>
+            <tr><td>① 敷地に関する権利の種類・内容</td><td class="n">○</td><td class="n no">✕</td></tr>
+            <tr><td>② 共用部分に関する規約の定め（案を含む）</td><td class="n">○</td><td class="n no">✕</td></tr>
+            <tr class="hi"><td>③ <strong>専有部分の用途その他の利用の制限</strong>に関する規約の定め</td><td class="n">○</td><td class="n">○</td></tr>
+            <tr><td>④ 専用使用権に関する規約の定め</td><td class="n">○</td><td class="n no">✕</td></tr>
+            <tr><td>⑤ 計画的な維持修繕費用の積立てを行う旨の規約の定めと<strong>既に積み立てられている額</strong></td><td class="n">○</td><td class="n no">✕</td></tr>
+            <tr><td>⑥ 通常の管理費用の額</td><td class="n">○</td><td class="n no">✕</td></tr>
+            <tr><td>⑦ 特定の者にのみ費用を減免する旨の規約の定め</td><td class="n">○</td><td class="n no">✕</td></tr>
+            <tr class="hi"><td>⑧ <strong>管理が委託されているときはその委託を受けている者</strong>の氏名・住所</td><td class="n">○</td><td class="n">○</td></tr>
+            <tr><td>⑨ 一棟の建物の維持修繕の実施状況が記録されているときはその内容</td><td class="n">○</td><td class="n no">✕</td></tr>
+            <tr class="hi"><td>⑩ <strong>管理者等が管理業者であるか否か</strong><span class="newtag">2026改正</span></td><td class="n">○</td><td class="n no">✕</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="call tip">
+        <span class="tag">覚え方</span>
+        <p><strong>貸借で必要なのは③と⑧の2つだけ。</strong>「ペット可か（利用の制限）」と「管理会社はどこか」— 借主が知りたいのはこの2点だけ、と考えれば足りる。<br>
+        規約・修繕積立金・管理費といった<strong>「所有者としての負担」に関する事項は、借主には説明しない</strong>。</p>
+      </div>
+
+      <div class="call trap">
+        <span class="tag">ひっかけ</span>
+        <p><strong>修繕積立金は「規約の定め」と「既に積み立てられている額」の両方が説明事項。</strong>額だけ、定めだけ、とする選択肢は不十分。<br>
+        <strong>規約が「案」の段階でもその案を説明する</strong>必要がある。「規約がまだ成立していないので説明不要」は誤り。<br>
+        新設の⑩は<strong>売買・交換のみ</strong>。「貸借でも管理業者管理者方式か否かを説明する」は誤り。</p>
+      </div>
+    </section>
+
+    <!-- 05 -->
+    <section id="it">
+      <h2 class="sec"><span class="num">05</span>IT重説・電磁的方法</h2>
+
+      <div class="scroll">
+        <table>
+          <thead><tr><th>論点</th><th>内容</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><strong>IT重説の要件</strong></td>
+              <td>
+                ① 図面等の書類と説明の内容について十分に理解できる程度に<strong>映像を視認でき</strong>、かつ双方が発する<strong>音声を十分に聞き取れる</strong>こと<br>
+                ② 事前に <strong>35条書面（または電磁的方法による提供）</strong> を相手方に届けていること<br>
+                ③ 宅建士が<strong>宅建士証を提示</strong>し、相手方がそれを<strong>視認できたことを確認</strong>すること
+              </td>
+            </tr>
+            <tr><td>対象取引</td><td class="tri"><strong>売買・交換・貸借のいずれも可能</strong></td></tr>
+            <tr><td>中断</td><td>映像・音声の状況が上記の条件を満たさなくなったときは、<strong>説明を中断</strong>し、回復してから再開する</td></tr>
+            <tr>
+              <td><strong>電磁的方法による提供</strong></td>
+              <td>相手方の<strong>承諾</strong>を得れば、書面の交付に代えて電磁的方法により提供できる（2022年5月18日施行）。<br>承諾は書面または電磁的方法で得る</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="call trap">
+        <span class="tag">ひっかけ</span>
+        <p><strong>IT重説でも宅建士証の提示は省略できない。</strong>画面越しに提示し、相手が見えたことを確認する必要がある。<br>
+        <strong>電磁的方法による提供には相手方の承諾が必要。</strong>承諾なしに送りつけることはできない。</p>
+      </div>
+    </section>
+
+    <!-- 06 -->
+    <section id="deru">
+      <h2 class="sec"><span class="num">06</span>よく出る論点</h2>
+      <div class="scroll">
+        <table>
+          <thead><tr><th class="n">順位</th><th>論点</th><th>要点</th></tr></thead>
+          <tbody>
+            <tr><td class="n">1</td><td><strong>売買・貸借で必要な事項の振り分け</strong></td><td>私道／手付金等の保全／ローンあっせん／期間・更新／敷金</td></tr>
+            <tr><td class="n">2</td><td>区分所有建物の追加事項</td><td>貸借は③⑧の2つだけ／<span class="no">⑩管理業者管理者方式は売買のみ</span></td></tr>
+            <tr><td class="n">3</td><td>基本ルール</td><td>宅建士が説明・記名／買主借主のみ／業者間は交付のみ／士証は無請求で提示</td></tr>
+            <tr><td class="n">4</td><td>調査義務の有無</td><td>建物状況調査・石綿・耐震のいずれも実施義務はない</td></tr>
+            <tr><td class="n">5</td><td>35条と37条の切り分け</td><td>代金の額・移転登記の時期・契約不適合責任の内容は37条</td></tr>
+            <tr><td class="n">6</td><td>IT重説</td><td>売買も可／士証の提示は必要／事前に書面を届ける</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 07 -->
+    <section id="hikkake">
+      <h2 class="sec"><span class="num">07</span>ひっかけ一覧</h2>
+      <div class="scroll">
+        <table class="traps">
+          <thead><tr><th>こう書かれたら疑う</th><th>正しくは</th></tr></thead>
+          <tbody>
+            <tr><td>重要事項説明は専任の宅建士が行わなければならない</td><td>宅建士であれば<strong>専任でなくてよい</strong></td></tr>
+            <tr><td>売主にも重要事項説明をしなければならない</td><td><strong>取得・賃借しようとする者</strong>にのみ説明する</td></tr>
+            <tr><td>相手方が宅建業者なら書面の交付も不要</td><td><strong>交付は必要</strong>。不要になるのは説明</td></tr>
+            <tr><td>契約成立後、遅滞なく説明すればよい</td><td><strong>契約が成立するまでの間</strong>に説明する</td></tr>
+            <tr><td>建物の貸借でも私道に関する負担を説明する</td><td><strong>建物の貸借では不要</strong>（宅地の貸借では必要）</td></tr>
+            <tr><td>建物の貸借で手付金等の保全措置を説明する</td><td><strong>売買・交換のみ</strong></td></tr>
+            <tr><td>売買でも契約期間や更新について説明する</td><td><strong>貸借のみ</strong></td></tr>
+            <tr><td>石綿使用の有無を自ら調査して説明しなければならない</td><td><strong>調査義務はない</strong>。記録があるときに内容を説明する</td></tr>
+            <tr><td>すべての建物について耐震診断の内容を説明する</td><td><strong>昭和56年6月1日以降着工のものは対象外</strong>。診断義務もない</td></tr>
+            <tr><td>水害ハザードマップが未作成なら説明は不要</td><td><strong>その旨を説明</strong>する</td></tr>
+            <tr><td>代金の額は重要事項として説明する</td><td>35条は<strong>代金以外</strong>に授受される金銭。代金の額は37条</td></tr>
+            <tr><td>契約不適合責任の内容を35条で説明する</td><td>35条は<strong>履行を確保する措置</strong>の有無と概要</td></tr>
+            <tr><td>マンションの貸借でも修繕積立金の額を説明する</td><td>貸借で必要なのは<strong>利用制限の規約と管理受託者</strong>の2つ</td></tr>
+            <tr><td>規約が案の段階なら説明しなくてよい</td><td><strong>案の段階でも説明</strong>する</td></tr>
+            <tr><td>マンションの貸借でも管理業者管理者方式か否かを説明する</td><td>2026年新設の項目は<strong>売買・交換のみ</strong></td></tr>
+            <tr><td>IT重説では宅建士証の提示を省略できる</td><td><strong>画面越しに提示し、視認を確認</strong>する</td></tr>
+            <tr><td>35条書面には宅建士の記名押印が必要</td><td><strong>記名のみ</strong>（押印は2022年に廃止）</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 08 -->
+    <section id="suji">
+      <h2 class="sec"><span class="num">08</span>数字まとめ</h2>
+      <p class="masthead-note">右上の「数値を隠す」で自己テストできる。</p>
+      <div class="nums" id="numgrid">
+        <div class="nc" tabindex="0"><span class="v">1年以内</span><span class="d">建物状況調査が「実施している」とされる期間</span></div>
+        <div class="nc" tabindex="0"><span class="v">2年以内</span><span class="d">鉄筋コンクリート造等の共同住宅における建物状況調査</span></div>
+        <div class="nc" tabindex="0"><span class="v">昭和56年6月1日</span><span class="d">これ以降に新築工事に着手した建物は耐震診断の説明対象外</span></div>
+        <div class="nc" tabindex="0"><span class="v">2つ</span><span class="d">区分所有建物の貸借で必要な追加事項（利用制限の規約・管理受託者）</span></div>
+        <div class="nc" tabindex="0"><span class="v">10万円以下</span><span class="d">宅建士証を提示しなかった場合の過料</span></div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <h4>出典</h4>
+    <ul>
+      <li>宅地建物取引業法（昭和27年法律第176号）第35条／同法施行規則第16条の2〜第16条の4の3 — <a href="https://laws.e-gov.go.jp/law/327AC1000000176">e-Gov法令検索</a></li>
+      <li>国土交通省「宅建業法施行規則の改正に伴う重要事項説明項目の追加等について」（2026年4月1日施行） — <a href="https://www.zennichi.or.jp/2025/12/17/%e5%9b%bd%e4%ba%a4%e7%9c%81%e3%80%8c%e5%ae%85%e5%bb%ba%e6%a5%ad%e6%b3%95%e6%96%bd%e8%a1%8c%e8%a6%8f%e5%89%87%e3%81%ae%e6%94%b9%e6%ad%a3%e3%81%ab%e4%bc%b4%e3%81%86%e9%87%8d%e8%a6%81%e4%ba%8b%e9%a0%85/">全日本不動産協会</a></li>
+      <li>令和8年度宅建試験に関係する宅地建物取引業法改正 — <a href="https://yotsuyagakuin-tsushin.com/blog_takkenshiken/r8_takkengyoho_kaisei/">四谷学院</a></li>
+    </ul>
+    <div class="sibling">
+      <a href="../index.html">総目次</a>
+      <a href="免許制度.html">免許制度</a>
+      <a href="宅地建物取引士.html">宅地建物取引士</a>
+      <a href="業務上の規制.html">← 業務上の規制</a>
+    </div>
+  </footer>
+
+</div>
+
+<script>
+  (function () {
+    var root = document.documentElement;
+    document.getElementById('theme').addEventListener('click', function () {
+      if (root.getAttribute('data-theme')) { root.removeAttribute('data-theme'); return; }
+      var dark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      root.setAttribute('data-theme', dark ? 'light' : 'dark');
+    });
+    var maskBtn = document.getElementById('mask');
+    var grid = document.getElementById('numgrid');
+    maskBtn.addEventListener('click', function () {
+      var on = grid.classList.toggle('masked');
+      maskBtn.setAttribute('aria-pressed', String(on));
+      maskBtn.textContent = on ? '数値を表示' : '数値を隠す';
+    });
+    var links = Array.prototype.slice.call(document.querySelectorAll('nav.rail ol a'));
+    var map = {};
+    links.forEach(function (a) { map[a.getAttribute('href').slice(1)] = a; });
+    var seen = [];
+    var obs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        var i = seen.indexOf(e.target.id);
+        if (e.isIntersecting && i < 0) seen.push(e.target.id);
+        if (!e.isIntersecting && i >= 0) seen.splice(i, 1);
+      });
+      links.forEach(function (a) { a.classList.remove('on'); });
+      if (seen.length) {
+        var order = Object.keys(map);
+        seen.sort(function (a, b) { return order.indexOf(a) - order.indexOf(b); });
+        map[seen[0]].classList.add('on');
+      }
+    }, { rootMargin: '-10% 0px -70% 0px' });
+    document.querySelectorAll('main section').forEach(function (s) { obs.observe(s); });
+  })();
+</script>

@@ -1,0 +1,580 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>国土利用計画法 — 宅建士試験 2026年度</title>
+
+<style>
+  :root {
+    --paper:#EBEDE9; --surface:#F8F9F6; --sunk:#E1E4DE; --ink:#151F2A; --muted:#5D6B78;
+    --rule:#CDD2CB; --hair:#DCE0D9; --accent:#B8342A; --accent-soft:#F3DEDB;
+    --blue:#2A5F86; --blue-soft:#DCE6EE;
+    --font-display:"Hiragino Mincho ProN","Yu Mincho","YuMincho","Noto Serif JP",serif;
+    --font-body:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","YuGothic","Noto Sans JP",system-ui,sans-serif;
+    --font-mono:ui-monospace,"SFMono-Regular","SF Mono",Menlo,Consolas,monospace;
+    --measure:68ch;
+    --s1:.35rem; --s2:.7rem; --s3:1.1rem; --s4:1.7rem; --s5:2.6rem; --s6:4rem;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper:#0D1B29; --surface:#132534; --sunk:#0A1622; --ink:#DAE4EC; --muted:#8CA1B3;
+      --rule:#26415A; --hair:#1D3448; --accent:#FF7059; --accent-soft:#3A1F1D;
+      --blue:#6FB6DC; --blue-soft:#14293A;
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper:#0D1B29; --surface:#132534; --sunk:#0A1622; --ink:#DAE4EC; --muted:#8CA1B3;
+    --rule:#26415A; --hair:#1D3448; --accent:#FF7059; --accent-soft:#3A1F1D;
+    --blue:#6FB6DC; --blue-soft:#14293A;
+  }
+
+  * { box-sizing: border-box; }
+  body { margin:0; background:var(--paper); color:var(--ink); font-family:var(--font-body);
+    font-size:16px; line-height:1.9; -webkit-font-smoothing:antialiased; font-feature-settings:"palt" 1; }
+
+  .wrap { display:grid; grid-template-columns:15.5rem minmax(0,1fr); gap:var(--s6);
+    max-width:78rem; margin:0 auto; padding:0 var(--s4) var(--s6); align-items:start; }
+  @media (max-width:60rem){ .wrap{ grid-template-columns:minmax(0,1fr); gap:var(--s4); padding:0 var(--s3) var(--s5);} }
+
+  .masthead { grid-column:1/-1; padding:var(--s5) 0 var(--s4); border-bottom:2px solid var(--ink);
+    margin-bottom:var(--s2); display:flex; flex-wrap:wrap; align-items:flex-end; justify-content:space-between; gap:var(--s3); }
+  .eyebrow { font-family:var(--font-mono); font-size:.72rem; letter-spacing:.16em; text-transform:uppercase;
+    color:var(--muted); display:flex; align-items:center; gap:.6em; }
+  .eyebrow::before { content:""; width:2.2rem; height:1px; background:var(--accent); }
+  h1 { font-family:var(--font-display); font-weight:600; font-size:clamp(2rem,1.4rem + 2.6vw,3.1rem);
+    line-height:1.2; letter-spacing:.04em; margin:var(--s2) 0 var(--s3); text-wrap:balance; }
+  .facts { display:flex; flex-wrap:wrap; gap:0 var(--s3); font-size:.82rem; color:var(--muted); list-style:none; margin:0; padding:0; }
+  .facts b { font-family:var(--font-mono); font-variant-numeric:tabular-nums; color:var(--ink); font-weight:600; }
+  .toggles { display:flex; gap:var(--s1); }
+  button { font-family:var(--font-body); font-size:.78rem; color:var(--muted); background:var(--surface);
+    border:1px solid var(--rule); border-radius:2px; padding:.4em .9em; cursor:pointer; transition:color .15s,border-color .15s; }
+  button:hover { color:var(--ink); border-color:var(--ink); }
+  button:focus-visible { outline:2px solid var(--accent); outline-offset:2px; }
+  button[aria-pressed="true"] { color:var(--accent); border-color:var(--accent); }
+
+  nav.rail { position:sticky; top:var(--s3); font-size:.82rem; max-height:calc(100vh - 3rem); overflow-y:auto; padding-bottom:var(--s3); }
+  nav.rail h2 { font-family:var(--font-mono); font-size:.68rem; letter-spacing:.16em; text-transform:uppercase; color:var(--muted); margin:0 0 var(--s2); font-weight:500; }
+  nav.rail ol { list-style:none; margin:0; padding:0; display:flex; flex-direction:column; }
+  nav.rail a { display:block; padding:.3em 0 .3em .9em; color:var(--muted); text-decoration:none; border-left:2px solid var(--hair); line-height:1.5; }
+  nav.rail a:hover { color:var(--ink); border-left-color:var(--rule); }
+  nav.rail a.on { color:var(--ink); border-left-color:var(--accent); font-weight:600; }
+  nav.rail a .num { font-family:var(--font-mono); font-size:.72rem; color:var(--muted); margin-right:.5em; }
+  @media (max-width:60rem){
+    nav.rail{ position:static; max-height:none; border-bottom:1px solid var(--rule); padding-bottom:var(--s3); }
+    nav.rail ol{ display:grid; grid-template-columns:repeat(auto-fill,minmax(9rem,1fr)); gap:0 var(--s2); }
+  }
+
+  main { min-width:0; }
+  section { padding-top:var(--s5); scroll-margin-top:var(--s3); }
+  section > * { max-width:var(--measure); }
+  section > figure, section > .scroll { max-width:none; }
+
+  h2.sec { font-family:var(--font-display); font-size:clamp(1.45rem,1.2rem + .9vw,1.9rem); font-weight:600;
+    letter-spacing:.04em; margin:0 0 var(--s3); padding-bottom:var(--s2); border-bottom:1px solid var(--rule);
+    display:flex; align-items:baseline; gap:.7em; max-width:none; }
+  h2.sec .num { font-family:var(--font-mono); font-size:.8rem; letter-spacing:.1em; color:var(--accent); font-weight:500; }
+  h3 { font-family:var(--font-body); font-size:1.06rem; font-weight:700; letter-spacing:.02em;
+    margin:var(--s4) 0 var(--s2); padding-left:.7em; border-left:3px solid var(--ink); }
+  h4 { font-size:.88rem; font-weight:700; color:var(--muted); letter-spacing:.06em; margin:var(--s3) 0 var(--s1); }
+  p { margin:0 0 var(--s3); }
+  a { color:var(--blue); text-underline-offset:.2em; }
+  em { font-style:normal; background:linear-gradient(transparent 62%, var(--accent-soft) 62%); font-weight:600; }
+  ul, ol { margin:0 0 var(--s3); padding-left:1.3em; }
+  li { margin-bottom:var(--s1); }
+  .lead { font-size:1.05rem; color:var(--muted); }
+
+  .call { max-width:var(--measure); margin:0 0 var(--s3); padding:var(--s3) var(--s3) var(--s3) var(--s4);
+    background:var(--surface); border:1px solid var(--hair); border-left:3px solid var(--rule); border-radius:2px; font-size:.94rem; }
+  .call > :last-child { margin-bottom:0; }
+  .call .tag { display:block; font-family:var(--font-mono); font-size:.68rem; letter-spacing:.16em; text-transform:uppercase; color:var(--muted); margin-bottom:var(--s1); }
+  .call.trap { border-left-color:var(--accent); background:var(--accent-soft); }
+  .call.trap .tag { color:var(--accent); }
+  .call.exam { border-left-color:var(--ink); }
+  .call.exam .tag { color:var(--ink); }
+  .call.rev { border-left-color:var(--accent); }
+  .call.rev .tag { color:var(--accent); }
+  .call.tip { border-left-color:var(--blue); background:var(--blue-soft); }
+  .call.tip .tag { color:var(--blue); }
+
+  .scroll { overflow-x:auto; margin:0 0 var(--s3); -webkit-overflow-scrolling:touch; }
+  table { border-collapse:collapse; width:100%; font-size:.88rem; line-height:1.6; }
+  caption { text-align:left; font-size:.78rem; color:var(--muted); padding-bottom:var(--s1); font-family:var(--font-mono); letter-spacing:.08em; }
+  th, td { padding:.62em .8em; text-align:left; vertical-align:top; border-bottom:1px solid var(--hair); }
+  thead th { font-size:.74rem; letter-spacing:.1em; color:var(--muted); font-weight:600; border-bottom:1px solid var(--ink); white-space:nowrap; }
+  tbody tr:hover { background:var(--surface); }
+  td.n, th.n { text-align:center; font-family:var(--font-mono); font-variant-numeric:tabular-nums; white-space:nowrap; }
+  .no { color:var(--accent); font-weight:700; }
+  .yes { color:var(--muted); }
+  .tri { color:var(--blue); }
+
+  figure { margin:0 0 var(--s4); }
+  figure svg { display:block; width:100%; height:auto; }
+  figcaption { font-size:.78rem; color:var(--muted); font-family:var(--font-mono); letter-spacing:.06em; margin-top:var(--s2); padding-top:var(--s1); border-top:1px solid var(--hair); }
+  .plate { background:var(--surface); border:1px solid var(--hair); border-radius:2px; padding:var(--s3); }
+  .svg-ink { fill:none; stroke:var(--ink); stroke-width:1.4; }
+  .svg-hair { fill:none; stroke:var(--rule); stroke-width:1; }
+  .svg-dim { fill:none; stroke:var(--blue); stroke-width:1; }
+  .svg-acc { fill:none; stroke:var(--accent); stroke-width:1.6; }
+  .svg-fill { fill:var(--sunk); stroke:var(--rule); stroke-width:1; }
+  .svg-accfill { fill:var(--accent-soft); stroke:var(--accent); stroke-width:1.2; }
+  .svg-bluefill { fill:var(--blue-soft); stroke:var(--blue); stroke-width:1.2; }
+  text { font-family:var(--font-body); fill:var(--ink); font-size:12px; }
+  text.lbl { font-family:var(--font-mono); fill:var(--muted); font-size:10.5px; letter-spacing:.06em; }
+  text.dimt { font-family:var(--font-mono); fill:var(--blue); font-size:11px; }
+  text.acct { fill:var(--accent); font-size:11.5px; font-weight:700; }
+
+  .nums { display:grid; grid-template-columns:repeat(auto-fill,minmax(11.5rem,1fr)); gap:var(--s2); }
+  .nc { background:var(--surface); border:1px solid var(--hair); border-radius:2px; padding:var(--s3) var(--s3) var(--s2); display:flex; flex-direction:column; gap:var(--s1); }
+  .nc .v { font-family:var(--font-mono); font-variant-numeric:tabular-nums; font-size:1.35rem; font-weight:600; line-height:1.2; color:var(--accent); }
+  .nc .d { font-size:.8rem; color:var(--muted); line-height:1.6; }
+  .nums.masked .v { color:transparent; background:var(--rule); border-radius:2px; user-select:none; }
+  .nums.masked .nc:hover .v, .nums.masked .nc:focus-within .v { color:var(--accent); background:transparent; }
+  .nc:focus-visible { outline:2px solid var(--accent); outline-offset:2px; }
+  .masthead-note { font-size:.78rem; color:var(--muted); margin-bottom:var(--s2); }
+
+  table.traps td:first-child { color:var(--muted); }
+  table.traps td:first-child::before { content:"「"; }
+  table.traps td:first-child::after { content:"」"; }
+  table.traps td:last-child strong { color:var(--accent); }
+
+  footer { grid-column:1/-1; margin-top:var(--s6); padding-top:var(--s3); border-top:1px solid var(--rule); font-size:.8rem; color:var(--muted); }
+  footer ul { list-style:none; padding:0; }
+  footer li { margin-bottom:var(--s1); }
+  .todo { font-family:var(--font-mono); font-size:.74rem; border:1px dashed var(--rule); border-radius:2px; padding:var(--s2) var(--s3); margin-top:var(--s3); color:var(--muted); }
+  .sibling { display:flex; flex-wrap:wrap; gap:var(--s2); margin-top:var(--s3); }
+  .sibling a { font-size:.8rem; text-decoration:none; border:1px solid var(--rule); border-radius:2px; padding:.35em .8em; color:var(--muted); }
+  .sibling a:hover { color:var(--ink); border-color:var(--ink); }
+
+  @media (prefers-reduced-motion: reduce){ *{ transition:none !important; animation:none !important; scroll-behavior:auto !important; } }
+  html { scroll-behavior:smooth; }
+  .eyebrow a { color:var(--accent); text-decoration:none; }
+  .eyebrow a:hover { text-decoration:underline; text-underline-offset:.2em; }
+  nav.rail a.home { border-left:none; padding:0 0 var(--s2); color:var(--accent);
+    font-family:var(--font-mono); font-size:.72rem; letter-spacing:.1em; }
+  nav.rail a.home:hover { color:var(--accent); text-decoration:underline; text-underline-offset:.2em; }
+</style>
+
+<div class="wrap">
+
+  <header class="masthead">
+    <div>
+      <div class="eyebrow"><a href="../index.html">← 総目次</a> &nbsp;/&nbsp; 03 法令上の制限 &nbsp;/&nbsp; 宅建士試験 2026年度</div>
+      <h1>国土利用計画法</h1>
+      <ul class="facts">
+        <li>法令基準日 <b>2026-04-01</b></li>
+        <li>出題数 <b>1問</b></li>
+        <li>目標 <b>確実に1問</b></li>
+        <li>更新 <b>2026-08-09</b></li>
+      </ul>
+    </div>
+    <div class="toggles">
+      <button id="mask" type="button" aria-pressed="false">数値を隠す</button>
+      <button id="theme" type="button">配色切替</button>
+    </div>
+  </header>
+
+  <nav class="rail" aria-label="目次">
+    <a class="home" href="../index.html">← 総目次</a>
+    <h2>Contents</h2>
+    <ol>
+      <li><a href="#overview"><span class="num">00</span>全体像</a></li>
+      <li><a href="#jigo"><span class="num">01</span>事後届出</a></li>
+      <li><a href="#torihiki"><span class="num">02</span>対象となる取引</a></li>
+      <li><a href="#ichidan"><span class="num">03</span>一団の土地</a></li>
+      <li><a href="#fuyou"><span class="num">04</span>届出が不要な場合</a></li>
+      <li><a href="#jizen"><span class="num">05</span>事前届出・許可</a></li>
+      <li><a href="#deru"><span class="num">06</span>よく出る論点</a></li>
+      <li><a href="#hikkake"><span class="num">07</span>ひっかけ一覧</a></li>
+      <li><a href="#suji"><span class="num">08</span>数字まとめ</a></li>
+    </ol>
+  </nav>
+
+  <main>
+
+    <!-- 00 -->
+    <section id="overview">
+      <h2 class="sec"><span class="num">00</span>全体像</h2>
+      <p class="lead">地価の高騰を抑えるための法律。区域の指定状況によって<em>規制の強さが4段階</em>に変わる。ただし実際に指定されている区域はほぼ無く、<em>出題の中心は「区域指定なし＝事後届出」</em>に集中する。</p>
+
+      <figure class="plate">
+        <svg viewBox="0 0 720 210" role="img" aria-label="規制の4段階。区域指定なしは事後届出で契約締結後2週間以内。注視区域と監視区域は事前届出で契約締結前に届出し6週間は契約できない。規制区域は許可制で無許可の契約は無効。">
+          <line x1="30" y1="150" x2="694" y2="150" class="svg-ink"/>
+          <text x="30" y="176" class="lbl">規制が弱い</text>
+          <text x="694" y="176" text-anchor="end" class="lbl">規制が強い</text>
+          <path d="M686 146 L694 150 L686 154" class="svg-ink"/>
+
+          <g>
+            <rect x="34" y="52" width="148" height="80" class="svg-fill" rx="2"/>
+            <text x="108" y="76" text-anchor="middle">区域指定なし</text>
+            <text x="108" y="98" text-anchor="middle" class="acct">事後届出</text>
+            <text x="108" y="118" text-anchor="middle" class="lbl">契約後 2週間以内</text>
+            <line x1="108" y1="132" x2="108" y2="150" class="svg-hair"/>
+            <text x="108" y="196" text-anchor="middle" class="lbl">全国の大半はここ</text>
+          </g>
+
+          <g>
+            <rect x="198" y="52" width="148" height="80" class="svg-bluefill" rx="2"/>
+            <text x="272" y="76" text-anchor="middle">注視区域</text>
+            <text x="272" y="98" text-anchor="middle" class="dimt">事前届出</text>
+            <text x="272" y="118" text-anchor="middle" class="lbl">面積要件は事後と同じ</text>
+            <line x1="272" y1="132" x2="272" y2="150" class="svg-hair"/>
+          </g>
+
+          <g>
+            <rect x="362" y="52" width="148" height="80" class="svg-bluefill" rx="2"/>
+            <text x="436" y="76" text-anchor="middle">監視区域</text>
+            <text x="436" y="98" text-anchor="middle" class="dimt">事前届出</text>
+            <text x="436" y="118" text-anchor="middle" class="lbl">面積は都道府県の規則</text>
+            <line x1="436" y1="132" x2="436" y2="150" class="svg-hair"/>
+          </g>
+
+          <g>
+            <rect x="526" y="52" width="148" height="80" class="svg-accfill" rx="2"/>
+            <text x="600" y="76" text-anchor="middle">規制区域</text>
+            <text x="600" y="98" text-anchor="middle" class="acct">許可制</text>
+            <text x="600" y="118" text-anchor="middle" class="lbl">無許可の契約は無効</text>
+            <line x1="600" y1="132" x2="600" y2="150" class="svg-hair"/>
+            <text x="600" y="196" text-anchor="middle" class="lbl">指定の実例なし</text>
+          </g>
+
+          <text x="30" y="34" class="lbl">区域を指定するのはいずれも都道府県知事</text>
+        </svg>
+        <figcaption>Fig.1 — 区域指定と規制手段の4段階</figcaption>
+      </figure>
+
+      <div class="call tip">
+        <span class="tag">覚え方</span>
+        <p><strong>届出制は契約が有効、許可制は契約が無効。</strong>届出を怠っても契約自体は生きているが、規制区域で許可を受けずに結んだ契約は<strong>効力を生じない</strong>。この違いが両者を分ける本質。</p>
+      </div>
+    </section>
+
+    <!-- 01 -->
+    <section id="jigo">
+      <h2 class="sec"><span class="num">01</span>事後届出</h2>
+      <p class="lead">出題のほぼすべてがここ。<em>誰が・いつまでに・どこへ・何を</em>の4点で覚える。</p>
+
+      <h3>1-1　面積要件</h3>
+
+      <figure class="plate">
+        <svg viewBox="0 0 720 190" role="img" aria-label="事後届出が必要な面積。市街化区域は2000平方メートル以上、市街化区域以外の都市計画区域は5000平方メートル以上、都市計画区域外は10000平方メートル以上。">
+          <line x1="286" y1="34" x2="286" y2="164" class="svg-hair" stroke-dasharray="3 4"/>
+          <line x1="430" y1="34" x2="430" y2="164" class="svg-hair" stroke-dasharray="3 4"/>
+          <line x1="580" y1="34" x2="580" y2="164" class="svg-hair" stroke-dasharray="3 4"/>
+          <text x="286" y="28" text-anchor="middle" class="dimt">2,000㎡</text>
+          <text x="430" y="28" text-anchor="middle" class="dimt">5,000㎡</text>
+          <text x="580" y="28" text-anchor="middle" class="dimt">10,000㎡</text>
+
+          <text x="12" y="58" class="lbl">市街化区域</text>
+          <rect x="190" y="42" width="96" height="24" class="svg-fill"/>
+          <rect x="286" y="42" width="374" height="24" class="svg-accfill"/>
+          <text x="238" y="59" text-anchor="middle" class="lbl">不要</text>
+          <text x="473" y="59" text-anchor="middle" class="acct">届出が必要</text>
+
+          <text x="12" y="96" class="lbl">市街化区域以外の</text>
+          <text x="12" y="110" class="lbl">都市計画区域</text>
+          <rect x="190" y="86" width="240" height="24" class="svg-fill"/>
+          <rect x="430" y="86" width="230" height="24" class="svg-accfill"/>
+          <text x="310" y="103" text-anchor="middle" class="lbl">不要</text>
+          <text x="545" y="103" text-anchor="middle" class="acct">届出が必要</text>
+
+          <text x="12" y="140" class="lbl">都市計画区域外</text>
+          <text x="12" y="154" class="lbl">（準都市計画区域を含む）</text>
+          <rect x="190" y="130" width="390" height="24" class="svg-fill"/>
+          <rect x="580" y="130" width="80" height="24" class="svg-accfill"/>
+          <text x="385" y="147" text-anchor="middle" class="lbl">不要</text>
+          <text x="620" y="147" text-anchor="middle" class="acct">必要</text>
+
+          <line x1="190" y1="172" x2="660" y2="172" class="svg-ink"/>
+          <text x="660" y="186" text-anchor="end" class="lbl">取得する土地の面積</text>
+        </svg>
+        <figcaption>Fig.2 — 事後届出が必要な面積（対数目盛）</figcaption>
+      </figure>
+
+      <div class="call tip">
+        <span class="tag">覚え方</span>
+        <p><strong>「に・ご・いち」</strong>で <strong>2,000 → 5,000 → 10,000</strong>。都市計画法の開発許可（1,000 / 3,000 / 10,000）と数字が違うので、混ぜないこと。<br>
+        <strong>準都市計画区域は「都市計画区域外」に入るので10,000㎡</strong>。開発許可では3,000㎡だったのと扱いが逆転する。</p>
+      </div>
+
+      <h3>1-2　手続</h3>
+
+      <figure class="plate">
+        <svg viewBox="0 0 720 165" role="img" aria-label="事後届出の流れ。契約締結から2週間以内に権利取得者が市町村長を経由して都道府県知事に届出し、知事は届出から3週間以内に土地の利用目的について勧告できる。勧告に従わない場合は公表される。">
+          <line x1="34" y1="72" x2="690" y2="72" class="svg-hair"/>
+          <g><circle cx="72" cy="72" r="6" class="svg-ink" fill="var(--paper)"/>
+             <text x="72" y="52" text-anchor="middle">契約締結</text>
+             <text x="72" y="98" text-anchor="middle" class="lbl">この日から起算</text></g>
+          <path d="M80 72 H 268" class="svg-dim" stroke-dasharray="3 3"/>
+          <text x="174" y="64" text-anchor="middle" class="dimt">2週間以内</text>
+          <g><circle cx="276" cy="72" r="6" class="svg-acc" fill="var(--paper)"/>
+             <text x="276" y="52" text-anchor="middle" class="acct">届出</text>
+             <text x="276" y="98" text-anchor="middle" class="lbl">権利取得者が</text>
+             <text x="276" y="112" text-anchor="middle" class="lbl">市町村長を経由して知事へ</text></g>
+          <path d="M284 72 H 500" class="svg-dim" stroke-dasharray="3 3"/>
+          <text x="392" y="64" text-anchor="middle" class="dimt">3週間以内</text>
+          <g><circle cx="508" cy="72" r="6" class="svg-ink" fill="var(--paper)"/>
+             <text x="508" y="52" text-anchor="middle">知事の勧告</text>
+             <text x="508" y="98" text-anchor="middle" class="lbl">利用目的についてのみ</text>
+             <text x="508" y="112" text-anchor="middle" class="lbl">3週間の範囲で延長可</text></g>
+          <g><circle cx="650" cy="72" r="6" class="svg-ink" fill="var(--paper)"/>
+             <text x="650" y="52" text-anchor="middle">従わない場合</text>
+             <text x="650" y="98" text-anchor="middle" class="lbl">公表できる</text>
+             <text x="650" y="112" text-anchor="middle" class="lbl">契約は有効のまま</text></g>
+          <text x="34" y="148" class="lbl">契約は届出前から有効。届出は「取引を止める」ためではなく「土地の使い方を正す」ための制度</text>
+        </svg>
+        <figcaption>Fig.3 — 事後届出のタイムライン</figcaption>
+      </figure>
+
+      <div class="scroll">
+        <table>
+          <thead><tr><th>論点</th><th>内容</th></tr></thead>
+          <tbody>
+            <tr><td><strong>誰が</strong></td><td><strong>権利取得者（買主・借主）</strong>のみ。売主に届出義務はない</td></tr>
+            <tr><td><strong>いつまでに</strong></td><td>契約を締結した日から起算して <strong>2週間以内</strong></td></tr>
+            <tr><td><strong>どこへ</strong></td><td><strong>市町村長を経由</strong>して<strong>都道府県知事</strong>へ</td></tr>
+            <tr><td><strong>何を</strong></td><td>土地の<strong>利用目的</strong>および<strong>対価の額</strong></td></tr>
+            <tr><td>勧告できる期間</td><td>届出があった日から起算して <strong>3週間以内</strong>（合理的な理由があれば3週間の範囲内で延長可）</td></tr>
+            <tr><td><strong>勧告の対象</strong></td><td class="no">利用目的のみ。対価の額は勧告できない</td></tr>
+            <tr><td>勧告に従わないとき</td><td>知事はその旨および内容を<strong>公表できる</strong>（罰則はない）</td></tr>
+            <tr><td>助言</td><td>知事は利用目的について必要な<strong>助言</strong>ができる。従わなくても公表されない</td></tr>
+            <tr><td>契約の効力</td><td class="no">届出をしなくても契約は<strong>有効</strong></td></tr>
+            <tr><td>罰則</td><td>無届・虚偽の届出は <strong>6月以下の拘禁刑</strong> または <strong>100万円以下の罰金</strong></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="call rev">
+        <span class="tag">改正</span>
+        <p>2025年6月1日の刑法改正で<strong>懲役と禁錮が「拘禁刑」に一本化</strong>されました。国土利用計画法を含む各法の罰則条文も表記が改まっています。2024年以前の教材は「6月以下の<s>懲役</s>」のままなので、条文の文言を問う出題に注意。</p>
+      </div>
+
+      <div class="call trap">
+        <span class="tag">ひっかけ</span>
+        <p><strong>対価の額は「届出事項」だが「勧告の対象」ではない。</strong>この2つを混ぜた選択肢が定番。<br>
+        なお<strong>事前届出（注視区域・監視区域）なら対価の額についても勧告できる</strong>。事後と事前で扱いが違う点が最大の分岐。</p>
+      </div>
+    </section>
+
+    <!-- 02 -->
+    <section id="torihiki">
+      <h2 class="sec"><span class="num">02</span>対象となる取引</h2>
+      <p>「土地売買等の契約」にあたるのは、次の<strong>3要件をすべて満たす</strong>ものだけ。</p>
+
+      <div class="scroll">
+        <table>
+          <thead><tr><th class="n">要件</th><th>内容</th><th>外れる例</th></tr></thead>
+          <tbody>
+            <tr><td class="n">①</td><td><strong>権利性</strong> — 所有権・地上権・賃借権の移転または設定</td><td>抵当権・地役権の設定</td></tr>
+            <tr><td class="n">②</td><td><strong>対価性</strong> — 対価を得て行われる</td><td>贈与・使用貸借・相続</td></tr>
+            <tr><td class="n">③</td><td><strong>契約性</strong> — 契約（予約を含む）による</td><td>相続・時効取得・土地収用</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="scroll">
+        <table>
+          <caption>届出が必要か — 判定の早見表</caption>
+          <thead><tr><th>取引</th><th class="n">届出</th><th>理由</th></tr></thead>
+          <tbody>
+            <tr><td>売買・売買の予約</td><td class="n no">必要</td><td>3要件を満たす</td></tr>
+            <tr><td>交換</td><td class="n no">必要</td><td>互いに対価性がある</td></tr>
+            <tr><td>代物弁済</td><td class="n no">必要</td><td>債務の消滅が対価</td></tr>
+            <tr><td>譲渡担保</td><td class="n no">必要</td><td>所有権が移転する</td></tr>
+            <tr><td>共有持分の譲渡</td><td class="n no">必要</td><td>持分も所有権</td></tr>
+            <tr><td>地上権・賃借権の設定（<strong>権利金あり</strong>）</td><td class="n no">必要</td><td>設定の対価がある</td></tr>
+            <tr><td>地上権・賃借権の設定（権利金なし）</td><td class="n yes">不要</td><td>対価性を欠く（賃料は対価にあたらない）</td></tr>
+            <tr><td><strong>相続・遺贈・法人の合併</strong></td><td class="n yes">不要</td><td>契約でない</td></tr>
+            <tr><td>時効取得</td><td class="n yes">不要</td><td>契約でない</td></tr>
+            <tr><td>土地収用</td><td class="n yes">不要</td><td>契約でない</td></tr>
+            <tr><td><strong>贈与</strong></td><td class="n yes">不要</td><td>対価がない</td></tr>
+            <tr><td>抵当権・地役権の設定</td><td class="n yes">不要</td><td>対象の権利でない</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="call trap">
+        <span class="tag">ひっかけ</span>
+        <p><strong>贈与は「無償だから不要」、相続は「契約でないから不要」</strong>。理由が違うだけで結論は同じ。<br>
+        逆に<strong>予約の段階で届出が必要</strong>で、後に予約完結権を行使したときには改めて届け出る必要がない。</p>
+      </div>
+    </section>
+
+    <!-- 03 -->
+    <section id="ichidan">
+      <h2 class="sec"><span class="num">03</span>一団の土地</h2>
+      <p>面積要件は<strong>権利取得者（買主）が取得する土地の合計</strong>で判断する。</p>
+
+      <div class="scroll">
+        <table>
+          <thead><tr><th>ケース</th><th class="n">届出</th></tr></thead>
+          <tbody>
+            <tr><td>市街化区域で、1,500㎡と1,000㎡の隣接地を<strong>同一の買主</strong>が別々の契約で取得</td><td class="n no">必要（合計2,500㎡）</td></tr>
+            <tr><td>市街化区域で、3,000㎡の土地を<strong>2人の買主</strong>が1,500㎡ずつ取得</td><td class="n yes">不要（各自1,500㎡）</td></tr>
+            <tr><td>市街化区域で、3,000㎡を<strong>1人の売主</strong>が2人に分けて売却</td><td class="n yes">売主側の分割は無関係。買主ごとに判定</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="call exam">
+        <span class="tag">よく出る</span>
+        <p>事後届出は<strong>買いの一団</strong>で判定する。売主が何人いても、売主がどう分割しても関係ない。届出義務者が買主だけである以上、当然の帰結として覚える。</p>
+      </div>
+    </section>
+
+    <!-- 04 -->
+    <section id="fuyou">
+      <h2 class="sec"><span class="num">04</span>届出が不要な場合</h2>
+      <p>面積要件を満たしていても、次の場合は届出がいらない。</p>
+      <ul>
+        <li>当事者の<strong>一方または双方が国・地方公共団体等</strong>（都市再生機構、地方住宅供給公社など）</li>
+        <li><strong>民事調停法</strong>による調停に基づく場合</li>
+        <li><strong>農地法3条1項の許可</strong>を受けることを要する場合</li>
+        <li>滞納処分・強制執行・担保権の実行としての競売など</li>
+      </ul>
+
+      <div class="call trap">
+        <span class="tag">ひっかけ</span>
+        <p><strong>農地法3条（権利移動）の許可を要する場合は届出不要だが、農地法5条（転用目的の権利移動）の許可を要する場合は届出が必要</strong>。3条だけが除外されている点に注意。<br>
+        また国等が当事者なら、<strong>一方が国であれば足りる</strong>（双方である必要はない）。</p>
+      </div>
+    </section>
+
+    <!-- 05 -->
+    <section id="jizen">
+      <h2 class="sec"><span class="num">05</span>事前届出・許可</h2>
+
+      <div class="scroll">
+        <table>
+          <thead><tr><th></th><th>注視区域</th><th>監視区域</th><th>規制区域</th></tr></thead>
+          <tbody>
+            <tr><td>指定する者</td><td colspan="3">都道府県知事（規制区域は指定の実例なし）</td></tr>
+            <tr><td>指定の要件</td><td>地価が<strong>相当な程度を超えて</strong>上昇するおそれ</td><td>地価が<strong>急激に</strong>上昇し、または上昇するおそれ</td><td>投機的取引が集中して行われるおそれ</td></tr>
+            <tr><td>規制手段</td><td colspan="2" class="n"><strong>事前届出</strong></td><td class="n no"><strong>許可</strong></td></tr>
+            <tr><td>面積要件</td><td>事後届出と同じ<br>（2,000／5,000／10,000㎡）</td><td class="no">都道府県の<strong>規則</strong>で定める<br>（事後届出より小さくできる）</td><td>面積を問わず許可が必要</td></tr>
+            <tr><td>届出義務者</td><td colspan="2"><strong>当事者双方</strong>（売主・買主とも）</td><td>—</td></tr>
+            <tr><td>契約締結の制限</td><td colspan="2" class="no">届出から <strong>6週間</strong> は契約を締結できない<br>（勧告等をしない旨の通知があればそれ以前でも可）</td><td>許可を受けるまで不可</td></tr>
+            <tr><td><strong>勧告の対象</strong></td><td colspan="2" class="no">利用目的 <strong>＋ 対価の額</strong></td><td>—</td></tr>
+            <tr><td>契約の効力</td><td colspan="2">届出をしなくても契約は<strong>有効</strong></td><td class="no">無許可の契約は<strong>無効</strong></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="call exam">
+        <span class="tag">よく出る</span>
+        <p><strong>事後届出と事前届出の3つの違い</strong>を押さえれば足りる。<br>
+        ① 届出義務者 — 事後は<strong>買主のみ</strong>／事前は<strong>双方</strong><br>
+        ② 勧告の対象 — 事後は<strong>利用目的のみ</strong>／事前は<strong>対価の額も</strong><br>
+        ③ 契約の時期 — 事後は<strong>契約後2週間以内</strong>／事前は<strong>契約前・6週間の待機</strong></p>
+      </div>
+    </section>
+
+    <!-- 06 -->
+    <section id="deru">
+      <h2 class="sec"><span class="num">06</span>よく出る論点</h2>
+      <div class="scroll">
+        <table>
+          <thead><tr><th class="n">順位</th><th>論点</th><th>要点</th></tr></thead>
+          <tbody>
+            <tr><td class="n">1</td><td><strong>事後届出の要否</strong></td><td>面積要件（2,000／5,000／10,000）＋対象取引の3要件</td></tr>
+            <tr><td class="n">2</td><td>届出の手続</td><td>買主が・2週間以内・市町村長経由・知事へ</td></tr>
+            <tr><td class="n">3</td><td>勧告の範囲</td><td>事後は利用目的のみ。対価は勧告できない</td></tr>
+            <tr><td class="n">4</td><td>一団の土地</td><td>買主ごとに合計して判定</td></tr>
+            <tr><td class="n">5</td><td>事前届出との違い</td><td>義務者・勧告対象・契約時期の3点</td></tr>
+            <tr><td class="n">6</td><td>届出不要の例外</td><td>国等が当事者／農地法3条／民事調停</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 07 -->
+    <section id="hikkake">
+      <h2 class="sec"><span class="num">07</span>ひっかけ一覧</h2>
+      <div class="scroll">
+        <table class="traps">
+          <thead><tr><th>こう書かれたら疑う</th><th>正しくは</th></tr></thead>
+          <tbody>
+            <tr><td>売主と買主の双方が事後届出をしなければならない</td><td><strong>権利取得者（買主）のみ</strong></td></tr>
+            <tr><td>事後届出は都道府県知事に直接行う</td><td><strong>市町村長を経由</strong>して知事へ</td></tr>
+            <tr><td>知事は対価の額について勧告できる</td><td>事後届出では<strong>利用目的のみ</strong>。対価は事前届出でのみ勧告可</td></tr>
+            <tr><td>勧告に従わないと契約が無効になる</td><td>契約は<strong>有効</strong>。<strong>公表</strong>されるにとどまる</td></tr>
+            <tr><td>届出をしないと契約は効力を生じない</td><td>契約は有効。ただし<strong>罰則</strong>あり（6月以下の拘禁刑等）</td></tr>
+            <tr><td>準都市計画区域内は5,000㎡以上で届出</td><td>準都市計画区域は都市計画区域外なので <strong>10,000㎡</strong> 以上</td></tr>
+            <tr><td>贈与でも面積が大きければ届出が必要</td><td><strong>対価がない</strong>ので不要</td></tr>
+            <tr><td>相続で取得した場合も届出が必要</td><td><strong>契約でない</strong>ので不要</td></tr>
+            <tr><td>3,000㎡を2人が1,500㎡ずつ買えばそれぞれ届出が必要</td><td>買主ごとに判定するので<strong>いずれも不要</strong>（市街化区域）</td></tr>
+            <tr><td>農地法5条の許可を受ける場合は届出不要</td><td>不要になるのは<strong>3条</strong>の許可を要する場合のみ</td></tr>
+            <tr><td>監視区域の面積要件は法律で定まっている</td><td><strong>都道府県の規則</strong>で定める</td></tr>
+            <tr><td>注視区域では届出後すぐに契約できる</td><td><strong>6週間</strong>は契約できない（通知があれば可）</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 08 -->
+    <section id="suji">
+      <h2 class="sec"><span class="num">08</span>数字まとめ</h2>
+      <p class="masthead-note">右上の「数値を隠す」で自己テストできる。</p>
+      <div class="nums" id="numgrid">
+        <div class="nc" tabindex="0"><span class="v">2,000㎡</span><span class="d">市街化区域で事後届出が必要な面積</span></div>
+        <div class="nc" tabindex="0"><span class="v">5,000㎡</span><span class="d">市街化区域以外の都市計画区域</span></div>
+        <div class="nc" tabindex="0"><span class="v">10,000㎡</span><span class="d">都市計画区域外（準都市計画区域を含む）</span></div>
+        <div class="nc" tabindex="0"><span class="v">2週間</span><span class="d">事後届出の期限（契約締結日から起算）</span></div>
+        <div class="nc" tabindex="0"><span class="v">3週間</span><span class="d">知事が勧告できる期間（3週間の範囲で延長可）</span></div>
+        <div class="nc" tabindex="0"><span class="v">6週間</span><span class="d">事前届出後、契約を締結できない期間</span></div>
+        <div class="nc" tabindex="0"><span class="v">6月以下</span><span class="d">無届・虚偽届出の拘禁刑（罰金は100万円以下）</span></div>
+        <div class="nc" tabindex="0"><span class="v">100万円</span><span class="d">無届・虚偽届出の罰金の上限</span></div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <h4>出典</h4>
+    <ul>
+      <li>国土利用計画法（昭和49年法律第92号） — <a href="https://laws.e-gov.go.jp/law/349AC0000000092">e-Gov法令検索</a></li>
+      <li>国土交通省 土地取引規制制度の概要（区域・規制手段・面積・勧告内容の一覧） — <a href="https://www.mlit.go.jp/tochi_fudousan_kensetsugyo/const/content/001707658.pdf">PDF</a></li>
+      <li>東京都都市整備局 国土利用計画法に基づく土地取引の届出 — <a href="https://www.toshiseibi.metro.tokyo.lg.jp/basic/keikaku/tochi_5">toshiseibi.metro.tokyo.lg.jp</a></li>
+      <li>拘禁刑への一本化（2025年6月1日施行） — <a href="https://keiyaku-watch.jp/media/hourei/202506-kokinkei/">解説</a></li>
+    </ul>
+    <div class="sibling">
+      <a href="../index.html">総目次</a>
+      <a href="都市計画法.html">← 都市計画法</a>
+      <a href="建築基準法.html">建築基準法</a>
+    </div>
+  </footer>
+
+</div>
+
+<script>
+  (function () {
+    var root = document.documentElement;
+    document.getElementById('theme').addEventListener('click', function () {
+      if (root.getAttribute('data-theme')) { root.removeAttribute('data-theme'); return; }
+      var dark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      root.setAttribute('data-theme', dark ? 'light' : 'dark');
+    });
+    var maskBtn = document.getElementById('mask');
+    var grid = document.getElementById('numgrid');
+    maskBtn.addEventListener('click', function () {
+      var on = grid.classList.toggle('masked');
+      maskBtn.setAttribute('aria-pressed', String(on));
+      maskBtn.textContent = on ? '数値を表示' : '数値を隠す';
+    });
+    var links = Array.prototype.slice.call(document.querySelectorAll('nav.rail ol a'));
+    var map = {};
+    links.forEach(function (a) { map[a.getAttribute('href').slice(1)] = a; });
+    var seen = [];
+    var obs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        var i = seen.indexOf(e.target.id);
+        if (e.isIntersecting && i < 0) seen.push(e.target.id);
+        if (!e.isIntersecting && i >= 0) seen.splice(i, 1);
+      });
+      links.forEach(function (a) { a.classList.remove('on'); });
+      if (seen.length) {
+        var order = Object.keys(map);
+        seen.sort(function (a, b) { return order.indexOf(a) - order.indexOf(b); });
+        map[seen[0]].classList.add('on');
+      }
+    }, { rootMargin: '-10% 0px -70% 0px' });
+    document.querySelectorAll('main section').forEach(function (s) { obs.observe(s); });
+  })();
+</script>

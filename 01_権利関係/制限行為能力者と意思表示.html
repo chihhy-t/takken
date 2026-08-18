@@ -1,0 +1,946 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>制限行為能力者と意思表示 — 宅建士試験 2026年度</title>
+
+<style>
+  :root {
+    --paper:#EBEDE9; --surface:#F8F9F6; --sunk:#E1E4DE; --ink:#151F2A; --muted:#5D6B78;
+    --rule:#CDD2CB; --hair:#DCE0D9; --accent:#B8342A; --accent-soft:#F3DEDB;
+    --blue:#2A5F86; --blue-soft:#DCE6EE;
+    --font-display:"Hiragino Mincho ProN","Yu Mincho","YuMincho","Noto Serif JP",serif;
+    --font-body:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","YuGothic","Noto Sans JP",system-ui,sans-serif;
+    --font-mono:ui-monospace,"SFMono-Regular","SF Mono",Menlo,Consolas,monospace;
+    --measure:68ch;
+    --s1:.35rem; --s2:.7rem; --s3:1.1rem; --s4:1.7rem; --s5:2.6rem; --s6:4rem;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper:#0D1B29; --surface:#132534; --sunk:#0A1622; --ink:#DAE4EC; --muted:#8CA1B3;
+      --rule:#26415A; --hair:#1D3448; --accent:#FF7059; --accent-soft:#3A1F1D;
+      --blue:#6FB6DC; --blue-soft:#14293A;
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper:#0D1B29; --surface:#132534; --sunk:#0A1622; --ink:#DAE4EC; --muted:#8CA1B3;
+    --rule:#26415A; --hair:#1D3448; --accent:#FF7059; --accent-soft:#3A1F1D;
+    --blue:#6FB6DC; --blue-soft:#14293A;
+  }
+
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--paper); color:var(--ink); font-family:var(--font-body);
+    font-size:16px; line-height:1.9; -webkit-font-smoothing:antialiased; font-feature-settings:"palt" 1; }
+
+  .wrap { display:grid; grid-template-columns:15.5rem minmax(0,1fr); gap:var(--s6);
+    max-width:80rem; margin:0 auto; padding:0 var(--s4) var(--s6); align-items:start; }
+  @media (max-width:60rem){ .wrap{ grid-template-columns:minmax(0,1fr); gap:var(--s4); padding:0 var(--s3) var(--s5);} }
+
+  .masthead { grid-column:1/-1; padding:var(--s5) 0 var(--s4); border-bottom:2px solid var(--ink);
+    margin-bottom:var(--s2); display:flex; flex-wrap:wrap; align-items:flex-end; justify-content:space-between; gap:var(--s3); }
+  .eyebrow { font-family:var(--font-mono); font-size:.72rem; letter-spacing:.16em; text-transform:uppercase;
+    color:var(--muted); display:flex; align-items:center; gap:.6em; }
+  .eyebrow::before { content:""; width:2.2rem; height:1px; background:var(--accent); }
+  .eyebrow a { color:var(--accent); text-decoration:none; }
+  .eyebrow a:hover { text-decoration:underline; text-underline-offset:.2em; }
+  h1 { font-family:var(--font-display); font-weight:600; font-size:clamp(1.8rem,1.2rem + 2.4vw,2.8rem);
+    line-height:1.2; letter-spacing:.04em; margin:var(--s2) 0 var(--s3); text-wrap:balance; }
+  .facts { display:flex; flex-wrap:wrap; gap:0 var(--s3); font-size:.82rem; color:var(--muted); list-style:none; margin:0; padding:0; }
+  .facts b { font-family:var(--font-mono); font-variant-numeric:tabular-nums; color:var(--ink); font-weight:600; }
+  .toggles { display:flex; gap:var(--s1); }
+  button { font-family:var(--font-body); font-size:.78rem; color:var(--muted); background:var(--surface);
+    border:1px solid var(--rule); border-radius:2px; padding:.4em .9em; cursor:pointer; transition:color .15s,border-color .15s; }
+  button:hover { color:var(--ink); border-color:var(--ink); }
+  button:focus-visible { outline:2px solid var(--accent); outline-offset:2px; }
+  button[aria-pressed="true"] { color:var(--accent); border-color:var(--accent); }
+
+  nav.rail { position:sticky; top:var(--s3); font-size:.82rem; max-height:calc(100vh - 3rem); overflow-y:auto; padding-bottom:var(--s3); }
+  nav.rail h2 { font-family:var(--font-mono); font-size:.68rem; letter-spacing:.16em; text-transform:uppercase; color:var(--muted); margin:0 0 var(--s2); font-weight:500; }
+  nav.rail ol { list-style:none; margin:0; padding:0; display:flex; flex-direction:column; }
+  nav.rail a { display:block; padding:.3em 0 .3em .9em; color:var(--muted); text-decoration:none; border-left:2px solid var(--hair); line-height:1.5; }
+  nav.rail a:hover { color:var(--ink); border-left-color:var(--rule); }
+  nav.rail a.on { color:var(--ink); border-left-color:var(--accent); font-weight:600; }
+  nav.rail a .num { font-family:var(--font-mono); font-size:.72rem; color:var(--muted); margin-right:.5em; }
+  nav.rail a.home { border-left:none; padding:0 0 var(--s2); color:var(--accent);
+    font-family:var(--font-mono); font-size:.72rem; letter-spacing:.1em; }
+  nav.rail a.home:hover { color:var(--accent); text-decoration:underline; text-underline-offset:.2em; }
+  @media (max-width:60rem){
+    nav.rail{ position:static; max-height:none; border-bottom:1px solid var(--rule); padding-bottom:var(--s3); }
+    nav.rail ol{ display:grid; grid-template-columns:repeat(auto-fill,minmax(9rem,1fr)); gap:0 var(--s2); }
+  }
+
+  main { min-width:0; }
+  section { padding-top:var(--s5); scroll-margin-top:var(--s3); }
+  section > * { max-width:var(--measure); }
+  section > figure, section > .scroll { max-width:none; }
+
+  h2.sec { font-family:var(--font-display); font-size:clamp(1.45rem,1.2rem + .9vw,1.9rem); font-weight:600;
+    letter-spacing:.04em; margin:0 0 var(--s3); padding-bottom:var(--s2); border-bottom:1px solid var(--rule);
+    display:flex; align-items:baseline; gap:.7em; max-width:none; }
+  h2.sec .num { font-family:var(--font-mono); font-size:.8rem; letter-spacing:.1em; color:var(--accent); font-weight:500; }
+  h3 { font-family:var(--font-body); font-size:1.06rem; font-weight:700; letter-spacing:.02em;
+    margin:var(--s4) 0 var(--s2); padding-left:.7em; border-left:3px solid var(--ink); }
+  p { margin:0 0 var(--s3); }
+  a { color:var(--blue); text-underline-offset:.2em; }
+  em { font-style:normal; background:linear-gradient(transparent 62%, var(--accent-soft) 62%); font-weight:600; }
+  ul, ol { margin:0 0 var(--s3); padding-left:1.3em; }
+  li { margin-bottom:var(--s1); }
+  .lead { font-size:1.05rem; color:var(--muted); }
+
+  .call { max-width:var(--measure); margin:0 0 var(--s3); padding:var(--s3) var(--s3) var(--s3) var(--s4);
+    background:var(--surface); border:1px solid var(--hair); border-left:3px solid var(--rule); border-radius:2px; font-size:.94rem; }
+  .call > :last-child { margin-bottom:0; }
+  .call .tag { display:block; font-family:var(--font-mono); font-size:.68rem; letter-spacing:.16em; text-transform:uppercase; color:var(--muted); margin-bottom:var(--s1); }
+  .call.trap { border-left-color:var(--accent); background:var(--accent-soft); }
+  .call.trap .tag { color:var(--accent); }
+  .call.exam { border-left-color:var(--ink); }
+  .call.exam .tag { color:var(--ink); }
+  .call.tip { border-left-color:var(--blue); background:var(--blue-soft); }
+  .call.tip .tag { color:var(--blue); }
+
+  .scroll { overflow-x:auto; margin:0 0 var(--s3); -webkit-overflow-scrolling:touch; }
+  table { border-collapse:collapse; width:100%; font-size:.88rem; line-height:1.6; }
+  caption { text-align:left; font-size:.78rem; color:var(--muted); padding-bottom:var(--s1); font-family:var(--font-mono); letter-spacing:.08em; }
+  th, td { padding:.58em .75em; text-align:left; vertical-align:top; border-bottom:1px solid var(--hair); }
+  thead th { font-size:.74rem; letter-spacing:.08em; color:var(--muted); font-weight:600; border-bottom:1px solid var(--ink); }
+  tbody tr:hover { background:var(--surface); }
+  td.n, th.n { text-align:center; font-family:var(--font-mono); font-variant-numeric:tabular-nums; white-space:nowrap; }
+  .no { color:var(--accent); font-weight:700; }
+  .yes { color:var(--muted); }
+  .tri { color:var(--blue); }
+  table.ishi tbody td:first-child { white-space:nowrap; font-weight:600; }
+  table.ishi tr.hi { background:var(--accent-soft); }
+
+  figure { margin:0 0 var(--s4); }
+  figure svg { display:block; width:100%; height:auto; }
+  figcaption { font-size:.78rem; color:var(--muted); font-family:var(--font-mono); letter-spacing:.06em; margin-top:var(--s2); padding-top:var(--s1); border-top:1px solid var(--hair); }
+  .plate { background:var(--surface); border:1px solid var(--hair); border-radius:2px; padding:var(--s3); }
+  .svg-ink { fill:none; stroke:var(--ink); stroke-width:1.4; }
+  .svg-hair { fill:none; stroke:var(--rule); stroke-width:1; }
+  .svg-dim { fill:none; stroke:var(--blue); stroke-width:1; }
+  .svg-acc { fill:none; stroke:var(--accent); stroke-width:1.6; }
+  .svg-fill { fill:var(--sunk); stroke:var(--rule); stroke-width:1; }
+  .svg-accfill { fill:var(--accent-soft); stroke:var(--accent); stroke-width:1.2; }
+  .svg-bluefill { fill:var(--blue-soft); stroke:var(--blue); stroke-width:1.2; }
+  text { font-family:var(--font-body); fill:var(--ink); font-size:12px; }
+  text.lbl { font-family:var(--font-mono); fill:var(--muted); font-size:10.5px; letter-spacing:.06em; }
+  text.dimt { font-family:var(--font-mono); fill:var(--blue); font-size:11px; }
+  text.acct { fill:var(--accent); font-size:11.5px; font-weight:700; }
+  text.big { font-size:14px; font-weight:700; }
+
+  .nums { display:grid; grid-template-columns:repeat(auto-fill,minmax(11.5rem,1fr)); gap:var(--s2); }
+  .nc { background:var(--surface); border:1px solid var(--hair); border-radius:2px; padding:var(--s3) var(--s3) var(--s2); display:flex; flex-direction:column; gap:var(--s1); }
+  .nc .v { font-family:var(--font-mono); font-variant-numeric:tabular-nums; font-size:1.2rem; font-weight:600; line-height:1.25; color:var(--accent); }
+  .nc .d { font-size:.8rem; color:var(--muted); line-height:1.6; }
+  .nums.masked .v { color:transparent; background:var(--rule); border-radius:2px; user-select:none; }
+  .nums.masked .nc:hover .v, .nums.masked .nc:focus-within .v { color:var(--accent); background:transparent; }
+  .nc:focus-visible { outline:2px solid var(--accent); outline-offset:2px; }
+  .masthead-note { font-size:.78rem; color:var(--muted); margin-bottom:var(--s2); }
+
+  table.traps td:first-child { color:var(--muted); }
+  table.traps td:first-child::before { content:"「"; }
+  table.traps td:first-child::after { content:"」"; }
+  table.traps td:last-child strong { color:var(--accent); }
+
+  footer { grid-column:1/-1; margin-top:var(--s6); padding-top:var(--s3); border-top:1px solid var(--rule); font-size:.8rem; color:var(--muted); }
+  footer ul { list-style:none; padding:0; }
+  footer li { margin-bottom:var(--s1); }
+  .sibling { display:flex; flex-wrap:wrap; gap:var(--s2); margin-top:var(--s3); }
+  .sibling a { font-size:.8rem; text-decoration:none; border:1px solid var(--rule); border-radius:2px; padding:.35em .8em; color:var(--muted); }
+  .sibling a:hover { color:var(--ink); border-color:var(--ink); }
+
+  /* ── 肢別○×ドリル ── */
+  .drillbar { max-width:none; display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between;
+    gap:var(--s2); margin:0 0 var(--s3); padding:var(--s2) var(--s3); background:var(--surface);
+    border:1px solid var(--rule); border-radius:2px; position:sticky; top:0; z-index:5; }
+  .drillbar .score { font-family:var(--font-mono); font-size:.8rem; font-variant-numeric:tabular-nums;
+    color:var(--muted); letter-spacing:.04em; }
+  .drillbar .score b { color:var(--ink); font-weight:600; }
+  .drillbar .score .pct { color:var(--accent); font-weight:600; }
+  .drillbar .dbtns { display:flex; gap:var(--s1); }
+  ol.drill { max-width:none; list-style:none; margin:0; padding:0; counter-reset:dq; }
+  li.dq { counter-increment:dq; margin:0 0 var(--s2); padding:var(--s3);
+    background:var(--surface); border:1px solid var(--hair); border-left:3px solid var(--rule); border-radius:2px; }
+  li.dq > .s { margin:0; font-size:.95rem; line-height:1.85; max-width:var(--measure); }
+  li.dq > .s::before { content:counter(dq,decimal-leading-zero); font-family:var(--font-mono);
+    font-size:.72rem; letter-spacing:.08em; color:var(--muted); margin-right:.9em; }
+  li.dq .ch { display:flex; gap:var(--s1); margin-top:var(--s2); }
+  li.dq .ch button { font-family:var(--font-display); font-size:1.05rem; line-height:1; min-width:3.6rem; padding:.4em 0; }
+  li.dq .ch button[data-picked] { color:var(--ink); border-color:var(--ink); font-weight:700; }
+  li.dq .ex { display:none; margin-top:var(--s3); padding-top:var(--s2); border-top:1px solid var(--hair); }
+  li.dq.done .ex { display:block; }
+  li.dq .ex .verdict { display:block; font-family:var(--font-mono); font-size:.7rem; letter-spacing:.14em;
+    margin-bottom:var(--s1); }
+  li.dq .ex p { margin:0; font-size:.88rem; line-height:1.8; color:var(--muted); max-width:var(--measure); }
+  li.dq .ex p strong { color:var(--ink); font-weight:700; }
+  li.dq.ok { border-left-color:var(--blue); }
+  li.dq.ok .verdict { color:var(--blue); }
+  li.dq.ng { border-left-color:var(--accent); background:var(--accent-soft); }
+  li.dq.ng .verdict { color:var(--accent); }
+  li.dq.ng .ex p strong { color:var(--accent); }
+  ol.drill.onlyng li.dq:not(.ng) { display:none; }
+  .drilldone { font-size:.84rem; color:var(--muted); padding:var(--s3); border:1px dashed var(--rule);
+    border-radius:2px; text-align:center; }
+
+  @media (prefers-reduced-motion: reduce){ *{ transition:none !important; animation:none !important; scroll-behavior:auto !important; } }
+  html { scroll-behavior:smooth; }
+</style>
+
+<div class="wrap">
+
+  <header class="masthead">
+    <div>
+      <div class="eyebrow"><a href="../index.html">← 総目次</a> &nbsp;/&nbsp; 01 権利関係 &nbsp;/&nbsp; 宅建士試験 2026年度</div>
+      <h1>制限行為能力者と意思表示</h1>
+      <ul class="facts">
+        <li>法令基準日 <b>2026-04-01</b></li>
+        <li>出題数 <b>約2問</b></li>
+        <li>ドリル <b>36肢</b></li>
+        <li>目標 <b>1問以上</b></li>
+        <li>更新 <b>2026-08-16</b></li>
+      </ul>
+    </div>
+    <div class="toggles">
+      <button id="mask" type="button" aria-pressed="false">数値を隠す</button>
+      <button id="theme" type="button">配色切替</button>
+    </div>
+  </header>
+
+  <nav class="rail" aria-label="目次">
+    <a class="home" href="../index.html">← 総目次</a>
+    <h2>Contents</h2>
+    <ol>
+      <li><a href="#overview"><span class="num">00</span>全体像</a></li>
+      <li><a href="#seigen"><span class="num">01</span>4つの制限行為能力者</a></li>
+      <li><a href="#aitegata"><span class="num">02</span>相手方の保護</a></li>
+      <li><a href="#torikeshi"><span class="num">03</span>取消しと追認</a></li>
+      <li><a href="#ishi"><span class="num">04</span>意思表示の5類型</a></li>
+      <li><a href="#daisansha"><span class="num">05</span>第三者保護の比較</a></li>
+      <li><a href="#sakugo"><span class="num">06</span>錯誤の要件</a></li>
+      <li><a href="#kouryoku"><span class="num">07</span>効力発生時期</a></li>
+      <li><a href="#deru"><span class="num">08</span>よく出る論点</a></li>
+      <li><a href="#hikkake"><span class="num">09</span>ひっかけ一覧</a></li>
+      <li><a href="#suji"><span class="num">10</span>数字まとめ</a></li>
+      <li><a href="#drill"><span class="num">11</span>肢別○×ドリル</a></li>
+    </ol>
+  </nav>
+
+  <main>
+
+    <!-- 00 -->
+    <section id="overview">
+      <h2 class="sec"><span class="num">00</span>全体像</h2>
+      <p class="lead">契約が有効に成立するかを崩す入口が2つある。<em>そもそも一人で契約できる人か（行為能力）</em>と、<em>その意思表示は本心か（意思表示の瑕疵）</em>。どちらも結論は「取消し」か「無効」で、<em>第三者をどこまで守るか</em>が争点になる。</p>
+
+      <div class="scroll">
+        <table>
+          <thead><tr><th>崩れ方</th><th>類型</th><th class="n">効果</th></tr></thead>
+          <tbody>
+            <tr><td rowspan="4"><strong>行為能力の制限</strong></td><td>未成年者</td><td class="n" rowspan="4">取消し</td></tr>
+            <tr><td>成年被後見人</td></tr>
+            <tr><td>被保佐人</td></tr>
+            <tr><td>被補助人</td></tr>
+            <tr><td rowspan="5"><strong>意思表示の瑕疵</strong></td><td>心裡留保</td><td class="n">原則 有効</td></tr>
+            <tr><td>虚偽表示</td><td class="n no">無効</td></tr>
+            <tr><td>錯誤</td><td class="n">取消し</td></tr>
+            <tr><td>詐欺</td><td class="n">取消し</td></tr>
+            <tr><td>強迫</td><td class="n">取消し</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="call tip">
+        <span class="tag">覚え方</span>
+        <p><strong>無効になるのは虚偽表示だけ。</strong>錯誤は2020年の民法改正で<strong>無効から取消しに変わった</strong>ので、古い教材と食い違う。ここは今も出題される。</p>
+      </div>
+    </section>
+
+    <!-- 01 -->
+    <section id="seigen">
+      <h2 class="sec"><span class="num">01</span>4つの制限行為能力者</h2>
+
+      <div class="scroll">
+        <table>
+          <thead><tr><th></th><th>要件</th><th>保護者と権限</th><th>取消しできる行為</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><strong>未成年者</strong></td>
+              <td class="no"><strong>18歳未満</strong></td>
+              <td>法定代理人（親権者・未成年後見人）<br>同意権・代理権・取消権・追認権</td>
+              <td>法定代理人の同意を得ないでした行為</td>
+            </tr>
+            <tr>
+              <td><strong>成年被後見人</strong></td>
+              <td>事理を弁識する能力を<strong>欠く常況</strong>／後見開始の審判</td>
+              <td class="no">成年後見人<br><strong>同意権がない</strong>（代理権・取消権・追認権のみ）</td>
+              <td class="no">原則すべて。<strong>後見人の同意を得ていても取り消せる</strong></td>
+            </tr>
+            <tr>
+              <td><strong>被保佐人</strong></td>
+              <td>能力が<strong>著しく不十分</strong>／保佐開始の審判</td>
+              <td>保佐人<br>同意権・取消権・追認権（代理権は審判により付与）</td>
+              <td><strong>13条1項の重要な行為</strong>を同意なくしたとき</td>
+            </tr>
+            <tr>
+              <td><strong>被補助人</strong></td>
+              <td>能力が<strong>不十分</strong>／補助開始の審判</td>
+              <td>補助人<br>審判により同意権・代理権が付与される</td>
+              <td>13条1項の行為のうち<strong>審判で定められたもの</strong>を同意なくしたとき</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>1-1　未成年者が単独でできる行為</h3>
+      <ul>
+        <li><strong>単に権利を得、または義務を免れる行為</strong> — 負担のない贈与を受ける、債務の免除を受ける</li>
+        <li><strong>処分を許された財産</strong>の処分 — 小遣いで買物をする</li>
+        <li><strong>営業を許された</strong>場合の、その営業に関する行為</li>
+      </ul>
+
+      <h3>1-2　被保佐人が同意を要する主な行為（13条1項）</h3>
+      <ul>
+        <li>元本を領収し、または利用すること／<strong>借財または保証</strong>をすること</li>
+        <li><strong>不動産その他重要な財産</strong>に関する権利の得喪を目的とする行為</li>
+        <li>訴訟行為／<strong>贈与・和解・仲裁合意</strong></li>
+        <li><strong>相続の承認・放棄、遺産分割</strong></li>
+        <li>贈与の申込みの拒絶、遺贈の放棄、<strong>負担付贈与の受諾</strong></li>
+        <li><strong>新築・改築・増築・大修繕</strong></li>
+        <li>一定期間を超える<strong>賃貸借</strong>（土地5年・建物3年など）</li>
+      </ul>
+
+      <div class="call trap">
+        <span class="tag">ひっかけ</span>
+        <p><strong>成年後見人には同意権がない。</strong>「成年後見人の同意を得てした売買契約は取り消せない」は<strong>誤り</strong>。事理弁識能力を欠く常況にある以上、同意があっても本人が理解して契約できるわけではないから。<br>
+        ただし<strong>日用品の購入その他日常生活に関する行為は取り消せない</strong>。<br>
+        <strong>負担付贈与を受けることは単独でできない。</strong>「贈与を受ける＝利益だから単独で可」と思わせるが、負担が付けば義務を負うので同意が必要。</p>
+      </div>
+    </section>
+
+    <!-- 02 -->
+    <section id="aitegata">
+      <h2 class="sec"><span class="num">02</span>相手方の保護</h2>
+
+      <h3>2-1　催告権</h3>
+      <p>相手方は <strong>1か月以上</strong> の期間を定めて追認するかどうか催告できる。<strong>誰に催告したかで、確答がないときの結論が逆になる。</strong></p>
+
+      <figure class="plate">
+        <svg viewBox="0 0 720 210" role="img" aria-label="催告して確答がない場合、行為能力者となった本人・法定代理人・保佐人・補助人に対する催告なら追認とみなされ、被保佐人・被補助人本人に対する催告なら取消しとみなされる。成年被後見人と未成年者本人には催告できない。">
+          <rect x="24" y="46" width="212" height="106" class="svg-bluefill" rx="2"/>
+          <text x="130" y="72" text-anchor="middle" class="big" fill="var(--blue)">追認とみなす</text>
+          <text x="130" y="98" text-anchor="middle" class="lbl">行為能力者となった本人</text>
+          <text x="130" y="114" text-anchor="middle" class="lbl">法定代理人</text>
+          <text x="130" y="130" text-anchor="middle" class="lbl">保佐人・補助人</text>
+          <text x="130" y="146" text-anchor="middle" class="dimt">単独で追認できる人</text>
+
+          <rect x="254" y="46" width="212" height="106" class="svg-accfill" rx="2"/>
+          <text x="360" y="72" text-anchor="middle" class="big" fill="var(--accent)">取消しとみなす</text>
+          <text x="360" y="98" text-anchor="middle" class="lbl">被保佐人 本人</text>
+          <text x="360" y="114" text-anchor="middle" class="lbl">被補助人 本人</text>
+          <text x="360" y="146" text-anchor="middle" class="acct">単独では追認できない人</text>
+
+          <rect x="484" y="46" width="212" height="106" class="svg-fill" rx="2"/>
+          <text x="590" y="72" text-anchor="middle" class="big">催告できない</text>
+          <text x="590" y="98" text-anchor="middle" class="lbl">成年被後見人 本人</text>
+          <text x="590" y="114" text-anchor="middle" class="lbl">未成年者 本人</text>
+          <text x="590" y="146" text-anchor="middle" class="lbl">催告しても効力を生じない</text>
+
+          <text x="24" y="30" class="lbl">1か月以上の期間を定めて催告し、その期間内に確答がないとき</text>
+          <text x="24" y="184" class="lbl">「自分ひとりで追認できる人が黙っていた → 追認」「できない人が黙っていた → 取消し」と考える</text>
+        </svg>
+        <figcaption>Fig.1 — 誰に催告したかで結論が反転する</figcaption>
+      </figure>
+
+      <h3>2-2　制限行為能力者の詐術</h3>
+      <div class="scroll">
+        <table>
+          <thead><tr><th>行為</th><th class="n">取消し</th></tr></thead>
+          <tbody>
+            <tr><td>行為能力者であることを信じさせるため<strong>詐術</strong>を用いた</td><td class="n no">できない</td></tr>
+            <tr><td>単に制限行為能力者であることを<strong>黙秘</strong>していただけ</td><td class="n tri">できる</td></tr>
+            <tr><td>黙秘に加え、他の言動と相まって相手方を誤信させた</td><td class="n no">詐術にあたり、できない</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="call exam">
+        <span class="tag">よく出る</span>
+        <p><strong>単なる黙秘は詐術ではない。</strong>制限行為能力者に「自分から名乗り出る義務」まで課すと保護の意味がなくなるから。ただし黙秘＋積極的な言動なら詐術になりうる、という判例の枠組みで覚える。</p>
+      </div>
+    </section>
+
+    <!-- 03 -->
+    <section id="torikeshi">
+      <h2 class="sec"><span class="num">03</span>取消しと追認</h2>
+
+      <div class="scroll">
+        <table>
+          <thead><tr><th>論点</th><th>内容</th></tr></thead>
+          <tbody>
+            <tr><td>取消権者</td><td>制限行為能力者<strong>本人</strong>／代理人・承継人・同意をすることができる者</td></tr>
+            <tr><td>取消しの効果</td><td>初めから<strong>無効</strong>であったものとみなされる（遡及効）</td></tr>
+            <tr>
+              <td class="no"><strong>返還の範囲</strong></td>
+              <td class="no">制限行為能力者は<strong>現に利益を受けている限度</strong>（現存利益）で返還すれば足りる<br><span class="lbl">遊興費に使ったなら返さなくてよいが、生活費に充てたなら現存利益あり</span></td>
+            </tr>
+            <tr><td>追認</td><td>取消権の放棄。追認により<strong>確定的に有効</strong>となる。取消しの原因となっていた状況が消滅した後にしなければ効力を生じない</td></tr>
+            <tr><td>法定追認</td><td>履行、履行の請求、更改、担保の供与、取得した権利の譲渡、強制執行があれば追認とみなされる</td></tr>
+            <tr><td class="no"><strong>取消権の期間</strong></td><td class="no">追認をすることができる時から <strong>5年</strong>／行為の時から <strong>20年</strong></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="call trap">
+        <span class="tag">ひっかけ</span>
+        <p><strong>制限行為能力者の返還義務は「現存利益」に限られる。</strong>一般の取消しでは原状回復が原則だが、ここは特則。<strong>浪費してしまえば返還義務を負わない</strong>。<br>
+        <strong>取消権は「追認できる時から5年」。</strong>取消しできることを知った時からではない。未成年者なら成年に達した時から5年。</p>
+      </div>
+    </section>
+
+    <!-- 04 -->
+    <section id="ishi">
+      <h2 class="sec"><span class="num">04</span>意思表示の5類型</h2>
+
+      <div class="scroll">
+        <table class="ishi">
+          <thead><tr><th>類型</th><th>内容</th><th class="n">当事者間の効力</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><strong>心裡留保</strong><br><span class="lbl">93条</span></td>
+              <td>表意者が真意でないことを知りながらした意思表示（冗談）</td>
+              <td class="n"><strong>原則 有効</strong><br><span class="no">相手方が悪意・有過失なら無効</span></td>
+            </tr>
+            <tr>
+              <td><strong>虚偽表示</strong><br><span class="lbl">94条</span></td>
+              <td>相手方と<strong>通じて</strong>した虚偽の意思表示（仮装売買）</td>
+              <td class="n no"><strong>無効</strong></td>
+            </tr>
+            <tr>
+              <td><strong>錯誤</strong><br><span class="lbl">95条</span></td>
+              <td>思い違いによる意思表示</td>
+              <td class="n"><strong>取消し</strong><br><span class="no">表意者に重過失があると原則不可</span></td>
+            </tr>
+            <tr>
+              <td><strong>詐欺</strong><br><span class="lbl">96条</span></td>
+              <td>だまされてした意思表示</td>
+              <td class="n"><strong>取消し</strong></td>
+            </tr>
+            <tr>
+              <td><strong>強迫</strong><br><span class="lbl">96条</span></td>
+              <td>おどされてした意思表示</td>
+              <td class="n"><strong>取消し</strong></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>4-1　第三者がした詐欺・強迫</h3>
+      <div class="scroll">
+        <table>
+          <thead><tr><th></th><th>取消しできるか</th></tr></thead>
+          <tbody>
+            <tr><td><strong>第三者による詐欺</strong></td><td class="no">相手方が<strong>その事実を知り、または知ることができたとき</strong>に限り取消しできる</td></tr>
+            <tr><td><strong>第三者による強迫</strong></td><td class="tri">相手方の善意・悪意を問わず<strong>常に取消しできる</strong></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="call tip">
+        <span class="tag">覚え方</span>
+        <p><strong>強迫はどこまでも表意者が勝つ。</strong>だまされた人には「うかつだった」という落ち度があるが、おどされた人に落ち度はない。この一点で、詐欺と強迫の違いはすべて説明がつく。</p>
+      </div>
+    </section>
+
+    <!-- 05 -->
+    <section id="daisansha">
+      <h2 class="sec"><span class="num">05</span>第三者保護の比較</h2>
+      <p class="lead">この分野の出題はほぼここに集約される。<em>第三者にどこまで求めるか</em>が類型ごとに違う。</p>
+
+      <figure class="plate">
+        <svg viewBox="0 0 720 220" role="img" aria-label="第三者保護の要件は3段階。虚偽表示と心裡留保は善意のみで保護される。錯誤と詐欺は善意かつ無過失が必要。強迫では第三者は保護されず、表意者が常に勝つ。">
+          <text x="24" y="30" class="lbl">第三者が保護されるためのハードル</text>
+
+          <rect x="24" y="46" width="212" height="118" class="svg-bluefill" rx="2"/>
+          <text x="130" y="74" text-anchor="middle" class="big" fill="var(--blue)">善意でよい</text>
+          <text x="130" y="102" text-anchor="middle">虚偽表示</text>
+          <text x="130" y="124" text-anchor="middle">心裡留保</text>
+          <text x="130" y="150" text-anchor="middle" class="lbl">無過失も登記も不要</text>
+
+          <rect x="254" y="46" width="212" height="118" class="svg-fill" rx="2"/>
+          <text x="360" y="74" text-anchor="middle" class="big">善意 かつ 無過失</text>
+          <text x="360" y="102" text-anchor="middle">錯誤</text>
+          <text x="360" y="124" text-anchor="middle">詐欺</text>
+          <text x="360" y="150" text-anchor="middle" class="lbl">落ち度があれば保護されない</text>
+
+          <rect x="484" y="46" width="212" height="118" class="svg-accfill" rx="2"/>
+          <text x="590" y="74" text-anchor="middle" class="big" fill="var(--accent)">保護されない</text>
+          <text x="590" y="102" text-anchor="middle">強迫</text>
+          <text x="590" y="136" text-anchor="middle" class="acct">善意無過失の第三者にも</text>
+          <text x="590" y="152" text-anchor="middle" class="acct">取消しを対抗できる</text>
+
+          <text x="24" y="196" class="lbl">表意者に落ち度が大きいほど第三者は薄い要件で守られ、落ち度がないほど第三者は守られない</text>
+        </svg>
+        <figcaption>Fig.2 — 表意者の落ち度と第三者保護は反比例する</figcaption>
+      </figure>
+
+      <div class="scroll">
+        <table class="ishi">
+          <thead><tr><th>類型</th><th>第三者が保護される要件</th><th class="n">登記</th></tr></thead>
+          <tbody>
+            <tr class="hi"><td><strong>虚偽表示</strong></td><td class="tri"><strong>善意</strong>であればよい</td><td class="n tri">不要</td></tr>
+            <tr class="hi"><td><strong>心裡留保</strong></td><td class="tri"><strong>善意</strong>であればよい</td><td class="n tri">不要</td></tr>
+            <tr><td><strong>錯誤</strong></td><td><strong>善意かつ無過失</strong></td><td class="n tri">不要</td></tr>
+            <tr><td><strong>詐欺</strong></td><td><strong>善意かつ無過失</strong></td><td class="n tri">不要</td></tr>
+            <tr class="hi"><td><strong>強迫</strong></td><td class="no">保護規定がない。<strong>表意者が常に勝つ</strong></td><td class="n">—</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="call trap">
+        <span class="tag">ひっかけ</span>
+        <p><strong>第三者の保護に「登記」は要らない。</strong>いずれの類型でも、第三者は登記を備えていなくても保護される（判例）。「善意の第三者であっても登記がなければ対抗できない」は誤り。<br>
+        <strong>虚偽表示だけが「善意」で足りる。</strong>詐欺・錯誤は無過失まで要求される。当事者が自ら仮装した虚偽表示は表意者の落ち度が最も大きいため。</p>
+      </div>
+
+      <div class="call exam">
+        <span class="tag">よく出る</span>
+        <p><strong>詐欺の第三者保護は「取消し前」の第三者の話。</strong>取消し<strong>後</strong>に現れた第三者との関係は、96条3項ではなく<strong>対抗問題（177条）</strong>として登記の先後で決まる（→ 物権変動と対抗要件）。<br>
+        <strong>強迫は取消し前の第三者に勝てるが、取消し後の第三者とは登記で決まる。</strong>ここも同じ構造。</p>
+      </div>
+    </section>
+
+    <!-- 06 -->
+    <section id="sakugo">
+      <h2 class="sec"><span class="num">06</span>錯誤の要件</h2>
+
+      <div class="scroll">
+        <table>
+          <thead><tr><th class="n">#</th><th>要件</th></tr></thead>
+          <tbody>
+            <tr><td class="n">①</td><td>意思表示に対応する意思を欠く錯誤（<strong>表示の錯誤</strong>）、または法律行為の基礎とした事情についての認識が真実に反する錯誤（<strong>基礎事情の錯誤＝動機の錯誤</strong>）</td></tr>
+            <tr><td class="n">②</td><td class="no">基礎事情の錯誤の場合、その事情が法律行為の<strong>基礎とされていることが表示されていた</strong>こと</td></tr>
+            <tr><td class="n">③</td><td>その錯誤が法律行為の目的および取引上の社会通念に照らして<strong>重要</strong>なものであること</td></tr>
+            <tr><td class="n">④</td><td class="no">表意者に<strong>重大な過失がない</strong>こと</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>6-1　重過失があっても取り消せる例外</h3>
+      <ul>
+        <li>相手方が表意者の錯誤を<strong>知り、または重大な過失によって知らなかった</strong>とき</li>
+        <li>相手方が表意者と<strong>同一の錯誤</strong>に陥っていたとき</li>
+      </ul>
+
+      <div class="call trap">
+        <span class="tag">ひっかけ</span>
+        <p><strong>動機の錯誤は「表示されていた」ことが必要。</strong>心の中で思っていただけでは取り消せない。<br>
+        <strong>錯誤は2020年改正で「無効」から「取消し」に変わった。</strong>効果が変わったことで、取消権の期間（追認できる時から5年・行為の時から20年）の制限がかかるようになった点も押さえる。</p>
+      </div>
+    </section>
+
+    <!-- 07 -->
+    <section id="kouryoku">
+      <h2 class="sec"><span class="num">07</span>意思表示の効力発生時期</h2>
+
+      <div class="scroll">
+        <table>
+          <thead><tr><th>論点</th><th>内容</th></tr></thead>
+          <tbody>
+            <tr><td class="no"><strong>到達主義</strong></td><td class="no">意思表示は、相手方に<strong>到達した時</strong>から効力を生ずる</td></tr>
+            <tr><td>到達の妨害</td><td>相手方が<strong>正当な理由なく</strong>到達を妨げたときは、<strong>通常到達すべきであった時</strong>に到達したものとみなす</td></tr>
+            <tr>
+              <td class="no"><strong>発信後の事情変更</strong></td>
+              <td class="no">表意者が通知を発した後に<strong>死亡し、意思能力を喪失し、または行為能力の制限を受けた</strong>としても、意思表示の効力は<strong>妨げられない</strong></td>
+            </tr>
+            <tr><td>受領能力</td><td>意思表示の相手方が<strong>意思能力を有しない</strong>か<strong>未成年者・成年被後見人</strong>であるときは、その意思表示を対抗できない。<span class="tri">法定代理人が知った後は対抗できる</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="call exam">
+        <span class="tag">よく出る</span>
+        <p><strong>「到達」とは相手方が現実に了知することまでは必要でなく、了知しうる状態に置かれれば足りる</strong>（判例）。郵便受けに投函されれば、読んでいなくても到達している。</p>
+      </div>
+    </section>
+
+    <!-- 08 -->
+    <section id="deru">
+      <h2 class="sec"><span class="num">08</span>よく出る論点</h2>
+      <div class="scroll">
+        <table>
+          <thead><tr><th class="n">順位</th><th>論点</th><th>要点</th></tr></thead>
+          <tbody>
+            <tr><td class="n">1</td><td><strong>第三者保護の要件</strong></td><td>虚偽表示・心裡留保は善意／錯誤・詐欺は善意無過失／強迫は保護なし／登記は不要</td></tr>
+            <tr><td class="n">2</td><td>成年後見人に同意権がない</td><td>同意を得ても取り消せる。日用品の購入は除く</td></tr>
+            <tr><td class="n">3</td><td>催告権</td><td>単独で追認できる人が黙る＝追認／できない人が黙る＝取消し</td></tr>
+            <tr><td class="n">4</td><td>詐欺と強迫の違い</td><td>第三者詐欺は相手方の悪意・有過失が必要／強迫は常に取消し可</td></tr>
+            <tr><td class="n">5</td><td>錯誤の要件</td><td>動機は表示が必要／重過失があると原則不可／2020年に取消しへ</td></tr>
+            <tr><td class="n">6</td><td>現存利益</td><td>制限行為能力者の返還義務は現存利益に限られる</td></tr>
+            <tr><td class="n">7</td><td>詐術</td><td>単なる黙秘は詐術にあたらない</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 09 -->
+    <section id="hikkake">
+      <h2 class="sec"><span class="num">09</span>ひっかけ一覧</h2>
+      <div class="scroll">
+        <table class="traps">
+          <thead><tr><th>こう書かれたら疑う</th><th>正しくは</th></tr></thead>
+          <tbody>
+            <tr><td>成年後見人の同意を得てした契約は取り消せない</td><td>成年後見人に<strong>同意権はない</strong>ので取り消せる</td></tr>
+            <tr><td>成年被後見人がした行為はすべて取り消せる</td><td><strong>日用品の購入等</strong>は取り消せない</td></tr>
+            <tr><td>未成年者は負担付贈与も単独で受けられる</td><td>負担が付けば<strong>同意が必要</strong></td></tr>
+            <tr><td>被保佐人は不動産の売買を単独でできる</td><td>13条1項の行為なので<strong>同意が必要</strong></td></tr>
+            <tr><td>制限行為能力者であることを黙っていたら詐術にあたる</td><td><strong>単なる黙秘は詐術ではない</strong></td></tr>
+            <tr><td>被保佐人本人に催告して確答がなければ追認とみなされる</td><td><strong>取消し</strong>とみなされる</td></tr>
+            <tr><td>取り消したら受け取った全額を返還しなければならない</td><td><strong>現存利益</strong>の限度でよい</td></tr>
+            <tr><td>取消権は取消しできることを知った時から5年</td><td><strong>追認をすることができる時</strong>から5年</td></tr>
+            <tr><td>虚偽表示の第三者は善意無過失でなければ保護されない</td><td><strong>善意</strong>であればよい</td></tr>
+            <tr><td>善意の第三者でも登記がなければ保護されない</td><td><strong>登記は不要</strong></td></tr>
+            <tr><td>強迫による取消しは善意の第三者に対抗できない</td><td><strong>対抗できる</strong>（保護規定がない）</td></tr>
+            <tr><td>第三者による強迫でも相手方が善意なら取り消せない</td><td>強迫は相手方の善意悪意を問わず<strong>取り消せる</strong></td></tr>
+            <tr><td>錯誤による意思表示は無効である</td><td>2020年改正により<strong>取消し</strong></td></tr>
+            <tr><td>動機の錯誤は表示されていなくても取り消せる</td><td>基礎とされていることが<strong>表示されていた</strong>ことが必要</td></tr>
+            <tr><td>意思表示は発信した時に効力を生ずる</td><td><strong>到達した時</strong>（到達主義）</td></tr>
+            <tr><td>発信後に表意者が死亡すると意思表示は効力を失う</td><td>効力は<strong>妨げられない</strong></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 10 -->
+    <section id="suji">
+      <h2 class="sec"><span class="num">10</span>数字まとめ</h2>
+      <p class="masthead-note">右上の「数値を隠す」で自己テストできる。</p>
+      <div class="nums" id="numgrid">
+        <div class="nc" tabindex="0"><span class="v">18歳</span><span class="d">成年年齢。これ未満が未成年者</span></div>
+        <div class="nc" tabindex="0"><span class="v">1か月以上</span><span class="d">相手方が催告する際に定める期間</span></div>
+        <div class="nc" tabindex="0"><span class="v">5年</span><span class="d">取消権の期間（追認をすることができる時から）</span></div>
+        <div class="nc" tabindex="0"><span class="v">20年</span><span class="d">取消権の期間（行為の時から）</span></div>
+        <div class="nc" tabindex="0"><span class="v">善意</span><span class="d">虚偽表示・心裡留保で第三者が保護される要件</span></div>
+        <div class="nc" tabindex="0"><span class="v">善意無過失</span><span class="d">錯誤・詐欺で第三者が保護される要件</span></div>
+        <div class="nc" tabindex="0"><span class="v">保護なし</span><span class="d">強迫における第三者の扱い</span></div>
+      </div>
+    </section>
+
+    <!-- 11 -->
+    <section id="drill">
+      <h2 class="sec"><span class="num">11</span>肢別○×ドリル</h2>
+      <p class="lead">頻出論点の一問一答 <em>36肢</em>。○×を押すと理由が開く。<strong>理由を一言で言えなかった肢は、正解していても「要復習」に入れる</strong>のがこのドリルの使い方。</p>
+      <div class="call tip">
+        <span class="tag">回し方</span>
+        <p>1周目は全肢。2周目以降は「間違えた肢だけ」で回す。解答状況はこのブラウザに保存されるので、日をまたいでも続きから再開できる。</p>
+      </div>
+      <div class="drillbar">
+        <div class="score">解答 <b id="d-done">0</b> / 36　　正答 <b id="d-ok">0</b>　　正答率 <span class="pct" id="d-pct">—</span></div>
+        <div class="dbtns">
+          <button id="d-wrong" type="button" aria-pressed="false">間違えた肢だけ</button>
+          <button id="d-reset" type="button">リセット</button>
+        </div>
+      </div>
+      <ol class="drill">
+          <li class="dq" data-a="o">
+            <p class="s">未成年者が単に権利を得、または義務を免れる法律行為をするには、法定代理人の同意を要しない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>5条1項ただし書。単純な贈与を受ける、債務の免除を受けるなどは<strong>単独でできる</strong>。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">未成年者が負担付贈与を受ける契約は、利益を得る行為であるから単独ですることができる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>負担が付けば<strong>義務を負う</strong>ことになるので、法定代理人の同意が必要。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">法定代理人が目的を定めて処分を許した財産は、未成年者がその目的の範囲内で自由に処分することができる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>5条3項。目的を定めないで処分を許した財産も自由に処分できる。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">一種または数種の営業を許された未成年者は、その営業に関しては成年者と同一の行為能力を有する。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>6条1項。その営業の範囲内でした行為は<strong>取り消せない</strong>。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">成年被後見人がした法律行為は、成年後見人の同意を得てしたものであれば取り消すことができない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p><strong>成年後見人に同意権はない</strong>ので、同意を得ていても取り消せる。判断能力を欠く常況にある以上、同意どおりに行動できる保証がないから。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">成年被後見人がした法律行為は、すべて取り消すことができる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p><strong>日用品の購入その他日常生活に関する行為</strong>は取り消せない（9条ただし書）。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">成年後見人が、成年被後見人に代わってその居住用の建物を売却するには、家庭裁判所の許可を得なければならない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>859条の3。売却のほか賃貸・賃貸借の解除・抵当権の設定も許可が必要。生活の本拠を失う影響が大きいため。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">被保佐人が自己所有の不動産を売却するには、保佐人の同意は不要である。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>不動産その他重要な財産に関する権利の得喪を目的とする行為は<strong>13条1項3号</strong>にあたり、保佐人の同意が必要。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">被保佐人が保佐人の同意を得られないとき、家庭裁判所は被保佐人の請求により保佐人の同意に代わる許可を与えることができる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>13条3項。保佐人が不当に同意しない場合の救済手段。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">保佐開始の審判をするには、本人の同意が必要である。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>保佐・後見の開始に本人の同意は不要。本人の同意が要るのは<strong>補助開始の審判</strong>と、補助人への同意権・代理権付与の審判。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">補助人に同意権を付与する審判は、13条1項に掲げる行為の一部についてのみすることができる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>17条1項ただし書。補助は保佐より軽い類型なので、<strong>保佐の範囲を超えることはできない</strong>。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">相手方が、制限行為能力者が行為能力者となった後にその者に対して1か月以上の期間を定めて催告し、確答がなかったときは、取り消したものとみなされる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>単独で追認できる者への催告なので<strong>追認したものとみなす</strong>（20条1項）。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">相手方が被保佐人に対し、保佐人の追認を得るべき旨を催告したにもかかわらず確答がなかったときは、その行為を取り消したものとみなされる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>20条4項。<strong>単独で追認できない者</strong>への催告だけが取消し擬制になる。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">制限行為能力者が行為能力者であることを相手方に黙っていた場合、詐術にあたるので取り消すことができなくなる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>判例は<strong>単なる黙秘は詐術にあたらない</strong>とする。他の言動と相まって相手方を誤信させたときは詐術になる。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">未成年者が成年者であると偽ったが相手方がそれを信じなかった場合でも、詐術にあたるので取り消すことができない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>詐術による取消権の排除は、<strong>相手方が実際に誤信したこと</strong>が前提。信じていない相手方を保護する必要はない。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">制限行為能力者が行為を取り消した場合、その返還義務の範囲は現に利益を受けている限度にとどまる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>121条の2第3項。<strong>浪費した分は返さなくてよい</strong>が、生活費に充てた分は現存利益として返還する。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">取消権は、取消しの原因となっていた状況が消滅した時から5年間行使しないときに時効消滅する。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>126条は「<strong>追認をすることができる時</strong>から5年、行為の時から20年」。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">取り消すことができる行為について追認をした後は、もはや取り消すことができない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>122条。ただし追認は<strong>取消しの原因となっていた状況が消滅した後</strong>にしなければ効力を生じない（124条）。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">意思表示は、その通知が相手方に到達した時からその効力を生ずる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>97条1項の<strong>到達主義</strong>。発信主義ではない。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">相手方が正当な理由なく意思表示の通知が到達することを妨げたときは、通常到達すべきであった時に到達したものとみなされる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>97条2項。受取拒否によって効力の発生から逃れることはできない。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">表意者が通知を発した後に死亡したときは、その意思表示は効力を生じない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>97条3項により<strong>効力は妨げられない</strong>。表意者が意思能力を喪失した場合、行為能力の制限を受けた場合も同じ。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">意思表示の相手方が意思表示を受けた時に未成年者であったときは、原則としてその意思表示をもって相手方に対抗することができない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>98条の2。ただし<strong>法定代理人が知った後</strong>、または本人が能力を回復して知った後は対抗できる。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">表意者が真意ではないことを知ってした意思表示は、そのことを相手方が知っていたとしても有効である。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>93条1項ただし書。相手方が<strong>悪意または有過失</strong>であれば無効になる。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">心裡留保による意思表示の無効は、善意の第三者に対抗することができない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>93条2項。第三者は<strong>善意であれば足り、無過失も登記も不要</strong>。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">相手方と通じてした虚偽の意思表示は無効であるが、その無効は善意の第三者に対抗することができない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>94条。ここでも第三者の要件は<strong>善意のみ</strong>。自ら虚偽の外観を作った以上、表意者は保護に値しない。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">虚偽表示における善意の第三者が保護されるためには、登記を備えていることが必要である。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>判例により<strong>登記は不要</strong>。94条2項の第三者に権利保護資格要件としての登記までは要求されない。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">虚偽表示の目的物を善意で譲り受けた者からさらに譲り受けた転得者は、悪意であっても保護される。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>判例（絶対的構成）。<strong>善意者が現れた時点で権利関係は確定</strong>するので、その後の転得者の主観は問わない。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">錯誤による意思表示は無効である。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>2020年改正により<strong>取消し</strong>に変わった（95条1項）。旧法の「無効」を残した選択肢は誤り。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">動機の錯誤による取消しは、その動機が法律行為の基礎とされていることが表示されていたときに限り認められる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>95条2項。<strong>表示されていない動機</strong>では取り消せない。相手方に不測の損害を与えないため。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">表意者に重大な過失があった場合、錯誤による取消しは一切認められない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>相手方が<strong>悪意または重過失</strong>であった場合、または<strong>相手方が同一の錯誤に陥っていた</strong>場合は取り消せる（95条3項）。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">錯誤による意思表示の取消しは、善意でかつ過失がない第三者に対抗することができない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>95条4項。錯誤・詐欺の第三者は<strong>善意無過失</strong>が必要で、虚偽表示・心裡留保（善意のみ）より要件が重い。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">相手方に対する意思表示について第三者が詐欺を行った場合、相手方がその事実を知り、または知ることができたときに限り、取り消すことができる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>96条2項。<strong>相手方が善意無過失なら取り消せない</strong>。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">第三者が強迫を行った場合、相手方が善意無過失であれば、意思表示を取り消すことはできない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>強迫には96条2項のような制限がなく、<strong>相手方の善意悪意を問わず取り消せる</strong>。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">強迫による意思表示の取消しは、善意でかつ過失のない第三者に対抗することができない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>強迫には<strong>第三者保護規定がない</strong>。強迫された表意者には落ち度がないので徹底的に保護される。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">詐欺による取消し前に利害関係をもった第三者は、善意無過失であれば、登記を備えていなくても保護される。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>96条3項。取消し<strong>前</strong>の第三者に登記は不要。取消し<strong>後</strong>の第三者とは対抗問題となり登記の先後で決まる。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">制限行為能力を理由とする取消しは、善意の第三者に対しても対抗することができる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>制限行為能力にも<strong>第三者保護規定がない</strong>。強迫と並んで、表意者が徹底的に保護される類型。</p></div>
+          </li>
+      </ol>
+    </section>
+
+  </main>
+
+  <footer>
+    <h4>出典</h4>
+    <ul>
+      <li>民法（明治29年法律第89号）第4条〜第21条、第93条〜第98条の2 — <a href="https://laws.e-gov.go.jp/law/129AC0000000089">e-Gov法令検索</a></li>
+    </ul>
+    <div class="sibling">
+      <a href="../index.html">総目次</a>
+      <a href="借地借家法.html">借地借家法</a>
+      <a href="区分所有法.html">区分所有法</a>
+      <a href="不動産登記法.html">不動産登記法</a>
+    </div>
+  </footer>
+
+</div>
+
+<script>
+  (function () {
+    var root = document.documentElement;
+    document.getElementById('theme').addEventListener('click', function () {
+      if (root.getAttribute('data-theme')) { root.removeAttribute('data-theme'); return; }
+      var dark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      root.setAttribute('data-theme', dark ? 'light' : 'dark');
+    });
+    var maskBtn = document.getElementById('mask');
+    var grid = document.getElementById('numgrid');
+    maskBtn.addEventListener('click', function () {
+      var on = grid.classList.toggle('masked');
+      maskBtn.setAttribute('aria-pressed', String(on));
+      maskBtn.textContent = on ? '答えを表示' : '数値を隠す';
+    });
+    var links = Array.prototype.slice.call(document.querySelectorAll('nav.rail ol a'));
+    var map = {};
+    links.forEach(function (a) { map[a.getAttribute('href').slice(1)] = a; });
+    var seen = [];
+    var obs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        var i = seen.indexOf(e.target.id);
+        if (e.isIntersecting && i < 0) seen.push(e.target.id);
+        if (!e.isIntersecting && i >= 0) seen.splice(i, 1);
+      });
+      links.forEach(function (a) { a.classList.remove('on'); });
+      if (seen.length) {
+        var order = Object.keys(map);
+        seen.sort(function (a, b) { return order.indexOf(a) - order.indexOf(b); });
+        map[seen[0]].classList.add('on');
+      }
+    }, { rootMargin: '-10% 0px -70% 0px' });
+    document.querySelectorAll('main section').forEach(function (s) { obs.observe(s); });
+  })();
+</script>
+
+<script>
+  /* 肢別○×ドリル */
+  (function () {
+    var sec = document.getElementById('drill');
+    if (!sec) return;
+    var list = sec.querySelector('ol.drill');
+    var items = Array.prototype.slice.call(list.querySelectorAll('li.dq'));
+    var key = 'takken-drill:' + (document.title || location.pathname);
+    var state = {};
+    try { state = JSON.parse(localStorage.getItem('' + key) || '{}') || {}; } catch (e) { state = {}; }
+    var elDone = document.getElementById('d-done');
+    var elOk = document.getElementById('d-ok');
+    var elPct = document.getElementById('d-pct');
+    var onlyBtn = document.getElementById('d-wrong');
+
+    function paint() {
+      var done = 0, ok = 0;
+      items.forEach(function (li, i) {
+        var picked = state[i];
+        li.classList.remove('done', 'ok', 'ng');
+        Array.prototype.forEach.call(li.querySelectorAll('.ch button'), function (b) {
+          b.removeAttribute('data-picked');
+        });
+        if (picked !== 'o' && picked !== 'x') return;
+        done++;
+        var ans = li.getAttribute('data-a');
+        var right = picked === ans;
+        if (right) ok++;
+        li.classList.add('done', right ? 'ok' : 'ng');
+        var b = li.querySelector('.ch button[data-v="' + picked + '"]');
+        if (b) b.setAttribute('data-picked', '1');
+        li.querySelector('.verdict').textContent =
+          right ? '正解　' + (ans === 'o' ? '○' : '×')
+                : '不正解　正解は ' + (ans === 'o' ? '○' : '×');
+      });
+      elDone.textContent = String(done);
+      elOk.textContent = String(ok);
+      elPct.textContent = done ? Math.round(ok / done * 100) + '%' : '—';
+      try { localStorage.setItem('' + key, JSON.stringify(state)); } catch (e) {}
+    }
+
+    list.addEventListener('click', function (e) {
+      var b = e.target;
+      while (b && b !== list && b.tagName !== 'BUTTON') b = b.parentNode;
+      if (!b || b.tagName !== 'BUTTON') return;
+      var li = b.parentNode.parentNode;
+      var i = items.indexOf(li);
+      if (i < 0) return;
+      state[i] = b.getAttribute('data-v');
+      paint();
+    });
+
+    onlyBtn.addEventListener('click', function () {
+      var on = list.classList.toggle('onlyng');
+      onlyBtn.setAttribute('aria-pressed', String(on));
+      onlyBtn.textContent = on ? 'すべて表示' : '間違えた肢だけ';
+    });
+
+    document.getElementById('d-reset').addEventListener('click', function () {
+      state = {};
+      list.classList.remove('onlyng');
+      onlyBtn.setAttribute('aria-pressed', 'false');
+      onlyBtn.textContent = '間違えた肢だけ';
+      paint();
+    });
+
+    paint();
+  })();
+</script>

@@ -1,0 +1,641 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>8種制限 — 宅建士試験 2026年度</title>
+
+<style>
+  :root {
+    --paper:#EBEDE9; --surface:#F8F9F6; --sunk:#E1E4DE; --ink:#151F2A; --muted:#5D6B78;
+    --rule:#CDD2CB; --hair:#DCE0D9; --accent:#B8342A; --accent-soft:#F3DEDB;
+    --blue:#2A5F86; --blue-soft:#DCE6EE;
+    --font-display:"Hiragino Mincho ProN","Yu Mincho","YuMincho","Noto Serif JP",serif;
+    --font-body:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","YuGothic","Noto Sans JP",system-ui,sans-serif;
+    --font-mono:ui-monospace,"SFMono-Regular","SF Mono",Menlo,Consolas,monospace;
+    --measure:68ch;
+    --s1:.35rem; --s2:.7rem; --s3:1.1rem; --s4:1.7rem; --s5:2.6rem; --s6:4rem;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper:#0D1B29; --surface:#132534; --sunk:#0A1622; --ink:#DAE4EC; --muted:#8CA1B3;
+      --rule:#26415A; --hair:#1D3448; --accent:#FF7059; --accent-soft:#3A1F1D;
+      --blue:#6FB6DC; --blue-soft:#14293A;
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper:#0D1B29; --surface:#132534; --sunk:#0A1622; --ink:#DAE4EC; --muted:#8CA1B3;
+    --rule:#26415A; --hair:#1D3448; --accent:#FF7059; --accent-soft:#3A1F1D;
+    --blue:#6FB6DC; --blue-soft:#14293A;
+  }
+
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--paper); color:var(--ink); font-family:var(--font-body);
+    font-size:16px; line-height:1.9; -webkit-font-smoothing:antialiased; font-feature-settings:"palt" 1; }
+
+  .wrap { display:grid; grid-template-columns:15.5rem minmax(0,1fr); gap:var(--s6);
+    max-width:80rem; margin:0 auto; padding:0 var(--s4) var(--s6); align-items:start; }
+  @media (max-width:60rem){ .wrap{ grid-template-columns:minmax(0,1fr); gap:var(--s4); padding:0 var(--s3) var(--s5);} }
+
+  .masthead { grid-column:1/-1; padding:var(--s5) 0 var(--s4); border-bottom:2px solid var(--ink);
+    margin-bottom:var(--s2); display:flex; flex-wrap:wrap; align-items:flex-end; justify-content:space-between; gap:var(--s3); }
+  .eyebrow { font-family:var(--font-mono); font-size:.72rem; letter-spacing:.16em; text-transform:uppercase;
+    color:var(--muted); display:flex; align-items:center; gap:.6em; }
+  .eyebrow::before { content:""; width:2.2rem; height:1px; background:var(--accent); }
+  h1 { font-family:var(--font-display); font-weight:600; font-size:clamp(2rem,1.4rem + 2.6vw,3.1rem);
+    line-height:1.2; letter-spacing:.04em; margin:var(--s2) 0 var(--s3); text-wrap:balance; }
+  .facts { display:flex; flex-wrap:wrap; gap:0 var(--s3); font-size:.82rem; color:var(--muted); list-style:none; margin:0; padding:0; }
+  .facts b { font-family:var(--font-mono); font-variant-numeric:tabular-nums; color:var(--ink); font-weight:600; }
+  .toggles { display:flex; gap:var(--s1); }
+  button { font-family:var(--font-body); font-size:.78rem; color:var(--muted); background:var(--surface);
+    border:1px solid var(--rule); border-radius:2px; padding:.4em .9em; cursor:pointer; transition:color .15s,border-color .15s; }
+  button:hover { color:var(--ink); border-color:var(--ink); }
+  button:focus-visible { outline:2px solid var(--accent); outline-offset:2px; }
+  button[aria-pressed="true"] { color:var(--accent); border-color:var(--accent); }
+
+  nav.rail { position:sticky; top:var(--s3); font-size:.82rem; max-height:calc(100vh - 3rem); overflow-y:auto; padding-bottom:var(--s3); }
+  nav.rail h2 { font-family:var(--font-mono); font-size:.68rem; letter-spacing:.16em; text-transform:uppercase; color:var(--muted); margin:0 0 var(--s2); font-weight:500; }
+  nav.rail ol { list-style:none; margin:0; padding:0; display:flex; flex-direction:column; }
+  nav.rail a { display:block; padding:.3em 0 .3em .9em; color:var(--muted); text-decoration:none; border-left:2px solid var(--hair); line-height:1.5; }
+  nav.rail a:hover { color:var(--ink); border-left-color:var(--rule); }
+  nav.rail a.on { color:var(--ink); border-left-color:var(--accent); font-weight:600; }
+  nav.rail a .num { font-family:var(--font-mono); font-size:.72rem; color:var(--muted); margin-right:.5em; }
+  @media (max-width:60rem){
+    nav.rail{ position:static; max-height:none; border-bottom:1px solid var(--rule); padding-bottom:var(--s3); }
+    nav.rail ol{ display:grid; grid-template-columns:repeat(auto-fill,minmax(9rem,1fr)); gap:0 var(--s2); }
+  }
+
+  main { min-width:0; }
+  section { padding-top:var(--s5); scroll-margin-top:var(--s3); }
+  section > * { max-width:var(--measure); }
+  section > figure, section > .scroll { max-width:none; }
+
+  h2.sec { font-family:var(--font-display); font-size:clamp(1.45rem,1.2rem + .9vw,1.9rem); font-weight:600;
+    letter-spacing:.04em; margin:0 0 var(--s3); padding-bottom:var(--s2); border-bottom:1px solid var(--rule);
+    display:flex; align-items:baseline; gap:.7em; max-width:none; }
+  h2.sec .num { font-family:var(--font-mono); font-size:.8rem; letter-spacing:.1em; color:var(--accent); font-weight:500; }
+  h3 { font-family:var(--font-body); font-size:1.06rem; font-weight:700; letter-spacing:.02em;
+    margin:var(--s4) 0 var(--s2); padding-left:.7em; border-left:3px solid var(--ink); }
+  p { margin:0 0 var(--s3); }
+  a { color:var(--blue); text-underline-offset:.2em; }
+  em { font-style:normal; background:linear-gradient(transparent 62%, var(--accent-soft) 62%); font-weight:600; }
+  ul, ol { margin:0 0 var(--s3); padding-left:1.3em; }
+  li { margin-bottom:var(--s1); }
+  .lead { font-size:1.05rem; color:var(--muted); }
+
+  .call { max-width:var(--measure); margin:0 0 var(--s3); padding:var(--s3) var(--s3) var(--s3) var(--s4);
+    background:var(--surface); border:1px solid var(--hair); border-left:3px solid var(--rule); border-radius:2px; font-size:.94rem; }
+  .call > :last-child { margin-bottom:0; }
+  .call .tag { display:block; font-family:var(--font-mono); font-size:.68rem; letter-spacing:.16em; text-transform:uppercase; color:var(--muted); margin-bottom:var(--s1); }
+  .call.trap { border-left-color:var(--accent); background:var(--accent-soft); }
+  .call.trap .tag { color:var(--accent); }
+  .call.exam { border-left-color:var(--ink); }
+  .call.exam .tag { color:var(--ink); }
+  .call.tip { border-left-color:var(--blue); background:var(--blue-soft); }
+  .call.tip .tag { color:var(--blue); }
+
+  .scroll { overflow-x:auto; margin:0 0 var(--s3); -webkit-overflow-scrolling:touch; }
+  table { border-collapse:collapse; width:100%; font-size:.88rem; line-height:1.6; }
+  caption { text-align:left; font-size:.78rem; color:var(--muted); padding-bottom:var(--s1); font-family:var(--font-mono); letter-spacing:.08em; }
+  th, td { padding:.58em .75em; text-align:left; vertical-align:top; border-bottom:1px solid var(--hair); }
+  thead th { font-size:.74rem; letter-spacing:.08em; color:var(--muted); font-weight:600; border-bottom:1px solid var(--ink); }
+  tbody tr:hover { background:var(--surface); }
+  td.n, th.n { text-align:center; font-family:var(--font-mono); font-variant-numeric:tabular-nums; white-space:nowrap; }
+  .no { color:var(--accent); font-weight:700; }
+  .yes { color:var(--muted); }
+  .tri { color:var(--blue); }
+  table.eight tbody td:first-child { white-space:nowrap; font-weight:600; }
+  table.eight tbody td:nth-child(2) { font-family:var(--font-mono); text-align:center; color:var(--accent); font-weight:600; white-space:nowrap; }
+
+  .ladder { display:flex; flex-direction:column; gap:var(--s2); margin-bottom:var(--s3); counter-reset:q; }
+  .q { background:var(--surface); border:1px solid var(--hair); border-radius:2px; padding:var(--s3); }
+  .q > p { font-weight:700; margin:0 0 var(--s2); font-size:.95rem; }
+  .q > p::before { counter-increment:q; content:"Q" counter(q); font-family:var(--font-mono); font-size:.7rem; letter-spacing:.1em; color:var(--accent); margin-right:.8em; }
+  .branch { display:grid; grid-template-columns:repeat(auto-fit,minmax(13rem,1fr)); gap:var(--s2); }
+  .b { font-size:.84rem; padding:.7em .9em; border-radius:2px; border:1px solid var(--hair); background:var(--paper); }
+  .b .k { font-family:var(--font-mono); font-size:.7rem; letter-spacing:.1em; color:var(--muted); display:block; }
+  .b.need { border-color:var(--accent); }
+  .b.need strong { color:var(--accent); }
+  .b.free { border-color:var(--blue); }
+  .b.free strong { color:var(--blue); }
+
+  figure { margin:0 0 var(--s4); }
+  figure svg { display:block; width:100%; height:auto; }
+  figcaption { font-size:.78rem; color:var(--muted); font-family:var(--font-mono); letter-spacing:.06em; margin-top:var(--s2); padding-top:var(--s1); border-top:1px solid var(--hair); }
+  .plate { background:var(--surface); border:1px solid var(--hair); border-radius:2px; padding:var(--s3); }
+  .svg-ink { fill:none; stroke:var(--ink); stroke-width:1.4; }
+  .svg-hair { fill:none; stroke:var(--rule); stroke-width:1; }
+  .svg-dim { fill:none; stroke:var(--blue); stroke-width:1; }
+  .svg-acc { fill:none; stroke:var(--accent); stroke-width:1.6; }
+  .svg-fill { fill:var(--sunk); stroke:var(--rule); stroke-width:1; }
+  .svg-accfill { fill:var(--accent-soft); stroke:var(--accent); stroke-width:1.2; }
+  .svg-bluefill { fill:var(--blue-soft); stroke:var(--blue); stroke-width:1.2; }
+  text { font-family:var(--font-body); fill:var(--ink); font-size:12px; }
+  text.lbl { font-family:var(--font-mono); fill:var(--muted); font-size:10.5px; letter-spacing:.06em; }
+  text.dimt { font-family:var(--font-mono); fill:var(--blue); font-size:11px; }
+  text.acct { fill:var(--accent); font-size:11.5px; font-weight:700; }
+  text.mark { font-size:16px; font-weight:700; }
+
+  .nums { display:grid; grid-template-columns:repeat(auto-fill,minmax(11.5rem,1fr)); gap:var(--s2); }
+  .nc { background:var(--surface); border:1px solid var(--hair); border-radius:2px; padding:var(--s3) var(--s3) var(--s2); display:flex; flex-direction:column; gap:var(--s1); }
+  .nc .v { font-family:var(--font-mono); font-variant-numeric:tabular-nums; font-size:1.3rem; font-weight:600; line-height:1.2; color:var(--accent); }
+  .nc .d { font-size:.8rem; color:var(--muted); line-height:1.6; }
+  .nums.masked .v { color:transparent; background:var(--rule); border-radius:2px; user-select:none; }
+  .nums.masked .nc:hover .v, .nums.masked .nc:focus-within .v { color:var(--accent); background:transparent; }
+  .nc:focus-visible { outline:2px solid var(--accent); outline-offset:2px; }
+  .masthead-note { font-size:.78rem; color:var(--muted); margin-bottom:var(--s2); }
+
+  table.traps td:first-child { color:var(--muted); }
+  table.traps td:first-child::before { content:"「"; }
+  table.traps td:first-child::after { content:"」"; }
+  table.traps td:last-child strong { color:var(--accent); }
+
+  footer { grid-column:1/-1; margin-top:var(--s6); padding-top:var(--s3); border-top:1px solid var(--rule); font-size:.8rem; color:var(--muted); }
+  footer ul { list-style:none; padding:0; }
+  footer li { margin-bottom:var(--s1); }
+  .sibling { display:flex; flex-wrap:wrap; gap:var(--s2); margin-top:var(--s3); }
+  .sibling a { font-size:.8rem; text-decoration:none; border:1px solid var(--rule); border-radius:2px; padding:.35em .8em; color:var(--muted); }
+  .sibling a:hover { color:var(--ink); border-color:var(--ink); }
+
+  @media (prefers-reduced-motion: reduce){ *{ transition:none !important; animation:none !important; scroll-behavior:auto !important; } }
+  html { scroll-behavior:smooth; }
+  .eyebrow a { color:var(--accent); text-decoration:none; }
+  .eyebrow a:hover { text-decoration:underline; text-underline-offset:.2em; }
+  nav.rail a.home { border-left:none; padding:0 0 var(--s2); color:var(--accent);
+    font-family:var(--font-mono); font-size:.72rem; letter-spacing:.1em; }
+  nav.rail a.home:hover { color:var(--accent); text-decoration:underline; text-underline-offset:.2em; }
+</style>
+
+<div class="wrap">
+
+  <header class="masthead">
+    <div>
+      <div class="eyebrow"><a href="../index.html">← 総目次</a> &nbsp;/&nbsp; 02 宅建業法 &nbsp;/&nbsp; 宅建士試験 2026年度</div>
+      <h1>8種制限</h1>
+      <ul class="facts">
+        <li>法令基準日 <b>2026-04-01</b></li>
+        <li>出題数 <b>約3問</b></li>
+        <li>目標 <b>全問正解</b></li>
+        <li>更新 <b>2026-08-09</b></li>
+      </ul>
+    </div>
+    <div class="toggles">
+      <button id="mask" type="button" aria-pressed="false">数値を隠す</button>
+      <button id="theme" type="button">配色切替</button>
+    </div>
+  </header>
+
+  <nav class="rail" aria-label="目次">
+    <a class="home" href="../index.html">← 総目次</a>
+    <h2>Contents</h2>
+    <ol>
+      <li><a href="#tekiyou"><span class="num">00</span>適用される場面</a></li>
+      <li><a href="#ichiran"><span class="num">01</span>8つの一覧</a></li>
+      <li><a href="#cooling"><span class="num">02</span>クーリング・オフ</a></li>
+      <li><a href="#tetsuke"><span class="num">03</span>手付の額と性質</a></li>
+      <li><a href="#songai"><span class="num">04</span>損害賠償額の予定</a></li>
+      <li><a href="#hozen"><span class="num">05</span>手付金等の保全措置</a></li>
+      <li><a href="#futekigou"><span class="num">06</span>契約不適合責任の特約</a></li>
+      <li><a href="#tanin"><span class="num">07</span>他人物売買の制限</a></li>
+      <li><a href="#kappu"><span class="num">08</span>割賦販売・所有権留保</a></li>
+      <li><a href="#deru"><span class="num">09</span>よく出る論点</a></li>
+      <li><a href="#hikkake"><span class="num">10</span>ひっかけ一覧</a></li>
+      <li><a href="#suji"><span class="num">11</span>数字まとめ</a></li>
+    </ol>
+  </nav>
+
+  <main>
+
+    <!-- 00 -->
+    <section id="tekiyou">
+      <h2 class="sec"><span class="num">00</span>適用される場面</h2>
+      <p class="lead">8種制限は<em>プロが素人に売るとき</em>だけのルール。まずこの入口を間違えないこと。適用場面を外した瞬間、8つすべてが問題にならなくなる。</p>
+
+      <figure class="plate">
+        <svg viewBox="0 0 720 210" role="img" aria-label="8種制限が適用されるのは、宅建業者が自ら売主となり買主が宅建業者でない場合だけ。業者間取引や、業者が媒介・代理をする場合には適用されない。">
+          <rect x="24" y="46" width="212" height="120" class="svg-accfill" rx="2"/>
+          <text x="130" y="76" text-anchor="middle" class="acct">適用される</text>
+          <text x="130" y="104" text-anchor="middle">売主：宅建業者</text>
+          <text x="130" y="126" text-anchor="middle">買主：宅建業者<tspan class="acct">でない</tspan></text>
+          <text x="130" y="152" text-anchor="middle" class="lbl">自ら売主のときだけ</text>
+
+          <rect x="254" y="46" width="212" height="120" class="svg-fill" rx="2"/>
+          <text x="360" y="76" text-anchor="middle" class="lbl">適用されない</text>
+          <text x="360" y="104" text-anchor="middle">売主：宅建業者</text>
+          <text x="360" y="126" text-anchor="middle">買主：<tspan class="dimt">宅建業者</tspan></text>
+          <text x="360" y="152" text-anchor="middle" class="lbl">業者間取引</text>
+
+          <rect x="484" y="46" width="212" height="120" class="svg-fill" rx="2"/>
+          <text x="590" y="76" text-anchor="middle" class="lbl">適用されない</text>
+          <text x="590" y="104" text-anchor="middle">売主：一般人</text>
+          <text x="590" y="126" text-anchor="middle">業者は<tspan class="dimt">媒介・代理</tspan></text>
+          <text x="590" y="152" text-anchor="middle" class="lbl">自ら売主ではない</text>
+
+          <text x="24" y="30" class="lbl">8種制限の入口 — 2つの条件がそろったときだけ働く</text>
+          <text x="24" y="192" class="lbl">買主が宅建業者かどうかは契約時点で判断する。免許を持つ個人が自宅用に買う場合も「宅建業者」</text>
+        </svg>
+        <figcaption>Fig.1 — 「自ら売主」かつ「買主が非業者」の1パターンのみ</figcaption>
+      </figure>
+
+      <div class="call trap">
+        <span class="tag">ひっかけ</span>
+        <p><strong>業者が媒介・代理をしているだけなら8種制限は働かない。</strong>売主が一般人で業者が仲介に入る取引では、手付の上限も保全措置も不要。<br>
+        <strong>買主が宅建業者なら、たとえ自宅用の購入でも8種制限は適用されない。</strong>用途ではなく買主の属性で判断する。</p>
+      </div>
+    </section>
+
+    <!-- 01 -->
+    <section id="ichiran">
+      <h2 class="sec"><span class="num">01</span>8つの一覧</h2>
+
+      <div class="scroll">
+        <table class="eight">
+          <thead><tr><th>制限</th><th>核心の数字</th><th>要点</th></tr></thead>
+          <tbody>
+            <tr><td>① クーリング・オフ</td><td>8日</td><td>事務所等以外で申込み・契約 → 書面で告げられた日から8日以内なら無条件解除</td></tr>
+            <tr><td>② 損害賠償額の予定等</td><td>2/10</td><td>予定額と違約金の合計が代金の20%を超える部分は無効</td></tr>
+            <tr><td>③ 手付の額の制限等</td><td>2/10</td><td>代金の20%を超える手付は受領できない。手付は常に解約手付</td></tr>
+            <tr><td>④ 契約不適合責任の特約</td><td>2年</td><td>買主に不利な特約は無効。ただし通知期間を引渡しから2年以上とする特約は有効</td></tr>
+            <tr><td>⑤ 手付金等の保全措置</td><td>5% / 10%<br>1,000万円</td><td>未完成は5%超、完成は10%超、または1,000万円超で保全が必要</td></tr>
+            <tr><td>⑥ 他人物売買の制限</td><td>—</td><td>取得契約（予約を含む）を締結していれば売れる。停止条件付きは不可</td></tr>
+            <tr><td>⑦ 割賦販売契約の解除等</td><td>30日</td><td>30日以上の期間を定めて書面で催告しなければ解除できない</td></tr>
+            <tr><td>⑧ 所有権留保等の禁止</td><td>3/10</td><td>代金の30%を超える支払を受けたら登記を移転しなければならない</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="call tip">
+        <span class="tag">覚え方</span>
+        <p><strong>割合の数字は「2・2・3」。</strong>損害賠償の予定と手付が <strong>2/10</strong>、所有権留保が <strong>3/10</strong>。<br>
+        <strong>期間の数字は「8日・2年・30日」。</strong>クーリング・オフ8日、契約不適合の通知期間2年、割賦の催告30日。</p>
+      </div>
+    </section>
+
+    <!-- 02 -->
+    <section id="cooling">
+      <h2 class="sec"><span class="num">02</span>クーリング・オフ</h2>
+
+      <div class="ladder">
+        <div class="q">
+          <p>どこで買受けの申込み・契約をしたか</p>
+          <div class="branch">
+            <div class="b free"><span class="k">事務所等</span><strong>できない</strong>／事務所、継続的に業務を行える施設、専任宅建士を置くべき案内所（<strong>土地に定着するもの</strong>）、売主の依頼を受けた他の業者の事務所等</div>
+            <div class="b need"><span class="k">事務所等以外</span><strong>できる</strong>／喫茶店、レストラン、買主の自宅・勤務先（業者から提案した場合）、<strong>テント張りの案内所</strong></div>
+          </div>
+        </div>
+        <div class="q">
+          <p>買主が自ら申し出た場所か</p>
+          <div class="branch">
+            <div class="b free"><span class="k">買主が申し出た自宅・勤務先</span><strong>できない</strong>（事務所等として扱われる）</div>
+            <div class="b need"><span class="k">業者が提案した自宅訪問</span><strong>できる</strong></div>
+          </div>
+        </div>
+        <div class="q">
+          <p>時間・履行が進んでいないか</p>
+          <div class="branch">
+            <div class="b free"><span class="k">書面で告げられた日から8日を経過</span><strong>できなくなる</strong></div>
+            <div class="b free"><span class="k">引渡しを受け、かつ代金全部を支払った</span><strong>できなくなる</strong></div>
+            <div class="b need"><span class="k">告知がない</span>いつまでも<strong>できる</strong></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="scroll">
+        <table>
+          <thead><tr><th>論点</th><th>内容</th></tr></thead>
+          <tbody>
+            <tr><td>申込みと契約の場所が違うとき</td><td class="no"><strong>申込みをした場所</strong>で判断する</td></tr>
+            <tr><td><strong>方法</strong></td><td class="no"><strong>書面</strong>で行う。口頭では効力を生じない</td></tr>
+            <tr><td><strong>効力発生時期</strong></td><td class="no">書面を<strong>発した時</strong>（発信主義）。到達は不要</td></tr>
+            <tr><td>効果</td><td>業者は<strong>速やかに</strong>手付金その他受領した金銭の<strong>全額を返還</strong>する</td></tr>
+            <tr><td class="no">損害賠償</td><td class="no">業者は<strong>損害賠償・違約金の請求ができない</strong></td></tr>
+            <tr><td>特約</td><td>買主に<strong>不利な特約は無効</strong>（8日を5日に短縮する特約など）。有利な特約は有効</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="call trap">
+        <span class="tag">ひっかけ</span>
+        <p><strong>「引渡しを受け、かつ代金の全部を支払った」— この2つがそろって初めてできなくなる。</strong>引渡しだけ、代金完済だけでは解除できる。<br>
+        <strong>クーリング・オフの告知は書面でしなければならない。</strong>口頭で告げても8日のカウントは始まらず、いつまでも解除できる状態が続く。<br>
+        <strong>効力は「発した時」に生じる。</strong>8日目に投函すれば、到達が9日目でも有効。</p>
+      </div>
+
+      <div class="call exam">
+        <span class="tag">よく出る</span>
+        <p><strong>テント張りの案内所・仮設の案内所は「土地に定着していない」ので事務所等にあたらず、クーリング・オフができる。</strong>マンションのモデルルームなど土地に定着した案内所では、専任の宅建士を置くべき場所なのでできない。<br>
+        <strong>買主が自ら申し出た場合の自宅・勤務先は事務所等扱い。</strong>業者から「ご自宅に伺います」と持ちかけた場合は事務所等にならない。</p>
+      </div>
+    </section>
+
+    <!-- 03 -->
+    <section id="tetsuke">
+      <h2 class="sec"><span class="num">03</span>手付の額と性質</h2>
+
+      <div class="scroll">
+        <table>
+          <thead><tr><th>論点</th><th>内容</th></tr></thead>
+          <tbody>
+            <tr><td><strong>額の制限</strong></td><td>代金の <strong>2/10（20%）</strong> を超える手付を受領できない。<span class="no">超過部分の受領が禁止される</span></td></tr>
+            <tr><td><strong>性質</strong></td><td class="no">いかなる名目でも<strong>常に解約手付</strong>とみなされる</td></tr>
+            <tr><td>解除できる期間</td><td class="no"><strong>相手方が履行に着手するまで</strong></td></tr>
+            <tr><td>買主が解除するとき</td><td>手付を<strong>放棄</strong>する</td></tr>
+            <tr><td>売主が解除するとき</td><td class="no">手付の<strong>倍額を現実に提供</strong>する（口頭の提供では足りない）</td></tr>
+            <tr><td>特約</td><td>買主に不利な特約は無効</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="call trap">
+        <span class="tag">ひっかけ</span>
+        <p><strong>「相手方が」履行に着手するまで。</strong>自分が履行に着手していても、相手方がまだなら解除できる。主語を入れ替えた選択肢が定番。<br>
+        <strong>売主からの解除は「現実の提供」が必要。</strong>「倍額を償還する旨を通知した」だけでは解除できない。<br>
+        <strong>「この手付は違約手付とする」という特約があっても解約手付として扱われる。</strong>名目は関係ない。</p>
+      </div>
+    </section>
+
+    <!-- 04 -->
+    <section id="songai">
+      <h2 class="sec"><span class="num">04</span>損害賠償額の予定等の制限</h2>
+
+      <div class="scroll">
+        <table>
+          <thead><tr><th>論点</th><th>内容</th></tr></thead>
+          <tbody>
+            <tr><td>制限</td><td>損害賠償額の予定と違約金を<strong>合算</strong>して、代金の <strong>2/10（20%）</strong> を超えてはならない</td></tr>
+            <tr><td class="no">超えた場合</td><td class="no"><strong>超える部分だけが無効</strong>。契約全体や特約全体が無効になるのではない</td></tr>
+            <tr><td>予定していない場合</td><td>制限を受けず、<strong>実際に生じた損害額</strong>を請求できる（20%を超えてもよい）</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="call exam">
+        <span class="tag">よく出る</span>
+        <p><strong>「予定していなければ実損額を請求でき、20%の縛りは受けない」</strong>という点が盲点になりやすい。制限がかかるのはあくまで<strong>あらかじめ額を決めた場合</strong>。<br>
+        代金3,000万円なら上限は<strong>600万円</strong>。800万円と定めた場合、600万円までが有効で、200万円分が無効になる。</p>
+      </div>
+    </section>
+
+    <!-- 05 -->
+    <section id="hozen">
+      <h2 class="sec"><span class="num">05</span>手付金等の保全措置</h2>
+      <p class="lead">8種制限で最も出題が多い。<em>未完成か完成か</em>で閾値が変わる。</p>
+
+      <figure class="plate">
+        <svg viewBox="0 0 720 220" role="img" aria-label="未完成物件では代金の5パーセントを超えるか1000万円を超えると保全措置が必要。完成物件では代金の10パーセントを超えるか1000万円を超えると必要。">
+          <text x="24" y="30" class="lbl">受領しようとする手付金等の額</text>
+
+          <text x="24" y="72" class="acct">未完成物件</text>
+          <rect x="150" y="56" width="120" height="26" class="svg-fill"/>
+          <rect x="270" y="56" width="410" height="26" class="svg-accfill"/>
+          <text x="210" y="74" text-anchor="middle" class="lbl">不要</text>
+          <text x="475" y="74" text-anchor="middle" class="acct">保全措置が必要</text>
+          <line x1="270" y1="48" x2="270" y2="92" class="svg-hair" stroke-dasharray="3 3"/>
+          <text x="270" y="44" text-anchor="middle" class="dimt">代金の5%</text>
+
+          <text x="24" y="130" class="acct">完成物件</text>
+          <rect x="150" y="114" width="230" height="26" class="svg-fill"/>
+          <rect x="380" y="114" width="300" height="26" class="svg-accfill"/>
+          <text x="265" y="132" text-anchor="middle" class="lbl">不要</text>
+          <text x="530" y="132" text-anchor="middle" class="acct">保全措置が必要</text>
+          <line x1="380" y1="106" x2="380" y2="150" class="svg-hair" stroke-dasharray="3 3"/>
+          <text x="380" y="102" text-anchor="middle" class="dimt">代金の10%</text>
+
+          <line x1="150" y1="166" x2="680" y2="166" class="svg-ink"/>
+          <text x="680" y="182" text-anchor="end" class="lbl">手付金等の額</text>
+
+          <rect x="150" y="192" width="530" height="22" class="svg-accfill"/>
+          <text x="415" y="207" text-anchor="middle" class="acct">いずれの場合も、1,000万円を超えるときは保全措置が必要</text>
+        </svg>
+        <figcaption>Fig.2 — 割合と絶対額の二段構え。どちらか一方に触れれば保全が必要</figcaption>
+      </figure>
+
+      <div class="scroll">
+        <table>
+          <thead><tr><th>論点</th><th>内容</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><strong>「手付金等」とは</strong></td>
+              <td>契約締結の日以後、<strong>引渡し前</strong>に支払われる金銭で、<strong>代金に充当されるもの</strong>。手付金・中間金・内金が該当する<br><span class="tri">引渡しと同時に支払う残代金は含まない</span></td>
+            </tr>
+            <tr><td>未完成物件の基準</td><td>代金の <strong>5%を超える</strong>、または <strong>1,000万円を超える</strong></td></tr>
+            <tr><td>完成物件の基準</td><td>代金の <strong>10%を超える</strong>、または <strong>1,000万円を超える</strong></td></tr>
+            <tr>
+              <td><strong>保全の方法</strong></td>
+              <td>
+                未完成 → ① 銀行等の<strong>保証委託契約</strong>　② 保険事業者の<strong>保証保険契約</strong><br>
+                完成 → 上記に加えて ③ 指定保管機関との<strong>手付金等寄託契約</strong>
+              </td>
+            </tr>
+            <tr><td class="no">保全が不要になる場合</td><td class="no">買主への<strong>所有権移転の登記がされたとき</strong>、または買主が<strong>所有権の登記をしたとき</strong></td></tr>
+            <tr><td>講じない場合</td><td>買主は手付金等を<strong>支払わないことができる</strong>（履行遅滞にならない）</td></tr>
+            <tr><td>額の判定</td><td class="no">それまでに受領した額との<strong>合計</strong>で判断する</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="call tip">
+        <span class="tag">覚え方</span>
+        <p><strong>「未完成は5、完成は10」。</strong>まだ建っていない物件のほうが危ないので、より低い額から保全させる。<br>
+        <strong>寄託契約が使えるのは完成物件だけ</strong>という点も同じ理屈。物がまだ無い未完成物件では、お金を預かるだけの仕組みでは足りず、銀行や保険会社の保証が要る。</p>
+      </div>
+
+      <div class="call trap">
+        <span class="tag">ひっかけ</span>
+        <p><strong>基準額は「超える」かどうか。</strong>完成物件で代金の<strong>ちょうど10%</strong>なら保全は不要。<br>
+        <strong>額は累計で判断する。</strong>手付金として5%、中間金として6%を受け取るなら、中間金を受領する前に合計11%分について保全措置が必要。<br>
+        <strong>登記が移れば保全は不要になる。</strong>買主が所有権を確保していれば、業者が倒産しても物件は買主のものだから。</p>
+      </div>
+    </section>
+
+    <!-- 06 -->
+    <section id="futekigou">
+      <h2 class="sec"><span class="num">06</span>契約不適合責任の特約の制限</h2>
+
+      <div class="scroll">
+        <table>
+          <thead><tr><th>論点</th><th>内容</th></tr></thead>
+          <tbody>
+            <tr><td>原則</td><td>民法の規定より<strong>買主に不利な特約は無効</strong></td></tr>
+            <tr><td class="no"><strong>唯一の例外</strong></td><td class="no">通知期間を<strong>「引渡しの日から2年以上」</strong>とする特約は<strong>有効</strong></td></tr>
+            <tr><td>無効になった場合</td><td>民法の原則に戻る。買主が<strong>不適合を知った時から1年以内</strong>に通知すればよい</td></tr>
+            <tr><td>民法の原則</td><td>買主は<strong>追完請求・代金減額請求・損害賠償請求・契約の解除</strong>ができる</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="call trap">
+        <span class="tag">ひっかけ</span>
+        <p><strong>「引渡しの日から2年」は有効、「契約締結の日から2年」は無効。</strong>起算点が引渡しでなければならない。<br>
+        <strong>「1年6か月」など2年に満たない期間は無効</strong>。無効になると民法の原則（知った時から1年以内の通知）に戻るため、かえって業者に不利になる。<br>
+        <strong>「一切責任を負わない」という特約も無効。</strong></p>
+      </div>
+    </section>
+
+    <!-- 07 -->
+    <section id="tanin">
+      <h2 class="sec"><span class="num">07</span>他人物売買の制限</h2>
+
+      <div class="scroll">
+        <table>
+          <thead><tr><th>状況</th><th class="n">契約できるか</th></tr></thead>
+          <tbody>
+            <tr><td>他人が所有する物件を、何の手当てもなく売る</td><td class="n no">できない</td></tr>
+            <tr><td>物件を<strong>取得する契約</strong>を締結している</td><td class="n tri">できる</td></tr>
+            <tr><td>物件を取得する<strong>予約</strong>を締結している</td><td class="n tri">できる</td></tr>
+            <tr><td class="no">取得契約が<strong>停止条件付き</strong>である</td><td class="n no">できない</td></tr>
+            <tr><td>未完成物件で、<strong>手付金等の保全措置</strong>が講じられている</td><td class="n tri">できる</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="call tip">
+        <span class="tag">覚え方</span>
+        <p><strong>予約は可、停止条件付きは不可。</strong>予約は業者の意思だけで本契約にできるので取得は確実だが、停止条件付きは条件が成就するかどうかが他人任せで不確実だから。</p>
+      </div>
+    </section>
+
+    <!-- 08 -->
+    <section id="kappu">
+      <h2 class="sec"><span class="num">08</span>割賦販売・所有権留保</h2>
+
+      <div class="scroll">
+        <table>
+          <thead><tr><th>制限</th><th>内容</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><strong>割賦販売契約の解除等の制限</strong></td>
+              <td>賦払金の支払がないとき、<strong>30日以上</strong>の相当の期間を定めて<strong>書面</strong>で催告し、その期間内に支払がない場合でなければ、契約の解除も残代金の一括請求もできない</td>
+            </tr>
+            <tr>
+              <td><strong>所有権留保等の禁止</strong></td>
+              <td>代金の額の <strong>3/10（30%）</strong> を超える額の支払を受けるまでは所有権を留保できるが、<strong>30%を超えたら登記その他引渡し以外の売主の義務を履行</strong>しなければならない</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="call exam">
+        <span class="tag">よく出る</span>
+        <p>割賦販売の催告は<strong>「30日以上」かつ「書面」</strong>の2要件。口頭の催告や、20日の期間を定めた催告では解除できない。</p>
+      </div>
+    </section>
+
+    <!-- 09 -->
+    <section id="deru">
+      <h2 class="sec"><span class="num">09</span>よく出る論点</h2>
+      <div class="scroll">
+        <table>
+          <thead><tr><th class="n">順位</th><th>論点</th><th>要点</th></tr></thead>
+          <tbody>
+            <tr><td class="n">1</td><td><strong>手付金等の保全措置</strong></td><td>未完成5%／完成10%／1,000万円／累計で判断／登記で不要</td></tr>
+            <tr><td class="n">2</td><td>クーリング・オフ</td><td>場所の判定／書面で告知して8日／発信主義／引渡し＋完済</td></tr>
+            <tr><td class="n">3</td><td>手付</td><td>2/10・常に解約手付・相手方が履行に着手するまで・倍額の現実の提供</td></tr>
+            <tr><td class="n">4</td><td>適用場面</td><td>自ら売主かつ買主が非業者。媒介・業者間は適用外</td></tr>
+            <tr><td class="n">5</td><td>契約不適合責任の特約</td><td>引渡しから2年以上のみ有効</td></tr>
+            <tr><td class="n">6</td><td>損害賠償額の予定</td><td>2/10・超過部分のみ無効・予定なしなら実損額</td></tr>
+            <tr><td class="n">7</td><td>他人物売買</td><td>予約は可・停止条件付きは不可</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 10 -->
+    <section id="hikkake">
+      <h2 class="sec"><span class="num">10</span>ひっかけ一覧</h2>
+      <div class="scroll">
+        <table class="traps">
+          <thead><tr><th>こう書かれたら疑う</th><th>正しくは</th></tr></thead>
+          <tbody>
+            <tr><td>業者が媒介する取引でも手付は代金の20%以内でなければならない</td><td>8種制限は<strong>自ら売主</strong>のときだけ</td></tr>
+            <tr><td>買主が宅建業者でも自宅用ならクーリング・オフできる</td><td>買主が<strong>宅建業者なら適用されない</strong></td></tr>
+            <tr><td>喫茶店で契約したがクーリング・オフはできない</td><td>事務所等にあたらないので<strong>できる</strong></td></tr>
+            <tr><td>買主が自ら申し出た自宅で契約してもクーリング・オフできる</td><td><strong>できない</strong>（事務所等として扱われる）</td></tr>
+            <tr><td>テント張りの案内所で契約したのでクーリング・オフできない</td><td>土地に定着していないので<strong>できる</strong></td></tr>
+            <tr><td>クーリング・オフは口頭でもできる</td><td><strong>書面</strong>で行う</td></tr>
+            <tr><td>クーリング・オフの書面が到達した時に効力が生じる</td><td><strong>発した時</strong>に効力が生じる</td></tr>
+            <tr><td>引渡しを受けたのでクーリング・オフできない</td><td><strong>引渡し＋代金全部の支払</strong>がそろって初めてできなくなる</td></tr>
+            <tr><td>クーリング・オフされたら業者は違約金を請求できる</td><td><strong>損害賠償も違約金も請求できない</strong></td></tr>
+            <tr><td>自分が履行に着手したので手付解除できない</td><td><strong>相手方</strong>が着手するまでは解除できる</td></tr>
+            <tr><td>売主は倍額を償還する旨を通知すれば解除できる</td><td><strong>現実に提供</strong>しなければならない</td></tr>
+            <tr><td>違約手付とする特約があれば手付解除できない</td><td>名目を問わず<strong>常に解約手付</strong></td></tr>
+            <tr><td>損害賠償額の予定が20%を超えると特約全体が無効</td><td><strong>超える部分のみ</strong>無効</td></tr>
+            <tr><td>予定していなくても損害賠償は代金の20%が上限</td><td>予定がなければ<strong>実損額</strong>を請求できる</td></tr>
+            <tr><td>完成物件で代金の10%の手付金を受領するので保全が必要</td><td>「<strong>超える</strong>」場合。ちょうど10%なら不要</td></tr>
+            <tr><td>手付金5%と中間金6%はそれぞれ基準以下なので保全不要</td><td><strong>累計11%</strong>で判断するので必要</td></tr>
+            <tr><td>未完成物件でも手付金等寄託契約で保全できる</td><td>寄託契約は<strong>完成物件のみ</strong></td></tr>
+            <tr><td>契約締結の日から2年とする特約は有効</td><td><strong>引渡しの日から</strong>2年以上でなければ無効</td></tr>
+            <tr><td>取得について停止条件付きの契約があれば他人物を売れる</td><td><strong>停止条件付きは不可</strong>（予約なら可）</td></tr>
+            <tr><td>割賦販売で20日の期間を定めて催告すれば解除できる</td><td><strong>30日以上</strong>かつ<strong>書面</strong></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 11 -->
+    <section id="suji">
+      <h2 class="sec"><span class="num">11</span>数字まとめ</h2>
+      <p class="masthead-note">右上の「数値を隠す」で自己テストできる。</p>
+      <div class="nums" id="numgrid">
+        <div class="nc" tabindex="0"><span class="v">8日</span><span class="d">クーリング・オフができる期間（書面で告げられた日から）</span></div>
+        <div class="nc" tabindex="0"><span class="v">2/10</span><span class="d">手付の額の上限／損害賠償額の予定と違約金の合計の上限</span></div>
+        <div class="nc" tabindex="0"><span class="v">5%超</span><span class="d">未完成物件で保全措置が必要になる手付金等の額</span></div>
+        <div class="nc" tabindex="0"><span class="v">10%超</span><span class="d">完成物件で保全措置が必要になる手付金等の額</span></div>
+        <div class="nc" tabindex="0"><span class="v">1,000万円超</span><span class="d">完成・未完成を問わず保全措置が必要になる額</span></div>
+        <div class="nc" tabindex="0"><span class="v">2年以上</span><span class="d">契約不適合責任の通知期間として有効な特約（引渡しの日から）</span></div>
+        <div class="nc" tabindex="0"><span class="v">1年以内</span><span class="d">民法の原則における通知期間（不適合を知った時から）</span></div>
+        <div class="nc" tabindex="0"><span class="v">30日以上</span><span class="d">割賦販売契約を解除する前の催告期間（書面で）</span></div>
+        <div class="nc" tabindex="0"><span class="v">3/10</span><span class="d">これを超える支払を受けたら所有権を留保できない</span></div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <h4>出典</h4>
+    <ul>
+      <li>宅地建物取引業法（昭和27年法律第176号）第33条の2、第37条の2〜第43条 — <a href="https://laws.e-gov.go.jp/law/327AC1000000176">e-Gov法令検索</a></li>
+      <li>国土交通省 不動産業（宅地建物取引業法） — <a href="https://www.mlit.go.jp/totikensangyo/const/1_6_bf_000030.html">mlit.go.jp</a></li>
+    </ul>
+    <div class="sibling">
+      <a href="../index.html">総目次</a>
+      <a href="35条書面.html">35条書面</a>
+      <a href="37条書面.html">← 37条書面</a>
+      <a href="免許制度.html">免許制度</a>
+    </div>
+  </footer>
+
+</div>
+
+<script>
+  (function () {
+    var root = document.documentElement;
+    document.getElementById('theme').addEventListener('click', function () {
+      if (root.getAttribute('data-theme')) { root.removeAttribute('data-theme'); return; }
+      var dark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      root.setAttribute('data-theme', dark ? 'light' : 'dark');
+    });
+    var maskBtn = document.getElementById('mask');
+    var grid = document.getElementById('numgrid');
+    maskBtn.addEventListener('click', function () {
+      var on = grid.classList.toggle('masked');
+      maskBtn.setAttribute('aria-pressed', String(on));
+      maskBtn.textContent = on ? '数値を表示' : '数値を隠す';
+    });
+    var links = Array.prototype.slice.call(document.querySelectorAll('nav.rail ol a'));
+    var map = {};
+    links.forEach(function (a) { map[a.getAttribute('href').slice(1)] = a; });
+    var seen = [];
+    var obs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        var i = seen.indexOf(e.target.id);
+        if (e.isIntersecting && i < 0) seen.push(e.target.id);
+        if (!e.isIntersecting && i >= 0) seen.splice(i, 1);
+      });
+      links.forEach(function (a) { a.classList.remove('on'); });
+      if (seen.length) {
+        var order = Object.keys(map);
+        seen.sort(function (a, b) { return order.indexOf(a) - order.indexOf(b); });
+        map[seen[0]].classList.add('on');
+      }
+    }, { rootMargin: '-10% 0px -70% 0px' });
+    document.querySelectorAll('main section').forEach(function (s) { obs.observe(s); });
+  })();
+</script>

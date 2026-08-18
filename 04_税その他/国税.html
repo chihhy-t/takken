@@ -1,0 +1,764 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>国税 — 宅建士試験 2026年度</title>
+
+<style>
+  :root {
+    --paper:#EBEDE9; --surface:#F8F9F6; --sunk:#E1E4DE; --ink:#151F2A; --muted:#5D6B78;
+    --rule:#CDD2CB; --hair:#DCE0D9; --accent:#B8342A; --accent-soft:#F3DEDB;
+    --blue:#2A5F86; --blue-soft:#DCE6EE;
+    --font-display:"Hiragino Mincho ProN","Yu Mincho","YuMincho","Noto Serif JP",serif;
+    --font-body:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","YuGothic","Noto Sans JP",system-ui,sans-serif;
+    --font-mono:ui-monospace,"SFMono-Regular","SF Mono",Menlo,Consolas,monospace;
+    --measure:68ch;
+    --s1:.35rem; --s2:.7rem; --s3:1.1rem; --s4:1.7rem; --s5:2.6rem; --s6:4rem;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper:#0D1B29; --surface:#132534; --sunk:#0A1622; --ink:#DAE4EC; --muted:#8CA1B3;
+      --rule:#26415A; --hair:#1D3448; --accent:#FF7059; --accent-soft:#3A1F1D;
+      --blue:#6FB6DC; --blue-soft:#14293A;
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper:#0D1B29; --surface:#132534; --sunk:#0A1622; --ink:#DAE4EC; --muted:#8CA1B3;
+    --rule:#26415A; --hair:#1D3448; --accent:#FF7059; --accent-soft:#3A1F1D;
+    --blue:#6FB6DC; --blue-soft:#14293A;
+  }
+
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--paper); color:var(--ink); font-family:var(--font-body);
+    font-size:16px; line-height:1.9; -webkit-font-smoothing:antialiased; font-feature-settings:"palt" 1; }
+
+  .wrap { display:grid; grid-template-columns:15.5rem minmax(0,1fr); gap:var(--s6);
+    max-width:78rem; margin:0 auto; padding:0 var(--s4) var(--s6); align-items:start; }
+  @media (max-width:60rem){ .wrap{ grid-template-columns:minmax(0,1fr); gap:var(--s4); padding:0 var(--s3) var(--s5);} }
+
+  .masthead { grid-column:1/-1; padding:var(--s5) 0 var(--s4); border-bottom:2px solid var(--ink);
+    margin-bottom:var(--s2); display:flex; flex-wrap:wrap; align-items:flex-end; justify-content:space-between; gap:var(--s3); }
+  .eyebrow { font-family:var(--font-mono); font-size:.72rem; letter-spacing:.16em; text-transform:uppercase;
+    color:var(--muted); display:flex; align-items:center; gap:.6em; }
+  .eyebrow::before { content:""; width:2.2rem; height:1px; background:var(--accent); }
+  h1 { font-family:var(--font-display); font-weight:600; font-size:clamp(2rem,1.4rem + 2.6vw,3.1rem);
+    line-height:1.2; letter-spacing:.04em; margin:var(--s2) 0 var(--s3); text-wrap:balance; }
+  .facts { display:flex; flex-wrap:wrap; gap:0 var(--s3); font-size:.82rem; color:var(--muted); list-style:none; margin:0; padding:0; }
+  .facts b { font-family:var(--font-mono); font-variant-numeric:tabular-nums; color:var(--ink); font-weight:600; }
+  .toggles { display:flex; gap:var(--s1); }
+  button { font-family:var(--font-body); font-size:.78rem; color:var(--muted); background:var(--surface);
+    border:1px solid var(--rule); border-radius:2px; padding:.4em .9em; cursor:pointer; transition:color .15s,border-color .15s; }
+  button:hover { color:var(--ink); border-color:var(--ink); }
+  button:focus-visible { outline:2px solid var(--accent); outline-offset:2px; }
+  button[aria-pressed="true"] { color:var(--accent); border-color:var(--accent); }
+
+  nav.rail { position:sticky; top:var(--s3); font-size:.82rem; max-height:calc(100vh - 3rem); overflow-y:auto; padding-bottom:var(--s3); }
+  nav.rail h2 { font-family:var(--font-mono); font-size:.68rem; letter-spacing:.16em; text-transform:uppercase; color:var(--muted); margin:0 0 var(--s2); font-weight:500; }
+  nav.rail ol { list-style:none; margin:0; padding:0; display:flex; flex-direction:column; }
+  nav.rail a { display:block; padding:.3em 0 .3em .9em; color:var(--muted); text-decoration:none; border-left:2px solid var(--hair); line-height:1.5; }
+  nav.rail a:hover { color:var(--ink); border-left-color:var(--rule); }
+  nav.rail a.on { color:var(--ink); border-left-color:var(--accent); font-weight:600; }
+  nav.rail a .num { font-family:var(--font-mono); font-size:.72rem; color:var(--muted); margin-right:.5em; }
+  @media (max-width:60rem){
+    nav.rail{ position:static; max-height:none; border-bottom:1px solid var(--rule); padding-bottom:var(--s3); }
+    nav.rail ol{ display:grid; grid-template-columns:repeat(auto-fill,minmax(9rem,1fr)); gap:0 var(--s2); }
+  }
+
+  main { min-width:0; }
+  section { padding-top:var(--s5); scroll-margin-top:var(--s3); }
+  section > * { max-width:var(--measure); }
+  section > figure, section > .scroll { max-width:none; }
+
+  h2.sec { font-family:var(--font-display); font-size:clamp(1.45rem,1.2rem + .9vw,1.9rem); font-weight:600;
+    letter-spacing:.04em; margin:0 0 var(--s3); padding-bottom:var(--s2); border-bottom:1px solid var(--rule);
+    display:flex; align-items:baseline; gap:.7em; max-width:none; }
+  h2.sec .num { font-family:var(--font-mono); font-size:.8rem; letter-spacing:.1em; color:var(--accent); font-weight:500; }
+  h3 { font-family:var(--font-body); font-size:1.06rem; font-weight:700; letter-spacing:.02em;
+    margin:var(--s4) 0 var(--s2); padding-left:.7em; border-left:3px solid var(--ink); }
+  h4 { font-size:.88rem; font-weight:700; color:var(--muted); letter-spacing:.06em; margin:var(--s3) 0 var(--s1); }
+  p { margin:0 0 var(--s3); }
+  a { color:var(--blue); text-underline-offset:.2em; }
+  em { font-style:normal; background:linear-gradient(transparent 62%, var(--accent-soft) 62%); font-weight:600; }
+  ul, ol { margin:0 0 var(--s3); padding-left:1.3em; }
+  li { margin-bottom:var(--s1); }
+  .lead { font-size:1.05rem; color:var(--muted); }
+
+  .call { max-width:var(--measure); margin:0 0 var(--s3); padding:var(--s3) var(--s3) var(--s3) var(--s4);
+    background:var(--surface); border:1px solid var(--hair); border-left:3px solid var(--rule); border-radius:2px; font-size:.94rem; }
+  .call > :last-child { margin-bottom:0; }
+  .call .tag { display:block; font-family:var(--font-mono); font-size:.68rem; letter-spacing:.16em; text-transform:uppercase; color:var(--muted); margin-bottom:var(--s1); }
+  .call.trap { border-left-color:var(--accent); background:var(--accent-soft); }
+  .call.trap .tag { color:var(--accent); }
+  .call.exam { border-left-color:var(--ink); }
+  .call.exam .tag { color:var(--ink); }
+  .call.rev { border-left-color:var(--accent); }
+  .call.rev .tag { color:var(--accent); }
+  .call.tip { border-left-color:var(--blue); background:var(--blue-soft); }
+  .call.tip .tag { color:var(--blue); }
+
+  .scroll { overflow-x:auto; margin:0 0 var(--s3); -webkit-overflow-scrolling:touch; }
+  table { border-collapse:collapse; width:100%; font-size:.88rem; line-height:1.6; }
+  caption { text-align:left; font-size:.78rem; color:var(--muted); padding-bottom:var(--s1); font-family:var(--font-mono); letter-spacing:.08em; }
+  th, td { padding:.62em .8em; text-align:left; vertical-align:top; border-bottom:1px solid var(--hair); }
+  thead th { font-size:.74rem; letter-spacing:.1em; color:var(--muted); font-weight:600; border-bottom:1px solid var(--ink); white-space:nowrap; }
+  tbody tr:hover { background:var(--surface); }
+  td.n, th.n { text-align:center; font-family:var(--font-mono); font-variant-numeric:tabular-nums; white-space:nowrap; }
+  .no { color:var(--accent); font-weight:700; }
+  .yes { color:var(--muted); }
+  .tri { color:var(--blue); }
+  table.pillars thead th:nth-child(2),
+  table.pillars thead th:nth-child(3),
+  table.pillars thead th:nth-child(4) { color:var(--ink); font-size:.9rem; }
+
+  figure { margin:0 0 var(--s4); }
+  figure svg { display:block; width:100%; height:auto; }
+  figcaption { font-size:.78rem; color:var(--muted); font-family:var(--font-mono); letter-spacing:.06em; margin-top:var(--s2); padding-top:var(--s1); border-top:1px solid var(--hair); }
+  .plate { background:var(--surface); border:1px solid var(--hair); border-radius:2px; padding:var(--s3); }
+  .svg-ink { fill:none; stroke:var(--ink); stroke-width:1.4; }
+  .svg-hair { fill:none; stroke:var(--rule); stroke-width:1; }
+  .svg-dim { fill:none; stroke:var(--blue); stroke-width:1; }
+  .svg-acc { fill:none; stroke:var(--accent); stroke-width:1.6; }
+  .svg-fill { fill:var(--sunk); stroke:var(--rule); stroke-width:1; }
+  .svg-accfill { fill:var(--accent-soft); stroke:var(--accent); stroke-width:1.2; }
+  .svg-bluefill { fill:var(--blue-soft); stroke:var(--blue); stroke-width:1.2; }
+  text { font-family:var(--font-body); fill:var(--ink); font-size:12px; }
+  text.big { font-family:var(--font-display); font-size:22px; font-weight:600; }
+  text.lbl { font-family:var(--font-mono); fill:var(--muted); font-size:10.5px; letter-spacing:.06em; }
+  text.dimt { font-family:var(--font-mono); fill:var(--blue); font-size:11px; }
+  text.acct { fill:var(--accent); font-size:11.5px; font-weight:700; }
+
+  .nums { display:grid; grid-template-columns:repeat(auto-fill,minmax(11.5rem,1fr)); gap:var(--s2); }
+  .nc { background:var(--surface); border:1px solid var(--hair); border-radius:2px; padding:var(--s3) var(--s3) var(--s2); display:flex; flex-direction:column; gap:var(--s1); }
+  .nc .v { font-family:var(--font-mono); font-variant-numeric:tabular-nums; font-size:1.35rem; font-weight:600; line-height:1.2; color:var(--accent); }
+  .nc .d { font-size:.8rem; color:var(--muted); line-height:1.6; }
+  .nums.masked .v { color:transparent; background:var(--rule); border-radius:2px; user-select:none; }
+  .nums.masked .nc:hover .v, .nums.masked .nc:focus-within .v { color:var(--accent); background:transparent; }
+  .nc:focus-visible { outline:2px solid var(--accent); outline-offset:2px; }
+  .masthead-note { font-size:.78rem; color:var(--muted); margin-bottom:var(--s2); }
+
+  table.traps td:first-child { color:var(--muted); }
+  table.traps td:first-child::before { content:"「"; }
+  table.traps td:first-child::after { content:"」"; }
+  table.traps td:last-child strong { color:var(--accent); }
+
+  footer { grid-column:1/-1; margin-top:var(--s6); padding-top:var(--s3); border-top:1px solid var(--rule); font-size:.8rem; color:var(--muted); }
+  footer ul { list-style:none; padding:0; }
+  footer li { margin-bottom:var(--s1); }
+  .sibling { display:flex; flex-wrap:wrap; gap:var(--s2); margin-top:var(--s3); }
+  .sibling a { font-size:.8rem; text-decoration:none; border:1px solid var(--rule); border-radius:2px; padding:.35em .8em; color:var(--muted); }
+  .sibling a:hover { color:var(--ink); border-color:var(--ink); }
+
+  @media (prefers-reduced-motion: reduce){ *{ transition:none !important; animation:none !important; scroll-behavior:auto !important; } }
+  html { scroll-behavior:smooth; }
+  .eyebrow a { color:var(--accent); text-decoration:none; }
+  .eyebrow a:hover { text-decoration:underline; text-underline-offset:.2em; }
+  nav.rail a.home { border-left:none; padding:0 0 var(--s2); color:var(--accent);
+    font-family:var(--font-mono); font-size:.72rem; letter-spacing:.1em; }
+  nav.rail a.home:hover { color:var(--accent); text-decoration:underline; text-underline-offset:.2em; }
+</style>
+
+<div class="wrap">
+
+  <header class="masthead">
+    <div>
+      <div class="eyebrow"><a href="../index.html">← 総目次</a> &nbsp;/&nbsp; 04 税その他 &nbsp;/&nbsp; 宅建士試験 2026年度</div>
+      <h1>国税</h1>
+      <ul class="facts">
+        <li>法令基準日 <b>2026-04-01</b></li>
+        <li>出題 <b>問23／1問</b></li>
+        <li>目標 <b>確実に1問</b></li>
+        <li>更新 <b>2026-08-11</b></li>
+      </ul>
+    </div>
+    <div class="toggles">
+      <button id="mask" type="button" aria-pressed="false">数値を隠す</button>
+      <button id="theme" type="button">配色切替</button>
+    </div>
+  </header>
+
+  <nav class="rail" aria-label="目次">
+    <a class="home" href="../index.html">← 総目次</a>
+    <h2>Contents</h2>
+    <ol>
+      <li><a href="#overview"><span class="num">00</span>問23で何が出るか</a></li>
+      <li><a href="#inshi"><span class="num">01</span>印紙税</a></li>
+      <li><a href="#kingaku"><span class="num">02</span>記載金額の判定</a></li>
+      <li><a href="#touroku"><span class="num">03</span>登録免許税</a></li>
+      <li><a href="#keigen"><span class="num">04</span>住宅用家屋の軽減税率</a></li>
+      <li><a href="#shotoku"><span class="num">05</span>所得税（譲渡所得）</a></li>
+      <li><a href="#tokurei"><span class="num">06</span>居住用財産の特例</a></li>
+      <li><a href="#zoyo"><span class="num">07</span>贈与税</a></li>
+      <li><a href="#deru"><span class="num">08</span>よく出る論点</a></li>
+      <li><a href="#hikkake"><span class="num">09</span>ひっかけ一覧</a></li>
+      <li><a href="#suji"><span class="num">10</span>数字まとめ</a></li>
+    </ol>
+  </nav>
+
+  <main>
+
+    <!-- 00 -->
+    <section id="overview">
+      <h2 class="sec"><span class="num">00</span>問23で何が出るか</h2>
+      <p class="lead">不動産の税は<em>「取引のどの瞬間に課されるか」</em>で整理すると混ざらない。問23はこのうち<strong>国税から1問</strong>。印紙税と登録免許税で全体の約7割を占め、この2つを固めれば十分に戦える。</p>
+
+      <figure class="plate">
+        <svg viewBox="0 0 720 300" role="img" aria-label="不動産取引のタイムライン上に税を配置した図。契約の段階で印紙税、登記の段階で登録免許税、取得の段階で不動産取得税と贈与税、保有している間は毎年固定資産税、譲渡した段階で所得税がかかる。印紙税・登録免許税・所得税・贈与税が国税で問23の範囲、不動産取得税・固定資産税が地方税で問24の範囲。">
+          <line x1="60" y1="150" x2="676" y2="150" class="svg-ink"/>
+          <path d="M668 144 L680 150 L668 156 Z" fill="var(--ink)"/>
+
+          <text x="60" y="30" class="lbl">国税 ＝ 問23（このドキュメント）</text>
+          <text x="60" y="288" class="lbl">地方税 ＝ 問24</text>
+
+          <!-- 契約 -->
+          <circle cx="115" cy="150" r="5" fill="var(--accent)"/>
+          <line x1="115" y1="150" x2="115" y2="100" class="svg-acc"/>
+          <rect x="62" y="58" width="106" height="42" class="svg-accfill" rx="2"/>
+          <text x="115" y="76" text-anchor="middle" class="acct">印紙税</text>
+          <text x="115" y="92" text-anchor="middle" class="lbl">契約書に貼る</text>
+          <text x="115" y="176" text-anchor="middle" class="lbl">契約</text>
+
+          <!-- 登記 -->
+          <circle cx="255" cy="150" r="5" fill="var(--accent)"/>
+          <line x1="255" y1="150" x2="255" y2="100" class="svg-acc"/>
+          <rect x="196" y="58" width="118" height="42" class="svg-accfill" rx="2"/>
+          <text x="255" y="76" text-anchor="middle" class="acct">登録免許税</text>
+          <text x="255" y="92" text-anchor="middle" class="lbl">登記のたび</text>
+          <text x="255" y="176" text-anchor="middle" class="lbl">登記</text>
+
+          <!-- 取得 -->
+          <circle cx="395" cy="150" r="5" fill="var(--blue)"/>
+          <line x1="395" y1="150" x2="395" y2="200" class="svg-dim"/>
+          <rect x="330" y="200" width="130" height="42" class="svg-bluefill" rx="2"/>
+          <text x="395" y="218" text-anchor="middle" class="dimt">不動産取得税</text>
+          <text x="395" y="234" text-anchor="middle" class="lbl">一度きり・都道府県</text>
+          <line x1="395" y1="150" x2="395" y2="100" class="svg-acc"/>
+          <rect x="342" y="58" width="106" height="42" class="svg-accfill" rx="2"/>
+          <text x="395" y="76" text-anchor="middle" class="acct">贈与税</text>
+          <text x="395" y="92" text-anchor="middle" class="lbl">もらった時だけ</text>
+          <text x="395" y="176" text-anchor="middle" class="lbl">取得</text>
+
+          <!-- 保有 -->
+          <rect x="470" y="138" width="90" height="24" class="svg-hair" rx="2"/>
+          <text x="515" y="176" text-anchor="middle" class="lbl">保有</text>
+          <line x1="515" y1="162" x2="515" y2="200" class="svg-dim"/>
+          <rect x="472" y="200" width="120" height="42" class="svg-bluefill" rx="2"/>
+          <text x="532" y="218" text-anchor="middle" class="dimt">固定資産税</text>
+          <text x="532" y="234" text-anchor="middle" class="lbl">毎年1/1・市町村</text>
+
+          <!-- 譲渡 -->
+          <circle cx="640" cy="150" r="5" fill="var(--accent)"/>
+          <line x1="640" y1="150" x2="640" y2="100" class="svg-acc"/>
+          <rect x="576" y="58" width="128" height="42" class="svg-accfill" rx="2"/>
+          <text x="640" y="76" text-anchor="middle" class="acct">所得税（譲渡所得）</text>
+          <text x="640" y="92" text-anchor="middle" class="lbl">売って儲けた時</text>
+          <text x="640" y="176" text-anchor="middle" class="lbl">譲渡</text>
+        </svg>
+        <figcaption>Fig.1 — 課税のタイミングで税目が決まる</figcaption>
+      </figure>
+
+      <div class="scroll">
+        <table>
+          <caption>問23の出題ローテーション（近年の傾向）</caption>
+          <thead><tr><th>税目</th><th class="n">頻度</th><th>ひとこと</th></tr></thead>
+          <tbody>
+            <tr><td><strong>印紙税</strong></td><td class="n">高</td><td>記載金額の判定さえできれば取れる。<strong>最優先</strong></td></tr>
+            <tr><td><strong>登録免許税</strong></td><td class="n">高</td><td>住宅用家屋の軽減税率の要件がすべて</td></tr>
+            <tr><td>所得税（譲渡所得）</td><td class="n">中</td><td>居住用財産の特例の併用可否</td></tr>
+            <tr><td>贈与税</td><td class="n">低</td><td>相続時精算課税・住宅取得等資金の非課税</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="call tip">
+        <span class="tag">覚え方</span>
+        <p>税は「<strong>誰が・何に・いくら</strong>」の3点セットで覚える。<br>
+        <strong>誰が課すか（課税主体）</strong>／<strong>何に対して（課税標準）</strong>／<strong>税率と特例</strong>。選択肢はこの3点のどれかを入れ替えて誤りを作ってくるので、表を縦に見る癖をつける。</p>
+      </div>
+    </section>
+
+    <!-- 01 -->
+    <section id="inshi">
+      <h2 class="sec"><span class="num">01</span>印紙税</h2>
+      <p>契約書などの<strong>文書に課される</strong>税。「取引」ではなく「紙」に課されるという性格が、そのまま出題ポイントになる。</p>
+
+      <div class="scroll">
+        <table>
+          <thead><tr><th>項目</th><th>内容</th></tr></thead>
+          <tbody>
+            <tr><td><strong>課税主体</strong></td><td>国（国税）</td></tr>
+            <tr><td><strong>納税義務者</strong></td><td>課税文書の<strong>作成者</strong>。2以上の者が共同で作成した場合は<strong>連帯納税義務</strong></td></tr>
+            <tr><td><strong>納付方法</strong></td><td>収入印紙を貼り付け、<strong>消印</strong>する</td></tr>
+            <tr><td>消印の方法</td><td>作成者・代理人・使用人・従業者のいずれの印章・署名でもよい。<span class="tri">署名でも可</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>課税される文書・されない文書</h3>
+      <div class="scroll">
+        <table>
+          <thead><tr><th>文書</th><th class="n">課税</th><th>備考</th></tr></thead>
+          <tbody>
+            <tr><td>不動産の<strong>売買</strong>契約書</td><td class="n no">課税</td><td>1号文書</td></tr>
+            <tr><td>不動産の<strong>交換</strong>契約書</td><td class="n no">課税</td><td>1号文書</td></tr>
+            <tr><td>不動産の<strong>贈与</strong>契約書</td><td class="n no">課税</td><td>1号文書。ただし記載金額のない契約書＝<strong>200円</strong></td></tr>
+            <tr><td><strong>土地</strong>の賃貸借契約書・地上権設定契約書</td><td class="n no">課税</td><td>1号文書</td></tr>
+            <tr><td><strong>建物</strong>の賃貸借契約書</td><td class="n yes">不課税</td><td class="no">土地と建物で結論が逆</td></tr>
+            <tr><td>抵当権の設定契約書</td><td class="n yes">不課税</td><td>担保権の設定は課税物件表にない</td></tr>
+            <tr><td>媒介契約書・委任状</td><td class="n yes">不課税</td><td>請負契約書（工事請負）は2号文書で<strong>課税</strong></td></tr>
+            <tr><td>建物の<strong>工事請負</strong>契約書</td><td class="n no">課税</td><td>2号文書</td></tr>
+            <tr><td>金銭の<strong>受取書（領収書）</strong></td><td class="n no">課税</td><td>17号文書。<strong>5万円未満</strong>と<strong>営業に関しないもの</strong>は非課税</td></tr>
+            <tr><td>国・地方公共団体が作成した文書</td><td class="n yes">非課税</td><td>下の「ひっかけ」参照</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="call trap">
+        <span class="tag">ひっかけ</span>
+        <p><strong>国等と私人が共同作成した文書は、どちらが保存するかで結論が入れ替わる。</strong><br>
+        ・<strong>私人が保存</strong>するもの → <strong>国等</strong>が作成したものとみなす → <strong>非課税</strong><br>
+        ・<strong>国等が保存</strong>するもの → <strong>私人</strong>が作成したものとみなす → <strong>課税</strong><br>
+        「自分の手元にある文書は相手が作った」と考えると覚えやすい。</p>
+      </div>
+
+      <div class="call trap">
+        <span class="tag">ひっかけ</span>
+        <p><strong>建物の賃貸借契約書は不課税、土地の賃貸借契約書は課税。</strong>これは印紙税で最も出る対比。<br>
+        さらに土地の賃貸借契約書の記載金額は<strong>賃料ではなく、後日返還されない権利金・礼金等</strong>。保証金・敷金のように返還されるものは記載金額にならない。「月額賃料10万円」とだけ書かれた土地賃貸借契約書は<strong>記載金額のない契約書＝200円</strong>。</p>
+      </div>
+
+      <div class="call exam">
+        <span class="tag">よく出る</span>
+        <p><strong>契約書を2通作れば、2通とも課税される。</strong>売主・買主がそれぞれ1通ずつ保管する場合、印紙は<strong>2枚必要</strong>。<br>
+        また、単なるコピーは不課税だが、<strong>写しであっても署名押印があり契約の成立を証明できる</strong>ものは課税文書になる。</p>
+      </div>
+
+      <h3>過怠税</h3>
+      <div class="scroll">
+        <table>
+          <thead><tr><th>違反</th><th>過怠税</th></tr></thead>
+          <tbody>
+            <tr><td>印紙を貼らなかった</td><td>印紙税額＋その<strong>2倍</strong>＝ <strong class="no">3倍</strong></td></tr>
+            <tr><td>貼らなかったが、調査を受ける前に<strong>自主的に申し出た</strong></td><td><strong>1.1倍</strong></td></tr>
+            <tr><td>貼ったが<strong>消印しなかった</strong></td><td>消印していない印紙の<strong>額面金額と同額</strong></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="call exam">
+        <span class="tag">よく出る</span>
+        <p><strong>印紙を貼らなくても契約自体は有効。</strong>過怠税を取られるだけで、契約の効力には影響しない。農地法の許可（無許可なら無効）と混同させる選択肢に注意。</p>
+      </div>
+    </section>
+
+    <!-- 02 -->
+    <section id="kingaku">
+      <h2 class="sec"><span class="num">02</span>記載金額の判定</h2>
+      <p class="lead">印紙税の出題は、結局<em>「この契約書の記載金額はいくらか」</em>を問うている。以下の6パターンを押さえれば足りる。</p>
+
+      <div class="scroll">
+        <table class="pillars">
+          <caption>記載金額はこう決まる</caption>
+          <thead><tr><th>契約書の書き方</th><th>記載金額</th><th>理由</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><strong>交換</strong>／双方の価額が記載<br><span class="lbl">A土地5,000万円・B土地4,000万円と交換</span></td>
+              <td class="no"><strong>高い方（5,000万円）</strong></td>
+              <td>いずれか高い方をとる</td>
+            </tr>
+            <tr>
+              <td><strong>交換</strong>／交換差金のみ記載<br><span class="lbl">交換差金1,000万円</span></td>
+              <td><strong>差金の額（1,000万円）</strong></td>
+              <td>他に金額の手がかりがない</td>
+            </tr>
+            <tr>
+              <td><strong>贈与</strong>契約書</td>
+              <td class="no"><strong>記載金額なし → 200円</strong></td>
+              <td>対価がない。評価額が書いてあっても記載金額にならない</td>
+            </tr>
+            <tr>
+              <td><strong>変更</strong>契約書／金額を<strong>増額</strong><br><span class="lbl">5,000万円 → 6,000万円に変更</span></td>
+              <td><strong>増加額（1,000万円）</strong></td>
+              <td>増えた分に課税</td>
+            </tr>
+            <tr>
+              <td><strong>変更</strong>契約書／金額を<strong>減額</strong><br><span class="lbl">5,000万円 → 4,000万円に変更</span></td>
+              <td class="no"><strong>記載金額なし → 200円</strong></td>
+              <td>減額分には課税しない</td>
+            </tr>
+            <tr>
+              <td>1つの文書に<strong>2以上の契約金額</strong><br><span class="lbl">土地3,000万円・建物2,000万円</span></td>
+              <td><strong>合計額（5,000万円）</strong></td>
+              <td>同一号の文書なら合算</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="call trap">
+        <span class="tag">ひっかけ</span>
+        <p><strong>消費税額が区分して記載されていれば、その消費税額は記載金額に含めない。</strong><br>
+        「建物代金5,000万円、消費税500万円」→ 記載金額は<strong>5,000万円</strong>。<br>
+        しかし「建物代金5,500万円（税込）」のように区分されていなければ、<strong>5,500万円全額</strong>が記載金額になる。「消費税込」の書き方ひとつで答えが変わる。</p>
+      </div>
+
+      <div class="call trap">
+        <span class="tag">ひっかけ</span>
+        <p><strong>土地と建物の売買契約書で、土地の価格しか書いていない場合</strong>は、記載金額は土地の価格のみ。合算するのは<strong>両方の金額が記載されている</strong>ときだけ。</p>
+      </div>
+    </section>
+
+    <!-- 03 -->
+    <section id="touroku">
+      <h2 class="sec"><span class="num">03</span>登録免許税</h2>
+
+      <div class="scroll">
+        <table>
+          <thead><tr><th>項目</th><th>内容</th></tr></thead>
+          <tbody>
+            <tr><td><strong>課税主体</strong></td><td>国（国税）</td></tr>
+            <tr><td><strong>納税義務者</strong></td><td><strong>登記を受ける者</strong>。登記権利者と登記義務者がいる場合は<strong>連帯納付義務</strong></td></tr>
+            <tr><td><strong>課税標準</strong></td><td>不動産の価額＝<strong>固定資産課税台帳の価格</strong>（固定資産税評価額）。<span class="no">実際の売買価格ではない</span></td></tr>
+            <tr><td>抵当権設定登記の課税標準</td><td class="tri"><strong>債権金額</strong>（不動産の価額ではない）</td></tr>
+            <tr><td>課税標準の端数</td><td><strong>1,000円未満切捨て</strong>。1,000円未満のときは<strong>1,000円</strong>とする</td></tr>
+            <tr><td><strong>納付方法</strong></td><td><strong>現金納付が原則</strong>。税額3万円以下なら印紙納付も可（実務では金額を問わず印紙も認められている）</td></tr>
+            <tr><td>納税地</td><td>登記を受ける<strong>登記所</strong>の所在地</td></tr>
+            <tr><td><strong>表示に関する登記</strong></td><td class="yes">原則<strong>非課税</strong>（分筆・合筆・建物の表題登記など）</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="call trap">
+        <span class="tag">ひっかけ</span>
+        <p><strong>課税標準は「売買価格」ではなく「固定資産課税台帳の価格」。</strong>不動産取得税・固定資産税と同じ評価額を使う。「実際の取引価格を課税標準とする」は誤り。<br>
+        ただし<strong>抵当権の設定登記だけは債権金額</strong>が課税標準。ここだけ別扱い。</p>
+      </div>
+    </section>
+
+    <!-- 04 -->
+    <section id="keigen">
+      <h2 class="sec"><span class="num">04</span>住宅用家屋の軽減税率</h2>
+      <p class="lead">登録免許税の出題はほぼここ。<em>要件を1つずつ潰す</em>形で問われる。</p>
+
+      <figure class="plate">
+        <svg viewBox="0 0 720 268" role="img" aria-label="登録免許税の本則税率と住宅用家屋の軽減税率を比較した横棒グラフ。所有権保存登記は本則0.4パーセントが軽減0.15パーセントに、売買による所有権移転登記は本則2.0パーセントが軽減0.3パーセントに、抵当権設定登記は本則0.4パーセントが軽減0.1パーセントになる。">
+          <text x="60" y="22" class="lbl">本則（灰）／住宅用家屋の軽減（朱）　※横軸は税率</text>
+
+          <text x="140" y="72" text-anchor="end">所有権</text>
+          <text x="140" y="88" text-anchor="end">保存登記</text>
+          <rect x="150" y="48" width="80" height="18" class="svg-fill" rx="1"/>
+          <text x="240" y="61" class="lbl">0.4%　本則</text>
+          <rect x="150" y="70" width="30" height="18" class="svg-accfill" rx="1"/>
+          <text x="190" y="83" class="acct">0.15%　軽減</text>
+
+          <text x="140" y="144" text-anchor="end">売買による</text>
+          <text x="140" y="160" text-anchor="end">所有権移転登記</text>
+          <rect x="150" y="120" width="400" height="18" class="svg-fill" rx="1"/>
+          <text x="560" y="133" class="lbl">2.0%　本則</text>
+          <rect x="150" y="142" width="60" height="18" class="svg-accfill" rx="1"/>
+          <text x="220" y="155" class="acct">0.3%　軽減</text>
+
+          <text x="140" y="216" text-anchor="end">抵当権</text>
+          <text x="140" y="232" text-anchor="end">設定登記</text>
+          <rect x="150" y="192" width="80" height="18" class="svg-fill" rx="1"/>
+          <text x="240" y="205" class="lbl">0.4%　本則</text>
+          <rect x="150" y="214" width="20" height="18" class="svg-accfill" rx="1"/>
+          <text x="180" y="227" class="acct">0.1%　軽減</text>
+
+          <line x1="150" y1="40" x2="150" y2="240" class="svg-hair"/>
+        </svg>
+        <figcaption>Fig.2 — 売買による移転登記は 2.0% が 0.3% になる（約7分の1）</figcaption>
+      </figure>
+
+      <h3>軽減を受けるための要件</h3>
+      <div class="scroll">
+        <table>
+          <thead><tr><th>要件</th><th>内容</th></tr></thead>
+          <tbody>
+            <tr><td><strong>対象</strong></td><td class="no"><strong>住宅用家屋のみ</strong>。土地には適用されない</td></tr>
+            <tr><td><strong>取得者</strong></td><td><strong>個人</strong>が<strong>自己の居住用</strong>に供する家屋。<span class="no">法人は不可・貸家は不可</span></td></tr>
+            <tr><td><strong>床面積</strong></td><td><strong>50㎡以上</strong>（上限なし）</td></tr>
+            <tr><td><strong>登記の時期</strong></td><td>新築または取得後<strong>1年以内</strong>に登記</td></tr>
+            <tr><td><strong>移転登記の原因</strong></td><td class="no"><strong>売買・競落に限る</strong>。贈与・交換・相続には適用なし</td></tr>
+            <tr><td>中古住宅</td><td>新耐震基準に適合するもの（登記簿上の建築日付が<strong>昭和57年1月1日以後</strong>なら適合とみなす）</td></tr>
+            <tr><td>証明</td><td>市町村長（区長）の<strong>証明書</strong>を添付する</td></tr>
+            <tr><td>再適用</td><td class="tri">過去にこの軽減を受けたことがあっても、<strong>再び受けられる</strong></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="call trap">
+        <span class="tag">ひっかけ</span>
+        <p><strong>軽減されるのは「家屋」だけ。土地の所有権移転登記には適用されない。</strong>「住宅用家屋の敷地である土地の移転登記も軽減される」は誤り。<br>
+        もう1つ、<strong>移転登記の軽減は売買と競落だけ</strong>。「贈与により取得した住宅用家屋の移転登記」に軽減は使えない。</p>
+      </div>
+
+      <div class="call trap">
+        <span class="tag">ひっかけ</span>
+        <p><strong>床面積は50㎡以上、「以上」であって上限はない。</strong>不動産取得税（50㎡以上240㎡以下）や住宅ローン控除と数字が違うので、税目ごとに分けて覚える。<br>
+        また「以前にこの軽減を受けた者は適用を受けられない」は<strong>誤り</strong>。回数制限はない。</p>
+      </div>
+    </section>
+
+    <!-- 05 -->
+    <section id="shotoku">
+      <h2 class="sec"><span class="num">05</span>所得税（譲渡所得）</h2>
+      <p>不動産を売って利益が出たときの税。他の所得と合算しない<strong>分離課税</strong>で、<strong>所有期間で税率が2段階</strong>に分かれる。</p>
+
+      <div class="scroll">
+        <table class="pillars">
+          <thead><tr><th></th><th>短期譲渡所得</th><th>長期譲渡所得</th></tr></thead>
+          <tbody>
+            <tr><td><strong>所有期間</strong></td><td class="no"><strong>5年以下</strong></td><td><strong>5年超</strong></td></tr>
+            <tr><td>判定の基準日</td><td colspan="2" class="no"><strong>譲渡した年の1月1日</strong>時点で判定（譲渡日ではない）</td></tr>
+            <tr><td>所得税</td><td class="n">30%</td><td class="n">15%</td></tr>
+            <tr><td>住民税</td><td class="n">9%</td><td class="n">5%</td></tr>
+            <tr><td><strong>合計</strong></td><td class="n no"><strong>39%</strong></td><td class="n"><strong>20%</strong></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="call trap">
+        <span class="tag">ひっかけ</span>
+        <p><strong>5年の判定は「譲渡した年の1月1日」時点で行う。</strong>2020年7月に取得し2025年10月に売却した場合、実際の所有期間は5年3か月だが、<strong>2025年1月1日時点では4年6か月</strong>なので<strong>短期</strong>。<br>
+        「譲渡の日において5年を超えていれば長期」は誤り。この1点だけで正誤が決まる問題が出る。</p>
+      </div>
+
+      <div class="call exam">
+        <span class="tag">よく出る</span>
+        <p>譲渡所得の計算は <strong>収入金額 −（取得費 ＋ 譲渡費用）− 特別控除</strong>。<br>
+        取得費が不明なときは<strong>収入金額の5%</strong>を概算取得費とできる。建物の取得費は<strong>減価償却費相当額を控除</strong>して求める（土地は減価しない）。</p>
+      </div>
+    </section>
+
+    <!-- 06 -->
+    <section id="tokurei">
+      <h2 class="sec"><span class="num">06</span>居住用財産の特例</h2>
+      <p class="lead">4つの特例と、<em>どれとどれが併用できるか</em>が問われる。</p>
+
+      <div class="scroll">
+        <table>
+          <caption>4つの特例</caption>
+          <thead><tr><th>特例</th><th>所有期間</th><th>内容</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><strong>3,000万円特別控除</strong></td>
+              <td class="n tri">問わない</td>
+              <td>譲渡所得から<strong>3,000万円</strong>を控除</td>
+            </tr>
+            <tr>
+              <td><strong>軽減税率の特例</strong></td>
+              <td class="n"><strong>10年超</strong></td>
+              <td>課税長期譲渡所得のうち<strong>6,000万円以下</strong>の部分は所得税10%・住民税4%＝<strong>14%</strong>。超える部分は20%</td>
+            </tr>
+            <tr>
+              <td><strong>特定居住用財産の買換え特例</strong></td>
+              <td class="n"><strong>10年超</strong><br><span class="lbl">＋居住期間10年以上</span></td>
+              <td>譲渡益への課税を繰り延べる。譲渡対価<strong>1億円以下</strong>が要件</td>
+            </tr>
+            <tr>
+              <td>収用等の特別控除</td>
+              <td class="n tri">問わない</td>
+              <td>収用等の場合に<strong>5,000万円</strong>を控除</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>共通の要件</h3>
+      <ul>
+        <li>譲渡の相手方が<strong>配偶者・直系血族・生計を一にする親族</strong>等である場合は<strong>適用なし</strong></li>
+        <li><strong>前年・前々年</strong>に同じ特例の適用を受けていないこと（＝<strong>3年に1度</strong>）</li>
+        <li>居住しなくなった日から<strong>3年を経過する日の属する年の12月31日</strong>までに譲渡すること</li>
+      </ul>
+
+      <div class="call exam">
+        <span class="tag">よく出る</span>
+        <p><strong>3,000万円特別控除と軽減税率の特例は併用できる。</strong>先に3,000万円を控除し、残った額に14%を掛ける。<br>
+        一方、<strong>買換え特例は3,000万円控除とも軽減税率とも併用できない</strong>。どちらか一方を選ぶ。「繰り延べる（買換え）」か「今すぐ減らす（控除＋軽減）」かの二者択一と考えるとよい。</p>
+      </div>
+
+      <div class="call trap">
+        <span class="tag">ひっかけ</span>
+        <p><strong>3,000万円特別控除に所有期間の要件はない。</strong>「所有期間10年超でなければ適用されない」は誤り。10年超が要るのは<strong>軽減税率</strong>と<strong>買換え特例</strong>。<br>
+        また「生計を一にしていない兄弟への譲渡」は適用対象になり得るが、<strong>配偶者・直系血族（親・子・孫）は生計が別でも一律にダメ</strong>。</p>
+      </div>
+    </section>
+
+    <!-- 07 -->
+    <section id="zoyo">
+      <h2 class="sec"><span class="num">07</span>贈与税</h2>
+      <p>出題頻度は低いが、出るとすれば<strong>相続時精算課税</strong>か<strong>住宅取得等資金の非課税</strong>。</p>
+
+      <div class="scroll">
+        <table>
+          <caption>相続時精算課税制度</caption>
+          <thead><tr><th>項目</th><th>内容</th></tr></thead>
+          <tbody>
+            <tr><td>贈与者</td><td><strong>60歳以上</strong>の父母・祖父母</td></tr>
+            <tr><td>受贈者</td><td><strong>18歳以上</strong>の子・孫（推定相続人である直系卑属・孫）</td></tr>
+            <tr><td><strong>特別控除</strong></td><td>累計<strong>2,500万円</strong>まで贈与税がかからない</td></tr>
+            <tr><td>基礎控除</td><td class="tri">特別控除とは別に<strong>年110万円</strong>（2024年1月1日以後の贈与）</td></tr>
+            <tr><td>超過分の税率</td><td>一律<strong>20%</strong></td></tr>
+            <tr><td><strong>住宅取得等資金の場合</strong></td><td class="no">贈与者の<strong>年齢要件（60歳以上）が不要</strong>になる</td></tr>
+            <tr><td>選択</td><td>いったん選択すると<strong>撤回できない</strong>（その贈与者からの贈与は以後すべて精算課税）</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="scroll">
+        <table>
+          <caption>住宅取得等資金の贈与の非課税（2026年12月31日まで）</caption>
+          <thead><tr><th>項目</th><th>内容</th></tr></thead>
+          <tbody>
+            <tr><td>非課税限度額</td><td>省エネ等住宅 <strong>1,000万円</strong>／それ以外 <strong>500万円</strong></td></tr>
+            <tr><td>受贈者</td><td><strong>18歳以上</strong>で、合計所得金額<strong>2,000万円以下</strong></td></tr>
+            <tr><td>床面積</td><td><strong>40㎡以上240㎡以下</strong>（40㎡以上50㎡未満は合計所得1,000万円以下）</td></tr>
+            <tr><td>贈与者</td><td>直系尊属（父母・祖父母）。<span class="no">年齢要件なし</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="call rev">
+        <span class="tag">改正</span>
+        <p><strong>相続時精算課税に年110万円の基礎控除が新設された（2024年1月1日施行）。</strong>従来は「精算課税を選ぶと暦年課税の110万円は一切使えない」でしたが、現在は<strong>精算課税の中に別枠で年110万円の基礎控除</strong>があり、その分は相続財産に加算もされません。古い教材の「精算課税を選ぶと基礎控除はゼロ」は<strong>誤り</strong>です。</p>
+      </div>
+    </section>
+
+    <!-- 08 -->
+    <section id="deru">
+      <h2 class="sec"><span class="num">08</span>よく出る論点</h2>
+      <div class="scroll">
+        <table>
+          <thead><tr><th class="n">順位</th><th>論点</th><th>要点</th></tr></thead>
+          <tbody>
+            <tr><td class="n">1</td><td><strong>印紙税の記載金額</strong></td><td>交換は高い方／贈与・減額変更は200円／増額変更は増加額</td></tr>
+            <tr><td class="n">2</td><td><strong>登録免許税の軽減税率</strong></td><td>家屋のみ・50㎡以上・1年以内・売買と競落だけ</td></tr>
+            <tr><td class="n">3</td><td>土地と建物の賃貸借契約書</td><td>土地は課税、建物は不課税</td></tr>
+            <tr><td class="n">4</td><td>登録免許税の課税標準</td><td>固定資産課税台帳の価格。抵当権だけ債権金額</td></tr>
+            <tr><td class="n">5</td><td>譲渡所得の長期・短期</td><td><strong>譲渡した年の1月1日</strong>で5年を判定</td></tr>
+            <tr><td class="n">6</td><td>居住用財産の特例の併用</td><td>3,000万円控除＋軽減税率は<strong>可</strong>、買換えとは<strong>不可</strong></td></tr>
+            <tr><td class="n">7</td><td>印紙税の過怠税</td><td>不貼付は3倍、自主申告は1.1倍、消印忘れは額面同額</td></tr>
+            <tr><td class="n">8</td><td>国等との共同作成文書</td><td>私人が保存する分は非課税、国等が保存する分は課税</td></tr>
+            <tr><td class="n">9</td><td>相続時精算課税</td><td>2,500万円＋年110万円。住宅資金なら贈与者の年齢要件なし</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 09 -->
+    <section id="hikkake">
+      <h2 class="sec"><span class="num">09</span>ひっかけ一覧</h2>
+      <div class="scroll">
+        <table class="traps">
+          <thead><tr><th>こう書かれたら疑う</th><th>正しくは</th></tr></thead>
+          <tbody>
+            <tr><td>建物の賃貸借契約書には印紙税が課される</td><td><strong>不課税</strong>。課税されるのは土地の賃貸借契約書</td></tr>
+            <tr><td>贈与契約書の記載金額は目的物の評価額である</td><td><strong>記載金額のない契約書</strong>として200円</td></tr>
+            <tr><td>減額する変更契約書の記載金額は減少額である</td><td><strong>記載金額なし</strong>（200円）。増額のときだけ増加額</td></tr>
+            <tr><td>交換契約書は交換差金の額が記載金額になる</td><td>双方の価額が記載されていれば<strong>高い方</strong></td></tr>
+            <tr><td>印紙を貼っていない契約書は無効である</td><td>契約は<strong>有効</strong>。過怠税が課されるだけ</td></tr>
+            <tr><td>印紙を貼らなかった場合の過怠税は2倍</td><td>印紙税額＋2倍＝<strong>3倍</strong></td></tr>
+            <tr><td>消印を忘れた場合の過怠税は3倍</td><td>消印していない印紙の<strong>額面と同額</strong></td></tr>
+            <tr><td>売主・買主が1通ずつ保管する場合、印紙は1枚でよい</td><td><strong>2通とも課税</strong>される</td></tr>
+            <tr><td>国と私人が共同作成した文書はすべて非課税</td><td><strong>国等が保存する分は課税</strong></td></tr>
+            <tr><td>登録免許税の課税標準は実際の売買価格</td><td><strong>固定資産課税台帳の価格</strong></td></tr>
+            <tr><td>抵当権設定登記の課税標準も不動産の価額</td><td class="no"><strong>債権金額</strong></td></tr>
+            <tr><td>住宅用家屋の軽減税率は敷地の土地にも適用される</td><td><strong>家屋のみ</strong></td></tr>
+            <tr><td>贈与で取得した住宅用家屋の移転登記も軽減される</td><td><strong>売買・競落に限る</strong></td></tr>
+            <tr><td>過去に軽減税率を受けた者は再度適用を受けられない</td><td><strong>回数制限はない</strong></td></tr>
+            <tr><td>軽減税率の床面積要件は50㎡以上240㎡以下</td><td><strong>50㎡以上</strong>。上限はない</td></tr>
+            <tr><td>表示に関する登記にも登録免許税が課される</td><td>原則<strong>非課税</strong></td></tr>
+            <tr><td>譲渡の日に所有期間5年を超えていれば長期譲渡所得</td><td><strong>譲渡した年の1月1日</strong>で判定</td></tr>
+            <tr><td>3,000万円特別控除には所有期間10年超が必要</td><td>所有期間は<strong>問わない</strong></td></tr>
+            <tr><td>3,000万円控除と軽減税率の特例は併用できない</td><td><strong>併用できる</strong>（買換え特例とは併用不可）</td></tr>
+            <tr><td>3,000万円控除は毎年でも受けられる</td><td><strong>前年・前々年</strong>に受けていないこと</td></tr>
+            <tr><td>相続時精算課税は贈与者が60歳以上でなければならない</td><td>原則そうだが、<strong>住宅取得等資金なら年齢要件なし</strong></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 10 -->
+    <section id="suji">
+      <h2 class="sec"><span class="num">10</span>数字まとめ</h2>
+      <p class="masthead-note">右上の「数値を隠す」で自己テストできる。</p>
+      <div class="nums" id="numgrid">
+        <div class="nc" tabindex="0"><span class="v">200円</span><span class="d">記載金額のない契約書の印紙税額（贈与・減額変更など）</span></div>
+        <div class="nc" tabindex="0"><span class="v">5万円未満</span><span class="d">非課税となる受取書（領収書）の金額</span></div>
+        <div class="nc" tabindex="0"><span class="v">3倍</span><span class="d">印紙を貼らなかった場合の過怠税（本税＋2倍）</span></div>
+        <div class="nc" tabindex="0"><span class="v">1.1倍</span><span class="d">調査前に自主的に申し出た場合の過怠税</span></div>
+        <div class="nc" tabindex="0"><span class="v">1,000円</span><span class="d">登録免許税の課税標準の端数処理（未満は切捨て・最低額）</span></div>
+        <div class="nc" tabindex="0"><span class="v">3万円</span><span class="d">登録免許税を印紙で納付できる税額の目安</span></div>
+        <div class="nc" tabindex="0"><span class="v">0.15%</span><span class="d">住宅用家屋の所有権保存登記（本則0.4%）</span></div>
+        <div class="nc" tabindex="0"><span class="v">0.3%</span><span class="d">住宅用家屋の売買による所有権移転登記（本則2.0%）</span></div>
+        <div class="nc" tabindex="0"><span class="v">0.1%</span><span class="d">住宅用家屋の抵当権設定登記（本則0.4%）</span></div>
+        <div class="nc" tabindex="0"><span class="v">50㎡以上</span><span class="d">登録免許税の軽減税率の床面積要件（上限なし）</span></div>
+        <div class="nc" tabindex="0"><span class="v">1年以内</span><span class="d">軽減税率を受けるための登記の期限（新築・取得から）</span></div>
+        <div class="nc" tabindex="0"><span class="v">5年</span><span class="d">譲渡所得の長期・短期の境目（譲渡した年の1月1日で判定）</span></div>
+        <div class="nc" tabindex="0"><span class="v">39% / 20%</span><span class="d">短期／長期の税率（所得税＋住民税）</span></div>
+        <div class="nc" tabindex="0"><span class="v">3,000万円</span><span class="d">居住用財産の特別控除（所有期間の要件なし）</span></div>
+        <div class="nc" tabindex="0"><span class="v">10年超</span><span class="d">軽減税率の特例・買換え特例に必要な所有期間</span></div>
+        <div class="nc" tabindex="0"><span class="v">6,000万円</span><span class="d">軽減税率14%が適用される課税長期譲渡所得の上限</span></div>
+        <div class="nc" tabindex="0"><span class="v">1億円</span><span class="d">特定居住用財産の買換え特例の譲渡対価の上限</span></div>
+        <div class="nc" tabindex="0"><span class="v">5,000万円</span><span class="d">収用等の場合の特別控除</span></div>
+        <div class="nc" tabindex="0"><span class="v">2,500万円</span><span class="d">相続時精算課税の特別控除（累計）</span></div>
+        <div class="nc" tabindex="0"><span class="v">110万円</span><span class="d">相続時精算課税の年間基礎控除（2024年新設）</span></div>
+        <div class="nc" tabindex="0"><span class="v">1,000万円</span><span class="d">住宅取得等資金の贈与の非課税枠（省エネ等住宅）</span></div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <h4>出典</h4>
+    <ul>
+      <li>印紙税法（昭和42年法律第23号） — <a href="https://laws.e-gov.go.jp/law/342AC0000000023">e-Gov法令検索</a></li>
+      <li>登録免許税法（昭和42年法律第35号） — <a href="https://laws.e-gov.go.jp/law/342AC0000000035">e-Gov法令検索</a></li>
+      <li>国税庁 印紙税額一覧表・不動産の譲渡に関する契約書 — <a href="https://www.nta.go.jp/taxes/shiraberu/taxanswer/inshi/inshi311.htm">nta.go.jp</a></li>
+      <li>国税庁 住宅取得資金に係る借入金の年末残高等・登録免許税の軽減 — <a href="https://www.nta.go.jp/taxes/shiraberu/taxanswer/inshi/7191.htm">nta.go.jp</a></li>
+      <li>国税庁 マイホームを売ったときの特例（3,000万円控除・軽減税率） — <a href="https://www.nta.go.jp/taxes/shiraberu/taxanswer/joto/3302.htm">nta.go.jp</a></li>
+      <li>国税庁 相続時精算課税の選択 — <a href="https://www.nta.go.jp/taxes/shiraberu/taxanswer/sozoku/4103.htm">nta.go.jp</a></li>
+    </ul>
+    <div class="sibling">
+      <a href="../index.html">総目次</a>
+      <a href="横断早見表.html">税その他 横断早見表</a>
+      <a href="地方税.html">地方税 →</a>
+      <a href="価格の評定.html">価格の評定</a>
+    </div>
+  </footer>
+
+</div>
+
+<script>
+  (function () {
+    var root = document.documentElement;
+    document.getElementById('theme').addEventListener('click', function () {
+      if (root.getAttribute('data-theme')) { root.removeAttribute('data-theme'); return; }
+      var dark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      root.setAttribute('data-theme', dark ? 'light' : 'dark');
+    });
+    var maskBtn = document.getElementById('mask');
+    var grid = document.getElementById('numgrid');
+    maskBtn.addEventListener('click', function () {
+      var on = grid.classList.toggle('masked');
+      maskBtn.setAttribute('aria-pressed', String(on));
+      maskBtn.textContent = on ? '数値を表示' : '数値を隠す';
+    });
+    var links = Array.prototype.slice.call(document.querySelectorAll('nav.rail ol a'));
+    var map = {};
+    links.forEach(function (a) { map[a.getAttribute('href').slice(1)] = a; });
+    var seen = [];
+    var obs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        var i = seen.indexOf(e.target.id);
+        if (e.isIntersecting && i < 0) seen.push(e.target.id);
+        if (!e.isIntersecting && i >= 0) seen.splice(i, 1);
+      });
+      links.forEach(function (a) { a.classList.remove('on'); });
+      if (seen.length) {
+        var order = Object.keys(map);
+        seen.sort(function (a, b) { return order.indexOf(a) - order.indexOf(b); });
+        map[seen[0]].classList.add('on');
+      }
+    }, { rootMargin: '-10% 0px -70% 0px' });
+    document.querySelectorAll('main section').forEach(function (s) { obs.observe(s); });
+  })();
+</script>

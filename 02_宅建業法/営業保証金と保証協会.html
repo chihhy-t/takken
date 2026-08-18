@@ -1,0 +1,703 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>営業保証金と保証協会 — 宅建士試験 2026年度</title>
+
+<style>
+  :root {
+    --paper:#EBEDE9; --surface:#F8F9F6; --sunk:#E1E4DE; --ink:#151F2A; --muted:#5D6B78;
+    --rule:#CDD2CB; --hair:#DCE0D9; --accent:#B8342A; --accent-soft:#F3DEDB;
+    --blue:#2A5F86; --blue-soft:#DCE6EE;
+    --font-display:"Hiragino Mincho ProN","Yu Mincho","YuMincho","Noto Serif JP",serif;
+    --font-body:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","YuGothic","Noto Sans JP",system-ui,sans-serif;
+    --font-mono:ui-monospace,"SFMono-Regular","SF Mono",Menlo,Consolas,monospace;
+    --measure:68ch;
+    --s1:.35rem; --s2:.7rem; --s3:1.1rem; --s4:1.7rem; --s5:2.6rem; --s6:4rem;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper:#0D1B29; --surface:#132534; --sunk:#0A1622; --ink:#DAE4EC; --muted:#8CA1B3;
+      --rule:#26415A; --hair:#1D3448; --accent:#FF7059; --accent-soft:#3A1F1D;
+      --blue:#6FB6DC; --blue-soft:#14293A;
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper:#0D1B29; --surface:#132534; --sunk:#0A1622; --ink:#DAE4EC; --muted:#8CA1B3;
+    --rule:#26415A; --hair:#1D3448; --accent:#FF7059; --accent-soft:#3A1F1D;
+    --blue:#6FB6DC; --blue-soft:#14293A;
+  }
+
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--paper); color:var(--ink); font-family:var(--font-body);
+    font-size:16px; line-height:1.9; -webkit-font-smoothing:antialiased; font-feature-settings:"palt" 1; }
+
+  .wrap { display:grid; grid-template-columns:15.5rem minmax(0,1fr); gap:var(--s6);
+    max-width:80rem; margin:0 auto; padding:0 var(--s4) var(--s6); align-items:start; }
+  @media (max-width:60rem){ .wrap{ grid-template-columns:minmax(0,1fr); gap:var(--s4); padding:0 var(--s3) var(--s5);} }
+
+  .masthead { grid-column:1/-1; padding:var(--s5) 0 var(--s4); border-bottom:2px solid var(--ink);
+    margin-bottom:var(--s2); display:flex; flex-wrap:wrap; align-items:flex-end; justify-content:space-between; gap:var(--s3); }
+  .eyebrow { font-family:var(--font-mono); font-size:.72rem; letter-spacing:.16em; text-transform:uppercase;
+    color:var(--muted); display:flex; align-items:center; gap:.6em; }
+  .eyebrow::before { content:""; width:2.2rem; height:1px; background:var(--accent); }
+  h1 { font-family:var(--font-display); font-weight:600; font-size:clamp(1.9rem,1.3rem + 2.4vw,2.9rem);
+    line-height:1.2; letter-spacing:.04em; margin:var(--s2) 0 var(--s3); text-wrap:balance; }
+  .facts { display:flex; flex-wrap:wrap; gap:0 var(--s3); font-size:.82rem; color:var(--muted); list-style:none; margin:0; padding:0; }
+  .facts b { font-family:var(--font-mono); font-variant-numeric:tabular-nums; color:var(--ink); font-weight:600; }
+  .toggles { display:flex; gap:var(--s1); }
+  button { font-family:var(--font-body); font-size:.78rem; color:var(--muted); background:var(--surface);
+    border:1px solid var(--rule); border-radius:2px; padding:.4em .9em; cursor:pointer; transition:color .15s,border-color .15s; }
+  button:hover { color:var(--ink); border-color:var(--ink); }
+  button:focus-visible { outline:2px solid var(--accent); outline-offset:2px; }
+  button[aria-pressed="true"] { color:var(--accent); border-color:var(--accent); }
+
+  nav.rail { position:sticky; top:var(--s3); font-size:.82rem; max-height:calc(100vh - 3rem); overflow-y:auto; padding-bottom:var(--s3); }
+  nav.rail h2 { font-family:var(--font-mono); font-size:.68rem; letter-spacing:.16em; text-transform:uppercase; color:var(--muted); margin:0 0 var(--s2); font-weight:500; }
+  nav.rail ol { list-style:none; margin:0; padding:0; display:flex; flex-direction:column; }
+  nav.rail a { display:block; padding:.3em 0 .3em .9em; color:var(--muted); text-decoration:none; border-left:2px solid var(--hair); line-height:1.5; }
+  nav.rail a:hover { color:var(--ink); border-left-color:var(--rule); }
+  nav.rail a.on { color:var(--ink); border-left-color:var(--accent); font-weight:600; }
+  nav.rail a .num { font-family:var(--font-mono); font-size:.72rem; color:var(--muted); margin-right:.5em; }
+  @media (max-width:60rem){
+    nav.rail{ position:static; max-height:none; border-bottom:1px solid var(--rule); padding-bottom:var(--s3); }
+    nav.rail ol{ display:grid; grid-template-columns:repeat(auto-fill,minmax(9rem,1fr)); gap:0 var(--s2); }
+  }
+
+  main { min-width:0; }
+  section { padding-top:var(--s5); scroll-margin-top:var(--s3); }
+  section > * { max-width:var(--measure); }
+  section > figure, section > .scroll { max-width:none; }
+
+  h2.sec { font-family:var(--font-display); font-size:clamp(1.45rem,1.2rem + .9vw,1.9rem); font-weight:600;
+    letter-spacing:.04em; margin:0 0 var(--s3); padding-bottom:var(--s2); border-bottom:1px solid var(--rule);
+    display:flex; align-items:baseline; gap:.7em; max-width:none; }
+  h2.sec .num { font-family:var(--font-mono); font-size:.8rem; letter-spacing:.1em; color:var(--accent); font-weight:500; }
+  h3 { font-family:var(--font-body); font-size:1.06rem; font-weight:700; letter-spacing:.02em;
+    margin:var(--s4) 0 var(--s2); padding-left:.7em; border-left:3px solid var(--ink); }
+  p { margin:0 0 var(--s3); }
+  a { color:var(--blue); text-underline-offset:.2em; }
+  em { font-style:normal; background:linear-gradient(transparent 62%, var(--accent-soft) 62%); font-weight:600; }
+  ul, ol { margin:0 0 var(--s3); padding-left:1.3em; }
+  li { margin-bottom:var(--s1); }
+  .lead { font-size:1.05rem; color:var(--muted); }
+
+  .call { max-width:var(--measure); margin:0 0 var(--s3); padding:var(--s3) var(--s3) var(--s3) var(--s4);
+    background:var(--surface); border:1px solid var(--hair); border-left:3px solid var(--rule); border-radius:2px; font-size:.94rem; }
+  .call > :last-child { margin-bottom:0; }
+  .call .tag { display:block; font-family:var(--font-mono); font-size:.68rem; letter-spacing:.16em; text-transform:uppercase; color:var(--muted); margin-bottom:var(--s1); }
+  .call.trap { border-left-color:var(--accent); background:var(--accent-soft); }
+  .call.trap .tag { color:var(--accent); }
+  .call.exam { border-left-color:var(--ink); }
+  .call.exam .tag { color:var(--ink); }
+  .call.tip { border-left-color:var(--blue); background:var(--blue-soft); }
+  .call.tip .tag { color:var(--blue); }
+
+  .scroll { overflow-x:auto; margin:0 0 var(--s3); -webkit-overflow-scrolling:touch; }
+  table { border-collapse:collapse; width:100%; font-size:.88rem; line-height:1.6; }
+  caption { text-align:left; font-size:.78rem; color:var(--muted); padding-bottom:var(--s1); font-family:var(--font-mono); letter-spacing:.08em; }
+  th, td { padding:.62em .8em; text-align:left; vertical-align:top; border-bottom:1px solid var(--hair); }
+  thead th { font-size:.74rem; letter-spacing:.1em; color:var(--muted); font-weight:600; border-bottom:1px solid var(--ink); white-space:nowrap; }
+  tbody tr:hover { background:var(--surface); }
+  td.n, th.n { text-align:center; font-family:var(--font-mono); font-variant-numeric:tabular-nums; white-space:nowrap; }
+  .no { color:var(--accent); font-weight:700; }
+  .yes { color:var(--muted); }
+  .tri { color:var(--blue); }
+  table.vs thead th:nth-child(2) { color:var(--accent); font-size:.9rem; }
+  table.vs thead th:nth-child(3) { color:var(--blue); font-size:.9rem; }
+  table.vs tbody td:first-child { white-space:nowrap; font-weight:600; }
+
+  figure { margin:0 0 var(--s4); }
+  figure svg { display:block; width:100%; height:auto; }
+  figcaption { font-size:.78rem; color:var(--muted); font-family:var(--font-mono); letter-spacing:.06em; margin-top:var(--s2); padding-top:var(--s1); border-top:1px solid var(--hair); }
+  .plate { background:var(--surface); border:1px solid var(--hair); border-radius:2px; padding:var(--s3); }
+  .svg-ink { fill:none; stroke:var(--ink); stroke-width:1.4; }
+  .svg-hair { fill:none; stroke:var(--rule); stroke-width:1; }
+  .svg-dim { fill:none; stroke:var(--blue); stroke-width:1; }
+  .svg-acc { fill:none; stroke:var(--accent); stroke-width:1.6; }
+  .svg-fill { fill:var(--sunk); stroke:var(--rule); stroke-width:1; }
+  .svg-accfill { fill:var(--accent-soft); stroke:var(--accent); stroke-width:1.2; }
+  .svg-bluefill { fill:var(--blue-soft); stroke:var(--blue); stroke-width:1.2; }
+  text { font-family:var(--font-body); fill:var(--ink); font-size:12px; }
+  text.lbl { font-family:var(--font-mono); fill:var(--muted); font-size:10.5px; letter-spacing:.06em; }
+  text.dimt { font-family:var(--font-mono); fill:var(--blue); font-size:11px; }
+  text.acct { fill:var(--accent); font-size:11.5px; font-weight:700; }
+  text.money { font-family:var(--font-mono); font-size:13px; font-weight:600; }
+
+  .nums { display:grid; grid-template-columns:repeat(auto-fill,minmax(11.5rem,1fr)); gap:var(--s2); }
+  .nc { background:var(--surface); border:1px solid var(--hair); border-radius:2px; padding:var(--s3) var(--s3) var(--s2); display:flex; flex-direction:column; gap:var(--s1); }
+  .nc .v { font-family:var(--font-mono); font-variant-numeric:tabular-nums; font-size:1.3rem; font-weight:600; line-height:1.2; color:var(--accent); }
+  .nc .d { font-size:.8rem; color:var(--muted); line-height:1.6; }
+  .nums.masked .v { color:transparent; background:var(--rule); border-radius:2px; user-select:none; }
+  .nums.masked .nc:hover .v, .nums.masked .nc:focus-within .v { color:var(--accent); background:transparent; }
+  .nc:focus-visible { outline:2px solid var(--accent); outline-offset:2px; }
+  .masthead-note { font-size:.78rem; color:var(--muted); margin-bottom:var(--s2); }
+
+  table.traps td:first-child { color:var(--muted); }
+  table.traps td:first-child::before { content:"「"; }
+  table.traps td:first-child::after { content:"」"; }
+  table.traps td:last-child strong { color:var(--accent); }
+
+  footer { grid-column:1/-1; margin-top:var(--s6); padding-top:var(--s3); border-top:1px solid var(--rule); font-size:.8rem; color:var(--muted); }
+  footer ul { list-style:none; padding:0; }
+  footer li { margin-bottom:var(--s1); }
+  .sibling { display:flex; flex-wrap:wrap; gap:var(--s2); margin-top:var(--s3); }
+  .sibling a { font-size:.8rem; text-decoration:none; border:1px solid var(--rule); border-radius:2px; padding:.35em .8em; color:var(--muted); }
+  .sibling a:hover { color:var(--ink); border-color:var(--ink); }
+
+  @media (prefers-reduced-motion: reduce){ *{ transition:none !important; animation:none !important; scroll-behavior:auto !important; } }
+  html { scroll-behavior:smooth; }
+  .eyebrow a { color:var(--accent); text-decoration:none; }
+  .eyebrow a:hover { text-decoration:underline; text-underline-offset:.2em; }
+  nav.rail a.home { border-left:none; padding:0 0 var(--s2); color:var(--accent);
+    font-family:var(--font-mono); font-size:.72rem; letter-spacing:.1em; }
+  nav.rail a.home:hover { color:var(--accent); text-decoration:underline; text-underline-offset:.2em; }
+</style>
+
+<div class="wrap">
+
+  <header class="masthead">
+    <div>
+      <div class="eyebrow"><a href="../index.html">← 総目次</a> &nbsp;/&nbsp; 02 宅建業法 &nbsp;/&nbsp; 宅建士試験 2026年度</div>
+      <h1>営業保証金と保証協会</h1>
+      <ul class="facts">
+        <li>法令基準日 <b>2026-04-01</b></li>
+        <li>出題数 <b>約2問</b></li>
+        <li>目標 <b>全問正解</b></li>
+        <li>更新 <b>2026-08-09</b></li>
+      </ul>
+    </div>
+    <div class="toggles">
+      <button id="mask" type="button" aria-pressed="false">数値を隠す</button>
+      <button id="theme" type="button">配色切替</button>
+    </div>
+  </header>
+
+  <nav class="rail" aria-label="目次">
+    <a class="home" href="../index.html">← 総目次</a>
+    <h2>Contents</h2>
+    <ol>
+      <li><a href="#overview"><span class="num">00</span>2つの制度</a></li>
+      <li><a href="#vs"><span class="num">01</span>対比表</a></li>
+      <li><a href="#eigyou"><span class="num">02</span>営業保証金</a></li>
+      <li><a href="#kanpu"><span class="num">03</span>還付と不足の補充</a></li>
+      <li><a href="#torimodoshi"><span class="num">04</span>取戻しと保管替え</a></li>
+      <li><a href="#kyoukai"><span class="num">05</span>保証協会</a></li>
+      <li><a href="#bensai"><span class="num">06</span>弁済業務</a></li>
+      <li><a href="#chii"><span class="num">07</span>社員の地位の喪失</a></li>
+      <li><a href="#deru"><span class="num">08</span>よく出る論点</a></li>
+      <li><a href="#hikkake"><span class="num">09</span>ひっかけ一覧</a></li>
+      <li><a href="#suji"><span class="num">10</span>数字まとめ</a></li>
+    </ol>
+  </nav>
+
+  <main>
+
+    <!-- 00 -->
+    <section id="overview">
+      <h2 class="sec"><span class="num">00</span>2つの制度</h2>
+      <p class="lead">取引で損害を受けた相手方を救済するための、お金の裏付け制度。<em>自分で全額積むか（営業保証金）、協会に入って安く済ませるか（保証協会）</em>の二者択一で、両方に入ることはない。</p>
+
+      <figure class="plate">
+        <svg viewBox="0 0 720 300" role="img" aria-label="営業保証金は業者が主たる事務所の最寄りの供託所に直接供託する。保証協会に加入する場合は業者が分担金を協会に納付し、協会が弁済業務保証金を供託所に供託する。">
+          <!-- 左：営業保証金 -->
+          <text x="24" y="30" class="acct">営業保証金 — 自分で積む</text>
+          <rect x="24" y="46" width="130" height="52" class="svg-fill" rx="2"/>
+          <text x="89" y="70" text-anchor="middle">宅建業者</text>
+          <text x="89" y="88" text-anchor="middle" class="lbl">免許を受けた</text>
+
+          <path d="M160 72 H 216" class="svg-acc"/>
+          <path d="M210 66 L216 72 L210 78" class="svg-acc"/>
+          <text x="188" y="60" text-anchor="middle" class="acct">供託</text>
+          <text x="188" y="92" text-anchor="middle" class="lbl">金銭・有価証券</text>
+
+          <rect x="222" y="46" width="120" height="52" class="svg-accfill" rx="2"/>
+          <text x="282" y="70" text-anchor="middle">供託所</text>
+          <text x="282" y="88" text-anchor="middle" class="lbl">主たる事務所の最寄り</text>
+
+          <path d="M89 104 V 132" class="svg-hair"/>
+          <text x="89" y="148" text-anchor="middle" class="lbl">免許権者へ届出</text>
+          <text x="89" y="164" text-anchor="middle" class="acct">届出後に事業開始</text>
+
+          <text x="24" y="196" class="money" fill="var(--accent)">主たる事務所 1,000万円</text>
+          <text x="24" y="216" class="money" fill="var(--accent)">その他の事務所 500万円／か所</text>
+
+          <!-- 区切り -->
+          <line x1="376" y1="20" x2="376" y2="280" class="svg-hair"/>
+
+          <!-- 右：保証協会 -->
+          <text x="400" y="30" class="dimt">保証協会 — 協会に預ける</text>
+          <rect x="400" y="46" width="110" height="52" class="svg-fill" rx="2"/>
+          <text x="455" y="70" text-anchor="middle">宅建業者</text>
+          <text x="455" y="88" text-anchor="middle" class="lbl">社員になる者</text>
+
+          <path d="M516 72 H 556" class="svg-dim"/>
+          <path d="M550 66 L556 72 L550 78" class="svg-dim"/>
+          <text x="536" y="60" text-anchor="middle" class="dimt">分担金</text>
+          <text x="536" y="92" text-anchor="middle" class="lbl">金銭のみ</text>
+
+          <rect x="562" y="46" width="110" height="52" class="svg-bluefill" rx="2"/>
+          <text x="617" y="70" text-anchor="middle">保証協会</text>
+          <text x="617" y="88" text-anchor="middle" class="lbl">大臣が指定</text>
+
+          <path d="M617 104 V 132" class="svg-dim"/>
+          <path d="M611 126 L617 132 L623 126" class="svg-dim"/>
+          <text x="617" y="122" text-anchor="middle" class="dimt">1週間以内</text>
+
+          <rect x="562" y="138" width="110" height="46" class="svg-accfill" rx="2"/>
+          <text x="617" y="160" text-anchor="middle">供託所</text>
+          <text x="617" y="176" text-anchor="middle" class="lbl">大臣が定める</text>
+
+          <text x="400" y="128" class="lbl">社員となった時点で</text>
+          <text x="400" y="144" class="dimt">事業を開始できる</text>
+          <text x="400" y="160" class="lbl">（協会が供託するので</text>
+          <text x="400" y="176" class="lbl">　業者の届出は不要）</text>
+
+          <text x="400" y="196" class="money" fill="var(--blue)">主たる事務所 60万円</text>
+          <text x="400" y="216" class="money" fill="var(--blue)">その他の事務所 30万円／か所</text>
+
+          <text x="24" y="256" class="lbl">どちらの制度でも、還付を受けられるのは「宅建業者を除く」取引の相手方だけ</text>
+          <text x="24" y="276" class="lbl">保証協会に加入すると営業保証金は不要になる（両方は積まない）</text>
+        </svg>
+        <figcaption>Fig.1 — お金の流れ。協会経由だと業者の負担は 1/16.7 で済む</figcaption>
+      </figure>
+
+      <div class="call tip">
+        <span class="tag">覚え方</span>
+        <p><strong>1,000万 : 60万 ＝ 500万 : 30万</strong>。どちらも支店は本店の半分、協会は営業保証金のおよそ 6% で済む。<br>
+        安くできる代わりに、<strong>還付のときは協会の「認証」という関門</strong>が入る、という交換条件になっている。</p>
+      </div>
+    </section>
+
+    <!-- 01 -->
+    <section id="vs">
+      <h2 class="sec"><span class="num">01</span>対比表</h2>
+      <p class="lead">この分野は<em>2つの制度を混ぜた選択肢</em>で失点する。まず一覧で全体を掴む。</p>
+
+      <div class="scroll">
+        <table class="vs">
+          <caption>営業保証金 vs 保証協会</caption>
+          <thead><tr><th>項目</th><th>営業保証金</th><th>保証協会（弁済業務保証金）</th></tr></thead>
+          <tbody>
+            <tr>
+              <td>金額</td>
+              <td>主たる事務所 <strong>1,000万円</strong><br>その他 <strong>500万円</strong>／か所</td>
+              <td>主たる事務所 <strong>60万円</strong><br>その他 <strong>30万円</strong>／か所</td>
+            </tr>
+            <tr>
+              <td>納める物</td>
+              <td>金銭 <strong>または有価証券</strong></td>
+              <td class="no">分担金は<strong>金銭のみ</strong></td>
+            </tr>
+            <tr>
+              <td>納める先</td>
+              <td>主たる事務所の<strong>最寄りの供託所</strong></td>
+              <td><strong>保証協会</strong>（協会が供託所へ供託）</td>
+            </tr>
+            <tr>
+              <td>誰が供託するか</td>
+              <td>宅建業者</td>
+              <td class="no"><strong>保証協会</strong></td>
+            </tr>
+            <tr>
+              <td><strong>事業開始の要件</strong></td>
+              <td class="no">供託 → <strong>免許権者に届出</strong>してから</td>
+              <td class="no"><strong>社員となった時</strong>から（届出は不要）</td>
+            </tr>
+            <tr>
+              <td><strong>事務所を新設したとき</strong></td>
+              <td>500万円を供託 → <strong>届出後</strong>にその事務所で開始</td>
+              <td class="no">新設の日から <strong>2週間以内</strong> に30万円を納付</td>
+            </tr>
+            <tr>
+              <td>還付を受ける手続</td>
+              <td>供託所に直接請求</td>
+              <td class="no">保証協会の<strong>認証</strong>を受けてから供託所へ</td>
+            </tr>
+            <tr>
+              <td>還付の上限</td>
+              <td>供託している額</td>
+              <td>社員でないとしたら供託すべき<strong>営業保証金の額に相当する額</strong></td>
+            </tr>
+            <tr>
+              <td><strong>不足の補充</strong></td>
+              <td>免許権者の通知を受けた日から <strong>2週間以内</strong> に供託<br>→ 供託の日から <strong>2週間以内</strong> に届出</td>
+              <td>保証協会の通知を受けた日から <strong>2週間以内</strong> に<strong>還付充当金</strong>を納付</td>
+            </tr>
+            <tr>
+              <td>怠った場合</td>
+              <td>業務停止・免許取消しの対象</td>
+              <td class="no"><strong>社員の地位を失う</strong></td>
+            </tr>
+            <tr>
+              <td>取戻しの公告</td>
+              <td><strong>6か月</strong>を下らない期間の公告が原則必要</td>
+              <td>保証協会が公告（社員でなくなった場合等）</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="call trap">
+        <span class="tag">ひっかけ</span>
+        <p><strong>事務所を新設したときの扱いが真逆。</strong>営業保証金は<strong>供託して届け出るまで</strong>その事務所で営業できないが、保証協会は<strong>先に営業できて、2週間以内に納付</strong>すればよい。<br>
+        納付を怠ると<strong>社員の地位を失う</strong>点も、営業保証金にはない制裁。</p>
+      </div>
+    </section>
+
+    <!-- 02 -->
+    <section id="eigyou">
+      <h2 class="sec"><span class="num">02</span>営業保証金</h2>
+
+      <h3>2-1　供託できる物</h3>
+      <div class="scroll">
+        <table>
+          <thead><tr><th>供託物</th><th class="n">評価額</th></tr></thead>
+          <tbody>
+            <tr><td>金銭</td><td class="n">額面どおり</td></tr>
+            <tr><td><strong>国債証券</strong></td><td class="n no"><strong>額面の100%</strong></td></tr>
+            <tr><td>地方債証券・政府保証債券</td><td class="n"><strong>額面の90%</strong></td></tr>
+            <tr><td>その他国土交通省令で定める有価証券</td><td class="n"><strong>額面の80%</strong></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="call tip">
+        <span class="tag">覚え方</span>
+        <p><strong>国債だけが満額（100%）。</strong>国が発行するものが最も信用が高い、と考えれば順序を間違えない。地方債・政府保証債で90%、それ以外は80%。</p>
+      </div>
+
+      <h3>2-2　供託しないとどうなるか</h3>
+
+      <figure class="plate">
+        <svg viewBox="0 0 720 140" role="img" aria-label="免許を受けた日から3か月以内に供託の届出をしないとき、免許権者は催告しなければならず、催告が到達した日から1か月以内に届出がないときは免許を取り消すことができる。">
+          <line x1="50" y1="72" x2="670" y2="72" class="svg-hair"/>
+          <g><circle cx="80" cy="72" r="6" class="svg-ink" fill="var(--paper)"/>
+             <text x="80" y="52" text-anchor="middle">免許</text></g>
+          <path d="M88 72 H 292" class="svg-dim" stroke-dasharray="3 3"/>
+          <text x="190" y="64" text-anchor="middle" class="dimt">3か月以内に届出がない</text>
+          <g><circle cx="300" cy="72" r="6" class="svg-acc" fill="var(--paper)"/>
+             <text x="300" y="52" text-anchor="middle" class="acct">催告</text>
+             <text x="300" y="98" text-anchor="middle" class="lbl">免許権者は催告</text>
+             <text x="300" y="114" text-anchor="middle" class="lbl">「しなければならない」</text></g>
+          <path d="M308 72 H 508" class="svg-dim" stroke-dasharray="3 3"/>
+          <text x="408" y="64" text-anchor="middle" class="dimt">到達から1か月以内に届出がない</text>
+          <g><circle cx="516" cy="72" r="6" class="svg-acc" fill="var(--paper)"/>
+             <text x="516" y="52" text-anchor="middle" class="acct">免許を取り消せる</text>
+             <text x="560" y="98" text-anchor="middle" class="lbl">「取り消すことができる」＝ 任意的取消</text></g>
+        </svg>
+        <figcaption>Fig.2 — 催告は義務、取消しは裁量</figcaption>
+      </figure>
+
+      <div class="call trap">
+        <span class="tag">ひっかけ</span>
+        <p><strong>催告は「しなければならない」（義務）、取消しは「できる」（任意）。</strong>この助動詞が入れ替えられる。<br>
+        また<strong>3か月と1か月</strong>の数字も逆にされる。免許から3か月、催告到達から1か月。</p>
+      </div>
+    </section>
+
+    <!-- 03 -->
+    <section id="kanpu">
+      <h2 class="sec"><span class="num">03</span>還付と不足の補充</h2>
+
+      <figure class="plate">
+        <svg viewBox="0 0 720 260" role="img" aria-label="営業保証金では還付後に免許権者から不足の通知を受け、2週間以内に供託し、供託から2週間以内に届け出る。保証協会では還付後に協会から通知を受け、2週間以内に還付充当金を納付し、怠ると社員の地位を失う。">
+          <!-- 営業保証金 -->
+          <text x="24" y="28" class="acct">営業保証金</text>
+          <line x1="40" y1="76" x2="680" y2="76" class="svg-hair"/>
+          <g><circle cx="70" cy="76" r="5" class="svg-ink" fill="var(--paper)"/><text x="70" y="58" text-anchor="middle">還付</text></g>
+          <g><circle cx="240" cy="76" r="5" class="svg-ink" fill="var(--paper)"/><text x="240" y="58" text-anchor="middle">免許権者の通知</text></g>
+          <path d="M248 76 H 396" class="svg-dim" stroke-dasharray="3 3"/>
+          <text x="322" y="68" text-anchor="middle" class="dimt">2週間以内</text>
+          <g><circle cx="404" cy="76" r="5" class="svg-acc" fill="var(--paper)"/><text x="404" y="58" text-anchor="middle" class="acct">不足額を供託</text></g>
+          <path d="M412 76 H 560" class="svg-dim" stroke-dasharray="3 3"/>
+          <text x="486" y="68" text-anchor="middle" class="dimt">2週間以内</text>
+          <g><circle cx="568" cy="76" r="5" class="svg-ink" fill="var(--paper)"/><text x="568" y="58" text-anchor="middle">免許権者へ届出</text></g>
+          <text x="40" y="102" class="lbl">2週間が2回続く — 「供託まで2週間、届出まで2週間」</text>
+
+          <line x1="24" y1="130" x2="696" y2="130" class="svg-hair"/>
+
+          <!-- 保証協会 -->
+          <text x="24" y="158" class="dimt">保証協会</text>
+          <line x1="40" y1="206" x2="680" y2="206" class="svg-hair"/>
+          <g><circle cx="70" cy="206" r="5" class="svg-ink" fill="var(--paper)"/><text x="70" y="188" text-anchor="middle">認証・還付</text></g>
+          <g><circle cx="240" cy="206" r="5" class="svg-ink" fill="var(--paper)"/><text x="240" y="188" text-anchor="middle">協会が2週間以内に供託</text></g>
+          <g><circle cx="404" cy="206" r="5" class="svg-ink" fill="var(--paper)"/><text x="404" y="188" text-anchor="middle">協会から社員へ通知</text></g>
+          <path d="M412 206 H 560" class="svg-dim" stroke-dasharray="3 3"/>
+          <text x="486" y="198" text-anchor="middle" class="dimt">2週間以内</text>
+          <g><circle cx="568" cy="206" r="5" class="svg-acc" fill="var(--paper)"/><text x="568" y="188" text-anchor="middle" class="acct">還付充当金を納付</text></g>
+          <text x="40" y="232" class="acct">納付しないと社員の地位を失う → その日から1週間以内に営業保証金を供託</text>
+        </svg>
+        <figcaption>Fig.3 — 還付されたあとの立て直し</figcaption>
+      </figure>
+
+      <div class="scroll">
+        <table>
+          <thead><tr><th>論点</th><th>内容</th></tr></thead>
+          <tbody>
+            <tr><td><strong>還付を受けられる者</strong></td><td>宅建業に関し取引をした者。<span class="no">宅建業者は除かれる</span></td></tr>
+            <tr><td>対象となる債権</td><td>その<strong>取引により生じた債権</strong>。広告代金や内装工事代金などの債権は対象外</td></tr>
+            <tr><td>保証協会の特則</td><td>社員が<strong>社員となる前に</strong>した取引の相手方も還付を受けられる</td></tr>
+            <tr><td>認証</td><td>保証協会の制度では、還付を受けようとする者は<strong>保証協会の認証</strong>を受ける必要がある</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="call exam">
+        <span class="tag">よく出る</span>
+        <p><strong>還付を受けられるのは「宅建業者以外」の取引の相手方だけ。</strong>プロ同士の取引は保護されない。<br>
+        また<strong>「取引により生じた債権」に限られる</strong>ので、その業者の広告を請け負った広告会社や、内装を請け負った工務店の代金債権は還付の対象にならない。</p>
+      </div>
+    </section>
+
+    <!-- 04 -->
+    <section id="torimodoshi">
+      <h2 class="sec"><span class="num">04</span>取戻しと保管替え</h2>
+
+      <h3>4-1　取戻し</h3>
+      <p>営業保証金を返してもらうこと。原則として <strong>6か月を下らない一定期間内に申し出るべき旨を公告</strong> し、その期間内に申出がなかったときに取り戻せる。</p>
+
+      <div class="scroll">
+        <table>
+          <thead><tr><th>取戻しの事由</th><th class="n">公告</th></tr></thead>
+          <tbody>
+            <tr><td>免許の有効期間満了・免許取消し・廃業等</td><td class="n no">必要</td></tr>
+            <tr><td>一部の事務所を廃止して供託額が超過した</td><td class="n no">必要</td></tr>
+            <tr><td><strong>保証協会の社員になった</strong></td><td class="n yes">不要</td></tr>
+            <tr><td><strong>取戻し事由の発生から10年</strong>が経過した</td><td class="n yes">不要</td></tr>
+            <tr><td>二重供託（本店移転で新たに供託した場合の従前分）</td><td class="n yes">不要</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="call tip">
+        <span class="tag">覚え方</span>
+        <p>公告は「債権者はいませんか」と呼びかける手続。<strong>保証協会に入れば協会のお金が代わりに担保になる</strong>し、<strong>10年経てば債権は時効</strong>で消える。だから呼びかける必要がない、と理解する。</p>
+      </div>
+
+      <h3>4-2　保管替え</h3>
+      <p>主たる事務所を移転して、最寄りの供託所が変わったときの手続。</p>
+
+      <div class="scroll">
+        <table>
+          <thead><tr><th>供託の方法</th><th>手続</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><strong>金銭のみ</strong>で供託している</td>
+              <td class="no">遅滞なく、<strong>費用を予納して保管替えを請求</strong>する</td>
+            </tr>
+            <tr>
+              <td><strong>有価証券が含まれる</strong></td>
+              <td class="no">保管替えはできない。遅滞なく、<strong>移転後の供託所に新たに供託</strong>し、その後に従前の分を取り戻す（二重供託）</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="call trap">
+        <span class="tag">ひっかけ</span>
+        <p><strong>保管替えができるのは金銭のみで供託している場合だけ。</strong>「金銭と有価証券で供託している場合も保管替えを請求できる」は誤り。1円でも有価証券が混ざっていれば新規供託になる。</p>
+      </div>
+    </section>
+
+    <!-- 05 -->
+    <section id="kyoukai">
+      <h2 class="sec"><span class="num">05</span>保証協会</h2>
+
+      <div class="scroll">
+        <table>
+          <thead><tr><th>論点</th><th>内容</th></tr></thead>
+          <tbody>
+            <tr><td>指定</td><td><strong>国土交通大臣</strong>が指定する</td></tr>
+            <tr><td>加入</td><td class="no"><strong>任意</strong>。ただし <strong>1つの保証協会にしか加入できない</strong>（重複加入の禁止）</td></tr>
+            <tr><td>加入・脱退の報告</td><td>保証協会は、新たに社員が加入し、または社員がその地位を失ったときは、<strong>直ちに</strong>その旨をその社員である宅建業者の<strong>免許権者に報告</strong>しなければならない</td></tr>
+            <tr><td>分担金の納付</td><td><strong>社員となる日まで</strong>に納付する</td></tr>
+            <tr><td>協会の供託</td><td>納付を受けた日から <strong>1週間以内</strong> に、法務大臣および国土交通大臣が定める供託所に供託する</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>5-1　保証協会の業務</h3>
+      <div class="scroll">
+        <table>
+          <thead><tr><th class="n">区分</th><th>業務</th></tr></thead>
+          <tbody>
+            <tr><td class="n no">必須</td><td><strong>苦情の解決</strong>／<strong>研修</strong>（宅建士その他の従業者に対する）／<strong>弁済業務</strong></td></tr>
+            <tr><td class="n">任意</td><td>一般保証業務／<strong>手付金等保管事業</strong>／研修費用の助成／宅建業の健全な発達を図るため必要な業務</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="call tip">
+        <span class="tag">覚え方</span>
+        <p>必須業務は<strong>「苦情・研修・弁済」</strong>の3つ。「苦情を聞き、教育し、弁償する」と唱える。<br>
+        <strong>手付金等保管事業は任意業務</strong>。8種制限の手付金等の保全措置で登場する「指定保管機関」がこれにあたる。</p>
+      </div>
+
+      <div class="call exam">
+        <span class="tag">よく出る</span>
+        <p>苦情の解決について、保証協会は社員に<strong>文書・口頭による説明や資料の提出を求めることができ、社員は正当な理由がなければ拒めない</strong>。また解決の結果を<strong>社員に周知</strong>させなければならない。</p>
+      </div>
+    </section>
+
+    <!-- 06 -->
+    <section id="bensai">
+      <h2 class="sec"><span class="num">06</span>弁済業務</h2>
+
+      <div class="scroll">
+        <table>
+          <thead><tr><th>用語</th><th>内容</th></tr></thead>
+          <tbody>
+            <tr><td><strong>弁済業務保証金分担金</strong></td><td>社員（業者）が<strong>協会に納める</strong>お金。主たる事務所60万円・その他30万円。<strong>金銭のみ</strong></td></tr>
+            <tr><td><strong>弁済業務保証金</strong></td><td>協会が<strong>供託所に供託する</strong>お金。金銭・有価証券のどちらでもよい</td></tr>
+            <tr><td><strong>還付充当金</strong></td><td>還付された分を社員が協会に穴埋めするお金。通知から <strong>2週間以内</strong></td></tr>
+            <tr><td><strong>弁済業務保証金準備金</strong></td><td>還付に充てるため協会が積み立てる準備金。供託にかかる利息などを充てる</td></tr>
+            <tr><td><strong>特別弁済業務保証金分担金</strong></td><td>準備金でも足りないとき、協会が社員に納付を求めることができるもの。通知から <strong>1か月以内</strong> に納付。怠ると社員の地位を失う</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="call trap">
+        <span class="tag">ひっかけ</span>
+        <p><strong>「分担金」は金銭のみ、「弁済業務保証金」は有価証券でもよい。</strong>業者が協会に払う段階と、協会が供託所に納める段階を区別する。<br>
+        還付充当金は<strong>2週間</strong>、特別弁済業務保証金分担金は<strong>1か月</strong>と期限が違う点も狙われる。</p>
+      </div>
+    </section>
+
+    <!-- 07 -->
+    <section id="chii">
+      <h2 class="sec"><span class="num">07</span>社員の地位の喪失</h2>
+
+      <div class="scroll">
+        <table>
+          <thead><tr><th>地位を失う場合</th><th class="n">期限</th></tr></thead>
+          <tbody>
+            <tr><td><strong>還付充当金</strong>を納付しなかった</td><td class="n no">通知から2週間以内に納付しないとき</td></tr>
+            <tr><td><strong>特別弁済業務保証金分担金</strong>を納付しなかった</td><td class="n no">通知から1か月以内に納付しないとき</td></tr>
+            <tr><td><strong>事務所を新設</strong>したのに分担金を納付しなかった</td><td class="n no">新設の日から2週間以内に納付しないとき</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="call exam">
+        <span class="tag">よく出る</span>
+        <p><strong>社員の地位を失ったら、その日から1週間以内に営業保証金を供託しなければならない。</strong>供託しないまま営業を続けると業務停止等の対象になる。<br>
+        地位を失った旨は、協会から<strong>免許権者に直ちに報告</strong>される。</p>
+      </div>
+    </section>
+
+    <!-- 08 -->
+    <section id="deru">
+      <h2 class="sec"><span class="num">08</span>よく出る論点</h2>
+      <div class="scroll">
+        <table>
+          <thead><tr><th class="n">順位</th><th>論点</th><th>要点</th></tr></thead>
+          <tbody>
+            <tr><td class="n">1</td><td><strong>2制度の対比</strong></td><td>金額・納付先・事業開始時期・事務所新設の扱い</td></tr>
+            <tr><td class="n">2</td><td>還付と補充</td><td>宅建業者は還付を受けられない／2週間の連鎖／認証</td></tr>
+            <tr><td class="n">3</td><td>社員の地位の喪失</td><td>2週間・1か月・2週間／喪失後1週間以内に営業保証金</td></tr>
+            <tr><td class="n">4</td><td>取戻しと公告</td><td>公告不要は「協会加入・10年経過・二重供託」</td></tr>
+            <tr><td class="n">5</td><td>保管替え</td><td>金銭のみのときだけ請求できる</td></tr>
+            <tr><td class="n">6</td><td>供託物の評価</td><td>国債100%・地方債90%・その他80%</td></tr>
+            <tr><td class="n">7</td><td>保証協会の業務</td><td>必須は苦情・研修・弁済／手付金等保管事業は任意</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 09 -->
+    <section id="hikkake">
+      <h2 class="sec"><span class="num">09</span>ひっかけ一覧</h2>
+      <div class="scroll">
+        <table class="traps">
+          <thead><tr><th>こう書かれたら疑う</th><th>正しくは</th></tr></thead>
+          <tbody>
+            <tr><td>営業保証金は金銭でしか供託できない</td><td><strong>有価証券でもよい</strong>（国債100%・地方債90%・その他80%）</td></tr>
+            <tr><td>弁済業務保証金分担金は有価証券でも納付できる</td><td><strong>金銭のみ</strong></td></tr>
+            <tr><td>供託すればすぐに事業を開始できる</td><td>供託を<strong>免許権者に届け出た後</strong>でなければ開始できない</td></tr>
+            <tr><td>社員は分担金を納付し、その届出をしてから事業を開始する</td><td>協会が供託するので、<strong>社員となった時</strong>から開始できる</td></tr>
+            <tr><td>事務所を新設したら2週間以内に営業保証金を供託する</td><td>営業保証金は<strong>供託・届出後</strong>に開始。2週間は<strong>保証協会</strong>のルール</td></tr>
+            <tr><td>宅建業者も還付を受けられる</td><td><strong>宅建業者は除かれる</strong></td></tr>
+            <tr><td>広告代金の債権についても還付を受けられる</td><td><strong>取引により生じた債権</strong>に限られる</td></tr>
+            <tr><td>還付を受けるには免許権者の認証が必要</td><td><strong>保証協会</strong>の認証（営業保証金なら認証自体が不要）</td></tr>
+            <tr><td>還付充当金を納付しないと業務停止処分を受ける</td><td><strong>社員の地位を失う</strong></td></tr>
+            <tr><td>社員の地位を失ったら2週間以内に営業保証金を供託する</td><td><strong>1週間以内</strong></td></tr>
+            <tr><td>保証協会は複数加入できる</td><td><strong>1つの協会にしか加入できない</strong></td></tr>
+            <tr><td>免許から3か月供託しないと免許を取り消さなければならない</td><td>まず<strong>催告が義務</strong>。取消しは催告到達から1か月後に「できる」</td></tr>
+            <tr><td>有価証券を含む場合も保管替えを請求できる</td><td><strong>金銭のみ</strong>のときだけ</td></tr>
+            <tr><td>保証協会に加入した場合も公告してから取り戻す</td><td><strong>公告不要</strong></td></tr>
+            <tr><td>手付金等保管事業は保証協会の必須業務である</td><td><strong>任意業務</strong>（必須は苦情・研修・弁済）</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 10 -->
+    <section id="suji">
+      <h2 class="sec"><span class="num">10</span>数字まとめ</h2>
+      <p class="masthead-note">右上の「数値を隠す」で自己テストできる。</p>
+      <div class="nums" id="numgrid">
+        <div class="nc" tabindex="0"><span class="v">1,000万円</span><span class="d">営業保証金 — 主たる事務所</span></div>
+        <div class="nc" tabindex="0"><span class="v">500万円</span><span class="d">営業保証金 — その他の事務所1か所につき</span></div>
+        <div class="nc" tabindex="0"><span class="v">60万円</span><span class="d">弁済業務保証金分担金 — 主たる事務所</span></div>
+        <div class="nc" tabindex="0"><span class="v">30万円</span><span class="d">弁済業務保証金分担金 — その他の事務所1か所につき</span></div>
+        <div class="nc" tabindex="0"><span class="v">100 / 90 / 80%</span><span class="d">国債／地方債・政府保証債／その他の有価証券の評価</span></div>
+        <div class="nc" tabindex="0"><span class="v">3か月 → 1か月</span><span class="d">供託の届出がない場合の催告と免許取消し</span></div>
+        <div class="nc" tabindex="0"><span class="v">1週間以内</span><span class="d">協会が分担金を受けてから供託するまで／社員の地位喪失後の営業保証金供託</span></div>
+        <div class="nc" tabindex="0"><span class="v">2週間以内</span><span class="d">不足額の供託・その届出／還付充当金の納付／事務所新設時の分担金</span></div>
+        <div class="nc" tabindex="0"><span class="v">1か月以内</span><span class="d">特別弁済業務保証金分担金の納付</span></div>
+        <div class="nc" tabindex="0"><span class="v">6か月</span><span class="d">取戻しの公告期間（これを下らない期間）</span></div>
+        <div class="nc" tabindex="0"><span class="v">10年</span><span class="d">取戻し事由の発生から公告が不要になるまでの期間</span></div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <h4>出典</h4>
+    <ul>
+      <li>宅地建物取引業法（昭和27年法律第176号）第25条〜第30条、第64条の2〜第64条の25 — <a href="https://laws.e-gov.go.jp/law/327AC1000000176">e-Gov法令検索</a></li>
+      <li>国土交通省 不動産業（宅地建物取引業法） — <a href="https://www.mlit.go.jp/totikensangyo/const/1_6_bf_000030.html">mlit.go.jp</a></li>
+    </ul>
+    <div class="sibling">
+      <a href="../index.html">総目次</a>
+      <a href="免許制度.html">免許制度</a>
+      <a href="宅地建物取引士.html">← 宅地建物取引士</a>
+    </div>
+  </footer>
+
+</div>
+
+<script>
+  (function () {
+    var root = document.documentElement;
+    document.getElementById('theme').addEventListener('click', function () {
+      if (root.getAttribute('data-theme')) { root.removeAttribute('data-theme'); return; }
+      var dark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      root.setAttribute('data-theme', dark ? 'light' : 'dark');
+    });
+    var maskBtn = document.getElementById('mask');
+    var grid = document.getElementById('numgrid');
+    maskBtn.addEventListener('click', function () {
+      var on = grid.classList.toggle('masked');
+      maskBtn.setAttribute('aria-pressed', String(on));
+      maskBtn.textContent = on ? '数値を表示' : '数値を隠す';
+    });
+    var links = Array.prototype.slice.call(document.querySelectorAll('nav.rail ol a'));
+    var map = {};
+    links.forEach(function (a) { map[a.getAttribute('href').slice(1)] = a; });
+    var seen = [];
+    var obs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        var i = seen.indexOf(e.target.id);
+        if (e.isIntersecting && i < 0) seen.push(e.target.id);
+        if (!e.isIntersecting && i >= 0) seen.splice(i, 1);
+      });
+      links.forEach(function (a) { a.classList.remove('on'); });
+      if (seen.length) {
+        var order = Object.keys(map);
+        seen.sort(function (a, b) { return order.indexOf(a) - order.indexOf(b); });
+        map[seen[0]].classList.add('on');
+      }
+    }, { rootMargin: '-10% 0px -70% 0px' });
+    document.querySelectorAll('main section').forEach(function (s) { obs.observe(s); });
+  })();
+</script>

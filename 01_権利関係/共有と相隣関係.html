@@ -1,0 +1,780 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>共有と相隣関係 — 宅建士試験 2026年度</title>
+
+<style>
+  :root {
+    --paper:#EBEDE9; --surface:#F8F9F6; --sunk:#E1E4DE; --ink:#151F2A; --muted:#5D6B78;
+    --rule:#CDD2CB; --hair:#DCE0D9; --accent:#B8342A; --accent-soft:#F3DEDB;
+    --blue:#2A5F86; --blue-soft:#DCE6EE;
+    --font-display:"Hiragino Mincho ProN","Yu Mincho","YuMincho","Noto Serif JP",serif;
+    --font-body:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","YuGothic","Noto Sans JP",system-ui,sans-serif;
+    --font-mono:ui-monospace,"SFMono-Regular","SF Mono",Menlo,Consolas,monospace;
+    --measure:68ch;
+    --s1:.35rem; --s2:.7rem; --s3:1.1rem; --s4:1.7rem; --s5:2.6rem; --s6:4rem;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper:#0D1B29; --surface:#132534; --sunk:#0A1622; --ink:#DAE4EC; --muted:#8CA1B3;
+      --rule:#26415A; --hair:#1D3448; --accent:#FF7059; --accent-soft:#3A1F1D;
+      --blue:#6FB6DC; --blue-soft:#14293A;
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper:#0D1B29; --surface:#132534; --sunk:#0A1622; --ink:#DAE4EC; --muted:#8CA1B3;
+    --rule:#26415A; --hair:#1D3448; --accent:#FF7059; --accent-soft:#3A1F1D;
+    --blue:#6FB6DC; --blue-soft:#14293A;
+  }
+
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--paper); color:var(--ink); font-family:var(--font-body);
+    font-size:16px; line-height:1.9; -webkit-font-smoothing:antialiased; font-feature-settings:"palt" 1; }
+
+  .wrap { display:grid; grid-template-columns:15.5rem minmax(0,1fr); gap:var(--s6);
+    max-width:80rem; margin:0 auto; padding:0 var(--s4) var(--s6); align-items:start; }
+  @media (max-width:60rem){ .wrap{ grid-template-columns:minmax(0,1fr); gap:var(--s4); padding:0 var(--s3) var(--s5);} }
+
+  .masthead { grid-column:1/-1; padding:var(--s5) 0 var(--s4); border-bottom:2px solid var(--ink);
+    margin-bottom:var(--s2); display:flex; flex-wrap:wrap; align-items:flex-end; justify-content:space-between; gap:var(--s3); }
+  .eyebrow { font-family:var(--font-mono); font-size:.72rem; letter-spacing:.16em; text-transform:uppercase;
+    color:var(--muted); display:flex; align-items:center; gap:.6em; }
+  .eyebrow::before { content:""; width:2.2rem; height:1px; background:var(--accent); }
+  .eyebrow a { color:var(--accent); text-decoration:none; }
+  .eyebrow a:hover { text-decoration:underline; text-underline-offset:.2em; }
+  h1 { font-family:var(--font-display); font-weight:600; font-size:clamp(2rem,1.4rem + 2.6vw,3.1rem);
+    line-height:1.2; letter-spacing:.04em; margin:var(--s2) 0 var(--s3); text-wrap:balance; }
+  .facts { display:flex; flex-wrap:wrap; gap:0 var(--s3); font-size:.82rem; color:var(--muted); list-style:none; margin:0; padding:0; }
+  .facts b { font-family:var(--font-mono); font-variant-numeric:tabular-nums; color:var(--ink); font-weight:600; }
+  .toggles { display:flex; gap:var(--s1); }
+  button { font-family:var(--font-body); font-size:.78rem; color:var(--muted); background:var(--surface);
+    border:1px solid var(--rule); border-radius:2px; padding:.4em .9em; cursor:pointer; transition:color .15s,border-color .15s; }
+  button:hover { color:var(--ink); border-color:var(--ink); }
+  button:focus-visible { outline:2px solid var(--accent); outline-offset:2px; }
+  button[aria-pressed="true"] { color:var(--accent); border-color:var(--accent); }
+
+  nav.rail { position:sticky; top:var(--s3); font-size:.82rem; max-height:calc(100vh - 3rem); overflow-y:auto; padding-bottom:var(--s3); }
+  nav.rail h2 { font-family:var(--font-mono); font-size:.68rem; letter-spacing:.16em; text-transform:uppercase; color:var(--muted); margin:0 0 var(--s2); font-weight:500; }
+  nav.rail ol { list-style:none; margin:0; padding:0; display:flex; flex-direction:column; }
+  nav.rail a { display:block; padding:.3em 0 .3em .9em; color:var(--muted); text-decoration:none; border-left:2px solid var(--hair); line-height:1.5; }
+  nav.rail a:hover { color:var(--ink); border-left-color:var(--rule); }
+  nav.rail a.on { color:var(--ink); border-left-color:var(--accent); font-weight:600; }
+  nav.rail a .num { font-family:var(--font-mono); font-size:.72rem; color:var(--muted); margin-right:.5em; }
+  nav.rail a.home { border-left:none; padding:0 0 var(--s2); color:var(--accent);
+    font-family:var(--font-mono); font-size:.72rem; letter-spacing:.1em; }
+  nav.rail a.home:hover { color:var(--accent); text-decoration:underline; text-underline-offset:.2em; }
+  @media (max-width:60rem){
+    nav.rail{ position:static; max-height:none; border-bottom:1px solid var(--rule); padding-bottom:var(--s3); }
+    nav.rail ol{ display:grid; grid-template-columns:repeat(auto-fill,minmax(9rem,1fr)); gap:0 var(--s2); }
+  }
+
+  main { min-width:0; }
+  section { padding-top:var(--s5); scroll-margin-top:var(--s3); }
+  section > * { max-width:var(--measure); }
+  section > figure, section > .scroll { max-width:none; }
+
+  h2.sec { font-family:var(--font-display); font-size:clamp(1.45rem,1.2rem + .9vw,1.9rem); font-weight:600;
+    letter-spacing:.04em; margin:0 0 var(--s3); padding-bottom:var(--s2); border-bottom:1px solid var(--rule);
+    display:flex; align-items:baseline; gap:.7em; max-width:none; }
+  h2.sec .num { font-family:var(--font-mono); font-size:.8rem; letter-spacing:.1em; color:var(--accent); font-weight:500; }
+  h3 { font-family:var(--font-body); font-size:1.06rem; font-weight:700; letter-spacing:.02em;
+    margin:var(--s4) 0 var(--s2); padding-left:.7em; border-left:3px solid var(--ink); }
+  p { margin:0 0 var(--s3); }
+  a { color:var(--blue); text-underline-offset:.2em; }
+  em { font-style:normal; background:linear-gradient(transparent 62%, var(--accent-soft) 62%); font-weight:600; }
+  ul, ol { margin:0 0 var(--s3); padding-left:1.3em; }
+  li { margin-bottom:var(--s1); }
+  .lead { font-size:1.05rem; color:var(--muted); }
+
+  .call { max-width:var(--measure); margin:0 0 var(--s3); padding:var(--s3) var(--s3) var(--s3) var(--s4);
+    background:var(--surface); border:1px solid var(--hair); border-left:3px solid var(--rule); border-radius:2px; font-size:.94rem; }
+  .call > :last-child { margin-bottom:0; }
+  .call .tag { display:block; font-family:var(--font-mono); font-size:.68rem; letter-spacing:.16em; text-transform:uppercase; color:var(--muted); margin-bottom:var(--s1); }
+  .call.trap { border-left-color:var(--accent); background:var(--accent-soft); }
+  .call.trap .tag { color:var(--accent); }
+  .call.exam { border-left-color:var(--ink); }
+  .call.exam .tag { color:var(--ink); }
+  .call.rev { border-left-color:var(--accent); }
+  .call.rev .tag { color:var(--accent); }
+  .call.tip { border-left-color:var(--blue); background:var(--blue-soft); }
+  .call.tip .tag { color:var(--blue); }
+
+  .scroll { overflow-x:auto; margin:0 0 var(--s3); -webkit-overflow-scrolling:touch; }
+  table { border-collapse:collapse; width:100%; font-size:.88rem; line-height:1.6; }
+  caption { text-align:left; font-size:.78rem; color:var(--muted); padding-bottom:var(--s1); font-family:var(--font-mono); letter-spacing:.08em; }
+  th, td { padding:.58em .75em; text-align:left; vertical-align:top; border-bottom:1px solid var(--hair); }
+  thead th { font-size:.74rem; letter-spacing:.08em; color:var(--muted); font-weight:600; border-bottom:1px solid var(--ink); }
+  tbody tr:hover { background:var(--surface); }
+  td.n, th.n { text-align:center; font-family:var(--font-mono); font-variant-numeric:tabular-nums; white-space:nowrap; }
+  .no { color:var(--accent); font-weight:700; }
+  .yes { color:var(--muted); }
+  .tri { color:var(--blue); }
+  table.kyoyu tbody td:nth-child(2) { font-family:var(--font-mono); font-weight:600; text-align:center; white-space:nowrap; }
+  table.kyoyu tr.hi { background:var(--accent-soft); }
+
+  figure { margin:0 0 var(--s4); }
+  figure svg { display:block; width:100%; height:auto; }
+  figcaption { font-size:.78rem; color:var(--muted); font-family:var(--font-mono); letter-spacing:.06em; margin-top:var(--s2); padding-top:var(--s1); border-top:1px solid var(--hair); }
+  .plate { background:var(--surface); border:1px solid var(--hair); border-radius:2px; padding:var(--s3); }
+  .svg-ink { fill:none; stroke:var(--ink); stroke-width:1.4; }
+  .svg-hair { fill:none; stroke:var(--rule); stroke-width:1; }
+  .svg-dim { fill:none; stroke:var(--blue); stroke-width:1; }
+  .svg-acc { fill:none; stroke:var(--accent); stroke-width:1.6; }
+  .svg-fill { fill:var(--sunk); stroke:var(--rule); stroke-width:1; }
+  .svg-accfill { fill:var(--accent-soft); stroke:var(--accent); stroke-width:1.2; }
+  .svg-bluefill { fill:var(--blue-soft); stroke:var(--blue); stroke-width:1.2; }
+  text { font-family:var(--font-body); fill:var(--ink); font-size:12px; }
+  text.lbl { font-family:var(--font-mono); fill:var(--muted); font-size:10.5px; letter-spacing:.06em; }
+  text.dimt { font-family:var(--font-mono); fill:var(--blue); font-size:11px; }
+  text.acct { fill:var(--accent); font-size:11.5px; font-weight:700; }
+  text.frac { font-family:var(--font-mono); font-size:15px; font-weight:600; }
+
+  .nums { display:grid; grid-template-columns:repeat(auto-fill,minmax(12rem,1fr)); gap:var(--s2); }
+  .nc { background:var(--surface); border:1px solid var(--hair); border-radius:2px; padding:var(--s3) var(--s3) var(--s2); display:flex; flex-direction:column; gap:var(--s1); }
+  .nc .v { font-family:var(--font-mono); font-size:1.15rem; font-weight:600; line-height:1.3; color:var(--accent); }
+  .nc .d { font-size:.8rem; color:var(--muted); line-height:1.6; }
+  .nums.masked .v { color:transparent; background:var(--rule); border-radius:2px; user-select:none; }
+  .nums.masked .nc:hover .v, .nums.masked .nc:focus-within .v { color:var(--accent); background:transparent; }
+  .nc:focus-visible { outline:2px solid var(--accent); outline-offset:2px; }
+  .masthead-note { font-size:.78rem; color:var(--muted); margin-bottom:var(--s2); }
+
+  table.traps td:first-child { color:var(--muted); }
+  table.traps td:first-child::before { content:"「"; }
+  table.traps td:first-child::after { content:"」"; }
+  table.traps td:last-child strong { color:var(--accent); }
+
+  footer { grid-column:1/-1; margin-top:var(--s6); padding-top:var(--s3); border-top:1px solid var(--rule); font-size:.8rem; color:var(--muted); }
+  footer ul { list-style:none; padding:0; }
+  footer li { margin-bottom:var(--s1); }
+  .sibling { display:flex; flex-wrap:wrap; gap:var(--s2); margin-top:var(--s3); }
+  .sibling a { font-size:.8rem; text-decoration:none; border:1px solid var(--rule); border-radius:2px; padding:.35em .8em; color:var(--muted); }
+  .sibling a:hover { color:var(--ink); border-color:var(--ink); }
+
+  /* ── 肢別○×ドリル ── */
+  .drillbar { max-width:none; display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between;
+    gap:var(--s2); margin:0 0 var(--s3); padding:var(--s2) var(--s3); background:var(--surface);
+    border:1px solid var(--rule); border-radius:2px; position:sticky; top:0; z-index:5; }
+  .drillbar .score { font-family:var(--font-mono); font-size:.8rem; font-variant-numeric:tabular-nums;
+    color:var(--muted); letter-spacing:.04em; }
+  .drillbar .score b { color:var(--ink); font-weight:600; }
+  .drillbar .score .pct { color:var(--accent); font-weight:600; }
+  .drillbar .dbtns { display:flex; gap:var(--s1); }
+  ol.drill { max-width:none; list-style:none; margin:0; padding:0; counter-reset:dq; }
+  li.dq { counter-increment:dq; margin:0 0 var(--s2); padding:var(--s3);
+    background:var(--surface); border:1px solid var(--hair); border-left:3px solid var(--rule); border-radius:2px; }
+  li.dq > .s { margin:0; font-size:.95rem; line-height:1.85; max-width:var(--measure); }
+  li.dq > .s::before { content:counter(dq,decimal-leading-zero); font-family:var(--font-mono);
+    font-size:.72rem; letter-spacing:.08em; color:var(--muted); margin-right:.9em; }
+  li.dq .ch { display:flex; gap:var(--s1); margin-top:var(--s2); }
+  li.dq .ch button { font-family:var(--font-display); font-size:1.05rem; line-height:1; min-width:3.6rem; padding:.4em 0; }
+  li.dq .ch button[data-picked] { color:var(--ink); border-color:var(--ink); font-weight:700; }
+  li.dq .ex { display:none; margin-top:var(--s3); padding-top:var(--s2); border-top:1px solid var(--hair); }
+  li.dq.done .ex { display:block; }
+  li.dq .ex .verdict { display:block; font-family:var(--font-mono); font-size:.7rem; letter-spacing:.14em;
+    margin-bottom:var(--s1); }
+  li.dq .ex p { margin:0; font-size:.88rem; line-height:1.8; color:var(--muted); max-width:var(--measure); }
+  li.dq .ex p strong { color:var(--ink); font-weight:700; }
+  li.dq.ok { border-left-color:var(--blue); }
+  li.dq.ok .verdict { color:var(--blue); }
+  li.dq.ng { border-left-color:var(--accent); background:var(--accent-soft); }
+  li.dq.ng .verdict { color:var(--accent); }
+  li.dq.ng .ex p strong { color:var(--accent); }
+  ol.drill.onlyng li.dq:not(.ng) { display:none; }
+  .drilldone { font-size:.84rem; color:var(--muted); padding:var(--s3); border:1px dashed var(--rule);
+    border-radius:2px; text-align:center; }
+
+  @media (prefers-reduced-motion: reduce){ *{ transition:none !important; animation:none !important; scroll-behavior:auto !important; } }
+  html { scroll-behavior:smooth; }
+</style>
+
+<div class="wrap">
+
+  <header class="masthead">
+    <div>
+      <div class="eyebrow"><a href="../index.html">← 総目次</a> &nbsp;/&nbsp; 01 権利関係 &nbsp;/&nbsp; 宅建士試験 2026年度</div>
+      <h1>共有と相隣関係</h1>
+      <ul class="facts">
+        <li>法令基準日 <b>2026-04-01</b></li>
+        <li>出題数 <b>約1問</b></li>
+        <li>ドリル <b>32肢</b></li>
+        <li>目標 <b>取れれば加点</b></li>
+        <li>更新 <b>2026-08-16</b></li>
+      </ul>
+    </div>
+    <div class="toggles">
+      <button id="mask" type="button" aria-pressed="false">答えを隠す</button>
+      <button id="theme" type="button">配色切替</button>
+    </div>
+  </header>
+
+  <nav class="rail" aria-label="目次">
+    <a class="home" href="../index.html">← 総目次</a>
+    <h2>Contents</h2>
+    <ol>
+      <li><a href="#mochibun"><span class="num">00</span>持分</a></li>
+      <li><a href="#kanri"><span class="num">01</span>保存・管理・変更</a></li>
+      <li><a href="#fumei"><span class="num">02</span>所在等不明共有者</a></li>
+      <li><a href="#bunkatsu"><span class="num">03</span>共有物の分割</a></li>
+      <li><a href="#sourin"><span class="num">04</span>相隣関係</a></li>
+      <li><a href="#deru"><span class="num">05</span>よく出る論点</a></li>
+      <li><a href="#hikkake"><span class="num">06</span>ひっかけ一覧</a></li>
+      <li><a href="#matome"><span class="num">07</span>暗記カード</a></li>
+      <li><a href="#drill"><span class="num">08</span>肢別○×ドリル</a></li>
+    </ol>
+  </nav>
+
+  <main>
+
+    <!-- 00 -->
+    <section id="mochibun">
+      <h2 class="sec"><span class="num">00</span>持分</h2>
+
+      <div class="scroll">
+        <table>
+          <thead><tr><th>論点</th><th>内容</th></tr></thead>
+          <tbody>
+            <tr><td>持分の割合</td><td>各共有者の持分は<strong>相等しいものと推定</strong>される</td></tr>
+            <tr><td class="tri"><strong>持分の処分</strong></td><td class="tri">各共有者は<strong>自己の持分を自由に譲渡・担保設定できる</strong>。他の共有者の同意は不要</td></tr>
+            <tr><td>使用</td><td>各共有者は共有物の<strong>全部</strong >について、その<strong>持分に応じた使用</strong>をすることができる</td></tr>
+            <tr><td>使用の対価</td><td>共有物を使用する共有者は、他の共有者に対し、自己の持分を超える使用の対価を<strong>償還する義務</strong>を負う</td></tr>
+            <tr><td>費用の負担</td><td>管理の費用その他の負担は<strong>持分に応じて</strong>負う</td></tr>
+            <tr><td class="no"><strong>持分の放棄・死亡</strong></td><td class="no">共有者の1人が持分を放棄し、または相続人なくして死亡したときは、その持分は<strong>他の共有者に帰属</strong>する</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="call trap">
+        <span class="tag">ひっかけ</span>
+        <p><strong>持分の処分は自由。</strong>共有物そのものを処分するには全員の同意が必要だが、自分の持分だけなら誰の同意も要らない。この区別が最頻出。<br>
+        <strong>共有物を単独で占有している共有者に対し、他の共有者は当然には明渡しを請求できない</strong>（判例）。その共有者にも持分に基づく使用権があるから。求められるのは対価の償還。</p>
+      </div>
+    </section>
+
+    <!-- 01 -->
+    <section id="kanri">
+      <h2 class="sec"><span class="num">01</span>保存・管理・変更</h2>
+      <p class="lead">共有の出題はほぼここ。<em>行為の重さに応じて必要な同意が3段階</em>になっている。</p>
+
+      <figure class="plate">
+        <svg viewBox="0 0 720 220" role="img" aria-label="保存行為は各共有者が単独でできる。管理行為と軽微変更は持分の価格の過半数で決する。変更行為と処分は共有者全員の同意が必要。">
+          <line x1="40" y1="182" x2="690" y2="182" class="svg-ink"/>
+          <text x="40" y="206" class="lbl">軽い</text>
+          <text x="690" y="206" text-anchor="end" class="lbl">重い</text>
+
+          <rect x="46" y="56" width="196" height="112" class="svg-fill" rx="2"/>
+          <text x="144" y="84" text-anchor="middle" class="frac">単独でできる</text>
+          <text x="144" y="108" text-anchor="middle">保存行為</text>
+          <text x="144" y="132" text-anchor="middle" class="lbl">修繕・不法占拠者への明渡請求</text>
+          <text x="144" y="150" text-anchor="middle" class="lbl">無効な登記の抹消請求</text>
+
+          <rect x="256" y="56" width="212" height="112" class="svg-bluefill" rx="2"/>
+          <text x="362" y="84" text-anchor="middle" class="frac" fill="var(--blue)">持分の過半数</text>
+          <text x="362" y="108" text-anchor="middle">管理行為・軽微変更</text>
+          <text x="362" y="132" text-anchor="middle" class="lbl">賃貸借の締結・解除／管理者の選任</text>
+          <text x="362" y="150" text-anchor="middle" class="lbl">形状・効用の著しい変更を伴わない変更</text>
+
+          <rect x="482" y="56" width="212" height="112" class="svg-accfill" rx="2"/>
+          <text x="588" y="84" text-anchor="middle" class="frac" fill="var(--accent)">全員の同意</text>
+          <text x="588" y="108" text-anchor="middle">変更行為・処分</text>
+          <text x="588" y="132" text-anchor="middle" class="lbl">売却・増改築などの重大な変更</text>
+          <text x="588" y="150" text-anchor="middle" class="lbl">抵当権の設定・建物の取壊し</text>
+
+          <text x="40" y="38" class="lbl">「頭数」ではなく「持分の価格」で数えることに注意</text>
+        </svg>
+        <figcaption>Fig.1 — 3段階の同意要件</figcaption>
+      </figure>
+
+      <div class="scroll">
+        <table class="kyoyu">
+          <thead><tr><th>行為</th><th>必要な同意</th><th>具体例</th></tr></thead>
+          <tbody>
+            <tr><td><strong>保存行為</strong></td><td>各共有者が単独</td><td>共有物の修繕／<strong>不法占拠者への明渡請求</strong>／実体のない登記の抹消請求</td></tr>
+            <tr class="hi"><td><strong>管理行為</strong></td><td class="tri">持分の価格の<strong>過半数</strong></td><td>共有物の<strong>賃貸借の締結・解除</strong>／管理者の選任・解任／使用者の決定</td></tr>
+            <tr><td><strong>軽微変更</strong></td><td class="tri">持分の価格の<strong>過半数</strong></td><td>形状・効用の著しい変更を伴わない変更（外壁の修繕など）</td></tr>
+            <tr class="hi"><td><strong>変更行為・処分</strong></td><td class="no"><strong>全員の同意</strong></td><td>共有物の<strong>売却</strong>／抵当権の設定／建物の取壊し／増改築</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="call exam">
+        <span class="tag">よく出る</span>
+        <p><strong>賃貸借の締結は「管理行為」で過半数。</strong>ただし長期のもの（土地は5年、建物は3年を超えるなど）は変更行為として全員の同意が必要。<br>
+        <strong>不法占拠者への明渡請求は保存行為で単独可。</strong>共有者全員のためになる行為だから。ただし<strong>損害賠償の請求は自己の持分の割合に応じた額に限られる</strong>。</p>
+      </div>
+
+      <div class="call trap">
+        <span class="tag">ひっかけ</span>
+        <p><strong>「過半数」は頭数ではなく持分の価格で数える。</strong>3人のうち2人が賛成しても、その2人の持分が合計40%なら過半数に達しない。<br>
+        <strong>共有物全体を売却するには全員の同意が必要だが、自分の持分だけなら単独で売れる。</strong></p>
+      </div>
+    </section>
+
+    <!-- 02 -->
+    <section id="fumei">
+      <h2 class="sec"><span class="num">02</span>所在等不明共有者</h2>
+
+      <div class="call rev">
+        <span class="tag">2023年4月1日施行</span>
+        <p>所有者不明土地問題への対策として、<strong>所在等が不明な共有者がいても共有物の管理・処分を進められる仕組み</strong>が設けられました。裁判所の関与を前提とする点が共通しています。</p>
+      </div>
+
+      <div class="scroll">
+        <table>
+          <thead><tr><th>制度</th><th>内容</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><strong>管理に関する決定</strong></td>
+              <td>裁判所の決定を得て、<strong>所在等不明共有者以外</strong>の共有者の持分の価格の過半数で管理に関する事項を決められる</td>
+            </tr>
+            <tr>
+              <td><strong>変更・処分</strong></td>
+              <td>裁判所の決定を得て、<strong>所在等不明共有者以外</strong>の共有者全員の同意で変更を加えられる</td>
+            </tr>
+            <tr>
+              <td class="no"><strong>持分の取得</strong></td>
+              <td class="no">共有者は、裁判所の決定を得て、<strong>所在等不明共有者の持分を取得</strong>できる（時価相当額を供託する）</td>
+            </tr>
+            <tr>
+              <td><strong>持分の譲渡権限の付与</strong></td>
+              <td>裁判所の決定を得て、所在等不明共有者の持分を含めて<strong>第三者に譲渡する権限</strong>を与えてもらえる</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="call tip">
+        <span class="tag">つながり</span>
+        <p>同じ発想は<strong>2026年施行の区分所有法改正</strong>にも引き継がれ、<strong>所在等不明区分所有者を決議の母数から除外する制度</strong>として現れている（→ <a href="区分所有法.html">区分所有法</a>）。「不明者がいても前に進める」という近年の立法の共通テーマ。</p>
+      </div>
+    </section>
+
+    <!-- 03 -->
+    <section id="bunkatsu">
+      <h2 class="sec"><span class="num">03</span>共有物の分割</h2>
+
+      <div class="scroll">
+        <table>
+          <thead><tr><th>論点</th><th>内容</th></tr></thead>
+          <tbody>
+            <tr><td class="no"><strong>分割請求</strong></td><td class="no">各共有者は<strong>いつでも</strong>共有物の分割を請求できる</td></tr>
+            <tr><td><strong>不分割特約</strong></td><td><strong>5年</strong>を超えない期間内で分割をしない旨の契約ができる。更新もできるが、更新の時から <strong>5年</strong> を超えられない</td></tr>
+            <tr><td>協議が調わないとき</td><td><strong>裁判所</strong>に分割を請求できる</td></tr>
+            <tr>
+              <td>分割の方法</td>
+              <td><strong>現物分割</strong>／<strong>賠償分割</strong>（一部の共有者に取得させ他へ債務を負担させる）／<strong>競売分割</strong>（現物分割も賠償分割もできないとき）</td>
+            </tr>
+            <tr><td>担保責任</td><td>各共有者は、他の共有者が分割によって取得した物について、<strong>持分に応じて売主と同じ担保責任</strong>を負う</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="call trap">
+        <span class="tag">ひっかけ</span>
+        <p><strong>不分割特約は5年以内。</strong>10年とする特約は5年に短縮されるのではなく、<strong>5年を超える部分が無効</strong>と扱われる点に注意。<br>
+        <strong>分割請求は「いつでも」できる</strong>のが原則。共有は暫定的な状態であり、いつでも解消できるべきという考え方に基づく。</p>
+      </div>
+    </section>
+
+    <!-- 04 -->
+    <section id="sourin">
+      <h2 class="sec"><span class="num">04</span>相隣関係</h2>
+
+      <div class="scroll">
+        <table>
+          <thead><tr><th>制度</th><th>内容</th></tr></thead>
+          <tbody>
+            <tr>
+              <td class="no"><strong>隣地使用権</strong></td>
+              <td class="no">境界付近での障壁・建物の築造・修繕、境界標の調査、越境した枝の切取りのため、<strong>必要な範囲で隣地を使用できる</strong>。<span class="tri">2023年改正で「隣地の使用を請求できる」から「使用できる」に変更された</span><br>あらかじめ目的・日時・場所・方法を隣地所有者等に<strong>通知</strong>する。住家に立ち入るには<strong>居住者の承諾</strong>が必要</td>
+            </tr>
+            <tr>
+              <td><strong>公道に至るための<br>他の土地の通行権</strong></td>
+              <td>袋地の所有者は、<strong>公道に至るため他の土地を通行できる</strong>。通行の場所・方法は必要かつ最も損害の少ないものを選ぶ。<strong>償金</strong>を支払う<br><span class="tri">分割によって袋地が生じたときは、<strong>分割の他方の土地のみ</strong>を通行でき、<strong>償金は不要</strong></span></td>
+            </tr>
+            <tr>
+              <td class="no"><strong>竹木の枝と根</strong></td>
+              <td class="no"><strong>根</strong>が越境 → <strong>自ら切り取れる</strong><br><strong>枝</strong>が越境 → 原則として所有者に<strong>切除させる</strong>。<span class="tri">ただし2023年改正で、①催告しても相当期間内に切除しないとき ②所有者を知ることができずまたはその所在を知ることができないとき ③急迫の事情があるとき は<strong>自ら切り取れる</strong></span></td>
+            </tr>
+            <tr>
+              <td>ライフラインの設備設置権</td>
+              <td>2023年改正で新設。電気・ガス・水道等を引くため、必要な範囲で他人の土地に設備を設置し、または他人の設備を使用できる</td>
+            </tr>
+            <tr><td>境界標の設置</td><td>費用は<strong>相隣者が等しい割合で</strong>負担する。測量の費用は<strong>土地の広狭に応じて</strong>分担する</td></tr>
+            <tr><td>境界線付近の建築</td><td>建物を築造するには、境界線から <strong>50cm以上</strong> の距離を保たなければならない</td></tr>
+            <tr><td>目隠しの設置</td><td>境界線から <strong>1m未満</strong> の距離に他人の宅地を見通せる窓・縁側を設けるときは、目隠しを付けなければならない</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="call tip">
+        <span class="tag">覚え方</span>
+        <p><strong>「根は切れる、枝は切れない」が原則。</strong>根は地中で見えず所有者に頼みにくいが、枝は目に見えて所有者が対応できるから。ただし2023年改正で<strong>枝も例外的に切れる</strong>ようになった。<br>
+        <strong>分割で袋地が生じた場合は償金が要らない。</strong>自分たちで作り出した不都合だから、他人に迷惑をかけず、当事者間で解決させる趣旨。</p>
+      </div>
+
+      <div class="call trap">
+        <span class="tag">ひっかけ</span>
+        <p><strong>境界線から50cm、目隠しは1m。</strong>数字を入れ替えた選択肢が出る。<br>
+        <strong>隣地使用は「請求できる」ではなく「使用できる」。</strong>2023年改正で、隣人の承諾がなくても使用できるようになった。ただし<strong>住家への立入りだけは居住者の承諾が必要</strong>。</p>
+      </div>
+    </section>
+
+    <!-- 05 -->
+    <section id="deru">
+      <h2 class="sec"><span class="num">05</span>よく出る論点</h2>
+      <div class="scroll">
+        <table>
+          <thead><tr><th class="n">順位</th><th>論点</th><th>要点</th></tr></thead>
+          <tbody>
+            <tr><td class="n">1</td><td><strong>保存・管理・変更の振り分け</strong></td><td>単独／持分の過半数／全員。賃貸借は管理、売却は変更</td></tr>
+            <tr><td class="n">2</td><td>持分の処分</td><td>自己の持分は自由に処分できる</td></tr>
+            <tr><td class="n">3</td><td>共有物の分割</td><td>いつでも請求できる／不分割特約は5年以内</td></tr>
+            <tr><td class="n">4</td><td>単独占有する共有者</td><td>当然には明渡しを請求できない。対価の償還を求める</td></tr>
+            <tr><td class="n">5</td><td>相隣関係の数字</td><td>境界線から50cm／目隠しは1m未満</td></tr>
+            <tr><td class="n">6</td><td>竹木の枝と根</td><td>根は自ら切れる／枝は原則切れないが3つの例外</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 06 -->
+    <section id="hikkake">
+      <h2 class="sec"><span class="num">06</span>ひっかけ一覧</h2>
+      <div class="scroll">
+        <table class="traps">
+          <thead><tr><th>こう書かれたら疑う</th><th>正しくは</th></tr></thead>
+          <tbody>
+            <tr><td>自己の持分を譲渡するにも他の共有者の同意が必要</td><td><strong>単独で自由に</strong>処分できる</td></tr>
+            <tr><td>共有物の賃貸借の解除には全員の同意が必要</td><td><strong>持分の価格の過半数</strong>で足りる</td></tr>
+            <tr><td>共有者の過半数の賛成があれば管理行為ができる</td><td>頭数ではなく<strong>持分の価格</strong>の過半数</td></tr>
+            <tr><td>共有物に抵当権を設定するのは管理行為である</td><td><strong>変更行為</strong>で全員の同意が必要</td></tr>
+            <tr><td>不法占拠者への明渡請求には過半数の同意が必要</td><td><strong>保存行為</strong>として単独でできる</td></tr>
+            <tr><td>単独占有する共有者に明渡しを請求できる</td><td>当然には<strong>請求できない</strong></td></tr>
+            <tr><td>不分割特約は10年まで有効である</td><td><strong>5年</strong>を超えられない</td></tr>
+            <tr><td>共有者が持分を放棄すると国庫に帰属する</td><td><strong>他の共有者</strong>に帰属する</td></tr>
+            <tr><td>越境した枝は常に自ら切り取ることができる</td><td>原則は<strong>切除させる</strong>。3つの例外あり</td></tr>
+            <tr><td>越境した根も所有者に切除させなければならない</td><td>根は<strong>自ら切り取れる</strong></td></tr>
+            <tr><td>建物は境界線から1m以上離さなければならない</td><td><strong>50cm以上</strong>（1mは目隠しの基準）</td></tr>
+            <tr><td>分割により袋地が生じた場合も償金が必要</td><td><strong>償金は不要</strong></td></tr>
+            <tr><td>隣地を使用するには隣人の承諾が必要</td><td>通知すれば<strong>使用できる</strong>（住家への立入りは承諾が必要）</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 07 -->
+    <section id="matome">
+      <h2 class="sec"><span class="num">07</span>暗記カード</h2>
+      <p class="masthead-note">右上のボタンで答えを伏せられる。</p>
+      <div class="nums" id="numgrid">
+        <div class="nc" tabindex="0"><span class="v">単独</span><span class="d">保存行為に必要な同意</span></div>
+        <div class="nc" tabindex="0"><span class="v">持分の過半数</span><span class="d">管理行為・軽微変更に必要な同意</span></div>
+        <div class="nc" tabindex="0"><span class="v">全員の同意</span><span class="d">変更行為・処分に必要な同意</span></div>
+        <div class="nc" tabindex="0"><span class="v">5年</span><span class="d">不分割特約の上限（更新も5年まで）</span></div>
+        <div class="nc" tabindex="0"><span class="v">他の共有者</span><span class="d">持分を放棄した場合の帰属先</span></div>
+        <div class="nc" tabindex="0"><span class="v">50cm</span><span class="d">建物を築造する際に境界線から保つべき距離</span></div>
+        <div class="nc" tabindex="0"><span class="v">1m未満</span><span class="d">目隠しの設置が必要になる窓の距離</span></div>
+        <div class="nc" tabindex="0"><span class="v">根</span><span class="d">越境した場合に自ら切り取れるほう</span></div>
+        <div class="nc" tabindex="0"><span class="v">不要</span><span class="d">分割によって袋地が生じた場合の償金</span></div>
+      </div>
+    </section>
+
+    <!-- 08 -->
+    <section id="drill">
+      <h2 class="sec"><span class="num">08</span>肢別○×ドリル</h2>
+      <p class="lead">頻出論点の一問一答 <em>32肢</em>。○×を押すと理由が開く。<strong>理由を一言で言えなかった肢は、正解していても「要復習」に入れる</strong>のがこのドリルの使い方。</p>
+      <div class="call tip">
+        <span class="tag">回し方</span>
+        <p>1周目は全肢。2周目以降は「間違えた肢だけ」で回す。解答状況はこのブラウザに保存されるので、日をまたいでも続きから再開できる。</p>
+      </div>
+      <div class="drillbar">
+        <div class="score">解答 <b id="d-done">0</b> / 32　　正答 <b id="d-ok">0</b>　　正答率 <span class="pct" id="d-pct">—</span></div>
+        <div class="dbtns">
+          <button id="d-wrong" type="button" aria-pressed="false">間違えた肢だけ</button>
+          <button id="d-reset" type="button">リセット</button>
+        </div>
+      </div>
+      <ol class="drill">
+          <li class="dq" data-a="o">
+            <p class="s">各共有者は、共有物の全部について、その持分に応じた使用をすることができる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>249条1項。持分が3分の1でも<strong>物の一部しか使えない</strong>のではなく、全部を持分割合に応じて使う。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">共有者は、自己の持分を他の共有者の同意を得ずに自由に処分することができる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>持分は各共有者の完全な権利。売却も抵当権の設定も単独でできる。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">共有物の保存行為をするには、持分の価格の過半数の同意が必要である。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>252条5項により<strong>各共有者が単独でできる</strong>。修繕や不法占拠者への明渡請求など、現状を維持するだけの行為だから。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">共有物の管理に関する事項は、共有者の頭数の過半数で決する。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>252条1項は<strong>持分の価格の過半数</strong>。頭数ではない。3人で持分が1/2・1/4・1/4なら、1人でも決められる。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">共有物の形状または効用の著しい変更を伴わない変更（軽微変更）は、持分の価格の過半数で決することができる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>251条1項かっこ書。2023年改正で導入された。砂利道のアスファルト舗装などが典型例。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">共有物全体に抵当権を設定することは管理行為であり、持分の価格の過半数で決することができる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>共有物全体への抵当権設定は<strong>変更（処分）行為</strong>にあたり<strong>全員の同意</strong>が必要。自己の持分にだけ設定するなら単独でできる。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">共有物を目的とする賃貸借契約の解除は、持分の価格の過半数で決することができる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>判例。解除権の不可分性（544条）は共有者間には適用されず、管理行為として扱われる。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">共有者は、建物の賃借権を3年を超えない期間で設定することを、持分の価格の過半数で決することができる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>252条4項。樹木の植栽・伐採目的の山林は10年、その他の土地は5年、建物は3年、動産は6か月。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">共有物を不法に占拠する者に対して明渡しを請求するには、持分の価格の過半数の同意が必要である。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p><strong>保存行為</strong>として各共有者が単独で請求できる。全員のために現状を守る行為だから。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">持分の価格の過半数を有する共有者は、共有物を単独で占有する他の共有者に対して、当然に明渡しを請求することができる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>判例により<strong>当然には請求できない</strong>。占有している共有者にも持分に基づく使用権があるから、明渡しを求めるには別途理由が必要。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">共有物を単独で占有する共有者は、他の共有者に対し、その持分に応じた使用の対価を償還する義務を負う。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>249条2項。2023年改正で明文化された。追い出せない代わりに対価は取れる、という均衡。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">各共有者は、その持分に応じて共有物の管理の費用を負担する。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>253条1項。1年以内に義務を履行しない共有者があるときは、他の共有者は相当の償金を支払ってその持分を取得できる。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">共有者の1人が持分を放棄したときは、その持分は国庫に帰属する。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>255条により<strong>他の共有者に帰属</strong>する。相続人なくして死亡した場合も同じ（ただし特別縁故者への分与が優先する）。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">各共有者は、いつでも共有物の分割を請求することができる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>256条1項。共有は暫定的で不安定な状態なので、いつでも解消できるのが原則。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">共有物を分割しない旨の契約は、10年を超えない期間内であれば有効である。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>256条1項ただし書により<strong>5年</strong>を超えることができない。更新も5年以内。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">共有物の分割について共有者間に協議が調わないときは、その分割を裁判所に請求することができる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>258条1項。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">裁判による共有物の分割は、必ず現物分割の方法によらなければならない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>258条2項・3項により、<strong>賠償分割（持分を取得させて価格を賠償させる）や競売分割</strong>も認められる。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">共有物について権利を有する者および各共有者の債権者は、自己の費用で分割に参加することができる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>260条1項。参加の請求があったのに参加させずにした分割は、その者に対抗できない。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">裁判所は、所在等が不明な共有者がいる場合、他の共有者の請求により、その不明共有者の持分を取得させる裁判をすることができる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>262条の2。2023年改正。所有者不明土地問題を解消するための制度。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">共有者が他の共有者を知ることができないときは、裁判所の決定を得て、残りの共有者の同意により共有物に変更を加えることができる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>251条2項。所在等不明共有者を意思決定の分母から外す仕組み。区分所有法の改正と同じ発想。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">共有者は共有物を管理する者を選任することができ、その選任は持分の価格の過半数で決する。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>252条の2。2023年改正で新設された共有物管理者の制度。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">隣地を使用するには、あらかじめ隣人の承諾を得なければならない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>209条1項。2023年改正により、目的・日時・場所・方法をあらかじめ<strong>通知すれば使用できる</strong>ようになった。ただし<strong>住家への立入りには承諾が必要</strong>。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">隣地の竹木の枝が境界線を越えるときは、常に自らこれを切り取ることができる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>233条1項の原則は<strong>竹木の所有者に切除させる</strong>こと。自ら切除できるのは、①催告しても相当期間内に切除しない、②所有者やその所在を知ることができない、③急迫の事情がある、の3つの場合。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">隣地の竹木の根が境界線を越えるときは、自らこれを切り取ることができる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>233条4項。<strong>枝は請求、根は自力</strong>という非対称を押さえる。根は価値が低く、切っても損害が小さいから。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">境界標の設置および保存の費用は相隣者が等しい割合で負担するが、測量の費用はその土地の広狭に応じて分担する。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>224条。境界標そのものは双方に等しく役立つが、測量の手間は面積に比例するという発想。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">建物を築造するには、境界線から1m以上の距離を保たなければならない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>234条1項は<strong>50cm以上</strong>。1mは目隠しの基準（235条）であり、この2つの数字を入れ替えた選択肢が頻出。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">境界線から1m未満の距離において他人の宅地を見通すことのできる窓または縁側を設けるときは、目隠しを付けなければならない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>235条1項。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">他の土地に囲まれて公道に通じない土地の所有者は、公道に至るため他の土地を通行することができる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>210条1項の囲繞地通行権。通行の場所および方法は<strong>必要かつ最も損害の少ない</strong>ものを選ばなければならない。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">分割によって公道に通じない土地が生じた場合、その土地の所有者は他の分割者の土地を通行できるが、償金を支払わなければならない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>213条2項により<strong>償金は不要</strong>。袋地を作り出したのは分割者自身であり、その負担は分割者間で処理すべきだから。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">分割によって公道に通じない土地が生じた場合、その所有者は他の分割者の所有地のみを通行することができる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>213条1項。無関係の第三者の土地に負担を及ぼすのは不当だから。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">土地の所有者は、他の土地に設備を設置しなければ電気・ガス・水道等の継続的給付を受けられないときは、必要な範囲で他の土地に設備を設置することができる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>213条の2。2023年改正で新設されたライフライン設備設置権。あらかじめ目的・場所・方法の通知が必要。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">土地の所有者は、隣地の所有者と共同の費用で境界標を設けることができる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>223条。</p></div>
+          </li>
+      </ol>
+    </section>
+
+  </main>
+
+  <footer>
+    <h4>出典</h4>
+    <ul>
+      <li>民法（明治29年法律第89号）第209条〜第238条、第249条〜第264条 — <a href="https://laws.e-gov.go.jp/law/129AC0000000089">e-Gov法令検索</a></li>
+      <li>法務省 民法・不動産登記法の改正（所有者不明土地の解消） — <a href="https://www.moj.go.jp/MINJI/minji05_00343.html">moj.go.jp</a></li>
+    </ul>
+    <div class="sibling">
+      <a href="../index.html">総目次</a>
+      <a href="物権変動と対抗要件.html">← 物権変動と対抗要件</a>
+    </div>
+  </footer>
+
+</div>
+
+<script>
+  (function () {
+    var root = document.documentElement;
+    document.getElementById('theme').addEventListener('click', function () {
+      if (root.getAttribute('data-theme')) { root.removeAttribute('data-theme'); return; }
+      var dark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      root.setAttribute('data-theme', dark ? 'light' : 'dark');
+    });
+    var maskBtn = document.getElementById('mask');
+    var grid = document.getElementById('numgrid');
+    maskBtn.addEventListener('click', function () {
+      var on = grid.classList.toggle('masked');
+      maskBtn.setAttribute('aria-pressed', String(on));
+      maskBtn.textContent = on ? '答えを表示' : '答えを隠す';
+    });
+    var links = Array.prototype.slice.call(document.querySelectorAll('nav.rail ol a'));
+    var map = {};
+    links.forEach(function (a) { map[a.getAttribute('href').slice(1)] = a; });
+    var seen = [];
+    var obs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        var i = seen.indexOf(e.target.id);
+        if (e.isIntersecting && i < 0) seen.push(e.target.id);
+        if (!e.isIntersecting && i >= 0) seen.splice(i, 1);
+      });
+      links.forEach(function (a) { a.classList.remove('on'); });
+      if (seen.length) {
+        var order = Object.keys(map);
+        seen.sort(function (a, b) { return order.indexOf(a) - order.indexOf(b); });
+        map[seen[0]].classList.add('on');
+      }
+    }, { rootMargin: '-10% 0px -70% 0px' });
+    document.querySelectorAll('main section').forEach(function (s) { obs.observe(s); });
+  })();
+</script>
+
+<script>
+  /* 肢別○×ドリル */
+  (function () {
+    var sec = document.getElementById('drill');
+    if (!sec) return;
+    var list = sec.querySelector('ol.drill');
+    var items = Array.prototype.slice.call(list.querySelectorAll('li.dq'));
+    var key = 'takken-drill:' + (document.title || location.pathname);
+    var state = {};
+    try { state = JSON.parse(localStorage.getItem('' + key) || '{}') || {}; } catch (e) { state = {}; }
+    var elDone = document.getElementById('d-done');
+    var elOk = document.getElementById('d-ok');
+    var elPct = document.getElementById('d-pct');
+    var onlyBtn = document.getElementById('d-wrong');
+
+    function paint() {
+      var done = 0, ok = 0;
+      items.forEach(function (li, i) {
+        var picked = state[i];
+        li.classList.remove('done', 'ok', 'ng');
+        Array.prototype.forEach.call(li.querySelectorAll('.ch button'), function (b) {
+          b.removeAttribute('data-picked');
+        });
+        if (picked !== 'o' && picked !== 'x') return;
+        done++;
+        var ans = li.getAttribute('data-a');
+        var right = picked === ans;
+        if (right) ok++;
+        li.classList.add('done', right ? 'ok' : 'ng');
+        var b = li.querySelector('.ch button[data-v="' + picked + '"]');
+        if (b) b.setAttribute('data-picked', '1');
+        li.querySelector('.verdict').textContent =
+          right ? '正解　' + (ans === 'o' ? '○' : '×')
+                : '不正解　正解は ' + (ans === 'o' ? '○' : '×');
+      });
+      elDone.textContent = String(done);
+      elOk.textContent = String(ok);
+      elPct.textContent = done ? Math.round(ok / done * 100) + '%' : '—';
+      try { localStorage.setItem('' + key, JSON.stringify(state)); } catch (e) {}
+    }
+
+    list.addEventListener('click', function (e) {
+      var b = e.target;
+      while (b && b !== list && b.tagName !== 'BUTTON') b = b.parentNode;
+      if (!b || b.tagName !== 'BUTTON') return;
+      var li = b.parentNode.parentNode;
+      var i = items.indexOf(li);
+      if (i < 0) return;
+      state[i] = b.getAttribute('data-v');
+      paint();
+    });
+
+    onlyBtn.addEventListener('click', function () {
+      var on = list.classList.toggle('onlyng');
+      onlyBtn.setAttribute('aria-pressed', String(on));
+      onlyBtn.textContent = on ? 'すべて表示' : '間違えた肢だけ';
+    });
+
+    document.getElementById('d-reset').addEventListener('click', function () {
+      state = {};
+      list.classList.remove('onlyng');
+      onlyBtn.setAttribute('aria-pressed', 'false');
+      onlyBtn.textContent = '間違えた肢だけ';
+      paint();
+    });
+
+    paint();
+  })();
+</script>

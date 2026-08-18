@@ -1,0 +1,533 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>権利関係 横断早見表 — 宅建士試験 2026年度</title>
+
+<style>
+  :root {
+    --paper:#EBEDE9; --surface:#F8F9F6; --sunk:#E1E4DE; --ink:#151F2A; --muted:#5D6B78;
+    --rule:#CDD2CB; --hair:#DCE0D9; --accent:#B8342A; --accent-soft:#F3DEDB;
+    --blue:#2A5F86; --blue-soft:#DCE6EE;
+    --font-display:"Hiragino Mincho ProN","Yu Mincho","YuMincho","Noto Serif JP",serif;
+    --font-body:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","YuGothic","Noto Sans JP",system-ui,sans-serif;
+    --font-mono:ui-monospace,"SFMono-Regular","SF Mono",Menlo,Consolas,monospace;
+    --measure:68ch;
+    --s1:.35rem; --s2:.7rem; --s3:1.1rem; --s4:1.7rem; --s5:2.6rem; --s6:4rem;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper:#0D1B29; --surface:#132534; --sunk:#0A1622; --ink:#DAE4EC; --muted:#8CA1B3;
+      --rule:#26415A; --hair:#1D3448; --accent:#FF7059; --accent-soft:#3A1F1D;
+      --blue:#6FB6DC; --blue-soft:#14293A;
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper:#0D1B29; --surface:#132534; --sunk:#0A1622; --ink:#DAE4EC; --muted:#8CA1B3;
+    --rule:#26415A; --hair:#1D3448; --accent:#FF7059; --accent-soft:#3A1F1D;
+    --blue:#6FB6DC; --blue-soft:#14293A;
+  }
+
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--paper); color:var(--ink); font-family:var(--font-body);
+    font-size:16px; line-height:1.9; -webkit-font-smoothing:antialiased; font-feature-settings:"palt" 1; }
+
+  .wrap { display:grid; grid-template-columns:15.5rem minmax(0,1fr); gap:var(--s6);
+    max-width:84rem; margin:0 auto; padding:0 var(--s4) var(--s6); align-items:start; }
+  @media (max-width:60rem){ .wrap{ grid-template-columns:minmax(0,1fr); gap:var(--s4); padding:0 var(--s3) var(--s5);} }
+
+  .masthead { grid-column:1/-1; padding:var(--s5) 0 var(--s4); border-bottom:2px solid var(--ink);
+    margin-bottom:var(--s2); display:flex; flex-wrap:wrap; align-items:flex-end; justify-content:space-between; gap:var(--s3); }
+  .eyebrow { font-family:var(--font-mono); font-size:.72rem; letter-spacing:.16em; text-transform:uppercase;
+    color:var(--muted); display:flex; align-items:center; gap:.6em; }
+  .eyebrow::before { content:""; width:2.2rem; height:1px; background:var(--accent); }
+  .eyebrow a { color:var(--accent); text-decoration:none; }
+  .eyebrow a:hover { text-decoration:underline; text-underline-offset:.2em; }
+  h1 { font-family:var(--font-display); font-weight:600; font-size:clamp(1.9rem,1.3rem + 2.4vw,2.9rem);
+    line-height:1.2; letter-spacing:.04em; margin:var(--s2) 0 var(--s3); text-wrap:balance; }
+  .facts { display:flex; flex-wrap:wrap; gap:0 var(--s3); font-size:.82rem; color:var(--muted); list-style:none; margin:0; padding:0; }
+  .facts b { font-family:var(--font-mono); font-variant-numeric:tabular-nums; color:var(--ink); font-weight:600; }
+  .toggles { display:flex; gap:var(--s1); }
+  button { font-family:var(--font-body); font-size:.78rem; color:var(--muted); background:var(--surface);
+    border:1px solid var(--rule); border-radius:2px; padding:.4em .9em; cursor:pointer; transition:color .15s,border-color .15s; }
+  button:hover { color:var(--ink); border-color:var(--ink); }
+  button:focus-visible { outline:2px solid var(--accent); outline-offset:2px; }
+  button[aria-pressed="true"] { color:var(--accent); border-color:var(--accent); }
+
+  nav.rail { position:sticky; top:var(--s3); font-size:.82rem; max-height:calc(100vh - 3rem); overflow-y:auto; padding-bottom:var(--s3); }
+  nav.rail h2 { font-family:var(--font-mono); font-size:.68rem; letter-spacing:.16em; text-transform:uppercase; color:var(--muted); margin:0 0 var(--s2); font-weight:500; }
+  nav.rail ol { list-style:none; margin:0; padding:0; display:flex; flex-direction:column; }
+  nav.rail a { display:block; padding:.3em 0 .3em .9em; color:var(--muted); text-decoration:none; border-left:2px solid var(--hair); line-height:1.5; }
+  nav.rail a:hover { color:var(--ink); border-left-color:var(--rule); }
+  nav.rail a.on { color:var(--ink); border-left-color:var(--accent); font-weight:600; }
+  nav.rail a .num { font-family:var(--font-mono); font-size:.72rem; color:var(--muted); margin-right:.5em; }
+  nav.rail a.home { border-left:none; padding:0 0 var(--s2); color:var(--accent);
+    font-family:var(--font-mono); font-size:.72rem; letter-spacing:.1em; }
+  nav.rail a.home:hover { color:var(--accent); text-decoration:underline; text-underline-offset:.2em; }
+  nav.rail .files { margin-top:var(--s3); padding-top:var(--s3); border-top:1px solid var(--hair); display:flex; flex-direction:column; gap:.2em; }
+  nav.rail .files a { border-left:none; padding-left:0; font-size:.78rem; }
+  @media (max-width:60rem){
+    nav.rail{ position:static; max-height:none; border-bottom:1px solid var(--rule); padding-bottom:var(--s3); }
+    nav.rail ol{ display:grid; grid-template-columns:repeat(auto-fill,minmax(9rem,1fr)); gap:0 var(--s2); }
+  }
+
+  main { min-width:0; }
+  section { padding-top:var(--s5); scroll-margin-top:var(--s3); }
+  section > * { max-width:var(--measure); }
+  section > figure, section > .scroll { max-width:none; }
+
+  h2.sec { font-family:var(--font-display); font-size:clamp(1.45rem,1.2rem + .9vw,1.9rem); font-weight:600;
+    letter-spacing:.04em; margin:0 0 var(--s3); padding-bottom:var(--s2); border-bottom:1px solid var(--rule);
+    display:flex; align-items:baseline; gap:.7em; max-width:none; }
+  h2.sec .num { font-family:var(--font-mono); font-size:.8rem; letter-spacing:.1em; color:var(--accent); font-weight:500; }
+  h3 { font-family:var(--font-body); font-size:1.06rem; font-weight:700; letter-spacing:.02em;
+    margin:var(--s4) 0 var(--s2); padding-left:.7em; border-left:3px solid var(--ink); }
+  p { margin:0 0 var(--s3); }
+  a { color:var(--blue); text-underline-offset:.2em; }
+  em { font-style:normal; background:linear-gradient(transparent 62%, var(--accent-soft) 62%); font-weight:600; }
+  ul, ol { margin:0 0 var(--s3); padding-left:1.3em; }
+  li { margin-bottom:var(--s1); }
+  .lead { font-size:1.05rem; color:var(--muted); }
+
+  .call { max-width:var(--measure); margin:0 0 var(--s3); padding:var(--s3) var(--s3) var(--s3) var(--s4);
+    background:var(--surface); border:1px solid var(--hair); border-left:3px solid var(--rule); border-radius:2px; font-size:.94rem; }
+  .call > :last-child { margin-bottom:0; }
+  .call .tag { display:block; font-family:var(--font-mono); font-size:.68rem; letter-spacing:.16em; text-transform:uppercase; color:var(--muted); margin-bottom:var(--s1); }
+  .call.trap { border-left-color:var(--accent); background:var(--accent-soft); }
+  .call.trap .tag { color:var(--accent); }
+  .call.exam { border-left-color:var(--ink); }
+  .call.exam .tag { color:var(--ink); }
+  .call.rev { border-left-color:var(--accent); }
+  .call.rev .tag { color:var(--accent); }
+  .call.tip { border-left-color:var(--blue); background:var(--blue-soft); }
+  .call.tip .tag { color:var(--blue); }
+
+  .scroll { overflow-x:auto; margin:0 0 var(--s3); -webkit-overflow-scrolling:touch; }
+  table { border-collapse:collapse; width:100%; font-size:.86rem; line-height:1.6; }
+  caption { text-align:left; font-size:.78rem; color:var(--muted); padding-bottom:var(--s1); font-family:var(--font-mono); letter-spacing:.08em; }
+  th, td { padding:.55em .7em; text-align:left; vertical-align:top; border-bottom:1px solid var(--hair); }
+  thead th { font-size:.74rem; letter-spacing:.08em; color:var(--muted); font-weight:600; border-bottom:1px solid var(--ink); }
+  tbody tr:hover { background:var(--surface); }
+  td.n, th.n { text-align:center; font-family:var(--font-mono); font-variant-numeric:tabular-nums; white-space:nowrap; }
+  .no { color:var(--accent); font-weight:700; }
+  .yes { color:var(--muted); }
+  .tri { color:var(--blue); }
+  table.kigen tbody td:first-child { font-family:var(--font-mono); color:var(--accent); font-weight:600; white-space:nowrap; text-align:center; }
+  table.hi tr.hl { background:var(--accent-soft); }
+  .src { font-family:var(--font-mono); font-size:.7rem; color:var(--muted); white-space:nowrap; }
+
+  figure { margin:0 0 var(--s4); }
+  figure svg { display:block; width:100%; height:auto; }
+  figcaption { font-size:.78rem; color:var(--muted); font-family:var(--font-mono); letter-spacing:.06em; margin-top:var(--s2); padding-top:var(--s1); border-top:1px solid var(--hair); }
+  .plate { background:var(--surface); border:1px solid var(--hair); border-radius:2px; padding:var(--s3); }
+  .svg-hair { fill:none; stroke:var(--rule); stroke-width:1; }
+  .svg-fill { fill:var(--sunk); stroke:var(--rule); stroke-width:1; }
+  .svg-accfill { fill:var(--accent-soft); stroke:var(--accent); stroke-width:1.2; }
+  .svg-bluefill { fill:var(--blue-soft); stroke:var(--blue); stroke-width:1.2; }
+  text { font-family:var(--font-body); fill:var(--ink); font-size:12px; }
+  text.lbl { font-family:var(--font-mono); fill:var(--muted); font-size:10.5px; letter-spacing:.06em; }
+  text.dimt { font-family:var(--font-mono); fill:var(--blue); font-size:11px; }
+  text.acct { fill:var(--accent); font-size:11.5px; font-weight:700; }
+  text.big { font-family:var(--font-mono); font-size:15px; font-weight:600; }
+
+  .nums { display:grid; grid-template-columns:repeat(auto-fill,minmax(13rem,1fr)); gap:var(--s2); }
+  .nc { background:var(--surface); border:1px solid var(--hair); border-radius:2px; padding:var(--s3) var(--s3) var(--s2); display:flex; flex-direction:column; gap:var(--s1); }
+  .nc .v { font-family:var(--font-mono); font-size:1.05rem; font-weight:600; line-height:1.3; color:var(--accent); }
+  .nc .d { font-size:.8rem; color:var(--muted); line-height:1.6; }
+  .nums.masked .v { color:transparent; background:var(--rule); border-radius:2px; user-select:none; }
+  .nums.masked .nc:hover .v, .nums.masked .nc:focus-within .v { color:var(--accent); background:transparent; }
+  .nc:focus-visible { outline:2px solid var(--accent); outline-offset:2px; }
+  .masthead-note { font-size:.78rem; color:var(--muted); margin-bottom:var(--s2); }
+
+  footer { grid-column:1/-1; margin-top:var(--s6); padding-top:var(--s3); border-top:1px solid var(--rule); font-size:.8rem; color:var(--muted); }
+  footer ul { list-style:none; padding:0; }
+  footer li { margin-bottom:var(--s1); }
+
+  @media (prefers-reduced-motion: reduce){ *{ transition:none !important; animation:none !important; scroll-behavior:auto !important; } }
+  html { scroll-behavior:smooth; }
+</style>
+
+<div class="wrap">
+
+  <header class="masthead">
+    <div>
+      <div class="eyebrow"><a href="../index.html">← 総目次</a> &nbsp;/&nbsp; 01 権利関係 &nbsp;/&nbsp; 宅建士試験 2026年度</div>
+      <h1>横断早見表</h1>
+      <ul class="facts">
+        <li>法令基準日 <b>2026-04-01</b></li>
+        <li>対象 <b>01 全14問</b></li>
+        <li>更新 <b>2026-08-11</b></li>
+      </ul>
+    </div>
+    <div class="toggles">
+      <button id="mask" type="button" aria-pressed="false">答えを隠す</button>
+      <button id="theme" type="button">配色切替</button>
+    </div>
+  </header>
+
+  <nav class="rail" aria-label="目次">
+    <a class="home" href="../index.html">← 総目次</a>
+    <h2>Contents</h2>
+    <ol>
+      <li><a href="#kaisei"><span class="num">00</span>2026年度の改正</a></li>
+      <li><a href="#daisansha"><span class="num">01</span>第三者保護の一覧</a></li>
+      <li><a href="#touki"><span class="num">02</span>登記の要否</a></li>
+      <li><a href="#taikou"><span class="num">03</span>対抗要件の一覧</a></li>
+      <li><a href="#ketsugi"><span class="num">04</span>決議・同意の割合</a></li>
+      <li><a href="#kigen"><span class="num">05</span>期間の衝突</a></li>
+      <li><a href="#kiseki"><span class="num">06</span>帰責事由の要否</a></li>
+      <li><a href="#chokuzen"><span class="num">07</span>直前チェック</a></li>
+      <li><a href="#matome"><span class="num">08</span>暗記カード</a></li>
+    </ol>
+    <div class="files">
+      <a href="借地借家法.html">借地借家法</a>
+      <a href="区分所有法.html">区分所有法</a>
+      <a href="不動産登記法.html">不動産登記法</a>
+      <a href="制限行為能力者と意思表示.html">制限行為能力者と意思表示</a>
+      <a href="代理.html">代理</a>
+      <a href="時効.html">時効</a>
+      <a href="物権変動と対抗要件.html">物権変動と対抗要件</a>
+      <a href="共有と相隣関係.html">共有と相隣関係</a>
+      <a href="抵当権と担保物権.html">抵当権と担保物権</a>
+      <a href="債務不履行と解除.html">債務不履行と解除</a>
+      <a href="売買と契約各論.html">売買と契約各論</a>
+      <a href="賃貸借.html">賃貸借</a>
+      <a href="債権総論.html">債権総論</a>
+      <a href="不法行為.html">不法行為</a>
+      <a href="相続.html">相続</a>
+    </div>
+  </nav>
+
+  <main>
+
+    <!-- 00 -->
+    <section id="kaisei">
+      <h2 class="sec"><span class="num">00</span>2026年度の改正</h2>
+      <p class="lead">権利関係は<em>改正の影響が最も大きい分野</em>。法令基準日は 2026年4月1日で、この日までに施行された内容が出題される。</p>
+
+      <div class="scroll">
+        <table>
+          <thead><tr><th>改正</th><th class="n">施行</th><th>内容</th><th class="n">重要度</th></tr></thead>
+          <tbody>
+            <tr>
+              <td class="no"><strong>区分所有法の大改正</strong></td>
+              <td class="n no">2026/4/1</td>
+              <td>約24年ぶり。建替え等は原則5分の4のまま、<strong>5つの客観的事由があれば4分の3</strong>。共用部分の変更も一定の場合に2/3へ。所在等不明区分所有者を決議の母数から除外。出席者を基礎とする決議</td>
+              <td class="n no">★★★</td>
+            </tr>
+            <tr>
+              <td class="no"><strong>住所等変更登記の義務化</strong></td>
+              <td class="n no">2026/4/1</td>
+              <td>変更から <strong>2年以内</strong>、過料5万円以下。施行前の変更は2028年3月31日まで猶予</td>
+              <td class="n">★★☆</td>
+            </tr>
+            <tr>
+              <td>相続登記の義務化</td>
+              <td class="n">2024/4/1</td>
+              <td>取得を知った日から <strong>3年以内</strong>、過料10万円以下。相続人申告登記</td>
+              <td class="n">★★☆</td>
+            </tr>
+            <tr>
+              <td>所在等不明共有者の制度／相隣関係の見直し</td>
+              <td class="n">2023/4/1</td>
+              <td>裁判所の決定による管理・処分・持分取得。越境した枝を自ら切除できる例外</td>
+              <td class="n">★☆☆</td>
+            </tr>
+            <tr>
+              <td>遺産分割の期間制限</td>
+              <td class="n">2023/4/1</td>
+              <td>相続開始から <strong>10年</strong> 経過後は原則として法定相続分による</td>
+              <td class="n">★☆☆</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="call rev">
+        <span class="tag">2020年民法改正の残り火</span>
+        <p>施行から数年が経ちましたが、古い教材との食い違いとして<strong>いまも出題され続ける</strong>のが次の5つです。<br>
+        ① <strong>錯誤が無効から取消しへ</strong>　② <strong>解除に債務者の帰責事由が不要に</strong>　③ <strong>連帯債務の請求・免除・時効が相対効に</strong>　④ <strong>瑕疵担保責任が契約不適合責任へ</strong>　⑤ <strong>時効の中断・停止が更新・完成猶予へ</strong></p>
+      </div>
+    </section>
+
+    <!-- 01 -->
+    <section id="daisansha">
+      <h2 class="sec"><span class="num">01</span>第三者保護の一覧</h2>
+      <p class="lead">権利関係で最も点差がつくのがここ。<em>何を要求されるか</em>が場面ごとに違う。</p>
+
+      <div class="scroll">
+        <table class="hi">
+          <thead><tr><th>場面</th><th>第三者が保護される要件</th><th class="n">登記</th><th class="n">出典</th></tr></thead>
+          <tbody>
+            <tr class="hl"><td><strong>虚偽表示</strong></td><td class="tri"><strong>善意</strong>で足りる</td><td class="n tri">不要</td><td class="n src">意思表示</td></tr>
+            <tr class="hl"><td><strong>心裡留保</strong></td><td class="tri"><strong>善意</strong>で足りる</td><td class="n tri">不要</td><td class="n src">意思表示</td></tr>
+            <tr><td><strong>詐欺</strong>による取消し（取消し前）</td><td><strong>善意かつ無過失</strong></td><td class="n tri">不要</td><td class="n src">意思表示</td></tr>
+            <tr><td><strong>錯誤</strong>による取消し（取消し前）</td><td><strong>善意かつ無過失</strong></td><td class="n tri">不要</td><td class="n src">意思表示</td></tr>
+            <tr class="hl"><td class="no"><strong>強迫</strong>による取消し（取消し前）</td><td class="no">保護されない。取消権者が勝つ</td><td class="n">—</td><td class="n src">意思表示</td></tr>
+            <tr class="hl"><td class="no"><strong>制限行為能力</strong>による取消し（取消し前）</td><td class="no">保護されない。取消権者が勝つ</td><td class="n">—</td><td class="n src">意思表示</td></tr>
+            <tr class="hl"><td><strong>解除</strong>（解除前）</td><td class="no">善意悪意を問わない</td><td class="n no"><strong>必要</strong></td><td class="n src">物権変動</td></tr>
+            <tr><td>取消し・解除・時効完成の<strong>後</strong></td><td>対抗問題。善意悪意を問わない</td><td class="n no"><strong>登記の先後</strong></td><td class="n src">物権変動</td></tr>
+            <tr><td class="no"><strong>背信的悪意者</strong></td><td class="no">保護されない（転得者が善意なら転得者は保護される）</td><td class="n">—</td><td class="n src">物権変動</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="call tip">
+        <span class="tag">覚え方</span>
+        <p><strong>表意者の落ち度が大きいほど第三者は薄い要件で守られる。</strong>自分で仮装した虚偽表示は善意だけで負け、だまされた詐欺は無過失まで要求でき、おどされた強迫では負けない。<br>
+        <strong>解除だけが「登記が必要・善意悪意は不問」</strong>という別系統。取消しとちょうど裏返しになっている。</p>
+      </div>
+    </section>
+
+    <!-- 02 -->
+    <section id="touki">
+      <h2 class="sec"><span class="num">02</span>登記の要否</h2>
+
+      <div class="scroll">
+        <table class="hi">
+          <thead><tr><th>場面</th><th class="n">登記</th><th>補足</th></tr></thead>
+          <tbody>
+            <tr><td>当事者間での所有権の主張</td><td class="n tri">不要</td><td>対抗問題にならない</td></tr>
+            <tr><td>不法占拠者への明渡請求</td><td class="n tri">不要</td><td>正当な利益を有する第三者にあたらない</td></tr>
+            <tr><td>無権利者・背信的悪意者への主張</td><td class="n tri">不要</td><td>—</td></tr>
+            <tr class="hl"><td><strong>単純悪意者</strong>への主張</td><td class="n no">必要</td><td>知っていただけでは背信的悪意者にならない</td></tr>
+            <tr class="hl"><td>取消し・解除・時効完成<strong>後</strong>の第三者</td><td class="n no">必要</td><td>登記の先後で決まる</td></tr>
+            <tr class="hl"><td><strong>解除前</strong>の第三者が保護されるため</td><td class="n no">必要</td><td>判例</td></tr>
+            <tr><td>時効完成<strong>前</strong>に登場した第三者への主張</td><td class="n tri">不要</td><td>当事者の関係になる</td></tr>
+            <tr><td>法定相続分の取得</td><td class="n tri">不要</td><td>—</td></tr>
+            <tr class="hl"><td class="no"><strong>法定相続分を超える</strong>部分の取得</td><td class="n no">必要</td><td class="no">遺産分割・特定財産承継遺言など（899条の2）</td></tr>
+            <tr class="hl"><td><strong>相続放棄</strong>の効果の主張</td><td class="n tri">不要</td><td>遡って相続人でなくなるため</td></tr>
+            <tr><td>賃貸人たる地位を取得した者の賃料請求</td><td class="n no">必要</td><td>所有権移転登記</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="call trap">
+        <span class="tag">ひっかけ</span>
+        <p><strong>遺産分割と相続放棄で結論が逆。</strong>放棄は遡って相続人でなくなるので登記不要、分割はいったん共有になったものを動かすので法定相続分を超える部分に登記が必要。</p>
+      </div>
+    </section>
+
+    <!-- 03 -->
+    <section id="taikou">
+      <h2 class="sec"><span class="num">03</span>対抗要件の一覧</h2>
+
+      <div class="scroll">
+        <table class="hi">
+          <thead><tr><th>権利</th><th>対抗要件</th><th class="n">出典</th></tr></thead>
+          <tbody>
+            <tr><td>不動産の物権変動</td><td><strong>登記</strong></td><td class="n src">物権変動</td></tr>
+            <tr class="hl"><td><strong>借地権</strong></td><td class="no">借地上の<strong>建物の登記</strong>（借地権者本人の名義）</td><td class="n src">借地借家法</td></tr>
+            <tr class="hl"><td><strong>借家権</strong></td><td class="no">建物の<strong>引渡し</strong></td><td class="n src">借地借家法</td></tr>
+            <tr><td>民法上の賃借権</td><td>賃借権の登記</td><td class="n src">賃貸借</td></tr>
+            <tr class="hl"><td><strong>農地の賃借権</strong></td><td class="no">農地の<strong>引渡し</strong></td><td class="n src">農地法</td></tr>
+            <tr><td>債権譲渡（債務者に対して）</td><td><strong>譲渡人からの通知</strong>または債務者の承諾</td><td class="n src">債権総論</td></tr>
+            <tr><td>債権譲渡（第三者に対して）</td><td><strong>確定日付のある証書</strong>による通知・承諾</td><td class="n src">債権総論</td></tr>
+            <tr><td>規約共用部分</td><td>その旨の<strong>登記</strong></td><td class="n src">区分所有法</td></tr>
+            <tr><td>配偶者居住権</td><td><strong>登記</strong>（短期居住権は登記できない）</td><td class="n src">相続</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="call tip">
+        <span class="tag">覚え方</span>
+        <p><strong>借地は「建物の登記」、借家と農地は「引渡し」。</strong>賃貸人が登記に協力してくれない実態を踏まえ、借主が自力で備えられるものを対抗要件にしている。</p>
+      </div>
+    </section>
+
+    <!-- 04 -->
+    <section id="ketsugi">
+      <h2 class="sec"><span class="num">04</span>決議・同意の割合</h2>
+
+      <div class="scroll">
+        <table class="hi">
+          <thead><tr><th class="n">割合</th><th>場面</th><th class="n">出典</th></tr></thead>
+          <tbody>
+            <tr><td class="n">単独</td><td>共有物の保存行為／持分の処分／不法占拠者への明渡請求</td><td class="n src">共有</td></tr>
+            <tr><td class="n">過半数</td><td>共有物の管理・軽微変更（<strong>持分の価格</strong>で数える）／区分所有の管理者の選任・共用部分の管理</td><td class="n src">共有・区分</td></tr>
+            <tr class="hl"><td class="n no">2/3</td><td class="no">共用部分の変更のうち瑕疵の是正・バリアフリー化<span class="src">（2026新設）</span></td><td class="n src">区分所有法</td></tr>
+            <tr><td class="n">3/4</td><td>規約の設定変更廃止／共用部分の重大変更／管理組合法人化／大規模滅失の復旧／使用禁止・競売請求</td><td class="n src">区分所有法</td></tr>
+            <tr class="hl"><td class="n no">4/5</td><td class="no">建替え・取壊し・一括売却・一棟リノベーション<span class="src">（客観的事由があれば3/4）</span></td><td class="n src">区分所有法</td></tr>
+            <tr><td class="n">全員</td><td>共有物の変更・処分／規約の一部の者への特別の影響の承諾</td><td class="n src">共有・区分</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 05 -->
+    <section id="kigen">
+      <h2 class="sec"><span class="num">05</span>期間の衝突</h2>
+      <p>同じ数字が別の場面で使われる。<strong>数字から論点を引ける</strong>状態にしておく。</p>
+
+      <div class="scroll">
+        <table class="kigen">
+          <thead><tr><th class="n">数字</th><th>意味</th><th class="n">出典</th></tr></thead>
+          <tbody>
+            <tr><td rowspan="2">1か月</td><td>制限行為能力者の相手方が催告する際の期間</td><td class="n src">意思表示</td></tr>
+            <tr><td>表示に関する登記の申請期間</td><td class="n src">不動産登記法</td></tr>
+            <tr><td rowspan="2">2か月</td><td>建替え決議の招集通知（短縮できない）</td><td class="n src">区分所有法</td></tr>
+            <tr><td>再築の通知に異議を述べなければ承諾とみなす期間</td><td class="n src">借地借家法</td></tr>
+            <tr><td rowspan="3">3か月</td><td>相続の熟慮期間（相続開始を知った時から）</td><td class="n src">相続</td></tr>
+            <tr><td>賃借人からの解約申入れ（建物）</td><td class="n src">借地借家法</td></tr>
+            <tr><td>天災等による時効の完成猶予</td><td class="n src">時効</td></tr>
+            <tr><td rowspan="3">6か月</td><td>賃貸人からの解約申入れ（建物）／定期借家の終了通知は1年前〜6か月前</td><td class="n src">借地借家法</td></tr>
+            <tr><td>催告・仮差押えによる時効の完成猶予</td><td class="n src">時効</td></tr>
+            <tr><td>抵当権者に対抗できない建物賃借人の明渡猶予／配偶者短期居住権</td><td class="n src">抵当権・相続</td></tr>
+            <tr><td rowspan="4">1年</td><td>種類・品質の契約不適合を知った時からの通知期間／請負も同じ</td><td class="n src">売買</td></tr>
+            <tr><td>費用償還請求（賃貸人が返還を受けた時から）</td><td class="n src">賃貸借</td></tr>
+            <tr><td>遺留分侵害額請求（知った時から）</td><td class="n src">相続</td></tr>
+            <tr><td>協議の合意による時効の完成猶予</td><td class="n src">時効</td></tr>
+            <tr><td rowspan="3">2年</td><td>建物滅失後に掲示で借地権を対抗できる期間</td><td class="n src">借地借家法</td></tr>
+            <tr><td>抵当権で優先弁済を受けられる利息（最後の2年分）</td><td class="n src">抵当権</td></tr>
+            <tr><td class="no">住所等変更登記の義務<span class="src">（2026新設）</span></td><td class="n src">不動産登記法</td></tr>
+            <tr><td rowspan="3">3年</td><td>不法行為の消滅時効（損害および加害者を知った時から）</td><td class="n src">不法行為</td></tr>
+            <tr><td>相続登記の義務（取得を知った日から）</td><td class="n src">不動産登記法</td></tr>
+            <tr><td>一人協定が効力を生じるまでの期間</td><td class="n src">建築基準法</td></tr>
+            <tr><td rowspan="3">5年</td><td>債権の消滅時効（主観的起算点）／生命身体の侵害は主観5年</td><td class="n src">時効</td></tr>
+            <tr><td>共有物の不分割特約の上限／遺産分割の禁止期間の上限</td><td class="n src">共有・相続</td></tr>
+            <tr><td>取消権の期間（追認できる時から）</td><td class="n src">意思表示</td></tr>
+            <tr><td rowspan="3">10年</td><td>取得時効（善意無過失）／債権の消滅時効（客観的起算点）</td><td class="n src">時効</td></tr>
+            <tr><td>遺留分侵害額請求（相続開始から）／遺産分割の期間制限</td><td class="n src">相続</td></tr>
+            <tr><td>品確法の瑕疵担保責任</td><td class="n src">履行法</td></tr>
+            <tr><td rowspan="3">20年</td><td>取得時効（善意無過失でない場合）／債権以外の財産権の消滅時効</td><td class="n src">時効</td></tr>
+            <tr><td>不法行為の消滅時効（不法行為の時から）</td><td class="n src">不法行為</td></tr>
+            <tr><td>取消権の期間（行為の時から）</td><td class="n src">意思表示</td></tr>
+            <tr><td>30・20・10年</td><td>借地権の存続期間（当初・1回目の更新・2回目以降）</td><td class="n src">借地借家法</td></tr>
+            <tr><td>50年</td><td>民法上の賃貸借の上限／一般定期借地権は50年以上</td><td class="n src">賃貸借・借地借家法</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="call trap">
+        <span class="tag">ひっかけ</span>
+        <p><strong>「6か月」が4か所、「1年」が4か所、「20年」が3か所ある。</strong>数字だけで覚えると必ず取り違える。必ず「何の」6か月かとセットで記憶する。</p>
+      </div>
+    </section>
+
+    <!-- 06 -->
+    <section id="kiseki">
+      <h2 class="sec"><span class="num">06</span>帰責事由の要否</h2>
+      <p class="lead">2020年改正の最大の産物。<em>同じ債務不履行でも、求める救済によって要件が変わる</em>。</p>
+
+      <div class="scroll">
+        <table class="hi">
+          <thead><tr><th>求める救済</th><th class="n">債務者の帰責事由</th><th>補足</th></tr></thead>
+          <tbody>
+            <tr class="hl"><td><strong>損害賠償</strong></td><td class="n no">必要</td><td>帰責事由がなければ免責される</td></tr>
+            <tr class="hl"><td><strong>解除</strong></td><td class="n tri">不要</td><td class="no">ただし<strong>債権者に帰責事由</strong>があると解除できない</td></tr>
+            <tr><td>契約不適合の<strong>追完請求</strong></td><td class="n tri">不要</td><td>買主に帰責事由があると請求できない</td></tr>
+            <tr><td>契約不適合の<strong>代金減額請求</strong></td><td class="n tri">不要</td><td>原則として追完の催告が必要</td></tr>
+            <tr><td>契約不適合の<strong>損害賠償</strong></td><td class="n no">必要</td><td>債務不履行の一般原則による</td></tr>
+            <tr><td>危険負担（履行拒絶）</td><td class="n tri">双方に帰責事由がないとき</td><td>債権者に帰責事由があれば拒めない</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="call tip">
+        <span class="tag">覚え方</span>
+        <p><strong>お金を取るなら相手の落ち度が要る、契約から抜けるだけなら要らない。</strong>解除は制裁ではなく「拘束からの解放」に位置づけが変わったため、帰責事由が外れた。</p>
+      </div>
+    </section>
+
+    <!-- 07 -->
+    <section id="chokuzen">
+      <h2 class="sec"><span class="num">07</span>直前チェック</h2>
+      <p>試験前日にここだけ見る。14問中8問を取るための最終確認。</p>
+
+      <div class="scroll">
+        <table>
+          <thead><tr><th>分野</th><th class="n">問数</th><th>これだけは落とせない</th></tr></thead>
+          <tbody>
+            <tr><td><a href="借地借家法.html">借地借家法</a></td><td class="n">2</td><td>定期借地3類型（50／10〜50・公正証書／30・書面不要）／定期借家は契約書と別に事前説明／対抗要件</td></tr>
+            <tr><td><a href="区分所有法.html">区分所有法</a></td><td class="n">1</td><td><span class="no">建替えは原則4/5・客観的事由で3/4</span>／所在等不明者の除外／規約共用部分は登記</td></tr>
+            <tr><td><a href="不動産登記法.html">不動産登記法</a></td><td class="n">1</td><td><span class="no">住所等変更は2年・5万円／相続登記は3年・10万円</span>／単独申請／仮登記</td></tr>
+            <tr><td><a href="制限行為能力者と意思表示.html">制限行為能力者と意思表示</a></td><td class="n">2</td><td>第三者保護の3段階／成年後見人に同意権なし／催告権の反転</td></tr>
+            <tr><td><a href="代理.html">代理</a></td><td class="n">1</td><td>代理権消滅事由（本人の破産だけ分かれる）／無権代理の3手段</td></tr>
+            <tr><td><a href="時効.html">時効</a></td><td class="n">1</td><td>猶予と更新の振り分け／10年20年／占有の承継</td></tr>
+            <tr><td><a href="物権変動と対抗要件.html">物権変動と対抗要件</a></td><td class="n">1〜2</td><td>取消し・解除・時効の前後／解除前は登記が必要／相続と登記</td></tr>
+            <tr><td><a href="共有と相隣関係.html">共有と相隣関係</a></td><td class="n">1</td><td>保存・管理・変更の3段階／持分は自由に処分／50cmと1m</td></tr>
+            <tr><td><a href="抵当権と担保物権.html">抵当権と担保物権</a></td><td class="n">1〜2</td><td>法定地上権の3要件（すべて設定当時）／物上代位は払渡し前／明渡猶予6か月</td></tr>
+            <tr><td><a href="債務不履行と解除.html">債務不履行と解除</a></td><td class="n">1</td><td>解除に帰責事由は不要／同時履行にならない4つ／金銭債務の特則</td></tr>
+            <tr><td><a href="売買と契約各論.html">売買と契約各論</a></td><td class="n">1〜2</td><td>契約不適合の4手段／通知は種類品質のみ1年／手付は相手方の着手まで</td></tr>
+            <tr><td><a href="賃貸借.html">賃貸借</a></td><td class="n">1</td><td>合意解除は転借人に対抗できない／敷金は賃貸人に承継・賃借人に承継されない</td></tr>
+            <tr><td><a href="債権総論.html">債権総論</a></td><td class="n">1〜2</td><td><span class="no">請求・免除・時効は相対効</span>／連帯保証に3つの盾なし／譲渡人からの通知</td></tr>
+            <tr><td><a href="不法行為.html">不法行為</a></td><td class="n">1</td><td>占有者→所有者（無過失責任）／失火は債務不履行に適用なし／3年20年</td></tr>
+            <tr><td><a href="相続.html">相続</a></td><td class="n">1</td><td>1/2・2/3・3/4／放棄では代襲しない／兄弟姉妹に遺留分なし</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="call exam">
+        <span class="tag">戦略</span>
+        <p>権利関係は<strong>14問中8問取れれば十分</strong>。確実に取れるのは<strong>借地借家法2問・区分所有法1問・不動産登記法1問</strong>の特別法4問と、意思表示・相続・不法行為あたり。<br>
+        <strong>抵当権や債権総論の複雑な事例問題は捨ててよい。</strong>そこに時間を使うより、宅建業法と法令上の制限を固めるほうが総得点は伸びる。</p>
+      </div>
+    </section>
+
+    <!-- 08 -->
+    <section id="matome">
+      <h2 class="sec"><span class="num">08</span>暗記カード</h2>
+      <p class="masthead-note">01 全体で衝突しやすいものを集めた。右上のボタンで答えを伏せられる。</p>
+      <div class="nums" id="numgrid">
+        <div class="nc" tabindex="0"><span class="v">善意のみ</span><span class="d">虚偽表示・心裡留保で第三者が保護される要件</span></div>
+        <div class="nc" tabindex="0"><span class="v">善意無過失</span><span class="d">詐欺・錯誤の取消し前の第三者（登記は不要）</span></div>
+        <div class="nc" tabindex="0"><span class="v">登記が必要</span><span class="d">解除前の第三者（善意悪意は不問）</span></div>
+        <div class="nc" tabindex="0"><span class="v">保護されない</span><span class="d">強迫・制限行為能力の取消し前の第三者</span></div>
+        <div class="nc" tabindex="0"><span class="v">建物の登記 / 引渡し</span><span class="d">借地権／借家権の対抗要件</span></div>
+        <div class="nc" tabindex="0"><span class="v">4/5（事由あれば3/4）</span><span class="d">建替え等の決議要件</span></div>
+        <div class="nc" tabindex="0"><span class="v">2年・5万円 / 3年・10万円</span><span class="d">住所等変更登記／相続登記の義務</span></div>
+        <div class="nc" tabindex="0"><span class="v">損害賠償だけ</span><span class="d">債務不履行で帰責事由が必要な救済</span></div>
+        <div class="nc" tabindex="0"><span class="v">相対効</span><span class="d">連帯債務における請求・免除・時効の完成</span></div>
+        <div class="nc" tabindex="0"><span class="v">占有者 → 所有者</span><span class="d">土地工作物責任の順序（所有者は無過失責任）</span></div>
+        <div class="nc" tabindex="0"><span class="v">生じない</span><span class="d">相続放棄をした者の子の代襲相続</span></div>
+        <div class="nc" tabindex="0"><span class="v">ない</span><span class="d">兄弟姉妹の遺留分</span></div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <h4>出典</h4>
+    <ul>
+      <li>民法（明治29年法律第89号） — <a href="https://laws.e-gov.go.jp/law/129AC0000000089">e-Gov法令検索</a></li>
+      <li>借地借家法（平成3年法律第90号） — <a href="https://laws.e-gov.go.jp/law/403AC0000000090">e-Gov法令検索</a></li>
+      <li>建物の区分所有等に関する法律（昭和37年法律第69号） — <a href="https://laws.e-gov.go.jp/law/337AC0000000069">e-Gov法令検索</a></li>
+      <li>不動産登記法（平成16年法律第123号） — <a href="https://laws.e-gov.go.jp/law/416AC0000000123">e-Gov法令検索</a></li>
+    </ul>
+  </footer>
+
+</div>
+
+<script>
+  (function () {
+    var root = document.documentElement;
+    document.getElementById('theme').addEventListener('click', function () {
+      if (root.getAttribute('data-theme')) { root.removeAttribute('data-theme'); return; }
+      var dark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      root.setAttribute('data-theme', dark ? 'light' : 'dark');
+    });
+    var maskBtn = document.getElementById('mask');
+    var grid = document.getElementById('numgrid');
+    maskBtn.addEventListener('click', function () {
+      var on = grid.classList.toggle('masked');
+      maskBtn.setAttribute('aria-pressed', String(on));
+      maskBtn.textContent = on ? '答えを表示' : '答えを隠す';
+    });
+    var links = Array.prototype.slice.call(document.querySelectorAll('nav.rail ol a'));
+    var map = {};
+    links.forEach(function (a) { map[a.getAttribute('href').slice(1)] = a; });
+    var seen = [];
+    var obs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        var i = seen.indexOf(e.target.id);
+        if (e.isIntersecting && i < 0) seen.push(e.target.id);
+        if (!e.isIntersecting && i >= 0) seen.splice(i, 1);
+      });
+      links.forEach(function (a) { a.classList.remove('on'); });
+      if (seen.length) {
+        var order = Object.keys(map);
+        seen.sort(function (a, b) { return order.indexOf(a) - order.indexOf(b); });
+        map[seen[0]].classList.add('on');
+      }
+    }, { rootMargin: '-10% 0px -70% 0px' });
+    document.querySelectorAll('main section').forEach(function (s) { obs.observe(s); });
+  })();
+</script>

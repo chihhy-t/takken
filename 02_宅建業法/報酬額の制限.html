@@ -1,0 +1,642 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>報酬額の制限 — 宅建士試験 2026年度</title>
+
+<style>
+  :root {
+    --paper:#EBEDE9; --surface:#F8F9F6; --sunk:#E1E4DE; --ink:#151F2A; --muted:#5D6B78;
+    --rule:#CDD2CB; --hair:#DCE0D9; --accent:#B8342A; --accent-soft:#F3DEDB;
+    --blue:#2A5F86; --blue-soft:#DCE6EE;
+    --font-display:"Hiragino Mincho ProN","Yu Mincho","YuMincho","Noto Serif JP",serif;
+    --font-body:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","YuGothic","Noto Sans JP",system-ui,sans-serif;
+    --font-mono:ui-monospace,"SFMono-Regular","SF Mono",Menlo,Consolas,monospace;
+    --measure:68ch;
+    --s1:.35rem; --s2:.7rem; --s3:1.1rem; --s4:1.7rem; --s5:2.6rem; --s6:4rem;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper:#0D1B29; --surface:#132534; --sunk:#0A1622; --ink:#DAE4EC; --muted:#8CA1B3;
+      --rule:#26415A; --hair:#1D3448; --accent:#FF7059; --accent-soft:#3A1F1D;
+      --blue:#6FB6DC; --blue-soft:#14293A;
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper:#0D1B29; --surface:#132534; --sunk:#0A1622; --ink:#DAE4EC; --muted:#8CA1B3;
+    --rule:#26415A; --hair:#1D3448; --accent:#FF7059; --accent-soft:#3A1F1D;
+    --blue:#6FB6DC; --blue-soft:#14293A;
+  }
+
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--paper); color:var(--ink); font-family:var(--font-body);
+    font-size:16px; line-height:1.9; -webkit-font-smoothing:antialiased; font-feature-settings:"palt" 1; }
+
+  .wrap { display:grid; grid-template-columns:15.5rem minmax(0,1fr); gap:var(--s6);
+    max-width:80rem; margin:0 auto; padding:0 var(--s4) var(--s6); align-items:start; }
+  @media (max-width:60rem){ .wrap{ grid-template-columns:minmax(0,1fr); gap:var(--s4); padding:0 var(--s3) var(--s5);} }
+
+  .masthead { grid-column:1/-1; padding:var(--s5) 0 var(--s4); border-bottom:2px solid var(--ink);
+    margin-bottom:var(--s2); display:flex; flex-wrap:wrap; align-items:flex-end; justify-content:space-between; gap:var(--s3); }
+  .eyebrow { font-family:var(--font-mono); font-size:.72rem; letter-spacing:.16em; text-transform:uppercase;
+    color:var(--muted); display:flex; align-items:center; gap:.6em; }
+  .eyebrow::before { content:""; width:2.2rem; height:1px; background:var(--accent); }
+  h1 { font-family:var(--font-display); font-weight:600; font-size:clamp(2rem,1.4rem + 2.6vw,3.1rem);
+    line-height:1.2; letter-spacing:.04em; margin:var(--s2) 0 var(--s3); text-wrap:balance; }
+  .facts { display:flex; flex-wrap:wrap; gap:0 var(--s3); font-size:.82rem; color:var(--muted); list-style:none; margin:0; padding:0; }
+  .facts b { font-family:var(--font-mono); font-variant-numeric:tabular-nums; color:var(--ink); font-weight:600; }
+  .toggles { display:flex; gap:var(--s1); }
+  button { font-family:var(--font-body); font-size:.78rem; color:var(--muted); background:var(--surface);
+    border:1px solid var(--rule); border-radius:2px; padding:.4em .9em; cursor:pointer; transition:color .15s,border-color .15s; }
+  button:hover { color:var(--ink); border-color:var(--ink); }
+  button:focus-visible { outline:2px solid var(--accent); outline-offset:2px; }
+  button[aria-pressed="true"] { color:var(--accent); border-color:var(--accent); }
+
+  nav.rail { position:sticky; top:var(--s3); font-size:.82rem; max-height:calc(100vh - 3rem); overflow-y:auto; padding-bottom:var(--s3); }
+  nav.rail h2 { font-family:var(--font-mono); font-size:.68rem; letter-spacing:.16em; text-transform:uppercase; color:var(--muted); margin:0 0 var(--s2); font-weight:500; }
+  nav.rail ol { list-style:none; margin:0; padding:0; display:flex; flex-direction:column; }
+  nav.rail a { display:block; padding:.3em 0 .3em .9em; color:var(--muted); text-decoration:none; border-left:2px solid var(--hair); line-height:1.5; }
+  nav.rail a:hover { color:var(--ink); border-left-color:var(--rule); }
+  nav.rail a.on { color:var(--ink); border-left-color:var(--accent); font-weight:600; }
+  nav.rail a .num { font-family:var(--font-mono); font-size:.72rem; color:var(--muted); margin-right:.5em; }
+  @media (max-width:60rem){
+    nav.rail{ position:static; max-height:none; border-bottom:1px solid var(--rule); padding-bottom:var(--s3); }
+    nav.rail ol{ display:grid; grid-template-columns:repeat(auto-fill,minmax(9rem,1fr)); gap:0 var(--s2); }
+  }
+
+  main { min-width:0; }
+  section { padding-top:var(--s5); scroll-margin-top:var(--s3); }
+  section > * { max-width:var(--measure); }
+  section > figure, section > .scroll, section > .calc { max-width:none; }
+
+  h2.sec { font-family:var(--font-display); font-size:clamp(1.45rem,1.2rem + .9vw,1.9rem); font-weight:600;
+    letter-spacing:.04em; margin:0 0 var(--s3); padding-bottom:var(--s2); border-bottom:1px solid var(--rule);
+    display:flex; align-items:baseline; gap:.7em; max-width:none; }
+  h2.sec .num { font-family:var(--font-mono); font-size:.8rem; letter-spacing:.1em; color:var(--accent); font-weight:500; }
+  h3 { font-family:var(--font-body); font-size:1.06rem; font-weight:700; letter-spacing:.02em;
+    margin:var(--s4) 0 var(--s2); padding-left:.7em; border-left:3px solid var(--ink); }
+  p { margin:0 0 var(--s3); }
+  a { color:var(--blue); text-underline-offset:.2em; }
+  em { font-style:normal; background:linear-gradient(transparent 62%, var(--accent-soft) 62%); font-weight:600; }
+  ul, ol { margin:0 0 var(--s3); padding-left:1.3em; }
+  li { margin-bottom:var(--s1); }
+  .lead { font-size:1.05rem; color:var(--muted); }
+
+  .call { max-width:var(--measure); margin:0 0 var(--s3); padding:var(--s3) var(--s3) var(--s3) var(--s4);
+    background:var(--surface); border:1px solid var(--hair); border-left:3px solid var(--rule); border-radius:2px; font-size:.94rem; }
+  .call > :last-child { margin-bottom:0; }
+  .call .tag { display:block; font-family:var(--font-mono); font-size:.68rem; letter-spacing:.16em; text-transform:uppercase; color:var(--muted); margin-bottom:var(--s1); }
+  .call.trap { border-left-color:var(--accent); background:var(--accent-soft); }
+  .call.trap .tag { color:var(--accent); }
+  .call.exam { border-left-color:var(--ink); }
+  .call.exam .tag { color:var(--ink); }
+  .call.rev { border-left-color:var(--accent); }
+  .call.rev .tag { color:var(--accent); }
+  .call.tip { border-left-color:var(--blue); background:var(--blue-soft); }
+  .call.tip .tag { color:var(--blue); }
+
+  .scroll { overflow-x:auto; margin:0 0 var(--s3); -webkit-overflow-scrolling:touch; }
+  table { border-collapse:collapse; width:100%; font-size:.88rem; line-height:1.6; }
+  caption { text-align:left; font-size:.78rem; color:var(--muted); padding-bottom:var(--s1); font-family:var(--font-mono); letter-spacing:.08em; }
+  th, td { padding:.58em .75em; text-align:left; vertical-align:top; border-bottom:1px solid var(--hair); }
+  thead th { font-size:.74rem; letter-spacing:.08em; color:var(--muted); font-weight:600; border-bottom:1px solid var(--ink); }
+  tbody tr:hover { background:var(--surface); }
+  td.n, th.n { text-align:center; font-family:var(--font-mono); font-variant-numeric:tabular-nums; white-space:nowrap; }
+  .no { color:var(--accent); font-weight:700; }
+  .yes { color:var(--muted); }
+  .tri { color:var(--blue); }
+  table.sokusan tbody td:nth-child(2) { font-family:var(--font-mono); font-size:1rem; color:var(--accent); font-weight:600; white-space:nowrap; }
+
+  /* worked example */
+  .calc { background:var(--surface); border:1px solid var(--hair); border-left:3px solid var(--blue);
+    border-radius:2px; padding:var(--s3) var(--s4); margin:0 0 var(--s3); }
+  .calc h4 { font-family:var(--font-mono); font-size:.7rem; letter-spacing:.14em; color:var(--blue);
+    margin:0 0 var(--s2); text-transform:uppercase; }
+  .calc .given { font-size:.9rem; margin-bottom:var(--s2); }
+  .calc ol { counter-reset:st; list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:var(--s1); }
+  .calc ol li { display:grid; grid-template-columns:1.6rem 1fr; gap:.6rem; font-size:.88rem; margin:0; }
+  .calc ol li::before { counter-increment:st; content:counter(st); font-family:var(--font-mono); font-size:.72rem;
+    color:var(--muted); border:1px solid var(--rule); border-radius:50%; width:1.4rem; height:1.4rem;
+    display:flex; align-items:center; justify-content:center; margin-top:.25rem; }
+  .calc code { font-family:var(--font-mono); font-size:.88rem; background:var(--paper); padding:.1em .4em; border-radius:2px; }
+  .calc .ans { margin-top:var(--s2); padding-top:var(--s2); border-top:1px solid var(--hair);
+    font-family:var(--font-mono); font-size:1.05rem; font-weight:600; color:var(--accent); }
+
+  figure { margin:0 0 var(--s4); }
+  figure svg { display:block; width:100%; height:auto; }
+  figcaption { font-size:.78rem; color:var(--muted); font-family:var(--font-mono); letter-spacing:.06em; margin-top:var(--s2); padding-top:var(--s1); border-top:1px solid var(--hair); }
+  .plate { background:var(--surface); border:1px solid var(--hair); border-radius:2px; padding:var(--s3); }
+  .svg-ink { fill:none; stroke:var(--ink); stroke-width:1.4; }
+  .svg-hair { fill:none; stroke:var(--rule); stroke-width:1; }
+  .svg-dim { fill:none; stroke:var(--blue); stroke-width:1; }
+  .svg-acc { fill:none; stroke:var(--accent); stroke-width:1.6; }
+  .svg-fill { fill:var(--sunk); stroke:var(--rule); stroke-width:1; }
+  .svg-accfill { fill:var(--accent-soft); stroke:var(--accent); stroke-width:1.2; }
+  .svg-bluefill { fill:var(--blue-soft); stroke:var(--blue); stroke-width:1.2; }
+  text { font-family:var(--font-body); fill:var(--ink); font-size:12px; }
+  text.lbl { font-family:var(--font-mono); fill:var(--muted); font-size:10.5px; letter-spacing:.06em; }
+  text.dimt { font-family:var(--font-mono); fill:var(--blue); font-size:11px; }
+  text.acct { fill:var(--accent); font-size:11.5px; font-weight:700; }
+  text.f { font-family:var(--font-mono); font-size:13px; font-weight:600; fill:var(--accent); }
+
+  .nums { display:grid; grid-template-columns:repeat(auto-fill,minmax(11.5rem,1fr)); gap:var(--s2); }
+  .nc { background:var(--surface); border:1px solid var(--hair); border-radius:2px; padding:var(--s3) var(--s3) var(--s2); display:flex; flex-direction:column; gap:var(--s1); }
+  .nc .v { font-family:var(--font-mono); font-variant-numeric:tabular-nums; font-size:1.2rem; font-weight:600; line-height:1.25; color:var(--accent); }
+  .nc .d { font-size:.8rem; color:var(--muted); line-height:1.6; }
+  .nums.masked .v { color:transparent; background:var(--rule); border-radius:2px; user-select:none; }
+  .nums.masked .nc:hover .v, .nums.masked .nc:focus-within .v { color:var(--accent); background:transparent; }
+  .nc:focus-visible { outline:2px solid var(--accent); outline-offset:2px; }
+  .masthead-note { font-size:.78rem; color:var(--muted); margin-bottom:var(--s2); }
+
+  table.traps td:first-child { color:var(--muted); }
+  table.traps td:first-child::before { content:"「"; }
+  table.traps td:first-child::after { content:"」"; }
+  table.traps td:last-child strong { color:var(--accent); }
+
+  footer { grid-column:1/-1; margin-top:var(--s6); padding-top:var(--s3); border-top:1px solid var(--rule); font-size:.8rem; color:var(--muted); }
+  footer ul { list-style:none; padding:0; }
+  footer li { margin-bottom:var(--s1); }
+  .sibling { display:flex; flex-wrap:wrap; gap:var(--s2); margin-top:var(--s3); }
+  .sibling a { font-size:.8rem; text-decoration:none; border:1px solid var(--rule); border-radius:2px; padding:.35em .8em; color:var(--muted); }
+  .sibling a:hover { color:var(--ink); border-color:var(--ink); }
+
+  @media (prefers-reduced-motion: reduce){ *{ transition:none !important; animation:none !important; scroll-behavior:auto !important; } }
+  html { scroll-behavior:smooth; }
+  .eyebrow a { color:var(--accent); text-decoration:none; }
+  .eyebrow a:hover { text-decoration:underline; text-underline-offset:.2em; }
+  nav.rail a.home { border-left:none; padding:0 0 var(--s2); color:var(--accent);
+    font-family:var(--font-mono); font-size:.72rem; letter-spacing:.1em; }
+  nav.rail a.home:hover { color:var(--accent); text-decoration:underline; text-underline-offset:.2em; }
+</style>
+
+<div class="wrap">
+
+  <header class="masthead">
+    <div>
+      <div class="eyebrow"><a href="../index.html">← 総目次</a> &nbsp;/&nbsp; 02 宅建業法 &nbsp;/&nbsp; 宅建士試験 2026年度</div>
+      <h1>報酬額の制限</h1>
+      <ul class="facts">
+        <li>法令基準日 <b>2026-04-01</b></li>
+        <li>出題数 <b>1問</b></li>
+        <li>目標 <b>確実に1問</b></li>
+        <li>更新 <b>2026-08-09</b></li>
+      </ul>
+    </div>
+    <div class="toggles">
+      <button id="mask" type="button" aria-pressed="false">数値を隠す</button>
+      <button id="theme" type="button">配色切替</button>
+    </div>
+  </header>
+
+  <nav class="rail" aria-label="目次">
+    <a class="home" href="../index.html">← 総目次</a>
+    <h2>Contents</h2>
+    <ol>
+      <li><a href="#tejun"><span class="num">00</span>計算の手順</a></li>
+      <li><a href="#sokusan"><span class="num">01</span>速算式</a></li>
+      <li><a href="#zei"><span class="num">02</span>消費税の扱い</a></li>
+      <li><a href="#dairi"><span class="num">03</span>媒介・代理・双方</a></li>
+      <li><a href="#koukan"><span class="num">04</span>交換</a></li>
+      <li><a href="#taishaku"><span class="num">05</span>貸借</a></li>
+      <li><a href="#tokurei"><span class="num">06</span>空家等の特例</a></li>
+      <li><a href="#hiyou"><span class="num">07</span>別に受領できる費用</a></li>
+      <li><a href="#rei"><span class="num">08</span>計算例</a></li>
+      <li><a href="#deru"><span class="num">09</span>よく出る論点</a></li>
+      <li><a href="#hikkake"><span class="num">10</span>ひっかけ一覧</a></li>
+      <li><a href="#suji"><span class="num">11</span>数字まとめ</a></li>
+    </ol>
+  </nav>
+
+  <main>
+
+    <!-- 00 -->
+    <section id="tejun">
+      <h2 class="sec"><span class="num">00</span>計算の手順</h2>
+      <p class="lead">計算問題は<em>手順を固定すれば必ず解ける</em>。迷うのは、消費税をいつ抜いていつ足すか。<em>抜いてから計算し、最後に足す</em>と覚える。</p>
+
+      <figure class="plate">
+        <svg viewBox="0 0 720 170" role="img" aria-label="報酬計算の3ステップ。まず建物価格から消費税を抜いて税抜の代金を出し、次に速算式で報酬の基礎額を求め、最後に消費税を上乗せする。土地は非課税なので税を抜かない。">
+          <line x1="60" y1="80" x2="660" y2="80" class="svg-hair"/>
+
+          <rect x="40" y="48" width="180" height="64" class="svg-bluefill" rx="2"/>
+          <text x="130" y="72" text-anchor="middle" class="dimt">STEP 1</text>
+          <text x="130" y="92" text-anchor="middle">消費税を抜く</text>
+          <text x="130" y="130" text-anchor="middle" class="lbl">建物 ÷ 1.1</text>
+          <text x="130" y="146" text-anchor="middle" class="lbl">土地は非課税なのでそのまま</text>
+
+          <path d="M226 80 H 250" class="svg-acc"/>
+          <path d="M244 74 L250 80 L244 86" class="svg-acc"/>
+
+          <rect x="256" y="48" width="200" height="64" class="svg-accfill" rx="2"/>
+          <text x="356" y="72" text-anchor="middle" class="acct">STEP 2</text>
+          <text x="356" y="92" text-anchor="middle">速算式にあてはめる</text>
+          <text x="356" y="130" text-anchor="middle" class="lbl">税抜の代金 × 3% + 6万円 など</text>
+          <text x="356" y="146" text-anchor="middle" class="lbl">これが「一方から受け取れる基礎額」</text>
+
+          <path d="M462 80 H 486" class="svg-acc"/>
+          <path d="M480 74 L486 80 L480 86" class="svg-acc"/>
+
+          <rect x="492" y="48" width="180" height="64" class="svg-bluefill" rx="2"/>
+          <text x="582" y="72" text-anchor="middle" class="dimt">STEP 3</text>
+          <text x="582" y="92" text-anchor="middle">消費税を上乗せ</text>
+          <text x="582" y="130" text-anchor="middle" class="lbl">課税事業者 × 1.1</text>
+          <text x="582" y="146" text-anchor="middle" class="lbl">免税事業者 × 1.04</text>
+
+          <text x="40" y="30" class="lbl">税抜にしてから計算し、最後に税を足す</text>
+        </svg>
+        <figcaption>Fig.1 — 順番を固定すれば間違えない</figcaption>
+      </figure>
+
+      <div class="call tip">
+        <span class="tag">覚え方</span>
+        <p><strong>「土地に消費税はかからない」</strong>が出発点。問題文の代金が土地付建物なら、<strong>建物部分だけ 1.1 で割って税抜に戻す</strong>。土地はそのまま足す。<br>
+        速算式は<strong>必ず税抜の代金</strong>に適用する。税込のまま計算すると答えが合わない。</p>
+      </div>
+    </section>
+
+    <!-- 01 -->
+    <section id="sokusan">
+      <h2 class="sec"><span class="num">01</span>速算式</h2>
+
+      <figure class="plate">
+        <svg viewBox="0 0 720 180" role="img" aria-label="速算式は代金200万円以下が5パーセント、200万円超400万円以下が4パーセントプラス2万円、400万円超が3パーセントプラス6万円。">
+          <line x1="60" y1="130" x2="680" y2="130" class="svg-ink"/>
+          <line x1="220" y1="60" x2="220" y2="138" class="svg-hair" stroke-dasharray="3 3"/>
+          <line x1="380" y1="60" x2="380" y2="138" class="svg-hair" stroke-dasharray="3 3"/>
+          <text x="220" y="152" text-anchor="middle" class="dimt">200万円</text>
+          <text x="380" y="152" text-anchor="middle" class="dimt">400万円</text>
+          <text x="680" y="168" text-anchor="end" class="lbl">税抜の代金</text>
+
+          <rect x="60" y="76" width="160" height="46" class="svg-accfill" rx="2"/>
+          <text x="140" y="96" text-anchor="middle" class="lbl">200万円以下</text>
+          <text x="140" y="114" text-anchor="middle" class="f">× 5%</text>
+
+          <rect x="220" y="76" width="160" height="46" class="svg-accfill" rx="2"/>
+          <text x="300" y="96" text-anchor="middle" class="lbl">200万円超 400万円以下</text>
+          <text x="300" y="114" text-anchor="middle" class="f">× 4% + 2万円</text>
+
+          <rect x="380" y="76" width="300" height="46" class="svg-accfill" rx="2"/>
+          <text x="530" y="96" text-anchor="middle" class="lbl">400万円超</text>
+          <text x="530" y="114" text-anchor="middle" class="f">× 3% + 6万円</text>
+
+          <text x="60" y="44" class="lbl">媒介で「一方の依頼者」から受け取れる上限（消費税を除く）</text>
+        </svg>
+        <figcaption>Fig.2 — 金額帯で係数が切り替わる</figcaption>
+      </figure>
+
+      <div class="scroll">
+        <table class="sokusan">
+          <thead><tr><th>税抜の代金</th><th>速算式</th><th>意味</th></tr></thead>
+          <tbody>
+            <tr><td>200万円以下</td><td>代金 × 5%</td><td rowspan="3">媒介の場合に<strong>一方の依頼者</strong>から受け取れる上限（消費税を除く）</td></tr>
+            <tr><td>200万円超 400万円以下</td><td>代金 × 4% + 2万円</td></tr>
+            <tr><td>400万円超</td><td>代金 × 3% + 6万円</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="call tip">
+        <span class="tag">覚え方</span>
+        <p><strong>「ごー・よんに・さんろく」</strong>。5%／4%＋2／3%＋6。<br>
+        本来は 200万円以下の部分に5%、200〜400万円の部分に4%、400万円超の部分に3% を段階的に掛けるが、その差額をまとめたのが「＋2万円」「＋6万円」。速算式を使えば一発で出る。</p>
+      </div>
+    </section>
+
+    <!-- 02 -->
+    <section id="zei">
+      <h2 class="sec"><span class="num">02</span>消費税の扱い</h2>
+
+      <div class="scroll">
+        <table>
+          <thead><tr><th>対象</th><th>消費税</th></tr></thead>
+          <tbody>
+            <tr><td><strong>土地</strong>の代金</td><td class="no">非課税。税を抜く処理は不要</td></tr>
+            <tr><td><strong>建物</strong>の代金</td><td>課税。<strong>税込価格 ÷ 1.1</strong> で税抜に戻してから速算式に入れる</td></tr>
+            <tr><td>報酬（課税事業者）</td><td>速算式の額 <strong>× 1.1</strong></td></tr>
+            <tr><td>報酬（免税事業者）</td><td class="no">速算式の額 <strong>× 1.04</strong>（仕入れに係る消費税相当額として4%）</td></tr>
+            <tr><td><strong>借賃</strong></td><td>貸借の報酬計算では、居住用建物の借賃は非課税。店舗等の借賃は税抜に直す</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="call trap">
+        <span class="tag">ひっかけ</span>
+        <p><strong>問題文に「消費税課税事業者である」「免税事業者である」と必ず書いてある。</strong>見落とすと 1.1 と 1.04 を取り違える。<br>
+        <strong>土地の代金には消費税がかからない</strong>ので、「土地付建物 5,500万円（うち消費税額500万円）」とあれば、消費税は建物部分にだけかかっている。税抜の代金は 5,000万円。</p>
+      </div>
+    </section>
+
+    <!-- 03 -->
+    <section id="dairi">
+      <h2 class="sec"><span class="num">03</span>媒介・代理・双方からの受領</h2>
+
+      <div class="scroll">
+        <table>
+          <thead><tr><th>形態</th><th>上限</th></tr></thead>
+          <tbody>
+            <tr><td><strong>媒介</strong>（一方から）</td><td>速算式の額</td></tr>
+            <tr><td><strong>媒介</strong>（双方から）</td><td>各当事者から速算式の額まで。<strong>合計で速算式の2倍</strong>まで</td></tr>
+            <tr><td><strong>代理</strong>（依頼者から）</td><td class="no">速算式の <strong>2倍</strong> まで</td></tr>
+            <tr><td><strong>代理</strong>（相手方からも受ける）</td><td class="no">両者の<strong>合計</strong>が速算式の2倍を超えてはならない</td></tr>
+            <tr><td><strong>複数の業者</strong>が関与</td><td class="no">取引全体で速算式の <strong>2倍</strong> が上限</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="call exam">
+        <span class="tag">よく出る</span>
+        <p><strong>1つの取引から業界全体が受け取れる額は、どんな形態でも「速算式の2倍」が天井。</strong>媒介業者が2社入ろうが、代理と媒介が組み合わさろうが変わらない。<br>
+        代理業者が依頼者から2倍を受け取ったら、<strong>相手方からは1円も受け取れない</strong>。</p>
+      </div>
+    </section>
+
+    <!-- 04 -->
+    <section id="koukan">
+      <h2 class="sec"><span class="num">04</span>交換</h2>
+      <div class="scroll">
+        <table>
+          <thead><tr><th>論点</th><th>内容</th></tr></thead>
+          <tbody>
+            <tr><td>基準となる価額</td><td class="no">交換する物件の価額に差があるときは、<strong>高いほうの価額</strong>を基準に計算する</td></tr>
+            <tr><td class="yes">誤り</td><td class="yes">差額（交換差金）を基準にするのではない</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 05 -->
+    <section id="taishaku">
+      <h2 class="sec"><span class="num">05</span>貸借</h2>
+
+      <div class="scroll">
+        <table>
+          <thead><tr><th>論点</th><th>内容</th></tr></thead>
+          <tbody>
+            <tr><td><strong>双方からの合計</strong></td><td class="no">媒介・代理を問わず、<strong>借賃の1か月分＋消費税</strong>（課税事業者なら <strong>1.1か月分</strong>）が上限</td></tr>
+            <tr>
+              <td><strong>居住用建物</strong>の媒介</td>
+              <td class="no">一方から受けられるのは <strong>借賃の0.5か月分</strong>（税込0.55か月分）まで。<br><strong>媒介の依頼を受けるにあたって依頼者の承諾を得ている</strong>場合は1か月分（税込1.1か月分）まで</td>
+            </tr>
+            <tr>
+              <td>居住用建物<strong>以外</strong>（店舗・土地など）</td>
+              <td>一方からの制限はない（合計1か月分の枠内で自由に配分できる）。<br class="tri"><strong>権利金</strong>（返還されないもの）がある場合は、権利金を売買代金とみなして速算式で計算した額と比較し、<strong>高いほうを選べる</strong></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="call trap">
+        <span class="tag">ひっかけ</span>
+        <p><strong>居住用建物の「0.5か月」の壁を外すには、媒介の依頼を受けるにあたって承諾が必要。</strong>契約成立後に承諾を得ても遅い。<br>
+        <strong>権利金を基準にできるのは「居住用建物以外」だけ。</strong>居住用建物の貸借では権利金方式を使えない。<br>
+        <strong>敷金は「返還されるもの」なので権利金にあたらない。</strong></p>
+      </div>
+    </section>
+
+    <!-- 06 -->
+    <section id="tokurei">
+      <h2 class="sec"><span class="num">06</span>空家等の特例</h2>
+
+      <div class="call rev">
+        <span class="tag">2024年7月1日施行</span>
+        <p>空き家の流通を促すため、報酬告示が6年ぶりに改正されました。<strong>低廉な空家等の対象が400万円以下から800万円以下に拡大</strong>され、上限額も引き上げられています。<strong>長期の空家等の貸借</strong>についても新たに特例が設けられました。改正前の「400万円以下・18万円」で覚えている教材は使えません。</p>
+      </div>
+
+      <div class="scroll">
+        <table>
+          <thead><tr><th></th><th>低廉な空家等（売買・交換）</th><th>長期の空家等（貸借）</th></tr></thead>
+          <tbody>
+            <tr>
+              <td>対象</td>
+              <td>代金の額が <strong>800万円以下</strong> の宅地建物</td>
+              <td>現に長期間使用されておらず、または将来にわたって使用の見込みがない宅地建物</td>
+            </tr>
+            <tr>
+              <td><strong>上限</strong></td>
+              <td class="no">通常の報酬額＋現地調査等の費用の合計で <strong>33万円（税込）</strong></td>
+              <td class="no"><strong>貸主</strong>から <strong>借賃の2.2か月分（税込）</strong></td>
+            </tr>
+            <tr>
+              <td>受領できる相手</td>
+              <td class="tri"><strong>売主・買主のいずれからも</strong>受領できる（それぞれ33万円以内）</td>
+              <td>特例が使えるのは<strong>貸主</strong>から受ける報酬のみ</td>
+            </tr>
+            <tr>
+              <td>相手方からの報酬</td>
+              <td>—</td>
+              <td>借主からは通常どおり（居住用は0.55か月分、承諾があれば1.1か月分）</td>
+            </tr>
+            <tr>
+              <td><strong>代理</strong>の場合</td>
+              <td class="no"><strong>66万円（税込）</strong>。相手方からも受けるときは両者の合計が66万円以内</td>
+              <td>—</td>
+            </tr>
+            <tr>
+              <td class="no">手続</td>
+              <td colspan="2" class="no">媒介契約の締結に際し、<strong>あらかじめ報酬額について依頼者に説明し、合意する</strong>ことが必要</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="call exam">
+        <span class="tag">よく出る</span>
+        <p><strong>特例は上限を「引き上げる」もので、通常の計算額のほうが高ければそちらが上限。</strong>800万円の物件なら通常額は <code>800 × 3% + 6 = 30万円</code>、税込33万円。ちょうど特例の上限と一致するので、<strong>800万円ぴったりでは特例のうまみがない</strong>。<br>
+        特例が効くのは<strong>もっと安い物件</strong>。たとえば200万円の物件なら通常額は税込11万円だが、特例なら33万円まで受け取れる。</p>
+      </div>
+
+      <div class="call trap">
+        <span class="tag">ひっかけ</span>
+        <p><strong>「あらかじめ説明・合意」が必要。</strong>これを欠くと特例は使えない。<br>
+        <strong>長期の空家等の特例で増えるのは貸主からの分だけ。</strong>借主から2.2か月分を取ることはできない。</p>
+      </div>
+    </section>
+
+    <!-- 07 -->
+    <section id="hiyou">
+      <h2 class="sec"><span class="num">07</span>報酬と別に受領できる費用</h2>
+
+      <div class="scroll">
+        <table>
+          <thead><tr><th>費用</th><th class="n">別に受領</th></tr></thead>
+          <tbody>
+            <tr><td><strong>依頼者の特別の依頼による広告</strong>の料金</td><td class="n tri">できる</td></tr>
+            <tr><td><strong>依頼者の特別の依頼による遠隔地への出張</strong>の費用</td><td class="n tri">できる</td></tr>
+            <tr><td>依頼者の依頼によらない広告の費用</td><td class="n no">できない</td></tr>
+            <tr><td>通常の業務で生じる現地調査・案内の費用</td><td class="n no">できない</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="call tip">
+        <span class="tag">覚え方</span>
+        <p><strong>「依頼者が特別に頼んだものだけ」</strong>が別途請求できる。業者が勝手に出した広告や、当然にやるべき案内は報酬に含まれている。</p>
+      </div>
+    </section>
+
+    <!-- 08 -->
+    <section id="rei">
+      <h2 class="sec"><span class="num">08</span>計算例</h2>
+
+      <div class="calc">
+        <h4>例1 — 土地付建物の売買・媒介</h4>
+        <p class="given">土地付建物を <strong>4,400万円</strong>（うち建物の代金1,100万円・消費税込）で売買。業者Aが売主から媒介の依頼を受けた。Aは課税事業者。Aが売主から受け取れる上限は。</p>
+        <ol>
+          <li>建物を税抜に戻す — <code>1,100万円 ÷ 1.1 = 1,000万円</code></li>
+          <li>税抜の代金 — <code>3,300万円（土地）+ 1,000万円 = 4,300万円</code></li>
+          <li>速算式（400万円超）— <code>4,300 × 3% + 6 = 135万円</code></li>
+          <li>消費税を上乗せ — <code>135 × 1.1 = 148.5万円</code></li>
+        </ol>
+        <div class="ans">答 148万5,000円</div>
+      </div>
+
+      <div class="calc">
+        <h4>例2 — 代理と媒介が組み合わさる場合</h4>
+        <p class="given">代金 <strong>2,000万円</strong> の土地。業者Aが売主の<strong>代理</strong>、業者Bが買主の<strong>媒介</strong>。ともに課税事業者。二社が受け取れる合計の上限は。</p>
+        <ol>
+          <li>速算式 — <code>2,000 × 3% + 6 = 66万円</code></li>
+          <li>取引全体の上限は速算式の2倍 — <code>66 × 2 = 132万円</code></li>
+          <li>消費税を上乗せ — <code>132 × 1.1 = 145.2万円</code></li>
+        </ol>
+        <div class="ans">答 A・B合計で 145万2,000円</div>
+      </div>
+
+      <div class="calc">
+        <h4>例3 — 居住用建物の貸借</h4>
+        <p class="given">借賃 <strong>月額10万円</strong> の居住用建物の貸借を業者Aが媒介。Aは課税事業者で、依頼を受けるにあたっての承諾は得ていない。Aが貸主・借主から受け取れる額は。</p>
+        <ol>
+          <li>双方からの合計の上限 — <code>10万円 × 1.1 = 11万円</code></li>
+          <li>承諾がないので一方からは半分まで — <code>10万円 × 0.55 = 5.5万円</code></li>
+        </ol>
+        <div class="ans">答 貸主・借主それぞれ5万5,000円まで（合計11万円）</div>
+      </div>
+
+      <div class="calc">
+        <h4>例4 — 低廉な空家等</h4>
+        <p class="given">代金 <strong>300万円</strong> の空家（低廉な空家等に該当し、現地調査等の費用を要する）の売買を業者Aが売主から媒介の依頼を受けた。あらかじめ説明・合意済み。Aは課税事業者。上限は。</p>
+        <ol>
+          <li>通常の速算式（200万円超400万円以下）— <code>300 × 4% + 2 = 14万円</code> → 税込 <code>15.4万円</code></li>
+          <li>特例の上限 — <strong>33万円（税込）</strong></li>
+          <li>特例のほうが高いので、現地調査等の費用を加えて33万円まで受領できる</li>
+        </ol>
+        <div class="ans">答 33万円</div>
+      </div>
+    </section>
+
+    <!-- 09 -->
+    <section id="deru">
+      <h2 class="sec"><span class="num">09</span>よく出る論点</h2>
+      <div class="scroll">
+        <table>
+          <thead><tr><th class="n">順位</th><th>論点</th><th>要点</th></tr></thead>
+          <tbody>
+            <tr><td class="n">1</td><td><strong>売買の計算</strong></td><td>建物の税抜化 → 速算式 → 1.1（免税なら1.04）</td></tr>
+            <tr><td class="n">2</td><td>代理・双方受領の上限</td><td>取引全体で速算式の2倍が天井</td></tr>
+            <tr><td class="n">3</td><td>貸借</td><td>合計1.1か月分／居住用は一方0.55／承諾で1.1</td></tr>
+            <tr><td class="n">4</td><td><span class="no">空家等の特例</span></td><td>800万円以下で33万円・代理66万円・貸借は貸主2.2か月分</td></tr>
+            <tr><td class="n">5</td><td>権利金方式</td><td>居住用建物以外のみ。高いほうを選べる</td></tr>
+            <tr><td class="n">6</td><td>別途受領できる費用</td><td>依頼者の特別の依頼による広告・出張のみ</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 10 -->
+    <section id="hikkake">
+      <h2 class="sec"><span class="num">10</span>ひっかけ一覧</h2>
+      <div class="scroll">
+        <table class="traps">
+          <thead><tr><th>こう書かれたら疑う</th><th>正しくは</th></tr></thead>
+          <tbody>
+            <tr><td>税込の代金に速算式をあてはめる</td><td><strong>税抜</strong>に直してから計算する</td></tr>
+            <tr><td>土地の代金からも消費税を抜く</td><td>土地は<strong>非課税</strong>。抜かない</td></tr>
+            <tr><td>免税事業者でも報酬に1.1を掛けられる</td><td>免税事業者は <strong>1.04</strong></td></tr>
+            <tr><td>代理なら依頼者から2倍、相手方からも2倍もらえる</td><td>両者の<strong>合計</strong>が2倍以内</td></tr>
+            <tr><td>業者が2社関与すればそれぞれ2倍まで受け取れる</td><td>取引全体で<strong>2倍</strong>が上限</td></tr>
+            <tr><td>交換では価額の差額を基準に計算する</td><td><strong>高いほうの価額</strong>を基準にする</td></tr>
+            <tr><td>居住用建物の貸借で貸主から1か月分を受け取れる</td><td>承諾がなければ <strong>0.5か月分</strong>（税込0.55）</td></tr>
+            <tr><td>承諾は契約成立までに得ればよい</td><td><strong>媒介の依頼を受けるにあたって</strong>得る</td></tr>
+            <tr><td>居住用建物の貸借でも権利金を基準にできる</td><td>権利金方式は<strong>居住用建物以外</strong>のみ</td></tr>
+            <tr><td>敷金も権利金として計算できる</td><td>敷金は<strong>返還される</strong>ので権利金にあたらない</td></tr>
+            <tr><td>低廉な空家等の特例は400万円以下が対象</td><td>2024年7月から <strong>800万円以下</strong></td></tr>
+            <tr><td>低廉な空家等の特例は売主からしか受け取れない</td><td><strong>買主からも</strong>受領できる（各33万円以内）</td></tr>
+            <tr><td>特例を使うのに説明や合意は不要</td><td><strong>あらかじめ説明し合意</strong>する必要がある</td></tr>
+            <tr><td>長期の空家等では借主からも2.2か月分もらえる</td><td>特例が及ぶのは<strong>貸主</strong>から受ける報酬のみ</td></tr>
+            <tr><td>依頼者の依頼によらない広告費用も請求できる</td><td><strong>特別の依頼</strong>による広告のみ</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 11 -->
+    <section id="suji">
+      <h2 class="sec"><span class="num">11</span>数字まとめ</h2>
+      <p class="masthead-note">右上の「数値を隠す」で自己テストできる。</p>
+      <div class="nums" id="numgrid">
+        <div class="nc" tabindex="0"><span class="v">5%</span><span class="d">税抜の代金が200万円以下のときの速算式</span></div>
+        <div class="nc" tabindex="0"><span class="v">4% + 2万円</span><span class="d">200万円超400万円以下</span></div>
+        <div class="nc" tabindex="0"><span class="v">3% + 6万円</span><span class="d">400万円超</span></div>
+        <div class="nc" tabindex="0"><span class="v">× 1.1</span><span class="d">課税事業者の報酬に上乗せする消費税</span></div>
+        <div class="nc" tabindex="0"><span class="v">× 1.04</span><span class="d">免税事業者が加算できる仕入れに係る消費税相当額</span></div>
+        <div class="nc" tabindex="0"><span class="v">2倍</span><span class="d">代理の上限／取引全体で受け取れる上限</span></div>
+        <div class="nc" tabindex="0"><span class="v">1.1か月分</span><span class="d">貸借で双方から受け取れる合計（税込）</span></div>
+        <div class="nc" tabindex="0"><span class="v">0.55か月分</span><span class="d">居住用建物の貸借で一方から受け取れる上限（税込）</span></div>
+        <div class="nc" tabindex="0"><span class="v">800万円以下</span><span class="d">低廉な空家等の特例の対象</span></div>
+        <div class="nc" tabindex="0"><span class="v">33万円</span><span class="d">低廉な空家等の媒介の上限（税込）</span></div>
+        <div class="nc" tabindex="0"><span class="v">66万円</span><span class="d">低廉な空家等の代理の上限（税込）</span></div>
+        <div class="nc" tabindex="0"><span class="v">2.2か月分</span><span class="d">長期の空家等の貸借で貸主から受け取れる上限（税込）</span></div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <h4>出典</h4>
+    <ul>
+      <li>宅地建物取引業法（昭和27年法律第176号）第46条 — <a href="https://laws.e-gov.go.jp/law/327AC1000000176">e-Gov法令検索</a></li>
+      <li>国土交通省告示「宅地建物取引業者が宅地又は建物の売買等に関して受けることができる報酬の額」（2024年7月1日改正） — <a href="https://www.mlit.go.jp/totikensangyo/const/1_6_bf_000030.html">mlit.go.jp</a></li>
+      <li>低廉な空家等・長期の空家等の媒介報酬の特例（2024年7月改正）の解説 — <a href="https://takken-fudosan.com/01-takken-46-tokurei-20240701/">解説</a>／<a href="https://www.zennichi.or.jp/column/vacant-property-fee/">全日本不動産協会</a></li>
+    </ul>
+    <div class="sibling">
+      <a href="../index.html">総目次</a>
+      <a href="業務上の規制.html">業務上の規制</a>
+      <a href="8種制限.html">← 8種制限</a>
+      <a href="35条書面.html">35条書面</a>
+    </div>
+  </footer>
+
+</div>
+
+<script>
+  (function () {
+    var root = document.documentElement;
+    document.getElementById('theme').addEventListener('click', function () {
+      if (root.getAttribute('data-theme')) { root.removeAttribute('data-theme'); return; }
+      var dark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      root.setAttribute('data-theme', dark ? 'light' : 'dark');
+    });
+    var maskBtn = document.getElementById('mask');
+    var grid = document.getElementById('numgrid');
+    maskBtn.addEventListener('click', function () {
+      var on = grid.classList.toggle('masked');
+      maskBtn.setAttribute('aria-pressed', String(on));
+      maskBtn.textContent = on ? '数値を表示' : '数値を隠す';
+    });
+    var links = Array.prototype.slice.call(document.querySelectorAll('nav.rail ol a'));
+    var map = {};
+    links.forEach(function (a) { map[a.getAttribute('href').slice(1)] = a; });
+    var seen = [];
+    var obs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        var i = seen.indexOf(e.target.id);
+        if (e.isIntersecting && i < 0) seen.push(e.target.id);
+        if (!e.isIntersecting && i >= 0) seen.splice(i, 1);
+      });
+      links.forEach(function (a) { a.classList.remove('on'); });
+      if (seen.length) {
+        var order = Object.keys(map);
+        seen.sort(function (a, b) { return order.indexOf(a) - order.indexOf(b); });
+        map[seen[0]].classList.add('on');
+      }
+    }, { rootMargin: '-10% 0px -70% 0px' });
+    document.querySelectorAll('main section').forEach(function (s) { obs.observe(s); });
+  })();
+</script>

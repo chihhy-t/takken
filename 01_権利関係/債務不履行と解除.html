@@ -1,0 +1,794 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>債務不履行と解除 — 宅建士試験 2026年度</title>
+
+<style>
+  :root {
+    --paper:#EBEDE9; --surface:#F8F9F6; --sunk:#E1E4DE; --ink:#151F2A; --muted:#5D6B78;
+    --rule:#CDD2CB; --hair:#DCE0D9; --accent:#B8342A; --accent-soft:#F3DEDB;
+    --blue:#2A5F86; --blue-soft:#DCE6EE;
+    --font-display:"Hiragino Mincho ProN","Yu Mincho","YuMincho","Noto Serif JP",serif;
+    --font-body:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","YuGothic","Noto Sans JP",system-ui,sans-serif;
+    --font-mono:ui-monospace,"SFMono-Regular","SF Mono",Menlo,Consolas,monospace;
+    --measure:68ch;
+    --s1:.35rem; --s2:.7rem; --s3:1.1rem; --s4:1.7rem; --s5:2.6rem; --s6:4rem;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper:#0D1B29; --surface:#132534; --sunk:#0A1622; --ink:#DAE4EC; --muted:#8CA1B3;
+      --rule:#26415A; --hair:#1D3448; --accent:#FF7059; --accent-soft:#3A1F1D;
+      --blue:#6FB6DC; --blue-soft:#14293A;
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper:#0D1B29; --surface:#132534; --sunk:#0A1622; --ink:#DAE4EC; --muted:#8CA1B3;
+    --rule:#26415A; --hair:#1D3448; --accent:#FF7059; --accent-soft:#3A1F1D;
+    --blue:#6FB6DC; --blue-soft:#14293A;
+  }
+
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--paper); color:var(--ink); font-family:var(--font-body);
+    font-size:16px; line-height:1.9; -webkit-font-smoothing:antialiased; font-feature-settings:"palt" 1; }
+
+  .wrap { display:grid; grid-template-columns:15.5rem minmax(0,1fr); gap:var(--s6);
+    max-width:80rem; margin:0 auto; padding:0 var(--s4) var(--s6); align-items:start; }
+  @media (max-width:60rem){ .wrap{ grid-template-columns:minmax(0,1fr); gap:var(--s4); padding:0 var(--s3) var(--s5);} }
+
+  .masthead { grid-column:1/-1; padding:var(--s5) 0 var(--s4); border-bottom:2px solid var(--ink);
+    margin-bottom:var(--s2); display:flex; flex-wrap:wrap; align-items:flex-end; justify-content:space-between; gap:var(--s3); }
+  .eyebrow { font-family:var(--font-mono); font-size:.72rem; letter-spacing:.16em; text-transform:uppercase;
+    color:var(--muted); display:flex; align-items:center; gap:.6em; }
+  .eyebrow::before { content:""; width:2.2rem; height:1px; background:var(--accent); }
+  .eyebrow a { color:var(--accent); text-decoration:none; }
+  .eyebrow a:hover { text-decoration:underline; text-underline-offset:.2em; }
+  h1 { font-family:var(--font-display); font-weight:600; font-size:clamp(1.9rem,1.3rem + 2.4vw,2.9rem);
+    line-height:1.2; letter-spacing:.04em; margin:var(--s2) 0 var(--s3); text-wrap:balance; }
+  .facts { display:flex; flex-wrap:wrap; gap:0 var(--s3); font-size:.82rem; color:var(--muted); list-style:none; margin:0; padding:0; }
+  .facts b { font-family:var(--font-mono); font-variant-numeric:tabular-nums; color:var(--ink); font-weight:600; }
+  .toggles { display:flex; gap:var(--s1); }
+  button { font-family:var(--font-body); font-size:.78rem; color:var(--muted); background:var(--surface);
+    border:1px solid var(--rule); border-radius:2px; padding:.4em .9em; cursor:pointer; transition:color .15s,border-color .15s; }
+  button:hover { color:var(--ink); border-color:var(--ink); }
+  button:focus-visible { outline:2px solid var(--accent); outline-offset:2px; }
+  button[aria-pressed="true"] { color:var(--accent); border-color:var(--accent); }
+
+  nav.rail { position:sticky; top:var(--s3); font-size:.82rem; max-height:calc(100vh - 3rem); overflow-y:auto; padding-bottom:var(--s3); }
+  nav.rail h2 { font-family:var(--font-mono); font-size:.68rem; letter-spacing:.16em; text-transform:uppercase; color:var(--muted); margin:0 0 var(--s2); font-weight:500; }
+  nav.rail ol { list-style:none; margin:0; padding:0; display:flex; flex-direction:column; }
+  nav.rail a { display:block; padding:.3em 0 .3em .9em; color:var(--muted); text-decoration:none; border-left:2px solid var(--hair); line-height:1.5; }
+  nav.rail a:hover { color:var(--ink); border-left-color:var(--rule); }
+  nav.rail a.on { color:var(--ink); border-left-color:var(--accent); font-weight:600; }
+  nav.rail a .num { font-family:var(--font-mono); font-size:.72rem; color:var(--muted); margin-right:.5em; }
+  nav.rail a.home { border-left:none; padding:0 0 var(--s2); color:var(--accent);
+    font-family:var(--font-mono); font-size:.72rem; letter-spacing:.1em; }
+  nav.rail a.home:hover { color:var(--accent); text-decoration:underline; text-underline-offset:.2em; }
+  @media (max-width:60rem){
+    nav.rail{ position:static; max-height:none; border-bottom:1px solid var(--rule); padding-bottom:var(--s3); }
+    nav.rail ol{ display:grid; grid-template-columns:repeat(auto-fill,minmax(9rem,1fr)); gap:0 var(--s2); }
+  }
+
+  main { min-width:0; }
+  section { padding-top:var(--s5); scroll-margin-top:var(--s3); }
+  section > * { max-width:var(--measure); }
+  section > figure, section > .scroll { max-width:none; }
+
+  h2.sec { font-family:var(--font-display); font-size:clamp(1.45rem,1.2rem + .9vw,1.9rem); font-weight:600;
+    letter-spacing:.04em; margin:0 0 var(--s3); padding-bottom:var(--s2); border-bottom:1px solid var(--rule);
+    display:flex; align-items:baseline; gap:.7em; max-width:none; }
+  h2.sec .num { font-family:var(--font-mono); font-size:.8rem; letter-spacing:.1em; color:var(--accent); font-weight:500; }
+  h3 { font-family:var(--font-body); font-size:1.06rem; font-weight:700; letter-spacing:.02em;
+    margin:var(--s4) 0 var(--s2); padding-left:.7em; border-left:3px solid var(--ink); }
+  p { margin:0 0 var(--s3); }
+  a { color:var(--blue); text-underline-offset:.2em; }
+  em { font-style:normal; background:linear-gradient(transparent 62%, var(--accent-soft) 62%); font-weight:600; }
+  ul, ol { margin:0 0 var(--s3); padding-left:1.3em; }
+  li { margin-bottom:var(--s1); }
+  .lead { font-size:1.05rem; color:var(--muted); }
+
+  .call { max-width:var(--measure); margin:0 0 var(--s3); padding:var(--s3) var(--s3) var(--s3) var(--s4);
+    background:var(--surface); border:1px solid var(--hair); border-left:3px solid var(--rule); border-radius:2px; font-size:.94rem; }
+  .call > :last-child { margin-bottom:0; }
+  .call .tag { display:block; font-family:var(--font-mono); font-size:.68rem; letter-spacing:.16em; text-transform:uppercase; color:var(--muted); margin-bottom:var(--s1); }
+  .call.trap { border-left-color:var(--accent); background:var(--accent-soft); }
+  .call.trap .tag { color:var(--accent); }
+  .call.exam { border-left-color:var(--ink); }
+  .call.exam .tag { color:var(--ink); }
+  .call.tip { border-left-color:var(--blue); background:var(--blue-soft); }
+  .call.tip .tag { color:var(--blue); }
+
+  .scroll { overflow-x:auto; margin:0 0 var(--s3); -webkit-overflow-scrolling:touch; }
+  table { border-collapse:collapse; width:100%; font-size:.88rem; line-height:1.6; }
+  caption { text-align:left; font-size:.78rem; color:var(--muted); padding-bottom:var(--s1); font-family:var(--font-mono); letter-spacing:.08em; }
+  th, td { padding:.58em .75em; text-align:left; vertical-align:top; border-bottom:1px solid var(--hair); }
+  thead th { font-size:.74rem; letter-spacing:.08em; color:var(--muted); font-weight:600; border-bottom:1px solid var(--ink); }
+  tbody tr:hover { background:var(--surface); }
+  td.n, th.n { text-align:center; font-family:var(--font-mono); font-variant-numeric:tabular-nums; white-space:nowrap; }
+  .no { color:var(--accent); font-weight:700; }
+  .yes { color:var(--muted); }
+  .tri { color:var(--blue); }
+  table.doji tbody td:first-child { font-weight:600; }
+  table.doji tr.hi { background:var(--accent-soft); }
+
+  figure { margin:0 0 var(--s4); }
+  figure svg { display:block; width:100%; height:auto; }
+  figcaption { font-size:.78rem; color:var(--muted); font-family:var(--font-mono); letter-spacing:.06em; margin-top:var(--s2); padding-top:var(--s1); border-top:1px solid var(--hair); }
+  .plate { background:var(--surface); border:1px solid var(--hair); border-radius:2px; padding:var(--s3); }
+  .svg-ink { fill:none; stroke:var(--ink); stroke-width:1.4; }
+  .svg-hair { fill:none; stroke:var(--rule); stroke-width:1; }
+  .svg-dim { fill:none; stroke:var(--blue); stroke-width:1; }
+  .svg-acc { fill:none; stroke:var(--accent); stroke-width:1.6; }
+  .svg-fill { fill:var(--sunk); stroke:var(--rule); stroke-width:1; }
+  .svg-accfill { fill:var(--accent-soft); stroke:var(--accent); stroke-width:1.2; }
+  .svg-bluefill { fill:var(--blue-soft); stroke:var(--blue); stroke-width:1.2; }
+  text { font-family:var(--font-body); fill:var(--ink); font-size:12px; }
+  text.lbl { font-family:var(--font-mono); fill:var(--muted); font-size:10.5px; letter-spacing:.06em; }
+  text.dimt { font-family:var(--font-mono); fill:var(--blue); font-size:11px; }
+  text.acct { fill:var(--accent); font-size:11.5px; font-weight:700; }
+  text.big { font-size:14px; font-weight:700; }
+
+  .nums { display:grid; grid-template-columns:repeat(auto-fill,minmax(12rem,1fr)); gap:var(--s2); }
+  .nc { background:var(--surface); border:1px solid var(--hair); border-radius:2px; padding:var(--s3) var(--s3) var(--s2); display:flex; flex-direction:column; gap:var(--s1); }
+  .nc .v { font-family:var(--font-mono); font-size:1.1rem; font-weight:600; line-height:1.3; color:var(--accent); }
+  .nc .d { font-size:.8rem; color:var(--muted); line-height:1.6; }
+  .nums.masked .v { color:transparent; background:var(--rule); border-radius:2px; user-select:none; }
+  .nums.masked .nc:hover .v, .nums.masked .nc:focus-within .v { color:var(--accent); background:transparent; }
+  .nc:focus-visible { outline:2px solid var(--accent); outline-offset:2px; }
+  .masthead-note { font-size:.78rem; color:var(--muted); margin-bottom:var(--s2); }
+
+  table.traps td:first-child { color:var(--muted); }
+  table.traps td:first-child::before { content:"「"; }
+  table.traps td:first-child::after { content:"」"; }
+  table.traps td:last-child strong { color:var(--accent); }
+
+  footer { grid-column:1/-1; margin-top:var(--s6); padding-top:var(--s3); border-top:1px solid var(--rule); font-size:.8rem; color:var(--muted); }
+  footer ul { list-style:none; padding:0; }
+  footer li { margin-bottom:var(--s1); }
+  .sibling { display:flex; flex-wrap:wrap; gap:var(--s2); margin-top:var(--s3); }
+  .sibling a { font-size:.8rem; text-decoration:none; border:1px solid var(--rule); border-radius:2px; padding:.35em .8em; color:var(--muted); }
+  .sibling a:hover { color:var(--ink); border-color:var(--ink); }
+
+  /* ── 肢別○×ドリル ── */
+  .drillbar { max-width:none; display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between;
+    gap:var(--s2); margin:0 0 var(--s3); padding:var(--s2) var(--s3); background:var(--surface);
+    border:1px solid var(--rule); border-radius:2px; position:sticky; top:0; z-index:5; }
+  .drillbar .score { font-family:var(--font-mono); font-size:.8rem; font-variant-numeric:tabular-nums;
+    color:var(--muted); letter-spacing:.04em; }
+  .drillbar .score b { color:var(--ink); font-weight:600; }
+  .drillbar .score .pct { color:var(--accent); font-weight:600; }
+  .drillbar .dbtns { display:flex; gap:var(--s1); }
+  ol.drill { max-width:none; list-style:none; margin:0; padding:0; counter-reset:dq; }
+  li.dq { counter-increment:dq; margin:0 0 var(--s2); padding:var(--s3);
+    background:var(--surface); border:1px solid var(--hair); border-left:3px solid var(--rule); border-radius:2px; }
+  li.dq > .s { margin:0; font-size:.95rem; line-height:1.85; max-width:var(--measure); }
+  li.dq > .s::before { content:counter(dq,decimal-leading-zero); font-family:var(--font-mono);
+    font-size:.72rem; letter-spacing:.08em; color:var(--muted); margin-right:.9em; }
+  li.dq .ch { display:flex; gap:var(--s1); margin-top:var(--s2); }
+  li.dq .ch button { font-family:var(--font-display); font-size:1.05rem; line-height:1; min-width:3.6rem; padding:.4em 0; }
+  li.dq .ch button[data-picked] { color:var(--ink); border-color:var(--ink); font-weight:700; }
+  li.dq .ex { display:none; margin-top:var(--s3); padding-top:var(--s2); border-top:1px solid var(--hair); }
+  li.dq.done .ex { display:block; }
+  li.dq .ex .verdict { display:block; font-family:var(--font-mono); font-size:.7rem; letter-spacing:.14em;
+    margin-bottom:var(--s1); }
+  li.dq .ex p { margin:0; font-size:.88rem; line-height:1.8; color:var(--muted); max-width:var(--measure); }
+  li.dq .ex p strong { color:var(--ink); font-weight:700; }
+  li.dq.ok { border-left-color:var(--blue); }
+  li.dq.ok .verdict { color:var(--blue); }
+  li.dq.ng { border-left-color:var(--accent); background:var(--accent-soft); }
+  li.dq.ng .verdict { color:var(--accent); }
+  li.dq.ng .ex p strong { color:var(--accent); }
+  ol.drill.onlyng li.dq:not(.ng) { display:none; }
+  .drilldone { font-size:.84rem; color:var(--muted); padding:var(--s3); border:1px dashed var(--rule);
+    border-radius:2px; text-align:center; }
+
+  @media (prefers-reduced-motion: reduce){ *{ transition:none !important; animation:none !important; scroll-behavior:auto !important; } }
+  html { scroll-behavior:smooth; }
+</style>
+
+<div class="wrap">
+
+  <header class="masthead">
+    <div>
+      <div class="eyebrow"><a href="../index.html">← 総目次</a> &nbsp;/&nbsp; 01 権利関係 &nbsp;/&nbsp; 宅建士試験 2026年度</div>
+      <h1>債務不履行と解除</h1>
+      <ul class="facts">
+        <li>法令基準日 <b>2026-04-01</b></li>
+        <li>出題数 <b>約1問</b></li>
+        <li>ドリル <b>32肢</b></li>
+        <li>目標 <b>取れれば加点</b></li>
+        <li>更新 <b>2026-08-16</b></li>
+      </ul>
+    </div>
+    <div class="toggles">
+      <button id="mask" type="button" aria-pressed="false">答えを隠す</button>
+      <button id="theme" type="button">配色切替</button>
+    </div>
+  </header>
+
+  <nav class="rail" aria-label="目次">
+    <a class="home" href="../index.html">← 総目次</a>
+    <h2>Contents</h2>
+    <ol>
+      <li><a href="#ruikei"><span class="num">00</span>債務不履行の類型</a></li>
+      <li><a href="#chitai"><span class="num">01</span>履行遅滞の起算点</a></li>
+      <li><a href="#baisho"><span class="num">02</span>損害賠償</a></li>
+      <li><a href="#kaijo"><span class="num">03</span>解除</a></li>
+      <li><a href="#kiken"><span class="num">04</span>危険負担</a></li>
+      <li><a href="#doji"><span class="num">05</span>同時履行の抗弁権</a></li>
+      <li><a href="#deru"><span class="num">06</span>よく出る論点</a></li>
+      <li><a href="#hikkake"><span class="num">07</span>ひっかけ一覧</a></li>
+      <li><a href="#matome"><span class="num">08</span>暗記カード</a></li>
+      <li><a href="#drill"><span class="num">09</span>肢別○×ドリル</a></li>
+    </ol>
+  </nav>
+
+  <main>
+
+    <!-- 00 -->
+    <section id="ruikei">
+      <h2 class="sec"><span class="num">00</span>債務不履行の類型</h2>
+      <p class="lead">債務不履行があると、債権者は<em>損害賠償</em>か<em>解除</em>、あるいは両方を求められる。<em>2020年改正でこの2つの要件が分かれた</em>ことが最大のポイント。</p>
+
+      <figure class="plate">
+        <svg viewBox="0 0 720 200" role="img" aria-label="債務不履行に対して債権者は損害賠償と解除を求められる。損害賠償には債務者の帰責事由が必要だが、解除には帰責事由が不要。ただし債権者に帰責事由がある場合は解除できない。">
+          <rect x="24" y="46" width="200" height="70" class="svg-fill" rx="2"/>
+          <text x="124" y="76" text-anchor="middle" class="big">債務不履行</text>
+          <text x="124" y="100" text-anchor="middle" class="lbl">履行遅滞・履行不能・不完全履行</text>
+
+          <path d="M230 66 H 268" class="svg-acc"/>
+          <path d="M262 60 L268 66 L262 72" class="svg-acc"/>
+          <path d="M230 96 H 268" class="svg-dim"/>
+          <path d="M262 90 L268 96 L262 102" class="svg-dim"/>
+
+          <rect x="276" y="34" width="418" height="52" class="svg-accfill" rx="2"/>
+          <text x="296" y="56" class="acct">損害賠償</text>
+          <text x="296" y="76" class="lbl">債務者の<tspan font-weight="700">帰責事由が必要</tspan>。帰責事由がなければ免責される</text>
+
+          <rect x="276" y="94" width="418" height="70" class="svg-bluefill" rx="2"/>
+          <text x="296" y="116" class="dimt">解除</text>
+          <text x="296" y="136" class="lbl">債務者の<tspan font-weight="700">帰責事由は不要</tspan>（2020年改正）</text>
+          <text x="296" y="154" class="lbl">ただし<tspan class="acct">債権者に帰責事由があるときは解除できない</tspan></text>
+
+          <text x="24" y="188" class="lbl">解除は「契約の拘束から解放する」制度で、相手を責めるための制度ではなくなった</text>
+        </svg>
+        <figcaption>Fig.1 — 損害賠償と解除で帰責事由の要否が違う</figcaption>
+      </figure>
+
+      <div class="scroll">
+        <table>
+          <thead><tr><th>類型</th><th>内容</th></tr></thead>
+          <tbody>
+            <tr><td><strong>履行遅滞</strong></td><td>履行が可能なのに履行期を過ぎても履行しない</td></tr>
+            <tr><td><strong>履行不能</strong></td><td>契約その他の債務の発生原因および取引上の社会通念に照らして履行が不能。<span class="tri">契約成立時にすでに不能だった場合（原始的不能）でも契約は有効で、損害賠償を請求できる</span></td></tr>
+            <tr><td><strong>不完全履行</strong></td><td>履行はされたが内容が不完全</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 01 -->
+    <section id="chitai">
+      <h2 class="sec"><span class="num">01</span>履行遅滞の起算点</h2>
+
+      <div class="scroll">
+        <table>
+          <thead><tr><th>期限の定め</th><th>いつから遅滞になるか</th></tr></thead>
+          <tbody>
+            <tr><td><strong>確定期限</strong>がある</td><td>その<strong>期限の到来した時</strong></td></tr>
+            <tr>
+              <td class="no"><strong>不確定期限</strong>がある</td>
+              <td class="no">期限到来後に<strong>履行の請求を受けた時</strong>、または<strong>期限の到来を知った時</strong>の<strong>いずれか早い時</strong></td>
+            </tr>
+            <tr><td><strong>期限の定めがない</strong></td><td><strong>履行の請求を受けた時</strong></td></tr>
+            <tr><td>不法行為による損害賠償債務</td><td class="no"><strong>不法行為の時</strong>（請求を待たずに当然に遅滞）</td></tr>
+            <tr><td>返還時期の定めのない消費貸借</td><td>相当の期間を定めて催告した後</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="call trap">
+        <span class="tag">ひっかけ</span>
+        <p><strong>不法行為の損害賠償債務は、請求がなくても不法行為の時から遅滞に陥る。</strong>被害者を保護するための特則。<br>
+        <strong>不確定期限は「請求を受けた時」と「到来を知った時」の早いほう。</strong>知っていれば請求を待たずに遅滞になる。</p>
+      </div>
+    </section>
+
+    <!-- 02 -->
+    <section id="baisho">
+      <h2 class="sec"><span class="num">02</span>損害賠償</h2>
+
+      <div class="scroll">
+        <table>
+          <thead><tr><th>論点</th><th>内容</th></tr></thead>
+          <tbody>
+            <tr><td class="no"><strong>帰責事由</strong></td><td class="no">契約その他の債務の発生原因および取引上の社会通念に照らして<strong>債務者の責めに帰することができない</strong>ときは、損害賠償を請求できない</td></tr>
+            <tr><td><strong>賠償の範囲</strong></td><td><strong>通常生ずべき損害</strong>。特別の事情によって生じた損害は、当事者がその事情を<strong>予見すべきであった</strong>ときに限る</td></tr>
+            <tr><td class="no"><strong>過失相殺</strong></td><td class="no">債権者に過失があったときは、裁判所は<strong>これを考慮して</strong>賠償額を定める（必ず考慮する）</td></tr>
+            <tr><td><strong>賠償額の予定</strong></td><td>当事者は賠償額を予定できる。<span class="tri">予定していても、裁判所が額を増減することを妨げない</span></td></tr>
+            <tr>
+              <td class="no"><strong>金銭債務の特則</strong></td>
+              <td class="no">① 損害の<strong>証明を要しない</strong>　② <strong>不可抗力をもって抗弁とすることができない</strong>　③ 賠償額は<strong>法定利率</strong>による（約定利率が高ければそれによる）</td>
+            </tr>
+            <tr><td>法定利率</td><td><strong>年3%</strong>。3年ごとに見直される変動制</td></tr>
+            <tr><td>代償請求権</td><td>履行不能により債務者が代償（保険金など）を取得したときは、債権者はその償還を請求できる</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="call exam">
+        <span class="tag">よく出る</span>
+        <p><strong>金銭債務は「払えなかった」という言い訳が一切通らない。</strong>地震で銀行が閉まっていても、火事で財産を失っても、遅延損害金は発生する。金銭はどこからでも調達できるという建前による。<br>
+        <strong>過失相殺は不法行為と扱いが違う。</strong>債務不履行では裁判所が<strong>必ず</strong>考慮するが、不法行為では<strong>考慮することができる</strong>（任意的）。</p>
+      </div>
+    </section>
+
+    <!-- 03 -->
+    <section id="kaijo">
+      <h2 class="sec"><span class="num">03</span>解除</h2>
+
+      <div class="scroll">
+        <table>
+          <thead><tr><th>類型</th><th>要件</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><strong>催告解除</strong></td>
+              <td>相当の期間を定めて履行を催告し、その期間内に履行がないとき。<span class="no">ただし不履行が<strong>軽微</strong>であるときは解除できない</span></td>
+            </tr>
+            <tr>
+              <td><strong>無催告解除</strong></td>
+              <td>
+                ① 債務の全部の履行が<strong>不能</strong>であるとき<br>
+                ② 債務者が履行を<strong>明確に拒絶</strong>したとき<br>
+                ③ 一部不能・一部拒絶で、残存部分だけでは契約の目的を達せられないとき<br>
+                ④ <strong>定期行為</strong>で履行がないまま時期を経過したとき<br>
+                ⑤ 催告をしても契約の目的を達するのに足りる履行がされる見込みがないことが明らかなとき
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="scroll">
+        <table>
+          <thead><tr><th>論点</th><th>内容</th></tr></thead>
+          <tbody>
+            <tr><td class="no"><strong>債務者の帰責事由</strong></td><td class="no"><strong>不要</strong>（2020年改正）。債務者に落ち度がなくても解除できる</td></tr>
+            <tr><td class="no"><strong>債権者の帰責事由</strong></td><td class="no">不履行が<strong>債権者の責めに帰すべき事由</strong>によるときは<strong>解除できない</strong></td></tr>
+            <tr><td>解除権の不可分性</td><td>当事者の一方が複数あるときは、解除は<strong>全員から、または全員に対して</strong>しなければならない。1人について解除権が消滅すれば全員について消滅する</td></tr>
+            <tr><td>撤回</td><td>解除の意思表示は<strong>撤回できない</strong></td></tr>
+            <tr><td><strong>原状回復義務</strong></td><td>各当事者は相手方を原状に復させる義務を負う。<strong>金銭を返還するときは受領の時からの利息</strong>を付す</td></tr>
+            <tr><td class="no">第三者の保護</td><td class="no">解除は<strong>第三者の権利を害することができない</strong>。ただし第三者は<strong>登記</strong>を備えている必要がある（→ <a href="物権変動と対抗要件.html">物権変動と対抗要件</a>）</td></tr>
+            <tr><td>解除と損害賠償</td><td>解除しても<strong>損害賠償の請求は妨げられない</strong></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="call trap">
+        <span class="tag">ひっかけ</span>
+        <p><strong>解除に債務者の帰責事由は要らない。</strong>改正前は必要だったので、古い教材と食い違う最重要ポイント。<br>
+        <strong>逆に債権者に帰責事由があると解除できない。</strong>買主が自分の落ち度で引渡しを受けられなくしておいて解除する、というのは許されない。<br>
+        <strong>軽微な不履行では解除できない。</strong>代金1億円のうち1万円の不足で契約全体を解除することはできない。</p>
+      </div>
+    </section>
+
+    <!-- 04 -->
+    <section id="kiken">
+      <h2 class="sec"><span class="num">04</span>危険負担</h2>
+      <p>双務契約で、一方の債務が<strong>当事者双方の責めに帰することができない事由</strong>により履行不能になったとき、もう一方の債務はどうなるか。</p>
+
+      <div class="scroll">
+        <table>
+          <thead><tr><th>状況</th><th>結論</th></tr></thead>
+          <tbody>
+            <tr>
+              <td class="no"><strong>双方に帰責事由がない</strong></td>
+              <td class="no">債権者は<strong>反対給付の履行を拒むことができる</strong>（履行拒絶権）<br><span class="lbl">契約は当然には消滅しない。消滅させたければ解除する</span></td>
+            </tr>
+            <tr>
+              <td><strong>債権者に帰責事由がある</strong></td>
+              <td>債権者は反対給付の履行を<strong>拒めない</strong>。<span class="tri">ただし債務者は自己の債務を免れたことによって得た利益を債権者に償還する</span></td>
+            </tr>
+            <tr><td>債務者に帰責事由がある</td><td>債務不履行の問題となり、債権者は損害賠償・解除ができる</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="call tip">
+        <span class="tag">2020年改正</span>
+        <p><strong>危険負担の効果が「債務の消滅」から「履行拒絶権」に変わりました。</strong>改正前は反対債務が当然に消滅する構成でしたが、現在は<strong>拒めるだけ</strong>で、契約を終わらせたければ別途<strong>解除</strong>が必要です。解除に帰責事由が不要になったので、この整理が可能になりました。</p>
+      </div>
+    </section>
+
+    <!-- 05 -->
+    <section id="doji">
+      <h2 class="sec"><span class="num">05</span>同時履行の抗弁権</h2>
+      <p>双務契約の当事者は、相手方がその債務の履行を提供するまで、自己の債務の履行を拒める。</p>
+
+      <div class="scroll">
+        <table class="doji">
+          <thead><tr><th>組み合わせ</th><th class="n">同時履行</th><th>補足</th></tr></thead>
+          <tbody>
+            <tr class="hi"><td>売買の<strong>代金支払</strong>と<strong>目的物の引渡し</strong></td><td class="n tri">なる</td><td>双務契約の典型</td></tr>
+            <tr><td>契約解除による<strong>原状回復義務</strong>相互</td><td class="n tri">なる</td><td>公平の観点から</td></tr>
+            <tr><td><strong>弁済</strong>と<strong>受取証書</strong>（領収書）の交付</td><td class="n tri">なる</td><td>領収書がなければ二重払いの危険がある</td></tr>
+            <tr><td>負担付贈与における贈与と負担の履行</td><td class="n tri">なる</td><td>—</td></tr>
+            <tr class="hi"><td><strong>弁済</strong>と<strong>債権証書</strong>（借用書）の返還</td><td class="n no">ならない</td><td class="no"><strong>弁済が先</strong>。証書は弁済後に返せばよい</td></tr>
+            <tr class="hi"><td><strong>被担保債務の弁済</strong>と<strong>抵当権登記の抹消</strong></td><td class="n no">ならない</td><td class="no"><strong>弁済が先</strong></td></tr>
+            <tr class="hi"><td>賃貸借終了時の<strong>敷金返還</strong>と<strong>目的物の明渡し</strong></td><td class="n no">ならない</td><td class="no"><strong>明渡しが先</strong>。明け渡して初めて敷金の精算額が確定する</td></tr>
+            <tr><td><strong>造作買取代金</strong>の支払と<strong>建物の明渡し</strong></td><td class="n no">ならない</td><td>造作の代金は建物と関係がない</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="call tip">
+        <span class="tag">覚え方</span>
+        <p><strong>「ならない」ものだけ覚える。</strong>弁済と債権証書、弁済と抵当権抹消、敷金返還と明渡し、造作代金と明渡し。<br>
+        いずれも<strong>「先に払え・先に出て行け」という順序が決まっているもの</strong>。同時履行は対等な立場のときの制度なので、順序が決まっていれば適用されない。</p>
+      </div>
+
+      <div class="call trap">
+        <span class="tag">ひっかけ</span>
+        <p><strong>受取証書（領収書）は同時履行、債権証書（借用書）は弁済が先。</strong>似た言葉だが結論が逆。領収書がないと払った証拠が残らないので同時、借用書は弁済後の回収で足りるため後回し、と理解する。</p>
+      </div>
+    </section>
+
+    <!-- 06 -->
+    <section id="deru">
+      <h2 class="sec"><span class="num">06</span>よく出る論点</h2>
+      <div class="scroll">
+        <table>
+          <thead><tr><th class="n">順位</th><th>論点</th><th>要点</th></tr></thead>
+          <tbody>
+            <tr><td class="n">1</td><td><strong>解除に帰責事由が不要</strong></td><td>債務者の帰責事由は不要／債権者に帰責事由があると解除不可</td></tr>
+            <tr><td class="n">2</td><td>同時履行になるかどうか</td><td>ならない4つを覚える</td></tr>
+            <tr><td class="n">3</td><td>金銭債務の特則</td><td>不可抗力でも免責されない／損害の証明不要</td></tr>
+            <tr><td class="n">4</td><td>履行遅滞の起算点</td><td>不確定期限は早いほう／不法行為はその時から</td></tr>
+            <tr><td class="n">5</td><td>危険負担</td><td>履行拒絶権。契約を終わらせるには解除が必要</td></tr>
+            <tr><td class="n">6</td><td>解除と第三者</td><td>第三者は登記を備えていれば保護される</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 07 -->
+    <section id="hikkake">
+      <h2 class="sec"><span class="num">07</span>ひっかけ一覧</h2>
+      <div class="scroll">
+        <table class="traps">
+          <thead><tr><th>こう書かれたら疑う</th><th>正しくは</th></tr></thead>
+          <tbody>
+            <tr><td>解除するには債務者に帰責事由が必要である</td><td><strong>不要</strong>（2020年改正）</td></tr>
+            <tr><td>債権者に帰責事由があっても解除できる</td><td><strong>解除できない</strong></td></tr>
+            <tr><td>どんなに軽微な不履行でも催告すれば解除できる</td><td><strong>軽微なときは解除できない</strong></td></tr>
+            <tr><td>履行不能でも催告してからでなければ解除できない</td><td><strong>無催告で解除できる</strong></td></tr>
+            <tr><td>当事者が複数でも1人が単独で解除できる</td><td><strong>全員から・全員に対して</strong>行う</td></tr>
+            <tr><td>解除したら損害賠償は請求できない</td><td><strong>請求できる</strong></td></tr>
+            <tr><td>解除前の第三者は登記がなくても保護される</td><td><strong>登記が必要</strong></td></tr>
+            <tr><td>金銭債務でも不可抗力なら遅延損害金は生じない</td><td><strong>不可抗力を抗弁にできない</strong></td></tr>
+            <tr><td>金銭債務の遅延損害金には損害の証明が必要</td><td><strong>証明は不要</strong></td></tr>
+            <tr><td>賠償額を予定すると裁判所は増減できない</td><td>裁判所が<strong>増減することを妨げない</strong></td></tr>
+            <tr><td>不法行為の損害賠償債務は請求時から遅滞となる</td><td><strong>不法行為の時</strong>から</td></tr>
+            <tr><td>敷金の返還と建物の明渡しは同時履行の関係にある</td><td><strong>明渡しが先</strong></td></tr>
+            <tr><td>弁済と抵当権登記の抹消は同時履行である</td><td><strong>弁済が先</strong></td></tr>
+            <tr><td>危険負担により反対債務は当然に消滅する</td><td><strong>履行を拒めるだけ</strong>。消滅させるには解除する</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 08 -->
+    <section id="matome">
+      <h2 class="sec"><span class="num">08</span>暗記カード</h2>
+      <p class="masthead-note">右上のボタンで答えを伏せられる。</p>
+      <div class="nums" id="numgrid">
+        <div class="nc" tabindex="0"><span class="v">不要</span><span class="d">解除に必要な債務者の帰責事由</span></div>
+        <div class="nc" tabindex="0"><span class="v">解除できない</span><span class="d">債権者に帰責事由がある場合</span></div>
+        <div class="nc" tabindex="0"><span class="v">軽微</span><span class="d">催告しても解除できなくなる不履行の程度</span></div>
+        <div class="nc" tabindex="0"><span class="v">年3%</span><span class="d">法定利率（3年ごとに見直す変動制）</span></div>
+        <div class="nc" tabindex="0"><span class="v">不法行為の時</span><span class="d">不法行為による損害賠償債務が遅滞に陥る時期</span></div>
+        <div class="nc" tabindex="0"><span class="v">受領の時から</span><span class="d">原状回復で金銭を返還する際の利息の起算点</span></div>
+        <div class="nc" tabindex="0"><span class="v">履行拒絶権</span><span class="d">危険負担の効果（2020年改正後）</span></div>
+        <div class="nc" tabindex="0"><span class="v">明渡しが先</span><span class="d">敷金返還と目的物明渡しの順序</span></div>
+        <div class="nc" tabindex="0"><span class="v">弁済が先</span><span class="d">債権証書の返還・抵当権登記の抹消との順序</span></div>
+      </div>
+    </section>
+
+    <!-- 09 -->
+    <section id="drill">
+      <h2 class="sec"><span class="num">09</span>肢別○×ドリル</h2>
+      <p class="lead">頻出論点の一問一答 <em>32肢</em>。○×を押すと理由が開く。<strong>理由を一言で言えなかった肢は、正解していても「要復習」に入れる</strong>のがこのドリルの使い方。</p>
+      <div class="call tip">
+        <span class="tag">回し方</span>
+        <p>1周目は全肢。2周目以降は「間違えた肢だけ」で回す。解答状況はこのブラウザに保存されるので、日をまたいでも続きから再開できる。</p>
+      </div>
+      <div class="drillbar">
+        <div class="score">解答 <b id="d-done">0</b> / 32　　正答 <b id="d-ok">0</b>　　正答率 <span class="pct" id="d-pct">—</span></div>
+        <div class="dbtns">
+          <button id="d-wrong" type="button" aria-pressed="false">間違えた肢だけ</button>
+          <button id="d-reset" type="button">リセット</button>
+        </div>
+      </div>
+      <ol class="drill">
+          <li class="dq" data-a="o">
+            <p class="s">債務の履行について確定期限があるときは、債務者はその期限の到来した時から遅滞の責任を負う。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>412条1項。請求を待つまでもない。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">債務の履行について不確定期限があるときは、債務者はその期限が到来した時から当然に遅滞の責任を負う。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>412条2項。<strong>期限到来後に履行の請求を受けた時</strong>か<strong>期限の到来を知った時</strong>の、いずれか早いほうから遅滞となる。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">債務の履行について期限を定めなかったときは、債務者は履行の請求を受けた時から遅滞の責任を負う。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>412条3項。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">不法行為による損害賠償債務は、被害者から請求を受けた時から遅滞に陥る。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>判例により<strong>不法行為の時から</strong>当然に遅滞となる。被害者を厚く保護する趣旨。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">契約の成立時にすでに履行が不能であった場合であっても、債務不履行による損害賠償を請求することができる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>412条の2第2項。原始的不能でも契約は有効というのが改正後の立場。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">債務不履行による損害賠償の範囲は、通常生ずべき損害のほか、当事者が予見すべきであった特別の事情による損害にも及ぶ。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>416条。改正により「予見した」から「<strong>予見すべきであった</strong>」という規範的判断に改められた。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">金銭債務の不履行について、債務者は不可抗力であったことを抗弁とすることができる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>419条3項により<strong>不可抗力を抗弁にできない</strong>。金銭はどこからでも調達できるはず、という建前による。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">金銭債務の不履行による損害賠償を請求するには、債権者は損害の証明をすることを要しない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>419条2項。法定利率（または約定利率）による遅延損害金が当然に発生する。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">当事者が債務不履行について賠償額を予定した場合、裁判所はその額を増減することができない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>改正により「増減することができない」という文言が<strong>削除</strong>された。裁判所が増減することは妨げられない。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">債務の不履行に関して債権者に過失があったときは、裁判所はこれを考慮して損害賠償の責任および額を定める。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>418条。不法行為の過失相殺（任意的・額のみ）と異なり、債務不履行では<strong>必ず考慮し、責任の有無まで左右できる</strong>。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">債権者が債務の履行を受けることを拒んだ場合であっても、債務者の目的物の保存義務は軽減されない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>413条1項により、受領遅滞後は<strong>自己の財産に対するのと同一の注意</strong>で足りる。増加した費用も債権者の負担となる。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">契約を解除するには、債務者に帰責事由があることが必要である。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>2020年改正により<strong>債務者の帰責事由は不要</strong>になった。解除は債権者を契約の拘束から解放する制度であって、債務者への制裁ではないから。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">債務の不履行が債権者の責めに帰すべき事由によるものであるときは、債権者は契約を解除することができない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>543条。自分のせいで生じた不履行を理由に契約から抜けることは許されない。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">催告をしたうえであれば、不履行がどんなに軽微であっても契約を解除することができる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>541条ただし書により、不履行が<strong>軽微であるとき</strong>は解除できない。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">債務の全部の履行が不能であるときは、債権者は催告をすることなく直ちに契約の全部を解除することができる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>542条1項1号。できないことを催告しても意味がないから。債務者が履行を明確に拒絶したときも同じ。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">契約の性質上、特定の日時に履行しなければ契約をした目的を達することができない場合において、その時期を経過したときは、催告なしに解除することができる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>542条1項4号の定期行為。結婚式当日のケーキやお節料理が典型例。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">当事者の一方が数人ある場合であっても、そのうちの1人が単独で契約を解除することができる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>544条1項の解除権の不可分性により、<strong>全員から、全員に対して</strong>しなければならない。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">解除権を有する者が数人ある場合において、そのうち1人の解除権が消滅したときは、他の者の解除権も消滅する。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>544条2項。契約関係を一部だけ巻き戻すことはできないから。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">契約を解除した場合であっても、損害賠償を請求することができる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>545条4項。解除と損害賠償は両立する。<strong>手付解除では損害賠償できない</strong>のと対比される。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">解除による原状回復として金銭を返還するときは、その受領の時からの利息を付さなければならない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>545条2項。金銭以外の物を返す場合は受領時以後の<strong>果実</strong>も返還する（545条3項）。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">契約の解除前に目的物を譲り受けた第三者は、登記を備えていなくても保護される。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>545条1項ただし書の第三者として保護されるには、判例により<strong>登記が必要</strong>（権利保護資格要件）。ただし善意悪意は問わない。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">双務契約において当事者双方の責めに帰することができない事由により債務の履行が不能となった場合、債権者は反対給付の履行を拒むことができる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>536条1項の危険負担。あくまで<strong>拒めるだけ</strong>である点が重要。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">危険負担により債権者が履行を拒める場合、反対債務は当然に消滅する。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>改正により、消滅させたいなら<strong>解除をする</strong>必要がある。危険負担は履行拒絶権を与えるにとどまる。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">債権者の責めに帰すべき事由によって履行が不能となったときも、債権者は反対給付の履行を拒むことができる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>536条2項により<strong>拒めない</strong>。ただし債務者は、自己の債務を免れたことによって得た利益を債権者に償還しなければならない。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">同時履行の抗弁権を有する者は、相手方が履行の提供をするまでは、自己の債務を履行しなくても履行遅滞とならない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>533条。同時履行の抗弁権には<strong>違法性を阻却する</strong>効果がある。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">敷金の返還債務と建物の明渡債務は、同時履行の関係に立つ。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>622条の2により<strong>明渡しが先履行</strong>。明け渡してもらわないと控除すべき損害額を確定できないから。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">被担保債権の弁済と抵当権設定登記の抹消手続は、同時履行の関係に立つ。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>判例により<strong>弁済が先</strong>。抵当権は債権が消滅して初めて消滅するので、順序が論理的に決まっている。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">契約が解除された場合の当事者双方の原状回復義務は、同時履行の関係に立つ。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>546条による533条の準用。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">契約不適合を理由とする代金減額請求権や損害賠償請求権と、売主の債務の履行とは、同時履行の関係に立つ。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>533条かっこ書。2020年改正で明文化された。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">債務の履行を強制する方法には、直接強制のほか、代替執行および間接強制がある。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>414条1項。ただし債務の性質がこれを許さないときはできない。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">債務不履行による損害賠償の請求は、債務者に帰責事由がなくてもすることができる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>415条1項ただし書により<strong>債務者の帰責事由が必要</strong>。帰責事由が不要な解除との違いが、この分野で最も問われる。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">債務の履行が不能である場合、債権者は履行に代わる損害賠償を請求することができる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>415条2項1号の填補賠償。債務者が履行を明確に拒絶したとき、契約が解除されたときなども同様。</p></div>
+          </li>
+      </ol>
+    </section>
+
+  </main>
+
+  <footer>
+    <h4>出典</h4>
+    <ul>
+      <li>民法（明治29年法律第89号）第412条〜第422条の2、第533条〜第548条 — <a href="https://laws.e-gov.go.jp/law/129AC0000000089">e-Gov法令検索</a></li>
+    </ul>
+    <div class="sibling">
+      <a href="../index.html">総目次</a>
+      <a href="抵当権と担保物権.html">← 抵当権と担保物権</a>
+      <a href="物権変動と対抗要件.html">物権変動と対抗要件</a>
+    </div>
+  </footer>
+
+</div>
+
+<script>
+  (function () {
+    var root = document.documentElement;
+    document.getElementById('theme').addEventListener('click', function () {
+      if (root.getAttribute('data-theme')) { root.removeAttribute('data-theme'); return; }
+      var dark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      root.setAttribute('data-theme', dark ? 'light' : 'dark');
+    });
+    var maskBtn = document.getElementById('mask');
+    var grid = document.getElementById('numgrid');
+    maskBtn.addEventListener('click', function () {
+      var on = grid.classList.toggle('masked');
+      maskBtn.setAttribute('aria-pressed', String(on));
+      maskBtn.textContent = on ? '答えを表示' : '答えを隠す';
+    });
+    var links = Array.prototype.slice.call(document.querySelectorAll('nav.rail ol a'));
+    var map = {};
+    links.forEach(function (a) { map[a.getAttribute('href').slice(1)] = a; });
+    var seen = [];
+    var obs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        var i = seen.indexOf(e.target.id);
+        if (e.isIntersecting && i < 0) seen.push(e.target.id);
+        if (!e.isIntersecting && i >= 0) seen.splice(i, 1);
+      });
+      links.forEach(function (a) { a.classList.remove('on'); });
+      if (seen.length) {
+        var order = Object.keys(map);
+        seen.sort(function (a, b) { return order.indexOf(a) - order.indexOf(b); });
+        map[seen[0]].classList.add('on');
+      }
+    }, { rootMargin: '-10% 0px -70% 0px' });
+    document.querySelectorAll('main section').forEach(function (s) { obs.observe(s); });
+  })();
+</script>
+
+<script>
+  /* 肢別○×ドリル */
+  (function () {
+    var sec = document.getElementById('drill');
+    if (!sec) return;
+    var list = sec.querySelector('ol.drill');
+    var items = Array.prototype.slice.call(list.querySelectorAll('li.dq'));
+    var key = 'takken-drill:' + (document.title || location.pathname);
+    var state = {};
+    try { state = JSON.parse(localStorage.getItem('' + key) || '{}') || {}; } catch (e) { state = {}; }
+    var elDone = document.getElementById('d-done');
+    var elOk = document.getElementById('d-ok');
+    var elPct = document.getElementById('d-pct');
+    var onlyBtn = document.getElementById('d-wrong');
+
+    function paint() {
+      var done = 0, ok = 0;
+      items.forEach(function (li, i) {
+        var picked = state[i];
+        li.classList.remove('done', 'ok', 'ng');
+        Array.prototype.forEach.call(li.querySelectorAll('.ch button'), function (b) {
+          b.removeAttribute('data-picked');
+        });
+        if (picked !== 'o' && picked !== 'x') return;
+        done++;
+        var ans = li.getAttribute('data-a');
+        var right = picked === ans;
+        if (right) ok++;
+        li.classList.add('done', right ? 'ok' : 'ng');
+        var b = li.querySelector('.ch button[data-v="' + picked + '"]');
+        if (b) b.setAttribute('data-picked', '1');
+        li.querySelector('.verdict').textContent =
+          right ? '正解　' + (ans === 'o' ? '○' : '×')
+                : '不正解　正解は ' + (ans === 'o' ? '○' : '×');
+      });
+      elDone.textContent = String(done);
+      elOk.textContent = String(ok);
+      elPct.textContent = done ? Math.round(ok / done * 100) + '%' : '—';
+      try { localStorage.setItem('' + key, JSON.stringify(state)); } catch (e) {}
+    }
+
+    list.addEventListener('click', function (e) {
+      var b = e.target;
+      while (b && b !== list && b.tagName !== 'BUTTON') b = b.parentNode;
+      if (!b || b.tagName !== 'BUTTON') return;
+      var li = b.parentNode.parentNode;
+      var i = items.indexOf(li);
+      if (i < 0) return;
+      state[i] = b.getAttribute('data-v');
+      paint();
+    });
+
+    onlyBtn.addEventListener('click', function () {
+      var on = list.classList.toggle('onlyng');
+      onlyBtn.setAttribute('aria-pressed', String(on));
+      onlyBtn.textContent = on ? 'すべて表示' : '間違えた肢だけ';
+    });
+
+    document.getElementById('d-reset').addEventListener('click', function () {
+      state = {};
+      list.classList.remove('onlyng');
+      onlyBtn.setAttribute('aria-pressed', 'false');
+      onlyBtn.textContent = '間違えた肢だけ';
+      paint();
+    });
+
+    paint();
+  })();
+</script>

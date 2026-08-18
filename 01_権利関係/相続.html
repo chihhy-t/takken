@@ -1,0 +1,900 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>相続 — 宅建士試験 2026年度</title>
+
+<style>
+  :root {
+    --paper:#EBEDE9; --surface:#F8F9F6; --sunk:#E1E4DE; --ink:#151F2A; --muted:#5D6B78;
+    --rule:#CDD2CB; --hair:#DCE0D9; --accent:#B8342A; --accent-soft:#F3DEDB;
+    --blue:#2A5F86; --blue-soft:#DCE6EE;
+    --font-display:"Hiragino Mincho ProN","Yu Mincho","YuMincho","Noto Serif JP",serif;
+    --font-body:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","YuGothic","Noto Sans JP",system-ui,sans-serif;
+    --font-mono:ui-monospace,"SFMono-Regular","SF Mono",Menlo,Consolas,monospace;
+    --measure:68ch;
+    --s1:.35rem; --s2:.7rem; --s3:1.1rem; --s4:1.7rem; --s5:2.6rem; --s6:4rem;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper:#0D1B29; --surface:#132534; --sunk:#0A1622; --ink:#DAE4EC; --muted:#8CA1B3;
+      --rule:#26415A; --hair:#1D3448; --accent:#FF7059; --accent-soft:#3A1F1D;
+      --blue:#6FB6DC; --blue-soft:#14293A;
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper:#0D1B29; --surface:#132534; --sunk:#0A1622; --ink:#DAE4EC; --muted:#8CA1B3;
+    --rule:#26415A; --hair:#1D3448; --accent:#FF7059; --accent-soft:#3A1F1D;
+    --blue:#6FB6DC; --blue-soft:#14293A;
+  }
+
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--paper); color:var(--ink); font-family:var(--font-body);
+    font-size:16px; line-height:1.9; -webkit-font-smoothing:antialiased; font-feature-settings:"palt" 1; }
+
+  .wrap { display:grid; grid-template-columns:15.5rem minmax(0,1fr); gap:var(--s6);
+    max-width:80rem; margin:0 auto; padding:0 var(--s4) var(--s6); align-items:start; }
+  @media (max-width:60rem){ .wrap{ grid-template-columns:minmax(0,1fr); gap:var(--s4); padding:0 var(--s3) var(--s5);} }
+
+  .masthead { grid-column:1/-1; padding:var(--s5) 0 var(--s4); border-bottom:2px solid var(--ink);
+    margin-bottom:var(--s2); display:flex; flex-wrap:wrap; align-items:flex-end; justify-content:space-between; gap:var(--s3); }
+  .eyebrow { font-family:var(--font-mono); font-size:.72rem; letter-spacing:.16em; text-transform:uppercase;
+    color:var(--muted); display:flex; align-items:center; gap:.6em; }
+  .eyebrow::before { content:""; width:2.2rem; height:1px; background:var(--accent); }
+  .eyebrow a { color:var(--accent); text-decoration:none; }
+  .eyebrow a:hover { text-decoration:underline; text-underline-offset:.2em; }
+  h1 { font-family:var(--font-display); font-weight:600; font-size:clamp(2rem,1.4rem + 2.6vw,3.1rem);
+    line-height:1.2; letter-spacing:.04em; margin:var(--s2) 0 var(--s3); text-wrap:balance; }
+  .facts { display:flex; flex-wrap:wrap; gap:0 var(--s3); font-size:.82rem; color:var(--muted); list-style:none; margin:0; padding:0; }
+  .facts b { font-family:var(--font-mono); font-variant-numeric:tabular-nums; color:var(--ink); font-weight:600; }
+  .toggles { display:flex; gap:var(--s1); }
+  button { font-family:var(--font-body); font-size:.78rem; color:var(--muted); background:var(--surface);
+    border:1px solid var(--rule); border-radius:2px; padding:.4em .9em; cursor:pointer; transition:color .15s,border-color .15s; }
+  button:hover { color:var(--ink); border-color:var(--ink); }
+  button:focus-visible { outline:2px solid var(--accent); outline-offset:2px; }
+  button[aria-pressed="true"] { color:var(--accent); border-color:var(--accent); }
+
+  nav.rail { position:sticky; top:var(--s3); font-size:.82rem; max-height:calc(100vh - 3rem); overflow-y:auto; padding-bottom:var(--s3); }
+  nav.rail h2 { font-family:var(--font-mono); font-size:.68rem; letter-spacing:.16em; text-transform:uppercase; color:var(--muted); margin:0 0 var(--s2); font-weight:500; }
+  nav.rail ol { list-style:none; margin:0; padding:0; display:flex; flex-direction:column; }
+  nav.rail a { display:block; padding:.3em 0 .3em .9em; color:var(--muted); text-decoration:none; border-left:2px solid var(--hair); line-height:1.5; }
+  nav.rail a:hover { color:var(--ink); border-left-color:var(--rule); }
+  nav.rail a.on { color:var(--ink); border-left-color:var(--accent); font-weight:600; }
+  nav.rail a .num { font-family:var(--font-mono); font-size:.72rem; color:var(--muted); margin-right:.5em; }
+  nav.rail a.home { border-left:none; padding:0 0 var(--s2); color:var(--accent);
+    font-family:var(--font-mono); font-size:.72rem; letter-spacing:.1em; }
+  nav.rail a.home:hover { color:var(--accent); text-decoration:underline; text-underline-offset:.2em; }
+  @media (max-width:60rem){
+    nav.rail{ position:static; max-height:none; border-bottom:1px solid var(--rule); padding-bottom:var(--s3); }
+    nav.rail ol{ display:grid; grid-template-columns:repeat(auto-fill,minmax(9rem,1fr)); gap:0 var(--s2); }
+  }
+
+  main { min-width:0; }
+  section { padding-top:var(--s5); scroll-margin-top:var(--s3); }
+  section > * { max-width:var(--measure); }
+  section > figure, section > .scroll { max-width:none; }
+
+  h2.sec { font-family:var(--font-display); font-size:clamp(1.45rem,1.2rem + .9vw,1.9rem); font-weight:600;
+    letter-spacing:.04em; margin:0 0 var(--s3); padding-bottom:var(--s2); border-bottom:1px solid var(--rule);
+    display:flex; align-items:baseline; gap:.7em; max-width:none; }
+  h2.sec .num { font-family:var(--font-mono); font-size:.8rem; letter-spacing:.1em; color:var(--accent); font-weight:500; }
+  h3 { font-family:var(--font-body); font-size:1.06rem; font-weight:700; letter-spacing:.02em;
+    margin:var(--s4) 0 var(--s2); padding-left:.7em; border-left:3px solid var(--ink); }
+  p { margin:0 0 var(--s3); }
+  a { color:var(--blue); text-underline-offset:.2em; }
+  em { font-style:normal; background:linear-gradient(transparent 62%, var(--accent-soft) 62%); font-weight:600; }
+  ul, ol { margin:0 0 var(--s3); padding-left:1.3em; }
+  li { margin-bottom:var(--s1); }
+  .lead { font-size:1.05rem; color:var(--muted); }
+
+  .call { max-width:var(--measure); margin:0 0 var(--s3); padding:var(--s3) var(--s3) var(--s3) var(--s4);
+    background:var(--surface); border:1px solid var(--hair); border-left:3px solid var(--rule); border-radius:2px; font-size:.94rem; }
+  .call > :last-child { margin-bottom:0; }
+  .call .tag { display:block; font-family:var(--font-mono); font-size:.68rem; letter-spacing:.16em; text-transform:uppercase; color:var(--muted); margin-bottom:var(--s1); }
+  .call.trap { border-left-color:var(--accent); background:var(--accent-soft); }
+  .call.trap .tag { color:var(--accent); }
+  .call.exam { border-left-color:var(--ink); }
+  .call.exam .tag { color:var(--ink); }
+  .call.tip { border-left-color:var(--blue); background:var(--blue-soft); }
+  .call.tip .tag { color:var(--blue); }
+
+  .scroll { overflow-x:auto; margin:0 0 var(--s3); -webkit-overflow-scrolling:touch; }
+  table { border-collapse:collapse; width:100%; font-size:.88rem; line-height:1.6; }
+  caption { text-align:left; font-size:.78rem; color:var(--muted); padding-bottom:var(--s1); font-family:var(--font-mono); letter-spacing:.08em; }
+  th, td { padding:.58em .75em; text-align:left; vertical-align:top; border-bottom:1px solid var(--hair); }
+  thead th { font-size:.74rem; letter-spacing:.08em; color:var(--muted); font-weight:600; border-bottom:1px solid var(--ink); }
+  tbody tr:hover { background:var(--surface); }
+  td.n, th.n { text-align:center; font-family:var(--font-mono); font-variant-numeric:tabular-nums; white-space:nowrap; }
+  .no { color:var(--accent); font-weight:700; }
+  .yes { color:var(--muted); }
+  .tri { color:var(--blue); }
+  table.bun tbody td:first-child { white-space:nowrap; font-weight:600; }
+  table.bun tbody td.n { font-size:.95rem; font-weight:600; }
+  table.bun tr.hi { background:var(--accent-soft); }
+
+  figure { margin:0 0 var(--s4); }
+  figure svg { display:block; width:100%; height:auto; }
+  figcaption { font-size:.78rem; color:var(--muted); font-family:var(--font-mono); letter-spacing:.06em; margin-top:var(--s2); padding-top:var(--s1); border-top:1px solid var(--hair); }
+  .plate { background:var(--surface); border:1px solid var(--hair); border-radius:2px; padding:var(--s3); }
+  .svg-ink { fill:none; stroke:var(--ink); stroke-width:1.4; }
+  .svg-hair { fill:none; stroke:var(--rule); stroke-width:1; }
+  .svg-dim { fill:none; stroke:var(--blue); stroke-width:1; }
+  .svg-acc { fill:none; stroke:var(--accent); stroke-width:1.6; }
+  .svg-fill { fill:var(--sunk); stroke:var(--rule); stroke-width:1; }
+  .svg-accfill { fill:var(--accent-soft); stroke:var(--accent); stroke-width:1.2; }
+  .svg-bluefill { fill:var(--blue-soft); stroke:var(--blue); stroke-width:1.2; }
+  text { font-family:var(--font-body); fill:var(--ink); font-size:12px; }
+  text.lbl { font-family:var(--font-mono); fill:var(--muted); font-size:10.5px; letter-spacing:.06em; }
+  text.dimt { font-family:var(--font-mono); fill:var(--blue); font-size:11px; }
+  text.acct { fill:var(--accent); font-size:11.5px; font-weight:700; }
+  text.frac { font-family:var(--font-mono); font-size:15px; font-weight:600; }
+
+  .nums { display:grid; grid-template-columns:repeat(auto-fill,minmax(12rem,1fr)); gap:var(--s2); }
+  .nc { background:var(--surface); border:1px solid var(--hair); border-radius:2px; padding:var(--s3) var(--s3) var(--s2); display:flex; flex-direction:column; gap:var(--s1); }
+  .nc .v { font-family:var(--font-mono); font-size:1.1rem; font-weight:600; line-height:1.3; color:var(--accent); }
+  .nc .d { font-size:.8rem; color:var(--muted); line-height:1.6; }
+  .nums.masked .v { color:transparent; background:var(--rule); border-radius:2px; user-select:none; }
+  .nums.masked .nc:hover .v, .nums.masked .nc:focus-within .v { color:var(--accent); background:transparent; }
+  .nc:focus-visible { outline:2px solid var(--accent); outline-offset:2px; }
+  .masthead-note { font-size:.78rem; color:var(--muted); margin-bottom:var(--s2); }
+
+  table.traps td:first-child { color:var(--muted); }
+  table.traps td:first-child::before { content:"「"; }
+  table.traps td:first-child::after { content:"」"; }
+  table.traps td:last-child strong { color:var(--accent); }
+
+  footer { grid-column:1/-1; margin-top:var(--s6); padding-top:var(--s3); border-top:1px solid var(--rule); font-size:.8rem; color:var(--muted); }
+  footer ul { list-style:none; padding:0; }
+  footer li { margin-bottom:var(--s1); }
+  .sibling { display:flex; flex-wrap:wrap; gap:var(--s2); margin-top:var(--s3); }
+  .sibling a { font-size:.8rem; text-decoration:none; border:1px solid var(--rule); border-radius:2px; padding:.35em .8em; color:var(--muted); }
+  .sibling a:hover { color:var(--ink); border-color:var(--ink); }
+
+  /* ── 肢別○×ドリル ── */
+  .drillbar { max-width:none; display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between;
+    gap:var(--s2); margin:0 0 var(--s3); padding:var(--s2) var(--s3); background:var(--surface);
+    border:1px solid var(--rule); border-radius:2px; position:sticky; top:0; z-index:5; }
+  .drillbar .score { font-family:var(--font-mono); font-size:.8rem; font-variant-numeric:tabular-nums;
+    color:var(--muted); letter-spacing:.04em; }
+  .drillbar .score b { color:var(--ink); font-weight:600; }
+  .drillbar .score .pct { color:var(--accent); font-weight:600; }
+  .drillbar .dbtns { display:flex; gap:var(--s1); }
+  ol.drill { max-width:none; list-style:none; margin:0; padding:0; counter-reset:dq; }
+  li.dq { counter-increment:dq; margin:0 0 var(--s2); padding:var(--s3);
+    background:var(--surface); border:1px solid var(--hair); border-left:3px solid var(--rule); border-radius:2px; }
+  li.dq > .s { margin:0; font-size:.95rem; line-height:1.85; max-width:var(--measure); }
+  li.dq > .s::before { content:counter(dq,decimal-leading-zero); font-family:var(--font-mono);
+    font-size:.72rem; letter-spacing:.08em; color:var(--muted); margin-right:.9em; }
+  li.dq .ch { display:flex; gap:var(--s1); margin-top:var(--s2); }
+  li.dq .ch button { font-family:var(--font-display); font-size:1.05rem; line-height:1; min-width:3.6rem; padding:.4em 0; }
+  li.dq .ch button[data-picked] { color:var(--ink); border-color:var(--ink); font-weight:700; }
+  li.dq .ex { display:none; margin-top:var(--s3); padding-top:var(--s2); border-top:1px solid var(--hair); }
+  li.dq.done .ex { display:block; }
+  li.dq .ex .verdict { display:block; font-family:var(--font-mono); font-size:.7rem; letter-spacing:.14em;
+    margin-bottom:var(--s1); }
+  li.dq .ex p { margin:0; font-size:.88rem; line-height:1.8; color:var(--muted); max-width:var(--measure); }
+  li.dq .ex p strong { color:var(--ink); font-weight:700; }
+  li.dq.ok { border-left-color:var(--blue); }
+  li.dq.ok .verdict { color:var(--blue); }
+  li.dq.ng { border-left-color:var(--accent); background:var(--accent-soft); }
+  li.dq.ng .verdict { color:var(--accent); }
+  li.dq.ng .ex p strong { color:var(--accent); }
+  ol.drill.onlyng li.dq:not(.ng) { display:none; }
+  .drilldone { font-size:.84rem; color:var(--muted); padding:var(--s3); border:1px dashed var(--rule);
+    border-radius:2px; text-align:center; }
+
+  @media (prefers-reduced-motion: reduce){ *{ transition:none !important; animation:none !important; scroll-behavior:auto !important; } }
+  html { scroll-behavior:smooth; }
+</style>
+
+<div class="wrap">
+
+  <header class="masthead">
+    <div>
+      <div class="eyebrow"><a href="../index.html">← 総目次</a> &nbsp;/&nbsp; 01 権利関係 &nbsp;/&nbsp; 宅建士試験 2026年度</div>
+      <h1>相続</h1>
+      <ul class="facts">
+        <li>法令基準日 <b>2026-04-01</b></li>
+        <li>出題数 <b>約1問</b></li>
+        <li>ドリル <b>34肢</b></li>
+        <li>目標 <b>確実に1問</b></li>
+        <li>更新 <b>2026-08-16</b></li>
+      </ul>
+    </div>
+    <div class="toggles">
+      <button id="mask" type="button" aria-pressed="false">答えを隠す</button>
+      <button id="theme" type="button">配色切替</button>
+    </div>
+  </header>
+
+  <nav class="rail" aria-label="目次">
+    <a class="home" href="../index.html">← 総目次</a>
+    <h2>Contents</h2>
+    <ol>
+      <li><a href="#junni"><span class="num">00</span>相続人と順位</a></li>
+      <li><a href="#bun"><span class="num">01</span>法定相続分</a></li>
+      <li><a href="#daishu"><span class="num">02</span>代襲相続</a></li>
+      <li><a href="#shonin"><span class="num">03</span>承認と放棄</a></li>
+      <li><a href="#bunkatsu"><span class="num">04</span>遺産分割</a></li>
+      <li><a href="#yuigon"><span class="num">05</span>遺言</a></li>
+      <li><a href="#iryubun"><span class="num">06</span>遺留分</a></li>
+      <li><a href="#kyojuken"><span class="num">07</span>配偶者居住権</a></li>
+      <li><a href="#deru"><span class="num">08</span>よく出る論点</a></li>
+      <li><a href="#hikkake"><span class="num">09</span>ひっかけ一覧</a></li>
+      <li><a href="#matome"><span class="num">10</span>暗記カード</a></li>
+      <li><a href="#drill"><span class="num">11</span>肢別○×ドリル</a></li>
+    </ol>
+  </nav>
+
+  <main>
+
+    <!-- 00 -->
+    <section id="junni">
+      <h2 class="sec"><span class="num">00</span>相続人と順位</h2>
+
+      <figure class="plate">
+        <svg viewBox="0 0 720 210" role="img" aria-label="配偶者は常に相続人となる。血族相続人は第1順位が子、第2順位が直系尊属、第3順位が兄弟姉妹で、先順位がいれば後順位は相続人にならない。">
+          <rect x="24" y="46" width="160" height="120" class="svg-accfill" rx="2"/>
+          <text x="104" y="82" text-anchor="middle" class="frac" fill="var(--accent)">配偶者</text>
+          <text x="104" y="112" text-anchor="middle">常に相続人</text>
+          <text x="104" y="140" text-anchor="middle" class="lbl">順位に関係なく</text>
+          <text x="104" y="156" text-anchor="middle" class="lbl">必ず加わる</text>
+
+          <text x="212" y="36" class="lbl">血族相続人 — 先順位がいれば後順位は相続しない</text>
+
+          <rect x="212" y="46" width="152" height="120" class="svg-bluefill" rx="2"/>
+          <text x="288" y="82" text-anchor="middle" class="frac" fill="var(--blue)">第1順位</text>
+          <text x="288" y="112" text-anchor="middle">子</text>
+          <text x="288" y="140" text-anchor="middle" class="lbl">代襲相続あり</text>
+          <text x="288" y="156" text-anchor="middle" class="lbl">孫・ひ孫へ再代襲</text>
+
+          <rect x="376" y="46" width="152" height="120" class="svg-fill" rx="2"/>
+          <text x="452" y="82" text-anchor="middle" class="frac">第2順位</text>
+          <text x="452" y="112" text-anchor="middle">直系尊属</text>
+          <text x="452" y="140" text-anchor="middle" class="lbl">父母・祖父母</text>
+          <text x="452" y="156" text-anchor="middle" class="lbl">親等の近い者が優先</text>
+
+          <rect x="540" y="46" width="156" height="120" class="svg-fill" rx="2"/>
+          <text x="618" y="82" text-anchor="middle" class="frac">第3順位</text>
+          <text x="618" y="112" text-anchor="middle">兄弟姉妹</text>
+          <text x="618" y="140" text-anchor="middle" class="acct">代襲は甥・姪まで</text>
+          <text x="618" y="156" text-anchor="middle" class="lbl">再代襲はない</text>
+
+          <text x="24" y="196" class="lbl">胎児は相続についてすでに生まれたものとみなされる（死産の場合を除く）</text>
+        </svg>
+        <figcaption>Fig.1 — 配偶者＋血族の3順位</figcaption>
+      </figure>
+
+      <div class="scroll">
+        <table>
+          <thead><tr><th>論点</th><th>内容</th></tr></thead>
+          <tbody>
+            <tr><td>配偶者</td><td class="no"><strong>常に相続人</strong>となる。ただし<strong>法律上の配偶者</strong>に限られ、内縁の配偶者は相続人にならない</td></tr>
+            <tr><td>胎児</td><td>相続については<strong>すでに生まれたものとみなす</strong>（死産の場合は適用しない）</td></tr>
+            <tr>
+              <td class="no"><strong>相続欠格</strong></td>
+              <td class="no">被相続人を殺害した、遺言書を偽造・破棄したなど。<strong>当然に相続権を失う</strong>（手続不要）</td>
+            </tr>
+            <tr>
+              <td><strong>廃除</strong></td>
+              <td>被相続人に対する虐待・重大な侮辱など。<strong>家庭裁判所への請求</strong>により相続権を奪う。<span class="tri">遺留分を有する推定相続人が対象</span></td>
+            </tr>
+            <tr><td class="no">欠格・廃除と代襲</td><td class="no">欠格・廃除の場合は<strong>代襲相続が生じる</strong>。<span class="no">相続放棄の場合は代襲相続が生じない</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 01 -->
+    <section id="bun">
+      <h2 class="sec"><span class="num">01</span>法定相続分</h2>
+
+      <div class="scroll">
+        <table class="bun">
+          <thead><tr><th>相続人の組み合わせ</th><th class="n">配偶者</th><th class="n">血族相続人</th></tr></thead>
+          <tbody>
+            <tr class="hi"><td>配偶者と<strong>子</strong></td><td class="n">1/2</td><td class="n">1/2</td></tr>
+            <tr class="hi"><td>配偶者と<strong>直系尊属</strong></td><td class="n">2/3</td><td class="n">1/3</td></tr>
+            <tr class="hi"><td>配偶者と<strong>兄弟姉妹</strong></td><td class="n">3/4</td><td class="n">1/4</td></tr>
+            <tr><td>配偶者のみ</td><td class="n">全部</td><td class="n">—</td></tr>
+            <tr><td>血族相続人のみ</td><td class="n">—</td><td class="n">全部</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="scroll">
+        <table>
+          <thead><tr><th>論点</th><th>内容</th></tr></thead>
+          <tbody>
+            <tr><td>同順位者が複数</td><td>血族相続人の相続分は<strong>頭数で等分</strong>する</td></tr>
+            <tr><td class="no"><strong>非嫡出子</strong></td><td class="no">嫡出子と<strong>同じ</strong>（2013年の改正で差が撤廃された）</td></tr>
+            <tr><td class="no"><strong>半血の兄弟姉妹</strong></td><td class="no">父母の一方のみを同じくする兄弟姉妹の相続分は、全血の兄弟姉妹の <strong>1/2</strong></td></tr>
+            <tr><td>養子</td><td>実子と同じ相続分。<strong>普通養子は実親からも養親からも相続できる</strong></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="call tip">
+        <span class="tag">覚え方</span>
+        <p><strong>配偶者は「1/2 → 2/3 → 3/4」と増えていく。</strong>血族が遠くなるほど配偶者の取り分が増える。<br>
+        <strong>半血の兄弟姉妹だけが1/2に減る。</strong>非嫡出子は同じなのに、半血の兄弟姉妹は半分。ここが引っかかりやすい。</p>
+      </div>
+
+      <div class="call exam">
+        <span class="tag">よく出る</span>
+        <p>計算問題の型。<strong>配偶者と子3人</strong>なら、配偶者1/2、子は残りの1/2を3等分して<strong>各1/6</strong>。<br>
+        <strong>子の1人が既に死亡し孫が2人</strong>いる場合、その子の1/6を孫2人で分けて<strong>各1/12</strong>。代襲相続人は被代襲者の相続分をそのまま引き継ぐ。</p>
+      </div>
+    </section>
+
+    <!-- 02 -->
+    <section id="daishu">
+      <h2 class="sec"><span class="num">02</span>代襲相続</h2>
+
+      <div class="scroll">
+        <table>
+          <thead><tr><th>論点</th><th>内容</th></tr></thead>
+          <tbody>
+            <tr><td class="no"><strong>原因</strong></td><td class="no">相続開始以前の<strong>死亡</strong>／<strong>相続欠格</strong>／<strong>廃除</strong>の3つ。<span class="no">相続放棄では代襲相続は生じない</span></td></tr>
+            <tr><td>子の代襲</td><td>孫・ひ孫へと<strong>再代襲する</strong></td></tr>
+            <tr><td class="no">兄弟姉妹の代襲</td><td class="no"><strong>甥・姪まで</strong>。<strong>再代襲はしない</strong></td></tr>
+            <tr><td>相続分</td><td>代襲相続人は被代襲者が受けるはずだった相続分を承継する。複数いれば等分</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="call trap">
+        <span class="tag">ひっかけ</span>
+        <p><strong>相続放棄をした者の子は代襲相続しない。</strong>放棄すると「初めから相続人でなかった」ことになるので、代襲すべき地位がそもそも存在しない。<strong>欠格・廃除との違いが最頻出。</strong><br>
+        欠格・廃除は本人を制裁するだけで、子には罪がないため代襲が認められる。</p>
+      </div>
+    </section>
+
+    <!-- 03 -->
+    <section id="shonin">
+      <h2 class="sec"><span class="num">03</span>承認と放棄</h2>
+
+      <div class="scroll">
+        <table>
+          <thead><tr><th>種類</th><th>内容</th><th class="n">方式</th></tr></thead>
+          <tbody>
+            <tr><td><strong>単純承認</strong></td><td>権利義務を無限に承継する</td><td class="n">手続不要</td></tr>
+            <tr><td><strong>限定承認</strong></td><td>相続によって得た財産の限度でのみ債務を弁済する</td><td class="n no">相続人<strong>全員が共同</strong>で家庭裁判所へ申述</td></tr>
+            <tr><td><strong>相続放棄</strong></td><td class="no">初めから相続人とならなかったものとみなされる</td><td class="n no"><strong>単独</strong>で家庭裁判所へ申述</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="scroll">
+        <table>
+          <thead><tr><th>論点</th><th>内容</th></tr></thead>
+          <tbody>
+            <tr><td class="no"><strong>熟慮期間</strong></td><td class="no">自己のために相続の開始があったことを<strong>知った時から3か月以内</strong>。家庭裁判所に請求して伸長できる</td></tr>
+            <tr><td>法定単純承認</td><td>相続財産の<strong>全部または一部を処分</strong>したとき、熟慮期間内に限定承認も放棄もしなかったとき、放棄後に財産を隠匿・消費したとき</td></tr>
+            <tr><td>撤回</td><td class="no">承認・放棄は熟慮期間内であっても<strong>撤回できない</strong>（詐欺・強迫などによる取消しは可）</td></tr>
+            <tr><td>放棄と登記</td><td class="tri">相続放棄の効果は<strong>登記なくして第三者に対抗できる</strong></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="call trap">
+        <span class="tag">ひっかけ</span>
+        <p><strong>限定承認は全員共同、放棄は単独。</strong>限定承認は財産を清算する手続なので足並みを揃える必要があるが、放棄は個人の自由。<br>
+        <strong>熟慮期間は「相続開始を知った時から」3か月。</strong>被相続人が死亡した時からではない。</p>
+      </div>
+    </section>
+
+    <!-- 04 -->
+    <section id="bunkatsu">
+      <h2 class="sec"><span class="num">04</span>遺産分割</h2>
+
+      <div class="scroll">
+        <table>
+          <thead><tr><th>論点</th><th>内容</th></tr></thead>
+          <tbody>
+            <tr><td>方法</td><td>共同相続人はいつでも協議で分割できる。協議が調わないときは<strong>家庭裁判所</strong>に請求する</td></tr>
+            <tr><td>分割の禁止</td><td>被相続人は遺言で <strong>5年</strong> を超えない期間、分割を禁止できる。共同相続人の契約でも5年以内で禁止できる</td></tr>
+            <tr><td class="no"><strong>効力</strong></td><td class="no">遺産分割は<strong>相続開始の時に遡って</strong>効力を生ずる。<span class="tri">ただし第三者の権利を害することはできない</span></td></tr>
+            <tr>
+              <td class="no"><strong>分割と登記</strong></td>
+              <td class="no">法定相続分を<strong>超える</strong>部分の取得は、<strong>登記をしなければ第三者に対抗できない</strong>（899条の2）</td>
+            </tr>
+            <tr><td>預貯金債権</td><td>遺産分割の対象となる（判例）。一定額までは単独で払戻しを受けられる制度がある</td></tr>
+            <tr><td>10年経過後</td><td>相続開始から <strong>10年</strong> を経過した後の遺産分割は、原則として<strong>具体的相続分ではなく法定相続分</strong>によることになった（2023年4月1日施行）</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="call tip">
+        <span class="tag">つながり</span>
+        <p>遺産分割で法定相続分を超える部分に登記が必要な点、相続放棄は登記が不要な点は、<a href="物権変動と対抗要件.html">物権変動と対抗要件</a>でも扱っている。<strong>放棄は遡って相続人でなくなるが、分割はいったん共有になったものを動かす</strong>という違いから結論が分かれる。</p>
+      </div>
+    </section>
+
+    <!-- 05 -->
+    <section id="yuigon">
+      <h2 class="sec"><span class="num">05</span>遺言</h2>
+
+      <div class="scroll">
+        <table>
+          <thead><tr><th>方式</th><th>作成</th><th class="n">検認</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><strong>自筆証書遺言</strong></td>
+              <td>全文・日付・氏名を<strong>自書</strong>し押印する。<span class="tri">財産目録はパソコン作成や通帳のコピーでもよい（各ページに署名押印）</span></td>
+              <td class="n no">必要<br><span class="lbl">法務局保管制度を利用すれば不要</span></td>
+            </tr>
+            <tr><td><strong>公正証書遺言</strong></td><td>証人 <strong>2人以上</strong> の立会いのもと公証人が作成</td><td class="n tri">不要</td></tr>
+            <tr><td><strong>秘密証書遺言</strong></td><td>遺言者が署名押印して封印し、公証人と証人2人以上に提出</td><td class="n no">必要</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="scroll">
+        <table>
+          <thead><tr><th>論点</th><th>内容</th></tr></thead>
+          <tbody>
+            <tr><td class="no"><strong>遺言能力</strong></td><td class="no"><strong>15歳</strong>に達した者は遺言をすることができる。<span class="tri">法定代理人の同意は不要</span></td></tr>
+            <tr><td>成年被後見人</td><td>事理弁識能力を一時回復した時に、<strong>医師2人以上</strong>の立会いがあれば遺言できる</td></tr>
+            <tr><td class="no"><strong>共同遺言の禁止</strong></td><td class="no">2人以上の者が<strong>同一の証書</strong>で遺言することはできない</td></tr>
+            <tr><td class="no"><strong>撤回</strong></td><td class="no">遺言者は<strong>いつでも</strong>遺言の全部または一部を撤回できる。<strong>撤回権を放棄できない</strong></td></tr>
+            <tr><td>抵触する遺言</td><td>前の遺言と後の遺言が抵触するときは、<strong>後の遺言</strong>で前の遺言を撤回したものとみなす</td></tr>
+            <tr><td>抵触する生前処分</td><td>遺言後に遺言と抵触する生前処分をしたときも、その部分は撤回したものとみなす</td></tr>
+            <tr><td>検認</td><td class="tri">検認は<strong>証拠保全の手続</strong>であって、遺言の有効・無効を判断するものではない</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="call trap">
+        <span class="tag">ひっかけ</span>
+        <p><strong>15歳から単独で遺言できる。</strong>未成年者でも法定代理人の同意は要らない。制限行為能力の枠組みが及ばない。<br>
+        <strong>検認を受けなくても遺言が無効になるわけではない。</strong>検認は形状や内容を確認して保存する手続にすぎない。<br>
+        <strong>方式の違う遺言でも後のものが優先する。</strong>公正証書遺言を自筆証書遺言で撤回することもできる。</p>
+      </div>
+    </section>
+
+    <!-- 06 -->
+    <section id="iryubun">
+      <h2 class="sec"><span class="num">06</span>遺留分</h2>
+
+      <div class="scroll">
+        <table class="bun">
+          <thead><tr><th>相続人</th><th class="n">遺留分の総額</th></tr></thead>
+          <tbody>
+            <tr class="hi"><td><strong>直系尊属のみ</strong>が相続人</td><td class="n">被相続人の財産の <strong>1/3</strong></td></tr>
+            <tr class="hi"><td>それ以外の場合</td><td class="n">被相続人の財産の <strong>1/2</strong></td></tr>
+            <tr><td class="no"><strong>兄弟姉妹</strong></td><td class="n no">遺留分は<strong>ない</strong></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="scroll">
+        <table>
+          <thead><tr><th>論点</th><th>内容</th></tr></thead>
+          <tbody>
+            <tr>
+              <td class="no"><strong>遺留分侵害額請求権</strong></td>
+              <td class="no">2019年施行の改正により、遺留分の侵害があった場合に請求できるのは<strong>金銭</strong>となった。<span class="tri">かつての「遺留分減殺請求」のように現物を取り戻す構成ではない</span></td>
+            </tr>
+            <tr>
+              <td>個別の遺留分</td>
+              <td>遺留分の総額に各自の<strong>法定相続分</strong>を掛けたもの<br><span class="lbl">配偶者と子1人なら、総額1/2 × 各1/2 ＝ <strong>各1/4</strong></span></td>
+            </tr>
+            <tr>
+              <td class="no"><strong>期間制限</strong></td>
+              <td class="no">相続の開始および遺留分を侵害する贈与・遺贈があったことを<strong>知った時から1年</strong>／相続開始の時から <strong>10年</strong></td>
+            </tr>
+            <tr><td>事前の放棄</td><td class="tri">相続開始<strong>前</strong>でも、<strong>家庭裁判所の許可</strong>を受ければ遺留分を放棄できる<span class="lbl">（相続放棄は事前にできない点と対照的）</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="call trap">
+        <span class="tag">ひっかけ</span>
+        <p><strong>兄弟姉妹に遺留分はない。</strong>これが最頻出。配偶者と兄弟姉妹が相続人の場合、「全財産を配偶者に」という遺言は完全に有効。<br>
+        <strong>遺留分は事前に放棄できるが、相続放棄は事前にできない。</strong>遺留分の放棄には家庭裁判所の許可が要る点まで押さえる。</p>
+      </div>
+    </section>
+
+    <!-- 07 -->
+    <section id="kyojuken">
+      <h2 class="sec"><span class="num">07</span>配偶者居住権</h2>
+      <p>2020年4月1日施行。<strong>配偶者が住み慣れた家に住み続けられるようにしつつ、他の財産も取得しやすくする</strong>ための権利。</p>
+
+      <div class="scroll">
+        <table>
+          <thead><tr><th></th><th>配偶者居住権</th><th>配偶者短期居住権</th></tr></thead>
+          <tbody>
+            <tr><td>要件</td><td>相続開始時に被相続人の建物に居住していたこと＋<strong>遺産分割・遺贈・死因贈与</strong>により取得</td><td>相続開始時に無償で居住していたこと（当然に発生）</td></tr>
+            <tr><td>存続期間</td><td class="no">原則として<strong>終身</strong>（別段の定めも可）</td><td>遺産分割により居住建物の帰属が確定した日、または相続開始から <strong>6か月</strong> を経過する日のいずれか<strong>遅い日</strong>まで</td></tr>
+            <tr><td class="no"><strong>登記</strong></td><td class="no"><strong>登記できる</strong>。登記すれば第三者に対抗できる</td><td class="tri">登記できない</td></tr>
+            <tr><td>譲渡</td><td colspan="2" class="no">いずれも<strong>譲渡できない</strong></td></tr>
+            <tr><td>費用</td><td colspan="2">配偶者が<strong>通常の必要費</strong>を負担する</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="call exam">
+        <span class="tag">よく出る</span>
+        <p><strong>配偶者居住権は登記でき、居住建物の所有者に登記義務がある。</strong>短期居住権は登記できないので、建物が第三者に売られると対抗できない。<br>
+        <strong>どちらも譲渡できない。</strong>配偶者本人のための権利だから。</p>
+      </div>
+    </section>
+
+    <!-- 08 -->
+    <section id="deru">
+      <h2 class="sec"><span class="num">08</span>よく出る論点</h2>
+      <div class="scroll">
+        <table>
+          <thead><tr><th class="n">順位</th><th>論点</th><th>要点</th></tr></thead>
+          <tbody>
+            <tr><td class="n">1</td><td><strong>法定相続分の計算</strong></td><td>1/2・2/3・3/4／代襲は被代襲者の分を承継／半血は1/2</td></tr>
+            <tr><td class="n">2</td><td>代襲相続の原因</td><td>死亡・欠格・廃除の3つ。放棄では生じない</td></tr>
+            <tr><td class="n">3</td><td>遺留分</td><td>兄弟姉妹にはない／直系尊属のみ1/3・それ以外1/2／金銭請求</td></tr>
+            <tr><td class="n">4</td><td>承認と放棄</td><td>3か月／限定承認は全員共同・放棄は単独／撤回できない</td></tr>
+            <tr><td class="n">5</td><td>遺言</td><td>15歳／共同遺言の禁止／後の遺言が優先／検認は有効性を判断しない</td></tr>
+            <tr><td class="n">6</td><td>遺産分割と登記</td><td>法定相続分を超える部分は登記が必要</td></tr>
+            <tr><td class="n">7</td><td>配偶者居住権</td><td>登記できる／譲渡できない／短期は6か月</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 09 -->
+    <section id="hikkake">
+      <h2 class="sec"><span class="num">09</span>ひっかけ一覧</h2>
+      <div class="scroll">
+        <table class="traps">
+          <thead><tr><th>こう書かれたら疑う</th><th>正しくは</th></tr></thead>
+          <tbody>
+            <tr><td>内縁の配偶者も相続人となる</td><td><strong>法律上の配偶者</strong>に限られる</td></tr>
+            <tr><td>非嫡出子の相続分は嫡出子の1/2である</td><td>2013年の改正で<strong>同じ</strong>になった</td></tr>
+            <tr><td>半血の兄弟姉妹も全血と同じ相続分である</td><td><strong>1/2</strong></td></tr>
+            <tr><td>相続を放棄した者の子は代襲相続する</td><td><strong>代襲しない</strong></td></tr>
+            <tr><td>兄弟姉妹の代襲は甥・姪の子まで及ぶ</td><td><strong>甥・姪まで</strong>。再代襲はない</td></tr>
+            <tr><td>限定承認は各相続人が単独でできる</td><td><strong>全員が共同</strong>でしなければならない</td></tr>
+            <tr><td>熟慮期間は被相続人の死亡時から3か月</td><td><strong>相続の開始があったことを知った時</strong>から</td></tr>
+            <tr><td>熟慮期間内であれば承認を撤回できる</td><td><strong>撤回できない</strong></td></tr>
+            <tr><td>相続放棄を第三者に対抗するには登記が必要</td><td><strong>登記なくして対抗できる</strong></td></tr>
+            <tr><td>遺産分割で取得した不動産は登記なくして対抗できる</td><td>法定相続分を<strong>超える部分</strong>は登記が必要</td></tr>
+            <tr><td>未成年者は法定代理人の同意がなければ遺言できない</td><td><strong>15歳</strong>から単独でできる</td></tr>
+            <tr><td>夫婦が同一の証書で遺言することができる</td><td><strong>共同遺言は禁止</strong></td></tr>
+            <tr><td>公正証書遺言を自筆証書遺言で撤回することはできない</td><td><strong>できる</strong>。後の遺言が優先する</td></tr>
+            <tr><td>検認を受けなければ遺言は無効である</td><td>検認は<strong>証拠保全</strong>の手続にすぎない</td></tr>
+            <tr><td>兄弟姉妹にも遺留分がある</td><td><strong>ない</strong></td></tr>
+            <tr><td>遺留分侵害額請求では現物の返還を求める</td><td><strong>金銭</strong>の支払を請求する</td></tr>
+            <tr><td>遺留分は相続開始前に放棄できない</td><td><strong>家庭裁判所の許可</strong>があれば放棄できる</td></tr>
+            <tr><td>配偶者短期居住権も登記できる</td><td><strong>登記できない</strong></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 10 -->
+    <section id="matome">
+      <h2 class="sec"><span class="num">10</span>暗記カード</h2>
+      <p class="masthead-note">右上のボタンで答えを伏せられる。</p>
+      <div class="nums" id="numgrid">
+        <div class="nc" tabindex="0"><span class="v">1/2・2/3・3/4</span><span class="d">配偶者の相続分（子／直系尊属／兄弟姉妹と）</span></div>
+        <div class="nc" tabindex="0"><span class="v">1/2</span><span class="d">半血の兄弟姉妹の相続分（全血に対して）</span></div>
+        <div class="nc" tabindex="0"><span class="v">死亡・欠格・廃除</span><span class="d">代襲相続が生じる3つの原因</span></div>
+        <div class="nc" tabindex="0"><span class="v">甥・姪まで</span><span class="d">兄弟姉妹の代襲が及ぶ範囲</span></div>
+        <div class="nc" tabindex="0"><span class="v">3か月</span><span class="d">熟慮期間（相続開始を知った時から）</span></div>
+        <div class="nc" tabindex="0"><span class="v">5年</span><span class="d">遺言や協議で遺産分割を禁止できる期間の上限</span></div>
+        <div class="nc" tabindex="0"><span class="v">15歳</span><span class="d">遺言をすることができる年齢</span></div>
+        <div class="nc" tabindex="0"><span class="v">2人以上</span><span class="d">公正証書遺言に必要な証人の数</span></div>
+        <div class="nc" tabindex="0"><span class="v">1/3 / 1/2</span><span class="d">遺留分の総額（直系尊属のみ／それ以外）</span></div>
+        <div class="nc" tabindex="0"><span class="v">ない</span><span class="d">兄弟姉妹の遺留分</span></div>
+        <div class="nc" tabindex="0"><span class="v">1年 / 10年</span><span class="d">遺留分侵害額請求の期間制限</span></div>
+        <div class="nc" tabindex="0"><span class="v">6か月</span><span class="d">配偶者短期居住権の最短の存続期間</span></div>
+      </div>
+    </section>
+
+    <!-- 11 -->
+    <section id="drill">
+      <h2 class="sec"><span class="num">11</span>肢別○×ドリル</h2>
+      <p class="lead">頻出論点の一問一答 <em>34肢</em>。○×を押すと理由が開く。<strong>理由を一言で言えなかった肢は、正解していても「要復習」に入れる</strong>のがこのドリルの使い方。</p>
+      <div class="call tip">
+        <span class="tag">回し方</span>
+        <p>1周目は全肢。2周目以降は「間違えた肢だけ」で回す。解答状況はこのブラウザに保存されるので、日をまたいでも続きから再開できる。</p>
+      </div>
+      <div class="drillbar">
+        <div class="score">解答 <b id="d-done">0</b> / 34　　正答 <b id="d-ok">0</b>　　正答率 <span class="pct" id="d-pct">—</span></div>
+        <div class="dbtns">
+          <button id="d-wrong" type="button" aria-pressed="false">間違えた肢だけ</button>
+          <button id="d-reset" type="button">リセット</button>
+        </div>
+      </div>
+      <ol class="drill">
+          <li class="dq" data-a="x">
+            <p class="s">内縁の配偶者も相続人となる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>相続権があるのは<strong>法律上の配偶者</strong>に限られる。何十年同居していても相続人にはならない。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">配偶者と子2人が相続人である場合、各人の相続分は配偶者2分の1、子は各4分の1である。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>900条1号・4号。子が複数なら子の取り分を頭割りする。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">配偶者と直系尊属が相続人である場合、配偶者の相続分は3分の2である。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>900条2号。配偶者は「子と1/2、直系尊属と2/3、兄弟姉妹と3/4」と階段状に増える。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">配偶者と被相続人の兄弟姉妹が相続人である場合、兄弟姉妹の相続分は4分の1である。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>900条3号。配偶者が4分の3を取る。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">父母の一方のみを同じくする兄弟姉妹の相続分は、父母の双方を同じくする兄弟姉妹と同じである。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>900条4号ただし書により<strong>2分の1</strong>。非嫡出子の差別は撤廃されたが、半血の兄弟姉妹の差は残っている。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">嫡出でない子の相続分は、嫡出である子の相続分の2分の1である。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>2013年の改正により<strong>同じ</strong>になった。古い教材のまま出題される定番のひっかけ。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">被相続人の子が相続開始以前に死亡していた場合、その者の子が代襲して相続人となる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>887条2項。子の系統は<strong>再代襲もある</strong>（孫・ひ孫と続く）。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">相続を放棄した者の子は、代襲相続をすることができる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>放棄した者は<strong>初めから相続人でなかった</strong>とみなされるので代襲は生じない。代襲原因は<strong>死亡・欠格・廃除</strong>の3つ。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">兄弟姉妹が相続人となる場合において甥・姪が死亡していたときは、その子が再代襲して相続人となる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>兄弟姉妹の代襲は<strong>甥・姪までの一代限り</strong>。再代襲があるのは子の系統だけ。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">相続の放棄をしようとする者は、自己のために相続の開始があったことを知った時から3か月以内に、家庭裁判所に申述しなければならない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>915条。起算点は<strong>死亡の時ではなく知った時</strong>。家庭裁判所への申述が必要で、他の相続人に伝えるだけでは足りない。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">限定承認は、各相続人が単独ですることができる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>923条により<strong>相続人全員が共同</strong>でしなければならない。単独でできるのは放棄のほう。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">熟慮期間内であれば、いったんした相続の承認または放棄を撤回することができる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>919条1項により<strong>撤回できない</strong>。ただし詐欺・強迫等を理由とする取消しは別途認められる。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">相続を放棄した者は、その旨を登記しなくても、放棄の効果を第三者に対抗することができる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>放棄により<strong>初めから相続人でなかった</strong>ことになり、放棄者は完全な無権利者。無権利者からは何も取得できないので対抗問題にならない。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">遺産分割によって法定相続分を超える不動産を取得した相続人は、登記がなくてもその権利を第三者に対抗することができる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>899条の2により<strong>法定相続分を超える部分は対抗要件を備えなければ対抗できない</strong>。相続放棄（登記不要）と結論が分かれる点が最頻出。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">遺産の分割は相続開始の時にさかのぼってその効力を生ずるが、第三者の権利を害することはできない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>909条。分割前に持分を差し押さえた債権者などは保護される。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">共同相続人は、被相続人が遺言で禁じた場合を除き、いつでもその協議で遺産の分割をすることができる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>907条1項。遺言による分割禁止は<strong>5年以内</strong>に限られる。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">未成年者は、法定代理人の同意がなければ遺言をすることができない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>961条により<strong>15歳に達した者は単独で遺言できる</strong>。遺言は本人の最終意思なので代理になじまない。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">夫婦は、同一の証書で遺言をすることができる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>975条により<strong>共同遺言は禁止</strong>。一方が自由に撤回できなくなり、遺言の自由を害するから。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">自筆証書遺言に添付する財産目録は、自書によらずパソコンで作成することができる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>968条2項。ただし目録の<strong>各頁に署名押印</strong>が必要。本文のほうは全文・日付・氏名の自書と押印が必要。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">公正証書遺言の作成には、証人2人以上の立会いが必要である。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>969条。推定相続人・受遺者やその配偶者・直系血族は証人になれない。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">公正証書遺言を、後にした自筆証書遺言によって撤回することはできない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>遺言の方式に上下関係はなく、<strong>後の遺言が前の遺言と抵触する部分は撤回</strong>したものとみなされる（1023条）。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">遺言者はいつでも遺言の全部または一部を撤回することができ、その撤回権を放棄することはできない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>1022条・1026条。最終意思をいつでも変えられることが遺言制度の核心。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">家庭裁判所の検認を受けなければ、遺言は効力を生じない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>検認は<strong>偽造防止のための証拠保全手続</strong>にすぎず、効力とは無関係。公正証書遺言と法務局に保管された自筆証書遺言は検認不要。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">被相続人の兄弟姉妹にも遺留分がある。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>1042条。<strong>兄弟姉妹に遺留分はない</strong>。血縁が遠く、生活保障の必要性も乏しいため。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">直系尊属のみが相続人である場合の遺留分は、被相続人の財産の3分の1である。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>1042条1項1号。それ以外の場合（配偶者や子がいる場合）は2分の1。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">遺留分を侵害された者は、贈与または遺贈された財産そのものの返還を請求することができる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>2018年改正により<strong>金銭の支払を請求する権利</strong>となった（1046条）。現物返還を求めて共有状態を作らないための改正。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">遺留分は、家庭裁判所の許可を受ければ相続の開始前に放棄することができる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>1049条1項。<strong>相続の放棄は開始前にできない</strong>のと対比される。許可を要件にして、被相続人からの圧力による放棄を防いでいる。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">遺留分侵害額請求権は、相続の開始および遺留分を侵害する贈与・遺贈があったことを知った時から1年、相続開始の時から10年で消滅する。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>1048条。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">配偶者居住権は登記することができ、居住建物の所有者は配偶者に登記を備えさせる義務を負う。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>1031条。登記すれば建物を譲り受けた第三者にも対抗できる。存続期間は原則として配偶者の終身。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">配偶者短期居住権も登記することができる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>配偶者短期居住権は<strong>登記できず、第三者に対抗することもできない</strong>。あくまで最低6か月の暫定的な保護。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">配偶者居住権は、第三者に譲渡することができる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>1032条2項により<strong>譲渡できない</strong>。配偶者本人が住み続けることを保障するための権利だから。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">相続により不動産を取得した相続人は、自己のために相続の開始があったことを知り、かつその所有権を取得したことを知った日から3年以内に、相続登記を申請しなければならない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>不動産登記法76条の2。正当な理由なく怠ると<strong>10万円以下の過料</strong>。所有者不明土地対策として2024年4月から義務化された。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">相続人が数人あるときは、相続財産はその共有に属する。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>898条。ただし金銭債権などの<strong>可分債権は相続開始と同時に当然に分割</strong>される（預貯金債権は判例により遺産分割の対象となる）。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">相続開始の時から10年を経過した後にする遺産分割でも、特別受益や寄与分を主張することができる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>904条の3により、原則として<strong>法定相続分（指定相続分）による分割</strong>となる。長期間放置された遺産分割を進めるための規律。</p></div>
+          </li>
+      </ol>
+    </section>
+
+  </main>
+
+  <footer>
+    <h4>出典</h4>
+    <ul>
+      <li>民法（明治29年法律第89号）第882条〜第1050条 — <a href="https://laws.e-gov.go.jp/law/129AC0000000089">e-Gov法令検索</a></li>
+    </ul>
+    <div class="sibling">
+      <a href="../index.html">総目次</a>
+      <a href="不法行為.html">← 不法行為</a>
+      <a href="物権変動と対抗要件.html">物権変動と対抗要件</a>
+    </div>
+  </footer>
+
+</div>
+
+<script>
+  (function () {
+    var root = document.documentElement;
+    document.getElementById('theme').addEventListener('click', function () {
+      if (root.getAttribute('data-theme')) { root.removeAttribute('data-theme'); return; }
+      var dark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      root.setAttribute('data-theme', dark ? 'light' : 'dark');
+    });
+    var maskBtn = document.getElementById('mask');
+    var grid = document.getElementById('numgrid');
+    maskBtn.addEventListener('click', function () {
+      var on = grid.classList.toggle('masked');
+      maskBtn.setAttribute('aria-pressed', String(on));
+      maskBtn.textContent = on ? '答えを表示' : '答えを隠す';
+    });
+    var links = Array.prototype.slice.call(document.querySelectorAll('nav.rail ol a'));
+    var map = {};
+    links.forEach(function (a) { map[a.getAttribute('href').slice(1)] = a; });
+    var seen = [];
+    var obs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        var i = seen.indexOf(e.target.id);
+        if (e.isIntersecting && i < 0) seen.push(e.target.id);
+        if (!e.isIntersecting && i >= 0) seen.splice(i, 1);
+      });
+      links.forEach(function (a) { a.classList.remove('on'); });
+      if (seen.length) {
+        var order = Object.keys(map);
+        seen.sort(function (a, b) { return order.indexOf(a) - order.indexOf(b); });
+        map[seen[0]].classList.add('on');
+      }
+    }, { rootMargin: '-10% 0px -70% 0px' });
+    document.querySelectorAll('main section').forEach(function (s) { obs.observe(s); });
+  })();
+</script>
+
+<script>
+  /* 肢別○×ドリル */
+  (function () {
+    var sec = document.getElementById('drill');
+    if (!sec) return;
+    var list = sec.querySelector('ol.drill');
+    var items = Array.prototype.slice.call(list.querySelectorAll('li.dq'));
+    var key = 'takken-drill:' + (document.title || location.pathname);
+    var state = {};
+    try { state = JSON.parse(localStorage.getItem('' + key) || '{}') || {}; } catch (e) { state = {}; }
+    var elDone = document.getElementById('d-done');
+    var elOk = document.getElementById('d-ok');
+    var elPct = document.getElementById('d-pct');
+    var onlyBtn = document.getElementById('d-wrong');
+
+    function paint() {
+      var done = 0, ok = 0;
+      items.forEach(function (li, i) {
+        var picked = state[i];
+        li.classList.remove('done', 'ok', 'ng');
+        Array.prototype.forEach.call(li.querySelectorAll('.ch button'), function (b) {
+          b.removeAttribute('data-picked');
+        });
+        if (picked !== 'o' && picked !== 'x') return;
+        done++;
+        var ans = li.getAttribute('data-a');
+        var right = picked === ans;
+        if (right) ok++;
+        li.classList.add('done', right ? 'ok' : 'ng');
+        var b = li.querySelector('.ch button[data-v="' + picked + '"]');
+        if (b) b.setAttribute('data-picked', '1');
+        li.querySelector('.verdict').textContent =
+          right ? '正解　' + (ans === 'o' ? '○' : '×')
+                : '不正解　正解は ' + (ans === 'o' ? '○' : '×');
+      });
+      elDone.textContent = String(done);
+      elOk.textContent = String(ok);
+      elPct.textContent = done ? Math.round(ok / done * 100) + '%' : '—';
+      try { localStorage.setItem('' + key, JSON.stringify(state)); } catch (e) {}
+    }
+
+    list.addEventListener('click', function (e) {
+      var b = e.target;
+      while (b && b !== list && b.tagName !== 'BUTTON') b = b.parentNode;
+      if (!b || b.tagName !== 'BUTTON') return;
+      var li = b.parentNode.parentNode;
+      var i = items.indexOf(li);
+      if (i < 0) return;
+      state[i] = b.getAttribute('data-v');
+      paint();
+    });
+
+    onlyBtn.addEventListener('click', function () {
+      var on = list.classList.toggle('onlyng');
+      onlyBtn.setAttribute('aria-pressed', String(on));
+      onlyBtn.textContent = on ? 'すべて表示' : '間違えた肢だけ';
+    });
+
+    document.getElementById('d-reset').addEventListener('click', function () {
+      state = {};
+      list.classList.remove('onlyng');
+      onlyBtn.setAttribute('aria-pressed', 'false');
+      onlyBtn.textContent = '間違えた肢だけ';
+      paint();
+    });
+
+    paint();
+  })();
+</script>

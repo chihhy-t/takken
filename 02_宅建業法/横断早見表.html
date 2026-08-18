@@ -1,0 +1,560 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>宅建業法 横断早見表 — 宅建士試験 2026年度</title>
+
+<style>
+  :root {
+    --paper:#EBEDE9; --surface:#F8F9F6; --sunk:#E1E4DE; --ink:#151F2A; --muted:#5D6B78;
+    --rule:#CDD2CB; --hair:#DCE0D9; --accent:#B8342A; --accent-soft:#F3DEDB;
+    --blue:#2A5F86; --blue-soft:#DCE6EE;
+    --font-display:"Hiragino Mincho ProN","Yu Mincho","YuMincho","Noto Serif JP",serif;
+    --font-body:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","YuGothic","Noto Sans JP",system-ui,sans-serif;
+    --font-mono:ui-monospace,"SFMono-Regular","SF Mono",Menlo,Consolas,monospace;
+    --measure:68ch;
+    --s1:.35rem; --s2:.7rem; --s3:1.1rem; --s4:1.7rem; --s5:2.6rem; --s6:4rem;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper:#0D1B29; --surface:#132534; --sunk:#0A1622; --ink:#DAE4EC; --muted:#8CA1B3;
+      --rule:#26415A; --hair:#1D3448; --accent:#FF7059; --accent-soft:#3A1F1D;
+      --blue:#6FB6DC; --blue-soft:#14293A;
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper:#0D1B29; --surface:#132534; --sunk:#0A1622; --ink:#DAE4EC; --muted:#8CA1B3;
+    --rule:#26415A; --hair:#1D3448; --accent:#FF7059; --accent-soft:#3A1F1D;
+    --blue:#6FB6DC; --blue-soft:#14293A;
+  }
+
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--paper); color:var(--ink); font-family:var(--font-body);
+    font-size:16px; line-height:1.9; -webkit-font-smoothing:antialiased; font-feature-settings:"palt" 1; }
+
+  .wrap { display:grid; grid-template-columns:15.5rem minmax(0,1fr); gap:var(--s6);
+    max-width:84rem; margin:0 auto; padding:0 var(--s4) var(--s6); align-items:start; }
+  @media (max-width:60rem){ .wrap{ grid-template-columns:minmax(0,1fr); gap:var(--s4); padding:0 var(--s3) var(--s5);} }
+
+  .masthead { grid-column:1/-1; padding:var(--s5) 0 var(--s4); border-bottom:2px solid var(--ink);
+    margin-bottom:var(--s2); display:flex; flex-wrap:wrap; align-items:flex-end; justify-content:space-between; gap:var(--s3); }
+  .eyebrow { font-family:var(--font-mono); font-size:.72rem; letter-spacing:.16em; text-transform:uppercase;
+    color:var(--muted); display:flex; align-items:center; gap:.6em; }
+  .eyebrow::before { content:""; width:2.2rem; height:1px; background:var(--accent); }
+  h1 { font-family:var(--font-display); font-weight:600; font-size:clamp(1.9rem,1.3rem + 2.4vw,2.9rem);
+    line-height:1.2; letter-spacing:.04em; margin:var(--s2) 0 var(--s3); text-wrap:balance; }
+  .facts { display:flex; flex-wrap:wrap; gap:0 var(--s3); font-size:.82rem; color:var(--muted); list-style:none; margin:0; padding:0; }
+  .facts b { font-family:var(--font-mono); font-variant-numeric:tabular-nums; color:var(--ink); font-weight:600; }
+  .toggles { display:flex; gap:var(--s1); }
+  button { font-family:var(--font-body); font-size:.78rem; color:var(--muted); background:var(--surface);
+    border:1px solid var(--rule); border-radius:2px; padding:.4em .9em; cursor:pointer; transition:color .15s,border-color .15s; }
+  button:hover { color:var(--ink); border-color:var(--ink); }
+  button:focus-visible { outline:2px solid var(--accent); outline-offset:2px; }
+  button[aria-pressed="true"] { color:var(--accent); border-color:var(--accent); }
+
+  nav.rail { position:sticky; top:var(--s3); font-size:.82rem; max-height:calc(100vh - 3rem); overflow-y:auto; padding-bottom:var(--s3); }
+  nav.rail h2 { font-family:var(--font-mono); font-size:.68rem; letter-spacing:.16em; text-transform:uppercase; color:var(--muted); margin:0 0 var(--s2); font-weight:500; }
+  nav.rail ol { list-style:none; margin:0; padding:0; display:flex; flex-direction:column; }
+  nav.rail a { display:block; padding:.3em 0 .3em .9em; color:var(--muted); text-decoration:none; border-left:2px solid var(--hair); line-height:1.5; }
+  nav.rail a:hover { color:var(--ink); border-left-color:var(--rule); }
+  nav.rail a.on { color:var(--ink); border-left-color:var(--accent); font-weight:600; }
+  nav.rail a .num { font-family:var(--font-mono); font-size:.72rem; color:var(--muted); margin-right:.5em; }
+  nav.rail .files { margin-top:var(--s3); padding-top:var(--s3); border-top:1px solid var(--hair); display:flex; flex-direction:column; gap:.2em; }
+  nav.rail .files a { border-left:none; padding-left:0; font-size:.78rem; }
+  @media (max-width:60rem){
+    nav.rail{ position:static; max-height:none; border-bottom:1px solid var(--rule); padding-bottom:var(--s3); }
+    nav.rail ol{ display:grid; grid-template-columns:repeat(auto-fill,minmax(9rem,1fr)); gap:0 var(--s2); }
+  }
+
+  main { min-width:0; }
+  section { padding-top:var(--s5); scroll-margin-top:var(--s3); }
+  section > * { max-width:var(--measure); }
+  section > figure, section > .scroll { max-width:none; }
+
+  h2.sec { font-family:var(--font-display); font-size:clamp(1.45rem,1.2rem + .9vw,1.9rem); font-weight:600;
+    letter-spacing:.04em; margin:0 0 var(--s3); padding-bottom:var(--s2); border-bottom:1px solid var(--rule);
+    display:flex; align-items:baseline; gap:.7em; max-width:none; }
+  h2.sec .num { font-family:var(--font-mono); font-size:.8rem; letter-spacing:.1em; color:var(--accent); font-weight:500; }
+  h3 { font-family:var(--font-body); font-size:1.06rem; font-weight:700; letter-spacing:.02em;
+    margin:var(--s4) 0 var(--s2); padding-left:.7em; border-left:3px solid var(--ink); }
+  p { margin:0 0 var(--s3); }
+  a { color:var(--blue); text-underline-offset:.2em; }
+  em { font-style:normal; background:linear-gradient(transparent 62%, var(--accent-soft) 62%); font-weight:600; }
+  ul, ol { margin:0 0 var(--s3); padding-left:1.3em; }
+  li { margin-bottom:var(--s1); }
+  .lead { font-size:1.05rem; color:var(--muted); }
+
+  .call { max-width:var(--measure); margin:0 0 var(--s3); padding:var(--s3) var(--s3) var(--s3) var(--s4);
+    background:var(--surface); border:1px solid var(--hair); border-left:3px solid var(--rule); border-radius:2px; font-size:.94rem; }
+  .call > :last-child { margin-bottom:0; }
+  .call .tag { display:block; font-family:var(--font-mono); font-size:.68rem; letter-spacing:.16em; text-transform:uppercase; color:var(--muted); margin-bottom:var(--s1); }
+  .call.trap { border-left-color:var(--accent); background:var(--accent-soft); }
+  .call.trap .tag { color:var(--accent); }
+  .call.exam { border-left-color:var(--ink); }
+  .call.exam .tag { color:var(--ink); }
+  .call.rev { border-left-color:var(--accent); }
+  .call.rev .tag { color:var(--accent); }
+  .call.tip { border-left-color:var(--blue); background:var(--blue-soft); }
+  .call.tip .tag { color:var(--blue); }
+
+  .scroll { overflow-x:auto; margin:0 0 var(--s3); -webkit-overflow-scrolling:touch; }
+  table { border-collapse:collapse; width:100%; font-size:.86rem; line-height:1.6; }
+  caption { text-align:left; font-size:.78rem; color:var(--muted); padding-bottom:var(--s1); font-family:var(--font-mono); letter-spacing:.08em; }
+  th, td { padding:.55em .7em; text-align:left; vertical-align:top; border-bottom:1px solid var(--hair); }
+  thead th { font-size:.74rem; letter-spacing:.08em; color:var(--muted); font-weight:600; border-bottom:1px solid var(--ink); }
+  tbody tr:hover { background:var(--surface); }
+  td.n, th.n { text-align:center; font-family:var(--font-mono); font-variant-numeric:tabular-nums; white-space:nowrap; }
+  .no { color:var(--accent); font-weight:700; }
+  .yes { color:var(--muted); }
+  .tri { color:var(--blue); }
+  table.vs thead th:nth-child(2) { color:var(--ink); font-size:.88rem; }
+  table.vs thead th:nth-child(3) { color:var(--accent); font-size:.88rem; }
+  table.vs tbody td:first-child { white-space:nowrap; font-weight:600; }
+  table.kigen tbody td:first-child { font-family:var(--font-mono); color:var(--accent); font-weight:600; white-space:nowrap; text-align:center; }
+  .src { font-family:var(--font-mono); font-size:.7rem; color:var(--muted); white-space:nowrap; }
+
+  figure { margin:0 0 var(--s4); }
+  figure svg { display:block; width:100%; height:auto; }
+  figcaption { font-size:.78rem; color:var(--muted); font-family:var(--font-mono); letter-spacing:.06em; margin-top:var(--s2); padding-top:var(--s1); border-top:1px solid var(--hair); }
+  .plate { background:var(--surface); border:1px solid var(--hair); border-radius:2px; padding:var(--s3); }
+  .svg-hair { fill:none; stroke:var(--rule); stroke-width:1; }
+  .svg-fill { fill:var(--sunk); stroke:var(--rule); stroke-width:1; }
+  .svg-accfill { fill:var(--accent-soft); stroke:var(--accent); stroke-width:1.2; }
+  .svg-bluefill { fill:var(--blue-soft); stroke:var(--blue); stroke-width:1.2; }
+  text { font-family:var(--font-body); fill:var(--ink); font-size:12px; }
+  text.lbl { font-family:var(--font-mono); fill:var(--muted); font-size:10.5px; letter-spacing:.06em; }
+  text.dimt { font-family:var(--font-mono); fill:var(--blue); font-size:11px; }
+  text.acct { fill:var(--accent); font-size:11.5px; font-weight:700; }
+  text.big { font-family:var(--font-mono); font-size:15px; font-weight:600; }
+
+  .nums { display:grid; grid-template-columns:repeat(auto-fill,minmax(13rem,1fr)); gap:var(--s2); }
+  .nc { background:var(--surface); border:1px solid var(--hair); border-radius:2px; padding:var(--s3) var(--s3) var(--s2); display:flex; flex-direction:column; gap:var(--s1); }
+  .nc .v { font-family:var(--font-mono); font-variant-numeric:tabular-nums; font-size:1.15rem; font-weight:600; line-height:1.3; color:var(--accent); }
+  .nc .d { font-size:.8rem; color:var(--muted); line-height:1.6; }
+  .nums.masked .v { color:transparent; background:var(--rule); border-radius:2px; user-select:none; }
+  .nums.masked .nc:hover .v, .nums.masked .nc:focus-within .v { color:var(--accent); background:transparent; }
+  .nc:focus-visible { outline:2px solid var(--accent); outline-offset:2px; }
+  .masthead-note { font-size:.78rem; color:var(--muted); margin-bottom:var(--s2); }
+
+  footer { grid-column:1/-1; margin-top:var(--s6); padding-top:var(--s3); border-top:1px solid var(--rule); font-size:.8rem; color:var(--muted); }
+  footer ul { list-style:none; padding:0; }
+  footer li { margin-bottom:var(--s1); }
+
+  @media (prefers-reduced-motion: reduce){ *{ transition:none !important; animation:none !important; scroll-behavior:auto !important; } }
+  html { scroll-behavior:smooth; }
+  .eyebrow a { color:var(--accent); text-decoration:none; }
+  .eyebrow a:hover { text-decoration:underline; text-underline-offset:.2em; }
+  nav.rail a.home { border-left:none; padding:0 0 var(--s2); color:var(--accent);
+    font-family:var(--font-mono); font-size:.72rem; letter-spacing:.1em; }
+  nav.rail a.home:hover { color:var(--accent); text-decoration:underline; text-underline-offset:.2em; }
+</style>
+
+<div class="wrap">
+
+  <header class="masthead">
+    <div>
+      <div class="eyebrow"><a href="../index.html">← 総目次</a> &nbsp;/&nbsp; 02 宅建業法 &nbsp;/&nbsp; 宅建士試験 2026年度</div>
+      <h1>横断早見表</h1>
+      <ul class="facts">
+        <li>法令基準日 <b>2026-04-01</b></li>
+        <li>対象 <b>02 全20問</b></li>
+        <li>更新 <b>2026-08-09</b></li>
+      </ul>
+    </div>
+    <div class="toggles">
+      <button id="mask" type="button" aria-pressed="false">数値を隠す</button>
+      <button id="theme" type="button">配色切替</button>
+    </div>
+  </header>
+
+  <nav class="rail" aria-label="目次">
+    <a class="home" href="../index.html">← 総目次</a>
+    <h2>Contents</h2>
+    <ol>
+      <li><a href="#kaisei"><span class="num">00</span>2026年度の改正</a></li>
+      <li><a href="#menkyo-shi"><span class="num">01</span>免許 vs 宅建士</a></li>
+      <li><a href="#hoshou"><span class="num">02</span>営業保証金 vs 保証協会</a></li>
+      <li><a href="#shomen"><span class="num">03</span>3つの書面</a></li>
+      <li><a href="#kigen"><span class="num">04</span>期限の衝突</a></li>
+      <li><a href="#todokede"><span class="num">05</span>届出先の一覧</a></li>
+      <li><a href="#warai"><span class="num">06</span>割合の数字</a></li>
+      <li><a href="#gyoushakan"><span class="num">07</span>業者間取引で外れるもの</a></li>
+      <li><a href="#chokuzen"><span class="num">08</span>直前チェック</a></li>
+      <li><a href="#suji"><span class="num">09</span>数字まとめ</a></li>
+    </ol>
+    <div class="files">
+      <a href="../index.html">総目次</a>
+      <a href="免許制度.html">免許制度</a>
+      <a href="宅地建物取引士.html">宅地建物取引士</a>
+      <a href="営業保証金と保証協会.html">営業保証金と保証協会</a>
+      <a href="業務上の規制.html">業務上の規制</a>
+      <a href="35条書面.html">35条書面</a>
+      <a href="37条書面.html">37条書面</a>
+      <a href="8種制限.html">8種制限</a>
+      <a href="報酬額の制限.html">報酬額の制限</a>
+      <a href="監督処分と罰則.html">監督処分と罰則</a>
+      <a href="住宅瑕疵担保履行法.html">住宅瑕疵担保履行法</a>
+    </div>
+  </nav>
+
+  <main>
+
+    <!-- 00 -->
+    <section id="kaisei">
+      <h2 class="sec"><span class="num">00</span>2026年度の改正</h2>
+      <p class="lead">法令基準日は <em>2026年4月1日</em>。この日までに施行された改正が出題対象になる。<em>改正初年度の論点は狙われる</em>ので、まずここを確認する。</p>
+
+      <div class="scroll">
+        <table>
+          <thead><tr><th>改正</th><th class="n">施行</th><th>内容</th><th class="n">重要度</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><strong>管理業者管理者方式の説明義務化</strong></td>
+              <td class="n no">2026/4/1</td>
+              <td>区分所有建物の<strong>売買・交換</strong>の重要事項説明に、管理者等が管理業者であるか否かの説明が追加。<span class="no">貸借は対象外</span></td>
+              <td class="n no">★★★</td>
+            </tr>
+            <tr>
+              <td><strong>拘禁刑への一本化</strong></td>
+              <td class="n">2025/6/1</td>
+              <td>欠格要件・登録欠格・罰則の「懲役」がすべて「<strong>拘禁刑</strong>」に。制度の中身は変わらない</td>
+              <td class="n">★★☆</td>
+            </tr>
+            <tr>
+              <td><strong>従業者名簿の記載事項の削減</strong></td>
+              <td class="n">2025/4/1</td>
+              <td>生年月日・住所・性別が<strong>削除</strong>された</td>
+              <td class="n">★☆☆</td>
+            </tr>
+            <tr>
+              <td><strong>囲い込み防止</strong></td>
+              <td class="n">2025/1/1</td>
+              <td>レインズへの<strong>取引状況の登録</strong>が義務化。虚偽登録は指示処分等の対象</td>
+              <td class="n">★★☆</td>
+            </tr>
+            <tr>
+              <td><strong>低廉な空家等の報酬特例</strong></td>
+              <td class="n">2024/7/1</td>
+              <td>対象が800万円以下に拡大、上限 <strong>33万円</strong>（代理66万円）。長期の空家等の貸借は貸主から <strong>2.2か月分</strong></td>
+              <td class="n">★★☆</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 01 -->
+    <section id="menkyo-shi">
+      <h2 class="sec"><span class="num">01</span>免許 vs 宅建士</h2>
+
+      <div class="scroll">
+        <table class="vs">
+          <thead><tr><th>項目</th><th>宅建業者（免許）</th><th>宅地建物取引士（登録）</th></tr></thead>
+          <tbody>
+            <tr><td>相手方</td><td>大臣または知事（事務所の所在）</td><td>知事のみ（合格した都道府県）</td></tr>
+            <tr><td>有効期間</td><td>免許 <strong>5年</strong></td><td>登録は<strong>無期限</strong>／宅建士証は <strong>5年</strong></td></tr>
+            <tr><td><strong>変更があったとき</strong></td><td>変更の届出 <strong>30日以内</strong></td><td class="no">変更の登録 <strong>遅滞なく</strong></td></tr>
+            <tr><td>住所の変更</td><td class="no">専任宅建士の住所は<strong>届出不要</strong></td><td class="no">本人の住所は<strong>変更の登録が必要</strong></td></tr>
+            <tr><td>破産したとき</td><td class="no"><strong>破産管財人</strong>が30日以内</td><td class="no"><strong>本人</strong>が30日以内</td></tr>
+            <tr><td>死亡したとき</td><td colspan="2">相続人が<strong>知った日</strong>から30日以内</td></tr>
+            <tr><td>所在を移すとき</td><td><strong>免許換え</strong>（義務）／新免許は <strong>5年</strong></td><td><strong>登録の移転</strong>（任意）／宅建士証は <strong>残存期間</strong></td></tr>
+            <tr><td>処分の3段階</td><td>指示 → 業務停止（1年以内）→ 免許取消</td><td>指示 → 事務禁止（1年以内）→ 登録消除</td></tr>
+            <tr><td>いちばん重い処分</td><td colspan="2" class="no">免許・登録を<strong>与えた者だけ</strong>ができる</td></tr>
+            <tr><td>処分の公告</td><td>業務停止・免許取消しは<strong>公告する</strong></td><td class="no">3つとも<strong>公告されない</strong></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 02 -->
+    <section id="hoshou">
+      <h2 class="sec"><span class="num">02</span>営業保証金 vs 保証協会</h2>
+
+      <div class="scroll">
+        <table class="vs">
+          <thead><tr><th>項目</th><th>営業保証金</th><th>保証協会</th></tr></thead>
+          <tbody>
+            <tr><td>金額</td><td>本店 <strong>1,000万円</strong>／支店 <strong>500万円</strong></td><td>本店 <strong>60万円</strong>／支店 <strong>30万円</strong></td></tr>
+            <tr><td>納める物</td><td>金銭または有価証券</td><td class="no">分担金は<strong>金銭のみ</strong></td></tr>
+            <tr><td>誰が供託するか</td><td>宅建業者</td><td class="no"><strong>保証協会</strong>（納付から1週間以内）</td></tr>
+            <tr><td><strong>事業開始</strong></td><td class="no">供託 → <strong>届出後</strong></td><td class="no"><strong>社員となった時</strong></td></tr>
+            <tr><td><strong>事務所を新設</strong></td><td>供託・届出まで営業できない</td><td class="no">先に営業でき、<strong>2週間以内</strong>に納付</td></tr>
+            <tr><td>還付の手続</td><td>供託所に直接</td><td class="no">協会の<strong>認証</strong>が必要</td></tr>
+            <tr><td>穴埋め</td><td>通知から2週間以内に供託 → 供託から2週間以内に届出</td><td>通知から2週間以内に<strong>還付充当金</strong></td></tr>
+            <tr><td>怠った場合</td><td>業務停止・免許取消しの対象</td><td class="no"><strong>社員の地位を失う</strong>（1週間以内に営業保証金）</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 03 -->
+    <section id="shomen">
+      <h2 class="sec"><span class="num">03</span>3つの書面</h2>
+      <p class="lead">媒介契約書面・35条書面・37条書面。<em>誰が記名するか、押印が要るか</em>が入れ替えられる。</p>
+
+      <div class="scroll">
+        <table>
+          <thead><tr><th>項目</th><th>媒介契約書面<br><span class="src">34条の2</span></th><th>35条書面<br><span class="src">重要事項説明</span></th><th>37条書面<br><span class="src">契約書面</span></th></tr></thead>
+          <tbody>
+            <tr><td><strong>記名するのは</strong></td><td class="no">宅建業者</td><td>宅建士</td><td>宅建士</td></tr>
+            <tr><td><strong>押印</strong></td><td class="no">必要</td><td class="tri">不要（2022年廃止）</td><td class="tri">不要（2022年廃止）</td></tr>
+            <tr><td>交付の相手</td><td>依頼者</td><td class="no">取得者・借主のみ</td><td class="no">両当事者</td></tr>
+            <tr><td>時期</td><td>媒介契約の締結後、遅滞なく</td><td>契約が成立するまで</td><td>契約成立後、遅滞なく</td></tr>
+            <tr><td>説明義務</td><td>なし</td><td class="no">あり（宅建士が説明）</td><td class="no">なし</td></tr>
+            <tr><td>宅建士証の提示</td><td>—</td><td class="no">請求がなくても必要</td><td class="tri">不要</td></tr>
+            <tr><td><strong>相手が業者のとき</strong></td><td>—</td><td>説明は不要（交付は必要）</td><td class="no">交付を省略できない</td></tr>
+            <tr><td>電磁的方法</td><td colspan="3">いずれも相手方（依頼者）の<strong>承諾</strong>があれば可</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="call tip">
+        <span class="tag">覚え方</span>
+        <p><strong>「業者が押す媒介、士が名を書く35・37」。</strong>媒介契約書面だけが宅建業者の記名押印で、押印が残っている唯一の書面。</p>
+      </div>
+
+      <h3>3-1　35条と37条の切り分け</h3>
+      <div class="scroll">
+        <table>
+          <thead><tr><th>事項</th><th class="n">35条</th><th class="n">37条</th></tr></thead>
+          <tbody>
+            <tr><td><strong>代金・借賃の額、支払時期・方法</strong></td><td class="n no">✕</td><td class="n">○ 必要的</td></tr>
+            <tr><td><strong>引渡しの時期</strong></td><td class="n no">✕</td><td class="n">○ 必要的</td></tr>
+            <tr><td><strong>移転登記の申請の時期</strong></td><td class="n no">✕</td><td class="n">○ 必要的</td></tr>
+            <tr><td><strong>危険負担・租税公課の負担</strong></td><td class="n no">✕</td><td class="n">○ 任意的</td></tr>
+            <tr><td>契約不適合責任の<strong>内容</strong></td><td class="n no">✕</td><td class="n">○ 任意的</td></tr>
+            <tr><td>契約不適合責任の<strong>履行を確保する措置</strong></td><td class="n">○</td><td class="n">○</td></tr>
+            <tr><td><strong>登記された権利・法令上の制限・インフラ・ハザードマップ</strong></td><td class="n">○</td><td class="n no">✕</td></tr>
+            <tr><td><strong>手付金等の保全措置</strong>の概要</td><td class="n">○</td><td class="n no">✕</td></tr>
+            <tr><td>建物状況調査の実施の有無・結果</td><td class="n">○</td><td class="n no">✕</td></tr>
+            <tr><td>構造耐力上主要な部分等について<strong>当事者双方が確認した事項</strong></td><td class="n no">✕</td><td class="n">○ 必要的</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="call tip">
+        <span class="tag">覚え方</span>
+        <p><strong>「調べて教えること」は35条、「合意して決めたこと」は37条。</strong></p>
+      </div>
+    </section>
+
+    <!-- 04 -->
+    <section id="kigen">
+      <h2 class="sec"><span class="num">04</span>期限の衝突</h2>
+      <p>同じ数字が別の場面で使われる。<strong>数字から論点を引ける</strong>状態にしておく。</p>
+
+      <div class="scroll">
+        <table class="kigen">
+          <thead><tr><th class="n">数字</th><th>意味</th><th class="n">出典</th></tr></thead>
+          <tbody>
+            <tr><td rowspan="2">遅滞なく</td><td>宅建士の<strong>変更の登録</strong></td><td class="n src">宅建士</td></tr>
+            <tr><td>媒介契約書面・37条書面の交付／登録済証の引渡し</td><td class="n src">業務／37条</td></tr>
+            <tr><td rowspan="3">2週間</td><td>専任の宅建士が不足したときの補充</td><td class="n src">宅建士</td></tr>
+            <tr><td>営業保証金の不足額の供託／その届出／還付充当金の納付</td><td class="n src">保証金</td></tr>
+            <tr><td>保証協会の社員が事務所を新設したときの分担金の納付</td><td class="n src">保証協会</td></tr>
+            <tr><td rowspan="2">1週間</td><td>協会が分担金を受けてから供託するまで／社員の地位喪失後の営業保証金</td><td class="n src">保証協会</td></tr>
+            <tr><td>専属専任媒介の業務処理状況の報告</td><td class="n src">媒介</td></tr>
+            <tr><td>3週間</td><td>住宅瑕疵担保履行法の<strong>基準日からの届出</strong></td><td class="n src">履行法</td></tr>
+            <tr><td>5日 / 7日</td><td>指定流通機構への登録（専属専任／専任）※休業日を除く</td><td class="n src">媒介</td></tr>
+            <tr><td>8日</td><td><strong>クーリング・オフ</strong>（書面で告げられた日から）</td><td class="n src">8種制限</td></tr>
+            <tr><td>10日前</td><td>案内所等の<strong>届出</strong>（免許権者と所在地の知事へ）</td><td class="n src">業務</td></tr>
+            <tr><td>30日</td><td>変更の届出／廃業等の届出／死亡等の届出／割賦販売の催告期間</td><td class="n src">免許ほか</td></tr>
+            <tr><td>50日</td><td>住宅瑕疵担保履行法 — 基準日の<strong>翌日</strong>から。契約締結が禁止される</td><td class="n src">履行法</td></tr>
+            <tr><td>3か月</td><td>専任・専属専任媒介契約の有効期間の上限</td><td class="n src">媒介</td></tr>
+            <tr><td>3か月 → 1か月</td><td>営業保証金の供託の届出がない場合の催告と免許取消し</td><td class="n src">保証金</td></tr>
+            <tr><td>6月</td><td>宅建士証の交付前に受ける法定講習</td><td class="n src">宅建士</td></tr>
+            <tr><td>1年</td><td>業務停止・事務禁止の上限／事業の不開始・休止による免許取消し／合格から宅建士証交付で法定講習が不要になる期間</td><td class="n src">複数</td></tr>
+            <tr><td>2年</td><td>登録に必要な実務経験／契約不適合責任の通知期間の特約（引渡しから）</td><td class="n src">宅建士／8種</td></tr>
+            <tr><td>5年</td><td>免許・宅建士証の有効期間／欠格要件の期間</td><td class="n src">免許／宅建士</td></tr>
+            <tr><td>10年</td><td>従業者名簿の保存／品確法の瑕疵担保責任／自ら売主の新築住宅に係る帳簿</td><td class="n src">複数</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="call trap">
+        <span class="tag">ひっかけ</span>
+        <p><strong>「1年」が5か所、「2週間」が3か所、「30日」が4か所ある。</strong>数字だけを覚えると取り違えるので、必ず「何の」1年かとセットで記憶する。<br>
+        とくに<strong>変更の届出（業者・30日）と変更の登録（宅建士・遅滞なく）</strong>は毎年のように入れ替えられる。</p>
+      </div>
+    </section>
+
+    <!-- 05 -->
+    <section id="todokede">
+      <h2 class="sec"><span class="num">05</span>届出先の一覧</h2>
+
+      <div class="scroll">
+        <table>
+          <thead><tr><th>場面</th><th>届出・申請の相手</th><th class="n">期限</th></tr></thead>
+          <tbody>
+            <tr><td>宅建業者名簿の変更</td><td>免許権者</td><td class="n">30日以内</td></tr>
+            <tr><td>廃業等</td><td>免許権者</td><td class="n">30日以内</td></tr>
+            <tr><td>営業保証金の供託</td><td>免許権者に届出</td><td class="n">事業開始前</td></tr>
+            <tr><td class="no"><strong>案内所等の設置</strong></td><td class="no">免許権者 <strong>および</strong> 案内所の所在地の知事</td><td class="n no">10日前まで</td></tr>
+            <tr><td>宅建士の変更の登録</td><td>登録をしている知事</td><td class="n">遅滞なく</td></tr>
+            <tr><td>宅建士の死亡等</td><td>登録をしている知事</td><td class="n">30日以内</td></tr>
+            <tr><td class="no"><strong>登録の移転</strong></td><td class="no">現在の登録先の知事を<strong>経由</strong>して移転先の知事へ</td><td class="n">任意</td></tr>
+            <tr><td>資力確保措置の状況</td><td>免許権者</td><td class="n">基準日から3週間以内</td></tr>
+            <tr><td>大臣免許の申請</td><td>主たる事務所の所在地の知事を<strong>経由</strong></td><td class="n">—</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 06 -->
+    <section id="warai">
+      <h2 class="sec"><span class="num">06</span>割合の数字</h2>
+
+      <figure class="plate">
+        <svg viewBox="0 0 720 200" role="img" aria-label="割合の数字の一覧。5分の1が業務停止に関係せず、10分の2が手付と損害賠償額の予定、10分の3が所有権留保、5パーセントと10パーセントが手付金等の保全措置、5人に1人が専任の宅建士。">
+          <rect x="24" y="34" width="212" height="70" class="svg-accfill" rx="2"/>
+          <text x="130" y="62" text-anchor="middle" class="big" fill="var(--accent)">2/10</text>
+          <text x="130" y="84" text-anchor="middle" class="lbl">手付の額の上限</text>
+          <text x="130" y="98" text-anchor="middle" class="lbl">損害賠償額の予定＋違約金</text>
+
+          <rect x="254" y="34" width="212" height="70" class="svg-accfill" rx="2"/>
+          <text x="360" y="62" text-anchor="middle" class="big" fill="var(--accent)">3/10</text>
+          <text x="360" y="84" text-anchor="middle" class="lbl">所有権留保が許される限度</text>
+          <text x="360" y="98" text-anchor="middle" class="lbl">これを超えたら登記を移す</text>
+
+          <rect x="484" y="34" width="212" height="70" class="svg-bluefill" rx="2"/>
+          <text x="590" y="62" text-anchor="middle" class="big" fill="var(--blue)">5% / 10%</text>
+          <text x="590" y="84" text-anchor="middle" class="lbl">手付金等の保全措置</text>
+          <text x="590" y="98" text-anchor="middle" class="lbl">未完成／完成</text>
+
+          <rect x="24" y="118" width="212" height="66" class="svg-fill" rx="2"/>
+          <text x="130" y="146" text-anchor="middle" class="big">5人に1人</text>
+          <text x="130" y="168" text-anchor="middle" class="lbl">事務所の専任の宅建士</text>
+
+          <rect x="254" y="118" width="212" height="66" class="svg-fill" rx="2"/>
+          <text x="360" y="146" text-anchor="middle" class="big">2倍</text>
+          <text x="360" y="168" text-anchor="middle" class="lbl">代理の報酬／取引全体の上限</text>
+
+          <rect x="484" y="118" width="212" height="66" class="svg-fill" rx="2"/>
+          <text x="590" y="146" text-anchor="middle" class="big">0.55 / 1.1</text>
+          <text x="590" y="168" text-anchor="middle" class="lbl">貸借の報酬（一方／双方合計）</text>
+        </svg>
+        <figcaption>Fig.1 — 割合はこの6つ</figcaption>
+      </figure>
+    </section>
+
+    <!-- 07 -->
+    <section id="gyoushakan">
+      <h2 class="sec"><span class="num">07</span>業者間取引で外れるもの</h2>
+      <p class="lead">「買主が宅建業者である」と書かれたら、<em>何が外れて何が残るか</em>を即答できるようにする。</p>
+
+      <div class="scroll">
+        <table>
+          <thead><tr><th>制度</th><th class="n">業者間取引</th></tr></thead>
+          <tbody>
+            <tr><td><strong>8種制限</strong>（クーリング・オフ、手付の額、保全措置ほか8つ）</td><td class="n no">すべて適用されない</td></tr>
+            <tr><td><strong>住宅瑕疵担保履行法</strong>の資力確保措置</td><td class="n no">適用されない</td></tr>
+            <tr><td><strong>35条書面の説明</strong></td><td class="n no">不要（<strong>交付は必要</strong>）</td></tr>
+            <tr><td>供託所等の説明</td><td class="n no">不要</td></tr>
+            <tr><td><strong>37条書面の交付</strong></td><td class="n tri">必要（省略できない）</td></tr>
+            <tr><td>報酬額の制限</td><td class="n tri">適用される</td></tr>
+            <tr><td>誇大広告等の禁止・広告開始時期の制限</td><td class="n tri">適用される</td></tr>
+            <tr><td>媒介契約の規制</td><td class="n tri">適用される</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="call tip">
+        <span class="tag">覚え方</span>
+        <p><strong>外れるのは「素人を守るための制度」だけ。</strong>8種制限・履行法・35条の説明・供託所の説明の4つ。<br>
+        <strong>証拠として残す37条書面と、業界秩序のための報酬・広告規制は外れない。</strong></p>
+      </div>
+    </section>
+
+    <!-- 08 -->
+    <section id="chokuzen">
+      <h2 class="sec"><span class="num">08</span>直前チェック</h2>
+      <p>試験前日にここだけ見る。20問中18問を取るための最終確認。</p>
+
+      <div class="scroll">
+        <table>
+          <thead><tr><th>分野</th><th class="n">問数</th><th>これだけは落とせない</th></tr></thead>
+          <tbody>
+            <tr><td><a href="免許制度.html">免許制度</a></td><td class="n">3</td><td>自ら貸借は免許不要／用途地域内は宅地／欠格は拘禁刑以上5年・破産は復権で直ちに／廃業等の届出義務者と失効時期</td></tr>
+            <tr><td><a href="宅地建物取引士.html">宅地建物取引士</a></td><td class="n">2</td><td>変更の登録は遅滞なく／登録の移転は任意・残存期間／法定講習6月以内・合格1年以内は不要／士証は返納と提出</td></tr>
+            <tr><td><a href="営業保証金と保証協会.html">営業保証金・保証協会</a></td><td class="n">2</td><td>1,000万/500万 と 60万/30万／事業開始の時期／事務所新設の扱いが真逆／認証</td></tr>
+            <tr><td><a href="業務上の規制.html">業務上の規制</a></td><td class="n">3</td><td>媒介3類型（7日/5日・2週/1週・3か月）／広告は全面禁止・契約は貸借のみ可／取引状況の登録</td></tr>
+            <tr><td><a href="35条書面.html">35条書面</a></td><td class="n">2〜3</td><td>売買・建物貸借・宅地貸借の振り分け／区分所有は貸借だけ2項目／<span class="no">管理業者管理者方式は売買のみ</span></td></tr>
+            <tr><td><a href="37条書面.html">37条書面</a></td><td class="n">1〜2</td><td>両当事者に交付・説明不要・業者間でも省略不可／代金・引渡し・移転登記は必要的</td></tr>
+            <tr><td><a href="8種制限.html">8種制限</a></td><td class="n">3</td><td>自ら売主かつ買主が非業者／保全措置5%・10%・1,000万円／クーリング・オフの場所と8日／手付2/10・解約手付</td></tr>
+            <tr><td><a href="報酬額の制限.html">報酬額の制限</a></td><td class="n">1</td><td>税抜化→速算式→1.1／取引全体で2倍／貸借1.1か月・居住用0.55／空家等33万円</td></tr>
+            <tr><td><a href="監督処分と罰則.html">監督処分と罰則</a></td><td class="n">1</td><td>免許取消し・登録消除は元締めのみ／任意的取消しは3つ／指示処分は公告しない</td></tr>
+            <tr><td><a href="住宅瑕疵担保履行法.html">住宅瑕疵担保履行法</a></td><td class="n">1</td><td>基準日3月31日・届出3週間・翌日から50日／新築住宅は未入居かつ1年以内／2,000万円以上</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 09 -->
+    <section id="suji">
+      <h2 class="sec"><span class="num">09</span>数字まとめ</h2>
+      <p class="masthead-note">02 全体で衝突しやすい数字だけを集めた。右上の「数値を隠す」で自己テストできる。</p>
+      <div class="nums" id="numgrid">
+        <div class="nc" tabindex="0"><span class="v">30日以内 / 遅滞なく</span><span class="d">業者の変更の届出／宅建士の変更の登録</span></div>
+        <div class="nc" tabindex="0"><span class="v">破産管財人 / 本人</span><span class="d">破産したときの届出義務者（業者／宅建士）</span></div>
+        <div class="nc" tabindex="0"><span class="v">5年 / 残存期間</span><span class="d">免許換え後の免許／登録の移転後の宅建士証</span></div>
+        <div class="nc" tabindex="0"><span class="v">1,000万 / 500万</span><span class="d">営業保証金（本店／支店）</span></div>
+        <div class="nc" tabindex="0"><span class="v">60万 / 30万</span><span class="d">弁済業務保証金分担金（本店／支店）</span></div>
+        <div class="nc" tabindex="0"><span class="v">7日 / 5日</span><span class="d">レインズへの登録（専任／専属専任）</span></div>
+        <div class="nc" tabindex="0"><span class="v">2週間 / 1週間</span><span class="d">業務処理状況の報告（専任／専属専任）</span></div>
+        <div class="nc" tabindex="0"><span class="v">8日</span><span class="d">クーリング・オフ（書面で告げられた日から）</span></div>
+        <div class="nc" tabindex="0"><span class="v">5% / 10%</span><span class="d">手付金等の保全措置（未完成／完成）</span></div>
+        <div class="nc" tabindex="0"><span class="v">2/10 / 3/10</span><span class="d">手付・損害賠償額の予定／所有権留保</span></div>
+        <div class="nc" tabindex="0"><span class="v">33万円 / 66万円</span><span class="d">低廉な空家等の媒介／代理（税込）</span></div>
+        <div class="nc" tabindex="0"><span class="v">3月31日 / 50日</span><span class="d">住宅瑕疵担保履行法の基準日／契約禁止までの日数</span></div>
+        <div class="nc" tabindex="0"><span class="v">1億円</span><span class="d">法人重科の対象となる5つの行為</span></div>
+        <div class="nc" tabindex="0"><span class="v">10万円以下</span><span class="d">宅建士証の不提示・返納義務違反（過料）</span></div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <h4>出典</h4>
+    <ul>
+      <li>宅地建物取引業法（昭和27年法律第176号）／同施行令・施行規則 — <a href="https://laws.e-gov.go.jp/law/327AC1000000176">e-Gov法令検索</a></li>
+      <li>特定住宅瑕疵担保責任の履行の確保等に関する法律 — <a href="https://laws.e-gov.go.jp/law/419AC0000000066">e-Gov法令検索</a></li>
+      <li>国土交通省 不動産業（宅地建物取引業法） — <a href="https://www.mlit.go.jp/totikensangyo/const/1_6_bf_000030.html">mlit.go.jp</a></li>
+      <li>令和8年度宅建試験に関係する宅地建物取引業法改正 — <a href="https://yotsuyagakuin-tsushin.com/blog_takkenshiken/r8_takkengyoho_kaisei/">四谷学院</a></li>
+    </ul>
+  </footer>
+
+</div>
+
+<script>
+  (function () {
+    var root = document.documentElement;
+    document.getElementById('theme').addEventListener('click', function () {
+      if (root.getAttribute('data-theme')) { root.removeAttribute('data-theme'); return; }
+      var dark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      root.setAttribute('data-theme', dark ? 'light' : 'dark');
+    });
+    var maskBtn = document.getElementById('mask');
+    var grid = document.getElementById('numgrid');
+    maskBtn.addEventListener('click', function () {
+      var on = grid.classList.toggle('masked');
+      maskBtn.setAttribute('aria-pressed', String(on));
+      maskBtn.textContent = on ? '数値を表示' : '数値を隠す';
+    });
+    var links = Array.prototype.slice.call(document.querySelectorAll('nav.rail ol a'));
+    var map = {};
+    links.forEach(function (a) { map[a.getAttribute('href').slice(1)] = a; });
+    var seen = [];
+    var obs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        var i = seen.indexOf(e.target.id);
+        if (e.isIntersecting && i < 0) seen.push(e.target.id);
+        if (!e.isIntersecting && i >= 0) seen.splice(i, 1);
+      });
+      links.forEach(function (a) { a.classList.remove('on'); });
+      if (seen.length) {
+        var order = Object.keys(map);
+        seen.sort(function (a, b) { return order.indexOf(a) - order.indexOf(b); });
+        map[seen[0]].classList.add('on');
+      }
+    }, { rootMargin: '-10% 0px -70% 0px' });
+    document.querySelectorAll('main section').forEach(function (s) { obs.observe(s); });
+  })();
+</script>

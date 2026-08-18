@@ -1,0 +1,615 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>監督処分と罰則 — 宅建士試験 2026年度</title>
+
+<style>
+  :root {
+    --paper:#EBEDE9; --surface:#F8F9F6; --sunk:#E1E4DE; --ink:#151F2A; --muted:#5D6B78;
+    --rule:#CDD2CB; --hair:#DCE0D9; --accent:#B8342A; --accent-soft:#F3DEDB;
+    --blue:#2A5F86; --blue-soft:#DCE6EE;
+    --font-display:"Hiragino Mincho ProN","Yu Mincho","YuMincho","Noto Serif JP",serif;
+    --font-body:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","YuGothic","Noto Sans JP",system-ui,sans-serif;
+    --font-mono:ui-monospace,"SFMono-Regular","SF Mono",Menlo,Consolas,monospace;
+    --measure:68ch;
+    --s1:.35rem; --s2:.7rem; --s3:1.1rem; --s4:1.7rem; --s5:2.6rem; --s6:4rem;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper:#0D1B29; --surface:#132534; --sunk:#0A1622; --ink:#DAE4EC; --muted:#8CA1B3;
+      --rule:#26415A; --hair:#1D3448; --accent:#FF7059; --accent-soft:#3A1F1D;
+      --blue:#6FB6DC; --blue-soft:#14293A;
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper:#0D1B29; --surface:#132534; --sunk:#0A1622; --ink:#DAE4EC; --muted:#8CA1B3;
+    --rule:#26415A; --hair:#1D3448; --accent:#FF7059; --accent-soft:#3A1F1D;
+    --blue:#6FB6DC; --blue-soft:#14293A;
+  }
+
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--paper); color:var(--ink); font-family:var(--font-body);
+    font-size:16px; line-height:1.9; -webkit-font-smoothing:antialiased; font-feature-settings:"palt" 1; }
+
+  .wrap { display:grid; grid-template-columns:15.5rem minmax(0,1fr); gap:var(--s6);
+    max-width:80rem; margin:0 auto; padding:0 var(--s4) var(--s6); align-items:start; }
+  @media (max-width:60rem){ .wrap{ grid-template-columns:minmax(0,1fr); gap:var(--s4); padding:0 var(--s3) var(--s5);} }
+
+  .masthead { grid-column:1/-1; padding:var(--s5) 0 var(--s4); border-bottom:2px solid var(--ink);
+    margin-bottom:var(--s2); display:flex; flex-wrap:wrap; align-items:flex-end; justify-content:space-between; gap:var(--s3); }
+  .eyebrow { font-family:var(--font-mono); font-size:.72rem; letter-spacing:.16em; text-transform:uppercase;
+    color:var(--muted); display:flex; align-items:center; gap:.6em; }
+  .eyebrow::before { content:""; width:2.2rem; height:1px; background:var(--accent); }
+  h1 { font-family:var(--font-display); font-weight:600; font-size:clamp(2rem,1.4rem + 2.6vw,3.1rem);
+    line-height:1.2; letter-spacing:.04em; margin:var(--s2) 0 var(--s3); text-wrap:balance; }
+  .facts { display:flex; flex-wrap:wrap; gap:0 var(--s3); font-size:.82rem; color:var(--muted); list-style:none; margin:0; padding:0; }
+  .facts b { font-family:var(--font-mono); font-variant-numeric:tabular-nums; color:var(--ink); font-weight:600; }
+  .toggles { display:flex; gap:var(--s1); }
+  button { font-family:var(--font-body); font-size:.78rem; color:var(--muted); background:var(--surface);
+    border:1px solid var(--rule); border-radius:2px; padding:.4em .9em; cursor:pointer; transition:color .15s,border-color .15s; }
+  button:hover { color:var(--ink); border-color:var(--ink); }
+  button:focus-visible { outline:2px solid var(--accent); outline-offset:2px; }
+  button[aria-pressed="true"] { color:var(--accent); border-color:var(--accent); }
+
+  nav.rail { position:sticky; top:var(--s3); font-size:.82rem; max-height:calc(100vh - 3rem); overflow-y:auto; padding-bottom:var(--s3); }
+  nav.rail h2 { font-family:var(--font-mono); font-size:.68rem; letter-spacing:.16em; text-transform:uppercase; color:var(--muted); margin:0 0 var(--s2); font-weight:500; }
+  nav.rail ol { list-style:none; margin:0; padding:0; display:flex; flex-direction:column; }
+  nav.rail a { display:block; padding:.3em 0 .3em .9em; color:var(--muted); text-decoration:none; border-left:2px solid var(--hair); line-height:1.5; }
+  nav.rail a:hover { color:var(--ink); border-left-color:var(--rule); }
+  nav.rail a.on { color:var(--ink); border-left-color:var(--accent); font-weight:600; }
+  nav.rail a .num { font-family:var(--font-mono); font-size:.72rem; color:var(--muted); margin-right:.5em; }
+  @media (max-width:60rem){
+    nav.rail{ position:static; max-height:none; border-bottom:1px solid var(--rule); padding-bottom:var(--s3); }
+    nav.rail ol{ display:grid; grid-template-columns:repeat(auto-fill,minmax(9rem,1fr)); gap:0 var(--s2); }
+  }
+
+  main { min-width:0; }
+  section { padding-top:var(--s5); scroll-margin-top:var(--s3); }
+  section > * { max-width:var(--measure); }
+  section > figure, section > .scroll { max-width:none; }
+
+  h2.sec { font-family:var(--font-display); font-size:clamp(1.45rem,1.2rem + .9vw,1.9rem); font-weight:600;
+    letter-spacing:.04em; margin:0 0 var(--s3); padding-bottom:var(--s2); border-bottom:1px solid var(--rule);
+    display:flex; align-items:baseline; gap:.7em; max-width:none; }
+  h2.sec .num { font-family:var(--font-mono); font-size:.8rem; letter-spacing:.1em; color:var(--accent); font-weight:500; }
+  h3 { font-family:var(--font-body); font-size:1.06rem; font-weight:700; letter-spacing:.02em;
+    margin:var(--s4) 0 var(--s2); padding-left:.7em; border-left:3px solid var(--ink); }
+  p { margin:0 0 var(--s3); }
+  a { color:var(--blue); text-underline-offset:.2em; }
+  em { font-style:normal; background:linear-gradient(transparent 62%, var(--accent-soft) 62%); font-weight:600; }
+  ul, ol { margin:0 0 var(--s3); padding-left:1.3em; }
+  li { margin-bottom:var(--s1); }
+  .lead { font-size:1.05rem; color:var(--muted); }
+
+  .call { max-width:var(--measure); margin:0 0 var(--s3); padding:var(--s3) var(--s3) var(--s3) var(--s4);
+    background:var(--surface); border:1px solid var(--hair); border-left:3px solid var(--rule); border-radius:2px; font-size:.94rem; }
+  .call > :last-child { margin-bottom:0; }
+  .call .tag { display:block; font-family:var(--font-mono); font-size:.68rem; letter-spacing:.16em; text-transform:uppercase; color:var(--muted); margin-bottom:var(--s1); }
+  .call.trap { border-left-color:var(--accent); background:var(--accent-soft); }
+  .call.trap .tag { color:var(--accent); }
+  .call.exam { border-left-color:var(--ink); }
+  .call.exam .tag { color:var(--ink); }
+  .call.rev { border-left-color:var(--accent); }
+  .call.rev .tag { color:var(--accent); }
+  .call.tip { border-left-color:var(--blue); background:var(--blue-soft); }
+  .call.tip .tag { color:var(--blue); }
+
+  .scroll { overflow-x:auto; margin:0 0 var(--s3); -webkit-overflow-scrolling:touch; }
+  table { border-collapse:collapse; width:100%; font-size:.88rem; line-height:1.6; }
+  caption { text-align:left; font-size:.78rem; color:var(--muted); padding-bottom:var(--s1); font-family:var(--font-mono); letter-spacing:.08em; }
+  th, td { padding:.58em .75em; text-align:left; vertical-align:top; border-bottom:1px solid var(--hair); }
+  thead th { font-size:.74rem; letter-spacing:.08em; color:var(--muted); font-weight:600; border-bottom:1px solid var(--ink); }
+  tbody tr:hover { background:var(--surface); }
+  td.n, th.n { text-align:center; font-family:var(--font-mono); font-variant-numeric:tabular-nums; white-space:nowrap; }
+  .no { color:var(--accent); font-weight:700; }
+  .yes { color:var(--muted); }
+  .tri { color:var(--blue); }
+  table.vs thead th:nth-child(2) { color:var(--ink); font-size:.9rem; }
+  table.vs thead th:nth-child(3) { color:var(--accent); font-size:.9rem; }
+  table.vs tbody td:first-child { white-space:nowrap; font-weight:600; }
+  table.batsu tbody td:first-child { font-family:var(--font-mono); color:var(--accent); font-weight:600; white-space:nowrap; }
+
+  figure { margin:0 0 var(--s4); }
+  figure svg { display:block; width:100%; height:auto; }
+  figcaption { font-size:.78rem; color:var(--muted); font-family:var(--font-mono); letter-spacing:.06em; margin-top:var(--s2); padding-top:var(--s1); border-top:1px solid var(--hair); }
+  .plate { background:var(--surface); border:1px solid var(--hair); border-radius:2px; padding:var(--s3); }
+  .svg-ink { fill:none; stroke:var(--ink); stroke-width:1.4; }
+  .svg-hair { fill:none; stroke:var(--rule); stroke-width:1; }
+  .svg-dim { fill:none; stroke:var(--blue); stroke-width:1; }
+  .svg-acc { fill:none; stroke:var(--accent); stroke-width:1.6; }
+  .svg-fill { fill:var(--sunk); stroke:var(--rule); stroke-width:1; }
+  .svg-accfill { fill:var(--accent-soft); stroke:var(--accent); stroke-width:1.2; }
+  .svg-bluefill { fill:var(--blue-soft); stroke:var(--blue); stroke-width:1.2; }
+  text { font-family:var(--font-body); fill:var(--ink); font-size:12px; }
+  text.lbl { font-family:var(--font-mono); fill:var(--muted); font-size:10.5px; letter-spacing:.06em; }
+  text.dimt { font-family:var(--font-mono); fill:var(--blue); font-size:11px; }
+  text.acct { fill:var(--accent); font-size:11.5px; font-weight:700; }
+
+  .nums { display:grid; grid-template-columns:repeat(auto-fill,minmax(11.5rem,1fr)); gap:var(--s2); }
+  .nc { background:var(--surface); border:1px solid var(--hair); border-radius:2px; padding:var(--s3) var(--s3) var(--s2); display:flex; flex-direction:column; gap:var(--s1); }
+  .nc .v { font-family:var(--font-mono); font-variant-numeric:tabular-nums; font-size:1.2rem; font-weight:600; line-height:1.25; color:var(--accent); }
+  .nc .d { font-size:.8rem; color:var(--muted); line-height:1.6; }
+  .nums.masked .v { color:transparent; background:var(--rule); border-radius:2px; user-select:none; }
+  .nums.masked .nc:hover .v, .nums.masked .nc:focus-within .v { color:var(--accent); background:transparent; }
+  .nc:focus-visible { outline:2px solid var(--accent); outline-offset:2px; }
+  .masthead-note { font-size:.78rem; color:var(--muted); margin-bottom:var(--s2); }
+
+  table.traps td:first-child { color:var(--muted); }
+  table.traps td:first-child::before { content:"「"; }
+  table.traps td:first-child::after { content:"」"; }
+  table.traps td:last-child strong { color:var(--accent); }
+
+  footer { grid-column:1/-1; margin-top:var(--s6); padding-top:var(--s3); border-top:1px solid var(--rule); font-size:.8rem; color:var(--muted); }
+  footer ul { list-style:none; padding:0; }
+  footer li { margin-bottom:var(--s1); }
+  .sibling { display:flex; flex-wrap:wrap; gap:var(--s2); margin-top:var(--s3); }
+  .sibling a { font-size:.8rem; text-decoration:none; border:1px solid var(--rule); border-radius:2px; padding:.35em .8em; color:var(--muted); }
+  .sibling a:hover { color:var(--ink); border-color:var(--ink); }
+
+  @media (prefers-reduced-motion: reduce){ *{ transition:none !important; animation:none !important; scroll-behavior:auto !important; } }
+  html { scroll-behavior:smooth; }
+  .eyebrow a { color:var(--accent); text-decoration:none; }
+  .eyebrow a:hover { text-decoration:underline; text-underline-offset:.2em; }
+  nav.rail a.home { border-left:none; padding:0 0 var(--s2); color:var(--accent);
+    font-family:var(--font-mono); font-size:.72rem; letter-spacing:.1em; }
+  nav.rail a.home:hover { color:var(--accent); text-decoration:underline; text-underline-offset:.2em; }
+</style>
+
+<div class="wrap">
+
+  <header class="masthead">
+    <div>
+      <div class="eyebrow"><a href="../index.html">← 総目次</a> &nbsp;/&nbsp; 02 宅建業法 &nbsp;/&nbsp; 宅建士試験 2026年度</div>
+      <h1>監督処分と罰則</h1>
+      <ul class="facts">
+        <li>法令基準日 <b>2026-04-01</b></li>
+        <li>出題数 <b>1問</b></li>
+        <li>目標 <b>確実に1問</b></li>
+        <li>更新 <b>2026-08-09</b></li>
+      </ul>
+    </div>
+    <div class="toggles">
+      <button id="mask" type="button" aria-pressed="false">数値を隠す</button>
+      <button id="theme" type="button">配色切替</button>
+    </div>
+  </header>
+
+  <nav class="rail" aria-label="目次">
+    <a class="home" href="../index.html">← 総目次</a>
+    <h2>Contents</h2>
+    <ol>
+      <li><a href="#overview"><span class="num">00</span>3段階の処分</a></li>
+      <li><a href="#kengen"><span class="num">01</span>処分権者</a></li>
+      <li><a href="#gyousha"><span class="num">02</span>業者への処分事由</a></li>
+      <li><a href="#torikeshi"><span class="num">03</span>免許取消しの必要・任意</a></li>
+      <li><a href="#shi"><span class="num">04</span>宅建士への処分</a></li>
+      <li><a href="#choumon"><span class="num">05</span>聴聞と公告</a></li>
+      <li><a href="#batsu"><span class="num">06</span>罰則</a></li>
+      <li><a href="#deru"><span class="num">07</span>よく出る論点</a></li>
+      <li><a href="#hikkake"><span class="num">08</span>ひっかけ一覧</a></li>
+      <li><a href="#suji"><span class="num">09</span>数字まとめ</a></li>
+    </ol>
+  </nav>
+
+  <main>
+
+    <!-- 00 -->
+    <section id="overview">
+      <h2 class="sec"><span class="num">00</span>3段階の処分</h2>
+      <p class="lead">業者にも宅建士にも<em>軽い順に3段階</em>の処分がある。名前と重さが対応していることを押さえれば、大半の選択肢は判断できる。</p>
+
+      <figure class="plate">
+        <svg viewBox="0 0 720 230" role="img" aria-label="宅建業者は指示処分、1年以内の業務停止処分、免許取消処分の3段階。宅建士は指示処分、1年以内の事務禁止処分、登録消除処分の3段階。">
+          <text x="24" y="30" class="lbl">軽い</text>
+          <text x="696" y="30" text-anchor="end" class="lbl">重い</text>
+          <line x1="24" y1="40" x2="696" y2="40" class="svg-hair"/>
+          <path d="M688 36 L696 40 L688 44" class="svg-hair"/>
+
+          <text x="24" y="72" class="acct">宅地建物取引業者</text>
+          <rect x="180" y="54" width="150" height="52" class="svg-fill" rx="2"/>
+          <text x="255" y="78" text-anchor="middle">指示処分</text>
+          <text x="255" y="96" text-anchor="middle" class="lbl">是正を指示する</text>
+
+          <rect x="342" y="54" width="170" height="52" class="svg-accfill" rx="2"/>
+          <text x="427" y="78" text-anchor="middle">業務停止処分</text>
+          <text x="427" y="96" text-anchor="middle" class="acct">1年以内</text>
+
+          <rect x="524" y="54" width="170" height="52" class="svg-accfill" rx="2"/>
+          <text x="609" y="78" text-anchor="middle">免許取消処分</text>
+          <text x="609" y="96" text-anchor="middle" class="lbl">免許権者のみ</text>
+
+          <text x="24" y="156" class="dimt">宅地建物取引士</text>
+          <rect x="180" y="138" width="150" height="52" class="svg-fill" rx="2"/>
+          <text x="255" y="162" text-anchor="middle">指示処分</text>
+          <text x="255" y="180" text-anchor="middle" class="lbl">是正を指示する</text>
+
+          <rect x="342" y="138" width="170" height="52" class="svg-bluefill" rx="2"/>
+          <text x="427" y="162" text-anchor="middle">事務禁止処分</text>
+          <text x="427" y="180" text-anchor="middle" class="dimt">1年以内</text>
+
+          <rect x="524" y="138" width="170" height="52" class="svg-bluefill" rx="2"/>
+          <text x="609" y="162" text-anchor="middle">登録消除処分</text>
+          <text x="609" y="180" text-anchor="middle" class="lbl">登録した知事のみ</text>
+
+          <text x="24" y="216" class="lbl">真ん中の処分はどちらも「1年以内」。いちばん重い処分はどちらも「元締めの知事」しかできない</text>
+        </svg>
+        <figcaption>Fig.1 — 業者と宅建士で同じ構造になっている</figcaption>
+      </figure>
+    </section>
+
+    <!-- 01 -->
+    <section id="kengen">
+      <h2 class="sec"><span class="num">01</span>処分権者</h2>
+      <p class="lead">この分野の失点はほぼ<em>「誰が処分できるか」</em>で起きる。<em>いちばん重い処分だけは元締めしかできない</em>と覚える。</p>
+
+      <div class="scroll">
+        <table>
+          <caption>宅建業者に対する監督処分</caption>
+          <thead><tr><th>処分</th><th class="n">免許権者</th><th class="n">業務地を管轄する知事<br><span class="lbl">（免許権者以外）</span></th></tr></thead>
+          <tbody>
+            <tr><td>指示処分</td><td class="n">できる</td><td class="n tri">できる</td></tr>
+            <tr><td>業務停止処分</td><td class="n">できる</td><td class="n tri">できる</td></tr>
+            <tr><td><strong>免許取消処分</strong></td><td class="n">できる</td><td class="n no">できない</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="scroll">
+        <table>
+          <caption>宅地建物取引士に対する監督処分</caption>
+          <thead><tr><th>処分</th><th class="n">登録している知事</th><th class="n">事務を行う場所を<br>管轄する知事</th></tr></thead>
+          <tbody>
+            <tr><td>指示処分</td><td class="n">できる</td><td class="n tri">できる</td></tr>
+            <tr><td>事務禁止処分</td><td class="n">できる</td><td class="n tri">できる</td></tr>
+            <tr><td><strong>登録消除処分</strong></td><td class="n">できる</td><td class="n no">できない</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="call tip">
+        <span class="tag">覚え方</span>
+        <p><strong>「免許・登録を与えた者だけが、それを奪える」。</strong>他県で悪さをすればその県の知事も注意（指示）や営業の一時停止（業務停止・事務禁止）はできるが、免許や登録そのものを消せるのは出した本人だけ。</p>
+      </div>
+
+      <div class="call exam">
+        <span class="tag">よく出る</span>
+        <p>他県の知事が処分をしたときは、<strong>遅滞なくその旨を免許権者（登録をしている知事）に通知</strong>しなければならない。<br>
+        国土交通大臣が処分をしようとするときは、消費者保護に関するものについて<strong>あらかじめ内閣総理大臣に協議</strong>する。</p>
+      </div>
+    </section>
+
+    <!-- 02 -->
+    <section id="gyousha">
+      <h2 class="sec"><span class="num">02</span>業者への処分事由</h2>
+
+      <div class="scroll">
+        <table>
+          <thead><tr><th>処分</th><th>主な事由</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><strong>指示処分</strong></td>
+              <td>
+                業務に関し取引の関係者に<strong>損害を与えたとき</strong>、または損害を与えるおそれが大きいとき／取引の公正を害する行為をしたとき／<strong>他の法令に違反</strong>し宅建業者として不適当と認められるとき／<strong>宅建士が処分を受けた場合で業者の責めに帰すべき理由があるとき</strong>／宅建業法に違反したとき
+              </td>
+            </tr>
+            <tr>
+              <td><strong>業務停止処分</strong><br><span class="lbl">1年以内</span></td>
+              <td>
+                <strong>指示処分に従わないとき</strong>／名義貸しの禁止に違反／専任の宅建士の設置義務違反／媒介契約書面・35条書面・37条書面の交付義務違反／<strong>報酬額の制限に違反</strong>／業務に関する禁止事項に違反／<strong>8種制限に違反</strong>／営業保証金の供託の届出前に事業を開始
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="call trap">
+        <span class="tag">ひっかけ</span>
+        <p><strong>「他の法令に違反した場合」も処分の対象になる。</strong>宅建業法に違反していなくても、業務に関して他の法令に違反し宅建業者として不適当と認められれば指示処分を受ける。<br>
+        <strong>宅建士が処分を受けたことを理由に、業者が指示処分を受けることもある</strong>（業者の責めに帰すべき理由があるとき）。</p>
+      </div>
+    </section>
+
+    <!-- 03 -->
+    <section id="torikeshi">
+      <h2 class="sec"><span class="num">03</span>免許取消しの必要・任意</h2>
+      <p class="lead">「取り消さなければならない」と「取り消すことができる」の区別が問われる。<em>任意的取消しは3つだけ</em>なので、そちらを覚える。</p>
+
+      <div class="scroll">
+        <table class="vs">
+          <thead><tr><th></th><th>必要的取消し<br><span class="lbl">取り消さなければならない</span></th><th>任意的取消し<br><span class="lbl">取り消すことができる</span></th></tr></thead>
+          <tbody>
+            <tr>
+              <td>事由</td>
+              <td>
+                ・<strong>免許の欠格要件</strong>に該当するに至った（破産・拘禁刑以上・暴力団員等）<br>
+                ・<strong>免許換え</strong>が必要なのに新免許を受けていない<br>
+                ・免許を受けてから <strong>1年以内に事業を開始せず</strong>、または引き続き <strong>1年以上事業を休止</strong>した<br>
+                ・廃業等の届出がないのに廃業等の事実が判明した<br>
+                ・<strong>不正の手段</strong>により免許を受けた<br>
+                ・業務停止処分事由に該当し<strong>情状が特に重い</strong><br>
+                ・<strong>業務停止処分に違反</strong>した
+              </td>
+              <td>
+                ・免許に付した<strong>条件に違反</strong>した<br>
+                ・<strong>営業保証金</strong>の供託の届出をしない（催告到達から1か月）<br>
+                ・事務所の所在地または所在を<strong>確知できない</strong>（公告から30日）
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="call tip">
+        <span class="tag">覚え方</span>
+        <p>任意的取消しは<strong>「条件違反・供託しない・行方不明」の3つ</strong>。いずれも<strong>悪意があるとは限らない</strong>ケースなので、行政に裁量が残されている。<br>
+        逆に<strong>免許取消しの下3つ（不正取得・情状が特に重い・業務停止違反）は、免許の欠格要件でも5年間の期間が付く3つ</strong>と同じ顔ぶれ。セットで覚えると効率がよい。</p>
+      </div>
+    </section>
+
+    <!-- 04 -->
+    <section id="shi">
+      <h2 class="sec"><span class="num">04</span>宅建士への処分</h2>
+
+      <div class="scroll">
+        <table>
+          <thead><tr><th>処分</th><th>事由</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><strong>指示処分</strong></td>
+              <td>
+                ・自己が専任の宅建士として従事している事務所<strong>以外</strong>の事務所の専任の宅建士である旨の<strong>表示を許した</strong>とき<br>
+                ・<strong>他人に自己の名義の使用を許し</strong>、その他人が宅建士である旨の表示をしたとき<br>
+                ・宅建士の事務に関し<strong>不正または著しく不当な行為</strong>をしたとき
+              </td>
+            </tr>
+            <tr>
+              <td><strong>事務禁止処分</strong><br><span class="lbl">1年以内</span></td>
+              <td>指示処分の事由に該当し<strong>情状が重い</strong>とき／<strong>指示処分に従わない</strong>とき</td>
+            </tr>
+            <tr>
+              <td><strong>登録消除処分</strong><br><span class="lbl">すべて必要的</span></td>
+              <td>
+                ・登録の<strong>欠格事由</strong>に該当するに至ったとき<br>
+                ・<strong>不正の手段により登録</strong>を受けたとき<br>
+                ・<strong>不正の手段により宅建士証の交付</strong>を受けたとき<br>
+                ・事務禁止処分事由に該当し<strong>情状が特に重い</strong>とき<br>
+                ・<strong>事務禁止処分に違反</strong>したとき
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="call exam">
+        <span class="tag">よく出る</span>
+        <p><strong>登録消除処分に「任意的」はない。</strong>該当すれば必ず消除される。<br>
+        <strong>事務禁止処分を受けたら、速やかに宅建士証を交付を受けた知事に提出する。</strong>返納ではなく提出で、期間満了後に請求すれば返還される（→ <a href="宅地建物取引士.html#shou">宅建士証</a>）。</p>
+      </div>
+    </section>
+
+    <!-- 05 -->
+    <section id="choumon">
+      <h2 class="sec"><span class="num">05</span>聴聞と公告</h2>
+
+      <div class="scroll">
+        <table>
+          <thead><tr><th>処分</th><th class="n">聴聞</th><th class="n">公告</th></tr></thead>
+          <tbody>
+            <tr><td>指示処分</td><td class="n">必要</td><td class="n no">不要</td></tr>
+            <tr><td>業務停止処分</td><td class="n">必要</td><td class="n no">必要</td></tr>
+            <tr><td>免許取消処分</td><td class="n">必要</td><td class="n no">必要</td></tr>
+            <tr><td>宅建士への指示・事務禁止・登録消除</td><td class="n">必要</td><td class="n yes">不要</td></tr>
+            <tr><td class="no">所在を確知できない場合の免許取消し</td><td class="n no">不要</td><td class="n">必要</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="scroll">
+        <table>
+          <thead><tr><th>論点</th><th>内容</th></tr></thead>
+          <tbody>
+            <tr><td>聴聞</td><td class="no">処分をしようとするときは <strong>公開による聴聞</strong> を行わなければならない</td></tr>
+            <tr><td>聴聞の例外</td><td>所在を確知できない場合の免許取消しは、<strong>公告してから30日</strong>を経過しても申出がないときに取り消せる（聴聞は不要）</td></tr>
+            <tr><td>公告</td><td class="no"><strong>業務停止処分・免許取消処分</strong>をしたときは公告する。<strong>指示処分は公告しない</strong></td></tr>
+            <tr><td>宅建士への処分</td><td class="no">宅建士への処分は<strong>いずれも公告されない</strong></td></tr>
+            <tr><td>宅建業者名簿</td><td>指示処分・業務停止処分を受けたときは、その旨が<strong>宅建業者名簿に登載</strong>される</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="call trap">
+        <span class="tag">ひっかけ</span>
+        <p><strong>指示処分は公告されない。</strong>公告されるのは業務停止と免許取消しだけ。ただし<strong>名簿には登載される</strong>ので「一切公にされない」わけではない。<br>
+        <strong>宅建士への処分は3つとも公告されない。</strong>業者への処分と扱いが違う。<br>
+        <strong>聴聞は「公開」で行う。</strong>非公開とする選択肢は誤り。</p>
+      </div>
+
+      <h3>5-1　報告・立入検査</h3>
+      <ul>
+        <li><strong>国土交通大臣</strong>は<strong>すべての</strong>宅建業者に対して、報告を求め、立入検査ができる</li>
+        <li><strong>都道府県知事</strong>は、<strong>当該都道府県の区域内で業務を行う</strong>宅建業者に対してできる（他県の免許業者にもできる）</li>
+      </ul>
+    </section>
+
+    <!-- 06 -->
+    <section id="batsu">
+      <h2 class="sec"><span class="num">06</span>罰則</h2>
+
+      <div class="call rev">
+        <span class="tag">改正</span>
+        <p>2025年6月1日の刑法改正により、<strong>「懲役」の表記はすべて「拘禁刑」に置き換わりました</strong>。刑の重さや宅建業法の制度そのものに変更はありませんが、条文の文言を問う出題に注意してください。</p>
+      </div>
+
+      <div class="scroll">
+        <table class="batsu">
+          <caption>重い順</caption>
+          <thead><tr><th>法定刑</th><th>対象となる行為</th><th class="n">法人重科</th></tr></thead>
+          <tbody>
+            <tr>
+              <td>3年以下の拘禁刑<br>300万円以下の罰金<br><span class="lbl">併科あり</span></td>
+              <td><strong>無免許営業</strong>／<strong>不正の手段による免許取得</strong>／<strong>名義貸し</strong>／<strong>業務停止処分違反</strong></td>
+              <td class="n no">1億円</td>
+            </tr>
+            <tr>
+              <td>2年以下の拘禁刑<br>300万円以下の罰金<br><span class="lbl">併科あり</span></td>
+              <td><strong>重要な事実の不告知等</strong>（47条1号）</td>
+              <td class="n no">1億円</td>
+            </tr>
+            <tr>
+              <td>1年以下の拘禁刑<br>100万円以下の罰金<br><span class="lbl">併科あり</span></td>
+              <td><strong>不当に高額の報酬を要求</strong>する行為</td>
+              <td class="n">同額</td>
+            </tr>
+            <tr>
+              <td>6月以下の拘禁刑<br>100万円以下の罰金<br><span class="lbl">併科あり</span></td>
+              <td><strong>誇大広告等の禁止違反</strong>／<strong>報酬額の制限を超える報酬の受領</strong>／不当な履行遅延／手付貸与等による誘引</td>
+              <td class="n">同額</td>
+            </tr>
+            <tr>
+              <td>100万円以下の罰金</td>
+              <td>営業保証金の供託の届出前の事業開始／免許を受けずに宅建業を営む旨の表示・広告</td>
+              <td class="n">同額</td>
+            </tr>
+            <tr>
+              <td>50万円以下の罰金</td>
+              <td><strong>35条書面・37条書面の不交付</strong>／従業者名簿・帳簿の不備／報告の拒否・虚偽報告／案内所等の届出違反／専任の宅建士の設置義務違反／従業者証明書の携帯義務違反</td>
+              <td class="n">同額</td>
+            </tr>
+            <tr>
+              <td class="no">10万円以下の<strong>過料</strong></td>
+              <td><strong>宅建士証の返納・提出義務違反</strong>／<strong>重要事項説明時に宅建士証を提示しなかった</strong></td>
+              <td class="n">—</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="call tip">
+        <span class="tag">覚え方</span>
+        <p><strong>法人に1億円が科されるのは5つだけ。</strong>無免許営業・不正免許取得・名義貸し・業務停止違反・重要な事実の不告知。<strong>「業を営む資格そのものを偽る行為」と「客をだます行為」</strong>だけが桁違いに重い。<br>
+        <strong>過料は「宅建士証まわり」の2つだけ。</strong>過料は刑罰ではないので、前科にならず欠格要件にもならない。</p>
+      </div>
+
+      <div class="call trap">
+        <span class="tag">ひっかけ</span>
+        <p><strong>宅建士証の不提示は「罰金」ではなく「過料」。</strong>刑罰と行政上の秩序罰の違いを問う選択肢がある。<br>
+        <strong>誇大広告と報酬の超過受領はどちらも6月以下。</strong>一方だけ重くする選択肢は誤り。</p>
+      </div>
+    </section>
+
+    <!-- 07 -->
+    <section id="deru">
+      <h2 class="sec"><span class="num">07</span>よく出る論点</h2>
+      <div class="scroll">
+        <table>
+          <thead><tr><th class="n">順位</th><th>論点</th><th>要点</th></tr></thead>
+          <tbody>
+            <tr><td class="n">1</td><td><strong>処分権者</strong></td><td>免許取消し・登録消除は元締めのみ／他は業務地の知事も可</td></tr>
+            <tr><td class="n">2</td><td>必要的取消しと任意的取消し</td><td>任意は「条件違反・供託しない・行方不明」の3つ</td></tr>
+            <tr><td class="n">3</td><td>聴聞と公告</td><td>聴聞は公開／指示処分と宅建士への処分は公告しない</td></tr>
+            <tr><td class="n">4</td><td>罰則の重さ</td><td>3年・2年・1年・6月の振り分け／法人1億円は5つ／過料は2つ</td></tr>
+            <tr><td class="n">5</td><td>宅建士への処分事由</td><td>名義貸し・他の事務所の専任表示・不正または著しく不当な行為</td></tr>
+            <tr><td class="n">6</td><td>1年の期間</td><td>業務停止も事務禁止も1年以内／事業の不開始・休止も1年</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 08 -->
+    <section id="hikkake">
+      <h2 class="sec"><span class="num">08</span>ひっかけ一覧</h2>
+      <div class="scroll">
+        <table class="traps">
+          <thead><tr><th>こう書かれたら疑う</th><th>正しくは</th></tr></thead>
+          <tbody>
+            <tr><td>業務地を管轄する知事も免許を取り消せる</td><td>免許取消しは<strong>免許権者のみ</strong></td></tr>
+            <tr><td>他県で違反しても免許権者しか処分できない</td><td>指示・業務停止は<strong>業務地の知事もできる</strong></td></tr>
+            <tr><td>登録している知事以外は宅建士を処分できない</td><td>指示・事務禁止は<strong>事務を行う場所の知事もできる</strong></td></tr>
+            <tr><td>業務停止処分は2年以内の期間を定めて行う</td><td><strong>1年以内</strong></td></tr>
+            <tr><td>不正の手段で免許を受けた場合は取り消すことができる</td><td><strong>取り消さなければならない</strong>（必要的）</td></tr>
+            <tr><td>免許の条件に違反したら必ず免許を取り消される</td><td><strong>取り消すことができる</strong>（任意的）</td></tr>
+            <tr><td>1年以上事業を休止しても取消しは任意である</td><td><strong>必要的取消し</strong></td></tr>
+            <tr><td>指示処分をしたときは公告しなければならない</td><td>公告するのは<strong>業務停止と免許取消し</strong></td></tr>
+            <tr><td>宅建士への登録消除処分は公告される</td><td>宅建士への処分は<strong>公告されない</strong></td></tr>
+            <tr><td>聴聞は非公開で行う</td><td><strong>公開</strong>による聴聞</td></tr>
+            <tr><td>所在を確知できない場合も聴聞が必要である</td><td>この場合は<strong>聴聞不要</strong>（公告から30日）</td></tr>
+            <tr><td>登録消除処分にも任意的なものがある</td><td>登録消除は<strong>すべて必要的</strong></td></tr>
+            <tr><td>重要事項説明で宅建士証を提示しないと罰金</td><td><strong>10万円以下の過料</strong></td></tr>
+            <tr><td>誇大広告をした法人には1億円の罰金が科される</td><td>1億円は<strong>5つの行為</strong>のみ。誇大広告は含まれない</td></tr>
+            <tr><td>宅建業法違反でなければ監督処分を受けない</td><td><strong>他の法令違反</strong>でも処分の対象になる</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 09 -->
+    <section id="suji">
+      <h2 class="sec"><span class="num">09</span>数字まとめ</h2>
+      <p class="masthead-note">右上の「数値を隠す」で自己テストできる。</p>
+      <div class="nums" id="numgrid">
+        <div class="nc" tabindex="0"><span class="v">1年以内</span><span class="d">業務停止処分・事務禁止処分の期間</span></div>
+        <div class="nc" tabindex="0"><span class="v">1年</span><span class="d">事業を開始しない／休止した場合の必要的免許取消し</span></div>
+        <div class="nc" tabindex="0"><span class="v">30日</span><span class="d">所在を確知できない場合、公告からこの期間で取り消せる</span></div>
+        <div class="nc" tabindex="0"><span class="v">3年以下 / 300万円</span><span class="d">無免許営業・不正免許取得・名義貸し・業務停止違反</span></div>
+        <div class="nc" tabindex="0"><span class="v">2年以下 / 300万円</span><span class="d">重要な事実の不告知等</span></div>
+        <div class="nc" tabindex="0"><span class="v">1年以下 / 100万円</span><span class="d">不当に高額の報酬を要求する行為</span></div>
+        <div class="nc" tabindex="0"><span class="v">6月以下 / 100万円</span><span class="d">誇大広告・報酬の超過受領・不当な履行遅延・手付貸与</span></div>
+        <div class="nc" tabindex="0"><span class="v">50万円以下</span><span class="d">35条・37条書面の不交付、従業者名簿・帳簿の不備など</span></div>
+        <div class="nc" tabindex="0"><span class="v">10万円以下</span><span class="d">宅建士証の不提示・返納義務違反（過料）</span></div>
+        <div class="nc" tabindex="0"><span class="v">1億円</span><span class="d">法人重科の対象となる5つの行為</span></div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <h4>出典</h4>
+    <ul>
+      <li>宅地建物取引業法（昭和27年法律第176号）第65条〜第72条、第79条〜第86条 — <a href="https://laws.e-gov.go.jp/law/327AC1000000176">e-Gov法令検索</a></li>
+      <li>拘禁刑への一本化（2025年6月1日施行） — <a href="https://yotsuyagakuin-tsushin.com/blog_takkenshiken/r8_takkengyoho_kaisei/">四谷学院</a></li>
+      <li>国土交通省 不動産業（宅地建物取引業法） — <a href="https://www.mlit.go.jp/totikensangyo/const/1_6_bf_000030.html">mlit.go.jp</a></li>
+    </ul>
+    <div class="sibling">
+      <a href="../index.html">総目次</a>
+      <a href="免許制度.html">免許制度</a>
+      <a href="宅地建物取引士.html">宅地建物取引士</a>
+      <a href="報酬額の制限.html">← 報酬額の制限</a>
+    </div>
+  </footer>
+
+</div>
+
+<script>
+  (function () {
+    var root = document.documentElement;
+    document.getElementById('theme').addEventListener('click', function () {
+      if (root.getAttribute('data-theme')) { root.removeAttribute('data-theme'); return; }
+      var dark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      root.setAttribute('data-theme', dark ? 'light' : 'dark');
+    });
+    var maskBtn = document.getElementById('mask');
+    var grid = document.getElementById('numgrid');
+    maskBtn.addEventListener('click', function () {
+      var on = grid.classList.toggle('masked');
+      maskBtn.setAttribute('aria-pressed', String(on));
+      maskBtn.textContent = on ? '数値を表示' : '数値を隠す';
+    });
+    var links = Array.prototype.slice.call(document.querySelectorAll('nav.rail ol a'));
+    var map = {};
+    links.forEach(function (a) { map[a.getAttribute('href').slice(1)] = a; });
+    var seen = [];
+    var obs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        var i = seen.indexOf(e.target.id);
+        if (e.isIntersecting && i < 0) seen.push(e.target.id);
+        if (!e.isIntersecting && i >= 0) seen.splice(i, 1);
+      });
+      links.forEach(function (a) { a.classList.remove('on'); });
+      if (seen.length) {
+        var order = Object.keys(map);
+        seen.sort(function (a, b) { return order.indexOf(a) - order.indexOf(b); });
+        map[seen[0]].classList.add('on');
+      }
+    }, { rootMargin: '-10% 0px -70% 0px' });
+    document.querySelectorAll('main section').forEach(function (s) { obs.observe(s); });
+  })();
+</script>

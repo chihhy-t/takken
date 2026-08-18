@@ -1,0 +1,494 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>37条書面 — 宅建士試験 2026年度</title>
+
+<style>
+  :root {
+    --paper:#EBEDE9; --surface:#F8F9F6; --sunk:#E1E4DE; --ink:#151F2A; --muted:#5D6B78;
+    --rule:#CDD2CB; --hair:#DCE0D9; --accent:#B8342A; --accent-soft:#F3DEDB;
+    --blue:#2A5F86; --blue-soft:#DCE6EE;
+    --font-display:"Hiragino Mincho ProN","Yu Mincho","YuMincho","Noto Serif JP",serif;
+    --font-body:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","YuGothic","Noto Sans JP",system-ui,sans-serif;
+    --font-mono:ui-monospace,"SFMono-Regular","SF Mono",Menlo,Consolas,monospace;
+    --measure:68ch;
+    --s1:.35rem; --s2:.7rem; --s3:1.1rem; --s4:1.7rem; --s5:2.6rem; --s6:4rem;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper:#0D1B29; --surface:#132534; --sunk:#0A1622; --ink:#DAE4EC; --muted:#8CA1B3;
+      --rule:#26415A; --hair:#1D3448; --accent:#FF7059; --accent-soft:#3A1F1D;
+      --blue:#6FB6DC; --blue-soft:#14293A;
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper:#0D1B29; --surface:#132534; --sunk:#0A1622; --ink:#DAE4EC; --muted:#8CA1B3;
+    --rule:#26415A; --hair:#1D3448; --accent:#FF7059; --accent-soft:#3A1F1D;
+    --blue:#6FB6DC; --blue-soft:#14293A;
+  }
+
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--paper); color:var(--ink); font-family:var(--font-body);
+    font-size:16px; line-height:1.9; -webkit-font-smoothing:antialiased; font-feature-settings:"palt" 1; }
+
+  .wrap { display:grid; grid-template-columns:15.5rem minmax(0,1fr); gap:var(--s6);
+    max-width:82rem; margin:0 auto; padding:0 var(--s4) var(--s6); align-items:start; }
+  @media (max-width:60rem){ .wrap{ grid-template-columns:minmax(0,1fr); gap:var(--s4); padding:0 var(--s3) var(--s5);} }
+
+  .masthead { grid-column:1/-1; padding:var(--s5) 0 var(--s4); border-bottom:2px solid var(--ink);
+    margin-bottom:var(--s2); display:flex; flex-wrap:wrap; align-items:flex-end; justify-content:space-between; gap:var(--s3); }
+  .eyebrow { font-family:var(--font-mono); font-size:.72rem; letter-spacing:.16em; text-transform:uppercase;
+    color:var(--muted); display:flex; align-items:center; gap:.6em; }
+  .eyebrow::before { content:""; width:2.2rem; height:1px; background:var(--accent); }
+  h1 { font-family:var(--font-display); font-weight:600; font-size:clamp(2rem,1.4rem + 2.6vw,3.1rem);
+    line-height:1.2; letter-spacing:.04em; margin:var(--s2) 0 var(--s3); text-wrap:balance; }
+  .facts { display:flex; flex-wrap:wrap; gap:0 var(--s3); font-size:.82rem; color:var(--muted); list-style:none; margin:0; padding:0; }
+  .facts b { font-family:var(--font-mono); font-variant-numeric:tabular-nums; color:var(--ink); font-weight:600; }
+  .toggles { display:flex; gap:var(--s1); }
+  button { font-family:var(--font-body); font-size:.78rem; color:var(--muted); background:var(--surface);
+    border:1px solid var(--rule); border-radius:2px; padding:.4em .9em; cursor:pointer; transition:color .15s,border-color .15s; }
+  button:hover { color:var(--ink); border-color:var(--ink); }
+  button:focus-visible { outline:2px solid var(--accent); outline-offset:2px; }
+  button[aria-pressed="true"] { color:var(--accent); border-color:var(--accent); }
+
+  nav.rail { position:sticky; top:var(--s3); font-size:.82rem; max-height:calc(100vh - 3rem); overflow-y:auto; padding-bottom:var(--s3); }
+  nav.rail h2 { font-family:var(--font-mono); font-size:.68rem; letter-spacing:.16em; text-transform:uppercase; color:var(--muted); margin:0 0 var(--s2); font-weight:500; }
+  nav.rail ol { list-style:none; margin:0; padding:0; display:flex; flex-direction:column; }
+  nav.rail a { display:block; padding:.3em 0 .3em .9em; color:var(--muted); text-decoration:none; border-left:2px solid var(--hair); line-height:1.5; }
+  nav.rail a:hover { color:var(--ink); border-left-color:var(--rule); }
+  nav.rail a.on { color:var(--ink); border-left-color:var(--accent); font-weight:600; }
+  nav.rail a .num { font-family:var(--font-mono); font-size:.72rem; color:var(--muted); margin-right:.5em; }
+  @media (max-width:60rem){
+    nav.rail{ position:static; max-height:none; border-bottom:1px solid var(--rule); padding-bottom:var(--s3); }
+    nav.rail ol{ display:grid; grid-template-columns:repeat(auto-fill,minmax(9rem,1fr)); gap:0 var(--s2); }
+  }
+
+  main { min-width:0; }
+  section { padding-top:var(--s5); scroll-margin-top:var(--s3); }
+  section > * { max-width:var(--measure); }
+  section > figure, section > .scroll { max-width:none; }
+
+  h2.sec { font-family:var(--font-display); font-size:clamp(1.45rem,1.2rem + .9vw,1.9rem); font-weight:600;
+    letter-spacing:.04em; margin:0 0 var(--s3); padding-bottom:var(--s2); border-bottom:1px solid var(--rule);
+    display:flex; align-items:baseline; gap:.7em; max-width:none; }
+  h2.sec .num { font-family:var(--font-mono); font-size:.8rem; letter-spacing:.1em; color:var(--accent); font-weight:500; }
+  h3 { font-family:var(--font-body); font-size:1.06rem; font-weight:700; letter-spacing:.02em;
+    margin:var(--s4) 0 var(--s2); padding-left:.7em; border-left:3px solid var(--ink); }
+  p { margin:0 0 var(--s3); }
+  a { color:var(--blue); text-underline-offset:.2em; }
+  em { font-style:normal; background:linear-gradient(transparent 62%, var(--accent-soft) 62%); font-weight:600; }
+  ul, ol { margin:0 0 var(--s3); padding-left:1.3em; }
+  li { margin-bottom:var(--s1); }
+  .lead { font-size:1.05rem; color:var(--muted); }
+
+  .call { max-width:var(--measure); margin:0 0 var(--s3); padding:var(--s3) var(--s3) var(--s3) var(--s4);
+    background:var(--surface); border:1px solid var(--hair); border-left:3px solid var(--rule); border-radius:2px; font-size:.94rem; }
+  .call > :last-child { margin-bottom:0; }
+  .call .tag { display:block; font-family:var(--font-mono); font-size:.68rem; letter-spacing:.16em; text-transform:uppercase; color:var(--muted); margin-bottom:var(--s1); }
+  .call.trap { border-left-color:var(--accent); background:var(--accent-soft); }
+  .call.trap .tag { color:var(--accent); }
+  .call.exam { border-left-color:var(--ink); }
+  .call.exam .tag { color:var(--ink); }
+  .call.tip { border-left-color:var(--blue); background:var(--blue-soft); }
+  .call.tip .tag { color:var(--blue); }
+
+  .scroll { overflow-x:auto; margin:0 0 var(--s3); -webkit-overflow-scrolling:touch; }
+  table { border-collapse:collapse; width:100%; font-size:.88rem; line-height:1.6; }
+  caption { text-align:left; font-size:.78rem; color:var(--muted); padding-bottom:var(--s1); font-family:var(--font-mono); letter-spacing:.08em; }
+  th, td { padding:.55em .7em; text-align:left; vertical-align:top; border-bottom:1px solid var(--hair); }
+  thead th { font-size:.74rem; letter-spacing:.08em; color:var(--muted); font-weight:600; border-bottom:1px solid var(--ink); }
+  tbody tr:hover { background:var(--surface); }
+  td.n, th.n { text-align:center; font-family:var(--font-mono); font-variant-numeric:tabular-nums; white-space:nowrap; }
+  .no { color:var(--accent); font-weight:700; }
+  .yes { color:var(--muted); }
+  .tri { color:var(--blue); }
+  table.matrix { font-size:.85rem; }
+  table.matrix th.g { text-align:center; white-space:nowrap; width:6rem; }
+  table.matrix td.n { width:6rem; font-size:.95rem; }
+  table.matrix tbody td:first-child { min-width:22rem; }
+  table.matrix tr.hi { background:var(--accent-soft); }
+  table.vs thead th:nth-child(2) { color:var(--blue); font-size:.9rem; }
+  table.vs thead th:nth-child(3) { color:var(--accent); font-size:.9rem; }
+  table.vs tbody td:first-child { white-space:nowrap; font-weight:600; }
+  .must { display:inline-block; font-family:var(--font-mono); font-size:.64rem; letter-spacing:.08em;
+    border:1px solid var(--accent); color:var(--accent); border-radius:2px; padding:0 .4em; margin-right:.5em; }
+  .opt { display:inline-block; font-family:var(--font-mono); font-size:.64rem; letter-spacing:.08em;
+    border:1px solid var(--muted); color:var(--muted); border-radius:2px; padding:0 .4em; margin-right:.5em; }
+
+  figure { margin:0 0 var(--s4); }
+  figure svg { display:block; width:100%; height:auto; }
+  figcaption { font-size:.78rem; color:var(--muted); font-family:var(--font-mono); letter-spacing:.06em; margin-top:var(--s2); padding-top:var(--s1); border-top:1px solid var(--hair); }
+  .plate { background:var(--surface); border:1px solid var(--hair); border-radius:2px; padding:var(--s3); }
+  .svg-ink { fill:none; stroke:var(--ink); stroke-width:1.4; }
+  .svg-hair { fill:none; stroke:var(--rule); stroke-width:1; }
+  .svg-dim { fill:none; stroke:var(--blue); stroke-width:1; }
+  .svg-acc { fill:none; stroke:var(--accent); stroke-width:1.6; }
+  .svg-fill { fill:var(--sunk); stroke:var(--rule); stroke-width:1; }
+  .svg-accfill { fill:var(--accent-soft); stroke:var(--accent); stroke-width:1.2; }
+  .svg-bluefill { fill:var(--blue-soft); stroke:var(--blue); stroke-width:1.2; }
+  text { font-family:var(--font-body); fill:var(--ink); font-size:12px; }
+  text.lbl { font-family:var(--font-mono); fill:var(--muted); font-size:10.5px; letter-spacing:.06em; }
+  text.dimt { font-family:var(--font-mono); fill:var(--blue); font-size:11px; }
+  text.acct { fill:var(--accent); font-size:11.5px; font-weight:700; }
+
+  .nums { display:grid; grid-template-columns:repeat(auto-fill,minmax(11.5rem,1fr)); gap:var(--s2); }
+  .nc { background:var(--surface); border:1px solid var(--hair); border-radius:2px; padding:var(--s3) var(--s3) var(--s2); display:flex; flex-direction:column; gap:var(--s1); }
+  .nc .v { font-family:var(--font-mono); font-size:1.1rem; font-weight:600; line-height:1.3; color:var(--accent); }
+  .nc .d { font-size:.8rem; color:var(--muted); line-height:1.6; }
+  .nums.masked .v { color:transparent; background:var(--rule); border-radius:2px; user-select:none; }
+  .nums.masked .nc:hover .v, .nums.masked .nc:focus-within .v { color:var(--accent); background:transparent; }
+  .nc:focus-visible { outline:2px solid var(--accent); outline-offset:2px; }
+  .masthead-note { font-size:.78rem; color:var(--muted); margin-bottom:var(--s2); }
+
+  table.traps td:first-child { color:var(--muted); }
+  table.traps td:first-child::before { content:"「"; }
+  table.traps td:first-child::after { content:"」"; }
+  table.traps td:last-child strong { color:var(--accent); }
+
+  footer { grid-column:1/-1; margin-top:var(--s6); padding-top:var(--s3); border-top:1px solid var(--rule); font-size:.8rem; color:var(--muted); }
+  footer ul { list-style:none; padding:0; }
+  footer li { margin-bottom:var(--s1); }
+  .sibling { display:flex; flex-wrap:wrap; gap:var(--s2); margin-top:var(--s3); }
+  .sibling a { font-size:.8rem; text-decoration:none; border:1px solid var(--rule); border-radius:2px; padding:.35em .8em; color:var(--muted); }
+  .sibling a:hover { color:var(--ink); border-color:var(--ink); }
+
+  @media (prefers-reduced-motion: reduce){ *{ transition:none !important; animation:none !important; scroll-behavior:auto !important; } }
+  html { scroll-behavior:smooth; }
+  .eyebrow a { color:var(--accent); text-decoration:none; }
+  .eyebrow a:hover { text-decoration:underline; text-underline-offset:.2em; }
+  nav.rail a.home { border-left:none; padding:0 0 var(--s2); color:var(--accent);
+    font-family:var(--font-mono); font-size:.72rem; letter-spacing:.1em; }
+  nav.rail a.home:hover { color:var(--accent); text-decoration:underline; text-underline-offset:.2em; }
+</style>
+
+<div class="wrap">
+
+  <header class="masthead">
+    <div>
+      <div class="eyebrow"><a href="../index.html">← 総目次</a> &nbsp;/&nbsp; 02 宅建業法 &nbsp;/&nbsp; 宅建士試験 2026年度</div>
+      <h1>37条書面</h1>
+      <ul class="facts">
+        <li>法令基準日 <b>2026-04-01</b></li>
+        <li>出題数 <b>1〜2問</b></li>
+        <li>目標 <b>全問正解</b></li>
+        <li>更新 <b>2026-08-09</b></li>
+      </ul>
+    </div>
+    <div class="toggles">
+      <button id="mask" type="button" aria-pressed="false">数値を隠す</button>
+      <button id="theme" type="button">配色切替</button>
+    </div>
+  </header>
+
+  <nav class="rail" aria-label="目次">
+    <a class="home" href="../index.html">← 総目次</a>
+    <h2>Contents</h2>
+    <ol>
+      <li><a href="#overview"><span class="num">00</span>基本ルール</a></li>
+      <li><a href="#vs"><span class="num">01</span>35条との対比</a></li>
+      <li><a href="#kisai"><span class="num">02</span>記載事項マトリクス</a></li>
+      <li><a href="#kiritori"><span class="num">03</span>35条と37条の切り分け</a></li>
+      <li><a href="#deru"><span class="num">04</span>よく出る論点</a></li>
+      <li><a href="#hikkake"><span class="num">05</span>ひっかけ一覧</a></li>
+      <li><a href="#matome"><span class="num">06</span>暗記カード</a></li>
+    </ol>
+  </nav>
+
+  <main>
+
+    <!-- 00 -->
+    <section id="overview">
+      <h2 class="sec"><span class="num">00</span>基本ルール</h2>
+      <p class="lead">35条書面が<em>「契約する前に判断材料を渡す」</em>ものなのに対し、37条書面は<em>「決まった契約内容を書き残す」</em>もの。目的が違うから、相手も時期も中身も変わる。</p>
+
+      <figure class="plate">
+        <svg viewBox="0 0 720 220" role="img" aria-label="35条書面は契約成立までに買主・借主だけに宅建士が説明して交付する。37条書面は契約成立後遅滞なく両当事者に交付する。どちらも宅建士が記名するが、37条書面に説明義務はない。">
+          <line x1="40" y1="80" x2="680" y2="80" class="svg-hair"/>
+          <circle cx="360" cy="80" r="7" class="svg-ink" fill="var(--paper)"/>
+          <text x="360" y="60" text-anchor="middle">契約の成立</text>
+
+          <!-- 35条 -->
+          <rect x="40" y="104" width="290" height="92" class="svg-bluefill" rx="2"/>
+          <text x="185" y="128" text-anchor="middle" class="dimt">35条書面（重要事項説明）</text>
+          <text x="58" y="152" class="lbl">・契約が成立するまでの間</text>
+          <text x="58" y="170" class="lbl">・買主／借主にだけ</text>
+          <text x="58" y="188" class="lbl">・宅建士が説明する（士証を提示）</text>
+
+          <!-- 37条 -->
+          <rect x="390" y="104" width="290" height="92" class="svg-accfill" rx="2"/>
+          <text x="535" y="128" text-anchor="middle" class="acct">37条書面（契約書面）</text>
+          <text x="408" y="152" class="lbl">・契約成立後、遅滞なく</text>
+          <text x="408" y="170" class="lbl">・両当事者に交付</text>
+          <text x="408" y="188" class="lbl">・説明は不要（交付するだけ）</text>
+
+          <path d="M330 80 H 40" class="svg-dim"/>
+          <path d="M46 76 L40 80 L46 84" class="svg-dim"/>
+          <path d="M390 80 H 680" class="svg-acc"/>
+          <path d="M674 76 L680 80 L674 84" class="svg-acc"/>
+
+          <text x="40" y="32" class="lbl">判断するための材料</text>
+          <text x="680" y="32" text-anchor="end" class="lbl">合意した内容の記録</text>
+        </svg>
+        <figcaption>Fig.1 — 契約成立をはさんで役割が入れ替わる</figcaption>
+      </figure>
+
+      <div class="scroll">
+        <table>
+          <thead><tr><th>論点</th><th>内容</th></tr></thead>
+          <tbody>
+            <tr><td>交付義務者</td><td><strong>宅地建物取引業者</strong></td></tr>
+            <tr><td><strong>交付する相手</strong></td><td class="no"><strong>契約の両当事者</strong>（売主と買主／貸主と借主）</td></tr>
+            <tr><td>代理・媒介のとき</td><td>代理・媒介をした業者が<strong>両当事者</strong>に交付する</td></tr>
+            <tr><td><strong>時期</strong></td><td>契約が成立したときは<strong>遅滞なく</strong></td></tr>
+            <tr><td><strong>記名</strong></td><td>宅建士が記名する（専任でなくてよい）。<span class="no">押印は2022年5月18日施行の改正で廃止</span></td></tr>
+            <tr><td>説明義務</td><td class="no"><strong>なし</strong>。交付すれば足りる</td></tr>
+            <tr><td>宅建士証の提示</td><td class="no"><strong>不要</strong>（請求があれば提示する一般的な義務はある）</td></tr>
+            <tr><td><strong>相手方が宅建業者のとき</strong></td><td class="no"><strong>省略できない</strong>。業者間取引でも交付が必要</td></tr>
+            <tr><td>電磁的方法</td><td>相手方の<strong>承諾</strong>を得れば、書面の交付に代えて電磁的方法により提供できる</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="call trap">
+        <span class="tag">ひっかけ</span>
+        <p><strong>35条は業者間なら説明不要だが、37条書面は業者間でも交付を省略できない。</strong>ここが最大の対比。<br>
+        37条書面には<strong>説明義務がない</strong>ので、宅建士が交付する必要もなく、宅建士証の提示も要らない。<strong>宅建士がするのは記名だけ</strong>。</p>
+      </div>
+    </section>
+
+    <!-- 01 -->
+    <section id="vs">
+      <h2 class="sec"><span class="num">01</span>35条との対比</h2>
+
+      <div class="scroll">
+        <table class="vs">
+          <caption>手続面の違い</caption>
+          <thead><tr><th>項目</th><th>35条書面</th><th>37条書面</th></tr></thead>
+          <tbody>
+            <tr><td>目的</td><td>契約するかどうかの<strong>判断材料</strong></td><td>合意した<strong>契約内容の記録</strong></td></tr>
+            <tr><td><strong>時期</strong></td><td>契約が成立する<strong>までの間</strong></td><td>契約成立後<strong>遅滞なく</strong></td></tr>
+            <tr><td><strong>交付する相手</strong></td><td class="no">取得者・借主<strong>のみ</strong></td><td class="no"><strong>両当事者</strong></td></tr>
+            <tr><td>説明</td><td>宅建士が<strong>説明する</strong></td><td class="no"><strong>説明不要</strong></td></tr>
+            <tr><td>記名</td><td>宅建士</td><td>宅建士</td></tr>
+            <tr><td>宅建士証の提示</td><td class="no"><strong>請求がなくても必要</strong></td><td class="no"><strong>不要</strong></td></tr>
+            <tr><td><strong>業者間取引</strong></td><td>説明は不要（交付は必要）</td><td class="no"><strong>交付は省略できない</strong></td></tr>
+            <tr><td>電磁的方法</td><td>相手方の承諾があれば可</td><td>相手方の承諾があれば可</td></tr>
+            <tr><td>違反の効果</td><td colspan="2">指示処分・業務停止処分の対象。書面を交付しない場合は<strong>50万円以下の罰金</strong></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="call tip">
+        <span class="tag">覚え方</span>
+        <p><strong>35条は「これから買う人を守る」、37条は「双方の言った言わないを防ぐ」。</strong><br>
+        だから35条は買主・借主だけに、37条は両当事者に渡す。だから35条には説明が要り、37条は渡すだけでよい。だから35条はプロ相手なら説明を省けるが、37条は証拠なので誰が相手でも省けない。<strong>目的から結論を導けば丸暗記は要らない。</strong></p>
+      </div>
+    </section>
+
+    <!-- 02 -->
+    <section id="kisai">
+      <h2 class="sec"><span class="num">02</span>記載事項マトリクス</h2>
+      <p class="lead">37条書面の記載事項は<em>必要的記載事項</em>（必ず書く）と<em>任意的記載事項</em>（定めがあるときだけ書く）に分かれる。</p>
+
+      <div class="scroll">
+        <table class="matrix">
+          <caption>必＝必ず記載 ／ 任＝定めがあるときに記載 ／ ✕＝記載不要</caption>
+          <thead><tr><th>記載事項</th><th class="g">売買・交換</th><th class="g">貸借</th></tr></thead>
+          <tbody>
+            <tr><td colspan="3" class="lbl" style="background:var(--sunk)">必要的記載事項 — 必ず書く</td></tr>
+            <tr><td><span class="must">必</span>当事者の氏名・住所</td><td class="n">必</td><td class="n">必</td></tr>
+            <tr><td><span class="must">必</span>宅地建物を特定するために必要な表示</td><td class="n">必</td><td class="n">必</td></tr>
+            <tr class="hi"><td><span class="must">必</span><strong>既存建物のとき — 構造耐力上主要な部分等の状況について当事者双方が確認した事項</strong></td><td class="n">必</td><td class="n no">✕</td></tr>
+            <tr><td><span class="must">必</span>代金・交換差金・<strong>借賃の額</strong>、支払時期、支払方法</td><td class="n">必</td><td class="n">必</td></tr>
+            <tr><td><span class="must">必</span><strong>宅地建物の引渡しの時期</strong></td><td class="n">必</td><td class="n">必</td></tr>
+            <tr class="hi"><td><span class="must">必</span><strong>移転登記の申請の時期</strong></td><td class="n">必</td><td class="n no">✕</td></tr>
+
+            <tr><td colspan="3" class="lbl" style="background:var(--sunk)">任意的記載事項 — 定めがあるときだけ書く</td></tr>
+            <tr><td><span class="opt">任</span>代金等<strong>以外</strong>の金銭の授受の定め — 額・授受の時期・目的</td><td class="n">任</td><td class="n">任</td></tr>
+            <tr><td><span class="opt">任</span>契約の解除に関する定め</td><td class="n">任</td><td class="n">任</td></tr>
+            <tr><td><span class="opt">任</span>損害賠償額の予定・違約金に関する定め</td><td class="n">任</td><td class="n">任</td></tr>
+            <tr class="hi"><td><span class="opt">任</span><strong>金銭の貸借のあっせん</strong>の定めがあるとき — <strong>不成立のときの措置</strong></td><td class="n">任</td><td class="n no">✕</td></tr>
+            <tr><td><span class="opt">任</span><strong>天災その他不可抗力による損害の負担</strong>（危険負担）に関する定め</td><td class="n">任</td><td class="n">任</td></tr>
+            <tr class="hi"><td><span class="opt">任</span><strong>契約不適合責任</strong>／その履行に関して講ずべき措置についての定め</td><td class="n">任</td><td class="n no">✕</td></tr>
+            <tr class="hi"><td><span class="opt">任</span><strong>租税その他の公課の負担</strong>に関する定め</td><td class="n">任</td><td class="n no">✕</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="call tip">
+        <span class="tag">覚え方</span>
+        <p><strong>貸借で落ちる5つは「所有権が動かないから要らないもの」</strong>と考えれば一括で処理できる。<br>
+        既存建物の状況確認・移転登記の時期・ローンのあっせん・契約不適合責任・固定資産税の負担 — いずれも<strong>買主が所有者になるからこそ問題になる事項</strong>。借主には関係がない。</p>
+      </div>
+
+      <div class="call exam">
+        <span class="tag">よく出る</span>
+        <p><strong>「引渡しの時期」と「移転登記の申請の時期」は必要的記載事項。</strong>定めがなければ書かなくてよい、ではなく<strong>必ず書く</strong>。<br>
+        一方<strong>「契約の解除」「損害賠償額の予定」「危険負担」は任意的</strong>で、定めがなければ書かなくてよい。35条では定めがなくても「ない旨」を説明するのと扱いが違う。</p>
+      </div>
+    </section>
+
+    <!-- 03 -->
+    <section id="kiritori">
+      <h2 class="sec"><span class="num">03</span>35条と37条の切り分け</h2>
+      <p class="lead">出題の本丸。<em>「この事項は35条か、37条か、両方か」</em>を問う形で毎年出る。</p>
+
+      <div class="scroll">
+        <table class="matrix">
+          <caption>○＝対象 ／ ✕＝対象外</caption>
+          <thead><tr><th>事項</th><th class="g">35条</th><th class="g">37条</th></tr></thead>
+          <tbody>
+            <tr class="hi"><td><strong>代金・借賃の額、支払時期、支払方法</strong></td><td class="n no">✕</td><td class="n">○（必要的）</td></tr>
+            <tr class="hi"><td><strong>引渡しの時期</strong></td><td class="n no">✕</td><td class="n">○（必要的）</td></tr>
+            <tr class="hi"><td><strong>移転登記の申請の時期</strong></td><td class="n no">✕</td><td class="n">○（必要的）</td></tr>
+            <tr class="hi"><td><strong>天災その他不可抗力による損害の負担（危険負担）</strong></td><td class="n no">✕</td><td class="n">○（任意的）</td></tr>
+            <tr class="hi"><td><strong>租税その他の公課の負担</strong></td><td class="n no">✕</td><td class="n">○（任意的）</td></tr>
+            <tr><td>代金等<strong>以外</strong>に授受される金銭 — 額と目的</td><td class="n">○</td><td class="n">○</td></tr>
+            <tr><td>代金等以外の金銭 — <strong>授受の時期</strong></td><td class="n no">✕</td><td class="n">○</td></tr>
+            <tr><td>契約の解除に関する事項</td><td class="n">○</td><td class="n">○（任意的）</td></tr>
+            <tr><td>損害賠償額の予定・違約金</td><td class="n">○</td><td class="n">○（任意的）</td></tr>
+            <tr><td>金銭の貸借のあっせん — <strong>内容</strong></td><td class="n">○</td><td class="n no">✕</td></tr>
+            <tr><td>金銭の貸借のあっせん — <strong>不成立のときの措置</strong></td><td class="n">○</td><td class="n">○</td></tr>
+            <tr><td>契約不適合責任 — <strong>履行を確保する措置</strong>の概要</td><td class="n">○</td><td class="n">○</td></tr>
+            <tr><td>契約不適合責任 — <strong>責任そのものの内容</strong></td><td class="n no">✕</td><td class="n">○（任意的）</td></tr>
+            <tr class="hi"><td><strong>登記された権利の種類・内容、登記名義人</strong></td><td class="n">○</td><td class="n no">✕</td></tr>
+            <tr class="hi"><td><strong>法令に基づく制限の概要</strong></td><td class="n">○</td><td class="n no">✕</td></tr>
+            <tr class="hi"><td><strong>飲用水・電気・ガスの供給、排水施設</strong></td><td class="n">○</td><td class="n no">✕</td></tr>
+            <tr class="hi"><td><strong>各種の災害警戒区域・水害ハザードマップ</strong></td><td class="n">○</td><td class="n no">✕</td></tr>
+            <tr class="hi"><td><strong>手付金等の保全措置</strong>の概要</td><td class="n">○</td><td class="n no">✕</td></tr>
+            <tr><td>既存建物 — <strong>建物状況調査の実施の有無・結果の概要</strong></td><td class="n">○</td><td class="n no">✕</td></tr>
+            <tr><td>既存建物 — <strong>構造耐力上主要な部分等について当事者双方が確認した事項</strong></td><td class="n no">✕</td><td class="n">○（必要的）</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="call tip">
+        <span class="tag">覚え方</span>
+        <p><strong>「これから調べて教えること」は35条、「合意して決めたこと」は37条。</strong><br>
+        登記の状況・法令上の制限・インフラ・ハザードマップは、業者が<strong>調べて教える</strong>情報だから35条にしかない。<br>
+        代金・引渡し時期・登記の申請時期・危険負担・公課の負担は、当事者が<strong>話し合って決める</strong>事項だから37条にしかない。</p>
+      </div>
+
+      <div class="call trap">
+        <span class="tag">ひっかけ</span>
+        <p><strong>既存建物の扱いが35条と37条でずれている。</strong><br>
+        35条は「<strong>建物状況調査を実施したか、その結果はどうか</strong>」を説明する。<br>
+        37条は「<strong>構造耐力上主要な部分等の状況について当事者双方が確認した事項</strong>」を記載する。<br>
+        調べた結果を伝えるのが35条、双方が確認して合意した内容を残すのが37条、という役割分担になっている。</p>
+      </div>
+    </section>
+
+    <!-- 04 -->
+    <section id="deru">
+      <h2 class="sec"><span class="num">04</span>よく出る論点</h2>
+      <div class="scroll">
+        <table>
+          <thead><tr><th class="n">順位</th><th>論点</th><th>要点</th></tr></thead>
+          <tbody>
+            <tr><td class="n">1</td><td><strong>35条と37条の切り分け</strong></td><td>代金・引渡し・移転登記・危険負担・公課は37条のみ</td></tr>
+            <tr><td class="n">2</td><td>必要的か任意的か</td><td>引渡しと移転登記の時期は必ず記載／解除・違約金は定めがあるとき</td></tr>
+            <tr><td class="n">3</td><td>手続の違い</td><td>両当事者に交付／説明不要／士証の提示不要／業者間でも省略不可</td></tr>
+            <tr><td class="n">4</td><td>貸借で落ちる5項目</td><td>既存建物の確認事項・移転登記・ローン不成立の措置・契約不適合責任・公課</td></tr>
+            <tr><td class="n">5</td><td>既存建物の扱い</td><td>35条は調査の有無と結果／37条は双方が確認した事項</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 05 -->
+    <section id="hikkake">
+      <h2 class="sec"><span class="num">05</span>ひっかけ一覧</h2>
+      <div class="scroll">
+        <table class="traps">
+          <thead><tr><th>こう書かれたら疑う</th><th>正しくは</th></tr></thead>
+          <tbody>
+            <tr><td>37条書面は買主にのみ交付すればよい</td><td><strong>両当事者</strong>に交付する</td></tr>
+            <tr><td>37条書面は宅建士が交付しなければならない</td><td>宅建士がするのは<strong>記名だけ</strong>。交付は業者の義務</td></tr>
+            <tr><td>37条書面の交付にあたり宅建士証を提示する</td><td><strong>不要</strong>（35条の説明では必要）</td></tr>
+            <tr><td>買主が宅建業者なら37条書面の交付を省略できる</td><td><strong>省略できない</strong></td></tr>
+            <tr><td>37条書面は契約成立前に交付する</td><td>契約成立後<strong>遅滞なく</strong></td></tr>
+            <tr><td>代金の額は重要事項説明で説明する</td><td>35条では説明しない。<strong>37条の必要的記載事項</strong></td></tr>
+            <tr><td>引渡しの時期は定めがあるときに記載する</td><td><strong>必要的記載事項</strong>。必ず記載する</td></tr>
+            <tr><td>移転登記の申請時期は35条で説明する</td><td><strong>37条</strong>の必要的記載事項</td></tr>
+            <tr><td>危険負担について35条で説明しなければならない</td><td><strong>37条</strong>の任意的記載事項</td></tr>
+            <tr><td>固定資産税の負担について35条で説明する</td><td><strong>37条</strong>の任意的記載事項</td></tr>
+            <tr><td>契約の解除について定めがなくても37条書面に記載する</td><td><strong>定めがあるとき</strong>に記載する</td></tr>
+            <tr><td>建物の貸借でも移転登記の申請時期を記載する</td><td>貸借では<strong>記載不要</strong></td></tr>
+            <tr><td>貸借でも租税公課の負担を記載する</td><td>貸借では<strong>記載不要</strong></td></tr>
+            <tr><td>37条書面には宅建士の記名押印が必要</td><td><strong>記名のみ</strong>（押印は2022年に廃止）</td></tr>
+            <tr><td>37条書面に代えて電磁的方法で提供するのに承諾は不要</td><td>相手方の<strong>承諾</strong>が必要</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 06 -->
+    <section id="matome">
+      <h2 class="sec"><span class="num">06</span>暗記カード</h2>
+      <p class="masthead-note">右上の「数値を隠す」で自己テストできる。カードにカーソルを合わせる／フォーカスすると答えが出る。</p>
+      <div class="nums" id="numgrid">
+        <div class="nc" tabindex="0"><span class="v">両当事者</span><span class="d">37条書面を交付する相手</span></div>
+        <div class="nc" tabindex="0"><span class="v">遅滞なく</span><span class="d">37条書面の交付時期（契約成立後）</span></div>
+        <div class="nc" tabindex="0"><span class="v">記名のみ</span><span class="d">宅建士が37条書面に対して行うこと</span></div>
+        <div class="nc" tabindex="0"><span class="v">省略できない</span><span class="d">業者間取引における37条書面の交付</span></div>
+        <div class="nc" tabindex="0"><span class="v">6つ</span><span class="d">必要的記載事項の数（売買・交換の場合）</span></div>
+        <div class="nc" tabindex="0"><span class="v">5つ</span><span class="d">貸借で記載が不要になる項目の数</span></div>
+        <div class="nc" tabindex="0"><span class="v">37条だけ</span><span class="d">代金の額・引渡しの時期・移転登記の申請時期</span></div>
+        <div class="nc" tabindex="0"><span class="v">37条だけ</span><span class="d">危険負担・租税公課の負担</span></div>
+        <div class="nc" tabindex="0"><span class="v">35条だけ</span><span class="d">登記された権利・法令上の制限・インフラ・ハザードマップ</span></div>
+        <div class="nc" tabindex="0"><span class="v">50万円以下</span><span class="d">37条書面を交付しなかった場合の罰金</span></div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <h4>出典</h4>
+    <ul>
+      <li>宅地建物取引業法（昭和27年法律第176号）第37条 — <a href="https://laws.e-gov.go.jp/law/327AC1000000176">e-Gov法令検索</a></li>
+      <li>国土交通省 不動産業（宅地建物取引業法） — <a href="https://www.mlit.go.jp/totikensangyo/const/1_6_bf_000030.html">mlit.go.jp</a></li>
+    </ul>
+    <div class="sibling">
+      <a href="../index.html">総目次</a>
+      <a href="35条書面.html">← 35条書面</a>
+      <a href="業務上の規制.html">業務上の規制</a>
+      <a href="免許制度.html">免許制度</a>
+    </div>
+  </footer>
+
+</div>
+
+<script>
+  (function () {
+    var root = document.documentElement;
+    document.getElementById('theme').addEventListener('click', function () {
+      if (root.getAttribute('data-theme')) { root.removeAttribute('data-theme'); return; }
+      var dark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      root.setAttribute('data-theme', dark ? 'light' : 'dark');
+    });
+    var maskBtn = document.getElementById('mask');
+    var grid = document.getElementById('numgrid');
+    maskBtn.addEventListener('click', function () {
+      var on = grid.classList.toggle('masked');
+      maskBtn.setAttribute('aria-pressed', String(on));
+      maskBtn.textContent = on ? '答えを表示' : '数値を隠す';
+    });
+    var links = Array.prototype.slice.call(document.querySelectorAll('nav.rail ol a'));
+    var map = {};
+    links.forEach(function (a) { map[a.getAttribute('href').slice(1)] = a; });
+    var seen = [];
+    var obs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        var i = seen.indexOf(e.target.id);
+        if (e.isIntersecting && i < 0) seen.push(e.target.id);
+        if (!e.isIntersecting && i >= 0) seen.splice(i, 1);
+      });
+      links.forEach(function (a) { a.classList.remove('on'); });
+      if (seen.length) {
+        var order = Object.keys(map);
+        seen.sort(function (a, b) { return order.indexOf(a) - order.indexOf(b); });
+        map[seen[0]].classList.add('on');
+      }
+    }, { rootMargin: '-10% 0px -70% 0px' });
+    document.querySelectorAll('main section').forEach(function (s) { obs.observe(s); });
+  })();
+</script>

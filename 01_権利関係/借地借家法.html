@@ -1,0 +1,997 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>借地借家法 — 宅建士試験 2026年度</title>
+
+<style>
+  :root {
+    --paper:#EBEDE9; --surface:#F8F9F6; --sunk:#E1E4DE; --ink:#151F2A; --muted:#5D6B78;
+    --rule:#CDD2CB; --hair:#DCE0D9; --accent:#B8342A; --accent-soft:#F3DEDB;
+    --blue:#2A5F86; --blue-soft:#DCE6EE;
+    --font-display:"Hiragino Mincho ProN","Yu Mincho","YuMincho","Noto Serif JP",serif;
+    --font-body:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","YuGothic","Noto Sans JP",system-ui,sans-serif;
+    --font-mono:ui-monospace,"SFMono-Regular","SF Mono",Menlo,Consolas,monospace;
+    --measure:68ch;
+    --s1:.35rem; --s2:.7rem; --s3:1.1rem; --s4:1.7rem; --s5:2.6rem; --s6:4rem;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper:#0D1B29; --surface:#132534; --sunk:#0A1622; --ink:#DAE4EC; --muted:#8CA1B3;
+      --rule:#26415A; --hair:#1D3448; --accent:#FF7059; --accent-soft:#3A1F1D;
+      --blue:#6FB6DC; --blue-soft:#14293A;
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper:#0D1B29; --surface:#132534; --sunk:#0A1622; --ink:#DAE4EC; --muted:#8CA1B3;
+    --rule:#26415A; --hair:#1D3448; --accent:#FF7059; --accent-soft:#3A1F1D;
+    --blue:#6FB6DC; --blue-soft:#14293A;
+  }
+
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--paper); color:var(--ink); font-family:var(--font-body);
+    font-size:16px; line-height:1.9; -webkit-font-smoothing:antialiased; font-feature-settings:"palt" 1; }
+
+  .wrap { display:grid; grid-template-columns:15.5rem minmax(0,1fr); gap:var(--s6);
+    max-width:80rem; margin:0 auto; padding:0 var(--s4) var(--s6); align-items:start; }
+  @media (max-width:60rem){ .wrap{ grid-template-columns:minmax(0,1fr); gap:var(--s4); padding:0 var(--s3) var(--s5);} }
+
+  .masthead { grid-column:1/-1; padding:var(--s5) 0 var(--s4); border-bottom:2px solid var(--ink);
+    margin-bottom:var(--s2); display:flex; flex-wrap:wrap; align-items:flex-end; justify-content:space-between; gap:var(--s3); }
+  .eyebrow { font-family:var(--font-mono); font-size:.72rem; letter-spacing:.16em; text-transform:uppercase;
+    color:var(--muted); display:flex; align-items:center; gap:.6em; }
+  .eyebrow::before { content:""; width:2.2rem; height:1px; background:var(--accent); }
+  h1 { font-family:var(--font-display); font-weight:600; font-size:clamp(2rem,1.4rem + 2.6vw,3.1rem);
+    line-height:1.2; letter-spacing:.04em; margin:var(--s2) 0 var(--s3); text-wrap:balance; }
+  .facts { display:flex; flex-wrap:wrap; gap:0 var(--s3); font-size:.82rem; color:var(--muted); list-style:none; margin:0; padding:0; }
+  .facts b { font-family:var(--font-mono); font-variant-numeric:tabular-nums; color:var(--ink); font-weight:600; }
+  .toggles { display:flex; gap:var(--s1); }
+  button { font-family:var(--font-body); font-size:.78rem; color:var(--muted); background:var(--surface);
+    border:1px solid var(--rule); border-radius:2px; padding:.4em .9em; cursor:pointer; transition:color .15s,border-color .15s; }
+  button:hover { color:var(--ink); border-color:var(--ink); }
+  button:focus-visible { outline:2px solid var(--accent); outline-offset:2px; }
+  button[aria-pressed="true"] { color:var(--accent); border-color:var(--accent); }
+
+  nav.rail { position:sticky; top:var(--s3); font-size:.82rem; max-height:calc(100vh - 3rem); overflow-y:auto; padding-bottom:var(--s3); }
+  nav.rail h2 { font-family:var(--font-mono); font-size:.68rem; letter-spacing:.16em; text-transform:uppercase; color:var(--muted); margin:0 0 var(--s2); font-weight:500; }
+  nav.rail ol { list-style:none; margin:0; padding:0; display:flex; flex-direction:column; }
+  nav.rail a { display:block; padding:.3em 0 .3em .9em; color:var(--muted); text-decoration:none; border-left:2px solid var(--hair); line-height:1.5; }
+  nav.rail a:hover { color:var(--ink); border-left-color:var(--rule); }
+  nav.rail a.on { color:var(--ink); border-left-color:var(--accent); font-weight:600; }
+  nav.rail a .num { font-family:var(--font-mono); font-size:.72rem; color:var(--muted); margin-right:.5em; }
+  @media (max-width:60rem){
+    nav.rail{ position:static; max-height:none; border-bottom:1px solid var(--rule); padding-bottom:var(--s3); }
+    nav.rail ol{ display:grid; grid-template-columns:repeat(auto-fill,minmax(9rem,1fr)); gap:0 var(--s2); }
+  }
+
+  main { min-width:0; }
+  section { padding-top:var(--s5); scroll-margin-top:var(--s3); }
+  section > * { max-width:var(--measure); }
+  section > figure, section > .scroll { max-width:none; }
+
+  h2.sec { font-family:var(--font-display); font-size:clamp(1.45rem,1.2rem + .9vw,1.9rem); font-weight:600;
+    letter-spacing:.04em; margin:0 0 var(--s3); padding-bottom:var(--s2); border-bottom:1px solid var(--rule);
+    display:flex; align-items:baseline; gap:.7em; max-width:none; }
+  h2.sec .num { font-family:var(--font-mono); font-size:.8rem; letter-spacing:.1em; color:var(--accent); font-weight:500; }
+  h3 { font-family:var(--font-body); font-size:1.06rem; font-weight:700; letter-spacing:.02em;
+    margin:var(--s4) 0 var(--s2); padding-left:.7em; border-left:3px solid var(--ink); }
+  p { margin:0 0 var(--s3); }
+  a { color:var(--blue); text-underline-offset:.2em; }
+  em { font-style:normal; background:linear-gradient(transparent 62%, var(--accent-soft) 62%); font-weight:600; }
+  ul, ol { margin:0 0 var(--s3); padding-left:1.3em; }
+  li { margin-bottom:var(--s1); }
+  .lead { font-size:1.05rem; color:var(--muted); }
+
+  .call { max-width:var(--measure); margin:0 0 var(--s3); padding:var(--s3) var(--s3) var(--s3) var(--s4);
+    background:var(--surface); border:1px solid var(--hair); border-left:3px solid var(--rule); border-radius:2px; font-size:.94rem; }
+  .call > :last-child { margin-bottom:0; }
+  .call .tag { display:block; font-family:var(--font-mono); font-size:.68rem; letter-spacing:.16em; text-transform:uppercase; color:var(--muted); margin-bottom:var(--s1); }
+  .call.trap { border-left-color:var(--accent); background:var(--accent-soft); }
+  .call.trap .tag { color:var(--accent); }
+  .call.exam { border-left-color:var(--ink); }
+  .call.exam .tag { color:var(--ink); }
+  .call.tip { border-left-color:var(--blue); background:var(--blue-soft); }
+  .call.tip .tag { color:var(--blue); }
+
+  .scroll { overflow-x:auto; margin:0 0 var(--s3); -webkit-overflow-scrolling:touch; }
+  table { border-collapse:collapse; width:100%; font-size:.88rem; line-height:1.6; }
+  caption { text-align:left; font-size:.78rem; color:var(--muted); padding-bottom:var(--s1); font-family:var(--font-mono); letter-spacing:.08em; }
+  th, td { padding:.58em .75em; text-align:left; vertical-align:top; border-bottom:1px solid var(--hair); }
+  thead th { font-size:.74rem; letter-spacing:.08em; color:var(--muted); font-weight:600; border-bottom:1px solid var(--ink); }
+  tbody tr:hover { background:var(--surface); }
+  td.n, th.n { text-align:center; font-family:var(--font-mono); font-variant-numeric:tabular-nums; white-space:nowrap; }
+  .no { color:var(--accent); font-weight:700; }
+  .yes { color:var(--muted); }
+  .tri { color:var(--blue); }
+  table.vs thead th:nth-child(2) { color:var(--accent); font-size:.9rem; }
+  table.vs thead th:nth-child(3) { color:var(--blue); font-size:.9rem; }
+  table.vs tbody td:first-child { white-space:nowrap; font-weight:600; }
+  table.teiki thead th { font-size:.8rem; color:var(--ink); }
+  table.teiki tbody td:first-child { white-space:nowrap; font-weight:600; }
+
+  figure { margin:0 0 var(--s4); }
+  figure svg { display:block; width:100%; height:auto; }
+  figcaption { font-size:.78rem; color:var(--muted); font-family:var(--font-mono); letter-spacing:.06em; margin-top:var(--s2); padding-top:var(--s1); border-top:1px solid var(--hair); }
+  .plate { background:var(--surface); border:1px solid var(--hair); border-radius:2px; padding:var(--s3); }
+  .svg-ink { fill:none; stroke:var(--ink); stroke-width:1.4; }
+  .svg-hair { fill:none; stroke:var(--rule); stroke-width:1; }
+  .svg-dim { fill:none; stroke:var(--blue); stroke-width:1; }
+  .svg-acc { fill:none; stroke:var(--accent); stroke-width:1.6; }
+  .svg-fill { fill:var(--sunk); stroke:var(--rule); stroke-width:1; }
+  .svg-accfill { fill:var(--accent-soft); stroke:var(--accent); stroke-width:1.2; }
+  .svg-bluefill { fill:var(--blue-soft); stroke:var(--blue); stroke-width:1.2; }
+  text { font-family:var(--font-body); fill:var(--ink); font-size:12px; }
+  text.lbl { font-family:var(--font-mono); fill:var(--muted); font-size:10.5px; letter-spacing:.06em; }
+  text.dimt { font-family:var(--font-mono); fill:var(--blue); font-size:11px; }
+  text.acct { fill:var(--accent); font-size:11.5px; font-weight:700; }
+  text.big { font-family:var(--font-mono); font-size:15px; font-weight:600; }
+
+  .nums { display:grid; grid-template-columns:repeat(auto-fill,minmax(11.5rem,1fr)); gap:var(--s2); }
+  .nc { background:var(--surface); border:1px solid var(--hair); border-radius:2px; padding:var(--s3) var(--s3) var(--s2); display:flex; flex-direction:column; gap:var(--s1); }
+  .nc .v { font-family:var(--font-mono); font-variant-numeric:tabular-nums; font-size:1.25rem; font-weight:600; line-height:1.25; color:var(--accent); }
+  .nc .d { font-size:.8rem; color:var(--muted); line-height:1.6; }
+  .nums.masked .v { color:transparent; background:var(--rule); border-radius:2px; user-select:none; }
+  .nums.masked .nc:hover .v, .nums.masked .nc:focus-within .v { color:var(--accent); background:transparent; }
+  .nc:focus-visible { outline:2px solid var(--accent); outline-offset:2px; }
+  .masthead-note { font-size:.78rem; color:var(--muted); margin-bottom:var(--s2); }
+
+  table.traps td:first-child { color:var(--muted); }
+  table.traps td:first-child::before { content:"「"; }
+  table.traps td:first-child::after { content:"」"; }
+  table.traps td:last-child strong { color:var(--accent); }
+
+  footer { grid-column:1/-1; margin-top:var(--s6); padding-top:var(--s3); border-top:1px solid var(--rule); font-size:.8rem; color:var(--muted); }
+  footer ul { list-style:none; padding:0; }
+  footer li { margin-bottom:var(--s1); }
+  .sibling { display:flex; flex-wrap:wrap; gap:var(--s2); margin-top:var(--s3); }
+  .sibling a { font-size:.8rem; text-decoration:none; border:1px solid var(--rule); border-radius:2px; padding:.35em .8em; color:var(--muted); }
+  .sibling a:hover { color:var(--ink); border-color:var(--ink); }
+
+  /* ── 肢別○×ドリル ── */
+  .drillbar { max-width:none; display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between;
+    gap:var(--s2); margin:0 0 var(--s3); padding:var(--s2) var(--s3); background:var(--surface);
+    border:1px solid var(--rule); border-radius:2px; position:sticky; top:0; z-index:5; }
+  .drillbar .score { font-family:var(--font-mono); font-size:.8rem; font-variant-numeric:tabular-nums;
+    color:var(--muted); letter-spacing:.04em; }
+  .drillbar .score b { color:var(--ink); font-weight:600; }
+  .drillbar .score .pct { color:var(--accent); font-weight:600; }
+  .drillbar .dbtns { display:flex; gap:var(--s1); }
+  ol.drill { max-width:none; list-style:none; margin:0; padding:0; counter-reset:dq; }
+  li.dq { counter-increment:dq; margin:0 0 var(--s2); padding:var(--s3);
+    background:var(--surface); border:1px solid var(--hair); border-left:3px solid var(--rule); border-radius:2px; }
+  li.dq > .s { margin:0; font-size:.95rem; line-height:1.85; max-width:var(--measure); }
+  li.dq > .s::before { content:counter(dq,decimal-leading-zero); font-family:var(--font-mono);
+    font-size:.72rem; letter-spacing:.08em; color:var(--muted); margin-right:.9em; }
+  li.dq .ch { display:flex; gap:var(--s1); margin-top:var(--s2); }
+  li.dq .ch button { font-family:var(--font-display); font-size:1.05rem; line-height:1; min-width:3.6rem; padding:.4em 0; }
+  li.dq .ch button[data-picked] { color:var(--ink); border-color:var(--ink); font-weight:700; }
+  li.dq .ex { display:none; margin-top:var(--s3); padding-top:var(--s2); border-top:1px solid var(--hair); }
+  li.dq.done .ex { display:block; }
+  li.dq .ex .verdict { display:block; font-family:var(--font-mono); font-size:.7rem; letter-spacing:.14em;
+    margin-bottom:var(--s1); }
+  li.dq .ex p { margin:0; font-size:.88rem; line-height:1.8; color:var(--muted); max-width:var(--measure); }
+  li.dq .ex p strong { color:var(--ink); font-weight:700; }
+  li.dq.ok { border-left-color:var(--blue); }
+  li.dq.ok .verdict { color:var(--blue); }
+  li.dq.ng { border-left-color:var(--accent); background:var(--accent-soft); }
+  li.dq.ng .verdict { color:var(--accent); }
+  li.dq.ng .ex p strong { color:var(--accent); }
+  ol.drill.onlyng li.dq:not(.ng) { display:none; }
+  .drilldone { font-size:.84rem; color:var(--muted); padding:var(--s3); border:1px dashed var(--rule);
+    border-radius:2px; text-align:center; }
+
+  @media (prefers-reduced-motion: reduce){ *{ transition:none !important; animation:none !important; scroll-behavior:auto !important; } }
+  html { scroll-behavior:smooth; }
+  .eyebrow a { color:var(--accent); text-decoration:none; }
+  .eyebrow a:hover { text-decoration:underline; text-underline-offset:.2em; }
+  nav.rail a.home { border-left:none; padding:0 0 var(--s2); color:var(--accent);
+    font-family:var(--font-mono); font-size:.72rem; letter-spacing:.1em; }
+  nav.rail a.home:hover { color:var(--accent); text-decoration:underline; text-underline-offset:.2em; }
+</style>
+
+<div class="wrap">
+
+  <header class="masthead">
+    <div>
+      <div class="eyebrow"><a href="../index.html">← 総目次</a> &nbsp;/&nbsp; 01 権利関係 &nbsp;/&nbsp; 宅建士試験 2026年度</div>
+      <h1>借地借家法</h1>
+      <ul class="facts">
+        <li>法令基準日 <b>2026-04-01</b></li>
+        <li>出題数 <b>2問</b></li>
+        <li>ドリル <b>36肢</b></li>
+        <li>目標 <b>2問とも正解</b></li>
+        <li>更新 <b>2026-08-16</b></li>
+      </ul>
+    </div>
+    <div class="toggles">
+      <button id="mask" type="button" aria-pressed="false">数値を隠す</button>
+      <button id="theme" type="button">配色切替</button>
+    </div>
+  </header>
+
+  <nav class="rail" aria-label="目次">
+    <a class="home" href="../index.html">← 総目次</a>
+    <h2>Contents</h2>
+    <ol>
+      <li><a href="#overview"><span class="num">00</span>全体像</a></li>
+      <li><a href="#shakuchi"><span class="num">01</span>借地 — 存続期間と更新</a></li>
+      <li><a href="#kaishu"><span class="num">02</span>建物買取請求権</a></li>
+      <li><a href="#taikou-chi"><span class="num">03</span>借地権の対抗要件</a></li>
+      <li><a href="#teiki-chi"><span class="num">04</span>定期借地権</a></li>
+      <li><a href="#shakuya"><span class="num">05</span>借家 — 存続期間と更新</a></li>
+      <li><a href="#taikou-ya"><span class="num">06</span>借家権の対抗要件</a></li>
+      <li><a href="#teiki-ya"><span class="num">07</span>定期建物賃貸借</a></li>
+      <li><a href="#zousaku"><span class="num">08</span>造作買取請求権</a></li>
+      <li><a href="#deru"><span class="num">09</span>よく出る論点</a></li>
+      <li><a href="#hikkake"><span class="num">10</span>ひっかけ一覧</a></li>
+      <li><a href="#suji"><span class="num">11</span>数字まとめ</a></li>
+      <li><a href="#drill"><span class="num">12</span>肢別○×ドリル</a></li>
+    </ol>
+  </nav>
+
+  <main>
+
+    <!-- 00 -->
+    <section id="overview">
+      <h2 class="sec"><span class="num">00</span>全体像</h2>
+      <p class="lead">民法の賃貸借だけでは借主が弱すぎるため、<em>借主を保護するために民法を上書きする</em>特別法。出題は例年<em>借地から1問・借家から1問</em>で安定しており、権利関係14問のなかで最も取りやすい2問。</p>
+
+      <figure class="plate">
+        <svg viewBox="0 0 720 220" role="img" aria-label="借地借家法は借地権と借家権の2本柱。借地権は建物の所有を目的とする地上権または土地の賃借権で存続期間30年以上、借家権は建物の賃貸借で存続期間の下限がない。いずれも借主に不利な特約は無効。">
+          <rect x="24" y="46" width="320" height="126" class="svg-accfill" rx="2"/>
+          <text x="184" y="74" text-anchor="middle" class="big" fill="var(--accent)">借地権</text>
+          <text x="184" y="100" text-anchor="middle">建物の所有を目的とする</text>
+          <text x="184" y="120" text-anchor="middle">地上権または土地の賃借権</text>
+          <text x="184" y="146" text-anchor="middle" class="lbl">存続期間 30年以上／更新あり</text>
+          <text x="184" y="162" text-anchor="middle" class="lbl">対抗要件は建物の登記</text>
+
+          <rect x="376" y="46" width="320" height="126" class="svg-bluefill" rx="2"/>
+          <text x="536" y="74" text-anchor="middle" class="big" fill="var(--blue)">借家権</text>
+          <text x="536" y="100" text-anchor="middle">建物の賃貸借</text>
+          <text x="536" y="120" text-anchor="middle" class="lbl">（一時使用が明らかなものを除く）</text>
+          <text x="536" y="146" text-anchor="middle" class="lbl">存続期間の下限なし／更新あり</text>
+          <text x="536" y="162" text-anchor="middle" class="lbl">対抗要件は建物の引渡し</text>
+
+          <text x="24" y="30" class="lbl">借地借家法 — 民法の賃貸借を借主有利に上書きする</text>
+          <text x="360" y="202" text-anchor="middle" class="acct">借主に不利な特約は無効／借主に有利な特約は有効（片面的強行規定）</text>
+        </svg>
+        <figcaption>Fig.1 — 借地と借家の2本柱</figcaption>
+      </figure>
+
+      <div class="call exam">
+        <span class="tag">よく出る</span>
+        <p><strong>「建物の所有を目的とする」土地の賃借権だけが借地権。</strong>資材置場・駐車場・ゴルフ練習場などのために土地を借りても借地借家法は適用されず、<strong>民法の賃貸借</strong>になる。<br>
+        また<strong>一時使用が明らかな賃貸借</strong>には、借地・借家とも借地借家法の主要な規定が適用されない。</p>
+      </div>
+
+      <div class="call tip">
+        <span class="tag">覚え方</span>
+        <p>この法律の条文はすべて<strong>「借主に不利な特約は無効」</strong>という一点に収束する。迷ったら<strong>借主に有利なほうが正解</strong>と考えれば、知らない肢でも半分は当たる。</p>
+      </div>
+    </section>
+
+    <!-- 01 -->
+    <section id="shakuchi">
+      <h2 class="sec"><span class="num">01</span>借地 — 存続期間と更新</h2>
+
+      <figure class="plate">
+        <svg viewBox="0 0 720 190" role="img" aria-label="借地権の存続期間は当初30年以上、最初の更新は20年以上、2回目以降の更新は10年以上。これより短い期間を定めても法定の期間になる。">
+          <line x1="40" y1="110" x2="690" y2="110" class="svg-ink"/>
+
+          <rect x="40" y="72" width="230" height="30" class="svg-accfill"/>
+          <text x="155" y="92" text-anchor="middle" class="acct">当初 30年以上</text>
+          <text x="155" y="132" text-anchor="middle" class="lbl">30年より短い定めは30年に</text>
+          <text x="155" y="148" text-anchor="middle" class="lbl">30年より長い定めは有効</text>
+
+          <rect x="278" y="72" width="180" height="30" class="svg-accfill"/>
+          <text x="368" y="92" text-anchor="middle" class="acct">1回目の更新 20年以上</text>
+
+          <rect x="466" y="72" width="150" height="30" class="svg-accfill"/>
+          <text x="541" y="92" text-anchor="middle" class="acct">2回目以降 10年以上</text>
+
+          <rect x="624" y="72" width="66" height="30" class="svg-fill"/>
+          <text x="657" y="92" text-anchor="middle" class="lbl">…</text>
+
+          <line x1="278" y1="64" x2="278" y2="118" class="svg-hair" stroke-dasharray="3 3"/>
+          <line x1="466" y1="64" x2="466" y2="118" class="svg-hair" stroke-dasharray="3 3"/>
+          <text x="278" y="58" text-anchor="middle" class="dimt">更新①</text>
+          <text x="466" y="58" text-anchor="middle" class="dimt">更新②</text>
+
+          <text x="40" y="32" class="lbl">借地権の存続期間 — 短くする方向の特約は無効</text>
+          <text x="460" y="148" text-anchor="middle" class="lbl">更新後も同じルールで繰り返す</text>
+        </svg>
+        <figcaption>Fig.2 — 30年 → 20年 → 10年</figcaption>
+      </figure>
+
+      <div class="scroll">
+        <table>
+          <thead><tr><th>論点</th><th>内容</th></tr></thead>
+          <tbody>
+            <tr><td>当初の存続期間</td><td class="no"><strong>30年以上</strong>。30年より短い定め（期間を定めなかった場合を含む）は <strong>30年</strong> になる。30年より長い定めは有効</td></tr>
+            <tr><td>更新後の期間</td><td>1回目 <strong>20年以上</strong>／2回目以降 <strong>10年以上</strong></td></tr>
+            <tr>
+              <td><strong>合意更新・請求更新</strong></td>
+              <td>借地権者が更新を請求したとき、<strong>建物がある場合に限り</strong>、従前と同一の条件で更新したものとみなされる</td>
+            </tr>
+            <tr>
+              <td><strong>法定更新（使用継続）</strong></td>
+              <td>期間満了後も借地権者が土地の使用を継続するとき、<strong>建物がある場合に限り</strong>更新したものとみなされる</td>
+            </tr>
+            <tr>
+              <td class="no"><strong>更新を拒むには</strong></td>
+              <td class="no">借地権設定者が<strong>遅滞なく異議</strong>を述べ、かつその異議に<strong>正当の事由</strong>があること</td>
+            </tr>
+            <tr>
+              <td>正当の事由の判断</td>
+              <td>①双方が土地の使用を必要とする事情 ②借地に関する従前の経過 ③土地の利用状況 ④<strong>立退料の申出</strong>。<span class="tri">立退料だけでは正当事由にならず、補完的な要素にとどまる</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="call trap">
+        <span class="tag">ひっかけ</span>
+        <p><strong>更新されるのは「建物がある場合」に限られる。</strong>建物が滅失して存在しないときは、請求しても使用を継続しても更新されない。<br>
+        <strong>「30年より短い定めは無効になり期間の定めがないものとなる」は誤り。</strong>無効になるのではなく <strong>30年</strong> という期間に置き換わる。</p>
+      </div>
+
+      <h3>1-1　建物の滅失と再築</h3>
+      <div class="scroll">
+        <table>
+          <thead><tr><th>時期</th><th>内容</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><strong>当初の存続期間中</strong>に滅失</td>
+              <td>借地権者が残存期間を超えて存続する建物を築造し、借地権設定者が<strong>承諾</strong>したときは、承諾があった日または築造された日のいずれか<strong>早い日</strong>から <strong>20年間</strong> 存続する。<br><span class="tri">設定者が築造の通知を受けてから <strong>2か月以内</strong> に異議を述べなければ承諾したものとみなされる</span></td>
+            </tr>
+            <tr>
+              <td class="no"><strong>更新後</strong>に滅失</td>
+              <td class="no">借地権者は<strong>地上権の放棄・解約の申入れ</strong>ができる。設定者の承諾を得ずに再築すると、設定者は<strong>解約の申入れ</strong>ができる（いずれも <strong>3か月</strong> の経過で借地権は消滅）</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="call exam">
+        <span class="tag">よく出る</span>
+        <p><strong>「2か月以内に異議を述べなければ承諾とみなす」というみなし承諾の規定は、当初の存続期間中だけ。</strong>更新後の再築には適用されない。<br>
+        更新後は借地権者が勝手に再築すると解約されうる、という<strong>厳しい扱い</strong>になる点が対比のポイント。</p>
+      </div>
+    </section>
+
+    <!-- 02 -->
+    <section id="kaishu">
+      <h2 class="sec"><span class="num">02</span>建物買取請求権</h2>
+
+      <div class="scroll">
+        <table>
+          <thead><tr><th>場面</th><th>誰が誰に</th><th>要件</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><strong>更新されなかったとき</strong><br><span class="lbl">13条</span></td>
+              <td>借地権者 → 借地権設定者</td>
+              <td>存続期間が満了し更新がない場合、<strong>時価</strong>で建物等を買い取るよう請求できる</td>
+            </tr>
+            <tr>
+              <td><strong>第三者が建物を取得したとき</strong><br><span class="lbl">14条</span></td>
+              <td>建物を取得した第三者 → 借地権設定者</td>
+              <td>借地権の譲渡について設定者の承諾が得られないとき、<strong>時価</strong>で買い取るよう請求できる</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="call trap">
+        <span class="tag">ひっかけ</span>
+        <p><strong>債務不履行（賃料の不払い）で解除された場合、建物買取請求権は認められない。</strong>自分の落ち度で終了させておいて買い取れとは言えない、という趣旨。<br>
+        <strong>買取請求権は形成権</strong>で、請求すれば設定者の承諾なしに<strong>売買契約が成立</strong>する。「協議が必要」は誤り。<br>
+        なお<strong>定期借地権では建物買取請求権を排除できる</strong>（後述）。</p>
+      </div>
+
+      <h3>2-1　借地権の譲渡・転貸と裁判所の許可</h3>
+      <div class="scroll">
+        <table>
+          <thead><tr><th>論点</th><th>内容</th></tr></thead>
+          <tbody>
+            <tr><td>原則</td><td>借地権の譲渡・転貸には<strong>借地権設定者の承諾</strong>が必要（民法612条）</td></tr>
+            <tr><td class="no">代諾許可</td><td class="no">設定者が承諾しないとき、借地権者は<strong>裁判所</strong>に対し、承諾に代わる許可を申し立てられる（設定者に不利となるおそれがないとき）</td></tr>
+            <tr><td>競売の場合</td><td>建物を競売等で取得した第三者も、裁判所に承諾に代わる許可を申し立てられる</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 03 -->
+    <section id="taikou-chi">
+      <h2 class="sec"><span class="num">03</span>借地権の対抗要件</h2>
+
+      <div class="scroll">
+        <table>
+          <thead><tr><th>論点</th><th>内容</th></tr></thead>
+          <tbody>
+            <tr><td><strong>対抗要件</strong></td><td class="no">借地上の<strong>建物の登記</strong>があれば、土地の新所有者に借地権を対抗できる。<span class="tri">土地の賃借権の登記は不要</span></td></tr>
+            <tr><td>登記の名義</td><td class="no">借地権者<strong>自身の名義</strong>でなければならない。<strong>配偶者や子の名義では対抗できない</strong></td></tr>
+            <tr><td>登記の種類</td><td>表示に関する登記でもよい（所有権保存登記に限られない）</td></tr>
+            <tr>
+              <td>建物が滅失したとき</td>
+              <td>土地上の<strong>見やすい場所に</strong>、建物を特定するために必要な事項・滅失日・再築する旨を<strong>掲示</strong>すれば、滅失の日から <strong>2年間</strong> は対抗できる（その間に建物を再築し登記すれば継続）</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="call trap">
+        <span class="tag">ひっかけ</span>
+        <p><strong>建物の登記が「借地権者本人の名義」でなければ対抗できない。</strong>妻名義・長男名義では対抗力がないというのが判例。ここが最頻出。<br>
+        <strong>掲示による対抗力は2年間の暫定措置</strong>。恒久的なものではない。</p>
+      </div>
+    </section>
+
+    <!-- 04 -->
+    <section id="teiki-chi">
+      <h2 class="sec"><span class="num">04</span>定期借地権</h2>
+      <p class="lead">更新のない借地権が3種類。<em>期間・用途・書面の要否</em>の3点で区別する。</p>
+
+      <div class="scroll">
+        <table class="teiki">
+          <thead>
+            <tr><th></th><th>一般定期借地権<br><span class="lbl">22条</span></th><th>事業用定期借地権等<br><span class="lbl">23条</span></th><th>建物譲渡特約付借地権<br><span class="lbl">24条</span></th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>存続期間</strong></td><td class="n no">50年以上</td><td class="n no">10年以上50年未満</td><td class="n no">30年以上</td></tr>
+            <tr><td><strong>用途</strong></td><td class="n">制限なし</td><td class="n no"><strong>事業用</strong>に限る<br><span class="lbl">居住用は不可</span></td><td class="n">制限なし</td></tr>
+            <tr>
+              <td><strong>方式</strong></td>
+              <td><strong>書面</strong>（電磁的記録も可）</td>
+              <td class="no"><strong>公正証書</strong>に限る</td>
+              <td class="tri">書面は不要（口頭でも可）</td>
+            </tr>
+            <tr>
+              <td>特約の内容</td>
+              <td>更新なし・再築による延長なし・<strong>建物買取請求なし</strong>の3点を定める</td>
+              <td>同左（30年以上50年未満の場合は特約が必要／10年以上30年未満は当然に適用なし）</td>
+              <td>30年以上経過後に<strong>建物を相当の対価で譲渡</strong>する旨を定める</td>
+            </tr>
+            <tr><td>終了のしかた</td><td>期間満了で終了</td><td>期間満了で終了</td><td class="no">建物の譲渡により借地権が<strong>消滅</strong>する</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="call tip">
+        <span class="tag">覚え方</span>
+        <p><strong>「50年以上・10〜50年・30年以上」。</strong>数字の大小と厳格さが対応している。<br>
+        <strong>いちばん短く設定できる事業用だけが公正証書</strong>という最も厳格な方式を要求される。短期で追い出せるぶん、意思確認を厳しくする趣旨。<br>
+        <strong>建物譲渡特約付だけは書面すら要らない</strong>。最後に建物を買い取ってもらえるので借主の不利益が小さいから。</p>
+      </div>
+
+      <div class="call trap">
+        <span class="tag">ひっかけ</span>
+        <p><strong>事業用定期借地権は「居住用」には使えない。</strong>社宅・賃貸マンションなど、居住のための建物は事業目的であってもダメ。<br>
+        <strong>「一般定期借地権は公正証書によらなければならない」は誤り。</strong>公正証書が必須なのは事業用だけ。</p>
+      </div>
+    </section>
+
+    <!-- 05 -->
+    <section id="shakuya">
+      <h2 class="sec"><span class="num">05</span>借家 — 存続期間と更新</h2>
+
+      <div class="scroll">
+        <table>
+          <thead><tr><th>論点</th><th>内容</th></tr></thead>
+          <tbody>
+            <tr><td><strong>存続期間の下限</strong></td><td class="no"><strong>なし</strong>。1年でも6か月でもよい</td></tr>
+            <tr><td class="no"><strong>1年未満の定め</strong></td><td class="no"><strong>期間の定めがない</strong>建物の賃貸借とみなされる（無効になるのではない）</td></tr>
+            <tr><td>上限</td><td>なし（民法の50年の制限は適用されない）</td></tr>
+            <tr>
+              <td><strong>期間の定めがある場合の更新拒絶</strong></td>
+              <td class="no">期間満了の <strong>1年前から6か月前まで</strong> の間に、更新をしない旨の通知をしなければ、従前と同一の条件で更新したものとみなされる（<strong>期間は定めのないもの</strong>となる）</td>
+            </tr>
+            <tr>
+              <td>通知後の使用継続</td>
+              <td>通知をしていても、期間満了後に賃借人が使用を継続し、賃貸人が<strong>遅滞なく異議</strong>を述べなければ更新したものとみなされる</td>
+            </tr>
+            <tr>
+              <td><strong>期間の定めがない場合の解約</strong></td>
+              <td class="no">賃貸人からの解約申入れ → <strong>6か月</strong> の経過で終了<br class="tri">賃借人からの解約申入れ → <strong>3か月</strong> の経過で終了（民法617条）</td>
+            </tr>
+            <tr><td class="no"><strong>正当の事由</strong></td><td class="no">賃貸人からの更新拒絶・解約申入れには<strong>正当の事由</strong>が必要。賃借人からの解約には不要</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="call tip">
+        <span class="tag">覚え方</span>
+        <p><strong>「大家は6か月・店子は3か月」。</strong>出ていけと言う側には長い猶予と正当事由が要り、出ていく側は短くて理由も要らない。<br>
+        更新拒絶の通知期間 <strong>1年前〜6か月前</strong> は、<a href="../03_法令上の制限/農地法.html">農地法の賃貸借</a>の法定更新と同じ数字。</p>
+      </div>
+
+      <div class="call trap">
+        <span class="tag">ひっかけ</span>
+        <p><strong>1年未満の期間を定めると「期間の定めがない」ものになる。</strong>借地の「30年に伸びる」とは処理が違う。<br>
+        <strong>法定更新後は「期間の定めがないもの」になる。</strong>従前と同じ期間で更新されるのではない。</p>
+      </div>
+    </section>
+
+    <!-- 06 -->
+    <section id="taikou-ya">
+      <h2 class="sec"><span class="num">06</span>借家権の対抗要件</h2>
+
+      <div class="scroll">
+        <table>
+          <thead><tr><th>論点</th><th>内容</th></tr></thead>
+          <tbody>
+            <tr><td><strong>対抗要件</strong></td><td class="no"><strong>建物の引渡し</strong>を受けていれば、その後に建物を取得した者に賃借権を対抗できる。<span class="tri">賃借権の登記は不要</span></td></tr>
+            <tr><td>賃貸人たる地位の移転</td><td>建物が譲渡されると、賃貸人たる地位は<strong>新所有者に当然に移転</strong>する。敷金返還義務・費用償還義務も新所有者が承継する</td></tr>
+            <tr>
+              <td><strong>造作の対象外</strong></td>
+              <td>建物の賃貸借が期間満了・解約申入れで終了する場合、賃貸人は<strong>転借人</strong>にその旨を通知しなければ終了を対抗できない。通知後 <strong>6か月</strong> で転貸借は終了する</td>
+            </tr>
+            <tr>
+              <td><strong>借地上の建物の賃借人の保護</strong></td>
+              <td>借地権の存続期間の満了により建物の賃借人が土地を明け渡すべきときは、賃借人がその1年前までに借地権の満了を知らなかった場合、裁判所は請求により <strong>1年を超えない範囲で</strong> 明渡しの期限を許与できる</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="call exam">
+        <span class="tag">よく出る</span>
+        <p><strong>借地は「建物の登記」、借家は「建物の引渡し」。</strong>どちらも<strong>賃借権の登記は要らない</strong>。<br>
+        民法の原則では賃借権の対抗要件は登記だが、賃貸人が登記に協力する義務はないので実際にはほぼ登記されない。だから借地借家法が別の対抗要件を用意している、という理屈で覚える。</p>
+      </div>
+    </section>
+
+    <!-- 07 -->
+    <section id="teiki-ya">
+      <h2 class="sec"><span class="num">07</span>定期建物賃貸借</h2>
+
+      <div class="scroll">
+        <table class="vs">
+          <thead><tr><th>項目</th><th>定期建物賃貸借</th><th>普通の建物賃貸借</th></tr></thead>
+          <tbody>
+            <tr><td>更新</td><td class="no"><strong>更新がない</strong>（期間満了で確定的に終了）</td><td>法定更新あり</td></tr>
+            <tr><td>存続期間</td><td class="no">制限なし。<strong>1年未満でもよい</strong></td><td>1年未満は期間の定めがないものとみなす</td></tr>
+            <tr><td><strong>契約の方式</strong></td><td class="no"><strong>公正証書等の書面</strong>による（電磁的記録も可）</td><td>方式は自由（口頭でも可）</td></tr>
+            <tr>
+              <td class="no"><strong>事前の説明</strong></td>
+              <td class="no">契約前に、更新がなく期間の満了により終了することを記載した<strong>書面を交付して説明</strong>しなければならない（賃借人の承諾があれば電磁的方法も可）<br><strong>怠ると更新がない旨の定めは無効</strong>になる</td>
+              <td>不要</td>
+            </tr>
+            <tr>
+              <td><strong>終了の通知</strong></td>
+              <td class="no">期間が <strong>1年以上</strong> のときは、期間満了の <strong>1年前から6か月前まで</strong> に終了する旨を通知しなければ終了を対抗できない</td>
+              <td>更新拒絶の通知＋正当事由</td>
+            </tr>
+            <tr>
+              <td><strong>中途解約</strong></td>
+              <td>床面積 <strong>200㎡未満</strong> の<strong>居住用</strong>建物で、転勤・療養・親族の介護等のやむを得ない事情があるとき、賃借人は解約を申し入れられる（<strong>1か月</strong> の経過で終了）</td>
+              <td>特約による</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="call trap">
+        <span class="tag">ひっかけ</span>
+        <p><strong>「書面による契約」と「事前の書面による説明」は別々に必要。</strong>契約書に「更新がない」と書いてあるだけでは足りず、<strong>契約書とは別の書面</strong>で説明しなければならない（判例）。説明を怠ると、更新がない旨の定めだけが無効となり、<strong>普通の借家契約として更新される</strong>。<br>
+        <strong>中途解約が認められるのは「200㎡未満」かつ「居住用」かつ「やむを得ない事情」の3要件。</strong>店舗や広い住宅では使えない。</p>
+      </div>
+
+      <div class="call exam">
+        <span class="tag">よく出る</span>
+        <p><strong>定期建物賃貸借では「賃料の増減額請求をしない」旨の特約が有効。</strong>普通の借家では借主に不利な特約は無効だが、定期借家では<strong>賃料の増額も減額もしない特約を有効にできる</strong>点が例外。<br>
+        なお普通の借家でも<strong>「増額しない」特約は有効</strong>（借主に有利だから）、<strong>「減額しない」特約は無効</strong>。</p>
+      </div>
+
+      <h3>7-1　取壊し予定の建物の賃貸借</h3>
+      <p>法令または契約により一定の期間を経過した後に建物を取り壊すべきことが明らかな場合、建物を取り壊すこととなる時に賃貸借が終了する旨の特約を定められる。この特約は<strong>書面</strong>（電磁的記録も可）によらなければならない。</p>
+    </section>
+
+    <!-- 08 -->
+    <section id="zousaku">
+      <h2 class="sec"><span class="num">08</span>造作買取請求権</h2>
+
+      <div class="scroll">
+        <table>
+          <thead><tr><th>論点</th><th>内容</th></tr></thead>
+          <tbody>
+            <tr><td>内容</td><td>賃貸人の<strong>同意を得て</strong>建物に付加した畳・建具その他の造作について、賃貸借終了時に<strong>時価</strong>での買取りを請求できる</td></tr>
+            <tr><td class="no"><strong>特約で排除できるか</strong></td><td class="no"><strong>できる</strong>。「造作買取請求権を行使しない」という特約は<strong>有効</strong></td></tr>
+            <tr><td>債務不履行で解除されたとき</td><td>造作買取請求権は認められない</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="call trap">
+        <span class="tag">ひっかけ</span>
+        <p><strong>造作買取請求権は特約で排除できるが、建物買取請求権（借地）は原則として排除できない。</strong>この非対称が最頻出。<br>
+        造作は借主が勝手に付けたもので建物の価値の中心ではないため、借主保護の必要性が低い、と理解する。</p>
+      </div>
+    </section>
+
+    <!-- 09 -->
+    <section id="deru">
+      <h2 class="sec"><span class="num">09</span>よく出る論点</h2>
+      <div class="scroll">
+        <table>
+          <thead><tr><th class="n">順位</th><th>論点</th><th>要点</th></tr></thead>
+          <tbody>
+            <tr><td class="n">1</td><td><strong>定期借地権の3類型</strong></td><td>50年／10〜50年（事業用・公正証書）／30年（書面不要）</td></tr>
+            <tr><td class="n">2</td><td><strong>定期建物賃貸借</strong></td><td>書面契約＋事前の書面説明の2段構え／1年前〜6か月前の通知／200㎡未満の中途解約</td></tr>
+            <tr><td class="n">3</td><td>対抗要件</td><td>借地は建物の登記（本人名義）／借家は建物の引渡し</td></tr>
+            <tr><td class="n">4</td><td>存続期間と更新</td><td>借地30・20・10年／借家は下限なし・1年未満は期間の定めなし</td></tr>
+            <tr><td class="n">5</td><td>解約申入れ</td><td>賃貸人6か月＋正当事由／賃借人3か月</td></tr>
+            <tr><td class="n">6</td><td>買取請求権</td><td>造作は特約で排除できる／建物はできない／債務不履行解除では不可</td></tr>
+            <tr><td class="n">7</td><td>建物の再築</td><td>当初期間中は2か月のみなし承諾／更新後は解約されうる</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 10 -->
+    <section id="hikkake">
+      <h2 class="sec"><span class="num">10</span>ひっかけ一覧</h2>
+      <div class="scroll">
+        <table class="traps">
+          <thead><tr><th>こう書かれたら疑う</th><th>正しくは</th></tr></thead>
+          <tbody>
+            <tr><td>駐車場として土地を借りる契約にも借地借家法が適用される</td><td><strong>建物の所有を目的</strong>としないので適用されない</td></tr>
+            <tr><td>借地権の存続期間を20年と定めた契約は無効である</td><td>無効ではなく <strong>30年</strong> になる</td></tr>
+            <tr><td>建物が滅失していても更新請求により更新される</td><td><strong>建物がある場合に限り</strong>更新される</td></tr>
+            <tr><td>立退料を提供すれば正当事由が認められる</td><td>立退料は<strong>補完的な要素</strong>にとどまる</td></tr>
+            <tr><td>借地権の対抗要件は土地の賃借権の登記である</td><td><strong>建物の登記</strong>があればよい</td></tr>
+            <tr><td>配偶者名義の建物登記でも借地権を対抗できる</td><td><strong>借地権者本人の名義</strong>でなければならない</td></tr>
+            <tr><td>債務不履行で解除されても建物買取請求ができる</td><td><strong>できない</strong></td></tr>
+            <tr><td>一般定期借地権は公正証書によらなければならない</td><td><strong>書面</strong>であればよい（公正証書が必須なのは事業用）</td></tr>
+            <tr><td>事業用定期借地権で社宅を建てられる</td><td>居住用は<strong>不可</strong></td></tr>
+            <tr><td>建物譲渡特約付借地権も書面が必要である</td><td><strong>書面は不要</strong></td></tr>
+            <tr><td>建物の賃貸借で期間を6か月と定めると無効になる</td><td><strong>期間の定めがない</strong>賃貸借とみなされる</td></tr>
+            <tr><td>賃借人からの解約申入れにも正当事由が必要</td><td>正当事由が必要なのは<strong>賃貸人</strong>から</td></tr>
+            <tr><td>賃貸人からの解約申入れは3か月で終了する</td><td><strong>6か月</strong>（3か月は賃借人から）</td></tr>
+            <tr><td>借家権の対抗要件は賃借権の登記である</td><td><strong>建物の引渡し</strong>でよい</td></tr>
+            <tr><td>定期建物賃貸借は契約書に明記すれば足りる</td><td>契約書とは<strong>別の書面</strong>で事前に説明する必要がある</td></tr>
+            <tr><td>定期建物賃貸借なら賃借人はいつでも中途解約できる</td><td><strong>200㎡未満の居住用</strong>＋やむを得ない事情が必要</td></tr>
+            <tr><td>造作買取請求権を排除する特約は無効である</td><td><strong>有効</strong></td></tr>
+            <tr><td>普通の借家で賃料を減額しない特約は有効である</td><td><strong>無効</strong>（増額しない特約は有効）</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 11 -->
+    <section id="suji">
+      <h2 class="sec"><span class="num">11</span>数字まとめ</h2>
+      <p class="masthead-note">右上の「数値を隠す」で自己テストできる。</p>
+      <div class="nums" id="numgrid">
+        <div class="nc" tabindex="0"><span class="v">30 / 20 / 10年</span><span class="d">借地権の存続期間（当初／1回目の更新／2回目以降）</span></div>
+        <div class="nc" tabindex="0"><span class="v">20年</span><span class="d">当初期間中に承諾を得て再築した場合の延長期間</span></div>
+        <div class="nc" tabindex="0"><span class="v">2か月</span><span class="d">再築の通知に異議を述べなければ承諾とみなされる期間</span></div>
+        <div class="nc" tabindex="0"><span class="v">2年</span><span class="d">建物滅失後、掲示により借地権を対抗できる期間</span></div>
+        <div class="nc" tabindex="0"><span class="v">50年以上</span><span class="d">一般定期借地権の存続期間（書面）</span></div>
+        <div class="nc" tabindex="0"><span class="v">10年以上50年未満</span><span class="d">事業用定期借地権等（公正証書・事業用に限る）</span></div>
+        <div class="nc" tabindex="0"><span class="v">30年以上</span><span class="d">建物譲渡特約付借地権（書面不要）</span></div>
+        <div class="nc" tabindex="0"><span class="v">1年未満</span><span class="d">借家でこの期間を定めると「期間の定めがない」ものになる</span></div>
+        <div class="nc" tabindex="0"><span class="v">1年前〜6か月前</span><span class="d">借家の更新拒絶の通知／定期借家の終了通知</span></div>
+        <div class="nc" tabindex="0"><span class="v">6か月 / 3か月</span><span class="d">解約申入れから終了まで（賃貸人から／賃借人から）</span></div>
+        <div class="nc" tabindex="0"><span class="v">200㎡未満</span><span class="d">定期建物賃貸借で中途解約が認められる床面積</span></div>
+        <div class="nc" tabindex="0"><span class="v">1か月</span><span class="d">定期建物賃貸借の中途解約申入れから終了まで</span></div>
+      </div>
+    </section>
+
+    <!-- 12 -->
+    <section id="drill">
+      <h2 class="sec"><span class="num">12</span>肢別○×ドリル</h2>
+      <p class="lead">頻出論点の一問一答 <em>36肢</em>。○×を押すと理由が開く。<strong>理由を一言で言えなかった肢は、正解していても「要復習」に入れる</strong>のがこのドリルの使い方。</p>
+      <div class="call tip">
+        <span class="tag">回し方</span>
+        <p>1周目は全肢。2周目以降は「間違えた肢だけ」で回す。解答状況はこのブラウザに保存されるので、日をまたいでも続きから再開できる。</p>
+      </div>
+      <div class="drillbar">
+        <div class="score">解答 <b id="d-done">0</b> / 36　　正答 <b id="d-ok">0</b>　　正答率 <span class="pct" id="d-pct">—</span></div>
+        <div class="dbtns">
+          <button id="d-wrong" type="button" aria-pressed="false">間違えた肢だけ</button>
+          <button id="d-reset" type="button">リセット</button>
+        </div>
+      </div>
+      <ol class="drill">
+          <li class="dq" data-a="x">
+            <p class="s">資材置場として土地を借りる契約にも、借地借家法が適用される。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>借地権は<strong>建物の所有を目的とする</strong>地上権・土地賃借権に限られる（2条1号）。駐車場・資材置場は民法の賃貸借のみ。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">借地権の存続期間を20年と定めた場合、その定めは無効となり、存続期間は30年となる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>3条。<strong>30年より短い定めは30年に引き直される</strong>。契約全体が無効になるのでも、期間の定めがない契約になるのでもない。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">借地権の存続期間を40年と定めることができる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>3条ただし書。<strong>30年以上であれば当事者の定めが優先</strong>し、上限はない。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">借地契約を更新する場合の存続期間は、最初の更新では20年、2回目以降の更新では10年である。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>4条。これより長く定めることはできるが、短くはできない。30年→20年→10年の階段で覚える。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">借地権の存続期間が満了し借地権者が更新を請求した場合、建物が存在しなくても契約は更新されたものとみなされる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>5条1項は<strong>建物がある場合に限る</strong>。更新請求も使用継続による法定更新も、建物の存在が前提。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">借地権の存続期間満了後に借地権者が土地の使用を継続している場合において、借地権設定者が遅滞なく異議を述べなかったときは、契約は更新されたものとみなされる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>5条2項の法定更新。異議を述べるには<strong>正当事由</strong>が必要（6条）。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">借地権設定者が相当額の立退料を提供すれば、更新拒絶の正当事由が認められる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>6条。立退料は<strong>補完的な考慮要素</strong>にすぎない。中心はどちらが土地の使用を必要としているかという事情。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">借地権を第三者に対抗するためには、土地の賃借権の登記が必要である。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>10条1項により、借地上の<strong>建物の登記</strong>があればよい。表示に関する登記でも足りる。地主の協力なしに備えられる点が重要。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">借地権者が、その配偶者の名義で借地上の建物の登記をしている場合でも、借地権を第三者に対抗することができる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>判例により<strong>借地権者本人の名義</strong>でなければならない。家族名義の登記では対抗できない。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">借地上の建物が滅失した場合でも、借地権者が一定の事項を土地上の見やすい場所に掲示すれば、滅失の日から2年間は借地権を対抗することができる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>10条2項。2年以内に<strong>建物を新築して登記</strong>すれば、その後も対抗力が続く。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">借地権の存続期間が満了し契約が更新されないときは、借地権者は借地権設定者に対し、建物を時価で買い取るべきことを請求することができる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>13条1項の建物買取請求権。<strong>形成権</strong>なので、請求した時点で時価による売買が成立し、相手方の承諾は要らない。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">借地権者の債務不履行により借地契約が解除された場合でも、借地権者は建物買取請求権を行使することができる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>判例により<strong>行使できない</strong>。自ら契約を壊した者まで保護する必要はない。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">一般定期借地権を設定するには、公正証書によらなければならない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>22条は<strong>書面（電磁的記録を含む）</strong>であればよい。公正証書に限られるのは事業用定期借地権だけ。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">一般定期借地権の存続期間は、50年以上でなければならない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>22条。更新なし・建物築造による期間延長なし・建物買取請求なしの3つの特約をセットで定める。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">事業用定期借地権を設定するには、公正証書によらなければならない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>23条3項。3類型のうち<strong>公正証書に限られるのはこれだけ</strong>。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">事業用定期借地権を設定して、賃貸マンションを建築することができる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>23条は<strong>専ら事業の用に供する建物</strong>に限る。賃貸マンション・社宅・寮など居住用は不可。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">事業用定期借地権の存続期間は、10年以上50年未満でなければならない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>23条。50年以上にしたいなら一般定期借地権を使う。存続期間の帯が重ならないように設計されている。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">建物譲渡特約付借地権を設定するには、書面によることが必要である。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>24条には<strong>書面の要求がない</strong>。3類型のうちこれだけ口頭でも設定できる。存続期間は30年以上。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">建物の賃貸借において期間を6か月と定めた場合、期間の定めがない建物の賃貸借とみなされる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>29条1項。<strong>1年未満の定めは期間の定めなし</strong>になる（定期建物賃貸借を除く）。1年に引き直されるのではない点に注意。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">建物の賃貸借の存続期間を60年と定めることができる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>29条2項により民法604条（50年の上限）が適用されない。<strong>借家に期間の上限はない</strong>。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">期間の定めがある建物賃貸借において更新を拒絶するには、期間満了の1年前から6か月前までの間に相手方に通知しなければならない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>26条1項。賃貸人からの更新拒絶には、さらに<strong>正当事由</strong>が必要。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">期間の定めがない建物賃貸借において賃借人が解約を申し入れた場合、6か月の経過により契約は終了する。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>賃借人からの解約申入れは<strong>3か月</strong>（民法617条）。6か月＋正当事由が必要なのは賃貸人からの申入れ（27条）。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">建物賃借人が賃貸借を第三者に対抗するためには、賃借権の登記を備えなければならない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>31条により<strong>建物の引渡し</strong>を受けていれば対抗できる。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">建物の賃借人は、賃貸人の同意を得て建物に付加した造作を、契約終了時に時価で買い取るべきことを請求することができる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>33条の造作買取請求権。賃貸人から買い受けた造作も対象になる。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">造作買取請求権を排除する旨の特約は、賃借人に不利であるから無効である。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>37条の強行規定の列挙に33条は<strong>入っていない</strong>ので、排除特約は<strong>有効</strong>。実務ではほとんどの契約で排除されている。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">建物の借賃が不相当となったときは、当事者は将来に向かって借賃の増減額を請求することができる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>32条1項。<strong>形成権</strong>なので相手方の合意は不要で、協議が調わなければ裁判で決める。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">一定の期間建物の借賃を増額しない旨の特約は、借地借家法に反するので無効である。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>32条1項ただし書により<strong>不増額特約は有効</strong>。賃借人に有利だから。無効になるのは不減額特約（普通借家の場合）。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">定期建物賃貸借契約は、公正証書等の書面によってしなければならない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>38条1項。公正証書は<strong>例示</strong>であって、書面（電磁的記録を含む）であればよい。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">定期建物賃貸借であることを契約書に明記していれば、賃借人に対する事前の説明は不要である。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>38条3項により、<strong>契約書とは別の書面</strong>を交付して、更新がなく期間満了で終了する旨を説明しなければならない。怠ると更新がない旨の定めが無効になる。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">定期建物賃貸借では、賃借人はいつでも中途解約を申し入れることができる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>38条7項の中途解約は、<strong>床面積200㎡未満の居住用建物</strong>で、転勤・療養・親族の介護等の<strong>やむを得ない事情</strong>がある場合に限られる。申入れから1か月で終了する。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">定期建物賃貸借では、借賃を減額しない旨の特約も有効である。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>38条9項により32条の適用が排除される。普通借家（不減額特約は無効）と逆になる点が狙われる。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">法令または契約により一定の期間を経過した後に建物を取り壊すべきことが明らかな場合、建物を取り壊すこととなる時に賃貸借が終了する旨の特約を書面で定めることができる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>39条の取壊し予定の建物の賃貸借。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">建物の転貸借がされている場合において、建物の賃貸借が期間の満了により終了するときは、賃貸人は転借人にその旨の通知をしなければ終了を対抗することができない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>34条1項。通知をした日から<strong>6か月</strong>を経過することによって転貸借も終了する（34条2項）。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">借地権者が借地上の建物を第三者に譲渡しようとする場合において借地権設定者が承諾しないときは、裁判所は借地権者の申立てにより承諾に代わる許可を与えることができる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>19条1項。<strong>借地権が賃借権</strong>である場合の話で、地上権であればそもそも承諾は不要。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">一時使用のために借地権を設定したことが明らかな場合であっても、存続期間や更新に関する借地借家法の規定が適用される。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>25条により、存続期間・更新・建物買取請求権などの規定は<strong>適用されない</strong>。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">借地権の存続期間の満了により借地上の建物の賃借人が土地を明け渡すべき場合において、その賃借人が期間満了を1年前までに知らなかったときは、裁判所は1年を超えない範囲で明渡しの猶予を与えることができる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>35条。借地権者ではなく、その建物を借りている人を保護するための規定。</p></div>
+          </li>
+      </ol>
+    </section>
+
+  </main>
+
+  <footer>
+    <h4>出典</h4>
+    <ul>
+      <li>借地借家法（平成3年法律第90号） — <a href="https://laws.e-gov.go.jp/law/403AC0000000090">e-Gov法令検索</a></li>
+      <li>民法（明治29年法律第89号）第601条〜第622条の2 — <a href="https://laws.e-gov.go.jp/law/129AC0000000089">e-Gov法令検索</a></li>
+    </ul>
+    <div class="sibling">
+      <a href="../index.html">総目次</a>
+    </div>
+  </footer>
+
+</div>
+
+<script>
+  (function () {
+    var root = document.documentElement;
+    document.getElementById('theme').addEventListener('click', function () {
+      if (root.getAttribute('data-theme')) { root.removeAttribute('data-theme'); return; }
+      var dark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      root.setAttribute('data-theme', dark ? 'light' : 'dark');
+    });
+    var maskBtn = document.getElementById('mask');
+    var grid = document.getElementById('numgrid');
+    maskBtn.addEventListener('click', function () {
+      var on = grid.classList.toggle('masked');
+      maskBtn.setAttribute('aria-pressed', String(on));
+      maskBtn.textContent = on ? '数値を表示' : '数値を隠す';
+    });
+    var links = Array.prototype.slice.call(document.querySelectorAll('nav.rail ol a'));
+    var map = {};
+    links.forEach(function (a) { map[a.getAttribute('href').slice(1)] = a; });
+    var seen = [];
+    var obs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        var i = seen.indexOf(e.target.id);
+        if (e.isIntersecting && i < 0) seen.push(e.target.id);
+        if (!e.isIntersecting && i >= 0) seen.splice(i, 1);
+      });
+      links.forEach(function (a) { a.classList.remove('on'); });
+      if (seen.length) {
+        var order = Object.keys(map);
+        seen.sort(function (a, b) { return order.indexOf(a) - order.indexOf(b); });
+        map[seen[0]].classList.add('on');
+      }
+    }, { rootMargin: '-10% 0px -70% 0px' });
+    document.querySelectorAll('main section').forEach(function (s) { obs.observe(s); });
+  })();
+</script>
+
+<script>
+  /* 肢別○×ドリル */
+  (function () {
+    var sec = document.getElementById('drill');
+    if (!sec) return;
+    var list = sec.querySelector('ol.drill');
+    var items = Array.prototype.slice.call(list.querySelectorAll('li.dq'));
+    var key = 'takken-drill:' + (document.title || location.pathname);
+    var state = {};
+    try { state = JSON.parse(localStorage.getItem('' + key) || '{}') || {}; } catch (e) { state = {}; }
+    var elDone = document.getElementById('d-done');
+    var elOk = document.getElementById('d-ok');
+    var elPct = document.getElementById('d-pct');
+    var onlyBtn = document.getElementById('d-wrong');
+
+    function paint() {
+      var done = 0, ok = 0;
+      items.forEach(function (li, i) {
+        var picked = state[i];
+        li.classList.remove('done', 'ok', 'ng');
+        Array.prototype.forEach.call(li.querySelectorAll('.ch button'), function (b) {
+          b.removeAttribute('data-picked');
+        });
+        if (picked !== 'o' && picked !== 'x') return;
+        done++;
+        var ans = li.getAttribute('data-a');
+        var right = picked === ans;
+        if (right) ok++;
+        li.classList.add('done', right ? 'ok' : 'ng');
+        var b = li.querySelector('.ch button[data-v="' + picked + '"]');
+        if (b) b.setAttribute('data-picked', '1');
+        li.querySelector('.verdict').textContent =
+          right ? '正解　' + (ans === 'o' ? '○' : '×')
+                : '不正解　正解は ' + (ans === 'o' ? '○' : '×');
+      });
+      elDone.textContent = String(done);
+      elOk.textContent = String(ok);
+      elPct.textContent = done ? Math.round(ok / done * 100) + '%' : '—';
+      try { localStorage.setItem('' + key, JSON.stringify(state)); } catch (e) {}
+    }
+
+    list.addEventListener('click', function (e) {
+      var b = e.target;
+      while (b && b !== list && b.tagName !== 'BUTTON') b = b.parentNode;
+      if (!b || b.tagName !== 'BUTTON') return;
+      var li = b.parentNode.parentNode;
+      var i = items.indexOf(li);
+      if (i < 0) return;
+      state[i] = b.getAttribute('data-v');
+      paint();
+    });
+
+    onlyBtn.addEventListener('click', function () {
+      var on = list.classList.toggle('onlyng');
+      onlyBtn.setAttribute('aria-pressed', String(on));
+      onlyBtn.textContent = on ? 'すべて表示' : '間違えた肢だけ';
+    });
+
+    document.getElementById('d-reset').addEventListener('click', function () {
+      state = {};
+      list.classList.remove('onlyng');
+      onlyBtn.setAttribute('aria-pressed', 'false');
+      onlyBtn.textContent = '間違えた肢だけ';
+      paint();
+    });
+
+    paint();
+  })();
+</script>

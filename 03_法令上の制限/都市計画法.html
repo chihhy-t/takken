@@ -1,0 +1,939 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>都市計画法 — 宅建士試験 2026年度</title>
+
+<style>
+  :root {
+    --paper:   #EBEDE9;
+    --surface: #F8F9F6;
+    --sunk:    #E1E4DE;
+    --ink:     #151F2A;
+    --muted:   #5D6B78;
+    --rule:    #CDD2CB;
+    --hair:    #DCE0D9;
+    --accent:  #B8342A;
+    --accent-soft: #F3DEDB;
+    --blue:    #2A5F86;
+    --blue-soft:   #DCE6EE;
+    --shadow:  0 1px 2px rgba(21,31,42,.06), 0 8px 24px -16px rgba(21,31,42,.28);
+
+    --font-display: "Hiragino Mincho ProN", "Yu Mincho", "YuMincho", "Noto Serif JP", serif;
+    --font-body: "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Yu Gothic", "YuGothic", "Noto Sans JP", system-ui, sans-serif;
+    --font-mono: ui-monospace, "SFMono-Regular", "SF Mono", Menlo, Consolas, monospace;
+
+    --measure: 68ch;
+    --s1: .35rem; --s2: .7rem; --s3: 1.1rem; --s4: 1.7rem; --s5: 2.6rem; --s6: 4rem;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper:   #0D1B29;
+      --surface: #132534;
+      --sunk:    #0A1622;
+      --ink:     #DAE4EC;
+      --muted:   #8CA1B3;
+      --rule:    #26415A;
+      --hair:    #1D3448;
+      --accent:  #FF7059;
+      --accent-soft: #3A1F1D;
+      --blue:    #6FB6DC;
+      --blue-soft:   #14293A;
+      --shadow:  0 1px 2px rgba(0,0,0,.4), 0 8px 24px -16px rgba(0,0,0,.8);
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper:   #0D1B29;
+    --surface: #132534;
+    --sunk:    #0A1622;
+    --ink:     #DAE4EC;
+    --muted:   #8CA1B3;
+    --rule:    #26415A;
+    --hair:    #1D3448;
+    --accent:  #FF7059;
+    --accent-soft: #3A1F1D;
+    --blue:    #6FB6DC;
+    --blue-soft:   #14293A;
+    --shadow:  0 1px 2px rgba(0,0,0,.4), 0 8px 24px -16px rgba(0,0,0,.8);
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.9;
+    -webkit-font-smoothing: antialiased;
+    font-feature-settings: "palt" 1;
+  }
+
+  .wrap {
+    display: grid;
+    grid-template-columns: 15.5rem minmax(0, 1fr);
+    gap: var(--s6);
+    max-width: 78rem;
+    margin: 0 auto;
+    padding: 0 var(--s4) var(--s6);
+    align-items: start;
+  }
+  @media (max-width: 60rem) {
+    .wrap { grid-template-columns: minmax(0,1fr); gap: var(--s4); padding: 0 var(--s3) var(--s5); }
+  }
+
+  .masthead {
+    grid-column: 1 / -1;
+    padding: var(--s5) 0 var(--s4);
+    border-bottom: 2px solid var(--ink);
+    margin-bottom: var(--s2);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: var(--s3);
+  }
+  .eyebrow {
+    font-family: var(--font-mono);
+    font-size: .72rem;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    color: var(--muted);
+    display: flex;
+    align-items: center;
+    gap: .6em;
+  }
+  .eyebrow::before { content: ""; width: 2.2rem; height: 1px; background: var(--accent); }
+  h1 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: clamp(2rem, 1.4rem + 2.6vw, 3.1rem);
+    line-height: 1.2;
+    letter-spacing: .04em;
+    margin: var(--s2) 0 var(--s3);
+    text-wrap: balance;
+  }
+  .facts { display: flex; flex-wrap: wrap; gap: 0 var(--s3); font-size: .82rem; color: var(--muted); list-style: none; margin: 0; padding: 0; }
+  .facts b { font-family: var(--font-mono); font-variant-numeric: tabular-nums; color: var(--ink); font-weight: 600; }
+  .toggles { display: flex; gap: var(--s1); }
+  button {
+    font-family: var(--font-body); font-size: .78rem; color: var(--muted);
+    background: var(--surface); border: 1px solid var(--rule); border-radius: 2px;
+    padding: .4em .9em; cursor: pointer; transition: color .15s, border-color .15s;
+  }
+  button:hover { color: var(--ink); border-color: var(--ink); }
+  button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  button[aria-pressed="true"] { color: var(--accent); border-color: var(--accent); }
+
+  nav.rail { position: sticky; top: var(--s3); font-size: .82rem; max-height: calc(100vh - 3rem); overflow-y: auto; padding-bottom: var(--s3); }
+  nav.rail h2 { font-family: var(--font-mono); font-size: .68rem; letter-spacing: .16em; text-transform: uppercase; color: var(--muted); margin: 0 0 var(--s2); font-weight: 500; }
+  nav.rail ol { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
+  nav.rail a { display: block; padding: .3em 0 .3em .9em; color: var(--muted); text-decoration: none; border-left: 2px solid var(--hair); line-height: 1.5; }
+  nav.rail a:hover { color: var(--ink); border-left-color: var(--rule); }
+  nav.rail a.on { color: var(--ink); border-left-color: var(--accent); font-weight: 600; }
+  nav.rail a .num { font-family: var(--font-mono); font-size: .72rem; color: var(--muted); margin-right: .5em; }
+  @media (max-width: 60rem) {
+    nav.rail { position: static; max-height: none; border-bottom: 1px solid var(--rule); padding-bottom: var(--s3); }
+    nav.rail ol { display: grid; grid-template-columns: repeat(auto-fill, minmax(9rem, 1fr)); gap: 0 var(--s2); }
+  }
+
+  main { min-width: 0; }
+  section { padding-top: var(--s5); scroll-margin-top: var(--s3); }
+  section > * { max-width: var(--measure); }
+  section > figure, section > .full, section > .scroll { max-width: none; }
+
+  h2.sec {
+    font-family: var(--font-display);
+    font-size: clamp(1.45rem, 1.2rem + .9vw, 1.9rem);
+    font-weight: 600; letter-spacing: .04em;
+    margin: 0 0 var(--s3); padding-bottom: var(--s2);
+    border-bottom: 1px solid var(--rule);
+    display: flex; align-items: baseline; gap: .7em; max-width: none;
+  }
+  h2.sec .num { font-family: var(--font-mono); font-size: .8rem; letter-spacing: .1em; color: var(--accent); font-weight: 500; }
+  h3 { font-family: var(--font-body); font-size: 1.06rem; font-weight: 700; letter-spacing: .02em; margin: var(--s4) 0 var(--s2); padding-left: .7em; border-left: 3px solid var(--ink); }
+  h4 { font-size: .88rem; font-weight: 700; color: var(--muted); letter-spacing: .06em; margin: var(--s3) 0 var(--s1); }
+  p { margin: 0 0 var(--s3); }
+  a { color: var(--blue); text-underline-offset: .2em; }
+  strong { font-weight: 700; }
+  em { font-style: normal; background: linear-gradient(transparent 62%, var(--accent-soft) 62%); font-weight: 600; }
+  ul, ol { margin: 0 0 var(--s3); padding-left: 1.3em; }
+  li { margin-bottom: var(--s1); }
+  .lead { font-size: 1.05rem; color: var(--muted); }
+
+  .call {
+    max-width: var(--measure); margin: 0 0 var(--s3);
+    padding: var(--s3) var(--s3) var(--s3) var(--s4);
+    background: var(--surface); border: 1px solid var(--hair);
+    border-left: 3px solid var(--rule); border-radius: 2px; font-size: .94rem;
+  }
+  .call > :last-child { margin-bottom: 0; }
+  .call .tag { display: block; font-family: var(--font-mono); font-size: .68rem; letter-spacing: .16em; text-transform: uppercase; color: var(--muted); margin-bottom: var(--s1); }
+  .call.trap { border-left-color: var(--accent); background: var(--accent-soft); }
+  .call.trap .tag { color: var(--accent); }
+  .call.exam { border-left-color: var(--ink); }
+  .call.exam .tag { color: var(--ink); }
+  .call.rev { border-left-color: var(--accent); }
+  .call.rev .tag { color: var(--accent); }
+  .call.tip { border-left-color: var(--blue); background: var(--blue-soft); }
+  .call.tip .tag { color: var(--blue); }
+
+  .scroll { overflow-x: auto; margin: 0 0 var(--s3); -webkit-overflow-scrolling: touch; }
+  table { border-collapse: collapse; width: 100%; font-size: .88rem; line-height: 1.6; }
+  caption { text-align: left; font-size: .78rem; color: var(--muted); padding-bottom: var(--s1); font-family: var(--font-mono); letter-spacing: .08em; }
+  th, td { padding: .62em .8em; text-align: left; vertical-align: top; border-bottom: 1px solid var(--hair); }
+  thead th { font-size: .74rem; letter-spacing: .1em; color: var(--muted); font-weight: 600; border-bottom: 1px solid var(--ink); white-space: nowrap; }
+  tbody tr:hover { background: var(--surface); }
+  td.n, th.n { text-align: center; font-family: var(--font-mono); font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .no  { color: var(--accent); font-weight: 700; }
+  .yes { color: var(--muted); }
+  .tri { color: var(--blue); }
+  table.matrix td.n { width: 3.2rem; }
+  table.matrix tbody th { font-weight: 500; font-size: .84rem; white-space: nowrap; }
+  table.matrix tr.hi { background: var(--accent-soft); }
+  table.matrix tr.hi th { font-weight: 700; }
+
+  figure { margin: 0 0 var(--s4); }
+  figure svg { display: block; width: 100%; height: auto; }
+  figcaption { font-size: .78rem; color: var(--muted); font-family: var(--font-mono); letter-spacing: .06em; margin-top: var(--s2); padding-top: var(--s1); border-top: 1px solid var(--hair); }
+  .plate { background: var(--surface); border: 1px solid var(--hair); border-radius: 2px; padding: var(--s3); }
+  .svg-ink   { fill: none; stroke: var(--ink); stroke-width: 1.4; }
+  .svg-hair  { fill: none; stroke: var(--rule); stroke-width: 1; }
+  .svg-dim   { fill: none; stroke: var(--blue); stroke-width: 1; }
+  .svg-acc   { fill: none; stroke: var(--accent); stroke-width: 1.6; }
+  .svg-fill  { fill: var(--sunk); stroke: var(--rule); stroke-width: 1; }
+  .svg-accfill { fill: var(--accent-soft); stroke: var(--accent); stroke-width: 1.2; }
+  .svg-bluefill { fill: var(--blue-soft); stroke: var(--blue); stroke-width: 1.2; }
+  text { font-family: var(--font-body); fill: var(--ink); font-size: 12px; }
+  text.lbl { font-family: var(--font-mono); fill: var(--muted); font-size: 10.5px; letter-spacing: .06em; }
+  text.dimt { font-family: var(--font-mono); fill: var(--blue); font-size: 11px; }
+  text.acct { fill: var(--accent); font-size: 11.5px; font-weight: 700; }
+
+  .cols { display: grid; grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); gap: var(--s2); margin-bottom: var(--s3); }
+  .col { background: var(--surface); border: 1px solid var(--hair); border-top: 3px solid var(--ink); border-radius: 2px; padding: var(--s3); }
+  .col.wide { border-top-color: var(--blue); }
+  .col.hot { border-top-color: var(--accent); }
+  .col h4 { margin-top: 0; color: var(--ink); font-size: 1rem; letter-spacing: .04em; }
+  .col p { font-size: .86rem; margin-bottom: var(--s2); color: var(--muted); }
+  .col ul { font-size: .86rem; padding-left: 1.1em; margin-bottom: 0; }
+  .scope { display: inline-block; margin-top: var(--s2); font-family: var(--font-mono); font-size: .7rem; letter-spacing: .08em; padding: .25em .7em; border: 1px solid currentColor; border-radius: 999px; color: var(--muted); }
+  .col .scope.nation { color: var(--ink); }
+  .col .scope.city { color: var(--blue); }
+  .col .scope.hot { color: var(--accent); }
+
+  .ladder { display: flex; flex-direction: column; gap: var(--s2); margin-bottom: var(--s3); counter-reset: q; }
+  .q { background: var(--surface); border: 1px solid var(--hair); border-radius: 2px; padding: var(--s3); }
+  .q > p { font-weight: 700; margin: 0 0 var(--s2); font-size: .95rem; }
+  .q > p::before { counter-increment: q; content: "Q" counter(q); font-family: var(--font-mono); font-size: .7rem; letter-spacing: .1em; color: var(--accent); margin-right: .8em; }
+  .branch { display: grid; grid-template-columns: repeat(auto-fit, minmax(13rem,1fr)); gap: var(--s2); }
+  .b { font-size: .84rem; padding: .7em .9em; border-radius: 2px; border: 1px solid var(--hair); background: var(--paper); }
+  .b .k { font-family: var(--font-mono); font-size: .7rem; letter-spacing: .1em; color: var(--muted); display: block; }
+  .b.need { border-color: var(--accent); }
+  .b.need strong { color: var(--accent); }
+  .b.free { border-color: var(--rule); }
+
+  .nums { display: grid; grid-template-columns: repeat(auto-fill, minmax(11.5rem, 1fr)); gap: var(--s2); }
+  .nc { background: var(--surface); border: 1px solid var(--hair); border-radius: 2px; padding: var(--s3) var(--s3) var(--s2); display: flex; flex-direction: column; gap: var(--s1); }
+  .nc .v { font-family: var(--font-mono); font-variant-numeric: tabular-nums; font-size: 1.35rem; font-weight: 600; letter-spacing: -.01em; line-height: 1.2; color: var(--accent); }
+  .nc .d { font-size: .8rem; color: var(--muted); line-height: 1.6; }
+  .nums.masked .v { color: transparent; background: var(--rule); border-radius: 2px; user-select: none; }
+  .nums.masked .nc:hover .v, .nums.masked .nc:focus-within .v { color: var(--accent); background: transparent; }
+  .nc:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .masthead-note { font-size: .78rem; color: var(--muted); margin-bottom: var(--s2); }
+
+  table.traps td:first-child { color: var(--muted); }
+  table.traps td:first-child::before { content: "「"; }
+  table.traps td:first-child::after  { content: "」"; }
+  table.traps td:last-child strong { color: var(--accent); }
+
+  footer { grid-column: 1 / -1; margin-top: var(--s6); padding-top: var(--s3); border-top: 1px solid var(--rule); font-size: .8rem; color: var(--muted); }
+  footer ul { list-style: none; padding: 0; }
+  footer li { margin-bottom: var(--s1); }
+  .todo { font-family: var(--font-mono); font-size: .74rem; border: 1px dashed var(--rule); border-radius: 2px; padding: var(--s2) var(--s3); margin-top: var(--s3); color: var(--muted); }
+  .sibling { display: flex; flex-wrap: wrap; gap: var(--s2); margin-top: var(--s3); }
+  .sibling a { font-size: .8rem; text-decoration: none; border: 1px solid var(--rule); border-radius: 2px; padding: .35em .8em; color: var(--muted); }
+  .sibling a:hover { color: var(--ink); border-color: var(--ink); }
+
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; scroll-behavior: auto !important; } }
+  html { scroll-behavior: smooth; }
+  .eyebrow a { color:var(--accent); text-decoration:none; }
+  .eyebrow a:hover { text-decoration:underline; text-underline-offset:.2em; }
+  nav.rail a.home { border-left:none; padding:0 0 var(--s2); color:var(--accent);
+    font-family:var(--font-mono); font-size:.72rem; letter-spacing:.1em; }
+  nav.rail a.home:hover { color:var(--accent); text-decoration:underline; text-underline-offset:.2em; }
+</style>
+
+<div class="wrap">
+
+  <header class="masthead">
+    <div>
+      <div class="eyebrow"><a href="../index.html">← 総目次</a> &nbsp;/&nbsp; 03 法令上の制限 &nbsp;/&nbsp; 宅建士試験 2026年度</div>
+      <h1>都市計画法</h1>
+      <ul class="facts">
+        <li>法令基準日 <b>2026-04-01</b></li>
+        <li>出題数 <b>2問</b></li>
+        <li>目標 <b>1〜2問</b></li>
+        <li>更新 <b>2026-08-09</b></li>
+      </ul>
+    </div>
+    <div class="toggles">
+      <button id="mask" type="button" aria-pressed="false">数値を隠す</button>
+      <button id="theme" type="button">配色切替</button>
+    </div>
+  </header>
+
+  <nav class="rail" aria-label="目次">
+    <a class="home" href="../index.html">← 総目次</a>
+    <h2>Contents</h2>
+    <ol>
+      <li><a href="#overview"><span class="num">00</span>全体像</a></li>
+      <li><a href="#kuiki"><span class="num">01</span>都市計画区域</a></li>
+      <li><a href="#kubun"><span class="num">02</span>区域区分</a></li>
+      <li><a href="#chiiki"><span class="num">03</span>地域地区</a></li>
+      <li><a href="#kettei"><span class="num">04</span>決定手続</a></li>
+      <li><a href="#chiku"><span class="num">05</span>地区計画</a></li>
+      <li><a href="#kaihatsu"><span class="num">06</span>開発許可</a></li>
+      <li><a href="#seigen"><span class="num">07</span>建築制限</a></li>
+      <li><a href="#deru"><span class="num">08</span>よく出る論点</a></li>
+      <li><a href="#hikkake"><span class="num">09</span>ひっかけ一覧</a></li>
+      <li><a href="#suji"><span class="num">10</span>数字まとめ</a></li>
+    </ol>
+  </nav>
+
+  <main>
+
+    <!-- ============ 00 ============ -->
+    <section id="overview">
+      <h2 class="sec"><span class="num">00</span>全体像</h2>
+      <p class="lead">都市計画法は「<em>どこを</em>」「<em>どう使うか</em>」を決める法律。決めたルールを工事の段階で担保するのが<em>開発許可</em>で、ここが出題の中心になる。</p>
+
+      <div class="cols">
+        <div class="col">
+          <h4>① 区域を決める</h4>
+          <p>都市計画をかける範囲を線で囲う。</p>
+          <ul>
+            <li>都市計画区域・準都市計画区域の指定</li>
+            <li>区域区分（線引き）</li>
+          </ul>
+          <span class="scope">都道府県が指定</span>
+        </div>
+        <div class="col wide">
+          <h4>② 使い方を決める</h4>
+          <p>囲った中を用途で塗り分ける。</p>
+          <ul>
+            <li>地域地区（用途地域13種＋その他）</li>
+            <li>都市施設・市街地開発事業</li>
+            <li>地区計画</li>
+          </ul>
+          <span class="scope city">市町村・都道府県が決定</span>
+        </div>
+        <div class="col hot">
+          <h4>③ 工事を止める</h4>
+          <p>決めたルールに反する造成を、着工前に押さえる。</p>
+          <ul>
+            <li>開発許可</li>
+            <li>工事完了公告の前後の建築制限</li>
+            <li>市街化調整区域の建築規制</li>
+          </ul>
+          <span class="scope hot">2問中1問はここ</span>
+        </div>
+      </div>
+
+      <h3>区域の入れ子構造</h3>
+
+      <figure class="plate">
+        <svg viewBox="0 0 720 250" role="img" aria-label="国土は都市計画区域と都市計画区域外に分かれる。都市計画区域は線引きされたもの（市街化区域と市街化調整区域）と非線引き都市計画区域に分かれる。都市計画区域外の一部が準都市計画区域として指定される。">
+          <rect x="14" y="34" width="692" height="180" class="svg-hair" rx="2"/>
+          <text x="24" y="28" class="lbl">日本の国土</text>
+
+          <!-- 都市計画区域 -->
+          <rect x="28" y="52" width="392" height="148" class="svg-ink" fill="none" rx="2"/>
+          <text x="38" y="70" class="lbl">都市計画区域（都道府県が指定）</text>
+
+          <rect x="40" y="80" width="248" height="108" class="svg-hair" rx="2"/>
+          <text x="50" y="96" class="lbl">線引きあり</text>
+          <rect x="50" y="104" width="112" height="74" class="svg-bluefill" rx="2"/>
+          <text x="106" y="130" text-anchor="middle">市街化区域</text>
+          <text x="106" y="148" text-anchor="middle" class="lbl">用途地域を必ず定める</text>
+          <text x="106" y="164" text-anchor="middle" class="dimt">開発許可 1,000㎡〜</text>
+
+          <rect x="170" y="104" width="108" height="74" class="svg-accfill" rx="2"/>
+          <text x="224" y="130" text-anchor="middle">市街化調整区域</text>
+          <text x="224" y="148" text-anchor="middle" class="lbl">用途地域は原則定めない</text>
+          <text x="224" y="164" text-anchor="middle" class="acct">規模を問わず許可</text>
+
+          <rect x="298" y="80" width="112" height="108" class="svg-fill" rx="2"/>
+          <text x="354" y="112" text-anchor="middle">非線引き</text>
+          <text x="354" y="130" text-anchor="middle">都市計画区域</text>
+          <text x="354" y="152" text-anchor="middle" class="lbl">線引きは任意</text>
+          <text x="354" y="168" text-anchor="middle" class="dimt">開発許可 3,000㎡〜</text>
+
+          <!-- 都市計画区域外 -->
+          <rect x="436" y="52" width="256" height="148" class="svg-hair" rx="2"/>
+          <text x="446" y="70" class="lbl">都市計画区域外</text>
+
+          <rect x="448" y="80" width="116" height="108" class="svg-fill" rx="2"/>
+          <text x="506" y="112" text-anchor="middle">準都市計画</text>
+          <text x="506" y="130" text-anchor="middle">区域</text>
+          <text x="506" y="152" text-anchor="middle" class="lbl">地域地区は8種のみ</text>
+          <text x="506" y="168" text-anchor="middle" class="dimt">開発許可 3,000㎡〜</text>
+
+          <rect x="574" y="80" width="106" height="108" class="svg-hair" rx="2"/>
+          <text x="627" y="120" text-anchor="middle">それ以外</text>
+          <text x="627" y="152" text-anchor="middle" class="lbl">規制は最小</text>
+          <text x="627" y="168" text-anchor="middle" class="dimt">開発許可 1ha〜</text>
+
+          <text x="24" y="236" class="lbl">準都市計画区域は都市計画区域の「外」に指定される — 内側ではない</text>
+        </svg>
+        <figcaption>Fig.1 — 区域の関係と開発許可の面積要件</figcaption>
+      </figure>
+
+      <div class="call trap">
+        <span class="tag">ひっかけ</span>
+        <p><strong>準都市計画区域は、都市計画区域の外に指定される。</strong>「都市計画区域内の一部を準都市計画区域に指定する」は誤り。両者が重なることはない。</p>
+      </div>
+    </section>
+
+    <!-- ============ 01 ============ -->
+    <section id="kuiki">
+      <h2 class="sec"><span class="num">01</span>都市計画区域・準都市計画区域</h2>
+
+      <div class="scroll">
+        <table>
+          <thead><tr><th></th><th>都市計画区域</th><th>準都市計画区域</th></tr></thead>
+          <tbody>
+            <tr>
+              <td>指定する者</td>
+              <td><strong>都道府県</strong>（関係市町村と都道府県都市計画審議会の意見を聴き、国土交通大臣に協議して同意を得る）<br>2以上の都府県にわたる場合は<strong>国土交通大臣</strong></td>
+              <td><strong>都道府県</strong>（関係市町村と都道府県都市計画審議会の意見を聴く）</td>
+            </tr>
+            <tr>
+              <td>指定する区域</td>
+              <td>一体の都市として総合的に整備・開発・保全する必要がある区域。<strong>市町村の行政区域を越えて</strong>指定できる</td>
+              <td>都市計画区域<strong>外</strong>で、放置すれば将来の都市としての整備に支障が生じるおそれがある区域</td>
+            </tr>
+            <tr>
+              <td>定められる地域地区</td>
+              <td>すべて</td>
+              <td class="no">8種類のみ</td>
+            </tr>
+            <tr><td>区域区分</td><td>定められる（義務の場合あり）</td><td class="no">定められない</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>1-1　準都市計画区域に定められる8種類</h3>
+      <p>都市計画法8条2項が限定列挙している。<strong>建築物を「積極的に建てさせる」ための制度は入らない</strong>と考えると整理しやすい。</p>
+
+      <div class="scroll">
+        <table>
+          <thead><tr><th>定められる（8種類）</th><th>定められない — よく出る誤答</th></tr></thead>
+          <tbody>
+            <tr>
+              <td>
+                ① 用途地域<br>
+                ② 特別用途地区<br>
+                ③ 特定用途制限地域<br>
+                ④ <strong>高度地区</strong>（高さの<strong>最高限度のみ</strong>）<br>
+                ⑤ 景観地区<br>
+                ⑥ 風致地区<br>
+                ⑦ 緑地保全地域<br>
+                ⑧ 伝統的建造物群保存地区
+              </td>
+              <td class="no">
+                区域区分<br>
+                <strong>高度利用地区</strong><br>
+                防火地域・準防火地域<br>
+                高層住居誘導地区<br>
+                特定街区<br>
+                市街地開発事業<br>
+                地区計画<br>
+                都市施設（定められるが限定的）
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="call trap">
+        <span class="tag">ひっかけ</span>
+        <p><strong>高度地区は定められるが、高度利用地区は定められない。</strong>名前が1文字違いで最も狙われる。さらに準都市計画区域の高度地区は<strong>最高限度しか定められない</strong>（都市計画区域なら最低限度も定められる）。</p>
+      </div>
+
+      <div class="call tip">
+        <span class="tag">覚え方</span>
+        <p>準都市計画区域は「<strong>建てさせない側のルールだけ</strong>」。高度<em>利用</em>地区・特定街区・市街地開発事業は、いずれも高度利用を<em>促す</em>制度なので入らない。防火地域も市街地を前提とする制度なので入らない。</p>
+      </div>
+    </section>
+
+    <!-- ============ 02 ============ -->
+    <section id="kubun">
+      <h2 class="sec"><span class="num">02</span>区域区分（線引き）</h2>
+
+      <div class="scroll">
+        <table>
+          <thead><tr><th>論点</th><th>内容</th></tr></thead>
+          <tbody>
+            <tr><td>定める者</td><td><strong>都道府県</strong></td></tr>
+            <tr><td>義務か任意か</td><td>原則<strong>任意</strong>。ただし三大都市圏の一定区域・指定都市の区域の全部または一部を含む都市計画区域では<strong>必ず定める</strong></td></tr>
+            <tr><td><strong>市街化区域</strong></td><td>すでに市街地を形成している区域＋<strong>おおむね10年以内</strong>に優先的かつ計画的に市街化を図るべき区域。<strong>用途地域を必ず定める</strong></td></tr>
+            <tr><td><strong>市街化調整区域</strong></td><td>市街化を<strong>抑制すべき</strong>区域。<strong>原則として用途地域を定めない</strong></td></tr>
+            <tr><td>非線引き都市計画区域</td><td>区域区分が定められていない都市計画区域。用途地域を定めることもできる</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="call exam">
+        <span class="tag">よく出る</span>
+        <p>「市街化調整区域は市街化を<strong>抑制すべき</strong>区域」— 「市街化してはならない区域」「市街化を<strong>禁止</strong>する区域」という言い換えは<strong>誤り</strong>。抑制であって禁止ではない。</p>
+      </div>
+    </section>
+
+    <!-- ============ 03 ============ -->
+    <section id="chiiki">
+      <h2 class="sec"><span class="num">03</span>地域地区</h2>
+
+      <h3>3-1　用途地域13種</h3>
+      <p>住居系8・商業系2・工業系3。用途制限の中身は<a href="建築基準法.html">建築基準法</a>側で扱う。</p>
+      <div class="scroll">
+        <table>
+          <thead><tr><th>系統</th><th>用途地域</th></tr></thead>
+          <tbody>
+            <tr><td>住居系（8）</td><td>第一種低層住居専用／第二種低層住居専用／<strong>田園住居</strong>／第一種中高層住居専用／第二種中高層住居専用／第一種住居／第二種住居／準住居</td></tr>
+            <tr><td>商業系（2）</td><td>近隣商業／商業</td></tr>
+            <tr><td>工業系（3）</td><td>準工業／工業／工業専用</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>3-2　紛らわしい地区の区別</h3>
+      <div class="scroll">
+        <table>
+          <thead><tr><th>地区</th><th>定める場所</th><th>定める内容</th></tr></thead>
+          <tbody>
+            <tr><td><strong>特別用途地区</strong></td><td>用途地域<strong>内</strong></td><td>用途地域の指定を補完（特別の目的のため用途制限を強化・緩和）</td></tr>
+            <tr><td><strong>特定用途制限地域</strong></td><td>用途地域が定められていない区域<br>（<strong>市街化調整区域を除く</strong>）</td><td>制限すべき特定の建築物等の用途の概要</td></tr>
+            <tr><td><strong>高度地区</strong></td><td>用途地域内</td><td>建築物の<strong>高さ</strong>の最高限度・最低限度</td></tr>
+            <tr><td><strong>高度利用地区</strong></td><td>用途地域内</td><td>容積率の最高・最低限度、建蔽率の最高限度、建築面積の最低限度、壁面の位置の制限<br><span class="no">高さは定めない</span></td></tr>
+            <tr><td>特定街区</td><td>—</td><td>容積率、高さの最高限度、壁面の位置の制限</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="call trap">
+        <span class="tag">ひっかけ</span>
+        <p><strong>高度地区＝高さ、高度利用地区＝容積率。</strong>「高度利用地区では建築物の高さの最高限度を定める」は誤り。<br>
+        また<strong>特定用途制限地域は市街化調整区域には定められない</strong>。市街化調整区域はそもそも建築が厳しく制限されているため、重ねて用途制限をかける必要がない。</p>
+      </div>
+    </section>
+
+    <!-- ============ 04 ============ -->
+    <section id="kettei">
+      <h2 class="sec"><span class="num">04</span>都市計画の決定手続</h2>
+
+      <div class="scroll">
+        <table>
+          <thead><tr><th>都道府県が定めるもの</th><th>市町村が定めるもの</th></tr></thead>
+          <tbody>
+            <tr>
+              <td>
+                都市計画区域の整備・開発・保全の方針<br>
+                <strong>区域区分</strong><br>
+                都市再開発方針等<br>
+                広域的・根幹的な都市施設<br>
+                大規模な市街地開発事業<br>
+                風致地区（10ha以上で2以上の市町村にわたるもの）
+              </td>
+              <td>
+                <strong>用途地域</strong>その他の地域地区（都道府県が定めるものを除く）<br>
+                <strong>地区計画</strong><br>
+                小規模な都市施設<br>
+                市街地開発事業（小規模）
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>市町村が定める都市計画は、<strong>都道府県が定めた都市計画に適合</strong>しなければならない。抵触するときは都道府県の都市計画が優先する。</p>
+
+      <h3>4-1　決定の流れ</h3>
+      <figure class="plate">
+        <svg viewBox="0 0 720 130" role="img" aria-label="都市計画決定の流れ。公聴会等で住民の意見を反映させ、都市計画案を2週間公衆の縦覧に供し、住民と利害関係人は意見書を提出でき、都市計画審議会の議を経て決定し告示する。">
+          <line x1="30" y1="62" x2="694" y2="62" class="svg-hair"/>
+          <g><circle cx="66" cy="62" r="6" class="svg-ink" fill="var(--paper)"/><text x="66" y="44" text-anchor="middle">公聴会等</text><text x="66" y="86" text-anchor="middle" class="lbl">住民の意見を反映</text></g>
+          <g><circle cx="234" cy="62" r="6" class="svg-acc" fill="var(--paper)"/><text x="234" y="44" text-anchor="middle" class="acct">案の公告・縦覧</text><text x="234" y="86" text-anchor="middle" class="dimt">2週間</text></g>
+          <g><circle cx="402" cy="62" r="6" class="svg-ink" fill="var(--paper)"/><text x="402" y="44" text-anchor="middle">意見書の提出</text><text x="402" y="86" text-anchor="middle" class="lbl">住民・利害関係人</text></g>
+          <g><circle cx="546" cy="62" r="6" class="svg-ink" fill="var(--paper)"/><text x="546" y="44" text-anchor="middle">都市計画審議会</text><text x="546" y="86" text-anchor="middle" class="lbl">議を経る</text></g>
+          <g><circle cx="664" cy="62" r="6" class="svg-ink" fill="var(--paper)"/><text x="664" y="44" text-anchor="middle">決定・告示</text><text x="664" y="86" text-anchor="middle" class="lbl">効力発生</text></g>
+        </svg>
+        <figcaption>Fig.2 — 都市計画決定の手続</figcaption>
+      </figure>
+
+      <div class="call exam">
+        <span class="tag">よく出る</span>
+        <p>縦覧期間は <strong>2週間</strong>。意見書を提出できるのは<strong>住民および利害関係人</strong>で、その都市計画区域内に住んでいれば足りる（土地所有者に限らない）。</p>
+      </div>
+    </section>
+
+    <!-- ============ 05 ============ -->
+    <section id="chiku">
+      <h2 class="sec"><span class="num">05</span>地区計画</h2>
+
+      <div class="scroll">
+        <table>
+          <thead><tr><th>論点</th><th>内容</th></tr></thead>
+          <tbody>
+            <tr><td>定める場所</td><td><strong>都市計画区域内</strong>。用途地域が定められている区域、および定められていない区域のうち一定のもの。<strong>市街化調整区域でも定められる</strong></td></tr>
+            <tr><td>準都市計画区域</td><td class="no">定められない</td></tr>
+            <tr><td>定める者</td><td><strong>市町村</strong></td></tr>
+            <tr><td><strong>行為の届出</strong></td><td>地区整備計画の区域内で土地の区画形質の変更・建築物の建築等をしようとする者は、行為に着手する日の <strong>30日前まで</strong> に<strong>市町村長</strong>に届け出る</td></tr>
+            <tr><td>届出への対応</td><td>市町村長は、地区計画に適合しないときは設計の変更等を<strong>勧告</strong>できる</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="call trap">
+        <span class="tag">ひっかけ</span>
+        <p>地区計画の届出は「<strong>許可</strong>」ではなく<strong>届出</strong>、期限は着手の<strong>30日前まで</strong>、相手は<strong>市町村長</strong>（知事ではない）。市町村長ができるのは<strong>勧告</strong>であって命令ではない。数字・相手・効果の3点セットで狙われる。</p>
+      </div>
+    </section>
+
+    <!-- ============ 06 ============ -->
+    <section id="kaihatsu">
+      <h2 class="sec"><span class="num">06</span>開発許可</h2>
+      <p class="lead">都市計画法の出題2問のうち、<em>1問はここから出ると考えてよい</em>。</p>
+
+      <h3>6-1　開発行為とは</h3>
+      <p><strong>主として建築物の建築または特定工作物の建設の用に供する目的</strong>で行う<strong>土地の区画形質の変更</strong>。目的が伴わない単なる造成は開発行為にあたらない。</p>
+
+      <div class="scroll">
+        <table>
+          <thead><tr><th>特定工作物</th><th>内容</th><th class="n">規模</th></tr></thead>
+          <tbody>
+            <tr><td><strong>第一種</strong></td><td>コンクリートプラント、アスファルトプラント、クラッシャープラント、危険物の貯蔵・処理施設</td><td class="n">規模を問わない</td></tr>
+            <tr><td><strong>第二種</strong></td><td><strong>ゴルフコース</strong></td><td class="n">規模を問わない</td></tr>
+            <tr><td><strong>第二種</strong></td><td>野球場・庭球場・陸上競技場・遊園地・動物園・墓園など</td><td class="n"><strong>1ha以上</strong></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="call trap">
+        <span class="tag">ひっかけ</span>
+        <p><strong>ゴルフコースだけは規模を問わず</strong>第二種特定工作物になる。逆に<strong>1ha未満の野球場・庭球場は特定工作物にあたらない</strong>ので、そもそも開発行為にならず許可も不要。「0.9haの野球場の建設のための造成に開発許可が必要」は誤り。</p>
+      </div>
+
+      <h3>6-2　面積要件</h3>
+
+      <figure class="plate">
+        <svg viewBox="0 0 720 250" role="img" aria-label="区域別の開発許可の面積要件。市街化区域は1000平方メートル以上、三大都市圏の一定区域は500平方メートル以上、市街化調整区域は規模を問わず許可が必要、非線引き都市計画区域と準都市計画区域は3000平方メートル以上、都市計画区域および準都市計画区域外は1ヘクタール以上で許可が必要。">
+          <!-- guides -->
+          <line x1="230" y1="40" x2="230" y2="222" class="svg-hair" stroke-dasharray="3 4"/>
+          <line x1="311" y1="40" x2="311" y2="222" class="svg-hair" stroke-dasharray="3 4"/>
+          <line x1="439" y1="40" x2="439" y2="222" class="svg-hair" stroke-dasharray="3 4"/>
+          <line x1="579" y1="40" x2="579" y2="222" class="svg-hair" stroke-dasharray="3 4"/>
+          <text x="230" y="32" text-anchor="middle" class="dimt">500㎡</text>
+          <text x="311" y="32" text-anchor="middle" class="dimt">1,000㎡</text>
+          <text x="439" y="32" text-anchor="middle" class="dimt">3,000㎡</text>
+          <text x="579" y="32" text-anchor="middle" class="dimt">1ha</text>
+
+          <!-- row 1 -->
+          <text x="12" y="62" class="lbl">市街化区域</text>
+          <rect x="150" y="46" width="161" height="22" class="svg-fill"/>
+          <rect x="311" y="46" width="349" height="22" class="svg-accfill"/>
+          <text x="230" y="62" text-anchor="middle" class="lbl">許可不要</text>
+          <text x="486" y="62" text-anchor="middle" class="acct">許可が必要</text>
+
+          <!-- row 2 -->
+          <text x="12" y="98" class="lbl">市街化区域</text>
+          <text x="12" y="112" class="lbl">（三大都市圏）</text>
+          <rect x="150" y="88" width="80" height="22" class="svg-fill"/>
+          <rect x="230" y="88" width="430" height="22" class="svg-accfill"/>
+          <text x="190" y="104" text-anchor="middle" class="lbl">不要</text>
+          <text x="445" y="104" text-anchor="middle" class="acct">許可が必要</text>
+
+          <!-- row 3 -->
+          <text x="12" y="140" class="lbl">市街化調整区域</text>
+          <rect x="150" y="126" width="510" height="22" class="svg-accfill"/>
+          <text x="405" y="142" text-anchor="middle" class="acct">規模を問わず、常に許可が必要</text>
+
+          <!-- row 4 -->
+          <text x="12" y="176" class="lbl">非線引き都市計画区域</text>
+          <text x="12" y="190" class="lbl">準都市計画区域</text>
+          <rect x="150" y="166" width="289" height="22" class="svg-fill"/>
+          <rect x="439" y="166" width="221" height="22" class="svg-accfill"/>
+          <text x="294" y="182" text-anchor="middle" class="lbl">許可不要</text>
+          <text x="549" y="182" text-anchor="middle" class="acct">許可が必要</text>
+
+          <!-- row 5 -->
+          <text x="12" y="218" class="lbl">上記以外（両区域外）</text>
+          <rect x="150" y="204" width="429" height="22" class="svg-fill"/>
+          <rect x="579" y="204" width="81" height="22" class="svg-accfill"/>
+          <text x="364" y="220" text-anchor="middle" class="lbl">許可不要</text>
+          <text x="619" y="220" text-anchor="middle" class="acct">必要</text>
+
+          <line x1="150" y1="236" x2="660" y2="236" class="svg-ink"/>
+          <text x="660" y="248" text-anchor="end" class="lbl">開発区域の面積（対数目盛）</text>
+        </svg>
+        <figcaption>Fig.3 — 区域別の面積要件。市街化調整区域だけが面積で切れない</figcaption>
+      </figure>
+
+      <div class="scroll">
+        <table>
+          <thead><tr><th>区域</th><th class="n">許可が必要な規模</th><th>条例による引下げ</th></tr></thead>
+          <tbody>
+            <tr><td>市街化区域</td><td class="n"><strong>1,000㎡</strong>以上</td><td rowspan="2">都道府県は条例で <strong>300㎡</strong> まで引き下げられる</td></tr>
+            <tr><td>市街化区域（三大都市圏の一定区域）</td><td class="n"><strong>500㎡</strong>以上</td></tr>
+            <tr><td><strong>市街化調整区域</strong></td><td class="n no">規模を問わず必要</td><td>—</td></tr>
+            <tr><td>非線引き都市計画区域・準都市計画区域</td><td class="n"><strong>3,000㎡</strong>以上</td><td>条例で <strong>300㎡</strong> まで</td></tr>
+            <tr><td>都市計画区域・準都市計画区域<strong>外</strong></td><td class="n"><strong>1ha</strong>（10,000㎡）以上</td><td>—</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="call tip">
+        <span class="tag">覚え方</span>
+        <p><strong>1,000 → 3,000 → 10,000</strong> と3倍ずつ。都市から離れるほど緩くなる。例外は<strong>市街化調整区域だけが面積で切れない</strong>こと — 市街化を抑制する区域なので、小さな造成も見逃さない。</p>
+      </div>
+
+      <h3>6-3　面積に関係なく許可が不要になる場合</h3>
+      <div class="scroll">
+        <table>
+          <thead><tr><th>類型</th><th>許可不要となる区域</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><strong>農林漁業用の建築物</strong>、および農林漁業を営む者の<strong>居住用建築物</strong></td>
+              <td>市街化調整区域・非線引き区域・準都市計画区域・両区域外<br><span class="no">市街化区域では許可が必要</span></td>
+            </tr>
+            <tr>
+              <td><strong>公益上必要な建築物</strong> — 駅舎その他の鉄道施設、図書館、公民館、変電所など</td>
+              <td>すべての区域で不要</td>
+            </tr>
+            <tr>
+              <td>都市計画事業・土地区画整理事業・市街地再開発事業・住宅街区整備事業・防災街区整備事業の施行として行うもの</td>
+              <td>すべての区域で不要</td>
+            </tr>
+            <tr><td>非常災害の応急措置</td><td>すべての区域で不要</td></tr>
+            <tr><td>通常の管理行為・軽易な行為（仮設建築物、車庫・物置等の附属建築物）</td><td>すべての区域で不要</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="call trap">
+        <span class="tag">ひっかけ</span>
+        <p><strong>学校・病院・社会福祉施設・庁舎は「公益上必要な建築物」に含まれない</strong>（2007年改正）。これらを建てるための開発行為には<strong>許可が必要</strong>。<br>
+        また、農林漁業用の建築物が許可不要になるのは<strong>市街化区域以外</strong>。市街化区域内に農家住宅を建てる場合、1,000㎡以上なら許可がいる。</p>
+      </div>
+
+      <h3>6-4　手続の流れ</h3>
+
+      <figure class="plate">
+        <svg viewBox="0 0 720 180" role="img" aria-label="開発許可の手続。公共施設管理者の同意を得たうえで申請し、許可または不許可が文書で通知され、開発登録簿に登録される。工事完了後は完了届、検査、検査済証を経て工事完了の公告が行われる。公告前は建築物を建築できず、公告後は予定建築物以外を建築できない。">
+          <line x1="24" y1="70" x2="696" y2="70" class="svg-hair"/>
+          <g><circle cx="62" cy="70" r="6" class="svg-ink" fill="var(--paper)"/><text x="62" y="52" text-anchor="middle">事前の同意・協議</text><text x="62" y="96" text-anchor="middle" class="lbl">公共施設の管理者</text></g>
+          <g><circle cx="212" cy="70" r="6" class="svg-ink" fill="var(--paper)"/><text x="212" y="52" text-anchor="middle">許可申請</text><text x="212" y="96" text-anchor="middle" class="lbl">知事等へ</text></g>
+          <g><circle cx="342" cy="70" r="6" class="svg-ink" fill="var(--paper)"/><text x="342" y="52" text-anchor="middle">許可・不許可</text><text x="342" y="96" text-anchor="middle" class="lbl">文書で通知／登録簿へ</text></g>
+          <g><circle cx="486" cy="70" r="6" class="svg-ink" fill="var(--paper)"/><text x="486" y="52" text-anchor="middle">完了届・検査</text><text x="486" y="96" text-anchor="middle" class="lbl">検査済証の交付</text></g>
+          <g><circle cx="646" cy="70" r="6" class="svg-acc" fill="var(--paper)"/><text x="646" y="52" text-anchor="middle" class="acct">工事完了の公告</text><text x="646" y="96" text-anchor="middle" class="lbl">境界となる時点</text></g>
+
+          <path d="M24 122 H 640" class="svg-acc" stroke-dasharray="4 3"/>
+          <path d="M28 118 L24 122 L28 126" class="svg-acc"/>
+          <text x="330" y="138" text-anchor="middle" class="acct">公告前 — 原則、建築物を建築できない</text>
+          <path d="M652 122 H 696" class="svg-dim"/>
+          <text x="674" y="138" text-anchor="middle" class="dimt">公告後</text>
+          <text x="674" y="154" text-anchor="middle" class="lbl">予定建築物のみ</text>
+        </svg>
+        <figcaption>Fig.4 — 開発許可の手続と建築制限の境界</figcaption>
+      </figure>
+
+      <div class="scroll">
+        <table>
+          <thead><tr><th>論点</th><th>内容</th></tr></thead>
+          <tbody>
+            <tr><td>事前の同意</td><td>開発区域内の<strong>既存の公共施設の管理者の同意</strong>が必要。将来管理することとなる者とは<strong>協議</strong></td></tr>
+            <tr><td>関係権利者</td><td><strong>相当数の同意</strong>で足りる（全員の同意は不要）</td></tr>
+            <tr><td>処分の通知</td><td>許可・不許可のいずれも<strong>文書</strong>で通知</td></tr>
+            <tr><td>開発登録簿</td><td>知事等が調製し、常に公衆の閲覧に供する。<strong>誰でも</strong>写しの交付を請求できる</td></tr>
+            <tr><td>変更</td><td>原則、知事の<strong>許可</strong>。軽微な変更は遅滞なく<strong>届出</strong></td></tr>
+            <tr><td>地位の承継</td><td>相続等の<strong>一般承継人</strong>は当然に承継。譲受け等の<strong>特定承継人</strong>は知事の<strong>承認</strong>が必要</td></tr>
+            <tr><td>不服申立て</td><td><strong>開発審査会</strong>へ審査請求</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="call trap">
+        <span class="tag">ひっかけ</span>
+        <p>関係権利者は<strong>相当数の同意</strong>でよいが、<strong>公共施設の管理者の同意は必須</strong>。「全員の同意が必要」「管理者とは協議すれば足りる」はいずれも誤り。<br>
+        承継は<strong>相続は当然・売買は承認</strong>。ここも入れ替えて出される。</p>
+      </div>
+    </section>
+
+    <!-- ============ 07 ============ -->
+    <section id="seigen">
+      <h2 class="sec"><span class="num">07</span>建築制限</h2>
+
+      <h3>7-1　開発許可を受けた区域内</h3>
+      <div class="scroll">
+        <table>
+          <thead><tr><th>時期</th><th>原則</th><th>例外</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><strong>工事完了の公告前</strong></td>
+              <td class="no">建築物の建築・特定工作物の建設をしてはならない</td>
+              <td>① 工事用の仮設建築物<br>② 知事が支障がないと認めたとき<br>③ 開発行為に<strong>同意していない</strong>土地所有者等が権利の行使として建築するとき</td>
+            </tr>
+            <tr>
+              <td><strong>工事完了の公告後</strong></td>
+              <td class="no">予定建築物等以外の建築物を新築してはならない</td>
+              <td>① 知事の<strong>許可</strong>があるとき<br>② その区域に用途地域等が定められているとき</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>7-2　市街化調整区域のうち開発許可を受けた区域「以外」</h3>
+      <p>開発許可の話とは別に、市街化調整区域には建築そのものへの規制がかかる（法43条）。</p>
+      <div class="scroll">
+        <table>
+          <thead><tr><th>原則</th><th>例外（許可不要）</th></tr></thead>
+          <tbody>
+            <tr>
+              <td class="no">知事の許可なく、建築物の新築・改築・用途変更、第一種特定工作物の新設をしてはならない</td>
+              <td>農林漁業用の建築物および農林漁業を営む者の居住用建築物／公益上必要な建築物／都市計画事業の施行として行うもの／通常の管理行為・軽易な行為／非常災害の応急措置</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="call exam">
+        <span class="tag">よく出る</span>
+        <p>市街化調整区域では、<strong>開発行為を伴わない建築（更地への新築）にも許可がいる</strong>。造成しなければ自由に建てられる、という誤答が定番。</p>
+      </div>
+    </section>
+
+    <!-- ============ 08 ============ -->
+    <section id="deru">
+      <h2 class="sec"><span class="num">08</span>よく出る論点</h2>
+      <div class="scroll">
+        <table>
+          <thead><tr><th class="n">順位</th><th>論点</th><th>要点</th></tr></thead>
+          <tbody>
+            <tr><td class="n">1</td><td><strong>開発許可の要否</strong></td><td>区域別の面積要件＋許可不要の例外。<span class="no">2問中1問の本命</span></td></tr>
+            <tr><td class="n">2</td><td>開発許可の手続</td><td>公共施設管理者の同意、承継、変更、開発登録簿</td></tr>
+            <tr><td class="n">3</td><td>工事完了公告の前後の建築制限</td><td>公告前は原則不可／公告後は予定建築物のみ</td></tr>
+            <tr><td class="n">4</td><td>準都市計画区域に定められる地域地区</td><td>8種類。高度地区は可・高度利用地区は不可</td></tr>
+            <tr><td class="n">5</td><td>地域地区の区別</td><td>高度地区／高度利用地区、特別用途地区／特定用途制限地域</td></tr>
+            <tr><td class="n">6</td><td>都市計画の決定権者</td><td>区域区分＝都道府県、用途地域・地区計画＝市町村</td></tr>
+            <tr><td class="n">7</td><td>地区計画の届出</td><td>着手30日前まで・市町村長・勧告</td></tr>
+            <tr><td class="n">8</td><td>区域区分</td><td>市街化区域はおおむね10年以内、用途地域を必ず定める</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ============ 09 ============ -->
+    <section id="hikkake">
+      <h2 class="sec"><span class="num">09</span>ひっかけ一覧</h2>
+      <div class="scroll">
+        <table class="traps">
+          <thead><tr><th>こう書かれたら疑う</th><th>正しくは</th></tr></thead>
+          <tbody>
+            <tr><td>準都市計画区域は都市計画区域内の一部に指定する</td><td>都市計画区域の<strong>外</strong>に指定する</td></tr>
+            <tr><td>準都市計画区域に高度利用地区を定める</td><td><strong>定められない</strong>。定められるのは高度地区（最高限度のみ）</td></tr>
+            <tr><td>市街化調整区域は市街化を禁止する区域</td><td>市街化を<strong>抑制すべき</strong>区域</td></tr>
+            <tr><td>市街化調整区域でも1,000㎡未満なら開発許可は不要</td><td><strong>規模を問わず必要</strong></td></tr>
+            <tr><td>0.9haの野球場の造成に開発許可が必要</td><td>1ha未満は特定工作物でないため<strong>開発行為にあたらない</strong></td></tr>
+            <tr><td>小規模なゴルフコースは特定工作物にあたらない</td><td>ゴルフコースは<strong>規模を問わず</strong>第二種特定工作物</td></tr>
+            <tr><td>病院を建てる開発行為は公益上必要なので許可不要</td><td>学校・病院・社会福祉施設・庁舎は<strong>許可が必要</strong></td></tr>
+            <tr><td>市街化区域内の農家住宅なら開発許可は不要</td><td>農林漁業の例外は<strong>市街化区域では使えない</strong></td></tr>
+            <tr><td>開発区域内の土地所有者全員の同意が必要</td><td><strong>相当数</strong>の同意で足りる（管理者の同意は必須）</td></tr>
+            <tr><td>開発許可を受けた地位は売買でも当然に移転する</td><td>特定承継人は知事の<strong>承認</strong>が必要（相続なら当然承継）</td></tr>
+            <tr><td>市街化調整区域でも造成しなければ自由に建築できる</td><td>建築自体に<strong>知事の許可</strong>が必要（法43条）</td></tr>
+            <tr><td>地区計画の区域内では市町村長の許可が必要</td><td><strong>着手30日前までの届出</strong>。市町村長は勧告できる</td></tr>
+            <tr><td>用途地域は都道府県が定める</td><td><strong>市町村</strong>が定める（区域区分は都道府県）</td></tr>
+            <tr><td>特定用途制限地域は市街化調整区域にも定められる</td><td><strong>市街化調整区域を除く</strong>用途地域が定められていない区域</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ============ 10 ============ -->
+    <section id="suji">
+      <h2 class="sec"><span class="num">10</span>数字まとめ</h2>
+      <p class="masthead-note">右上の「数値を隠す」で自己テストできる。カードにカーソルを合わせる／フォーカスすると答えが出る。</p>
+
+      <div class="nums" id="numgrid">
+        <div class="nc" tabindex="0"><span class="v">1,000㎡</span><span class="d">市街化区域で開発許可が必要になる規模</span></div>
+        <div class="nc" tabindex="0"><span class="v">500㎡</span><span class="d">三大都市圏の一定区域（市街化区域）での開発許可</span></div>
+        <div class="nc" tabindex="0"><span class="v">3,000㎡</span><span class="d">非線引き都市計画区域・準都市計画区域での開発許可</span></div>
+        <div class="nc" tabindex="0"><span class="v">1ha</span><span class="d">都市計画区域・準都市計画区域外での開発許可（10,000㎡）</span></div>
+        <div class="nc" tabindex="0"><span class="v">300㎡</span><span class="d">条例で面積要件を引き下げられる下限</span></div>
+        <div class="nc" tabindex="0"><span class="v">規模を問わず</span><span class="d">市街化調整区域の開発許可 — 面積で切れない</span></div>
+        <div class="nc" tabindex="0"><span class="v">1ha</span><span class="d">野球場・庭球場等が第二種特定工作物になる規模</span></div>
+        <div class="nc" tabindex="0"><span class="v">8種類</span><span class="d">準都市計画区域に定められる地域地区</span></div>
+        <div class="nc" tabindex="0"><span class="v">13種類</span><span class="d">用途地域（住居8・商業2・工業3）</span></div>
+        <div class="nc" tabindex="0"><span class="v">おおむね10年</span><span class="d">市街化区域で優先的・計画的に市街化を図る期間</span></div>
+        <div class="nc" tabindex="0"><span class="v">2週間</span><span class="d">都市計画案の公衆縦覧の期間</span></div>
+        <div class="nc" tabindex="0"><span class="v">30日前</span><span class="d">地区計画区域内の行為の届出期限（市町村長へ）</span></div>
+        <div class="nc" tabindex="0"><span class="v">10ha</span><span class="d">都道府県が定める風致地区の規模（2以上の市町村にわたるもの）</span></div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <h4>出典</h4>
+    <ul>
+      <li>都市計画法（昭和43年法律第100号） — <a href="https://laws.e-gov.go.jp/law/343AC0000000100">e-Gov法令検索</a></li>
+      <li>都市計画法第8条（地域地区）／第8条第2項の準都市計画区域の限定列挙 — <a href="https://lawzilla.jp/law/343AC0000000100?n=ln8&amp;mode=only">Lawzilla 条文</a></li>
+      <li>開発許可の面積要件（区域別・三大都市圏の特例） — <a href="https://takuchi-kaihatsu.com/kaihatsu-menseki/">開発許可の面積要件</a></li>
+      <li>国土交通省 都市計画・開発許可制度 — <a href="https://www.mlit.go.jp/toshi/city_plan/">mlit.go.jp</a></li>
+    </ul>
+    <div class="sibling">
+      <a href="../index.html">総目次</a>
+      <a href="建築基準法.html">← 建築基準法</a>
+    </div>
+    <div class="todo">TODO — 都市施設・市街地開発事業の細目、および市街化調整区域の開発許可の立地基準（法34条各号）は、単独出題が少ないため未収録。過去問で問われた形が出てきたら追記する。</div>
+  </footer>
+
+</div>
+
+<script>
+  (function () {
+    var root = document.documentElement;
+
+    document.getElementById('theme').addEventListener('click', function () {
+      var now = root.getAttribute('data-theme');
+      if (now) { root.removeAttribute('data-theme'); return; }
+      var dark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      root.setAttribute('data-theme', dark ? 'light' : 'dark');
+    });
+
+    var maskBtn = document.getElementById('mask');
+    var grid = document.getElementById('numgrid');
+    maskBtn.addEventListener('click', function () {
+      var on = grid.classList.toggle('masked');
+      maskBtn.setAttribute('aria-pressed', String(on));
+      maskBtn.textContent = on ? '数値を表示' : '数値を隠す';
+    });
+
+    var links = Array.prototype.slice.call(document.querySelectorAll('nav.rail ol a'));
+    var map = {};
+    links.forEach(function (a) { map[a.getAttribute('href').slice(1)] = a; });
+    var seen = [];
+    var obs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        var i = seen.indexOf(e.target.id);
+        if (e.isIntersecting && i < 0) seen.push(e.target.id);
+        if (!e.isIntersecting && i >= 0) seen.splice(i, 1);
+      });
+      links.forEach(function (a) { a.classList.remove('on'); });
+      if (seen.length) {
+        var order = Object.keys(map);
+        seen.sort(function (a, b) { return order.indexOf(a) - order.indexOf(b); });
+        map[seen[0]].classList.add('on');
+      }
+    }, { rootMargin: '-10% 0px -70% 0px' });
+    document.querySelectorAll('main section').forEach(function (s) { obs.observe(s); });
+  })();
+</script>

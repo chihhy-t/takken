@@ -1,0 +1,840 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>抵当権と担保物権 — 宅建士試験 2026年度</title>
+
+<style>
+  :root {
+    --paper:#EBEDE9; --surface:#F8F9F6; --sunk:#E1E4DE; --ink:#151F2A; --muted:#5D6B78;
+    --rule:#CDD2CB; --hair:#DCE0D9; --accent:#B8342A; --accent-soft:#F3DEDB;
+    --blue:#2A5F86; --blue-soft:#DCE6EE;
+    --font-display:"Hiragino Mincho ProN","Yu Mincho","YuMincho","Noto Serif JP",serif;
+    --font-body:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","YuGothic","Noto Sans JP",system-ui,sans-serif;
+    --font-mono:ui-monospace,"SFMono-Regular","SF Mono",Menlo,Consolas,monospace;
+    --measure:68ch;
+    --s1:.35rem; --s2:.7rem; --s3:1.1rem; --s4:1.7rem; --s5:2.6rem; --s6:4rem;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper:#0D1B29; --surface:#132534; --sunk:#0A1622; --ink:#DAE4EC; --muted:#8CA1B3;
+      --rule:#26415A; --hair:#1D3448; --accent:#FF7059; --accent-soft:#3A1F1D;
+      --blue:#6FB6DC; --blue-soft:#14293A;
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper:#0D1B29; --surface:#132534; --sunk:#0A1622; --ink:#DAE4EC; --muted:#8CA1B3;
+    --rule:#26415A; --hair:#1D3448; --accent:#FF7059; --accent-soft:#3A1F1D;
+    --blue:#6FB6DC; --blue-soft:#14293A;
+  }
+
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--paper); color:var(--ink); font-family:var(--font-body);
+    font-size:16px; line-height:1.9; -webkit-font-smoothing:antialiased; font-feature-settings:"palt" 1; }
+
+  .wrap { display:grid; grid-template-columns:15.5rem minmax(0,1fr); gap:var(--s6);
+    max-width:80rem; margin:0 auto; padding:0 var(--s4) var(--s6); align-items:start; }
+  @media (max-width:60rem){ .wrap{ grid-template-columns:minmax(0,1fr); gap:var(--s4); padding:0 var(--s3) var(--s5);} }
+
+  .masthead { grid-column:1/-1; padding:var(--s5) 0 var(--s4); border-bottom:2px solid var(--ink);
+    margin-bottom:var(--s2); display:flex; flex-wrap:wrap; align-items:flex-end; justify-content:space-between; gap:var(--s3); }
+  .eyebrow { font-family:var(--font-mono); font-size:.72rem; letter-spacing:.16em; text-transform:uppercase;
+    color:var(--muted); display:flex; align-items:center; gap:.6em; }
+  .eyebrow::before { content:""; width:2.2rem; height:1px; background:var(--accent); }
+  .eyebrow a { color:var(--accent); text-decoration:none; }
+  .eyebrow a:hover { text-decoration:underline; text-underline-offset:.2em; }
+  h1 { font-family:var(--font-display); font-weight:600; font-size:clamp(1.9rem,1.3rem + 2.4vw,2.9rem);
+    line-height:1.2; letter-spacing:.04em; margin:var(--s2) 0 var(--s3); text-wrap:balance; }
+  .facts { display:flex; flex-wrap:wrap; gap:0 var(--s3); font-size:.82rem; color:var(--muted); list-style:none; margin:0; padding:0; }
+  .facts b { font-family:var(--font-mono); font-variant-numeric:tabular-nums; color:var(--ink); font-weight:600; }
+  .toggles { display:flex; gap:var(--s1); }
+  button { font-family:var(--font-body); font-size:.78rem; color:var(--muted); background:var(--surface);
+    border:1px solid var(--rule); border-radius:2px; padding:.4em .9em; cursor:pointer; transition:color .15s,border-color .15s; }
+  button:hover { color:var(--ink); border-color:var(--ink); }
+  button:focus-visible { outline:2px solid var(--accent); outline-offset:2px; }
+  button[aria-pressed="true"] { color:var(--accent); border-color:var(--accent); }
+
+  nav.rail { position:sticky; top:var(--s3); font-size:.82rem; max-height:calc(100vh - 3rem); overflow-y:auto; padding-bottom:var(--s3); }
+  nav.rail h2 { font-family:var(--font-mono); font-size:.68rem; letter-spacing:.16em; text-transform:uppercase; color:var(--muted); margin:0 0 var(--s2); font-weight:500; }
+  nav.rail ol { list-style:none; margin:0; padding:0; display:flex; flex-direction:column; }
+  nav.rail a { display:block; padding:.3em 0 .3em .9em; color:var(--muted); text-decoration:none; border-left:2px solid var(--hair); line-height:1.5; }
+  nav.rail a:hover { color:var(--ink); border-left-color:var(--rule); }
+  nav.rail a.on { color:var(--ink); border-left-color:var(--accent); font-weight:600; }
+  nav.rail a .num { font-family:var(--font-mono); font-size:.72rem; color:var(--muted); margin-right:.5em; }
+  nav.rail a.home { border-left:none; padding:0 0 var(--s2); color:var(--accent);
+    font-family:var(--font-mono); font-size:.72rem; letter-spacing:.1em; }
+  nav.rail a.home:hover { color:var(--accent); text-decoration:underline; text-underline-offset:.2em; }
+  @media (max-width:60rem){
+    nav.rail{ position:static; max-height:none; border-bottom:1px solid var(--rule); padding-bottom:var(--s3); }
+    nav.rail ol{ display:grid; grid-template-columns:repeat(auto-fill,minmax(9rem,1fr)); gap:0 var(--s2); }
+  }
+
+  main { min-width:0; }
+  section { padding-top:var(--s5); scroll-margin-top:var(--s3); }
+  section > * { max-width:var(--measure); }
+  section > figure, section > .scroll { max-width:none; }
+
+  h2.sec { font-family:var(--font-display); font-size:clamp(1.45rem,1.2rem + .9vw,1.9rem); font-weight:600;
+    letter-spacing:.04em; margin:0 0 var(--s3); padding-bottom:var(--s2); border-bottom:1px solid var(--rule);
+    display:flex; align-items:baseline; gap:.7em; max-width:none; }
+  h2.sec .num { font-family:var(--font-mono); font-size:.8rem; letter-spacing:.1em; color:var(--accent); font-weight:500; }
+  h3 { font-family:var(--font-body); font-size:1.06rem; font-weight:700; letter-spacing:.02em;
+    margin:var(--s4) 0 var(--s2); padding-left:.7em; border-left:3px solid var(--ink); }
+  p { margin:0 0 var(--s3); }
+  a { color:var(--blue); text-underline-offset:.2em; }
+  em { font-style:normal; background:linear-gradient(transparent 62%, var(--accent-soft) 62%); font-weight:600; }
+  ul, ol { margin:0 0 var(--s3); padding-left:1.3em; }
+  li { margin-bottom:var(--s1); }
+  .lead { font-size:1.05rem; color:var(--muted); }
+
+  .call { max-width:var(--measure); margin:0 0 var(--s3); padding:var(--s3) var(--s3) var(--s3) var(--s4);
+    background:var(--surface); border:1px solid var(--hair); border-left:3px solid var(--rule); border-radius:2px; font-size:.94rem; }
+  .call > :last-child { margin-bottom:0; }
+  .call .tag { display:block; font-family:var(--font-mono); font-size:.68rem; letter-spacing:.16em; text-transform:uppercase; color:var(--muted); margin-bottom:var(--s1); }
+  .call.trap { border-left-color:var(--accent); background:var(--accent-soft); }
+  .call.trap .tag { color:var(--accent); }
+  .call.exam { border-left-color:var(--ink); }
+  .call.exam .tag { color:var(--ink); }
+  .call.tip { border-left-color:var(--blue); background:var(--blue-soft); }
+  .call.tip .tag { color:var(--blue); }
+
+  .scroll { overflow-x:auto; margin:0 0 var(--s3); -webkit-overflow-scrolling:touch; }
+  table { border-collapse:collapse; width:100%; font-size:.88rem; line-height:1.6; }
+  caption { text-align:left; font-size:.78rem; color:var(--muted); padding-bottom:var(--s1); font-family:var(--font-mono); letter-spacing:.08em; }
+  th, td { padding:.58em .75em; text-align:left; vertical-align:top; border-bottom:1px solid var(--hair); }
+  thead th { font-size:.74rem; letter-spacing:.08em; color:var(--muted); font-weight:600; border-bottom:1px solid var(--ink); }
+  tbody tr:hover { background:var(--surface); }
+  td.n, th.n { text-align:center; font-family:var(--font-mono); font-variant-numeric:tabular-nums; white-space:nowrap; }
+  .no { color:var(--accent); font-weight:700; }
+  .yes { color:var(--muted); }
+  .tri { color:var(--blue); }
+  table.tanpo tbody td:first-child { white-space:nowrap; font-weight:600; }
+  table.tanpo tr.hi { background:var(--accent-soft); }
+
+  figure { margin:0 0 var(--s4); }
+  figure svg { display:block; width:100%; height:auto; }
+  figcaption { font-size:.78rem; color:var(--muted); font-family:var(--font-mono); letter-spacing:.06em; margin-top:var(--s2); padding-top:var(--s1); border-top:1px solid var(--hair); }
+  .plate { background:var(--surface); border:1px solid var(--hair); border-radius:2px; padding:var(--s3); }
+  .svg-ink { fill:none; stroke:var(--ink); stroke-width:1.4; }
+  .svg-hair { fill:none; stroke:var(--rule); stroke-width:1; }
+  .svg-dim { fill:none; stroke:var(--blue); stroke-width:1; }
+  .svg-acc { fill:none; stroke:var(--accent); stroke-width:1.6; }
+  .svg-fill { fill:var(--sunk); stroke:var(--rule); stroke-width:1; }
+  .svg-accfill { fill:var(--accent-soft); stroke:var(--accent); stroke-width:1.2; }
+  .svg-bluefill { fill:var(--blue-soft); stroke:var(--blue); stroke-width:1.2; }
+  text { font-family:var(--font-body); fill:var(--ink); font-size:12px; }
+  text.lbl { font-family:var(--font-mono); fill:var(--muted); font-size:10.5px; letter-spacing:.06em; }
+  text.dimt { font-family:var(--font-mono); fill:var(--blue); font-size:11px; }
+  text.acct { fill:var(--accent); font-size:11.5px; font-weight:700; }
+  text.big { font-size:14px; font-weight:700; }
+
+  .nums { display:grid; grid-template-columns:repeat(auto-fill,minmax(12rem,1fr)); gap:var(--s2); }
+  .nc { background:var(--surface); border:1px solid var(--hair); border-radius:2px; padding:var(--s3) var(--s3) var(--s2); display:flex; flex-direction:column; gap:var(--s1); }
+  .nc .v { font-family:var(--font-mono); font-size:1.1rem; font-weight:600; line-height:1.3; color:var(--accent); }
+  .nc .d { font-size:.8rem; color:var(--muted); line-height:1.6; }
+  .nums.masked .v { color:transparent; background:var(--rule); border-radius:2px; user-select:none; }
+  .nums.masked .nc:hover .v, .nums.masked .nc:focus-within .v { color:var(--accent); background:transparent; }
+  .nc:focus-visible { outline:2px solid var(--accent); outline-offset:2px; }
+  .masthead-note { font-size:.78rem; color:var(--muted); margin-bottom:var(--s2); }
+
+  table.traps td:first-child { color:var(--muted); }
+  table.traps td:first-child::before { content:"「"; }
+  table.traps td:first-child::after { content:"」"; }
+  table.traps td:last-child strong { color:var(--accent); }
+
+  footer { grid-column:1/-1; margin-top:var(--s6); padding-top:var(--s3); border-top:1px solid var(--rule); font-size:.8rem; color:var(--muted); }
+  footer ul { list-style:none; padding:0; }
+  footer li { margin-bottom:var(--s1); }
+  .sibling { display:flex; flex-wrap:wrap; gap:var(--s2); margin-top:var(--s3); }
+  .sibling a { font-size:.8rem; text-decoration:none; border:1px solid var(--rule); border-radius:2px; padding:.35em .8em; color:var(--muted); }
+  .sibling a:hover { color:var(--ink); border-color:var(--ink); }
+
+  /* ── 肢別○×ドリル ── */
+  .drillbar { max-width:none; display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between;
+    gap:var(--s2); margin:0 0 var(--s3); padding:var(--s2) var(--s3); background:var(--surface);
+    border:1px solid var(--rule); border-radius:2px; position:sticky; top:0; z-index:5; }
+  .drillbar .score { font-family:var(--font-mono); font-size:.8rem; font-variant-numeric:tabular-nums;
+    color:var(--muted); letter-spacing:.04em; }
+  .drillbar .score b { color:var(--ink); font-weight:600; }
+  .drillbar .score .pct { color:var(--accent); font-weight:600; }
+  .drillbar .dbtns { display:flex; gap:var(--s1); }
+  ol.drill { max-width:none; list-style:none; margin:0; padding:0; counter-reset:dq; }
+  li.dq { counter-increment:dq; margin:0 0 var(--s2); padding:var(--s3);
+    background:var(--surface); border:1px solid var(--hair); border-left:3px solid var(--rule); border-radius:2px; }
+  li.dq > .s { margin:0; font-size:.95rem; line-height:1.85; max-width:var(--measure); }
+  li.dq > .s::before { content:counter(dq,decimal-leading-zero); font-family:var(--font-mono);
+    font-size:.72rem; letter-spacing:.08em; color:var(--muted); margin-right:.9em; }
+  li.dq .ch { display:flex; gap:var(--s1); margin-top:var(--s2); }
+  li.dq .ch button { font-family:var(--font-display); font-size:1.05rem; line-height:1; min-width:3.6rem; padding:.4em 0; }
+  li.dq .ch button[data-picked] { color:var(--ink); border-color:var(--ink); font-weight:700; }
+  li.dq .ex { display:none; margin-top:var(--s3); padding-top:var(--s2); border-top:1px solid var(--hair); }
+  li.dq.done .ex { display:block; }
+  li.dq .ex .verdict { display:block; font-family:var(--font-mono); font-size:.7rem; letter-spacing:.14em;
+    margin-bottom:var(--s1); }
+  li.dq .ex p { margin:0; font-size:.88rem; line-height:1.8; color:var(--muted); max-width:var(--measure); }
+  li.dq .ex p strong { color:var(--ink); font-weight:700; }
+  li.dq.ok { border-left-color:var(--blue); }
+  li.dq.ok .verdict { color:var(--blue); }
+  li.dq.ng { border-left-color:var(--accent); background:var(--accent-soft); }
+  li.dq.ng .verdict { color:var(--accent); }
+  li.dq.ng .ex p strong { color:var(--accent); }
+  ol.drill.onlyng li.dq:not(.ng) { display:none; }
+  .drilldone { font-size:.84rem; color:var(--muted); padding:var(--s3); border:1px dashed var(--rule);
+    border-radius:2px; text-align:center; }
+
+  @media (prefers-reduced-motion: reduce){ *{ transition:none !important; animation:none !important; scroll-behavior:auto !important; } }
+  html { scroll-behavior:smooth; }
+</style>
+
+<div class="wrap">
+
+  <header class="masthead">
+    <div>
+      <div class="eyebrow"><a href="../index.html">← 総目次</a> &nbsp;/&nbsp; 01 権利関係 &nbsp;/&nbsp; 宅建士試験 2026年度</div>
+      <h1>抵当権と担保物権</h1>
+      <ul class="facts">
+        <li>法令基準日 <b>2026-04-01</b></li>
+        <li>出題数 <b>1〜2問</b></li>
+        <li>ドリル <b>34肢</b></li>
+        <li>目標 <b>1問以上</b></li>
+        <li>更新 <b>2026-08-16</b></li>
+      </ul>
+    </div>
+    <div class="toggles">
+      <button id="mask" type="button" aria-pressed="false">答えを隠す</button>
+      <button id="theme" type="button">配色切替</button>
+    </div>
+  </header>
+
+  <nav class="rail" aria-label="目次">
+    <a class="home" href="../index.html">← 総目次</a>
+    <h2>Contents</h2>
+    <ol>
+      <li><a href="#overview"><span class="num">00</span>担保物権の全体像</a></li>
+      <li><a href="#seishitsu"><span class="num">01</span>抵当権の性質</a></li>
+      <li><a href="#han-i"><span class="num">02</span>効力の及ぶ範囲</a></li>
+      <li><a href="#daii"><span class="num">03</span>物上代位</a></li>
+      <li><a href="#hotei"><span class="num">04</span>法定地上権</a></li>
+      <li><a href="#ikkatsu"><span class="num">05</span>一括競売と賃借人</a></li>
+      <li><a href="#daisansha"><span class="num">06</span>第三取得者の保護</a></li>
+      <li><a href="#neteito"><span class="num">07</span>根抵当権</a></li>
+      <li><a href="#deru"><span class="num">08</span>よく出る論点</a></li>
+      <li><a href="#hikkake"><span class="num">09</span>ひっかけ一覧</a></li>
+      <li><a href="#matome"><span class="num">10</span>暗記カード</a></li>
+      <li><a href="#drill"><span class="num">11</span>肢別○×ドリル</a></li>
+    </ol>
+  </nav>
+
+  <main>
+
+    <!-- 00 -->
+    <section id="overview">
+      <h2 class="sec"><span class="num">00</span>担保物権の全体像</h2>
+
+      <div class="scroll">
+        <table class="tanpo">
+          <thead><tr><th>担保物権</th><th class="n">発生</th><th>内容</th><th class="n">占有</th></tr></thead>
+          <tbody>
+            <tr><td><strong>留置権</strong></td><td class="n">法定</td><td>他人の物に関して生じた債権の弁済を受けるまで、その物を留置できる</td><td class="n">必要</td></tr>
+            <tr><td><strong>先取特権</strong></td><td class="n">法定</td><td>法律の定める特殊な債権について優先弁済を受けられる</td><td class="n">不要</td></tr>
+            <tr><td><strong>質権</strong></td><td class="n">約定</td><td>債権の担保として受け取った物を占有し、優先弁済を受けられる</td><td class="n no">必要</td></tr>
+            <tr class="hi"><td><strong>抵当権</strong></td><td class="n">約定</td><td class="no">目的物の<strong>占有を移さず</strong>に、優先弁済を受けられる</td><td class="n no">不要</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="call tip">
+        <span class="tag">読み方</span>
+        <p><strong>抵当権の本質は「占有を移さない担保」。</strong>借主は自宅に住み続けたまま担保に入れられる。だからこそ「実際に使っている人」と「担保を持っている人」がずれ、法定地上権や賃借人の扱いといった難しい論点が生まれる。</p>
+      </div>
+    </section>
+
+    <!-- 01 -->
+    <section id="seishitsu">
+      <h2 class="sec"><span class="num">01</span>抵当権の性質</h2>
+
+      <div class="scroll">
+        <table>
+          <thead><tr><th>性質</th><th>内容</th></tr></thead>
+          <tbody>
+            <tr><td><strong>付従性</strong></td><td>被担保債権が成立しなければ成立せず、消滅すれば消滅する</td></tr>
+            <tr><td><strong>随伴性</strong></td><td>被担保債権が移転すれば抵当権も移転する</td></tr>
+            <tr><td><strong>不可分性</strong></td><td>債権全部の弁済を受けるまで、目的物の<strong>全部</strong>について権利を行使できる</td></tr>
+            <tr><td><strong>物上代位性</strong></td><td>目的物の売却・賃貸・滅失・損傷により債務者が受けるべき金銭等に対しても行使できる（→ <a href="#daii">03</a>）</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="scroll">
+        <table>
+          <thead><tr><th>論点</th><th>内容</th></tr></thead>
+          <tbody>
+            <tr><td>設定できる者</td><td>債務者に限らない。<strong>物上保証人</strong>（他人の債務のために自分の不動産に抵当権を設定する者）でもよい</td></tr>
+            <tr><td>対象</td><td>不動産のほか、<strong>地上権・永小作権</strong>にも設定できる。<span class="no">賃借権には設定できない</span></td></tr>
+            <tr><td>対抗要件</td><td><strong>登記</strong>。同一不動産に複数設定でき、順位は<strong>登記の前後</strong>による</td></tr>
+            <tr><td>順位の変更</td><td>各抵当権者の<strong>合意</strong>によりできる。利害関係人がいるときはその承諾も必要。<strong>登記をしなければ効力を生じない</strong></td></tr>
+            <tr><td class="no"><strong>消滅時効</strong></td><td class="no">抵当権は、<strong>債務者および抵当権設定者に対しては</strong>、被担保債権と同時でなければ時効消滅しない</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 02 -->
+    <section id="han-i">
+      <h2 class="sec"><span class="num">02</span>効力の及ぶ範囲</h2>
+
+      <div class="scroll">
+        <table>
+          <thead><tr><th>対象</th><th class="n">及ぶか</th><th>補足</th></tr></thead>
+          <tbody>
+            <tr><td><strong>付加一体物</strong>（雨戸・庭石など）</td><td class="n tri">及ぶ</td><td>不動産と一体となったもの</td></tr>
+            <tr><td class="no"><strong>従物</strong>（畳・建具・エアコンなど）</td><td class="n tri">及ぶ</td><td class="no"><strong>抵当権設定当時に存在した</strong>従物に及ぶ（判例）</td></tr>
+            <tr><td><strong>従たる権利</strong>（借地権）</td><td class="n tri">及ぶ</td><td>借地上の建物に抵当権を設定すると、<strong>借地権にも及ぶ</strong></td></tr>
+            <tr><td class="no"><strong>果実</strong></td><td class="n">及ぶ</td><td class="no"><strong>被担保債権について不履行があったとき以後</strong>に生じた果実に及ぶ（賃料など）</td></tr>
+            <tr><td>土地に抵当権 → その上の建物</td><td class="n no">及ばない</td><td rowspan="2" class="no">土地と建物は<strong>別個の不動産</strong>。片方に設定しても他方には及ばない</td></tr>
+            <tr><td>建物に抵当権 → その敷地</td><td class="n no">及ばない</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>2-1　被担保債権の範囲</h3>
+      <p>抵当権者は、利息その他の定期金については、<strong>満期となった最後の2年分</strong>についてのみ優先弁済を受けられる。</p>
+
+      <div class="call trap">
+        <span class="tag">ひっかけ</span>
+        <p><strong>利息は「最後の2年分」まで。</strong>ただしこれは<strong>後順位抵当権者など他の債権者がいる場合の制限</strong>で、他に債権者がいなければ全額について優先弁済を受けられる。<br>
+        <strong>土地と建物は別。</strong>「土地に抵当権を設定すれば建物にも及ぶ」は誤り。日本の民法が土地と建物を別個の不動産としているため、法定地上権という制度が必要になる。</p>
+      </div>
+    </section>
+
+    <!-- 03 -->
+    <section id="daii">
+      <h2 class="sec"><span class="num">03</span>物上代位</h2>
+
+      <div class="scroll">
+        <table>
+          <thead><tr><th>論点</th><th>内容</th></tr></thead>
+          <tbody>
+            <tr><td>対象</td><td>目的物の<strong>売却・賃貸・滅失・損傷</strong>によって債務者が受けるべき金銭その他の物<br><span class="lbl">売買代金・賃料・火災保険金・損害賠償金など</span></td></tr>
+            <tr><td class="no"><strong>要件</strong></td><td class="no">その払渡し・引渡しの<strong>前に差押えをしなければならない</strong></td></tr>
+            <tr><td>賃料への物上代位</td><td class="tri">できる（判例）。抵当不動産が賃貸されている場合、賃料債権を差し押さえられる</td></tr>
+            <tr><td>転貸賃料</td><td class="no">原則として<strong>できない</strong>（判例）。転借人は抵当権設定者ではないため</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="call exam">
+        <span class="tag">よく出る</span>
+        <p><strong>差押えは「払渡し前」に必要。</strong>すでに債務者が受け取ってしまえば、他の財産に混ざって特定できなくなるため、それより前に押さえておく必要がある。<br>
+        <strong>売却代金にも物上代位できる</strong>が、実務上は抵当権が付いたまま買主に移るので、あえて代位する必要は少ない。</p>
+      </div>
+    </section>
+
+    <!-- 04 -->
+    <section id="hotei">
+      <h2 class="sec"><span class="num">04</span>法定地上権</h2>
+      <p class="lead">土地と建物を別個の不動産とする日本法ならではの制度。<em>競売で土地と建物の所有者が分かれてしまうとき、建物のために自動的に地上権を発生させる</em>。</p>
+
+      <figure class="plate">
+        <svg viewBox="0 0 720 220" role="img" aria-label="法定地上権の成立要件は3つ。抵当権設定当時に土地の上に建物が存在すること、抵当権設定当時に土地と建物が同一の所有者に属すること、競売により土地と建物の所有者が異なるに至ったこと。">
+          <rect x="24" y="46" width="212" height="106" class="svg-accfill" rx="2"/>
+          <text x="130" y="74" text-anchor="middle" class="big" fill="var(--accent)">要件 ①</text>
+          <text x="130" y="102" text-anchor="middle">抵当権設定当時に</text>
+          <text x="130" y="124" text-anchor="middle">建物が存在すること</text>
+          <text x="130" y="144" text-anchor="middle" class="lbl">更地に設定した後の建築は不可</text>
+
+          <rect x="254" y="46" width="212" height="106" class="svg-accfill" rx="2"/>
+          <text x="360" y="74" text-anchor="middle" class="big" fill="var(--accent)">要件 ②</text>
+          <text x="360" y="102" text-anchor="middle">抵当権設定当時に</text>
+          <text x="360" y="124" text-anchor="middle">同一の所有者に属すること</text>
+          <text x="360" y="144" text-anchor="middle" class="lbl">土地と建物の所有者が同じ</text>
+
+          <rect x="484" y="46" width="212" height="106" class="svg-accfill" rx="2"/>
+          <text x="590" y="74" text-anchor="middle" class="big" fill="var(--accent)">要件 ③</text>
+          <text x="590" y="102" text-anchor="middle">競売により</text>
+          <text x="590" y="124" text-anchor="middle">所有者が異なるに至ること</text>
+          <text x="590" y="144" text-anchor="middle" class="lbl">土地だけ・建物だけが売れる</text>
+
+          <text x="360" y="188" text-anchor="middle" class="acct">3つすべてを満たすと、建物のために地上権が当然に発生する</text>
+          <text x="360" y="208" text-anchor="middle" class="lbl">判断のポイントは「抵当権を設定した時点」で①と②が満たされていたか</text>
+        </svg>
+        <figcaption>Fig.1 — 判定はすべて「抵当権設定当時」を基準にする</figcaption>
+      </figure>
+
+      <div class="scroll">
+        <table>
+          <thead><tr><th>ケース</th><th class="n">成立</th><th>理由</th></tr></thead>
+          <tbody>
+            <tr><td><strong>更地</strong>に抵当権を設定し、その後に建物を建てた</td><td class="n no">しない</td><td>設定当時に建物がない。抵当権者は更地としての価値を評価している</td></tr>
+            <tr><td>設定当時は土地と建物の所有者が異なっていた</td><td class="n no">しない</td><td>すでに借地権等があるはずで、法定地上権は不要</td></tr>
+            <tr><td>設定後に建物が<strong>再築</strong>された</td><td class="n tri">する</td><td>原則として成立する（旧建物を基準とした範囲で）</td></tr>
+            <tr><td>設定当時は同一所有者だったが、その後所有者が分かれた</td><td class="n tri">する</td><td>判断は<strong>設定当時</strong>を基準にする</td></tr>
+            <tr><td>土地と建物の<strong>両方</strong>に抵当権が設定され、一括競売された</td><td class="n no">しない</td><td>同一人が両方を取得すれば所有者は分かれない</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="call trap">
+        <span class="tag">ひっかけ</span>
+        <p><strong>更地に抵当権を設定した後で建物を建てても法定地上権は成立しない。</strong>これが最頻出。抵当権者は「土地だけ」の価値を見て融資しているのに、あとから地上権の負担を付けられては困るから。<br>
+        なおこの場合、抵当権者は<strong>建物も一緒に競売にかけられる</strong>（一括競売 → <a href="#ikkatsu">05</a>）。</p>
+      </div>
+    </section>
+
+    <!-- 05 -->
+    <section id="ikkatsu">
+      <h2 class="sec"><span class="num">05</span>一括競売と賃借人</h2>
+
+      <div class="scroll">
+        <table>
+          <thead><tr><th>制度</th><th>内容</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><strong>一括競売</strong></td>
+              <td>更地に抵当権を設定した後にその土地に建物が築造されたとき、抵当権者は<strong>土地とともに建物も競売</strong>できる。<span class="no">ただし優先弁済を受けられるのは<strong>土地の代価</strong>についてのみ</span></td>
+            </tr>
+            <tr>
+              <td class="no"><strong>抵当権に対抗できる賃借権</strong></td>
+              <td class="no">抵当権の<strong>登記前</strong>に対抗要件を備えた賃借権は、競落人に対抗できる。賃借人はそのまま住み続けられる</td>
+            </tr>
+            <tr>
+              <td class="no"><strong>建物明渡猶予制度</strong></td>
+              <td class="no">抵当権の登記<strong>後</strong>に賃借した者でも、競売により買受人が代金を納付した時から <strong>6か月</strong> は明渡しが猶予される<br><span class="lbl">建物の賃借人に限る。土地の賃借人には適用されない</span></td>
+            </tr>
+            <tr>
+              <td>賃借権に対抗力を与える同意</td>
+              <td>登記した賃借権は、その賃借権に優先するすべての抵当権者が<strong>同意</strong>し、その<strong>同意の登記</strong>があれば、抵当権者に対抗できる</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="call exam">
+        <span class="tag">よく出る</span>
+        <p><strong>明渡猶予は6か月、しかも「建物」の賃借人だけ。</strong>土地の賃借人には適用されない。<br>
+        猶予期間中も<strong>使用の対価（賃料相当額）は支払う必要がある</strong>。買受人が相当の期間を定めて催告しても支払わなければ、猶予は認められない。</p>
+      </div>
+    </section>
+
+    <!-- 06 -->
+    <section id="daisansha">
+      <h2 class="sec"><span class="num">06</span>第三取得者の保護</h2>
+      <p>抵当権付きの不動産を買った者（第三取得者）が、抵当権を消すための手段。</p>
+
+      <div class="scroll">
+        <table>
+          <thead><tr><th>手段</th><th>内容</th></tr></thead>
+          <tbody>
+            <tr>
+              <td class="no"><strong>抵当権消滅請求</strong></td>
+              <td class="no">第三取得者が抵当権者に一定の金額を提示し、承諾を得て抵当権を消滅させる。<br>抵当権者が <strong>2か月以内</strong> に競売の申立てをしなければ<strong>承諾したものとみなされる</strong><br><span class="no">主たる債務者・保証人・これらの承継人はできない</span></td>
+            </tr>
+            <tr><td><strong>代価弁済</strong></td><td>抵当権者の<strong>請求</strong>に応じて第三取得者が代価を弁済すると、抵当権は消滅する</td></tr>
+            <tr><td>第三者弁済</td><td>第三取得者は<strong>正当な利益を有する第三者</strong>として、債務者の意思に反しても弁済できる</td></tr>
+            <tr><td>費用の償還</td><td>第三取得者が必要費・有益費を支出したときは、<strong>売却代金から最優先で</strong>償還を受けられる</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="call trap">
+        <span class="tag">ひっかけ</span>
+        <p><strong>抵当権消滅請求は第三取得者が主導、代価弁済は抵当権者が主導。</strong>誰が言い出すかが逆。<br>
+        <strong>主たる債務者や保証人は抵当権消滅請求ができない。</strong>全額を弁済すべき立場の者が、安い金額で抵当権を消せるのはおかしいから。</p>
+      </div>
+    </section>
+
+    <!-- 07 -->
+    <section id="neteito">
+      <h2 class="sec"><span class="num">07</span>根抵当権</h2>
+
+      <div class="scroll">
+        <table>
+          <thead><tr><th>論点</th><th>内容</th></tr></thead>
+          <tbody>
+            <tr><td>意味</td><td>一定の範囲に属する<strong>不特定の債権</strong>を<strong>極度額</strong>の限度で担保する抵当権</td></tr>
+            <tr><td class="no"><strong>付従性・随伴性</strong></td><td class="no">元本確定前は<strong>付従性・随伴性がない</strong>。個々の債権が消滅しても根抵当権は消えず、債権が譲渡されても根抵当権は移転しない</td></tr>
+            <tr><td>極度額の変更</td><td><strong>利害関係人の承諾</strong>が必要</td></tr>
+            <tr><td>被担保債権の範囲・債務者の変更</td><td class="tri">元本確定前なら<strong>後順位抵当権者等の承諾は不要</strong></td></tr>
+            <tr><td>利息</td><td class="no">極度額の限度であれば、<strong>2年分に限られず</strong>全額について優先弁済を受けられる</td></tr>
+            <tr><td>元本確定期日</td><td>定めることができる。定める場合は<strong>5年以内</strong></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="call tip">
+        <span class="tag">覚え方</span>
+        <p><strong>根抵当権は「枠」を担保する。</strong>個々の債権ではなく極度額という枠そのものが担保なので、中身が入れ替わっても枠は残る。だから付従性も随伴性もない。<br>
+        <strong>利息が2年分に制限されないのも同じ理屈。</strong>極度額という上限があらかじめ公示されているので、後順位者が予測を裏切られることがない。</p>
+      </div>
+    </section>
+
+    <!-- 08 -->
+    <section id="deru">
+      <h2 class="sec"><span class="num">08</span>よく出る論点</h2>
+      <div class="scroll">
+        <table>
+          <thead><tr><th class="n">順位</th><th>論点</th><th>要点</th></tr></thead>
+          <tbody>
+            <tr><td class="n">1</td><td><strong>法定地上権の3要件</strong></td><td>すべて抵当権設定当時が基準／更地への設定後の建築は不成立</td></tr>
+            <tr><td class="n">2</td><td>効力の及ぶ範囲</td><td>従物・借地権に及ぶ／果実は不履行後／土地と建物は別</td></tr>
+            <tr><td class="n">3</td><td>物上代位</td><td>払渡し前の差押えが必要／賃料は可・転貸賃料は不可</td></tr>
+            <tr><td class="n">4</td><td>賃借人の保護</td><td>登記前の賃借権は対抗可／登記後でも建物は6か月の明渡猶予</td></tr>
+            <tr><td class="n">5</td><td>第三取得者の保護</td><td>抵当権消滅請求と代価弁済の主導者の違い</td></tr>
+            <tr><td class="n">6</td><td>根抵当権</td><td>元本確定前は付従性・随伴性なし／利息は2年分に限られない</td></tr>
+            <tr><td class="n">7</td><td>利息の2年分</td><td>他の債権者がいる場合の制限</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 09 -->
+    <section id="hikkake">
+      <h2 class="sec"><span class="num">09</span>ひっかけ一覧</h2>
+      <div class="scroll">
+        <table class="traps">
+          <thead><tr><th>こう書かれたら疑う</th><th>正しくは</th></tr></thead>
+          <tbody>
+            <tr><td>土地に抵当権を設定すればその上の建物にも効力が及ぶ</td><td>土地と建物は<strong>別個の不動産</strong>。及ばない</td></tr>
+            <tr><td>更地に抵当権を設定した後に建てた建物にも法定地上権が成立する</td><td><strong>成立しない</strong>（一括競売はできる）</td></tr>
+            <tr><td>抵当権設定後に所有者が分かれたので法定地上権は成立しない</td><td>判断は<strong>設定当時</strong>。成立する</td></tr>
+            <tr><td>一括競売では建物の代価からも優先弁済を受けられる</td><td>優先弁済は<strong>土地の代価</strong>のみ</td></tr>
+            <tr><td>抵当権は賃借権にも設定できる</td><td>設定できるのは不動産・<strong>地上権・永小作権</strong></td></tr>
+            <tr><td>抵当権設定後に備え付けた従物にも当然に及ぶ</td><td>及ぶのは<strong>設定当時に存在した</strong>従物（判例）</td></tr>
+            <tr><td>果実には常に抵当権の効力が及ぶ</td><td><strong>不履行があった後</strong>に生じた果実に及ぶ</td></tr>
+            <tr><td>賃料を債務者が受け取った後でも物上代位できる</td><td><strong>払渡し前</strong>に差し押さえる必要がある</td></tr>
+            <tr><td>転貸賃料にも当然に物上代位できる</td><td>原則として<strong>できない</strong></td></tr>
+            <tr><td>抵当権登記後の賃借人は直ちに明け渡さなければならない</td><td>建物なら <strong>6か月</strong> の明渡猶予がある</td></tr>
+            <tr><td>土地の賃借人にも明渡猶予が認められる</td><td><strong>建物</strong>の賃借人に限られる</td></tr>
+            <tr><td>保証人も抵当権消滅請求ができる</td><td><strong>できない</strong></td></tr>
+            <tr><td>抵当権消滅請求を無視すれば承諾したことにはならない</td><td><strong>2か月以内</strong>に競売を申し立てないと承諾とみなされる</td></tr>
+            <tr><td>根抵当権も個々の債権が消滅すれば消滅する</td><td>元本確定前は<strong>付従性がない</strong></td></tr>
+            <tr><td>根抵当権でも利息は最後の2年分に限られる</td><td><strong>極度額の限度で全額</strong></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 10 -->
+    <section id="matome">
+      <h2 class="sec"><span class="num">10</span>暗記カード</h2>
+      <p class="masthead-note">右上のボタンで答えを伏せられる。</p>
+      <div class="nums" id="numgrid">
+        <div class="nc" tabindex="0"><span class="v">最後の2年分</span><span class="d">他の債権者がいる場合に優先弁済を受けられる利息</span></div>
+        <div class="nc" tabindex="0"><span class="v">払渡し前</span><span class="d">物上代位のために差押えをすべき時期</span></div>
+        <div class="nc" tabindex="0"><span class="v">抵当権設定当時</span><span class="d">法定地上権の要件を判断する基準時</span></div>
+        <div class="nc" tabindex="0"><span class="v">土地の代価のみ</span><span class="d">一括競売で優先弁済を受けられる範囲</span></div>
+        <div class="nc" tabindex="0"><span class="v">6か月</span><span class="d">建物賃借人の明渡猶予期間（代金納付時から）</span></div>
+        <div class="nc" tabindex="0"><span class="v">2か月</span><span class="d">抵当権消滅請求に対し競売を申し立てるべき期間</span></div>
+        <div class="nc" tabindex="0"><span class="v">5年以内</span><span class="d">根抵当権の元本確定期日を定める場合の上限</span></div>
+        <div class="nc" tabindex="0"><span class="v">なし</span><span class="d">元本確定前の根抵当権における付従性・随伴性</span></div>
+      </div>
+    </section>
+
+    <!-- 11 -->
+    <section id="drill">
+      <h2 class="sec"><span class="num">11</span>肢別○×ドリル</h2>
+      <p class="lead">頻出論点の一問一答 <em>34肢</em>。○×を押すと理由が開く。<strong>理由を一言で言えなかった肢は、正解していても「要復習」に入れる</strong>のがこのドリルの使い方。</p>
+      <div class="call tip">
+        <span class="tag">回し方</span>
+        <p>1周目は全肢。2周目以降は「間違えた肢だけ」で回す。解答状況はこのブラウザに保存されるので、日をまたいでも続きから再開できる。</p>
+      </div>
+      <div class="drillbar">
+        <div class="score">解答 <b id="d-done">0</b> / 34　　正答 <b id="d-ok">0</b>　　正答率 <span class="pct" id="d-pct">—</span></div>
+        <div class="dbtns">
+          <button id="d-wrong" type="button" aria-pressed="false">間違えた肢だけ</button>
+          <button id="d-reset" type="button">リセット</button>
+        </div>
+      </div>
+      <ol class="drill">
+          <li class="dq" data-a="x">
+            <p class="s">抵当権は、不動産のほか、賃借権にも設定することができる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>369条により設定できるのは<strong>不動産・地上権・永小作権</strong>。賃借権に抵当権は設定できない。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">抵当権設定者は、債務者以外の第三者であってもよい。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>いわゆる物上保証人。抵当権は<strong>占有を移さない</strong>担保なので、設定者は目的物を使い続けられる。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">抵当権者は、抵当権を実行するまでの間、抵当不動産の使用収益に干渉することができる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>抵当権は<strong>非占有担保</strong>。設定者は自由に使用・収益・処分できる。だから抵当権付きの不動産も売買できる。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">土地に抵当権を設定した場合、その土地上に存在する建物にも抵当権の効力が及ぶ。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>日本では<strong>土地と建物は別個の不動産</strong>なので効力は及ばない。ここから法定地上権の問題が生まれる。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">抵当権の効力は、抵当地に付加して一体となっている物に及ぶ。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>370条。庭石・門扉・取り外しの困難な設備などの付加一体物。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">抵当権設定当時に存在した従物にも、抵当権の効力が及ぶ。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>判例。逆に設定<strong>後</strong>に備え付けられた従物には原則として及ばない。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">借地上の建物に抵当権が設定された場合、その敷地の借地権にも抵当権の効力が及ぶ。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>判例。借地権は建物の<strong>従たる権利</strong>。建物だけ競落しても土地を使えないのでは競売の意味がない。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">抵当不動産から生じる果実には、常に抵当権の効力が及ぶ。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>371条により、及ぶのは<strong>債務不履行があった後</strong>に生じた果実に限られる。それまでは設定者が自由に収取できる。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">抵当権者は、抵当不動産の賃料債権に対して物上代位することができる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>372条・304条。ただし払渡し前に<strong>差押え</strong>をすることが必要。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">賃借人が賃料を債務者に支払った後であっても、抵当権者は物上代位することができる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>304条ただし書により<strong>払渡しまたは引渡しの前に差し押さえ</strong>なければならない。一般財産に混ざった金銭は追及できない。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">抵当不動産の賃借人が第三者に転貸している場合、抵当権者は転貸賃料に対して物上代位することができる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>判例は原則として<strong>否定</strong>。賃借人は抵当権設定者とは別人であり、その財産に手を出す理由がない。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">抵当権の被担保債権の利息については、満期となった最後の2年分についてのみ優先弁済を受けることができる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>375条。ただしこの制限は<strong>後順位抵当権者などがいる場合</strong>の話で、いなければ全額請求できる。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">法定地上権が成立するためには、抵当権設定当時に土地の上に建物が存在していたことが必要である。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>388条。4要件は「設定当時に建物が存在」「土地と建物が同一所有者」「一方または双方に抵当権」「競売により所有者が別々になった」。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">更地に抵当権を設定した後にその土地上に建物が建築された場合でも、その建物のために法定地上権が成立する。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>更地としての価値を前提に融資しているので<strong>成立しない</strong>。ただし抵当権者は土地と建物を<strong>一括競売</strong>できる（389条）。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">一括競売をした場合、抵当権者は建物の代価からも優先弁済を受けることができる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>389条1項ただし書により、優先弁済を受けられるのは<strong>土地の代価についてのみ</strong>。建物には抵当権が及んでいないから。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">抵当権設定当時に土地と建物が同一の所有者に属していれば、その後に所有者が異なることとなっても法定地上権は成立する。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>判断の基準時は<strong>抵当権設定当時</strong>。設定後の事情変更で抵当権者の把握した価値は変わらない。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">土地と建物が別々の所有者に属していた時点で土地に抵当権が設定され、その後に同一の所有者となった場合、競売により法定地上権が成立する。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>判例は<strong>成立を否定</strong>する。設定時に建物のための借地権が別に存在しており、抵当権者はそれを前提に土地を評価しているから。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">抵当権の順位を変更するには、各抵当権者の合意と利害関係人の承諾が必要であり、登記をしなければ効力を生じない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>374条。順位変更では<strong>登記が効力要件</strong>である点が特徴的（通常の登記は対抗要件）。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">抵当不動産の第三取得者が抵当権者の請求に応じて代価を弁済したときは、抵当権はその第三取得者のために消滅する。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>378条の代価弁済。<strong>抵当権者からの請求で始まる</strong>点が、第三取得者から仕掛ける抵当権消滅請求と逆になる。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">主たる債務者や保証人も、抵当権消滅請求をすることができる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>380条により<strong>できない</strong>。全額を弁済すべき立場の者が一部の支払で抵当権を消せるのでは筋が通らない。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">抵当権消滅請求を受けた抵当権者が2か月以内に競売の申立てをしないときは、その請求を承諾したものとみなされる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>384条1号。黙っていれば承諾になるので、抵当権者は期限内の行動を迫られる。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">抵当権設定登記後に建物を賃借した者は、競売により買受人が代金を納付した時点で直ちに建物を明け渡さなければならない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>395条により、<strong>建物の賃借人</strong>には買受けの時から<strong>6か月の明渡猶予</strong>が与えられる。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">抵当権設定登記後に土地を賃借した者にも、6か月の明渡猶予が認められる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>395条は<strong>建物の賃借人に限る</strong>。住まいや店舗を突然失う影響の大きさに配慮した規定だから。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">抵当権設定登記後に対抗要件を備えた賃借権であっても、それに優先するすべての抵当権者が同意し、その同意の登記があれば、抵当権者に対抗することができる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>387条。優良なテナントを追い出さずに済ませるための制度。<strong>すべての</strong>抵当権者の同意が必要な点に注意。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">抵当権は、被担保債権が弁済によって消滅すれば当然に消滅する。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>担保物権の<strong>付従性</strong>。ただし元本確定前の根抵当権にはこの性質がない。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">元本確定前の根抵当権は、個々の被担保債権が弁済により消滅すれば、その限度で消滅する。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>元本確定前の根抵当権には<strong>付従性・随伴性がない</strong>。個々の債権が消えても極度額という枠は残り続ける。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">根抵当権の被担保債権についても、利息は最後の2年分に限って優先弁済を受けることができる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>根抵当権では<strong>極度額の範囲内であれば利息・損害金も全額</strong>優先弁済を受けられる。375条の制限は適用されない。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">根抵当権の担保すべき債権の範囲や債務者の変更は、元本の確定前であれば、後順位抵当権者の承諾を得ずにすることができる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>398条の4。極度額という上限が動かない以上、後順位者の取り分に影響しないから。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">根抵当権の極度額の変更は、後順位抵当権者の承諾を得ずにすることができる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>398条の5により<strong>利害関係人の承諾</strong>が必要。極度額が動けば後順位者の取り分が直接変わる。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">根抵当権設定者は、根抵当権の設定の時から3年を経過したときは、担保すべき元本の確定を請求することができる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>398条の19第1項。請求から<strong>2週間</strong>を経過すると確定する。根抵当権者の側からはいつでも請求できる。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">留置権者は、目的物を留置することができるだけでなく、競売代金から優先弁済を受けることができる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>留置権に<strong>優先弁済権はない</strong>。返してほしければ払え、という心理的圧迫によって弁済を促す担保。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">不動産の先取特権は、登記をしなければ第三者に対抗することができない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>177条の一般則が適用される。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">質権は、債権者に目的物を引き渡さなければその効力を生じない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>344条の要物契約。<strong>占有を移す</strong>点が、占有を移さない抵当権と決定的に異なる。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">抵当権は、債務者および抵当権設定者に対しては、被担保債権と同時でなければ時効によって消滅しない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>396条。第三取得者や後順位抵当権者との関係では、被担保債権が残っていても20年で時効消滅しうる。</p></div>
+          </li>
+      </ol>
+    </section>
+
+  </main>
+
+  <footer>
+    <h4>出典</h4>
+    <ul>
+      <li>民法（明治29年法律第89号）第295条〜第398条の22 — <a href="https://laws.e-gov.go.jp/law/129AC0000000089">e-Gov法令検索</a></li>
+    </ul>
+    <div class="sibling">
+      <a href="../index.html">総目次</a>
+      <a href="共有と相隣関係.html">← 共有と相隣関係</a>
+      <a href="物権変動と対抗要件.html">物権変動と対抗要件</a>
+    </div>
+  </footer>
+
+</div>
+
+<script>
+  (function () {
+    var root = document.documentElement;
+    document.getElementById('theme').addEventListener('click', function () {
+      if (root.getAttribute('data-theme')) { root.removeAttribute('data-theme'); return; }
+      var dark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      root.setAttribute('data-theme', dark ? 'light' : 'dark');
+    });
+    var maskBtn = document.getElementById('mask');
+    var grid = document.getElementById('numgrid');
+    maskBtn.addEventListener('click', function () {
+      var on = grid.classList.toggle('masked');
+      maskBtn.setAttribute('aria-pressed', String(on));
+      maskBtn.textContent = on ? '答えを表示' : '答えを隠す';
+    });
+    var links = Array.prototype.slice.call(document.querySelectorAll('nav.rail ol a'));
+    var map = {};
+    links.forEach(function (a) { map[a.getAttribute('href').slice(1)] = a; });
+    var seen = [];
+    var obs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        var i = seen.indexOf(e.target.id);
+        if (e.isIntersecting && i < 0) seen.push(e.target.id);
+        if (!e.isIntersecting && i >= 0) seen.splice(i, 1);
+      });
+      links.forEach(function (a) { a.classList.remove('on'); });
+      if (seen.length) {
+        var order = Object.keys(map);
+        seen.sort(function (a, b) { return order.indexOf(a) - order.indexOf(b); });
+        map[seen[0]].classList.add('on');
+      }
+    }, { rootMargin: '-10% 0px -70% 0px' });
+    document.querySelectorAll('main section').forEach(function (s) { obs.observe(s); });
+  })();
+</script>
+
+<script>
+  /* 肢別○×ドリル */
+  (function () {
+    var sec = document.getElementById('drill');
+    if (!sec) return;
+    var list = sec.querySelector('ol.drill');
+    var items = Array.prototype.slice.call(list.querySelectorAll('li.dq'));
+    var key = 'takken-drill:' + (document.title || location.pathname);
+    var state = {};
+    try { state = JSON.parse(localStorage.getItem('' + key) || '{}') || {}; } catch (e) { state = {}; }
+    var elDone = document.getElementById('d-done');
+    var elOk = document.getElementById('d-ok');
+    var elPct = document.getElementById('d-pct');
+    var onlyBtn = document.getElementById('d-wrong');
+
+    function paint() {
+      var done = 0, ok = 0;
+      items.forEach(function (li, i) {
+        var picked = state[i];
+        li.classList.remove('done', 'ok', 'ng');
+        Array.prototype.forEach.call(li.querySelectorAll('.ch button'), function (b) {
+          b.removeAttribute('data-picked');
+        });
+        if (picked !== 'o' && picked !== 'x') return;
+        done++;
+        var ans = li.getAttribute('data-a');
+        var right = picked === ans;
+        if (right) ok++;
+        li.classList.add('done', right ? 'ok' : 'ng');
+        var b = li.querySelector('.ch button[data-v="' + picked + '"]');
+        if (b) b.setAttribute('data-picked', '1');
+        li.querySelector('.verdict').textContent =
+          right ? '正解　' + (ans === 'o' ? '○' : '×')
+                : '不正解　正解は ' + (ans === 'o' ? '○' : '×');
+      });
+      elDone.textContent = String(done);
+      elOk.textContent = String(ok);
+      elPct.textContent = done ? Math.round(ok / done * 100) + '%' : '—';
+      try { localStorage.setItem('' + key, JSON.stringify(state)); } catch (e) {}
+    }
+
+    list.addEventListener('click', function (e) {
+      var b = e.target;
+      while (b && b !== list && b.tagName !== 'BUTTON') b = b.parentNode;
+      if (!b || b.tagName !== 'BUTTON') return;
+      var li = b.parentNode.parentNode;
+      var i = items.indexOf(li);
+      if (i < 0) return;
+      state[i] = b.getAttribute('data-v');
+      paint();
+    });
+
+    onlyBtn.addEventListener('click', function () {
+      var on = list.classList.toggle('onlyng');
+      onlyBtn.setAttribute('aria-pressed', String(on));
+      onlyBtn.textContent = on ? 'すべて表示' : '間違えた肢だけ';
+    });
+
+    document.getElementById('d-reset').addEventListener('click', function () {
+      state = {};
+      list.classList.remove('onlyng');
+      onlyBtn.setAttribute('aria-pressed', 'false');
+      onlyBtn.textContent = '間違えた肢だけ';
+      paint();
+    });
+
+    paint();
+  })();
+</script>

@@ -1,0 +1,976 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>区分所有法 — 宅建士試験 2026年度</title>
+
+<style>
+  :root {
+    --paper:#EBEDE9; --surface:#F8F9F6; --sunk:#E1E4DE; --ink:#151F2A; --muted:#5D6B78;
+    --rule:#CDD2CB; --hair:#DCE0D9; --accent:#B8342A; --accent-soft:#F3DEDB;
+    --blue:#2A5F86; --blue-soft:#DCE6EE;
+    --font-display:"Hiragino Mincho ProN","Yu Mincho","YuMincho","Noto Serif JP",serif;
+    --font-body:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","YuGothic","Noto Sans JP",system-ui,sans-serif;
+    --font-mono:ui-monospace,"SFMono-Regular","SF Mono",Menlo,Consolas,monospace;
+    --measure:68ch;
+    --s1:.35rem; --s2:.7rem; --s3:1.1rem; --s4:1.7rem; --s5:2.6rem; --s6:4rem;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper:#0D1B29; --surface:#132534; --sunk:#0A1622; --ink:#DAE4EC; --muted:#8CA1B3;
+      --rule:#26415A; --hair:#1D3448; --accent:#FF7059; --accent-soft:#3A1F1D;
+      --blue:#6FB6DC; --blue-soft:#14293A;
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper:#0D1B29; --surface:#132534; --sunk:#0A1622; --ink:#DAE4EC; --muted:#8CA1B3;
+    --rule:#26415A; --hair:#1D3448; --accent:#FF7059; --accent-soft:#3A1F1D;
+    --blue:#6FB6DC; --blue-soft:#14293A;
+  }
+
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--paper); color:var(--ink); font-family:var(--font-body);
+    font-size:16px; line-height:1.9; -webkit-font-smoothing:antialiased; font-feature-settings:"palt" 1; }
+
+  .wrap { display:grid; grid-template-columns:15.5rem minmax(0,1fr); gap:var(--s6);
+    max-width:80rem; margin:0 auto; padding:0 var(--s4) var(--s6); align-items:start; }
+  @media (max-width:60rem){ .wrap{ grid-template-columns:minmax(0,1fr); gap:var(--s4); padding:0 var(--s3) var(--s5);} }
+
+  .masthead { grid-column:1/-1; padding:var(--s5) 0 var(--s4); border-bottom:2px solid var(--ink);
+    margin-bottom:var(--s2); display:flex; flex-wrap:wrap; align-items:flex-end; justify-content:space-between; gap:var(--s3); }
+  .eyebrow { font-family:var(--font-mono); font-size:.72rem; letter-spacing:.16em; text-transform:uppercase;
+    color:var(--muted); display:flex; align-items:center; gap:.6em; }
+  .eyebrow::before { content:""; width:2.2rem; height:1px; background:var(--accent); }
+  .eyebrow a { color:var(--accent); text-decoration:none; }
+  .eyebrow a:hover { text-decoration:underline; text-underline-offset:.2em; }
+  h1 { font-family:var(--font-display); font-weight:600; font-size:clamp(2rem,1.4rem + 2.6vw,3.1rem);
+    line-height:1.2; letter-spacing:.04em; margin:var(--s2) 0 var(--s3); text-wrap:balance; }
+  .facts { display:flex; flex-wrap:wrap; gap:0 var(--s3); font-size:.82rem; color:var(--muted); list-style:none; margin:0; padding:0; }
+  .facts b { font-family:var(--font-mono); font-variant-numeric:tabular-nums; color:var(--ink); font-weight:600; }
+  .toggles { display:flex; gap:var(--s1); }
+  button { font-family:var(--font-body); font-size:.78rem; color:var(--muted); background:var(--surface);
+    border:1px solid var(--rule); border-radius:2px; padding:.4em .9em; cursor:pointer; transition:color .15s,border-color .15s; }
+  button:hover { color:var(--ink); border-color:var(--ink); }
+  button:focus-visible { outline:2px solid var(--accent); outline-offset:2px; }
+  button[aria-pressed="true"] { color:var(--accent); border-color:var(--accent); }
+
+  nav.rail { position:sticky; top:var(--s3); font-size:.82rem; max-height:calc(100vh - 3rem); overflow-y:auto; padding-bottom:var(--s3); }
+  nav.rail h2 { font-family:var(--font-mono); font-size:.68rem; letter-spacing:.16em; text-transform:uppercase; color:var(--muted); margin:0 0 var(--s2); font-weight:500; }
+  nav.rail ol { list-style:none; margin:0; padding:0; display:flex; flex-direction:column; }
+  nav.rail a { display:block; padding:.3em 0 .3em .9em; color:var(--muted); text-decoration:none; border-left:2px solid var(--hair); line-height:1.5; }
+  nav.rail a:hover { color:var(--ink); border-left-color:var(--rule); }
+  nav.rail a.on { color:var(--ink); border-left-color:var(--accent); font-weight:600; }
+  nav.rail a .num { font-family:var(--font-mono); font-size:.72rem; color:var(--muted); margin-right:.5em; }
+  nav.rail a.home { border-left:none; padding:0 0 var(--s2); color:var(--accent);
+    font-family:var(--font-mono); font-size:.72rem; letter-spacing:.1em; }
+  nav.rail a.home:hover { color:var(--accent); text-decoration:underline; text-underline-offset:.2em; }
+  @media (max-width:60rem){
+    nav.rail{ position:static; max-height:none; border-bottom:1px solid var(--rule); padding-bottom:var(--s3); }
+    nav.rail ol{ display:grid; grid-template-columns:repeat(auto-fill,minmax(9rem,1fr)); gap:0 var(--s2); }
+  }
+
+  main { min-width:0; }
+  section { padding-top:var(--s5); scroll-margin-top:var(--s3); }
+  section > * { max-width:var(--measure); }
+  section > figure, section > .scroll { max-width:none; }
+
+  h2.sec { font-family:var(--font-display); font-size:clamp(1.45rem,1.2rem + .9vw,1.9rem); font-weight:600;
+    letter-spacing:.04em; margin:0 0 var(--s3); padding-bottom:var(--s2); border-bottom:1px solid var(--rule);
+    display:flex; align-items:baseline; gap:.7em; max-width:none; }
+  h2.sec .num { font-family:var(--font-mono); font-size:.8rem; letter-spacing:.1em; color:var(--accent); font-weight:500; }
+  h3 { font-family:var(--font-body); font-size:1.06rem; font-weight:700; letter-spacing:.02em;
+    margin:var(--s4) 0 var(--s2); padding-left:.7em; border-left:3px solid var(--ink); }
+  p { margin:0 0 var(--s3); }
+  a { color:var(--blue); text-underline-offset:.2em; }
+  em { font-style:normal; background:linear-gradient(transparent 62%, var(--accent-soft) 62%); font-weight:600; }
+  ul, ol { margin:0 0 var(--s3); padding-left:1.3em; }
+  li { margin-bottom:var(--s1); }
+  .lead { font-size:1.05rem; color:var(--muted); }
+
+  .call { max-width:var(--measure); margin:0 0 var(--s3); padding:var(--s3) var(--s3) var(--s3) var(--s4);
+    background:var(--surface); border:1px solid var(--hair); border-left:3px solid var(--rule); border-radius:2px; font-size:.94rem; }
+  .call > :last-child { margin-bottom:0; }
+  .call .tag { display:block; font-family:var(--font-mono); font-size:.68rem; letter-spacing:.16em; text-transform:uppercase; color:var(--muted); margin-bottom:var(--s1); }
+  .call.trap { border-left-color:var(--accent); background:var(--accent-soft); }
+  .call.trap .tag { color:var(--accent); }
+  .call.exam { border-left-color:var(--ink); }
+  .call.exam .tag { color:var(--ink); }
+  .call.rev { border-left-color:var(--accent); }
+  .call.rev .tag { color:var(--accent); }
+  .call.tip { border-left-color:var(--blue); background:var(--blue-soft); }
+  .call.tip .tag { color:var(--blue); }
+
+  .scroll { overflow-x:auto; margin:0 0 var(--s3); -webkit-overflow-scrolling:touch; }
+  table { border-collapse:collapse; width:100%; font-size:.88rem; line-height:1.6; }
+  caption { text-align:left; font-size:.78rem; color:var(--muted); padding-bottom:var(--s1); font-family:var(--font-mono); letter-spacing:.08em; }
+  th, td { padding:.58em .75em; text-align:left; vertical-align:top; border-bottom:1px solid var(--hair); }
+  thead th { font-size:.74rem; letter-spacing:.08em; color:var(--muted); font-weight:600; border-bottom:1px solid var(--ink); }
+  tbody tr:hover { background:var(--surface); }
+  td.n, th.n { text-align:center; font-family:var(--font-mono); font-variant-numeric:tabular-nums; white-space:nowrap; }
+  .no { color:var(--accent); font-weight:700; }
+  .yes { color:var(--muted); }
+  .tri { color:var(--blue); }
+  table.ketsugi tbody td:nth-child(2) { font-family:var(--font-mono); font-size:1rem; font-weight:600; text-align:center; white-space:nowrap; }
+  table.ketsugi tr.hi { background:var(--accent-soft); }
+  .newtag { display:inline-block; font-family:var(--font-mono); font-size:.64rem; letter-spacing:.1em;
+    color:var(--accent); border:1px solid var(--accent); border-radius:2px; padding:0 .4em; margin-left:.4em; vertical-align:middle; }
+
+  figure { margin:0 0 var(--s4); }
+  figure svg { display:block; width:100%; height:auto; }
+  figcaption { font-size:.78rem; color:var(--muted); font-family:var(--font-mono); letter-spacing:.06em; margin-top:var(--s2); padding-top:var(--s1); border-top:1px solid var(--hair); }
+  .plate { background:var(--surface); border:1px solid var(--hair); border-radius:2px; padding:var(--s3); }
+  .svg-ink { fill:none; stroke:var(--ink); stroke-width:1.4; }
+  .svg-hair { fill:none; stroke:var(--rule); stroke-width:1; }
+  .svg-dim { fill:none; stroke:var(--blue); stroke-width:1; }
+  .svg-acc { fill:none; stroke:var(--accent); stroke-width:1.6; }
+  .svg-fill { fill:var(--sunk); stroke:var(--rule); stroke-width:1; }
+  .svg-accfill { fill:var(--accent-soft); stroke:var(--accent); stroke-width:1.2; }
+  .svg-bluefill { fill:var(--blue-soft); stroke:var(--blue); stroke-width:1.2; }
+  text { font-family:var(--font-body); fill:var(--ink); font-size:12px; }
+  text.lbl { font-family:var(--font-mono); fill:var(--muted); font-size:10.5px; letter-spacing:.06em; }
+  text.dimt { font-family:var(--font-mono); fill:var(--blue); font-size:11px; }
+  text.acct { fill:var(--accent); font-size:11.5px; font-weight:700; }
+  text.frac { font-family:var(--font-mono); font-size:16px; font-weight:600; }
+
+  .nums { display:grid; grid-template-columns:repeat(auto-fill,minmax(11.5rem,1fr)); gap:var(--s2); }
+  .nc { background:var(--surface); border:1px solid var(--hair); border-radius:2px; padding:var(--s3) var(--s3) var(--s2); display:flex; flex-direction:column; gap:var(--s1); }
+  .nc .v { font-family:var(--font-mono); font-variant-numeric:tabular-nums; font-size:1.25rem; font-weight:600; line-height:1.25; color:var(--accent); }
+  .nc .d { font-size:.8rem; color:var(--muted); line-height:1.6; }
+  .nums.masked .v { color:transparent; background:var(--rule); border-radius:2px; user-select:none; }
+  .nums.masked .nc:hover .v, .nums.masked .nc:focus-within .v { color:var(--accent); background:transparent; }
+  .nc:focus-visible { outline:2px solid var(--accent); outline-offset:2px; }
+  .masthead-note { font-size:.78rem; color:var(--muted); margin-bottom:var(--s2); }
+
+  table.traps td:first-child { color:var(--muted); }
+  table.traps td:first-child::before { content:"「"; }
+  table.traps td:first-child::after { content:"」"; }
+  table.traps td:last-child strong { color:var(--accent); }
+
+  footer { grid-column:1/-1; margin-top:var(--s6); padding-top:var(--s3); border-top:1px solid var(--rule); font-size:.8rem; color:var(--muted); }
+  footer ul { list-style:none; padding:0; }
+  footer li { margin-bottom:var(--s1); }
+  .sibling { display:flex; flex-wrap:wrap; gap:var(--s2); margin-top:var(--s3); }
+  .sibling a { font-size:.8rem; text-decoration:none; border:1px solid var(--rule); border-radius:2px; padding:.35em .8em; color:var(--muted); }
+  .sibling a:hover { color:var(--ink); border-color:var(--ink); }
+  .todo { font-family:var(--font-mono); font-size:.74rem; border:1px dashed var(--rule); border-radius:2px;
+    padding:var(--s2) var(--s3); margin-top:var(--s3); color:var(--muted); }
+
+  /* ── 肢別○×ドリル ── */
+  .drillbar { max-width:none; display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between;
+    gap:var(--s2); margin:0 0 var(--s3); padding:var(--s2) var(--s3); background:var(--surface);
+    border:1px solid var(--rule); border-radius:2px; position:sticky; top:0; z-index:5; }
+  .drillbar .score { font-family:var(--font-mono); font-size:.8rem; font-variant-numeric:tabular-nums;
+    color:var(--muted); letter-spacing:.04em; }
+  .drillbar .score b { color:var(--ink); font-weight:600; }
+  .drillbar .score .pct { color:var(--accent); font-weight:600; }
+  .drillbar .dbtns { display:flex; gap:var(--s1); }
+  ol.drill { max-width:none; list-style:none; margin:0; padding:0; counter-reset:dq; }
+  li.dq { counter-increment:dq; margin:0 0 var(--s2); padding:var(--s3);
+    background:var(--surface); border:1px solid var(--hair); border-left:3px solid var(--rule); border-radius:2px; }
+  li.dq > .s { margin:0; font-size:.95rem; line-height:1.85; max-width:var(--measure); }
+  li.dq > .s::before { content:counter(dq,decimal-leading-zero); font-family:var(--font-mono);
+    font-size:.72rem; letter-spacing:.08em; color:var(--muted); margin-right:.9em; }
+  li.dq .ch { display:flex; gap:var(--s1); margin-top:var(--s2); }
+  li.dq .ch button { font-family:var(--font-display); font-size:1.05rem; line-height:1; min-width:3.6rem; padding:.4em 0; }
+  li.dq .ch button[data-picked] { color:var(--ink); border-color:var(--ink); font-weight:700; }
+  li.dq .ex { display:none; margin-top:var(--s3); padding-top:var(--s2); border-top:1px solid var(--hair); }
+  li.dq.done .ex { display:block; }
+  li.dq .ex .verdict { display:block; font-family:var(--font-mono); font-size:.7rem; letter-spacing:.14em;
+    margin-bottom:var(--s1); }
+  li.dq .ex p { margin:0; font-size:.88rem; line-height:1.8; color:var(--muted); max-width:var(--measure); }
+  li.dq .ex p strong { color:var(--ink); font-weight:700; }
+  li.dq.ok { border-left-color:var(--blue); }
+  li.dq.ok .verdict { color:var(--blue); }
+  li.dq.ng { border-left-color:var(--accent); background:var(--accent-soft); }
+  li.dq.ng .verdict { color:var(--accent); }
+  li.dq.ng .ex p strong { color:var(--accent); }
+  ol.drill.onlyng li.dq:not(.ng) { display:none; }
+  .drilldone { font-size:.84rem; color:var(--muted); padding:var(--s3); border:1px dashed var(--rule);
+    border-radius:2px; text-align:center; }
+
+  @media (prefers-reduced-motion: reduce){ *{ transition:none !important; animation:none !important; scroll-behavior:auto !important; } }
+  html { scroll-behavior:smooth; }
+</style>
+
+<div class="wrap">
+
+  <header class="masthead">
+    <div>
+      <div class="eyebrow"><a href="../index.html">← 総目次</a> &nbsp;/&nbsp; 01 権利関係 &nbsp;/&nbsp; 宅建士試験 2026年度</div>
+      <h1>区分所有法</h1>
+      <ul class="facts">
+        <li>法令基準日 <b>2026-04-01</b></li>
+        <li>出題数 <b>1問</b></li>
+        <li>ドリル <b>34肢</b></li>
+        <li>目標 <b>確実に1問</b></li>
+        <li>更新 <b>2026-08-16</b></li>
+      </ul>
+    </div>
+    <div class="toggles">
+      <button id="mask" type="button" aria-pressed="false">数値を隠す</button>
+      <button id="theme" type="button">配色切替</button>
+    </div>
+  </header>
+
+  <nav class="rail" aria-label="目次">
+    <a class="home" href="../index.html">← 総目次</a>
+    <h2>Contents</h2>
+    <ol>
+      <li><a href="#kaisei"><span class="num">00</span>2026年の大改正</a></li>
+      <li><a href="#kouzou"><span class="num">01</span>専有部分と共用部分</a></li>
+      <li><a href="#shikichi"><span class="num">02</span>敷地利用権</a></li>
+      <li><a href="#kanri"><span class="num">03</span>管理者と管理組合</a></li>
+      <li><a href="#kiyaku"><span class="num">04</span>規約</a></li>
+      <li><a href="#shukai"><span class="num">05</span>集会</a></li>
+      <li><a href="#ketsugi"><span class="num">06</span>決議要件の一覧</a></li>
+      <li><a href="#saisei"><span class="num">07</span>再生手法と所在等不明</a></li>
+      <li><a href="#gimuihan"><span class="num">08</span>義務違反者への措置</a></li>
+      <li><a href="#deru"><span class="num">09</span>よく出る論点</a></li>
+      <li><a href="#hikkake"><span class="num">10</span>ひっかけ一覧</a></li>
+      <li><a href="#suji"><span class="num">11</span>数字まとめ</a></li>
+      <li><a href="#drill"><span class="num">12</span>肢別○×ドリル</a></li>
+    </ol>
+  </nav>
+
+  <main>
+
+    <!-- 00 -->
+    <section id="kaisei">
+      <h2 class="sec"><span class="num">00</span>2026年の大改正</h2>
+
+      <div class="call rev">
+        <span class="tag">2026年4月1日施行 — 今年最大の改正</span>
+        <p><strong>「建物の区分所有等に関する法律等の一部を改正する法律」（令和7年法律第47号）が2026年4月1日に施行されました。</strong>2002年以来およそ24年ぶりの大改正で、老朽化したマンションの管理と再生を進めるために<strong>決議要件が広く見直されています</strong>。<br>
+        法令基準日が2026年4月1日なので、<strong>今年の試験は改正後の内容で出題されます</strong>。2025年以前の教材・過去問の決議要件はそのままでは使えません。</p>
+      </div>
+
+      <div class="scroll">
+        <table>
+          <thead><tr><th>改正の柱</th><th>内容</th></tr></thead>
+          <tbody>
+            <tr><td><strong>① 決議の円滑化</strong></td><td>区分所有権の処分を伴わない決議を<strong>出席者ベース</strong>に変更。共用部分の変更決議を一定の場合に緩和</td></tr>
+            <tr><td><strong>② 所在等不明区分所有者の除外</strong></td><td>裁判所の決定により、<strong>すべての決議の母数から除外</strong>できる制度を新設</td></tr>
+            <tr><td><strong>③ 再生手法の多様化</strong></td><td>建替えに加えて<strong>建物の取壊し・建物敷地の一括売却・一棟リノベーション</strong>を多数決でできるように</td></tr>
+            <tr><td><strong>④ 管理の円滑化</strong></td><td><strong>国内管理人</strong>制度の新設、管理不全・所有者不明の専有部分等に対する<strong>財産管理制度</strong>の新設</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="call tip">
+        <span class="tag">読み方</span>
+        <p>改正はすべて<strong>「決められない状態を減らす」</strong>という一つの目的に向いている。所在不明の人を分母から外す、出席した人だけで決める、事情があれば必要な賛成数を下げる — <strong>すべて可決しやすくする方向</strong>。迷ったら「緩くなったほう」が改正後だと考えればよい。</p>
+      </div>
+    </section>
+
+    <!-- 01 -->
+    <section id="kouzou">
+      <h2 class="sec"><span class="num">01</span>専有部分と共用部分</h2>
+
+      <figure class="plate">
+        <svg viewBox="0 0 720 250" role="img" aria-label="マンションは専有部分、法定共用部分、規約共用部分、敷地利用権から構成される。専有部分は構造上と利用上の独立性を持つ部分。法定共用部分は廊下や階段など当然に共用となる部分で登記できない。規約共用部分は管理人室や集会室などを規約で共用部分としたもので、登記しなければ第三者に対抗できない。">
+          <rect x="24" y="42" width="200" height="96" class="svg-bluefill" rx="2"/>
+          <text x="124" y="68" text-anchor="middle">専有部分</text>
+          <text x="124" y="92" text-anchor="middle" class="lbl">構造上の独立性</text>
+          <text x="124" y="108" text-anchor="middle" class="lbl">＋ 利用上の独立性</text>
+          <text x="124" y="128" text-anchor="middle" class="dimt">区分所有権の対象</text>
+
+          <rect x="242" y="42" width="212" height="96" class="svg-fill" rx="2"/>
+          <text x="348" y="68" text-anchor="middle">法定共用部分</text>
+          <text x="348" y="92" text-anchor="middle" class="lbl">廊下・階段・エレベーター</text>
+          <text x="348" y="108" text-anchor="middle" class="lbl">構造上当然に共用となる部分</text>
+          <text x="348" y="128" text-anchor="middle" class="acct">登記できない</text>
+
+          <rect x="472" y="42" width="224" height="96" class="svg-accfill" rx="2"/>
+          <text x="584" y="68" text-anchor="middle">規約共用部分</text>
+          <text x="584" y="92" text-anchor="middle" class="lbl">管理人室・集会室・倉庫など</text>
+          <text x="584" y="108" text-anchor="middle" class="lbl">規約で共用部分と定めたもの</text>
+          <text x="584" y="128" text-anchor="middle" class="acct">登記しないと第三者に対抗できない</text>
+
+          <rect x="24" y="160" width="672" height="56" class="svg-fill" rx="2"/>
+          <text x="360" y="184" text-anchor="middle">敷地利用権（所有権・地上権・賃借権など）</text>
+          <text x="360" y="204" text-anchor="middle" class="acct">原則として専有部分と分離して処分できない</text>
+
+          <text x="24" y="240" class="lbl">共用部分の持分は専有部分の床面積の割合による（規約で別段の定めができる）</text>
+        </svg>
+        <figcaption>Fig.1 — マンションを構成する4つの要素</figcaption>
+      </figure>
+
+      <div class="scroll">
+        <table>
+          <thead><tr><th>論点</th><th>内容</th></tr></thead>
+          <tbody>
+            <tr><td>専有部分</td><td><strong>構造上の独立性</strong>と<strong>利用上の独立性</strong>を備えた部分。区分所有権の目的となる</td></tr>
+            <tr><td>法定共用部分</td><td>廊下・階段・エレベーター・エントランスなど。<span class="no">登記することができない</span></td></tr>
+            <tr><td><strong>規約共用部分</strong></td><td>本来は専有部分となりうる管理人室・集会室などを、<strong>規約</strong>で共用部分としたもの。<span class="no">その旨を登記しなければ第三者に対抗できない</span></td></tr>
+            <tr><td>共用部分の持分</td><td>各共有者の持分は<strong>専有部分の床面積の割合</strong>による（規約で別段の定めができる）</td></tr>
+            <tr><td class="no">分離処分の禁止</td><td class="no">共用部分の持分は、<strong>専有部分と分離して処分できない</strong>（規約でも変えられない）</td></tr>
+            <tr><td>一部共用部分</td><td>一部の区分所有者のみの共用に供されることが明らかな部分。その一部の区分所有者の共有に属する</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="call trap">
+        <span class="tag">ひっかけ</span>
+        <p><strong>法定共用部分は登記できない、規約共用部分は登記しないと対抗できない。</strong>この非対称が最頻出。<br>
+        <strong>共用部分の持分と専有部分の分離処分は、規約をもってしても禁止を解除できない。</strong>敷地利用権のほうは「規約に別段の定めがあるとき」は分離処分できるので、混同しないこと。</p>
+      </div>
+    </section>
+
+    <!-- 02 -->
+    <section id="shikichi">
+      <h2 class="sec"><span class="num">02</span>敷地利用権</h2>
+
+      <div class="scroll">
+        <table>
+          <thead><tr><th>論点</th><th>内容</th></tr></thead>
+          <tbody>
+            <tr><td>敷地利用権</td><td>専有部分を所有するための建物の敷地に関する権利。<strong>所有権に限らず</strong>、地上権・賃借権でもよい</td></tr>
+            <tr><td><strong>分離処分の禁止</strong></td><td>専有部分と敷地利用権は分離して処分できない。<span class="tri">ただし<strong>規約に別段の定めがあるとき</strong>は分離処分できる</span></td></tr>
+            <tr><td>法定敷地</td><td>建物が所在する土地</td></tr>
+            <tr><td>規約敷地</td><td>建物および法定敷地と一体として管理・使用する庭・通路・駐車場などを、<strong>規約</strong>で敷地としたもの</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>2-1　公正証書による規約の設定</h3>
+      <p><strong>最初に建物の専有部分の全部を所有する者</strong>（分譲業者など）は、<strong>公正証書</strong>により、次の<strong>4項目に限って</strong>規約を設定できる。</p>
+      <ol>
+        <li><strong>規約共用部分</strong>に関する定め</li>
+        <li><strong>規約敷地</strong>に関する定め</li>
+        <li>専有部分と敷地利用権の<strong>分離処分</strong>ができる旨の定め</li>
+        <li><strong>敷地利用権の割合</strong>に関する定め</li>
+      </ol>
+
+      <div class="call trap">
+        <span class="tag">ひっかけ</span>
+        <p><strong>公正証書で設定できるのはこの4項目だけ。</strong>「管理者を定める」「ペット飼育を禁止する」などを公正証書で設定することはできない。<br>
+        いずれも<strong>分譲前に決めておかないと後から全員の合意が必要になる事項</strong>だから先に決めさせる、という趣旨で覚える。</p>
+      </div>
+    </section>
+
+    <!-- 03 -->
+    <section id="kanri">
+      <h2 class="sec"><span class="num">03</span>管理者と管理組合</h2>
+
+      <div class="scroll">
+        <table>
+          <thead><tr><th>論点</th><th>内容</th></tr></thead>
+          <tbody>
+            <tr><td><strong>管理組合</strong></td><td>区分所有者は、全員で建物・敷地等の管理を行うための団体を<strong>当然に構成する</strong>。加入・脱退の自由はない</td></tr>
+            <tr><td>管理組合法人</td><td><strong>区分所有者及び議決権の各4分の3以上</strong>の集会の決議で法人となる旨等を定め、<strong>登記</strong>することにより成立する</td></tr>
+            <tr><td><strong>管理者の選任・解任</strong></td><td class="no">規約に別段の定めがない限り、<strong>集会の決議（過半数）</strong>による</td></tr>
+            <tr><td>管理者の資格</td><td class="tri"><strong>区分所有者以外でもよい</strong>。自然人でも法人でもよい</td></tr>
+            <tr><td>管理者の権限</td><td>共用部分等を保存し、集会の決議を実行し、規約で定めた行為をする。職務に関し<strong>区分所有者を代理</strong>する</td></tr>
+            <tr><td>集会の招集義務</td><td class="no"><strong>少なくとも毎年1回</strong>集会を招集しなければならない</td></tr>
+            <tr><td>事務の報告</td><td>集会において、毎年1回一定の時期に事務に関する報告をしなければならない</td></tr>
+            <tr><td>解任の請求</td><td>管理者に不正な行為その他その職務を行うに適しない事情があるときは、<strong>各区分所有者</strong>が解任を裁判所に請求できる</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="call rev">
+        <span class="tag">2026改正</span>
+        <p><strong>国内管理人制度</strong>が新設されました。国外に居住する区分所有者について、国内に住所を有する者を<strong>国内管理人</strong>として選任できます。<strong>規約でその選任を義務づけることもできます。</strong><br>
+        国内管理人は、保存行為・利用改良行為、集会の招集通知の受領、議決権の行使、債務の弁済などを行う権限を持ちます。</p>
+      </div>
+
+      <div class="call trap">
+        <span class="tag">ひっかけ</span>
+        <p><strong>管理者の選任は「過半数」、管理組合の法人化は「4分の3」。</strong>管理者は法人でもよく、区分所有者でなくてもよい。<br>
+        <strong>「管理者を必ず置かなければならない」は誤り。</strong>置くかどうかは任意で、規約または集会の決議で定める。</p>
+      </div>
+    </section>
+
+    <!-- 04 -->
+    <section id="kiyaku">
+      <h2 class="sec"><span class="num">04</span>規約</h2>
+
+      <div class="scroll">
+        <table>
+          <thead><tr><th>論点</th><th>内容</th></tr></thead>
+          <tbody>
+            <tr><td><strong>設定・変更・廃止</strong></td><td class="no">区分所有者及び議決権の各 <strong>4分の3以上</strong> の集会の決議</td></tr>
+            <tr>
+              <td class="no"><strong>特別の影響</strong></td>
+              <td class="no">規約の設定・変更・廃止が<strong>一部の区分所有者の権利に特別の影響を及ぼすとき</strong>は、その承諾を得なければならない</td>
+            </tr>
+            <tr><td>形式</td><td>書面または<strong>電磁的記録</strong>により作成する</td></tr>
+            <tr><td>保管</td><td>管理者が保管する。管理者がないときは、規約または集会の決議で定める区分所有者等が保管する</td></tr>
+            <tr><td class="no">閲覧</td><td class="no"><strong>利害関係人</strong>の請求があったときは、正当な理由がなければ閲覧を拒めない</td></tr>
+            <tr><td>保管場所</td><td>建物内の<strong>見やすい場所に掲示</strong>しなければならない</td></tr>
+            <tr><td>効力の及ぶ範囲</td><td>規約は、区分所有者の<strong>特定承継人</strong>に対しても効力を生ずる。<strong>占有者</strong>は建物等の使用方法について規約に従う義務を負う</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="call exam">
+        <span class="tag">よく出る</span>
+        <p><strong>規約は特定承継人にも及ぶ。</strong>中古で買った人も、前の所有者の時代に決まった規約に拘束される。滞納管理費も特定承継人が引き継ぐ。<br>
+        <strong>閲覧を請求できるのは「利害関係人」</strong>で、区分所有者に限られない。購入希望者や賃借人も含まれる。</p>
+      </div>
+    </section>
+
+    <!-- 05 -->
+    <section id="shukai">
+      <h2 class="sec"><span class="num">05</span>集会</h2>
+
+      <div class="scroll">
+        <table>
+          <thead><tr><th>論点</th><th>内容</th></tr></thead>
+          <tbody>
+            <tr><td>招集権者</td><td>管理者。<strong>少なくとも毎年1回</strong></td></tr>
+            <tr>
+              <td><strong>招集の請求</strong></td>
+              <td>区分所有者の <strong>5分の1以上</strong> で議決権の <strong>5分の1以上</strong> を有する者は、管理者に集会の招集を請求できる。<span class="tri">この定数は<strong>規約で減ずることができる</strong></span></td>
+            </tr>
+            <tr><td><strong>招集通知</strong></td><td class="no">会日より <strong>少なくとも1週間前</strong> に発する。<span class="tri">この期間は<strong>規約で伸縮できる</strong></span></td></tr>
+            <tr><td class="no"><strong>建替え決議の招集通知</strong></td><td class="no">会日より <strong>少なくとも2か月前</strong>。<span class="no">規約で伸長はできるが短縮はできない</span></td></tr>
+            <tr><td>招集手続の省略</td><td>区分所有者<strong>全員の同意</strong>があるときは、招集手続を経ないで開催できる</td></tr>
+            <tr><td>議決権</td><td>規約に別段の定めがない限り、<strong>共用部分の持分の割合</strong>（＝専有部分の床面積の割合）による</td></tr>
+            <tr><td>議決権の行使</td><td>書面または代理人によって行使できる。規約または集会の決議により<strong>電磁的方法</strong>によることもできる</td></tr>
+            <tr><td class="no"><strong>占有者の出席</strong></td><td class="no">賃借人などの占有者は、会議の目的たる事項につき利害関係を有する場合、集会に出席して<strong>意見を述べることができる</strong>。<strong>議決権はない</strong></td></tr>
+            <tr><td>決議事項の制限</td><td>あらかじめ通知した事項についてのみ決議できる（規約で別段の定めができる。ただし特別決議事項は不可）</td></tr>
+            <tr><td>書面決議</td><td>区分所有者<strong>全員の承諾</strong>があるときは集会を開かずに書面等で決議できる。全員の書面等による合意があったときは決議があったものとみなす</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="call trap">
+        <span class="tag">ひっかけ</span>
+        <p><strong>通常の招集通知は1週間前で規約により伸縮自在、建替え決議は2か月前で短縮できない。</strong>重大な決議ほど考える時間を確保させる。<br>
+        <strong>占有者は意見を述べられるが議決権はない。</strong>「賃借人も議決権を行使できる」は誤り。</p>
+      </div>
+    </section>
+
+    <!-- 06 -->
+    <section id="ketsugi">
+      <h2 class="sec"><span class="num">06</span>決議要件の一覧</h2>
+      <p class="lead">この分野の出題はほぼ<em>「その決議は何分の何か」</em>に集約される。<em>改正で下がった2か所</em>を意識して覚える。</p>
+
+      <figure class="plate">
+        <svg viewBox="0 0 720 260" role="img" aria-label="決議要件は過半数、3分の2、4分の3、5分の4の4段階。2026年の改正で、共用部分の変更が一定の場合に4分の3から3分の2へ、建替えが一定の場合に5分の4から4分の3へ緩和された。">
+          <line x1="40" y1="216" x2="690" y2="216" class="svg-ink"/>
+          <text x="40" y="240" class="lbl">緩い</text>
+          <text x="690" y="240" text-anchor="end" class="lbl">厳しい</text>
+
+          <rect x="46" y="86" width="150" height="118" class="svg-fill" rx="2"/>
+          <text x="121" y="112" text-anchor="middle" class="frac">過半数</text>
+          <text x="121" y="136" text-anchor="middle" class="lbl">管理者の選任・解任</text>
+          <text x="121" y="152" text-anchor="middle" class="lbl">共用部分の管理・軽微変更</text>
+          <text x="121" y="168" text-anchor="middle" class="lbl">小規模滅失の復旧</text>
+          <text x="121" y="184" text-anchor="middle" class="lbl">行為の停止請求（訴訟）</text>
+
+          <rect x="208" y="86" width="150" height="118" class="svg-accfill" rx="2"/>
+          <text x="283" y="112" text-anchor="middle" class="frac" fill="var(--accent)">2/3</text>
+          <text x="283" y="136" text-anchor="middle" class="lbl">共用部分の変更のうち</text>
+          <text x="283" y="152" text-anchor="middle" class="lbl">・瑕疵による権利侵害の是正</text>
+          <text x="283" y="168" text-anchor="middle" class="lbl">・バリアフリー化</text>
+          <text x="283" y="192" text-anchor="middle" class="acct">2026年に新設された枠</text>
+
+          <rect x="370" y="86" width="150" height="118" class="svg-fill" rx="2"/>
+          <text x="445" y="112" text-anchor="middle" class="frac">3/4</text>
+          <text x="445" y="136" text-anchor="middle" class="lbl">規約の設定・変更・廃止</text>
+          <text x="445" y="152" text-anchor="middle" class="lbl">共用部分の重大変更</text>
+          <text x="445" y="168" text-anchor="middle" class="lbl">管理組合法人の設立・解散</text>
+          <text x="445" y="184" text-anchor="middle" class="lbl">大規模滅失の復旧／使用禁止等</text>
+
+          <rect x="532" y="86" width="150" height="118" class="svg-fill" rx="2"/>
+          <text x="607" y="112" text-anchor="middle" class="frac">4/5</text>
+          <text x="607" y="136" text-anchor="middle" class="lbl">建替え</text>
+          <text x="607" y="152" text-anchor="middle" class="lbl">建物の取壊し</text>
+          <text x="607" y="168" text-anchor="middle" class="lbl">建物敷地の一括売却</text>
+          <text x="607" y="184" text-anchor="middle" class="lbl">一棟リノベーション</text>
+
+          <path d="M445 74 C 420 46, 310 46, 285 74" class="svg-acc"/>
+          <path d="M291 68 L285 76 L279 67" class="svg-acc"/>
+          <text x="365" y="42" text-anchor="middle" class="acct">一定の場合に緩和</text>
+
+          <path d="M607 74 C 582 58, 470 58, 447 74" class="svg-acc"/>
+          <path d="M453 68 L447 76 L441 67" class="svg-acc"/>
+          <text x="527" y="62" text-anchor="middle" class="acct">客観的事由があれば緩和</text>
+        </svg>
+        <figcaption>Fig.2 — 4段階の決議要件と、2026年に開いた2つの抜け道</figcaption>
+      </figure>
+
+      <div class="scroll">
+        <table class="ketsugi">
+          <caption>集会の決議要件（区分所有者及び議決権の各◯以上）</caption>
+          <thead><tr><th>決議事項</th><th>要件</th><th>補足</th></tr></thead>
+          <tbody>
+            <tr><td>管理者の選任・解任</td><td>過半数</td><td>規約で別段の定めができる</td></tr>
+            <tr><td>共用部分の管理・軽微変更</td><td>過半数</td><td>形状・効用の著しい変更を伴わないもの。保存行為は各区分所有者が単独でできる</td></tr>
+            <tr><td>小規模滅失（1/2以下）の復旧</td><td>過半数</td><td>各区分所有者が単独で復旧することもできる</td></tr>
+            <tr><td>義務違反者に対する行為の停止等の請求（訴訟による場合）</td><td>過半数</td><td>訴訟によらない請求に決議は不要</td></tr>
+            <tr class="hi"><td><strong>共用部分の変更</strong>のうち、瑕疵による権利侵害の是正・バリアフリー化に必要なもの<span class="newtag">2026新設</span></td><td>2/3</td><td>従来は一律 3/4 だった</td></tr>
+            <tr><td><strong>共用部分の重大変更</strong>（形状・効用の著しい変更を伴うもの）</td><td>3/4</td><td class="no">区分所有者の定数は<strong>規約で過半数まで減じられる</strong>（議決権は減じられない）</td></tr>
+            <tr><td><strong>規約の設定・変更・廃止</strong></td><td>3/4</td><td>特別の影響を受ける者の承諾が必要</td></tr>
+            <tr><td>管理組合法人の設立・解散</td><td>3/4</td><td>設立は登記により成立</td></tr>
+            <tr><td>大規模滅失（1/2超）の復旧</td><td>3/4</td><td>決議に賛成しなかった者は買取請求ができる</td></tr>
+            <tr><td>使用禁止請求・競売請求・占有者への引渡し請求</td><td>3/4</td><td>いずれも訴訟による。弁明の機会を与える</td></tr>
+            <tr class="hi"><td><strong>建替え／建物の取壊し／建物敷地の一括売却／一棟リノベーション</strong></td><td>4/5</td><td class="no">下の客観的事由があれば <strong>3/4</strong> に緩和<span class="newtag">2026改正</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="call rev">
+        <span class="tag">2026改正 — 建替え等が3/4になる客観的事由</span>
+        <p>次の<strong>いずれかに該当する場合</strong>に限り、5分の4が4分の3に緩和されます。<strong>無条件の引下げではありません。</strong></p>
+        <ul style="margin-bottom:0">
+          <li><strong>耐震性の不足</strong></li>
+          <li><strong>火災に対する安全性の不足</strong></li>
+          <li><strong>外壁等の剝落</strong>により周辺に危害を生ずるおそれ</li>
+          <li><strong>給排水管等の腐食</strong>等により著しく衛生上有害となるおそれ</li>
+          <li><strong>バリアフリー基準への不適合</strong></li>
+        </ul>
+      </div>
+
+      <div class="call trap">
+        <span class="tag">ひっかけ</span>
+        <p><strong>「改正により建替え決議は4分の3になった」は不正確。</strong>原則は<strong>5分の4のまま</strong>で、客観的事由がある場合にだけ4分の3になる。この条件を落とした選択肢は誤り。<br>
+        <strong>共用部分の重大変更で規約により減じられるのは「区分所有者の定数」だけ。</strong>議決権のほうは4分の3から減らせない。</p>
+      </div>
+
+      <div class="call rev">
+        <span class="tag">2026改正 — 出席者を基礎とする決議</span>
+        <p><strong>区分所有権の処分を伴う決議（建替え・売却・取壊しなど）を除き、集会に出席した区分所有者及び議決権を基礎として決議できる</strong>ようになりました。<br>
+        従来は区分所有者<strong>全員</strong>を分母としていたため、無関心層が多いと可決できませんでしたが、改正後は<strong>出席した人の中での多数決</strong>で足ります。</p>
+      </div>
+    </section>
+
+    <!-- 07 -->
+    <section id="saisei">
+      <h2 class="sec"><span class="num">07</span>再生手法と所在等不明区分所有者</h2>
+
+      <h3>7-1　再生手法の多様化</h3>
+      <p>従来、多数決でできるのは<strong>建替えだけ</strong>でした。改正により、建物を壊して終わらせる方向の選択肢も多数決でできるようになりました。</p>
+
+      <div class="scroll">
+        <table>
+          <thead><tr><th>手法</th><th>内容</th><th class="n">要件</th></tr></thead>
+          <tbody>
+            <tr><td><strong>建替え</strong></td><td>建物を取り壊し、新たに建物を建築する</td><td class="n">4/5<br><span class="lbl">事由があれば3/4</span></td></tr>
+            <tr><td><strong>建物の取壊し</strong><span class="newtag">2026新設</span></td><td>建物を取り壊して更地にする（再建はしない）</td><td class="n">4/5<br><span class="lbl">事由があれば3/4</span></td></tr>
+            <tr><td><strong>建物敷地の一括売却</strong><span class="newtag">2026新設</span></td><td>建物と敷地を一括して第三者に売却する</td><td class="n">4/5<br><span class="lbl">事由があれば3/4</span></td></tr>
+            <tr><td><strong>一棟リノベーション</strong><span class="newtag">2026新設</span></td><td class="no">既存の躯体を維持したまま全専有部分を更新する。<strong>従来は全員の同意が必要だった</strong></td><td class="n">4/5<br><span class="lbl">事由があれば3/4</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>7-2　所在等不明区分所有者の除外</h3>
+
+      <div class="call rev">
+        <span class="tag">2026改正 — 最大の実務的インパクト</span>
+        <p>管理組合が<strong>裁判所に申し立てて除外の決定</strong>を得れば、十分な調査をしても所在が判明しない区分所有者を<strong>すべての決議の母数から除外</strong>できるようになりました。除外された者は議決権を失います。<br>
+        従来は、所在不明者が1人いるだけで「反対1票」として数えられ、4分の3や5分の4の壁を越えられないことがありました。</p>
+      </div>
+
+      <h3>7-3　管理不全等への対応</h3>
+      <p>裁判所が管理人を選任する<strong>財産管理制度</strong>が新設されました。所有者が不明な専有部分や、管理が行き届かず放置された専有部分・共用部分について、裁判所の関与のもとで管理できるようになっています。</p>
+
+      <div class="call exam">
+        <span class="tag">よく出る</span>
+        <p>改正の柱を1行でまとめると、<strong>「所在不明者を外し、出席者だけで決め、事情があれば必要な賛成数を下げる」</strong>。この3つで可決のハードルを三重に下げている。</p>
+      </div>
+    </section>
+
+    <!-- 08 -->
+    <section id="gimuihan">
+      <h2 class="sec"><span class="num">08</span>義務違反者への措置</h2>
+
+      <div class="scroll">
+        <table>
+          <thead><tr><th>措置</th><th class="n">決議</th><th>相手方</th><th>補足</th></tr></thead>
+          <tbody>
+            <tr><td>行為の停止等の請求（訴訟によらない）</td><td class="n">不要</td><td>区分所有者・占有者</td><td>各区分所有者が単独で請求できる</td></tr>
+            <tr><td>行為の停止等の請求（訴訟による）</td><td class="n">過半数</td><td>区分所有者・占有者</td><td>弁明の機会は不要</td></tr>
+            <tr><td><strong>使用禁止請求</strong></td><td class="n no">3/4</td><td>区分所有者</td><td rowspan="3" class="no">いずれも<strong>訴訟による</strong>／あらかじめ<strong>弁明の機会</strong>を与えなければならない</td></tr>
+            <tr><td><strong>競売請求</strong></td><td class="n no">3/4</td><td>区分所有者</td></tr>
+            <tr><td><strong>占有者に対する引渡し請求</strong></td><td class="n no">3/4</td><td>占有者（賃借人など）</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="call trap">
+        <span class="tag">ひっかけ</span>
+        <p><strong>行為の停止請求だけが軽い。</strong>訴訟によらないなら決議すら要らず、訴訟でも過半数。残る3つは3/4＋訴訟＋弁明の機会がセット。<br>
+        <strong>競売請求は「区分所有権を奪う」措置</strong>なので、賃借人には使えない。賃借人に対しては引渡し請求を使う。</p>
+      </div>
+    </section>
+
+    <!-- 09 -->
+    <section id="deru">
+      <h2 class="sec"><span class="num">09</span>よく出る論点</h2>
+      <div class="scroll">
+        <table>
+          <thead><tr><th class="n">順位</th><th>論点</th><th>要点</th></tr></thead>
+          <tbody>
+            <tr><td class="n">1</td><td><strong>決議要件の振り分け</strong></td><td>過半数／2/3／3/4／4/5。<span class="no">改正で下がった2か所</span></td></tr>
+            <tr><td class="n">2</td><td><span class="no">2026改正の柱</span></td><td>所在等不明者の除外／出席者ベース／再生手法の多様化／国内管理人</td></tr>
+            <tr><td class="n">3</td><td>共用部分</td><td>法定は登記できない／規約共用部分は登記しないと対抗できない</td></tr>
+            <tr><td class="n">4</td><td>集会</td><td>1週間前（伸縮可）／建替えは2か月前（短縮不可）／占有者は意見のみ</td></tr>
+            <tr><td class="n">5</td><td>規約</td><td>3/4／特別の影響には承諾／特定承継人にも及ぶ／利害関係人の閲覧</td></tr>
+            <tr><td class="n">6</td><td>公正証書による規約設定</td><td>4項目に限られる</td></tr>
+            <tr><td class="n">7</td><td>義務違反者への措置</td><td>停止請求は軽い／残り3つは3/4＋訴訟＋弁明</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 10 -->
+    <section id="hikkake">
+      <h2 class="sec"><span class="num">10</span>ひっかけ一覧</h2>
+      <div class="scroll">
+        <table class="traps">
+          <thead><tr><th>こう書かれたら疑う</th><th>正しくは</th></tr></thead>
+          <tbody>
+            <tr><td>改正により建替え決議は4分の3になった</td><td>原則は <strong>5分の4</strong>。客観的事由がある場合にだけ4分の3</td></tr>
+            <tr><td>改正により共用部分の重大変更は一律3分の2になった</td><td>原則は <strong>4分の3</strong>。瑕疵の是正・バリアフリー化の場合だけ2/3</td></tr>
+            <tr><td>所在不明の区分所有者は当然に決議の母数から外れる</td><td><strong>裁判所の決定</strong>が必要</td></tr>
+            <tr><td>法定共用部分もその旨を登記しなければ対抗できない</td><td>法定共用部分は<strong>登記できない</strong></td></tr>
+            <tr><td>共用部分の持分は規約により専有部分と分離処分できる</td><td><strong>できない</strong>（敷地利用権なら規約で可）</td></tr>
+            <tr><td>公正証書で管理者を定めることができる</td><td>公正証書で定められるのは<strong>4項目のみ</strong></td></tr>
+            <tr><td>管理者は区分所有者の中から選ばなければならない</td><td><strong>区分所有者以外でもよい</strong>。法人でもよい</td></tr>
+            <tr><td>管理者の選任は4分の3以上の決議による</td><td><strong>過半数</strong>（4分の3は法人化）</td></tr>
+            <tr><td>集会の招集通知は規約で短縮できない</td><td>通常は<strong>伸縮できる</strong>。短縮できないのは建替えの2か月前</td></tr>
+            <tr><td>賃借人も集会で議決権を行使できる</td><td>意見を述べられるが<strong>議決権はない</strong></td></tr>
+            <tr><td>規約の閲覧を請求できるのは区分所有者に限られる</td><td><strong>利害関係人</strong>であればよい</td></tr>
+            <tr><td>規約は特定承継人には及ばない</td><td><strong>及ぶ</strong></td></tr>
+            <tr><td>共用部分の重大変更は規約で議決権も過半数まで減じられる</td><td>減じられるのは<strong>区分所有者の定数</strong>だけ</td></tr>
+            <tr><td>競売請求は賃借人に対しても行える</td><td>賃借人には<strong>引渡し請求</strong>を用いる</td></tr>
+            <tr><td>行為の停止請求にも弁明の機会が必要である</td><td>弁明の機会が必要なのは<strong>使用禁止・競売・引渡し</strong>の3つ</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 11 -->
+    <section id="suji">
+      <h2 class="sec"><span class="num">11</span>数字まとめ</h2>
+      <p class="masthead-note">右上の「数値を隠す」で自己テストできる。</p>
+      <div class="nums" id="numgrid">
+        <div class="nc" tabindex="0"><span class="v">過半数</span><span class="d">管理者の選任・解任／共用部分の管理・軽微変更／小規模滅失の復旧</span></div>
+        <div class="nc" tabindex="0"><span class="v">2/3</span><span class="d">共用部分の変更のうち瑕疵の是正・バリアフリー化（2026新設）</span></div>
+        <div class="nc" tabindex="0"><span class="v">3/4</span><span class="d">規約の設定変更廃止／共用部分の重大変更／法人化／大規模滅失の復旧／使用禁止等</span></div>
+        <div class="nc" tabindex="0"><span class="v">4/5</span><span class="d">建替え・取壊し・一括売却・一棟リノベーション</span></div>
+        <div class="nc" tabindex="0"><span class="v">5つ</span><span class="d">建替え等が3/4に緩和される客観的事由の数</span></div>
+        <div class="nc" tabindex="0"><span class="v">1/5以上</span><span class="d">集会の招集を請求できる区分所有者と議決権の割合（規約で減じられる）</span></div>
+        <div class="nc" tabindex="0"><span class="v">1週間前</span><span class="d">集会の招集通知（規約で伸縮できる）</span></div>
+        <div class="nc" tabindex="0"><span class="v">2か月前</span><span class="d">建替え決議の招集通知（短縮できない）</span></div>
+        <div class="nc" tabindex="0"><span class="v">毎年1回</span><span class="d">管理者が集会を招集すべき最低回数</span></div>
+        <div class="nc" tabindex="0"><span class="v">1/2</span><span class="d">滅失の大小を分ける割合（超なら大規模・以下なら小規模）</span></div>
+        <div class="nc" tabindex="0"><span class="v">4項目</span><span class="d">公正証書により設定できる規約の範囲</span></div>
+      </div>
+    </section>
+
+    <!-- 12 -->
+    <section id="drill">
+      <h2 class="sec"><span class="num">12</span>肢別○×ドリル</h2>
+      <p class="lead">頻出論点の一問一答 <em>34肢</em>。○×を押すと理由が開く。<strong>理由を一言で言えなかった肢は、正解していても「要復習」に入れる</strong>のがこのドリルの使い方。</p>
+      <div class="call tip">
+        <span class="tag">回し方</span>
+        <p>1周目は全肢。2周目以降は「間違えた肢だけ」で回す。解答状況はこのブラウザに保存されるので、日をまたいでも続きから再開できる。</p>
+      </div>
+      <div class="drillbar">
+        <div class="score">解答 <b id="d-done">0</b> / 34　　正答 <b id="d-ok">0</b>　　正答率 <span class="pct" id="d-pct">—</span></div>
+        <div class="dbtns">
+          <button id="d-wrong" type="button" aria-pressed="false">間違えた肢だけ</button>
+          <button id="d-reset" type="button">リセット</button>
+        </div>
+      </div>
+      <ol class="drill">
+          <li class="dq" data-a="o">
+            <p class="s">専有部分となるためには、構造上の独立性と利用上の独立性の両方を備えていなければならない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>1条。壁で仕切られているだけでなく、独立して使えることが必要。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">廊下・階段・エレベーターなどの法定共用部分は、規約で定めれば登記することができる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>法定共用部分は<strong>登記することができない</strong>。登記が問題になるのは規約共用部分のほう。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">管理人室を規約により共用部分とした場合、その旨の登記をしなければ第三者に対抗することができない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>4条2項。外から見ると専有部分に見えてしまうので、登記で公示させる。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">各共有者の共用部分の持分は、規約に別段の定めがない限り、その有する専有部分の床面積の割合による。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>14条1項・4項。規約で別段の定めができる。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">共用部分の持分は、規約で定めれば専有部分と分離して処分することができる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>15条2項。共用部分の持分の分離処分は<strong>規約をもってしても認められない</strong>。分離できる余地があるのは敷地利用権のほう。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">敷地利用権は、規約に別段の定めがあるときは、専有部分と分離して処分することができる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>22条1項ただし書。共用部分の持分（規約でも不可）との非対称が最頻出。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">敷地利用権は所有権に限られず、地上権や賃借権であってもよい。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>2条6項。専有部分を所有するための建物の敷地に関する権利であればよい。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">最初に建物の専有部分の全部を所有する者は、公正証書により、管理者を定める規約を設定することができる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>32条で公正証書により設定できるのは<strong>規約共用部分・規約敷地・専有部分と敷地利用権の分離処分・敷地利用権の割合</strong>の4項目のみ。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">区分所有者は、全員で建物および敷地等の管理を行うための団体を当然に構成する。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>3条。加入・脱退の自由はなく、区分所有者になれば当然に構成員となる。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">管理者は、区分所有者の中から選任しなければならない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>25条。<strong>区分所有者以外でもよく、法人でもよい</strong>。管理会社が管理者になることもできる。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">管理者の選任および解任は、規約に別段の定めがない限り、集会の決議によって行う。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>25条1項。決議要件は<strong>過半数</strong>。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">管理組合を法人とするには、区分所有者および議決権の各過半数による集会の決議が必要である。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>47条1項により<strong>各4分の3以上</strong>の決議と、主たる事務所の所在地における登記が必要。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">管理者は、少なくとも毎年1回集会を招集しなければならない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>34条2項。集会において毎年1回一定の時期に事務の報告もしなければならない。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">規約の設定、変更または廃止は、区分所有者および議決権の各4分の3以上の多数による集会の決議によって行う。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>31条1項。さらに一部の区分所有者に<strong>特別の影響</strong>を及ぼすときは、その者の承諾が必要。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">規約は、区分所有者の特定承継人に対しても効力を生ずる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>46条1項。中古で買った人も<strong>前の所有者の時代に決まった規約</strong>に拘束され、滞納管理費も引き継ぐ。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">規約の閲覧を請求することができるのは、区分所有者に限られる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>33条2項の「<strong>利害関係人</strong>」なので、購入希望者や賃借人も請求できる。正当な理由がなければ拒めない。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">集会の招集通知は会日より少なくとも1週間前に発しなければならないが、この期間は規約で伸縮することができる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>35条1項ただし書。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">建替え決議のための集会の招集通知は、規約で定めれば1か月前に短縮することができる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>62条4項により<strong>少なくとも2か月前</strong>。規約で<strong>伸長はできるが短縮はできない</strong>。重大な決議ほど考える時間を確保させる。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">区分所有者全員の同意があるときは、招集手続を経ないで集会を開くことができる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>36条。手続は全員のためのものだから、全員が要らないと言えば省略できる。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">建物の賃借人などの占有者は、集会に出席して議決権を行使することができる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>44条1項により、利害関係があれば<strong>意見を述べることはできるが、議決権はない</strong>。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">区分所有者の5分の1以上で議決権の5分の1以上を有する者は、管理者に対し集会の招集を請求することができる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>34条3項。この定数は<strong>規約で減ずることができる</strong>（増やすことはできない）。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">共用部分の保存行為は、規約に別段の定めがない限り、各区分所有者が単独ですることができる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>18条1項ただし書。現状を維持するだけなので他人に不利益がない。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">共用部分の形状または効用の著しい変更を伴わない変更をするには、区分所有者および議決権の各4分の3以上の決議が必要である。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>軽微変更は<strong>過半数</strong>（17条1項かっこ書）。4分の3が必要なのは重大変更のほう。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">共用部分の重大変更について、区分所有者の定数は規約で過半数まで減ずることができるが、議決権については減ずることができない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>17条1項ただし書。<strong>減らせるのは頭数だけ</strong>で、議決権は4分の3のまま。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">建物の価格の2分の1を超える部分が滅失した場合の復旧決議は、区分所有者および議決権の各4分の3以上の多数による。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>61条5項。決議に賛成しなかった者は<strong>買取請求</strong>ができる。2分の1以下の小規模滅失なら過半数で、各区分所有者が単独で復旧することもできる。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">2026年4月施行の改正により、共用部分の変更のうち、瑕疵による権利侵害の是正やバリアフリー化に必要なものは、区分所有者および議決権の各3分の2以上の多数で決議できることとなった。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>従来は一律4分の3だった枠が緩和され、<strong>3分の2という新しい段</strong>が加わった。今年の狙い目。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">2026年4月施行の改正により、建替え決議の要件は一律に区分所有者および議決権の各4分の3以上に引き下げられた。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p><strong>原則は5分の4のまま</strong>。耐震性の不足・火災に対する安全性の不足・外壁等の剝落のおそれ・給排水管等の腐食・バリアフリー基準への不適合という<strong>客観的事由がある場合に限り</strong>4分の3に緩和される。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">2026年4月施行の改正により、建替えのほか、建物の取壊し、建物敷地の一括売却、一棟リノベーションも多数決で決議できることとなった。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>いずれも要件は建替えと同じ<strong>5分の4（客観的事由があれば4分の3）</strong>。従来は全員の同意が必要だった手法が多数決に開かれた。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">2026年4月施行の改正により、裁判所の決定を得れば、所在等が不明な区分所有者を決議の母数から除外することができる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>従来は所在不明者が事実上の反対票として数えられ、4分の3や5分の4の壁を越えられなかった。除外された者は議決権を失う。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">2026年4月施行の改正により、区分所有権の処分を伴わない決議は、集会に出席した区分所有者および議決権を基礎として行うことができることとなった。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>無関心層が分母に入って可決できない事態を避けるため。<strong>建替え・売却・取壊しなど処分を伴う決議は対象外</strong>。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">義務違反者に対する行為の停止等の請求は、訴訟によらないのであれば、集会の決議を経ずに各区分所有者が単独ですることができる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>57条。訴訟によって請求する場合には<strong>過半数</strong>の決議が必要になる。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">専有部分の使用禁止請求および区分所有権の競売請求は、いずれも区分所有者および議決権の各4分の3以上の決議を経て、訴えをもって行う。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>58条・59条。あらかじめ<strong>弁明の機会</strong>を与えなければならない。行為の停止請求だけが軽い扱いになっている。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">建物を賃借している占有者が共同の利益に反する行為をした場合、管理組合はその者に対して競売を請求することができる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>競売請求は区分所有権を奪う措置なので<strong>区分所有者にしか使えない</strong>。占有者に対しては<strong>引渡し請求</strong>（60条）を用いる。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">区分所有者全員の承諾があるときは、集会を開催せずに書面または電磁的方法によって決議をすることができる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>45条1項。また、全員の書面等による合意があったときは決議があったものとみなされる（45条2項）。</p></div>
+          </li>
+      </ol>
+    </section>
+
+  </main>
+
+  <footer>
+    <h4>出典</h4>
+    <ul>
+      <li>建物の区分所有等に関する法律（昭和37年法律第69号） — <a href="https://laws.e-gov.go.jp/law/337AC0000000069">e-Gov法令検索</a></li>
+      <li>建物の区分所有等に関する法律等の一部を改正する法律（令和7年法律第47号・2026年4月1日施行） — <a href="https://www.moj.go.jp/">法務省</a></li>
+      <li>改正区分所有法 ～区分所有建物の再生の円滑化～ — <a href="https://www.tmi.gr.jp/eyes/blog/2025/17173.html">TMI総合法律事務所</a></li>
+      <li>改正区分所有法の概要 — <a href="https://www.irokawa.gr.jp/column/column-2367/">色川法律事務所</a></li>
+      <li>2026年宅建士試験で出題が予想される法改正 — <a href="https://column.itojuku.co.jp/takken/basic/houkaisei/">伊藤塾</a></li>
+    </ul>
+    <div class="sibling">
+      <a href="../index.html">総目次</a>
+      <a href="借地借家法.html">← 借地借家法</a>
+    </div>
+    <div class="todo">TODO — 出席者を基礎とする決議について、定足数の有無と特別決議での具体的な割合（出席者の3/4か等）は条文で未確認。改正法の条文が参照できる段階で確認し、必要なら06節に追記する。</div>
+  </footer>
+
+</div>
+
+<script>
+  (function () {
+    var root = document.documentElement;
+    document.getElementById('theme').addEventListener('click', function () {
+      if (root.getAttribute('data-theme')) { root.removeAttribute('data-theme'); return; }
+      var dark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      root.setAttribute('data-theme', dark ? 'light' : 'dark');
+    });
+    var maskBtn = document.getElementById('mask');
+    var grid = document.getElementById('numgrid');
+    maskBtn.addEventListener('click', function () {
+      var on = grid.classList.toggle('masked');
+      maskBtn.setAttribute('aria-pressed', String(on));
+      maskBtn.textContent = on ? '数値を表示' : '数値を隠す';
+    });
+    var links = Array.prototype.slice.call(document.querySelectorAll('nav.rail ol a'));
+    var map = {};
+    links.forEach(function (a) { map[a.getAttribute('href').slice(1)] = a; });
+    var seen = [];
+    var obs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        var i = seen.indexOf(e.target.id);
+        if (e.isIntersecting && i < 0) seen.push(e.target.id);
+        if (!e.isIntersecting && i >= 0) seen.splice(i, 1);
+      });
+      links.forEach(function (a) { a.classList.remove('on'); });
+      if (seen.length) {
+        var order = Object.keys(map);
+        seen.sort(function (a, b) { return order.indexOf(a) - order.indexOf(b); });
+        map[seen[0]].classList.add('on');
+      }
+    }, { rootMargin: '-10% 0px -70% 0px' });
+    document.querySelectorAll('main section').forEach(function (s) { obs.observe(s); });
+  })();
+</script>
+
+<script>
+  /* 肢別○×ドリル */
+  (function () {
+    var sec = document.getElementById('drill');
+    if (!sec) return;
+    var list = sec.querySelector('ol.drill');
+    var items = Array.prototype.slice.call(list.querySelectorAll('li.dq'));
+    var key = 'takken-drill:' + (document.title || location.pathname);
+    var state = {};
+    try { state = JSON.parse(localStorage.getItem('' + key) || '{}') || {}; } catch (e) { state = {}; }
+    var elDone = document.getElementById('d-done');
+    var elOk = document.getElementById('d-ok');
+    var elPct = document.getElementById('d-pct');
+    var onlyBtn = document.getElementById('d-wrong');
+
+    function paint() {
+      var done = 0, ok = 0;
+      items.forEach(function (li, i) {
+        var picked = state[i];
+        li.classList.remove('done', 'ok', 'ng');
+        Array.prototype.forEach.call(li.querySelectorAll('.ch button'), function (b) {
+          b.removeAttribute('data-picked');
+        });
+        if (picked !== 'o' && picked !== 'x') return;
+        done++;
+        var ans = li.getAttribute('data-a');
+        var right = picked === ans;
+        if (right) ok++;
+        li.classList.add('done', right ? 'ok' : 'ng');
+        var b = li.querySelector('.ch button[data-v="' + picked + '"]');
+        if (b) b.setAttribute('data-picked', '1');
+        li.querySelector('.verdict').textContent =
+          right ? '正解　' + (ans === 'o' ? '○' : '×')
+                : '不正解　正解は ' + (ans === 'o' ? '○' : '×');
+      });
+      elDone.textContent = String(done);
+      elOk.textContent = String(ok);
+      elPct.textContent = done ? Math.round(ok / done * 100) + '%' : '—';
+      try { localStorage.setItem('' + key, JSON.stringify(state)); } catch (e) {}
+    }
+
+    list.addEventListener('click', function (e) {
+      var b = e.target;
+      while (b && b !== list && b.tagName !== 'BUTTON') b = b.parentNode;
+      if (!b || b.tagName !== 'BUTTON') return;
+      var li = b.parentNode.parentNode;
+      var i = items.indexOf(li);
+      if (i < 0) return;
+      state[i] = b.getAttribute('data-v');
+      paint();
+    });
+
+    onlyBtn.addEventListener('click', function () {
+      var on = list.classList.toggle('onlyng');
+      onlyBtn.setAttribute('aria-pressed', String(on));
+      onlyBtn.textContent = on ? 'すべて表示' : '間違えた肢だけ';
+    });
+
+    document.getElementById('d-reset').addEventListener('click', function () {
+      state = {};
+      list.classList.remove('onlyng');
+      onlyBtn.setAttribute('aria-pressed', 'false');
+      onlyBtn.textContent = '間違えた肢だけ';
+      paint();
+    });
+
+    paint();
+  })();
+</script>

@@ -1,0 +1,675 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>免許制度 — 宅建士試験 2026年度</title>
+
+<style>
+  :root {
+    --paper:#EBEDE9; --surface:#F8F9F6; --sunk:#E1E4DE; --ink:#151F2A; --muted:#5D6B78;
+    --rule:#CDD2CB; --hair:#DCE0D9; --accent:#B8342A; --accent-soft:#F3DEDB;
+    --blue:#2A5F86; --blue-soft:#DCE6EE;
+    --font-display:"Hiragino Mincho ProN","Yu Mincho","YuMincho","Noto Serif JP",serif;
+    --font-body:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","YuGothic","Noto Sans JP",system-ui,sans-serif;
+    --font-mono:ui-monospace,"SFMono-Regular","SF Mono",Menlo,Consolas,monospace;
+    --measure:68ch;
+    --s1:.35rem; --s2:.7rem; --s3:1.1rem; --s4:1.7rem; --s5:2.6rem; --s6:4rem;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper:#0D1B29; --surface:#132534; --sunk:#0A1622; --ink:#DAE4EC; --muted:#8CA1B3;
+      --rule:#26415A; --hair:#1D3448; --accent:#FF7059; --accent-soft:#3A1F1D;
+      --blue:#6FB6DC; --blue-soft:#14293A;
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper:#0D1B29; --surface:#132534; --sunk:#0A1622; --ink:#DAE4EC; --muted:#8CA1B3;
+    --rule:#26415A; --hair:#1D3448; --accent:#FF7059; --accent-soft:#3A1F1D;
+    --blue:#6FB6DC; --blue-soft:#14293A;
+  }
+
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--paper); color:var(--ink); font-family:var(--font-body);
+    font-size:16px; line-height:1.9; -webkit-font-smoothing:antialiased; font-feature-settings:"palt" 1; }
+
+  .wrap { display:grid; grid-template-columns:15.5rem minmax(0,1fr); gap:var(--s6);
+    max-width:78rem; margin:0 auto; padding:0 var(--s4) var(--s6); align-items:start; }
+  @media (max-width:60rem){ .wrap{ grid-template-columns:minmax(0,1fr); gap:var(--s4); padding:0 var(--s3) var(--s5);} }
+
+  .masthead { grid-column:1/-1; padding:var(--s5) 0 var(--s4); border-bottom:2px solid var(--ink);
+    margin-bottom:var(--s2); display:flex; flex-wrap:wrap; align-items:flex-end; justify-content:space-between; gap:var(--s3); }
+  .eyebrow { font-family:var(--font-mono); font-size:.72rem; letter-spacing:.16em; text-transform:uppercase;
+    color:var(--muted); display:flex; align-items:center; gap:.6em; }
+  .eyebrow::before { content:""; width:2.2rem; height:1px; background:var(--accent); }
+  h1 { font-family:var(--font-display); font-weight:600; font-size:clamp(2rem,1.4rem + 2.6vw,3.1rem);
+    line-height:1.2; letter-spacing:.04em; margin:var(--s2) 0 var(--s3); text-wrap:balance; }
+  .facts { display:flex; flex-wrap:wrap; gap:0 var(--s3); font-size:.82rem; color:var(--muted); list-style:none; margin:0; padding:0; }
+  .facts b { font-family:var(--font-mono); font-variant-numeric:tabular-nums; color:var(--ink); font-weight:600; }
+  .toggles { display:flex; gap:var(--s1); }
+  button { font-family:var(--font-body); font-size:.78rem; color:var(--muted); background:var(--surface);
+    border:1px solid var(--rule); border-radius:2px; padding:.4em .9em; cursor:pointer; transition:color .15s,border-color .15s; }
+  button:hover { color:var(--ink); border-color:var(--ink); }
+  button:focus-visible { outline:2px solid var(--accent); outline-offset:2px; }
+  button[aria-pressed="true"] { color:var(--accent); border-color:var(--accent); }
+
+  nav.rail { position:sticky; top:var(--s3); font-size:.82rem; max-height:calc(100vh - 3rem); overflow-y:auto; padding-bottom:var(--s3); }
+  nav.rail h2 { font-family:var(--font-mono); font-size:.68rem; letter-spacing:.16em; text-transform:uppercase; color:var(--muted); margin:0 0 var(--s2); font-weight:500; }
+  nav.rail ol { list-style:none; margin:0; padding:0; display:flex; flex-direction:column; }
+  nav.rail a { display:block; padding:.3em 0 .3em .9em; color:var(--muted); text-decoration:none; border-left:2px solid var(--hair); line-height:1.5; }
+  nav.rail a:hover { color:var(--ink); border-left-color:var(--rule); }
+  nav.rail a.on { color:var(--ink); border-left-color:var(--accent); font-weight:600; }
+  nav.rail a .num { font-family:var(--font-mono); font-size:.72rem; color:var(--muted); margin-right:.5em; }
+  @media (max-width:60rem){
+    nav.rail{ position:static; max-height:none; border-bottom:1px solid var(--rule); padding-bottom:var(--s3); }
+    nav.rail ol{ display:grid; grid-template-columns:repeat(auto-fill,minmax(9rem,1fr)); gap:0 var(--s2); }
+  }
+
+  main { min-width:0; }
+  section { padding-top:var(--s5); scroll-margin-top:var(--s3); }
+  section > * { max-width:var(--measure); }
+  section > figure, section > .scroll { max-width:none; }
+
+  h2.sec { font-family:var(--font-display); font-size:clamp(1.45rem,1.2rem + .9vw,1.9rem); font-weight:600;
+    letter-spacing:.04em; margin:0 0 var(--s3); padding-bottom:var(--s2); border-bottom:1px solid var(--rule);
+    display:flex; align-items:baseline; gap:.7em; max-width:none; }
+  h2.sec .num { font-family:var(--font-mono); font-size:.8rem; letter-spacing:.1em; color:var(--accent); font-weight:500; }
+  h3 { font-family:var(--font-body); font-size:1.06rem; font-weight:700; letter-spacing:.02em;
+    margin:var(--s4) 0 var(--s2); padding-left:.7em; border-left:3px solid var(--ink); }
+  p { margin:0 0 var(--s3); }
+  a { color:var(--blue); text-underline-offset:.2em; }
+  em { font-style:normal; background:linear-gradient(transparent 62%, var(--accent-soft) 62%); font-weight:600; }
+  ul, ol { margin:0 0 var(--s3); padding-left:1.3em; }
+  li { margin-bottom:var(--s1); }
+  .lead { font-size:1.05rem; color:var(--muted); }
+
+  .call { max-width:var(--measure); margin:0 0 var(--s3); padding:var(--s3) var(--s3) var(--s3) var(--s4);
+    background:var(--surface); border:1px solid var(--hair); border-left:3px solid var(--rule); border-radius:2px; font-size:.94rem; }
+  .call > :last-child { margin-bottom:0; }
+  .call .tag { display:block; font-family:var(--font-mono); font-size:.68rem; letter-spacing:.16em; text-transform:uppercase; color:var(--muted); margin-bottom:var(--s1); }
+  .call.trap { border-left-color:var(--accent); background:var(--accent-soft); }
+  .call.trap .tag { color:var(--accent); }
+  .call.exam { border-left-color:var(--ink); }
+  .call.exam .tag { color:var(--ink); }
+  .call.rev { border-left-color:var(--accent); }
+  .call.rev .tag { color:var(--accent); }
+  .call.tip { border-left-color:var(--blue); background:var(--blue-soft); }
+  .call.tip .tag { color:var(--blue); }
+
+  .scroll { overflow-x:auto; margin:0 0 var(--s3); -webkit-overflow-scrolling:touch; }
+  table { border-collapse:collapse; width:100%; font-size:.88rem; line-height:1.6; }
+  caption { text-align:left; font-size:.78rem; color:var(--muted); padding-bottom:var(--s1); font-family:var(--font-mono); letter-spacing:.08em; }
+  th, td { padding:.62em .8em; text-align:left; vertical-align:top; border-bottom:1px solid var(--hair); }
+  thead th { font-size:.74rem; letter-spacing:.1em; color:var(--muted); font-weight:600; border-bottom:1px solid var(--ink); white-space:nowrap; }
+  tbody tr:hover { background:var(--surface); }
+  td.n, th.n { text-align:center; font-family:var(--font-mono); font-variant-numeric:tabular-nums; white-space:nowrap; }
+  .no { color:var(--accent); font-weight:700; }
+  .yes { color:var(--muted); }
+  .tri { color:var(--blue); }
+
+  .ladder { display:flex; flex-direction:column; gap:var(--s2); margin-bottom:var(--s3); counter-reset:q; }
+  .q { background:var(--surface); border:1px solid var(--hair); border-radius:2px; padding:var(--s3); }
+  .q > p { font-weight:700; margin:0 0 var(--s2); font-size:.95rem; }
+  .q > p::before { counter-increment:q; content:"要件" counter(q); font-family:var(--font-mono); font-size:.7rem; letter-spacing:.1em; color:var(--accent); margin-right:.8em; }
+  .branch { display:grid; grid-template-columns:repeat(auto-fit,minmax(13rem,1fr)); gap:var(--s2); }
+  .b { font-size:.84rem; padding:.7em .9em; border-radius:2px; border:1px solid var(--hair); background:var(--paper); }
+  .b .k { font-family:var(--font-mono); font-size:.7rem; letter-spacing:.1em; color:var(--muted); display:block; }
+  .b.need { border-color:var(--accent); }
+  .b.need strong { color:var(--accent); }
+
+  figure { margin:0 0 var(--s4); }
+  figure svg { display:block; width:100%; height:auto; }
+  figcaption { font-size:.78rem; color:var(--muted); font-family:var(--font-mono); letter-spacing:.06em; margin-top:var(--s2); padding-top:var(--s1); border-top:1px solid var(--hair); }
+  .plate { background:var(--surface); border:1px solid var(--hair); border-radius:2px; padding:var(--s3); }
+  .svg-ink { fill:none; stroke:var(--ink); stroke-width:1.4; }
+  .svg-hair { fill:none; stroke:var(--rule); stroke-width:1; }
+  .svg-dim { fill:none; stroke:var(--blue); stroke-width:1; }
+  .svg-acc { fill:none; stroke:var(--accent); stroke-width:1.6; }
+  .svg-fill { fill:var(--sunk); stroke:var(--rule); stroke-width:1; }
+  .svg-accfill { fill:var(--accent-soft); stroke:var(--accent); stroke-width:1.2; }
+  .svg-bluefill { fill:var(--blue-soft); stroke:var(--blue); stroke-width:1.2; }
+  text { font-family:var(--font-body); fill:var(--ink); font-size:12px; }
+  text.lbl { font-family:var(--font-mono); fill:var(--muted); font-size:10.5px; letter-spacing:.06em; }
+  text.dimt { font-family:var(--font-mono); fill:var(--blue); font-size:11px; }
+  text.acct { fill:var(--accent); font-size:11.5px; font-weight:700; }
+  text.mark { font-size:17px; font-weight:700; }
+
+  .nums { display:grid; grid-template-columns:repeat(auto-fill,minmax(11.5rem,1fr)); gap:var(--s2); }
+  .nc { background:var(--surface); border:1px solid var(--hair); border-radius:2px; padding:var(--s3) var(--s3) var(--s2); display:flex; flex-direction:column; gap:var(--s1); }
+  .nc .v { font-family:var(--font-mono); font-variant-numeric:tabular-nums; font-size:1.35rem; font-weight:600; line-height:1.2; color:var(--accent); }
+  .nc .d { font-size:.8rem; color:var(--muted); line-height:1.6; }
+  .nums.masked .v { color:transparent; background:var(--rule); border-radius:2px; user-select:none; }
+  .nums.masked .nc:hover .v, .nums.masked .nc:focus-within .v { color:var(--accent); background:transparent; }
+  .nc:focus-visible { outline:2px solid var(--accent); outline-offset:2px; }
+  .masthead-note { font-size:.78rem; color:var(--muted); margin-bottom:var(--s2); }
+
+  table.traps td:first-child { color:var(--muted); }
+  table.traps td:first-child::before { content:"「"; }
+  table.traps td:first-child::after { content:"」"; }
+  table.traps td:last-child strong { color:var(--accent); }
+
+  footer { grid-column:1/-1; margin-top:var(--s6); padding-top:var(--s3); border-top:1px solid var(--rule); font-size:.8rem; color:var(--muted); }
+  footer ul { list-style:none; padding:0; }
+  footer li { margin-bottom:var(--s1); }
+  .sibling { display:flex; flex-wrap:wrap; gap:var(--s2); margin-top:var(--s3); }
+  .sibling a { font-size:.8rem; text-decoration:none; border:1px solid var(--rule); border-radius:2px; padding:.35em .8em; color:var(--muted); }
+  .sibling a:hover { color:var(--ink); border-color:var(--ink); }
+
+  @media (prefers-reduced-motion: reduce){ *{ transition:none !important; animation:none !important; scroll-behavior:auto !important; } }
+  html { scroll-behavior:smooth; }
+  .eyebrow a { color:var(--accent); text-decoration:none; }
+  .eyebrow a:hover { text-decoration:underline; text-underline-offset:.2em; }
+  nav.rail a.home { border-left:none; padding:0 0 var(--s2); color:var(--accent);
+    font-family:var(--font-mono); font-size:.72rem; letter-spacing:.1em; }
+  nav.rail a.home:hover { color:var(--accent); text-decoration:underline; text-underline-offset:.2em; }
+</style>
+
+<div class="wrap">
+
+  <header class="masthead">
+    <div>
+      <div class="eyebrow"><a href="../index.html">← 総目次</a> &nbsp;/&nbsp; 02 宅建業法 &nbsp;/&nbsp; 宅建士試験 2026年度</div>
+      <h1>免許制度</h1>
+      <ul class="facts">
+        <li>法令基準日 <b>2026-04-01</b></li>
+        <li>出題数 <b>約3問</b></li>
+        <li>目標 <b>全問正解</b></li>
+        <li>更新 <b>2026-08-09</b></li>
+      </ul>
+    </div>
+    <div class="toggles">
+      <button id="mask" type="button" aria-pressed="false">数値を隠す</button>
+      <button id="theme" type="button">配色切替</button>
+    </div>
+  </header>
+
+  <nav class="rail" aria-label="目次">
+    <a class="home" href="../index.html">← 総目次</a>
+    <h2>Contents</h2>
+    <ol>
+      <li><a href="#overview"><span class="num">00</span>免許の要否</a></li>
+      <li><a href="#yougo"><span class="num">01</span>宅地・建物・取引</a></li>
+      <li><a href="#shurui"><span class="num">02</span>免許の種類と有効期間</a></li>
+      <li><a href="#jimusho"><span class="num">03</span>事務所</a></li>
+      <li><a href="#menkyogae"><span class="num">04</span>免許換え</a></li>
+      <li><a href="#kekkaku"><span class="num">05</span>免許の基準（欠格要件）</a></li>
+      <li><a href="#henkou"><span class="num">06</span>変更の届出</a></li>
+      <li><a href="#haigyou"><span class="num">07</span>廃業等の届出</a></li>
+      <li><a href="#mumenkyo"><span class="num">08</span>無免許営業・名義貸し</a></li>
+      <li><a href="#deru"><span class="num">09</span>よく出る論点</a></li>
+      <li><a href="#hikkake"><span class="num">10</span>ひっかけ一覧</a></li>
+      <li><a href="#suji"><span class="num">11</span>数字まとめ</a></li>
+    </ol>
+  </nav>
+
+  <main>
+
+    <!-- 00 -->
+    <section id="overview">
+      <h2 class="sec"><span class="num">00</span>免許の要否</h2>
+      <p class="lead">「宅地建物取引<em>業</em>」を営むには免許がいる。逆にいえば、<em>3つの要件のどれか1つでも欠ければ免許は不要</em>。この判定が毎年出る。</p>
+
+      <div class="ladder">
+        <div class="q">
+          <p>対象は「宅地」または「建物」か</p>
+          <div class="branch">
+            <div class="b"><span class="k">宅地</span>建物の敷地に供せられる土地／<strong>用途地域内</strong>の土地（道路・公園・河川・広場・水路を除く）</div>
+            <div class="b"><span class="k">建物</span>屋根と柱または壁を有するもの。マンションの一室も建物</div>
+          </div>
+        </div>
+        <div class="q">
+          <p>行為は「取引」にあたるか</p>
+          <div class="branch">
+            <div class="b need"><span class="k">あたる</span>自ら売買・交換／代理・媒介による売買・交換・貸借</div>
+            <div class="b"><span class="k">あたらない</span><strong>自ら貸借</strong>（転貸も含む）</div>
+          </div>
+        </div>
+        <div class="q">
+          <p>「業」として行うか</p>
+          <div class="branch">
+            <div class="b need"><span class="k">あたる</span><strong>不特定多数</strong>の者を相手に<strong>反復継続</strong>して行う</div>
+            <div class="b"><span class="k">あたらない</span>特定の相手だけ／1回限り</div>
+          </div>
+        </div>
+      </div>
+
+      <h3>取引の該当性マトリクス</h3>
+
+      <figure class="plate">
+        <svg viewBox="0 0 720 250" role="img" aria-label="自ら・代理・媒介と、売買・交換・貸借の組み合わせ表。自ら貸借だけが取引にあたらず、それ以外の8つはすべて取引にあたる。">
+          <text x="200" y="42" text-anchor="middle" class="lbl">売買</text>
+          <text x="360" y="42" text-anchor="middle" class="lbl">交換</text>
+          <text x="530" y="42" text-anchor="middle" class="lbl">貸借</text>
+
+          <text x="24" y="90" class="lbl">自ら</text>
+          <text x="24" y="152" class="lbl">代理</text>
+          <text x="24" y="214" class="lbl">媒介</text>
+
+          <!-- row 自ら -->
+          <rect x="120" y="58" width="160" height="52" class="svg-accfill" rx="2"/>
+          <text x="200" y="92" text-anchor="middle" class="mark" fill="var(--accent)">○</text>
+          <rect x="288" y="58" width="160" height="52" class="svg-accfill" rx="2"/>
+          <text x="368" y="92" text-anchor="middle" class="mark" fill="var(--accent)">○</text>
+          <rect x="456" y="58" width="160" height="52" class="svg-fill" rx="2"/>
+          <text x="536" y="92" text-anchor="middle" class="mark" fill="var(--muted)">✕</text>
+
+          <!-- row 代理 -->
+          <rect x="120" y="120" width="160" height="52" class="svg-accfill" rx="2"/>
+          <text x="200" y="154" text-anchor="middle" class="mark" fill="var(--accent)">○</text>
+          <rect x="288" y="120" width="160" height="52" class="svg-accfill" rx="2"/>
+          <text x="368" y="154" text-anchor="middle" class="mark" fill="var(--accent)">○</text>
+          <rect x="456" y="120" width="160" height="52" class="svg-accfill" rx="2"/>
+          <text x="536" y="154" text-anchor="middle" class="mark" fill="var(--accent)">○</text>
+
+          <!-- row 媒介 -->
+          <rect x="120" y="182" width="160" height="52" class="svg-accfill" rx="2"/>
+          <text x="200" y="216" text-anchor="middle" class="mark" fill="var(--accent)">○</text>
+          <rect x="288" y="182" width="160" height="52" class="svg-accfill" rx="2"/>
+          <text x="368" y="216" text-anchor="middle" class="mark" fill="var(--accent)">○</text>
+          <rect x="456" y="182" width="160" height="52" class="svg-accfill" rx="2"/>
+          <text x="536" y="216" text-anchor="middle" class="mark" fill="var(--accent)">○</text>
+
+          <text x="632" y="88" class="lbl">○＝取引</text>
+          <text x="632" y="104" class="lbl">免許が必要</text>
+          <text x="632" y="152" class="lbl">✕＝取引でない</text>
+          <text x="632" y="168" class="lbl">免許は不要</text>
+        </svg>
+        <figcaption>Fig.1 — 「自ら貸借」だけが穴になっている</figcaption>
+      </figure>
+
+      <div class="call exam">
+        <span class="tag">よく出る</span>
+        <p><strong>自ら貸借は取引にあたらない＝免許不要。</strong>9マスのうち1つだけが例外。自分のビルを不特定多数に反復継続して貸しても、<strong>免許はいらない</strong>。<strong>転貸（サブリース）も自ら貸借</strong>なので同じく不要。</p>
+      </div>
+
+      <div class="call trap">
+        <span class="tag">ひっかけ</span>
+        <p><strong>用途地域内の土地は、現況が農地でも山林でも「宅地」。</strong>ただし<strong>道路・公園・河川・広場・水路</strong>に現に供せられているものは除かれる。この5つは丸暗記する。<br>
+        逆に用途地域<strong>外</strong>の土地は、<strong>建物の敷地に供する目的で取引される場合にだけ</strong>宅地になる。</p>
+      </div>
+    </section>
+
+    <!-- 01 -->
+    <section id="yougo">
+      <h2 class="sec"><span class="num">01</span>免許が不要な者</h2>
+
+      <div class="scroll">
+        <table>
+          <thead><tr><th>主体</th><th class="n">免許</th><th>補足</th></tr></thead>
+          <tbody>
+            <tr><td>国・地方公共団体</td><td class="n yes">不要</td><td>宅建業法の規定は適用されない</td></tr>
+            <tr><td>都市再生機構・地方住宅供給公社</td><td class="n yes">不要</td><td>国等とみなされる</td></tr>
+            <tr><td><strong>信託会社・信託銀行</strong></td><td class="n yes">不要</td><td class="no">国土交通大臣への<strong>届出</strong>で足りる。<strong>ただし宅建業法の規定は適用される</strong>（大臣免許を受けた業者とみなされる）</td></tr>
+            <tr><td>農業協同組合・社会福祉法人など</td><td class="n no">必要</td><td>特別扱いはない</td></tr>
+            <tr><td>破産管財人が裁判所の許可を得て売却</td><td class="n yes">不要</td><td>裁判所の関与のもとで行われるため</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="call trap">
+        <span class="tag">ひっかけ</span>
+        <p><strong>信託会社は「免許は不要だが、宅建業法は適用される」</strong>という中間的な扱い。国・地方公共団体は法自体が適用されない。この2つを同列に扱う選択肢が誤り。</p>
+      </div>
+    </section>
+
+    <!-- 02 -->
+    <section id="shurui">
+      <h2 class="sec"><span class="num">02</span>免許の種類と有効期間</h2>
+
+      <div class="scroll">
+        <table>
+          <thead><tr><th>事務所の所在</th><th>免許権者</th><th>申請の経路</th></tr></thead>
+          <tbody>
+            <tr><td><strong>2以上</strong>の都道府県に事務所</td><td>国土交通大臣</td><td>主たる事務所の所在地の<strong>都道府県知事を経由</strong></td></tr>
+            <tr><td><strong>1の</strong>都道府県内のみ</td><td>その都道府県知事</td><td>直接</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="call trap">
+        <span class="tag">ひっかけ</span>
+        <p>大臣免許か知事免許かは<strong>「事務所がどこにあるか」だけ</strong>で決まる。<strong>取引する物件の所在地は無関係</strong>。東京都知事免許の業者が大阪の物件を売買してもよい。</p>
+      </div>
+
+      <figure class="plate">
+        <svg viewBox="0 0 720 160" role="img" aria-label="免許の有効期間は5年。更新の申請は有効期間満了の日の90日前から30日前までの間に行う。">
+          <line x1="60" y1="76" x2="660" y2="76" class="svg-ink"/>
+          <text x="60" y="58" text-anchor="middle">免許</text>
+          <circle cx="60" cy="76" r="5" class="svg-ink" fill="var(--paper)"/>
+          <text x="660" y="58" text-anchor="middle" class="acct">有効期間の満了</text>
+          <circle cx="660" cy="76" r="5" class="svg-acc" fill="var(--paper)"/>
+
+          <path d="M60 100 H 660" class="svg-dim"/>
+          <path d="M64 96 L60 100 L64 104 M656 96 L660 100 L656 104" class="svg-dim"/>
+          <text x="360" y="118" text-anchor="middle" class="dimt">有効期間 5年</text>
+
+          <rect x="480" y="66" width="120" height="20" class="svg-accfill"/>
+          <text x="540" y="42" text-anchor="middle" class="acct">更新申請の受付</text>
+          <text x="540" y="80" text-anchor="middle" class="lbl">90日前〜30日前</text>
+          <line x1="480" y1="86" x2="480" y2="96" class="svg-hair"/>
+          <line x1="600" y1="86" x2="600" y2="96" class="svg-hair"/>
+          <text x="480" y="140" text-anchor="middle" class="dimt">90日前</text>
+          <text x="600" y="140" text-anchor="middle" class="dimt">30日前</text>
+        </svg>
+        <figcaption>Fig.2 — 有効期間と更新の窓</figcaption>
+      </figure>
+
+      <div class="scroll">
+        <table>
+          <thead><tr><th>論点</th><th>内容</th></tr></thead>
+          <tbody>
+            <tr><td>有効期間</td><td><strong>5年</strong>（大臣免許・知事免許とも同じ）</td></tr>
+            <tr><td>更新の申請</td><td>有効期間満了の日の <strong>90日前から30日前まで</strong></td></tr>
+            <tr><td>処分が間に合わないとき</td><td>従前の免許は、有効期間満了後も<strong>処分がされるまで有効</strong></td></tr>
+            <tr><td>新免許の起算</td><td class="no">従前の免許の<strong>有効期間満了日の翌日</strong>から起算する（処分日からではない）</td></tr>
+            <tr><td>免許の条件</td><td>免許権者は免許に<strong>条件を付し、変更することができる</strong></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 03 -->
+    <section id="jimusho">
+      <h2 class="sec"><span class="num">03</span>事務所</h2>
+
+      <div class="scroll">
+        <table>
+          <thead><tr><th>該当するか</th><th>内容</th></tr></thead>
+          <tbody>
+            <tr><td class="no">事務所である</td><td><strong>本店</strong>（主たる事務所）— <strong>支店で宅建業を営んでいれば、本店で宅建業を営んでいなくても事務所</strong></td></tr>
+            <tr><td class="no">事務所である</td><td>宅建業を営む<strong>支店</strong>（従たる事務所）</td></tr>
+            <tr><td class="no">事務所である</td><td>継続的に業務を行うことができる施設で、<strong>契約締結権限を有する使用人</strong>を置くもの</td></tr>
+            <tr><td class="yes">事務所でない</td><td>宅建業を営まない支店</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>3-1　事務所に備えるもの（5点セット）</h3>
+      <div class="scroll">
+        <table>
+          <thead><tr><th>備えるもの</th><th>内容</th><th>案内所にも必要か</th></tr></thead>
+          <tbody>
+            <tr><td><strong>標識</strong></td><td>宅地建物取引業者票</td><td class="n no">必要</td></tr>
+            <tr><td><strong>報酬額</strong></td><td>国土交通大臣が定めた報酬額を掲示</td><td class="n yes">不要</td></tr>
+            <tr><td><strong>従業者名簿</strong></td><td>最終の記載をした日から <strong>10年間</strong> 保存。取引の関係者から請求があれば閲覧させる</td><td class="n yes">不要</td></tr>
+            <tr><td><strong>帳簿</strong></td><td>各事業年度末に閉鎖し、閉鎖後 <strong>5年間</strong>（自ら売主となる新築住宅は <strong>10年間</strong>）保存。<span class="no">閲覧義務はない</span></td><td class="n yes">不要</td></tr>
+            <tr><td><strong>専任の宅建士</strong></td><td>業務に従事する者 <strong>5人に1人以上</strong></td><td class="n">契約を締結等する案内所は <strong>1人以上</strong></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="call rev">
+        <span class="tag">改正</span>
+        <p>2025年4月1日施行の規則改正で、<strong>従業者名簿の記載事項から「生年月日」「住所」「性別」が削除</strong>されました。現在の記載事項は、氏名・従業者証明書番号・主たる職務内容・宅建士であるか否か・当該事務所の従業者となった年月日／従業者でなくなった年月日です。</p>
+      </div>
+
+      <div class="call trap">
+        <span class="tag">ひっかけ</span>
+        <p><strong>従業者名簿は閲覧させる義務があるが、帳簿にはない。</strong>保存期間も名簿10年・帳簿5年（新築住宅の売主は10年）と違う。名簿と帳簿は必ずセットで比較して覚える。<br>
+        <strong>標識だけは案内所にも必要</strong>。報酬額の掲示は事務所のみ。</p>
+      </div>
+    </section>
+
+    <!-- 04 -->
+    <section id="menkyogae">
+      <h2 class="sec"><span class="num">04</span>免許換え</h2>
+
+      <div class="scroll">
+        <table>
+          <thead><tr><th>変化</th><th>新しい免許権者</th><th>申請先</th></tr></thead>
+          <tbody>
+            <tr><td>知事免許 → 大臣免許<br><span class="lbl">他の都道府県にも事務所を設置</span></td><td>国土交通大臣</td><td>主たる事務所の所在地の知事を<strong>経由</strong></td></tr>
+            <tr><td>大臣免許 → 知事免許<br><span class="lbl">1つの都道府県だけになった</span></td><td>その都道府県知事</td><td>直接</td></tr>
+            <tr><td>A県知事免許 → B県知事免許<br><span class="lbl">事務所を移転</span></td><td>B県知事</td><td>直接</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="scroll">
+        <table>
+          <thead><tr><th>論点</th><th>内容</th></tr></thead>
+          <tbody>
+            <tr><td>従前の免許</td><td>新しい免許を受けたときに<strong>効力を失う</strong></td></tr>
+            <tr><td>新免許の有効期間</td><td class="no"><strong>5年</strong>（新規と同じ。従前の残存期間を引き継がない）</td></tr>
+            <tr><td>怠った場合</td><td class="no"><strong>免許取消し</strong>（必要的取消事由）</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="call trap">
+        <span class="tag">ひっかけ</span>
+        <p>免許換えを怠ると<strong>業務停止ではなく免許取消し</strong>。しかも「取り消すことができる」ではなく<strong>「取り消さなければならない」</strong>（必要的取消）。</p>
+      </div>
+    </section>
+
+    <!-- 05 -->
+    <section id="kekkaku">
+      <h2 class="sec"><span class="num">05</span>免許の基準（欠格要件）</h2>
+
+      <div class="call rev">
+        <span class="tag">改正</span>
+        <p>2025年6月1日の刑法改正（懲役・禁錮の拘禁刑への一本化）に伴い、宅建業法5条の欠格要件は<strong>「禁錮以上の刑」から「拘禁刑以上の刑」に改められました</strong>。制度の中身は変わっていませんが、条文の文言を問う出題に注意。</p>
+      </div>
+
+      <div class="scroll">
+        <table>
+          <thead><tr><th>類型</th><th>内容</th><th class="n">期間</th></tr></thead>
+          <tbody>
+            <tr><td>破産</td><td>破産手続開始の決定を受けて<strong>復権を得ない</strong>者</td><td class="n no">復権すれば<br>直ちに可</td></tr>
+            <tr><td rowspan="2"><strong>刑罰</strong></td><td><strong>拘禁刑以上</strong>の刑に処せられた者（罪名を問わない）</td><td class="n">5年</td></tr>
+            <tr><td><strong>罰金</strong>刑でも欠格になる罪 — 宅建業法違反／暴力団関係／<strong>傷害・現場助勢・暴行・凶器準備集合・脅迫・背任</strong>／暴力行為等処罰法</td><td class="n">5年</td></tr>
+            <tr><td rowspan="2">免許取消し</td><td><strong>3つの不正事由</strong>で免許を取り消された者 — ① 不正手段で免許取得 ② 業務停止処分事由に該当し情状が特に重い ③ 業務停止処分に違反</td><td class="n">5年</td></tr>
+            <tr><td>取消処分の<strong>聴聞の公示日</strong>から処分決定日までに、相当の理由なく<strong>廃業等の届出</strong>をした者</td><td class="n">5年</td></tr>
+            <tr><td>暴力団</td><td>暴力団員／暴力団員でなくなった日から5年を経過しない者／暴力団員等がその事業活動を支配する者</td><td class="n">5年</td></tr>
+            <tr><td>その他</td><td>心身の故障により宅建業を適正に営むことができない者／事務所に専任の宅建士を設置していない者</td><td class="n">—</td></tr>
+            <tr><td><strong>関係者</strong></td><td>法人の<strong>役員・政令で定める使用人</strong>が欠格 → その法人も欠格<br>未成年者で法定代理人から営業の許可を受けていない者は、<strong>法定代理人</strong>が欠格なら欠格</td><td class="n">—</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="call exam">
+        <span class="tag">よく出る</span>
+        <p><strong>「執行猶予」がついた場合、猶予期間が満了すれば刑の言渡しは効力を失うので、翌日から免許を受けられる。</strong>「猶予期間満了からさらに5年」は誤り。<br>
+        また<strong>控訴・上告中は「刑に処せられた」にあたらない</strong>ので、まだ欠格ではない。</p>
+      </div>
+
+      <div class="call trap">
+        <span class="tag">ひっかけ</span>
+        <p><strong>罰金刑で欠格になる罪は限定列挙。</strong>過失傷害・過失運転致死傷・道路交通法違反などの罰金では欠格にならない。<br>
+        <strong>「傷害」は罰金でも欠格、「過失傷害」は欠格にならない</strong>という対比が定番。<br>
+        <strong>破産は復権すればすぐ免許を受けられる（5年待たない）</strong>のも頻出。</p>
+      </div>
+    </section>
+
+    <!-- 06 -->
+    <section id="henkou">
+      <h2 class="sec"><span class="num">06</span>変更の届出</h2>
+      <p>宅建業者名簿の登載事項のうち一定のものが変わったら、<strong>30日以内</strong>に免許権者へ届け出る。</p>
+
+      <div class="scroll">
+        <table>
+          <thead><tr><th class="n">届出</th><th>事項</th></tr></thead>
+          <tbody>
+            <tr><td class="n no">必要</td><td>商号または名称</td></tr>
+            <tr><td class="n no">必要</td><td>役員（法人）／本人（個人）および<strong>政令で定める使用人</strong>の氏名</td></tr>
+            <tr><td class="n no">必要</td><td>事務所の名称および所在地</td></tr>
+            <tr><td class="n no">必要</td><td>事務所ごとに置かれる<strong>専任の宅建士の氏名</strong></td></tr>
+            <tr><td class="n yes">不要</td><td>専任の宅建士の<strong>住所</strong></td></tr>
+            <tr><td class="n yes">不要</td><td>資産の状況、代表者の住所</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="call tip">
+        <span class="tag">覚え方</span>
+        <p><strong>「名前・人・場所」が変わったら届け出る。</strong>専任の宅建士は<strong>氏名だけ</strong>が対象で、住所の変更は届出不要。宅建士自身の登録簿への変更登録（住所も対象）と混同させる出題がある。</p>
+      </div>
+    </section>
+
+    <!-- 07 -->
+    <section id="haigyou">
+      <h2 class="sec"><span class="num">07</span>廃業等の届出</h2>
+      <p class="lead">届出義務者と、<em>免許がいつ失効するか</em>の2点が問われる。</p>
+
+      <div class="scroll">
+        <table>
+          <thead><tr><th>事由</th><th>届出義務者</th><th class="n">期限</th><th class="n">免許の失効</th></tr></thead>
+          <tbody>
+            <tr><td><strong>死亡</strong></td><td>相続人</td><td class="n no">知った日から30日以内</td><td class="n no">死亡の時</td></tr>
+            <tr><td><strong>法人の合併消滅</strong></td><td>消滅した法人の代表役員</td><td class="n">30日以内</td><td class="n no">合併の時</td></tr>
+            <tr><td>破産手続開始の決定</td><td class="no">破産管財人</td><td class="n">30日以内</td><td class="n">届出の時</td></tr>
+            <tr><td>解散（合併・破産を除く）</td><td class="no">清算人</td><td class="n">30日以内</td><td class="n">届出の時</td></tr>
+            <tr><td>廃業</td><td>本人または代表役員</td><td class="n">30日以内</td><td class="n">届出の時</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="call tip">
+        <span class="tag">覚え方</span>
+        <p><strong>死亡と合併だけが「事由発生時」に失効し、残り3つは「届出の時」に失効する。</strong>死亡・合併は本人が消えてしまうので、届出を待たずに免許を切る必要がある、と理解すればよい。<br>
+        期限の起算も<strong>死亡だけが「知った日から」</strong>。相続人は死亡を知らないことがあるため。</p>
+      </div>
+
+      <div class="call trap">
+        <span class="tag">ひっかけ</span>
+        <p>届出義務者を入れ替える出題が定番。<strong>破産なら破産管財人、解散なら清算人</strong>。「破産した法人の代表役員が届け出る」は誤り。</p>
+      </div>
+
+      <h3>7-1　免許失効後の取引の結了</h3>
+      <p>免許が失効・取消しになっても、<strong>すでに締結した契約に基づく取引を結了する目的の範囲内</strong>では、なお宅建業者とみなされる。一般承継人（相続人など）も同様。<strong>新しい契約は締結できない。</strong></p>
+    </section>
+
+    <!-- 08 -->
+    <section id="mumenkyo">
+      <h2 class="sec"><span class="num">08</span>無免許営業・名義貸し</h2>
+
+      <div class="scroll">
+        <table>
+          <thead><tr><th>禁止される行為</th><th>内容</th></tr></thead>
+          <tbody>
+            <tr><td>無免許営業の禁止</td><td>免許を受けずに宅建業を営むこと</td></tr>
+            <tr><td>無免許表示の禁止</td><td>免許を受けずに、宅建業を営む旨の<strong>表示・広告</strong>をすること</td></tr>
+            <tr><td><strong>名義貸しの禁止</strong></td><td>自己の名義をもって他人に宅建業を営ませること。<strong>表示・広告をさせることも禁止</strong></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="call exam">
+        <span class="tag">よく出る</span>
+        <p>罰則は宅建業法で最も重い <strong>3年以下の拘禁刑</strong> または <strong>300万円以下の罰金</strong>（併科あり）。<strong>法人は1億円以下</strong>の罰金。<br>
+        <strong>実際に営業しなくても、広告や表示をしただけで違反になる</strong>点が狙われる。</p>
+      </div>
+    </section>
+
+    <!-- 09 -->
+    <section id="deru">
+      <h2 class="sec"><span class="num">09</span>よく出る論点</h2>
+      <div class="scroll">
+        <table>
+          <thead><tr><th class="n">順位</th><th>論点</th><th>要点</th></tr></thead>
+          <tbody>
+            <tr><td class="n">1</td><td><strong>免許の要否</strong></td><td>宅地・取引・業の3要件。自ら貸借は不要／用途地域内は宅地</td></tr>
+            <tr><td class="n">2</td><td>欠格要件</td><td>拘禁刑以上は5年／罰金は限定列挙／破産は復権で直ちに／執行猶予満了で直ちに</td></tr>
+            <tr><td class="n">3</td><td>廃業等の届出</td><td>届出義務者と失効時期。死亡・合併だけ事由発生時</td></tr>
+            <tr><td class="n">4</td><td>事務所の5点セット</td><td>名簿10年・帳簿5年（新築住宅の売主は10年）・標識は案内所にも</td></tr>
+            <tr><td class="n">5</td><td>免許換え</td><td>怠れば必要的免許取消し／新免許は5年</td></tr>
+            <tr><td class="n">6</td><td>変更の届出</td><td>30日以内／専任宅建士は氏名のみ</td></tr>
+            <tr><td class="n">7</td><td>免許の有効期間</td><td>5年／更新は90日前〜30日前</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 10 -->
+    <section id="hikkake">
+      <h2 class="sec"><span class="num">10</span>ひっかけ一覧</h2>
+      <div class="scroll">
+        <table class="traps">
+          <thead><tr><th>こう書かれたら疑う</th><th>正しくは</th></tr></thead>
+          <tbody>
+            <tr><td>自らアパートを不特定多数に反復継続して貸すには免許が必要</td><td><strong>自ら貸借は取引でない</strong>ので不要</td></tr>
+            <tr><td>用途地域内の農地は宅地にあたらない</td><td><strong>宅地にあたる</strong>（道路・公園・河川・広場・水路を除く）</td></tr>
+            <tr><td>大臣免許か知事免許かは取引物件の所在地で決まる</td><td><strong>事務所の所在</strong>で決まる</td></tr>
+            <tr><td>免許換えをしないと業務停止処分を受ける</td><td><strong>免許取消し</strong>（必要的）</td></tr>
+            <tr><td>免許換え後の免許は従前の残存期間を引き継ぐ</td><td>新たに <strong>5年</strong></td></tr>
+            <tr><td>破産者は復権後5年経たないと免許を受けられない</td><td>復権を得れば<strong>直ちに</strong>受けられる</td></tr>
+            <tr><td>執行猶予期間が満了しても5年間は免許を受けられない</td><td>満了により<strong>直ちに</strong>受けられる</td></tr>
+            <tr><td>過失傷害罪の罰金刑で欠格となる</td><td>罰金で欠格になる罪は<strong>限定列挙</strong>。過失傷害は含まれない</td></tr>
+            <tr><td>破産した法人の代表役員が廃業の届出をする</td><td><strong>破産管財人</strong>が届け出る</td></tr>
+            <tr><td>死亡の場合、免許は届出の時に失効する</td><td><strong>死亡の時</strong>に失効</td></tr>
+            <tr><td>専任の宅建士の住所が変わったら変更の届出が必要</td><td>届出が必要なのは<strong>氏名</strong>のみ</td></tr>
+            <tr><td>帳簿も取引の関係者に閲覧させなければならない</td><td>閲覧義務があるのは<strong>従業者名簿</strong>のみ</td></tr>
+            <tr><td>案内所にも報酬額を掲示しなければならない</td><td>報酬額の掲示は<strong>事務所のみ</strong>。標識は案内所にも必要</td></tr>
+            <tr><td>本店で宅建業を営んでいなければ本店は事務所でない</td><td>支店で営んでいれば<strong>本店も事務所</strong></td></tr>
+            <tr><td>信託会社には宅建業法の規定が適用されない</td><td><strong>適用される</strong>（免許が不要なだけ）</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 11 -->
+    <section id="suji">
+      <h2 class="sec"><span class="num">11</span>数字まとめ</h2>
+      <p class="masthead-note">右上の「数値を隠す」で自己テストできる。</p>
+      <div class="nums" id="numgrid">
+        <div class="nc" tabindex="0"><span class="v">5年</span><span class="d">免許の有効期間／欠格要件の期間</span></div>
+        <div class="nc" tabindex="0"><span class="v">90日前〜30日前</span><span class="d">免許更新の申請期間</span></div>
+        <div class="nc" tabindex="0"><span class="v">30日以内</span><span class="d">変更の届出／廃業等の届出</span></div>
+        <div class="nc" tabindex="0"><span class="v">5人に1人</span><span class="d">事務所の専任の宅建士の設置割合</span></div>
+        <div class="nc" tabindex="0"><span class="v">1人以上</span><span class="d">契約を締結等する案内所の専任の宅建士</span></div>
+        <div class="nc" tabindex="0"><span class="v">10年間</span><span class="d">従業者名簿の保存／自ら売主の新築住宅に係る帳簿</span></div>
+        <div class="nc" tabindex="0"><span class="v">5年間</span><span class="d">帳簿の保存（各事業年度末に閉鎖後）</span></div>
+        <div class="nc" tabindex="0"><span class="v">3年以下</span><span class="d">無免許営業・名義貸しの拘禁刑</span></div>
+        <div class="nc" tabindex="0"><span class="v">300万円 / 1億円</span><span class="d">無免許営業等の罰金（個人／法人）</span></div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <h4>出典</h4>
+    <ul>
+      <li>宅地建物取引業法（昭和27年法律第176号） — <a href="https://laws.e-gov.go.jp/law/327AC1000000176">e-Gov法令検索</a></li>
+      <li>国土交通省 不動産業（宅地建物取引業法） — <a href="https://www.mlit.go.jp/totikensangyo/const/1_6_bf_000030.html">mlit.go.jp</a></li>
+      <li>欠格要件の「拘禁刑以上の刑」への改正（2025年6月1日施行） — <a href="https://yotsuyagakuin-tsushin.com/blog_takkenshiken/r8_takkengyoho_kaisei/">四谷学院</a></li>
+    </ul>
+    <div class="sibling">
+      <a href="../index.html">総目次</a>
+      <a href="../03_法令上の制限/その他の法令と早見表.html">03 横断早見表</a>
+    </div>
+  </footer>
+
+</div>
+
+<script>
+  (function () {
+    var root = document.documentElement;
+    document.getElementById('theme').addEventListener('click', function () {
+      if (root.getAttribute('data-theme')) { root.removeAttribute('data-theme'); return; }
+      var dark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      root.setAttribute('data-theme', dark ? 'light' : 'dark');
+    });
+    var maskBtn = document.getElementById('mask');
+    var grid = document.getElementById('numgrid');
+    maskBtn.addEventListener('click', function () {
+      var on = grid.classList.toggle('masked');
+      maskBtn.setAttribute('aria-pressed', String(on));
+      maskBtn.textContent = on ? '数値を表示' : '数値を隠す';
+    });
+    var links = Array.prototype.slice.call(document.querySelectorAll('nav.rail ol a'));
+    var map = {};
+    links.forEach(function (a) { map[a.getAttribute('href').slice(1)] = a; });
+    var seen = [];
+    var obs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        var i = seen.indexOf(e.target.id);
+        if (e.isIntersecting && i < 0) seen.push(e.target.id);
+        if (!e.isIntersecting && i >= 0) seen.splice(i, 1);
+      });
+      links.forEach(function (a) { a.classList.remove('on'); });
+      if (seen.length) {
+        var order = Object.keys(map);
+        seen.sort(function (a, b) { return order.indexOf(a) - order.indexOf(b); });
+        map[seen[0]].classList.add('on');
+      }
+    }, { rootMargin: '-10% 0px -70% 0px' });
+    document.querySelectorAll('main section').forEach(function (s) { obs.observe(s); });
+  })();
+</script>

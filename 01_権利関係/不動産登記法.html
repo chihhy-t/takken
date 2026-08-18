@@ -1,0 +1,563 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>不動産登記法 — 宅建士試験 2026年度</title>
+
+<style>
+  :root {
+    --paper:#EBEDE9; --surface:#F8F9F6; --sunk:#E1E4DE; --ink:#151F2A; --muted:#5D6B78;
+    --rule:#CDD2CB; --hair:#DCE0D9; --accent:#B8342A; --accent-soft:#F3DEDB;
+    --blue:#2A5F86; --blue-soft:#DCE6EE;
+    --font-display:"Hiragino Mincho ProN","Yu Mincho","YuMincho","Noto Serif JP",serif;
+    --font-body:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","YuGothic","Noto Sans JP",system-ui,sans-serif;
+    --font-mono:ui-monospace,"SFMono-Regular","SF Mono",Menlo,Consolas,monospace;
+    --measure:68ch;
+    --s1:.35rem; --s2:.7rem; --s3:1.1rem; --s4:1.7rem; --s5:2.6rem; --s6:4rem;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper:#0D1B29; --surface:#132534; --sunk:#0A1622; --ink:#DAE4EC; --muted:#8CA1B3;
+      --rule:#26415A; --hair:#1D3448; --accent:#FF7059; --accent-soft:#3A1F1D;
+      --blue:#6FB6DC; --blue-soft:#14293A;
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper:#0D1B29; --surface:#132534; --sunk:#0A1622; --ink:#DAE4EC; --muted:#8CA1B3;
+    --rule:#26415A; --hair:#1D3448; --accent:#FF7059; --accent-soft:#3A1F1D;
+    --blue:#6FB6DC; --blue-soft:#14293A;
+  }
+
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--paper); color:var(--ink); font-family:var(--font-body);
+    font-size:16px; line-height:1.9; -webkit-font-smoothing:antialiased; font-feature-settings:"palt" 1; }
+
+  .wrap { display:grid; grid-template-columns:15.5rem minmax(0,1fr); gap:var(--s6);
+    max-width:80rem; margin:0 auto; padding:0 var(--s4) var(--s6); align-items:start; }
+  @media (max-width:60rem){ .wrap{ grid-template-columns:minmax(0,1fr); gap:var(--s4); padding:0 var(--s3) var(--s5);} }
+
+  .masthead { grid-column:1/-1; padding:var(--s5) 0 var(--s4); border-bottom:2px solid var(--ink);
+    margin-bottom:var(--s2); display:flex; flex-wrap:wrap; align-items:flex-end; justify-content:space-between; gap:var(--s3); }
+  .eyebrow { font-family:var(--font-mono); font-size:.72rem; letter-spacing:.16em; text-transform:uppercase;
+    color:var(--muted); display:flex; align-items:center; gap:.6em; }
+  .eyebrow::before { content:""; width:2.2rem; height:1px; background:var(--accent); }
+  .eyebrow a { color:var(--accent); text-decoration:none; }
+  .eyebrow a:hover { text-decoration:underline; text-underline-offset:.2em; }
+  h1 { font-family:var(--font-display); font-weight:600; font-size:clamp(2rem,1.4rem + 2.6vw,3.1rem);
+    line-height:1.2; letter-spacing:.04em; margin:var(--s2) 0 var(--s3); text-wrap:balance; }
+  .facts { display:flex; flex-wrap:wrap; gap:0 var(--s3); font-size:.82rem; color:var(--muted); list-style:none; margin:0; padding:0; }
+  .facts b { font-family:var(--font-mono); font-variant-numeric:tabular-nums; color:var(--ink); font-weight:600; }
+  .toggles { display:flex; gap:var(--s1); }
+  button { font-family:var(--font-body); font-size:.78rem; color:var(--muted); background:var(--surface);
+    border:1px solid var(--rule); border-radius:2px; padding:.4em .9em; cursor:pointer; transition:color .15s,border-color .15s; }
+  button:hover { color:var(--ink); border-color:var(--ink); }
+  button:focus-visible { outline:2px solid var(--accent); outline-offset:2px; }
+  button[aria-pressed="true"] { color:var(--accent); border-color:var(--accent); }
+
+  nav.rail { position:sticky; top:var(--s3); font-size:.82rem; max-height:calc(100vh - 3rem); overflow-y:auto; padding-bottom:var(--s3); }
+  nav.rail h2 { font-family:var(--font-mono); font-size:.68rem; letter-spacing:.16em; text-transform:uppercase; color:var(--muted); margin:0 0 var(--s2); font-weight:500; }
+  nav.rail ol { list-style:none; margin:0; padding:0; display:flex; flex-direction:column; }
+  nav.rail a { display:block; padding:.3em 0 .3em .9em; color:var(--muted); text-decoration:none; border-left:2px solid var(--hair); line-height:1.5; }
+  nav.rail a:hover { color:var(--ink); border-left-color:var(--rule); }
+  nav.rail a.on { color:var(--ink); border-left-color:var(--accent); font-weight:600; }
+  nav.rail a .num { font-family:var(--font-mono); font-size:.72rem; color:var(--muted); margin-right:.5em; }
+  nav.rail a.home { border-left:none; padding:0 0 var(--s2); color:var(--accent);
+    font-family:var(--font-mono); font-size:.72rem; letter-spacing:.1em; }
+  nav.rail a.home:hover { color:var(--accent); text-decoration:underline; text-underline-offset:.2em; }
+  @media (max-width:60rem){
+    nav.rail{ position:static; max-height:none; border-bottom:1px solid var(--rule); padding-bottom:var(--s3); }
+    nav.rail ol{ display:grid; grid-template-columns:repeat(auto-fill,minmax(9rem,1fr)); gap:0 var(--s2); }
+  }
+
+  main { min-width:0; }
+  section { padding-top:var(--s5); scroll-margin-top:var(--s3); }
+  section > * { max-width:var(--measure); }
+  section > figure, section > .scroll { max-width:none; }
+
+  h2.sec { font-family:var(--font-display); font-size:clamp(1.45rem,1.2rem + .9vw,1.9rem); font-weight:600;
+    letter-spacing:.04em; margin:0 0 var(--s3); padding-bottom:var(--s2); border-bottom:1px solid var(--rule);
+    display:flex; align-items:baseline; gap:.7em; max-width:none; }
+  h2.sec .num { font-family:var(--font-mono); font-size:.8rem; letter-spacing:.1em; color:var(--accent); font-weight:500; }
+  h3 { font-family:var(--font-body); font-size:1.06rem; font-weight:700; letter-spacing:.02em;
+    margin:var(--s4) 0 var(--s2); padding-left:.7em; border-left:3px solid var(--ink); }
+  p { margin:0 0 var(--s3); }
+  a { color:var(--blue); text-underline-offset:.2em; }
+  em { font-style:normal; background:linear-gradient(transparent 62%, var(--accent-soft) 62%); font-weight:600; }
+  ul, ol { margin:0 0 var(--s3); padding-left:1.3em; }
+  li { margin-bottom:var(--s1); }
+  .lead { font-size:1.05rem; color:var(--muted); }
+
+  .call { max-width:var(--measure); margin:0 0 var(--s3); padding:var(--s3) var(--s3) var(--s3) var(--s4);
+    background:var(--surface); border:1px solid var(--hair); border-left:3px solid var(--rule); border-radius:2px; font-size:.94rem; }
+  .call > :last-child { margin-bottom:0; }
+  .call .tag { display:block; font-family:var(--font-mono); font-size:.68rem; letter-spacing:.16em; text-transform:uppercase; color:var(--muted); margin-bottom:var(--s1); }
+  .call.trap { border-left-color:var(--accent); background:var(--accent-soft); }
+  .call.trap .tag { color:var(--accent); }
+  .call.exam { border-left-color:var(--ink); }
+  .call.exam .tag { color:var(--ink); }
+  .call.rev { border-left-color:var(--accent); }
+  .call.rev .tag { color:var(--accent); }
+  .call.tip { border-left-color:var(--blue); background:var(--blue-soft); }
+  .call.tip .tag { color:var(--blue); }
+
+  .scroll { overflow-x:auto; margin:0 0 var(--s3); -webkit-overflow-scrolling:touch; }
+  table { border-collapse:collapse; width:100%; font-size:.88rem; line-height:1.6; }
+  caption { text-align:left; font-size:.78rem; color:var(--muted); padding-bottom:var(--s1); font-family:var(--font-mono); letter-spacing:.08em; }
+  th, td { padding:.58em .75em; text-align:left; vertical-align:top; border-bottom:1px solid var(--hair); }
+  thead th { font-size:.74rem; letter-spacing:.08em; color:var(--muted); font-weight:600; border-bottom:1px solid var(--ink); }
+  tbody tr:hover { background:var(--surface); }
+  td.n, th.n { text-align:center; font-family:var(--font-mono); font-variant-numeric:tabular-nums; white-space:nowrap; }
+  .no { color:var(--accent); font-weight:700; }
+  .yes { color:var(--muted); }
+  .tri { color:var(--blue); }
+  .newtag { display:inline-block; font-family:var(--font-mono); font-size:.64rem; letter-spacing:.1em;
+    color:var(--accent); border:1px solid var(--accent); border-radius:2px; padding:0 .4em; margin-left:.4em; vertical-align:middle; }
+
+  figure { margin:0 0 var(--s4); }
+  figure svg { display:block; width:100%; height:auto; }
+  figcaption { font-size:.78rem; color:var(--muted); font-family:var(--font-mono); letter-spacing:.06em; margin-top:var(--s2); padding-top:var(--s1); border-top:1px solid var(--hair); }
+  .plate { background:var(--surface); border:1px solid var(--hair); border-radius:2px; padding:var(--s3); }
+  .svg-ink { fill:none; stroke:var(--ink); stroke-width:1.4; }
+  .svg-hair { fill:none; stroke:var(--rule); stroke-width:1; }
+  .svg-dim { fill:none; stroke:var(--blue); stroke-width:1; }
+  .svg-acc { fill:none; stroke:var(--accent); stroke-width:1.6; }
+  .svg-fill { fill:var(--sunk); stroke:var(--rule); stroke-width:1; }
+  .svg-accfill { fill:var(--accent-soft); stroke:var(--accent); stroke-width:1.2; }
+  .svg-bluefill { fill:var(--blue-soft); stroke:var(--blue); stroke-width:1.2; }
+  text { font-family:var(--font-body); fill:var(--ink); font-size:12px; }
+  text.lbl { font-family:var(--font-mono); fill:var(--muted); font-size:10.5px; letter-spacing:.06em; }
+  text.dimt { font-family:var(--font-mono); fill:var(--blue); font-size:11px; }
+  text.acct { fill:var(--accent); font-size:11.5px; font-weight:700; }
+
+  .nums { display:grid; grid-template-columns:repeat(auto-fill,minmax(11.5rem,1fr)); gap:var(--s2); }
+  .nc { background:var(--surface); border:1px solid var(--hair); border-radius:2px; padding:var(--s3) var(--s3) var(--s2); display:flex; flex-direction:column; gap:var(--s1); }
+  .nc .v { font-family:var(--font-mono); font-variant-numeric:tabular-nums; font-size:1.25rem; font-weight:600; line-height:1.25; color:var(--accent); }
+  .nc .d { font-size:.8rem; color:var(--muted); line-height:1.6; }
+  .nums.masked .v { color:transparent; background:var(--rule); border-radius:2px; user-select:none; }
+  .nums.masked .nc:hover .v, .nums.masked .nc:focus-within .v { color:var(--accent); background:transparent; }
+  .nc:focus-visible { outline:2px solid var(--accent); outline-offset:2px; }
+  .masthead-note { font-size:.78rem; color:var(--muted); margin-bottom:var(--s2); }
+
+  table.traps td:first-child { color:var(--muted); }
+  table.traps td:first-child::before { content:"「"; }
+  table.traps td:first-child::after { content:"」"; }
+  table.traps td:last-child strong { color:var(--accent); }
+
+  footer { grid-column:1/-1; margin-top:var(--s6); padding-top:var(--s3); border-top:1px solid var(--rule); font-size:.8rem; color:var(--muted); }
+  footer ul { list-style:none; padding:0; }
+  footer li { margin-bottom:var(--s1); }
+  .sibling { display:flex; flex-wrap:wrap; gap:var(--s2); margin-top:var(--s3); }
+  .sibling a { font-size:.8rem; text-decoration:none; border:1px solid var(--rule); border-radius:2px; padding:.35em .8em; color:var(--muted); }
+  .sibling a:hover { color:var(--ink); border-color:var(--ink); }
+
+  @media (prefers-reduced-motion: reduce){ *{ transition:none !important; animation:none !important; scroll-behavior:auto !important; } }
+  html { scroll-behavior:smooth; }
+</style>
+
+<div class="wrap">
+
+  <header class="masthead">
+    <div>
+      <div class="eyebrow"><a href="../index.html">← 総目次</a> &nbsp;/&nbsp; 01 権利関係 &nbsp;/&nbsp; 宅建士試験 2026年度</div>
+      <h1>不動産登記法</h1>
+      <ul class="facts">
+        <li>法令基準日 <b>2026-04-01</b></li>
+        <li>出題数 <b>1問</b></li>
+        <li>目標 <b>取れれば加点</b></li>
+        <li>更新 <b>2026-08-09</b></li>
+      </ul>
+    </div>
+    <div class="toggles">
+      <button id="mask" type="button" aria-pressed="false">数値を隠す</button>
+      <button id="theme" type="button">配色切替</button>
+    </div>
+  </header>
+
+  <nav class="rail" aria-label="目次">
+    <a class="home" href="../index.html">← 総目次</a>
+    <h2>Contents</h2>
+    <ol>
+      <li><a href="#kouzou"><span class="num">00</span>登記記録の構造</a></li>
+      <li><a href="#hyouji"><span class="num">01</span>表示に関する登記</a></li>
+      <li><a href="#kenri"><span class="num">02</span>権利に関する登記</a></li>
+      <li><a href="#tandoku"><span class="num">03</span>単独申請できる場合</a></li>
+      <li><a href="#hozon"><span class="num">04</span>所有権保存登記</a></li>
+      <li><a href="#karitouki"><span class="num">05</span>仮登記</a></li>
+      <li><a href="#gimuka"><span class="num">06</span>登記の義務化</a></li>
+      <li><a href="#sonota"><span class="num">07</span>その他の制度</a></li>
+      <li><a href="#deru"><span class="num">08</span>よく出る論点</a></li>
+      <li><a href="#hikkake"><span class="num">09</span>ひっかけ一覧</a></li>
+      <li><a href="#suji"><span class="num">10</span>数字まとめ</a></li>
+    </ol>
+  </nav>
+
+  <main>
+
+    <!-- 00 -->
+    <section id="kouzou">
+      <h2 class="sec"><span class="num">00</span>登記記録の構造</h2>
+      <p class="lead">登記記録は<em>表題部</em>と<em>権利部</em>に分かれ、権利部はさらに<em>甲区（所有権）</em>と<em>乙区（所有権以外）</em>に分かれる。<em>この3つの箱のどこに入る話か</em>を意識すると整理しやすい。</p>
+
+      <figure class="plate">
+        <svg viewBox="0 0 720 250" role="img" aria-label="登記記録は表題部と権利部からなる。表題部には土地建物の物理的状況が記録され、申請義務があり登記官の職権登記もできる。権利部の甲区には所有権、乙区には抵当権など所有権以外の権利が記録され、原則として共同申請による。">
+          <rect x="24" y="42" width="672" height="72" class="svg-bluefill" rx="2"/>
+          <text x="44" y="68">表題部</text>
+          <text x="44" y="90" class="lbl">所在・地番・地目・地積／家屋番号・種類・構造・床面積</text>
+          <text x="44" y="106" class="lbl">＝ その不動産が物理的にどういうものか</text>
+          <text x="676" y="72" text-anchor="end" class="dimt">申請義務あり（1か月以内）</text>
+          <text x="676" y="92" text-anchor="end" class="lbl">登記官の職権登記もできる</text>
+
+          <rect x="24" y="128" width="330" height="86" class="svg-accfill" rx="2"/>
+          <text x="44" y="154">権利部 — 甲区</text>
+          <text x="44" y="176" class="lbl">所有権に関する事項</text>
+          <text x="44" y="192" class="lbl">所有権保存・移転・差押え・仮登記</text>
+
+          <rect x="366" y="128" width="330" height="86" class="svg-fill" rx="2"/>
+          <text x="386" y="154">権利部 — 乙区</text>
+          <text x="386" y="176" class="lbl">所有権以外の権利に関する事項</text>
+          <text x="386" y="192" class="lbl">抵当権・地上権・賃借権・地役権</text>
+
+          <text x="24" y="240" class="lbl">権利に関する登記は原則として登記権利者と登記義務者の共同申請による</text>
+        </svg>
+        <figcaption>Fig.1 — 表題部・甲区・乙区の3つの箱</figcaption>
+      </figure>
+
+      <div class="call tip">
+        <span class="tag">覚え方</span>
+        <p><strong>表示に関する登記は「義務あり・職権あり」、権利に関する登記は「原則として任意・共同申請」。</strong>物理的な状況は国が把握しておく必要があるので義務、権利関係は当事者の問題なので任意、という建て付け。<br>
+        ただし<strong>この「権利は任意」という原則が、相続登記と住所等変更登記で崩れた</strong>のが近年の改正（→ <a href="#gimuka">06</a>）。</p>
+      </div>
+    </section>
+
+    <!-- 01 -->
+    <section id="hyouji">
+      <h2 class="sec"><span class="num">01</span>表示に関する登記</h2>
+
+      <div class="scroll">
+        <table>
+          <thead><tr><th>場面</th><th>申請義務</th><th class="n">期間</th></tr></thead>
+          <tbody>
+            <tr><td>建物を新築した</td><td>表題登記を申請</td><td class="n no">1か月以内</td></tr>
+            <tr><td>建物が滅失した</td><td>滅失の登記を申請</td><td class="n no">1か月以内</td></tr>
+            <tr><td>土地の地目・地積が変更した</td><td>変更の登記を申請</td><td class="n no">1か月以内</td></tr>
+            <tr><td>表題登記がない土地・建物を取得した</td><td>表題登記を申請</td><td class="n no">1か月以内</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="scroll">
+        <table>
+          <thead><tr><th>論点</th><th>内容</th></tr></thead>
+          <tbody>
+            <tr><td class="no"><strong>登記官の職権</strong></td><td class="no">表示に関する登記は、<strong>登記官が職権ですることができる</strong></td></tr>
+            <tr><td>実地調査</td><td>登記官は表示に関する登記について、必要があれば<strong>実地調査</strong>をすることができる</td></tr>
+            <tr><td>分筆・合筆</td><td>表題部所有者または所有権の登記名義人が申請する。<strong>登記官の職権による分筆</strong>もできる</td></tr>
+            <tr>
+              <td>合筆の制限</td>
+              <td>相互に接続していない土地、地目が異なる土地、所有者が異なる土地などは合筆できない。<span class="tri">所有権の登記以外の権利（抵当権など）がある土地も原則として合筆できない</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="call trap">
+        <span class="tag">ひっかけ</span>
+        <p><strong>表示に関する登記は「1か月以内」で統一されている。</strong>3か月・2週間などに置き換えた選択肢は誤り。<br>
+        <strong>職権でできるのは表示に関する登記だけ。</strong>権利に関する登記を登記官が職権ですることは、原則としてできない。</p>
+      </div>
+    </section>
+
+    <!-- 02 -->
+    <section id="kenri">
+      <h2 class="sec"><span class="num">02</span>権利に関する登記</h2>
+
+      <div class="scroll">
+        <table>
+          <thead><tr><th>論点</th><th>内容</th></tr></thead>
+          <tbody>
+            <tr><td class="no"><strong>共同申請主義</strong></td><td class="no">権利に関する登記の申請は、<strong>登記権利者と登記義務者が共同して</strong>しなければならない</td></tr>
+            <tr><td>登記権利者</td><td>登記により<strong>利益</strong>を受ける者（買主・抵当権者など）</td></tr>
+            <tr><td>登記義務者</td><td>登記により<strong>不利益</strong>を受ける登記名義人（売主・抵当権設定者など）</td></tr>
+            <tr><td>登記識別情報</td><td>登記名義人となった申請人に通知される12桁の符号。登記の申請時に提供する。<span class="tri">通知を希望しない旨の申出もできる</span></td></tr>
+            <tr><td>登記原因証明情報</td><td>権利に関する登記を申請するときは、原則として提供しなければならない</td></tr>
+            <tr><td>代理権の不消滅</td><td>登記の申請をする者の委任による代理人の権限は、<strong>本人の死亡によっては消滅しない</strong></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="call exam">
+        <span class="tag">よく出る</span>
+        <p><strong>登記申請の代理権は本人が死亡しても消滅しない。</strong>民法では代理権は本人の死亡で消滅するのが原則なので、その例外として狙われる。</p>
+      </div>
+    </section>
+
+    <!-- 03 -->
+    <section id="tandoku">
+      <h2 class="sec"><span class="num">03</span>単独申請できる場合</h2>
+      <p class="lead">共同申請が原則だが、<em>相手方がいない、または争いようがない</em>場合には単独で申請できる。</p>
+
+      <div class="scroll">
+        <table>
+          <thead><tr><th>単独申請できる場合</th><th>理由</th></tr></thead>
+          <tbody>
+            <tr><td><strong>相続</strong>または法人の合併による権利の移転</td><td>登記義務者が存在しない</td></tr>
+            <tr><td><strong>判決</strong>による登記</td><td>判決で権利関係が確定している（給付判決に限る）</td></tr>
+            <tr><td>登記名義人の<strong>氏名・名称・住所</strong>の変更・更正</td><td>不利益を受ける者がいない</td></tr>
+            <tr><td><strong>所有権保存登記</strong></td><td>そもそも前の権利者がいない</td></tr>
+            <tr><td><strong>収用</strong>による所有権の移転</td><td>公権力による取得</td></tr>
+            <tr><td>仮登記（仮登記義務者の承諾または仮登記を命ずる処分があるとき）</td><td>承諾・裁判所の関与がある</td></tr>
+            <tr><td>仮登記の抹消（仮登記名義人が申請するとき）</td><td>自分の権利を消すだけ</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="call trap">
+        <span class="tag">ひっかけ</span>
+        <p><strong>判決による登記が単独申請できるのは「登記手続を命ずる確定判決」（給付判決）の場合。</strong>確認判決や和解調書でも登記手続を命ずる内容であれば足りるが、単に所有権を確認しただけの判決では単独申請できない。<br>
+        <strong>遺贈による所有権移転登記は、受遺者が相続人である場合には単独申請できる</strong>（2023年4月1日施行の改正）。相続人以外への遺贈は共同申請のまま。</p>
+      </div>
+    </section>
+
+    <!-- 04 -->
+    <section id="hozon">
+      <h2 class="sec"><span class="num">04</span>所有権保存登記</h2>
+      <p>甲区に初めてされる所有権の登記。<strong>申請できる者が限定列挙</strong>されている。</p>
+
+      <div class="scroll">
+        <table>
+          <thead><tr><th class="n">#</th><th>申請できる者</th></tr></thead>
+          <tbody>
+            <tr><td class="n">①</td><td><strong>表題部所有者</strong>またはその<strong>相続人その他の一般承継人</strong></td></tr>
+            <tr><td class="n">②</td><td>所有権を有することが<strong>確定判決</strong>によって確認された者</td></tr>
+            <tr><td class="n">③</td><td><strong>収用</strong>により所有権を取得した者</td></tr>
+            <tr><td class="n">④</td><td class="no"><strong>区分建物</strong>にあっては、<strong>表題部所有者から所有権を取得した者</strong><br><span class="lbl">敷地権付き区分建物のときは、敷地権の登記名義人の承諾が必要</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="call trap">
+        <span class="tag">ひっかけ</span>
+        <p><strong>④の「表題部所有者から所有権を取得した者」は区分建物だけの特則。</strong>一戸建てでは、分譲業者（表題部所有者）がいったん保存登記をしてから買主へ移転登記する必要があるが、マンションでは買主が直接保存登記できる。<br>
+        <strong>表題部所有者の相続人は保存登記を申請できるが、表題部所有者から買った人（区分建物以外）は申請できない。</strong></p>
+      </div>
+    </section>
+
+    <!-- 05 -->
+    <section id="karitouki">
+      <h2 class="sec"><span class="num">05</span>仮登記</h2>
+
+      <div class="scroll">
+        <table>
+          <thead><tr><th>種類</th><th>要件</th></tr></thead>
+          <tbody>
+            <tr><td><strong>1号仮登記</strong></td><td>権利変動は生じているが、<strong>登記識別情報などの手続上の要件</strong>が備わっていない場合</td></tr>
+            <tr><td><strong>2号仮登記</strong></td><td>権利変動そのものはまだ生じておらず、<strong>請求権を保全</strong>しようとする場合（売買予約など）</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="scroll">
+        <table>
+          <thead><tr><th>論点</th><th>内容</th></tr></thead>
+          <tbody>
+            <tr><td class="no"><strong>順位保全効</strong></td><td class="no">仮登記に基づく本登記の順位は、<strong>仮登記の順位による</strong>。仮登記自体に対抗力はない</td></tr>
+            <tr><td>申請</td><td>原則は共同申請。<strong>仮登記義務者の承諾</strong>があるとき、または<strong>仮登記を命ずる処分</strong>があるときは<strong>単独申請</strong>できる</td></tr>
+            <tr>
+              <td class="no"><strong>本登記と利害関係人</strong></td>
+              <td class="no"><strong>所有権に関する</strong>仮登記に基づく本登記は、<strong>登記上の利害関係を有する第三者の承諾</strong>があるときに限りできる<br><span class="tri">所有権以外（抵当権など）の仮登記の本登記には承諾は不要</span></td>
+            </tr>
+            <tr><td>抹消</td><td>仮登記名義人は単独で抹消を申請できる。利害関係人も<strong>仮登記名義人の承諾</strong>があれば単独で申請できる</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="call exam">
+        <span class="tag">よく出る</span>
+        <p><strong>承諾が必要なのは「所有権に関する」仮登記の本登記だけ。</strong>所有権の本登記をすると中間の第三者の登記が職権抹消されてしまうため、承諾を要求している。抵当権なら順位が下がるだけで消えないので承諾は不要。</p>
+      </div>
+    </section>
+
+    <!-- 06 -->
+    <section id="gimuka">
+      <h2 class="sec"><span class="num">06</span>登記の義務化</h2>
+      <p class="lead">所有者不明土地問題への対策として、<em>権利に関する登記にも申請義務が課される</em>ようになった。近年の最重要改正。</p>
+
+      <figure class="plate">
+        <svg viewBox="0 0 720 210" role="img" aria-label="相続登記は2024年4月1日から義務化され、取得を知った日から3年以内、過料10万円以下。住所等変更登記は2026年4月1日から義務化され、変更から2年以内、過料5万円以下。施行前の分は2028年3月31日まで猶予される。">
+          <rect x="24" y="46" width="330" height="112" class="svg-fill" rx="2"/>
+          <text x="44" y="72">相続登記の義務化</text>
+          <text x="44" y="94" class="lbl">2024年4月1日 施行</text>
+          <text x="44" y="120" class="acct">取得を知った日から 3年以内</text>
+          <text x="44" y="142" class="lbl">正当な理由なく怠ると 10万円以下の過料</text>
+
+          <rect x="366" y="46" width="330" height="112" class="svg-accfill" rx="2"/>
+          <text x="386" y="72">住所等変更登記の義務化</text>
+          <text x="386" y="94" class="acct">2026年4月1日 施行</text>
+          <text x="386" y="120" class="acct">変更の日から 2年以内</text>
+          <text x="386" y="142" class="lbl">正当な理由なく怠ると 5万円以下の過料</text>
+
+          <text x="24" y="188" class="lbl">いずれも施行前に生じた変更・相続にも適用される（住所等変更は 2028年3月31日まで猶予）</text>
+        </svg>
+        <figcaption>Fig.2 — 2つの義務化。年数と過料の額がそれぞれ違う</figcaption>
+      </figure>
+
+      <div class="call rev">
+        <span class="tag">2026年4月1日施行 — 住所等変更登記の義務化</span>
+        <p>所有権の登記名義人は、<strong>氏名・名称・住所</strong>について変更があったときは、<strong>変更があった日から2年以内</strong>に変更の登記を申請しなければなりません。正当な理由なく怠ると <strong>5万円以下の過料</strong>。<br>
+        <strong>施行前に生じた変更にも適用され</strong>、その場合は <strong>2028年3月31日</strong> までの猶予期間が設けられています。<br>
+        あわせて、登記名義人が生年月日等の「検索用情報」を法務局に提供しておけば、住基ネットとの照合により<strong>登記官が職権で変更登記をする</strong>仕組みも導入されました。</p>
+      </div>
+
+      <div class="scroll">
+        <table>
+          <thead><tr><th></th><th>相続登記</th><th>住所等変更登記</th></tr></thead>
+          <tbody>
+            <tr><td>施行</td><td>2024年4月1日</td><td class="no">2026年4月1日</td></tr>
+            <tr><td class="no"><strong>期間</strong></td><td class="no">所有権を取得したことを知った日から <strong>3年以内</strong></td><td class="no">変更があった日から <strong>2年以内</strong></td></tr>
+            <tr><td class="no"><strong>過料</strong></td><td class="no"><strong>10万円以下</strong></td><td class="no"><strong>5万円以下</strong></td></tr>
+            <tr><td>施行前の分</td><td>施行日または知った日のいずれか遅い日から3年</td><td>2028年3月31日まで</td></tr>
+            <tr><td>簡易な手続</td><td><strong>相続人申告登記</strong>をすれば義務を履行したものとみなされる</td><td>検索用情報の提供により<strong>登記官の職権</strong>で変更される</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="call trap">
+        <span class="tag">ひっかけ</span>
+        <p><strong>相続は3年で10万円、住所変更は2年で5万円。</strong>数字を入れ替えた選択肢が出る。<strong>年数が長いほうが過料も重い</strong>と覚えると取り違えない。<br>
+        <strong>相続人申告登記をしても、それだけで所有権が移転するわけではない。</strong>あくまで義務を履行したとみなされるだけで、遺産分割が成立したら改めて登記が必要。</p>
+      </div>
+    </section>
+
+    <!-- 07 -->
+    <section id="sonota">
+      <h2 class="sec"><span class="num">07</span>その他の制度</h2>
+
+      <div class="scroll">
+        <table>
+          <thead><tr><th>制度</th><th>内容</th></tr></thead>
+          <tbody>
+            <tr><td class="no"><strong>登記事項証明書</strong></td><td class="no"><strong>誰でも</strong>、手数料を納付すれば交付を請求できる。<span class="tri">利害関係は不要</span></td></tr>
+            <tr><td>登記簿の附属書類</td><td>閲覧には<strong>正当な理由</strong>が必要（誰でも見られるわけではない）</td></tr>
+            <tr><td><strong>筆界特定制度</strong></td><td>土地の所有権登記名義人等の申請により、<strong>筆界特定登記官</strong>が現地における筆界の位置を特定する。<span class="no">所有権の範囲を確定するものではない</span></td></tr>
+            <tr><td>登記の申請方法</td><td>書面申請のほか<strong>オンライン申請</strong>ができる</td></tr>
+            <tr><td>敷地権</td><td>区分建物の敷地利用権で、専有部分と分離処分できないもの。<strong>敷地権である旨の登記</strong>がされると、建物の登記が敷地の権利にも効力を及ぼす</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="call trap">
+        <span class="tag">ひっかけ</span>
+        <p><strong>登記事項証明書は誰でも請求できるが、附属書類の閲覧には正当な理由が要る。</strong>この非対称が問われる。<br>
+        <strong>筆界特定は「筆界」を特定するもので、所有権の境界を確定するものではない。</strong>所有権の範囲を争うなら別途、境界確定訴訟による。</p>
+      </div>
+    </section>
+
+    <!-- 08 -->
+    <section id="deru">
+      <h2 class="sec"><span class="num">08</span>よく出る論点</h2>
+      <div class="scroll">
+        <table>
+          <thead><tr><th class="n">順位</th><th>論点</th><th>要点</th></tr></thead>
+          <tbody>
+            <tr><td class="n">1</td><td><span class="no">登記の義務化</span></td><td>相続3年・10万円／住所等変更2年・5万円（2026年4月施行）</td></tr>
+            <tr><td class="n">2</td><td>単独申請できる場合</td><td>相続・判決・氏名住所の変更・保存登記・収用</td></tr>
+            <tr><td class="n">3</td><td>仮登記</td><td>順位保全効／所有権の本登記だけ第三者の承諾が必要</td></tr>
+            <tr><td class="n">4</td><td>所有権保存登記</td><td>申請できる4類型／区分建物の特則</td></tr>
+            <tr><td class="n">5</td><td>表示に関する登記</td><td>1か月以内／登記官の職権</td></tr>
+            <tr><td class="n">6</td><td>登記事項証明書</td><td>誰でも請求できる／附属書類は正当な理由が必要</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 09 -->
+    <section id="hikkake">
+      <h2 class="sec"><span class="num">09</span>ひっかけ一覧</h2>
+      <div class="scroll">
+        <table class="traps">
+          <thead><tr><th>こう書かれたら疑う</th><th>正しくは</th></tr></thead>
+          <tbody>
+            <tr><td>建物を新築したら3か月以内に表題登記を申請する</td><td><strong>1か月以内</strong></td></tr>
+            <tr><td>権利に関する登記も登記官が職権ですることができる</td><td>職権でできるのは原則として<strong>表示に関する登記</strong></td></tr>
+            <tr><td>相続による所有権移転登記も共同申請による</td><td><strong>単独申請</strong>できる</td></tr>
+            <tr><td>登記申請の代理権は本人の死亡により消滅する</td><td><strong>消滅しない</strong></td></tr>
+            <tr><td>表題部所有者から建物を買った者は保存登記を申請できる</td><td><strong>区分建物に限られる</strong></td></tr>
+            <tr><td>仮登記には対抗力がある</td><td>対抗力はない。<strong>順位を保全する</strong>だけ</td></tr>
+            <tr><td>抵当権の仮登記に基づく本登記にも第三者の承諾が必要</td><td>承諾が必要なのは<strong>所有権に関する</strong>仮登記</td></tr>
+            <tr><td>相続登記の義務は施行前の相続には適用されない</td><td><strong>適用される</strong>（猶予期間あり）</td></tr>
+            <tr><td>住所変更登記を怠った場合の過料は10万円以下</td><td><strong>5万円以下</strong>（10万円は相続登記）</td></tr>
+            <tr><td>住所等変更登記は変更から3年以内に申請する</td><td><strong>2年以内</strong></td></tr>
+            <tr><td>相続人申告登記をすれば所有権の移転が登記される</td><td>義務を履行したとみなされるだけ。<strong>権利は移転しない</strong></td></tr>
+            <tr><td>登記事項証明書の交付請求には利害関係が必要</td><td><strong>誰でも</strong>請求できる</td></tr>
+            <tr><td>筆界特定により所有権の範囲が確定する</td><td>特定されるのは<strong>筆界</strong>であって所有権の範囲ではない</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 10 -->
+    <section id="suji">
+      <h2 class="sec"><span class="num">10</span>数字まとめ</h2>
+      <p class="masthead-note">右上の「数値を隠す」で自己テストできる。</p>
+      <div class="nums" id="numgrid">
+        <div class="nc" tabindex="0"><span class="v">1か月以内</span><span class="d">表示に関する登記の申請期間（新築・滅失・地目変更など）</span></div>
+        <div class="nc" tabindex="0"><span class="v">3年以内</span><span class="d">相続登記の申請期間（取得を知った日から）</span></div>
+        <div class="nc" tabindex="0"><span class="v">10万円以下</span><span class="d">相続登記を怠った場合の過料</span></div>
+        <div class="nc" tabindex="0"><span class="v">2年以内</span><span class="d">住所等変更登記の申請期間（2026年4月1日施行）</span></div>
+        <div class="nc" tabindex="0"><span class="v">5万円以下</span><span class="d">住所等変更登記を怠った場合の過料</span></div>
+        <div class="nc" tabindex="0"><span class="v">2028年3月31日</span><span class="d">施行前に生じた住所等変更の猶予期限</span></div>
+        <div class="nc" tabindex="0"><span class="v">4類型</span><span class="d">所有権保存登記を申請できる者</span></div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <h4>出典</h4>
+    <ul>
+      <li>不動産登記法（平成16年法律第123号） — <a href="https://laws.e-gov.go.jp/law/416AC0000000123">e-Gov法令検索</a></li>
+      <li>法務省 民事局（相続登記・住所等変更登記の申請義務化） — <a href="https://www.moj.go.jp/MINJI/minji05_00343.html">moj.go.jp</a></li>
+      <li>住所等変更登記の義務化（2026年4月1日施行） — <a href="https://shiodome.co.jp/js/blog/15784">解説</a></li>
+    </ul>
+    <div class="sibling">
+      <a href="../index.html">総目次</a>
+      <a href="区分所有法.html">← 区分所有法</a>
+      <a href="借地借家法.html">借地借家法</a>
+    </div>
+  </footer>
+
+</div>
+
+<script>
+  (function () {
+    var root = document.documentElement;
+    document.getElementById('theme').addEventListener('click', function () {
+      if (root.getAttribute('data-theme')) { root.removeAttribute('data-theme'); return; }
+      var dark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      root.setAttribute('data-theme', dark ? 'light' : 'dark');
+    });
+    var maskBtn = document.getElementById('mask');
+    var grid = document.getElementById('numgrid');
+    maskBtn.addEventListener('click', function () {
+      var on = grid.classList.toggle('masked');
+      maskBtn.setAttribute('aria-pressed', String(on));
+      maskBtn.textContent = on ? '数値を表示' : '数値を隠す';
+    });
+    var links = Array.prototype.slice.call(document.querySelectorAll('nav.rail ol a'));
+    var map = {};
+    links.forEach(function (a) { map[a.getAttribute('href').slice(1)] = a; });
+    var seen = [];
+    var obs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        var i = seen.indexOf(e.target.id);
+        if (e.isIntersecting && i < 0) seen.push(e.target.id);
+        if (!e.isIntersecting && i >= 0) seen.splice(i, 1);
+      });
+      links.forEach(function (a) { a.classList.remove('on'); });
+      if (seen.length) {
+        var order = Object.keys(map);
+        seen.sort(function (a, b) { return order.indexOf(a) - order.indexOf(b); });
+        map[seen[0]].classList.add('on');
+      }
+    }, { rootMargin: '-10% 0px -70% 0px' });
+    document.querySelectorAll('main section').forEach(function (s) { obs.observe(s); });
+  })();
+</script>

@@ -1,0 +1,600 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>宅地建物取引士 — 宅建士試験 2026年度</title>
+
+<style>
+  :root {
+    --paper:#EBEDE9; --surface:#F8F9F6; --sunk:#E1E4DE; --ink:#151F2A; --muted:#5D6B78;
+    --rule:#CDD2CB; --hair:#DCE0D9; --accent:#B8342A; --accent-soft:#F3DEDB;
+    --blue:#2A5F86; --blue-soft:#DCE6EE;
+    --font-display:"Hiragino Mincho ProN","Yu Mincho","YuMincho","Noto Serif JP",serif;
+    --font-body:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","YuGothic","Noto Sans JP",system-ui,sans-serif;
+    --font-mono:ui-monospace,"SFMono-Regular","SF Mono",Menlo,Consolas,monospace;
+    --measure:68ch;
+    --s1:.35rem; --s2:.7rem; --s3:1.1rem; --s4:1.7rem; --s5:2.6rem; --s6:4rem;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper:#0D1B29; --surface:#132534; --sunk:#0A1622; --ink:#DAE4EC; --muted:#8CA1B3;
+      --rule:#26415A; --hair:#1D3448; --accent:#FF7059; --accent-soft:#3A1F1D;
+      --blue:#6FB6DC; --blue-soft:#14293A;
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper:#0D1B29; --surface:#132534; --sunk:#0A1622; --ink:#DAE4EC; --muted:#8CA1B3;
+    --rule:#26415A; --hair:#1D3448; --accent:#FF7059; --accent-soft:#3A1F1D;
+    --blue:#6FB6DC; --blue-soft:#14293A;
+  }
+
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--paper); color:var(--ink); font-family:var(--font-body);
+    font-size:16px; line-height:1.9; -webkit-font-smoothing:antialiased; font-feature-settings:"palt" 1; }
+
+  .wrap { display:grid; grid-template-columns:15.5rem minmax(0,1fr); gap:var(--s6);
+    max-width:78rem; margin:0 auto; padding:0 var(--s4) var(--s6); align-items:start; }
+  @media (max-width:60rem){ .wrap{ grid-template-columns:minmax(0,1fr); gap:var(--s4); padding:0 var(--s3) var(--s5);} }
+
+  .masthead { grid-column:1/-1; padding:var(--s5) 0 var(--s4); border-bottom:2px solid var(--ink);
+    margin-bottom:var(--s2); display:flex; flex-wrap:wrap; align-items:flex-end; justify-content:space-between; gap:var(--s3); }
+  .eyebrow { font-family:var(--font-mono); font-size:.72rem; letter-spacing:.16em; text-transform:uppercase;
+    color:var(--muted); display:flex; align-items:center; gap:.6em; }
+  .eyebrow::before { content:""; width:2.2rem; height:1px; background:var(--accent); }
+  h1 { font-family:var(--font-display); font-weight:600; font-size:clamp(2rem,1.4rem + 2.6vw,3.1rem);
+    line-height:1.2; letter-spacing:.04em; margin:var(--s2) 0 var(--s3); text-wrap:balance; }
+  .facts { display:flex; flex-wrap:wrap; gap:0 var(--s3); font-size:.82rem; color:var(--muted); list-style:none; margin:0; padding:0; }
+  .facts b { font-family:var(--font-mono); font-variant-numeric:tabular-nums; color:var(--ink); font-weight:600; }
+  .toggles { display:flex; gap:var(--s1); }
+  button { font-family:var(--font-body); font-size:.78rem; color:var(--muted); background:var(--surface);
+    border:1px solid var(--rule); border-radius:2px; padding:.4em .9em; cursor:pointer; transition:color .15s,border-color .15s; }
+  button:hover { color:var(--ink); border-color:var(--ink); }
+  button:focus-visible { outline:2px solid var(--accent); outline-offset:2px; }
+  button[aria-pressed="true"] { color:var(--accent); border-color:var(--accent); }
+
+  nav.rail { position:sticky; top:var(--s3); font-size:.82rem; max-height:calc(100vh - 3rem); overflow-y:auto; padding-bottom:var(--s3); }
+  nav.rail h2 { font-family:var(--font-mono); font-size:.68rem; letter-spacing:.16em; text-transform:uppercase; color:var(--muted); margin:0 0 var(--s2); font-weight:500; }
+  nav.rail ol { list-style:none; margin:0; padding:0; display:flex; flex-direction:column; }
+  nav.rail a { display:block; padding:.3em 0 .3em .9em; color:var(--muted); text-decoration:none; border-left:2px solid var(--hair); line-height:1.5; }
+  nav.rail a:hover { color:var(--ink); border-left-color:var(--rule); }
+  nav.rail a.on { color:var(--ink); border-left-color:var(--accent); font-weight:600; }
+  nav.rail a .num { font-family:var(--font-mono); font-size:.72rem; color:var(--muted); margin-right:.5em; }
+  @media (max-width:60rem){
+    nav.rail{ position:static; max-height:none; border-bottom:1px solid var(--rule); padding-bottom:var(--s3); }
+    nav.rail ol{ display:grid; grid-template-columns:repeat(auto-fill,minmax(9rem,1fr)); gap:0 var(--s2); }
+  }
+
+  main { min-width:0; }
+  section { padding-top:var(--s5); scroll-margin-top:var(--s3); }
+  section > * { max-width:var(--measure); }
+  section > figure, section > .scroll { max-width:none; }
+
+  h2.sec { font-family:var(--font-display); font-size:clamp(1.45rem,1.2rem + .9vw,1.9rem); font-weight:600;
+    letter-spacing:.04em; margin:0 0 var(--s3); padding-bottom:var(--s2); border-bottom:1px solid var(--rule);
+    display:flex; align-items:baseline; gap:.7em; max-width:none; }
+  h2.sec .num { font-family:var(--font-mono); font-size:.8rem; letter-spacing:.1em; color:var(--accent); font-weight:500; }
+  h3 { font-family:var(--font-body); font-size:1.06rem; font-weight:700; letter-spacing:.02em;
+    margin:var(--s4) 0 var(--s2); padding-left:.7em; border-left:3px solid var(--ink); }
+  p { margin:0 0 var(--s3); }
+  a { color:var(--blue); text-underline-offset:.2em; }
+  em { font-style:normal; background:linear-gradient(transparent 62%, var(--accent-soft) 62%); font-weight:600; }
+  ul, ol { margin:0 0 var(--s3); padding-left:1.3em; }
+  li { margin-bottom:var(--s1); }
+  .lead { font-size:1.05rem; color:var(--muted); }
+
+  .call { max-width:var(--measure); margin:0 0 var(--s3); padding:var(--s3) var(--s3) var(--s3) var(--s4);
+    background:var(--surface); border:1px solid var(--hair); border-left:3px solid var(--rule); border-radius:2px; font-size:.94rem; }
+  .call > :last-child { margin-bottom:0; }
+  .call .tag { display:block; font-family:var(--font-mono); font-size:.68rem; letter-spacing:.16em; text-transform:uppercase; color:var(--muted); margin-bottom:var(--s1); }
+  .call.trap { border-left-color:var(--accent); background:var(--accent-soft); }
+  .call.trap .tag { color:var(--accent); }
+  .call.exam { border-left-color:var(--ink); }
+  .call.exam .tag { color:var(--ink); }
+  .call.rev { border-left-color:var(--accent); }
+  .call.rev .tag { color:var(--accent); }
+  .call.tip { border-left-color:var(--blue); background:var(--blue-soft); }
+  .call.tip .tag { color:var(--blue); }
+
+  .scroll { overflow-x:auto; margin:0 0 var(--s3); -webkit-overflow-scrolling:touch; }
+  table { border-collapse:collapse; width:100%; font-size:.88rem; line-height:1.6; }
+  caption { text-align:left; font-size:.78rem; color:var(--muted); padding-bottom:var(--s1); font-family:var(--font-mono); letter-spacing:.08em; }
+  th, td { padding:.62em .8em; text-align:left; vertical-align:top; border-bottom:1px solid var(--hair); }
+  thead th { font-size:.74rem; letter-spacing:.1em; color:var(--muted); font-weight:600; border-bottom:1px solid var(--ink); white-space:nowrap; }
+  tbody tr:hover { background:var(--surface); }
+  td.n, th.n { text-align:center; font-family:var(--font-mono); font-variant-numeric:tabular-nums; white-space:nowrap; }
+  .no { color:var(--accent); font-weight:700; }
+  .yes { color:var(--muted); }
+  .tri { color:var(--blue); }
+  table.vs th:nth-child(2) { color:var(--ink); }
+  table.vs th:nth-child(3) { color:var(--accent); }
+
+  figure { margin:0 0 var(--s4); }
+  figure svg { display:block; width:100%; height:auto; }
+  figcaption { font-size:.78rem; color:var(--muted); font-family:var(--font-mono); letter-spacing:.06em; margin-top:var(--s2); padding-top:var(--s1); border-top:1px solid var(--hair); }
+  .plate { background:var(--surface); border:1px solid var(--hair); border-radius:2px; padding:var(--s3); }
+  .svg-ink { fill:none; stroke:var(--ink); stroke-width:1.4; }
+  .svg-hair { fill:none; stroke:var(--rule); stroke-width:1; }
+  .svg-dim { fill:none; stroke:var(--blue); stroke-width:1; }
+  .svg-acc { fill:none; stroke:var(--accent); stroke-width:1.6; }
+  .svg-fill { fill:var(--sunk); stroke:var(--rule); stroke-width:1; }
+  .svg-accfill { fill:var(--accent-soft); stroke:var(--accent); stroke-width:1.2; }
+  .svg-bluefill { fill:var(--blue-soft); stroke:var(--blue); stroke-width:1.2; }
+  text { font-family:var(--font-body); fill:var(--ink); font-size:12px; }
+  text.lbl { font-family:var(--font-mono); fill:var(--muted); font-size:10.5px; letter-spacing:.06em; }
+  text.dimt { font-family:var(--font-mono); fill:var(--blue); font-size:11px; }
+  text.acct { fill:var(--accent); font-size:11.5px; font-weight:700; }
+  text.step { font-family:var(--font-mono); fill:var(--accent); font-size:10px; letter-spacing:.14em; }
+
+  .nums { display:grid; grid-template-columns:repeat(auto-fill,minmax(11.5rem,1fr)); gap:var(--s2); }
+  .nc { background:var(--surface); border:1px solid var(--hair); border-radius:2px; padding:var(--s3) var(--s3) var(--s2); display:flex; flex-direction:column; gap:var(--s1); }
+  .nc .v { font-family:var(--font-mono); font-variant-numeric:tabular-nums; font-size:1.35rem; font-weight:600; line-height:1.2; color:var(--accent); }
+  .nc .d { font-size:.8rem; color:var(--muted); line-height:1.6; }
+  .nums.masked .v { color:transparent; background:var(--rule); border-radius:2px; user-select:none; }
+  .nums.masked .nc:hover .v, .nums.masked .nc:focus-within .v { color:var(--accent); background:transparent; }
+  .nc:focus-visible { outline:2px solid var(--accent); outline-offset:2px; }
+  .masthead-note { font-size:.78rem; color:var(--muted); margin-bottom:var(--s2); }
+
+  table.traps td:first-child { color:var(--muted); }
+  table.traps td:first-child::before { content:"「"; }
+  table.traps td:first-child::after { content:"」"; }
+  table.traps td:last-child strong { color:var(--accent); }
+
+  footer { grid-column:1/-1; margin-top:var(--s6); padding-top:var(--s3); border-top:1px solid var(--rule); font-size:.8rem; color:var(--muted); }
+  footer ul { list-style:none; padding:0; }
+  footer li { margin-bottom:var(--s1); }
+  .sibling { display:flex; flex-wrap:wrap; gap:var(--s2); margin-top:var(--s3); }
+  .sibling a { font-size:.8rem; text-decoration:none; border:1px solid var(--rule); border-radius:2px; padding:.35em .8em; color:var(--muted); }
+  .sibling a:hover { color:var(--ink); border-color:var(--ink); }
+
+  @media (prefers-reduced-motion: reduce){ *{ transition:none !important; animation:none !important; scroll-behavior:auto !important; } }
+  html { scroll-behavior:smooth; }
+  .eyebrow a { color:var(--accent); text-decoration:none; }
+  .eyebrow a:hover { text-decoration:underline; text-underline-offset:.2em; }
+  nav.rail a.home { border-left:none; padding:0 0 var(--s2); color:var(--accent);
+    font-family:var(--font-mono); font-size:.72rem; letter-spacing:.1em; }
+  nav.rail a.home:hover { color:var(--accent); text-decoration:underline; text-underline-offset:.2em; }
+</style>
+
+<div class="wrap">
+
+  <header class="masthead">
+    <div>
+      <div class="eyebrow"><a href="../index.html">← 総目次</a> &nbsp;/&nbsp; 02 宅建業法 &nbsp;/&nbsp; 宅建士試験 2026年度</div>
+      <h1>宅地建物取引士</h1>
+      <ul class="facts">
+        <li>法令基準日 <b>2026-04-01</b></li>
+        <li>出題数 <b>約2問</b></li>
+        <li>目標 <b>全問正解</b></li>
+        <li>更新 <b>2026-08-09</b></li>
+      </ul>
+    </div>
+    <div class="toggles">
+      <button id="mask" type="button" aria-pressed="false">数値を隠す</button>
+      <button id="theme" type="button">配色切替</button>
+    </div>
+  </header>
+
+  <nav class="rail" aria-label="目次">
+    <a class="home" href="../index.html">← 総目次</a>
+    <h2>Contents</h2>
+    <ol>
+      <li><a href="#overview"><span class="num">00</span>3つの段階</a></li>
+      <li><a href="#touroku"><span class="num">01</span>登録</a></li>
+      <li><a href="#kekkaku"><span class="num">02</span>登録の欠格事由</a></li>
+      <li><a href="#henkou"><span class="num">03</span>変更の登録・死亡等の届出</a></li>
+      <li><a href="#iten"><span class="num">04</span>登録の移転</a></li>
+      <li><a href="#shou"><span class="num">05</span>宅建士証</a></li>
+      <li><a href="#dokusen"><span class="num">06</span>3つの独占業務</a></li>
+      <li><a href="#sennin"><span class="num">07</span>専任の宅建士</a></li>
+      <li><a href="#vs"><span class="num">08</span>免許との対比</a></li>
+      <li><a href="#deru"><span class="num">09</span>よく出る論点</a></li>
+      <li><a href="#hikkake"><span class="num">10</span>ひっかけ一覧</a></li>
+      <li><a href="#suji"><span class="num">11</span>数字まとめ</a></li>
+    </ol>
+  </nav>
+
+  <main>
+
+    <!-- 00 -->
+    <section id="overview">
+      <h2 class="sec"><span class="num">00</span>3つの段階</h2>
+      <p class="lead">「試験に合格した人」＝宅建士ではない。<em>合格 → 登録 → 宅建士証の交付</em>という3段階を経て、はじめて宅建士として業務ができる。<em>どの段階の話なのか</em>を見極めるのが、この分野を解く鍵。</p>
+
+      <figure class="plate">
+        <svg viewBox="0 0 720 220" role="img" aria-label="宅建士になる3段階。試験に合格し、2年以上の実務経験または登録実務講習を経て登録を受け、宅建士証の交付を受ける。合格は一生有効、登録は消除されない限り無期限、宅建士証は5年。">
+          <line x1="40" y1="86" x2="680" y2="86" class="svg-hair"/>
+
+          <g>
+            <rect x="40" y="52" width="170" height="68" class="svg-fill" rx="2"/>
+            <text x="52" y="46" class="step">STEP 1</text>
+            <text x="125" y="82" text-anchor="middle">試験に合格</text>
+            <text x="125" y="104" text-anchor="middle" class="lbl">全国どこでも有効</text>
+            <text x="125" y="150" text-anchor="middle" class="dimt">一生有効</text>
+            <text x="125" y="168" text-anchor="middle" class="lbl">合格の取消しはある</text>
+          </g>
+
+          <path d="M216 86 H 240" class="svg-acc"/>
+          <path d="M234 80 L240 86 L234 92" class="svg-acc"/>
+
+          <g>
+            <rect x="246" y="52" width="190" height="68" class="svg-bluefill" rx="2"/>
+            <text x="258" y="46" class="step">STEP 2</text>
+            <text x="341" y="82" text-anchor="middle">登録</text>
+            <text x="341" y="104" text-anchor="middle" class="lbl">合格した都道府県の知事へ</text>
+            <text x="341" y="150" text-anchor="middle" class="dimt">消除されない限り無期限</text>
+            <text x="341" y="168" text-anchor="middle" class="lbl">2年以上の実務経験</text>
+            <text x="341" y="184" text-anchor="middle" class="lbl">または登録実務講習</text>
+          </g>
+
+          <path d="M442 86 H 466" class="svg-acc"/>
+          <path d="M460 80 L466 86 L460 92" class="svg-acc"/>
+
+          <g>
+            <rect x="472" y="52" width="208" height="68" class="svg-accfill" rx="2"/>
+            <text x="484" y="46" class="step">STEP 3</text>
+            <text x="576" y="82" text-anchor="middle">宅建士証の交付</text>
+            <text x="576" y="104" text-anchor="middle" class="lbl">登録している知事へ申請</text>
+            <text x="576" y="150" text-anchor="middle" class="acct">有効期間 5年</text>
+            <text x="576" y="168" text-anchor="middle" class="lbl">交付前6月以内の法定講習</text>
+            <text x="576" y="184" text-anchor="middle" class="lbl">合格から1年以内なら不要</text>
+          </g>
+        </svg>
+        <figcaption>Fig.1 — 合格・登録・宅建士証は別物</figcaption>
+      </figure>
+
+      <div class="call trap">
+        <span class="tag">ひっかけ</span>
+        <p><strong>合格には有効期間がなく、登録にも有効期間がない。5年なのは宅建士証だけ。</strong>「登録は5年ごとに更新する」は誤り。<br>
+        なお、不正手段で受験した者は<strong>合格の決定を取り消される</strong>ことがあり、最長3年間の受験禁止処分もある。</p>
+      </div>
+    </section>
+
+    <!-- 01 -->
+    <section id="touroku">
+      <h2 class="sec"><span class="num">01</span>登録</h2>
+
+      <div class="scroll">
+        <table>
+          <thead><tr><th>論点</th><th>内容</th></tr></thead>
+          <tbody>
+            <tr><td><strong>登録先</strong></td><td class="no">試験に<strong>合格した都道府県</strong>の知事。住所地や勤務地の知事ではない</td></tr>
+            <tr><td>実務の要件</td><td><strong>2年以上</strong>の実務経験、または国土交通大臣の登録を受けた<strong>登録実務講習</strong>の修了</td></tr>
+            <tr><td>有効期間</td><td class="no">なし。<strong>消除されない限り一生有効</strong></td></tr>
+            <tr><td>未成年者</td><td>宅建業に係る営業に関し<strong>成年者と同一の行為能力を有しない</strong>未成年者は登録できない<br><span class="lbl">＝ 営業の許可を受けた未成年者は登録できる</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="call tip">
+        <span class="tag">覚え方</span>
+        <p><strong>登録は「合格した県」に紐づく。</strong>東京都で合格して大阪府に引っ越しても、登録は東京都のまま。動かしたいときだけ「登録の移転」を使う（→ <a href="#iten">04</a>）。</p>
+      </div>
+    </section>
+
+    <!-- 02 -->
+    <section id="kekkaku">
+      <h2 class="sec"><span class="num">02</span>登録の欠格事由</h2>
+      <p>免許の欠格要件とほぼ同じだが、<strong>宅建士だけの上乗せが3つ</strong>ある。</p>
+
+      <div class="scroll">
+        <table>
+          <thead><tr><th>類型</th><th>内容</th><th class="n">期間</th></tr></thead>
+          <tbody>
+            <tr><td rowspan="4" class="muted">免許と共通</td><td>破産手続開始の決定を受けて復権を得ない者</td><td class="n">復権で直ちに可</td></tr>
+            <tr><td><strong>拘禁刑以上</strong>の刑に処せられた者</td><td class="n">5年</td></tr>
+            <tr><td>宅建業法違反・暴力団関係・傷害等で<strong>罰金</strong>刑に処せられた者</td><td class="n">5年</td></tr>
+            <tr><td>不正な手段で免許を取得した等の理由で<strong>免許を取り消された</strong>法人の役員だった者など</td><td class="n">5年</td></tr>
+            <tr><td rowspan="3" class="no">宅建士のみ</td><td><strong>不正な手段で登録を受けた</strong>等により<strong>登録の消除処分</strong>を受けた者</td><td class="n">5年</td></tr>
+            <tr><td>登録消除処分の<strong>聴聞の公示日</strong>から処分決定日までに、相当の理由なく<strong>自ら登録の消除を申請</strong>した者</td><td class="n">5年</td></tr>
+            <tr><td><strong>事務禁止処分</strong>を受け、その禁止期間中に本人の申請により登録が消除され、まだ<strong>禁止期間が満了していない</strong>者</td><td class="n no">禁止期間の満了まで</td></tr>
+            <tr><td class="muted">その他</td><td>暴力団員等／心身の故障により宅建士の事務を適正に行うことができない者／成年者と同一の行為能力を有しない未成年者</td><td class="n">—</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="call trap">
+        <span class="tag">ひっかけ</span>
+        <p><strong>事務禁止処分の逃げ得を防ぐ規定に注意。</strong>事務禁止期間中に自分から登録を消除しても、<strong>禁止期間が満了するまでは再登録できない</strong>。「消除すれば処分から解放される」という発想を封じている。</p>
+      </div>
+    </section>
+
+    <!-- 03 -->
+    <section id="henkou">
+      <h2 class="sec"><span class="num">03</span>変更の登録・死亡等の届出</h2>
+
+      <div class="scroll">
+        <table>
+          <thead><tr><th></th><th>対象</th><th class="n">期限</th><th>届出・申請する者</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><strong>変更の登録</strong></td>
+              <td>氏名・<strong>住所</strong>・本籍／勤務先の宅建業者の<strong>商号または名称</strong>および<strong>免許証番号</strong></td>
+              <td class="n no"><strong>遅滞なく</strong></td>
+              <td>本人</td>
+            </tr>
+            <tr>
+              <td rowspan="4"><strong>死亡等の届出</strong></td>
+              <td>死亡</td><td class="n">知った日から30日以内</td><td class="no">相続人</td>
+            </tr>
+            <tr><td>心身の故障により事務を適正に行えなくなった</td><td class="n">30日以内</td><td>本人・法定代理人・同居の親族</td></tr>
+            <tr><td>破産手続開始の決定</td><td class="n">30日以内</td><td class="no">本人</td></tr>
+            <tr><td>その他の欠格事由に該当</td><td class="n">30日以内</td><td>本人</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="call trap">
+        <span class="tag">ひっかけ</span>
+        <p><strong>変更の「登録」は遅滞なく、死亡等の「届出」は30日以内。</strong>宅建業者の変更の届出（30日以内）と混同させる出題が最頻出。<br>
+        <strong>宅建士は住所の変更でも変更の登録が必要</strong>だが、<strong>宅建業者名簿のほうは専任宅建士の住所変更を届け出る必要がない</strong>。同じ「住所」でも扱いが逆になる。<br>
+        破産の届出は、宅建業者では<strong>破産管財人</strong>、宅建士では<strong>本人</strong>。ここも入れ替えられる。</p>
+      </div>
+    </section>
+
+    <!-- 04 -->
+    <section id="iten">
+      <h2 class="sec"><span class="num">04</span>登録の移転</h2>
+
+      <div class="scroll">
+        <table>
+          <thead><tr><th>論点</th><th>内容</th></tr></thead>
+          <tbody>
+            <tr><td>できる場合</td><td>現に登録している知事の管轄<strong>外</strong>の宅建業者の事務所に<strong>勤務し、または勤務しようとする</strong>とき</td></tr>
+            <tr><td><strong>義務か</strong></td><td class="no"><strong>任意</strong>。「しなければならない」ではない</td></tr>
+            <tr><td>申請先</td><td>現在登録している知事を<strong>経由</strong>して、移転先の知事へ</td></tr>
+            <tr><td class="no">できない場合</td><td><strong>事務禁止処分の期間中</strong>は登録の移転を申請できない</td></tr>
+            <tr><td class="no">できない場合</td><td><strong>住所を移転しただけ</strong>では登録の移転はできない</td></tr>
+            <tr><td>宅建士証</td><td>移転後の知事から新しい宅建士証が交付される。<strong>有効期間は従前の宅建士証の残存期間</strong></td></tr>
+            <tr><td>法定講習</td><td class="no">登録の移転に伴う交付では<strong>法定講習は不要</strong></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="call exam">
+        <span class="tag">よく出る</span>
+        <p>登録の移転で交付される宅建士証の有効期間は<strong>従前の残存期間</strong>。5年にリセットされない。<br>
+        免許換えでは新免許が<strong>5年</strong>になるのと逆なので、セットで対比して覚える。</p>
+      </div>
+    </section>
+
+    <!-- 05 -->
+    <section id="shou">
+      <h2 class="sec"><span class="num">05</span>宅建士証</h2>
+
+      <div class="scroll">
+        <table>
+          <thead><tr><th>論点</th><th>内容</th></tr></thead>
+          <tbody>
+            <tr><td>交付申請先</td><td>登録をしている都道府県知事</td></tr>
+            <tr><td>有効期間</td><td><strong>5年</strong></td></tr>
+            <tr><td><strong>法定講習</strong></td><td>交付の申請前 <strong>6月以内</strong> に行われる知事指定の講習を受講。<br class="no"><strong>試験合格から1年以内に交付を受ける場合は不要</strong></td></tr>
+            <tr><td><strong>提示義務（重要事項説明）</strong></td><td class="no">相手方から<strong>請求がなくても</strong>提示しなければならない</td></tr>
+            <tr><td>提示義務（その他）</td><td>取引の関係者から<strong>請求があったとき</strong>に提示</td></tr>
+            <tr><td>提示しない場合</td><td>重要事項説明時の不提示は <strong>10万円以下の過料</strong></td></tr>
+            <tr><td><strong>返納</strong></td><td>登録が消除されたとき／宅建士証が効力を失ったとき → <strong>速やかに返納</strong></td></tr>
+            <tr><td><strong>提出</strong></td><td>事務禁止処分を受けたとき → <strong>速やかに交付を受けた知事に提出</strong>。禁止期間満了後、本人の請求があれば<strong>直ちに返還</strong></td></tr>
+            <tr><td>書換え交付</td><td>氏名・住所の変更 → 変更の登録とあわせて書換え交付を申請</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="call tip">
+        <span class="tag">覚え方</span>
+        <p><strong>「返納」は縁が切れるとき、「提出」は預けるだけ。</strong>登録が消えたら返納（返ってこない）、事務禁止なら提出（期間が終われば返してもらえる）。<br>
+        なお提出先も返還先も<strong>「交付を受けた知事」</strong>。処分をした知事ではない点に注意。</p>
+      </div>
+
+      <div class="call trap">
+        <span class="tag">ひっかけ</span>
+        <p><strong>重要事項説明のときだけは、請求がなくても提示する。</strong>「請求があったときに提示すれば足りる」は誤り。<br>
+        提示義務違反の制裁は<strong>過料</strong>であって罰金ではない。</p>
+      </div>
+    </section>
+
+    <!-- 06 -->
+    <section id="dokusen">
+      <h2 class="sec"><span class="num">06</span>3つの独占業務</h2>
+      <p class="lead">宅建士でなければできない仕事は<em>3つだけ</em>。しかも<em>専任である必要はない</em>。</p>
+
+      <div class="scroll">
+        <table>
+          <thead><tr><th class="n">#</th><th>独占業務</th><th>補足</th></tr></thead>
+          <tbody>
+            <tr><td class="n">1</td><td><strong>重要事項の説明</strong>（35条）</td><td>宅建士証を提示して行う</td></tr>
+            <tr><td class="n">2</td><td><strong>35条書面への記名</strong></td><td rowspan="2" class="no">2022年5月18日施行の改正で<strong>押印は廃止</strong>。記名のみでよい</td></tr>
+            <tr><td class="n">3</td><td><strong>37条書面への記名</strong></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="call exam">
+        <span class="tag">よく出る</span>
+        <p><strong>3つとも「専任の」宅建士である必要はない。</strong>アルバイトの宅建士でも、宅建士でありさえすれば重要事項説明も記名もできる。「専任の宅建士が説明しなければならない」は誤り。<br>
+        逆に、<strong>37条書面の「交付」自体は宅建士でなくてもできる</strong>。宅建士がするのは記名まで。</p>
+      </div>
+
+      <h3>6-1　宅建士の業務処理の原則</h3>
+      <ul>
+        <li>宅建士は、<strong>公正かつ誠実に</strong>事務を行い、宅建業に関連する業務に従事する者との<strong>連携</strong>に努めなければならない</li>
+        <li><strong>信用失墜行為の禁止</strong> — 宅建士の信用や品位を害するような行為をしてはならない。<span class="no">職務として行われるものに限られず、私的な行為も含まれる</span></li>
+        <li><strong>知識及び能力の維持向上</strong>に努めなければならない</li>
+      </ul>
+    </section>
+
+    <!-- 07 -->
+    <section id="sennin">
+      <h2 class="sec"><span class="num">07</span>専任の宅建士</h2>
+
+      <div class="scroll">
+        <table>
+          <thead><tr><th>場所</th><th class="n">必要な人数</th></tr></thead>
+          <tbody>
+            <tr><td><strong>事務所</strong></td><td class="n no">業務に従事する者 <strong>5人に1人以上</strong></td></tr>
+            <tr><td><strong>案内所等</strong>（契約を締結し、または申込みを受けるもの）</td><td class="n no"><strong>1人以上</strong></td></tr>
+            <tr><td>案内所等（契約の締結も申込みの受付もしない）</td><td class="n yes">不要（標識は必要）</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="scroll">
+        <table>
+          <thead><tr><th>論点</th><th>内容</th></tr></thead>
+          <tbody>
+            <tr><td><strong>不足したとき</strong></td><td class="no"><strong>2週間以内</strong>に必要な措置（補充等）をとらなければならない</td></tr>
+            <tr><td>「専任」の意味</td><td>その事務所に<strong>常勤</strong>し、<strong>専ら</strong>宅建業に従事すること</td></tr>
+            <tr><td>役員が宅建士のとき</td><td>宅建業者（法人の役員・個人業者本人）が宅建士であれば、その者が<strong>自ら主として業務に従事する事務所</strong>については、その事務所の専任の宅建士とみなされる</td></tr>
+            <tr><td>案内所の届出</td><td>業務を開始する日の <strong>10日前まで</strong> に、免許権者<strong>および</strong>所在地の都道府県知事に届出</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="call trap">
+        <span class="tag">ひっかけ</span>
+        <p>案内所の届出は<strong>「10日前まで」に「2か所へ」</strong>。免許権者だけ、あるいは所在地の知事だけ、とする選択肢は誤り。<br>
+        <strong>専任宅建士が必要なのは「契約を締結し、または申込みを受ける」案内所だけ。</strong>単なる展示会場なら標識だけでよい。</p>
+      </div>
+    </section>
+
+    <!-- 08 -->
+    <section id="vs">
+      <h2 class="sec"><span class="num">08</span>免許との対比</h2>
+      <p class="lead">この分野の失点は、ほぼ<em>宅建業者の制度と宅建士の制度の取り違え</em>で起きる。並べて覚える。</p>
+
+      <div class="scroll">
+        <table class="vs">
+          <caption>業者 vs 宅建士</caption>
+          <thead><tr><th>項目</th><th>宅建業者（免許）</th><th>宅地建物取引士（登録）</th></tr></thead>
+          <tbody>
+            <tr><td>相手方</td><td>大臣または知事<br><span class="lbl">事務所の所在で決まる</span></td><td>知事のみ<br><span class="lbl">合格した都道府県</span></td></tr>
+            <tr><td>有効期間</td><td>免許 <strong>5年</strong></td><td>登録は<strong>無期限</strong>／宅建士証は <strong>5年</strong></td></tr>
+            <tr><td><strong>変更があったとき</strong></td><td>変更の届出 <strong>30日以内</strong></td><td class="no">変更の登録 <strong>遅滞なく</strong></td></tr>
+            <tr><td>住所の変更</td><td class="no">専任宅建士の住所は<strong>届出不要</strong></td><td class="no">本人の住所は<strong>変更の登録が必要</strong></td></tr>
+            <tr><td>破産したとき</td><td class="no"><strong>破産管財人</strong>が30日以内に届出</td><td class="no"><strong>本人</strong>が30日以内に届出</td></tr>
+            <tr><td>死亡したとき</td><td>相続人が知った日から30日以内</td><td>相続人が知った日から30日以内</td></tr>
+            <tr><td>所在地を移すとき</td><td><strong>免許換え</strong>（義務）<br>新免許の期間は <strong>5年</strong></td><td><strong>登録の移転</strong>（任意）<br>宅建士証は <strong>残存期間</strong></td></tr>
+            <tr><td>怠った場合</td><td>免許換えを怠る → <strong>必要的免許取消し</strong></td><td>登録の移転は任意なので制裁なし</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="call tip">
+        <span class="tag">覚え方</span>
+        <p><strong>業者は「30日以内」、宅建士は「遅滞なく」。</strong>ただし<strong>死亡等の届出はどちらも30日以内</strong>で揃う。<br>
+        <strong>免許換えは義務で期間リセット、登録の移転は任意で期間据置き</strong>。この非対称が対比の核心。</p>
+      </div>
+    </section>
+
+    <!-- 09 -->
+    <section id="deru">
+      <h2 class="sec"><span class="num">09</span>よく出る論点</h2>
+      <div class="scroll">
+        <table>
+          <thead><tr><th class="n">順位</th><th>論点</th><th>要点</th></tr></thead>
+          <tbody>
+            <tr><td class="n">1</td><td><strong>変更の登録と死亡等の届出</strong></td><td>遅滞なく／30日以内、届出義務者</td></tr>
+            <tr><td class="n">2</td><td>登録の移転</td><td>任意・事務禁止中は不可・住所だけでは不可・残存期間</td></tr>
+            <tr><td class="n">3</td><td>宅建士証</td><td>法定講習6月以内／合格1年以内は不要／提示義務／返納と提出</td></tr>
+            <tr><td class="n">4</td><td>登録の欠格事由</td><td>宅建士のみの3つ（不正登録・聴聞中の消除申請・事務禁止中の消除）</td></tr>
+            <tr><td class="n">5</td><td>専任の宅建士</td><td>5人に1人／案内所1人／不足は2週間以内／届出は10日前まで2か所</td></tr>
+            <tr><td class="n">6</td><td>3つの独占業務</td><td>専任である必要はない／押印は廃止</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 10 -->
+    <section id="hikkake">
+      <h2 class="sec"><span class="num">10</span>ひっかけ一覧</h2>
+      <div class="scroll">
+        <table class="traps">
+          <thead><tr><th>こう書かれたら疑う</th><th>正しくは</th></tr></thead>
+          <tbody>
+            <tr><td>登録は5年ごとに更新しなければならない</td><td>登録に有効期間は<strong>ない</strong>。5年なのは宅建士証</td></tr>
+            <tr><td>住所地の都道府県知事に登録を申請する</td><td><strong>試験に合格した都道府県</strong>の知事</td></tr>
+            <tr><td>宅建士の住所が変わったら30日以内に変更の登録</td><td><strong>遅滞なく</strong></td></tr>
+            <tr><td>宅建士が破産したら破産管財人が届け出る</td><td><strong>本人</strong>が届け出る</td></tr>
+            <tr><td>勤務先が変わったら登録の移転をしなければならない</td><td>登録の移転は<strong>任意</strong></td></tr>
+            <tr><td>住所を他県に移したので登録の移転を申請できる</td><td><strong>できない</strong>。勤務先の事務所が管轄外にある場合のみ</td></tr>
+            <tr><td>事務禁止処分の期間中でも登録の移転はできる</td><td><strong>できない</strong></td></tr>
+            <tr><td>登録の移転後の宅建士証の有効期間は5年</td><td><strong>従前の残存期間</strong></td></tr>
+            <tr><td>試験合格後1年以内でも法定講習が必要</td><td><strong>不要</strong></td></tr>
+            <tr><td>重要事項説明では請求があったときに宅建士証を提示する</td><td><strong>請求がなくても提示</strong>する</td></tr>
+            <tr><td>宅建士証の提示義務違反は罰金である</td><td><strong>10万円以下の過料</strong></td></tr>
+            <tr><td>事務禁止処分を受けたら宅建士証を返納する</td><td><strong>提出</strong>する（期間満了後に返還される）</td></tr>
+            <tr><td>重要事項説明は専任の宅建士が行わなければならない</td><td>宅建士であれば<strong>専任でなくてよい</strong></td></tr>
+            <tr><td>35条書面には宅建士の記名押印が必要</td><td><strong>記名のみ</strong>（押印は2022年に廃止）</td></tr>
+            <tr><td>専任の宅建士が不足したら30日以内に補充する</td><td><strong>2週間以内</strong></td></tr>
+            <tr><td>案内所の届出は免許権者にすれば足りる</td><td>免許権者<strong>および</strong>所在地の知事へ、<strong>10日前まで</strong></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 11 -->
+    <section id="suji">
+      <h2 class="sec"><span class="num">11</span>数字まとめ</h2>
+      <p class="masthead-note">右上の「数値を隠す」で自己テストできる。</p>
+      <div class="nums" id="numgrid">
+        <div class="nc" tabindex="0"><span class="v">2年以上</span><span class="d">登録に必要な実務経験（または登録実務講習）</span></div>
+        <div class="nc" tabindex="0"><span class="v">5年</span><span class="d">宅建士証の有効期間（登録は無期限）</span></div>
+        <div class="nc" tabindex="0"><span class="v">6月以内</span><span class="d">宅建士証の交付申請前に受ける法定講習</span></div>
+        <div class="nc" tabindex="0"><span class="v">1年以内</span><span class="d">試験合格から交付を受ければ法定講習が不要になる期間</span></div>
+        <div class="nc" tabindex="0"><span class="v">遅滞なく</span><span class="d">変更の登録の期限</span></div>
+        <div class="nc" tabindex="0"><span class="v">30日以内</span><span class="d">死亡等の届出（死亡は知った日から）</span></div>
+        <div class="nc" tabindex="0"><span class="v">5人に1人</span><span class="d">事務所の専任の宅建士</span></div>
+        <div class="nc" tabindex="0"><span class="v">2週間以内</span><span class="d">専任の宅建士が不足した場合の措置</span></div>
+        <div class="nc" tabindex="0"><span class="v">10日前まで</span><span class="d">案内所等の届出（免許権者と所在地の知事の2か所へ）</span></div>
+        <div class="nc" tabindex="0"><span class="v">10万円以下</span><span class="d">重要事項説明時に宅建士証を提示しない場合の過料</span></div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <h4>出典</h4>
+    <ul>
+      <li>宅地建物取引業法（昭和27年法律第176号）第15条〜第22条の2 — <a href="https://laws.e-gov.go.jp/law/327AC1000000176">e-Gov法令検索</a></li>
+      <li>国土交通省 不動産業（宅地建物取引業法） — <a href="https://www.mlit.go.jp/totikensangyo/const/1_6_bf_000030.html">mlit.go.jp</a></li>
+      <li>欠格事由の「拘禁刑以上の刑」への改正（2025年6月1日施行） — <a href="https://yotsuyagakuin-tsushin.com/blog_takkenshiken/r8_takkengyoho_kaisei/">四谷学院</a></li>
+    </ul>
+    <div class="sibling">
+      <a href="../index.html">総目次</a>
+      <a href="免許制度.html">← 免許制度</a>
+    </div>
+  </footer>
+
+</div>
+
+<script>
+  (function () {
+    var root = document.documentElement;
+    document.getElementById('theme').addEventListener('click', function () {
+      if (root.getAttribute('data-theme')) { root.removeAttribute('data-theme'); return; }
+      var dark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      root.setAttribute('data-theme', dark ? 'light' : 'dark');
+    });
+    var maskBtn = document.getElementById('mask');
+    var grid = document.getElementById('numgrid');
+    maskBtn.addEventListener('click', function () {
+      var on = grid.classList.toggle('masked');
+      maskBtn.setAttribute('aria-pressed', String(on));
+      maskBtn.textContent = on ? '数値を表示' : '数値を隠す';
+    });
+    var links = Array.prototype.slice.call(document.querySelectorAll('nav.rail ol a'));
+    var map = {};
+    links.forEach(function (a) { map[a.getAttribute('href').slice(1)] = a; });
+    var seen = [];
+    var obs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        var i = seen.indexOf(e.target.id);
+        if (e.isIntersecting && i < 0) seen.push(e.target.id);
+        if (!e.isIntersecting && i >= 0) seen.splice(i, 1);
+      });
+      links.forEach(function (a) { a.classList.remove('on'); });
+      if (seen.length) {
+        var order = Object.keys(map);
+        seen.sort(function (a, b) { return order.indexOf(a) - order.indexOf(b); });
+        map[seen[0]].classList.add('on');
+      }
+    }, { rootMargin: '-10% 0px -70% 0px' });
+    document.querySelectorAll('main section').forEach(function (s) { obs.observe(s); });
+  })();
+</script>

@@ -1,0 +1,725 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>地方税 — 宅建士試験 2026年度</title>
+
+<style>
+  :root {
+    --paper:#EBEDE9; --surface:#F8F9F6; --sunk:#E1E4DE; --ink:#151F2A; --muted:#5D6B78;
+    --rule:#CDD2CB; --hair:#DCE0D9; --accent:#B8342A; --accent-soft:#F3DEDB;
+    --blue:#2A5F86; --blue-soft:#DCE6EE;
+    --font-display:"Hiragino Mincho ProN","Yu Mincho","YuMincho","Noto Serif JP",serif;
+    --font-body:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","YuGothic","Noto Sans JP",system-ui,sans-serif;
+    --font-mono:ui-monospace,"SFMono-Regular","SF Mono",Menlo,Consolas,monospace;
+    --measure:68ch;
+    --s1:.35rem; --s2:.7rem; --s3:1.1rem; --s4:1.7rem; --s5:2.6rem; --s6:4rem;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper:#0D1B29; --surface:#132534; --sunk:#0A1622; --ink:#DAE4EC; --muted:#8CA1B3;
+      --rule:#26415A; --hair:#1D3448; --accent:#FF7059; --accent-soft:#3A1F1D;
+      --blue:#6FB6DC; --blue-soft:#14293A;
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper:#0D1B29; --surface:#132534; --sunk:#0A1622; --ink:#DAE4EC; --muted:#8CA1B3;
+    --rule:#26415A; --hair:#1D3448; --accent:#FF7059; --accent-soft:#3A1F1D;
+    --blue:#6FB6DC; --blue-soft:#14293A;
+  }
+
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--paper); color:var(--ink); font-family:var(--font-body);
+    font-size:16px; line-height:1.9; -webkit-font-smoothing:antialiased; font-feature-settings:"palt" 1; }
+
+  .wrap { display:grid; grid-template-columns:15.5rem minmax(0,1fr); gap:var(--s6);
+    max-width:78rem; margin:0 auto; padding:0 var(--s4) var(--s6); align-items:start; }
+  @media (max-width:60rem){ .wrap{ grid-template-columns:minmax(0,1fr); gap:var(--s4); padding:0 var(--s3) var(--s5);} }
+
+  .masthead { grid-column:1/-1; padding:var(--s5) 0 var(--s4); border-bottom:2px solid var(--ink);
+    margin-bottom:var(--s2); display:flex; flex-wrap:wrap; align-items:flex-end; justify-content:space-between; gap:var(--s3); }
+  .eyebrow { font-family:var(--font-mono); font-size:.72rem; letter-spacing:.16em; text-transform:uppercase;
+    color:var(--muted); display:flex; align-items:center; gap:.6em; }
+  .eyebrow::before { content:""; width:2.2rem; height:1px; background:var(--accent); }
+  h1 { font-family:var(--font-display); font-weight:600; font-size:clamp(2rem,1.4rem + 2.6vw,3.1rem);
+    line-height:1.2; letter-spacing:.04em; margin:var(--s2) 0 var(--s3); text-wrap:balance; }
+  .facts { display:flex; flex-wrap:wrap; gap:0 var(--s3); font-size:.82rem; color:var(--muted); list-style:none; margin:0; padding:0; }
+  .facts b { font-family:var(--font-mono); font-variant-numeric:tabular-nums; color:var(--ink); font-weight:600; }
+  .toggles { display:flex; gap:var(--s1); }
+  button { font-family:var(--font-body); font-size:.78rem; color:var(--muted); background:var(--surface);
+    border:1px solid var(--rule); border-radius:2px; padding:.4em .9em; cursor:pointer; transition:color .15s,border-color .15s; }
+  button:hover { color:var(--ink); border-color:var(--ink); }
+  button:focus-visible { outline:2px solid var(--accent); outline-offset:2px; }
+  button[aria-pressed="true"] { color:var(--accent); border-color:var(--accent); }
+
+  nav.rail { position:sticky; top:var(--s3); font-size:.82rem; max-height:calc(100vh - 3rem); overflow-y:auto; padding-bottom:var(--s3); }
+  nav.rail h2 { font-family:var(--font-mono); font-size:.68rem; letter-spacing:.16em; text-transform:uppercase; color:var(--muted); margin:0 0 var(--s2); font-weight:500; }
+  nav.rail ol { list-style:none; margin:0; padding:0; display:flex; flex-direction:column; }
+  nav.rail a { display:block; padding:.3em 0 .3em .9em; color:var(--muted); text-decoration:none; border-left:2px solid var(--hair); line-height:1.5; }
+  nav.rail a:hover { color:var(--ink); border-left-color:var(--rule); }
+  nav.rail a.on { color:var(--ink); border-left-color:var(--accent); font-weight:600; }
+  nav.rail a .num { font-family:var(--font-mono); font-size:.72rem; color:var(--muted); margin-right:.5em; }
+  @media (max-width:60rem){
+    nav.rail{ position:static; max-height:none; border-bottom:1px solid var(--rule); padding-bottom:var(--s3); }
+    nav.rail ol{ display:grid; grid-template-columns:repeat(auto-fill,minmax(9rem,1fr)); gap:0 var(--s2); }
+  }
+
+  main { min-width:0; }
+  section { padding-top:var(--s5); scroll-margin-top:var(--s3); }
+  section > * { max-width:var(--measure); }
+  section > figure, section > .scroll { max-width:none; }
+
+  h2.sec { font-family:var(--font-display); font-size:clamp(1.45rem,1.2rem + .9vw,1.9rem); font-weight:600;
+    letter-spacing:.04em; margin:0 0 var(--s3); padding-bottom:var(--s2); border-bottom:1px solid var(--rule);
+    display:flex; align-items:baseline; gap:.7em; max-width:none; }
+  h2.sec .num { font-family:var(--font-mono); font-size:.8rem; letter-spacing:.1em; color:var(--accent); font-weight:500; }
+  h3 { font-family:var(--font-body); font-size:1.06rem; font-weight:700; letter-spacing:.02em;
+    margin:var(--s4) 0 var(--s2); padding-left:.7em; border-left:3px solid var(--ink); }
+  h4 { font-size:.88rem; font-weight:700; color:var(--muted); letter-spacing:.06em; margin:var(--s3) 0 var(--s1); }
+  p { margin:0 0 var(--s3); }
+  a { color:var(--blue); text-underline-offset:.2em; }
+  em { font-style:normal; background:linear-gradient(transparent 62%, var(--accent-soft) 62%); font-weight:600; }
+  ul, ol { margin:0 0 var(--s3); padding-left:1.3em; }
+  li { margin-bottom:var(--s1); }
+  .lead { font-size:1.05rem; color:var(--muted); }
+
+  .call { max-width:var(--measure); margin:0 0 var(--s3); padding:var(--s3) var(--s3) var(--s3) var(--s4);
+    background:var(--surface); border:1px solid var(--hair); border-left:3px solid var(--rule); border-radius:2px; font-size:.94rem; }
+  .call > :last-child { margin-bottom:0; }
+  .call .tag { display:block; font-family:var(--font-mono); font-size:.68rem; letter-spacing:.16em; text-transform:uppercase; color:var(--muted); margin-bottom:var(--s1); }
+  .call.trap { border-left-color:var(--accent); background:var(--accent-soft); }
+  .call.trap .tag { color:var(--accent); }
+  .call.exam { border-left-color:var(--ink); }
+  .call.exam .tag { color:var(--ink); }
+  .call.rev { border-left-color:var(--accent); }
+  .call.rev .tag { color:var(--accent); }
+  .call.tip { border-left-color:var(--blue); background:var(--blue-soft); }
+  .call.tip .tag { color:var(--blue); }
+
+  .scroll { overflow-x:auto; margin:0 0 var(--s3); -webkit-overflow-scrolling:touch; }
+  table { border-collapse:collapse; width:100%; font-size:.88rem; line-height:1.6; }
+  caption { text-align:left; font-size:.78rem; color:var(--muted); padding-bottom:var(--s1); font-family:var(--font-mono); letter-spacing:.08em; }
+  th, td { padding:.62em .8em; text-align:left; vertical-align:top; border-bottom:1px solid var(--hair); }
+  thead th { font-size:.74rem; letter-spacing:.1em; color:var(--muted); font-weight:600; border-bottom:1px solid var(--ink); white-space:nowrap; }
+  tbody tr:hover { background:var(--surface); }
+  td.n, th.n { text-align:center; font-family:var(--font-mono); font-variant-numeric:tabular-nums; white-space:nowrap; }
+  .no { color:var(--accent); font-weight:700; }
+  .yes { color:var(--muted); }
+  .tri { color:var(--blue); }
+  table.pillars thead th:nth-child(2),
+  table.pillars thead th:nth-child(3),
+  table.pillars thead th:nth-child(4) { color:var(--ink); font-size:.9rem; }
+
+  figure { margin:0 0 var(--s4); }
+  figure svg { display:block; width:100%; height:auto; }
+  figcaption { font-size:.78rem; color:var(--muted); font-family:var(--font-mono); letter-spacing:.06em; margin-top:var(--s2); padding-top:var(--s1); border-top:1px solid var(--hair); }
+  .plate { background:var(--surface); border:1px solid var(--hair); border-radius:2px; padding:var(--s3); }
+  .svg-ink { fill:none; stroke:var(--ink); stroke-width:1.4; }
+  .svg-hair { fill:none; stroke:var(--rule); stroke-width:1; }
+  .svg-dim { fill:none; stroke:var(--blue); stroke-width:1; }
+  .svg-acc { fill:none; stroke:var(--accent); stroke-width:1.6; }
+  .svg-fill { fill:var(--sunk); stroke:var(--rule); stroke-width:1; }
+  .svg-accfill { fill:var(--accent-soft); stroke:var(--accent); stroke-width:1.2; }
+  .svg-bluefill { fill:var(--blue-soft); stroke:var(--blue); stroke-width:1.2; }
+  text { font-family:var(--font-body); fill:var(--ink); font-size:12px; }
+  text.big { font-family:var(--font-display); font-size:22px; font-weight:600; }
+  text.lbl { font-family:var(--font-mono); fill:var(--muted); font-size:10.5px; letter-spacing:.06em; }
+  text.dimt { font-family:var(--font-mono); fill:var(--blue); font-size:11px; }
+  text.acct { fill:var(--accent); font-size:11.5px; font-weight:700; }
+
+  .nums { display:grid; grid-template-columns:repeat(auto-fill,minmax(11.5rem,1fr)); gap:var(--s2); }
+  .nc { background:var(--surface); border:1px solid var(--hair); border-radius:2px; padding:var(--s3) var(--s3) var(--s2); display:flex; flex-direction:column; gap:var(--s1); }
+  .nc .v { font-family:var(--font-mono); font-variant-numeric:tabular-nums; font-size:1.35rem; font-weight:600; line-height:1.2; color:var(--accent); }
+  .nc .d { font-size:.8rem; color:var(--muted); line-height:1.6; }
+  .nums.masked .v { color:transparent; background:var(--rule); border-radius:2px; user-select:none; }
+  .nums.masked .nc:hover .v, .nums.masked .nc:focus-within .v { color:var(--accent); background:transparent; }
+  .nc:focus-visible { outline:2px solid var(--accent); outline-offset:2px; }
+  .masthead-note { font-size:.78rem; color:var(--muted); margin-bottom:var(--s2); }
+
+  table.traps td:first-child { color:var(--muted); }
+  table.traps td:first-child::before { content:"「"; }
+  table.traps td:first-child::after { content:"」"; }
+  table.traps td:last-child strong { color:var(--accent); }
+
+  footer { grid-column:1/-1; margin-top:var(--s6); padding-top:var(--s3); border-top:1px solid var(--rule); font-size:.8rem; color:var(--muted); }
+  footer ul { list-style:none; padding:0; }
+  footer li { margin-bottom:var(--s1); }
+  .sibling { display:flex; flex-wrap:wrap; gap:var(--s2); margin-top:var(--s3); }
+  .sibling a { font-size:.8rem; text-decoration:none; border:1px solid var(--rule); border-radius:2px; padding:.35em .8em; color:var(--muted); }
+  .sibling a:hover { color:var(--ink); border-color:var(--ink); }
+
+  @media (prefers-reduced-motion: reduce){ *{ transition:none !important; animation:none !important; scroll-behavior:auto !important; } }
+  html { scroll-behavior:smooth; }
+  .eyebrow a { color:var(--accent); text-decoration:none; }
+  .eyebrow a:hover { text-decoration:underline; text-underline-offset:.2em; }
+  nav.rail a.home { border-left:none; padding:0 0 var(--s2); color:var(--accent);
+    font-family:var(--font-mono); font-size:.72rem; letter-spacing:.1em; }
+  nav.rail a.home:hover { color:var(--accent); text-decoration:underline; text-underline-offset:.2em; }
+</style>
+
+<div class="wrap">
+
+  <header class="masthead">
+    <div>
+      <div class="eyebrow"><a href="../index.html">← 総目次</a> &nbsp;/&nbsp; 04 税その他 &nbsp;/&nbsp; 宅建士試験 2026年度</div>
+      <h1>地方税</h1>
+      <ul class="facts">
+        <li>法令基準日 <b>2026-04-01</b></li>
+        <li>出題 <b>問24／1問</b></li>
+        <li>目標 <b>確実に1問</b></li>
+        <li>更新 <b>2026-08-11</b></li>
+      </ul>
+    </div>
+    <div class="toggles">
+      <button id="mask" type="button" aria-pressed="false">数値を隠す</button>
+      <button id="theme" type="button">配色切替</button>
+    </div>
+  </header>
+
+  <nav class="rail" aria-label="目次">
+    <a class="home" href="../index.html">← 総目次</a>
+    <h2>Contents</h2>
+    <ol>
+      <li><a href="#overview"><span class="num">00</span>2つしか出ない</a></li>
+      <li><a href="#taihi"><span class="num">01</span>全体対比表</a></li>
+      <li><a href="#shutoku"><span class="num">02</span>不動産取得税</a></li>
+      <li><a href="#shutoku-tokurei"><span class="num">03</span>取得税の特例</a></li>
+      <li><a href="#kotei"><span class="num">04</span>固定資産税</a></li>
+      <li><a href="#kotei-tokurei"><span class="num">05</span>住宅用地の特例</a></li>
+      <li><a href="#daicho"><span class="num">06</span>台帳・縦覧・不服申立て</a></li>
+      <li><a href="#toshikeikaku"><span class="num">07</span>都市計画税</a></li>
+      <li><a href="#deru"><span class="num">08</span>よく出る論点</a></li>
+      <li><a href="#hikkake"><span class="num">09</span>ひっかけ一覧</a></li>
+      <li><a href="#suji"><span class="num">10</span>数字まとめ</a></li>
+    </ol>
+  </nav>
+
+  <main>
+
+    <!-- 00 -->
+    <section id="overview">
+      <h2 class="sec"><span class="num">00</span>2つしか出ない</h2>
+      <p class="lead">問24は<strong>不動産取得税か固定資産税のどちらか1問</strong>。範囲が極端に狭く、<em>対比表を1枚覚えるだけで得点源になる</em>。税の中では最もコスパが高い。</p>
+
+      <figure class="plate">
+        <svg viewBox="0 0 720 268" role="img" aria-label="不動産取得税と固定資産税の性格を対比した図。不動産取得税は取得した瞬間に一度だけ都道府県が課す税。固定資産税は毎年1月1日時点の所有者に市町村が繰り返し課す税。">
+          <!-- 不動産取得税 -->
+          <text x="16" y="52" class="acct">不動産取得税</text>
+          <text x="16" y="70" class="lbl">都道府県が課す</text>
+          <text x="16" y="86" class="lbl">＝ 一度きり</text>
+          <line x1="176" y1="72" x2="690" y2="72" class="svg-hair"/>
+          <line x1="260" y1="72" x2="260" y2="34" class="svg-acc"/>
+          <circle cx="260" cy="72" r="5" fill="var(--accent)"/>
+          <rect x="200" y="16" width="120" height="22" class="svg-accfill" rx="2"/>
+          <text x="260" y="31" text-anchor="middle" class="acct">取得したとき</text>
+          <text x="500" y="92" text-anchor="middle" class="lbl">以後は課されない</text>
+
+          <line x1="16" y1="116" x2="704" y2="116" class="svg-hair" stroke-dasharray="3 4"/>
+
+          <!-- 固定資産税 -->
+          <text x="16" y="176" class="dimt">固定資産税</text>
+          <text x="16" y="194" class="lbl">市町村が課す</text>
+          <text x="16" y="210" class="lbl">＝ 毎年くり返し</text>
+          <line x1="176" y1="196" x2="690" y2="196" class="svg-hair"/>
+          <path d="M682 190 L694 196 L682 202 Z" fill="var(--rule)"/>
+
+          <g>
+            <line x1="220" y1="196" x2="220" y2="158" class="svg-dim"/><circle cx="220" cy="196" r="4" fill="var(--blue)"/>
+            <line x1="300" y1="196" x2="300" y2="158" class="svg-dim"/><circle cx="300" cy="196" r="4" fill="var(--blue)"/>
+            <line x1="380" y1="196" x2="380" y2="158" class="svg-dim"/><circle cx="380" cy="196" r="4" fill="var(--blue)"/>
+            <line x1="460" y1="196" x2="460" y2="158" class="svg-dim"/><circle cx="460" cy="196" r="4" fill="var(--blue)"/>
+            <line x1="540" y1="196" x2="540" y2="158" class="svg-dim"/><circle cx="540" cy="196" r="4" fill="var(--blue)"/>
+            <line x1="620" y1="196" x2="620" y2="158" class="svg-dim"/><circle cx="620" cy="196" r="4" fill="var(--blue)"/>
+          </g>
+          <rect x="176" y="136" width="140" height="22" class="svg-bluefill" rx="2"/>
+          <text x="246" y="151" text-anchor="middle" class="dimt">毎年1月1日</text>
+          <text x="430" y="228" text-anchor="middle" class="lbl">賦課期日（1月1日）の所有者が納める　—　売却しても年の途中では課税されない</text>
+        </svg>
+        <figcaption>Fig.1 — 「一度きりの都道府県税」と「毎年の市町村税」</figcaption>
+      </figure>
+
+      <div class="call tip">
+        <span class="tag">覚え方</span>
+        <p><strong>取得税は「入るとき」の関所、固定資産税は「持っている間」の家賃。</strong><br>
+        関所は通るとき1回だけ（都道府県）、家賃は住んでいる限り毎年（市町村）。課税主体が違うのは、取得は広域の話、保有は生活圏の話だから、と理解しておくと入れ替えのひっかけに引っかからない。</p>
+      </div>
+    </section>
+
+    <!-- 01 -->
+    <section id="taihi">
+      <h2 class="sec"><span class="num">01</span>全体対比表</h2>
+      <p class="lead">この1枚が問24のほぼすべて。<em>縦に読んで違いを比べる</em>のが使い方。</p>
+
+      <div class="scroll">
+        <table class="pillars">
+          <caption>不動産取得税 vs 固定資産税</caption>
+          <thead><tr><th></th><th>不動産取得税</th><th>固定資産税</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><strong>課税主体</strong></td>
+              <td class="no"><strong>都道府県</strong></td>
+              <td class="tri"><strong>市町村</strong>（東京23区は都）</td>
+            </tr>
+            <tr>
+              <td><strong>納税義務者</strong></td>
+              <td>不動産の<strong>取得者</strong></td>
+              <td><strong>1月1日</strong>現在の所有者</td>
+            </tr>
+            <tr>
+              <td><strong>課税標準</strong></td>
+              <td colspan="2">どちらも<strong>固定資産課税台帳に登録された価格</strong>（固定資産税評価額）</td>
+            </tr>
+            <tr>
+              <td><strong>標準税率</strong></td>
+              <td><strong>4%</strong><br>土地・住宅は <strong class="no">3%</strong>（2027年3月31日まで）</td>
+              <td><strong>1.4%</strong></td>
+            </tr>
+            <tr>
+              <td><strong>制限税率</strong></td>
+              <td class="yes">なし</td>
+              <td class="yes">なし<br><span class="lbl">かつての2.1%の制限は廃止済み</span></td>
+            </tr>
+            <tr>
+              <td><strong>免税点</strong></td>
+              <td>土地 <strong>10万円</strong><br>家屋（建築）<strong>23万円</strong><br>家屋（その他）<strong>12万円</strong></td>
+              <td>土地 <strong>30万円</strong><br>家屋 <strong>20万円</strong><br>償却資産 <strong>150万円</strong></td>
+            </tr>
+            <tr>
+              <td><strong>徴収方法</strong></td>
+              <td colspan="2">どちらも<strong>普通徴収</strong>（納税通知書が送られてくる）。<span class="no">申告納付ではない</span></td>
+            </tr>
+            <tr>
+              <td><strong>住宅の特例</strong></td>
+              <td>新築住宅は課税標準から <strong>1,200万円</strong> 控除</td>
+              <td>住宅用地は課税標準を <strong>1/6・1/3</strong>／新築住宅は税額 <strong>1/2</strong></td>
+            </tr>
+            <tr>
+              <td>納期</td>
+              <td>各都道府県の条例で定める</td>
+              <td><strong>4月・7月・12月・翌年2月</strong>中（条例で異なる定めも可）</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="call trap">
+        <span class="tag">ひっかけ</span>
+        <p><strong>課税主体の入れ替えが最頻出。</strong>「不動産取得税は市町村が課する」「固定資産税は都道府県が課する」はどちらも誤り。<br>
+        もう1つ、<strong>どちらも制限税率はない</strong>。「固定資産税の税率は1.4%を超えてはならない」は誤りで、1.4%は<strong>標準</strong>税率にすぎず、条例でこれを超えて定めることもできる。</p>
+      </div>
+
+      <div class="call exam">
+        <span class="tag">よく出る</span>
+        <p><strong>免税点の数字は「取得税＝10・23・12／固定＝30・20・150」でセット暗記。</strong><br>
+        免税点は<strong>課税標準</strong>で判定する。同一の者が同一市町村内で所有する土地の課税標準の合計が30万円未満なら固定資産税は課されない。「税額が免税点未満」ではない。</p>
+      </div>
+    </section>
+
+    <!-- 02 -->
+    <section id="shutoku">
+      <h2 class="sec"><span class="num">02</span>不動産取得税</h2>
+
+      <h3>「取得」とは</h3>
+      <p>有償・無償を問わず、また<strong>登記の有無を問わない</strong>。所有権を現実に取得したという事実に着目して課される。</p>
+
+      <div class="scroll">
+        <table>
+          <thead><tr><th>取得の態様</th><th class="n">課税</th><th>備考</th></tr></thead>
+          <tbody>
+            <tr><td>売買・交換</td><td class="n no">課税</td><td></td></tr>
+            <tr><td><strong>贈与</strong></td><td class="n no">課税</td><td>無償でも課税される</td></tr>
+            <tr><td>新築・増築・改築</td><td class="n no">課税</td><td>改築は価値の増加分に対して課税</td></tr>
+            <tr><td><strong>相続</strong>（包括遺贈・相続人への遺贈を含む）</td><td class="n yes">非課税</td><td class="no">贈与と結論が逆</td></tr>
+            <tr><td>法人の合併・一定の分割</td><td class="n yes">非課税</td><td></td></tr>
+            <tr><td><strong>共有物の分割</strong></td><td class="n yes">非課税</td><td>自己の持分に対応する部分を超えない場合に限る</td></tr>
+            <tr><td>国・地方公共団体等の取得</td><td class="n yes">非課税</td><td></td></tr>
+            <tr><td>宗教法人・学校法人等の一定用途</td><td class="n yes">非課税</td><td>境内建物、直接保育・教育の用に供する不動産など</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="call trap">
+        <span class="tag">ひっかけ</span>
+        <p><strong>相続は非課税、贈与は課税。</strong>「無償だから贈与も非課税」と考えると落とす。相続が非課税なのは、本人の意思で取得したわけではないから。<br>
+        <strong>登記をしていなくても課税される</strong>点も頻出。「登記をした時に納税義務が生じる」は誤り。</p>
+      </div>
+
+      <h3>家屋を新築した場合の取得の時期</h3>
+      <div class="scroll">
+        <table>
+          <thead><tr><th>状況</th><th>取得したとみなす時</th></tr></thead>
+          <tbody>
+            <tr><td>新築後、最初の使用または譲渡があった</td><td>その<strong>使用または譲渡の日</strong></td></tr>
+            <tr><td>新築後<strong>6か月</strong>を経過しても使用・譲渡がない</td><td>6か月を経過した日に<strong>所有者</strong>が取得したものとみなす</td></tr>
+            <tr><td>宅建業者等が新築した住宅で、使用・譲渡がない</td><td class="tri">新築から<strong>1年</strong>を経過した日</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="call tip">
+        <span class="tag">覚え方</span>
+        <p>建てただけでは課税を待ってもらえるが、いつまでも待たない、という制度。<strong>一般は6か月、売るのが仕事の宅建業者は1年</strong>と長めに猶予される。</p>
+      </div>
+    </section>
+
+    <!-- 03 -->
+    <section id="shutoku-tokurei">
+      <h2 class="sec"><span class="num">03</span>取得税の特例</h2>
+
+      <figure class="plate">
+        <svg viewBox="0 0 720 160" role="img" aria-label="新築住宅を取得した場合の不動産取得税の計算式の流れ図。固定資産税評価額から1200万円を控除し、残った額に税率3パーセントを掛けて税額を出す。">
+          <rect x="16" y="52" width="150" height="52" class="svg-fill" rx="2"/>
+          <text x="91" y="76" text-anchor="middle">固定資産税評価額</text>
+          <text x="91" y="94" text-anchor="middle" class="lbl">＝ 課税標準</text>
+
+          <text x="186" y="84" text-anchor="middle" class="big" fill="var(--muted)">−</text>
+
+          <rect x="206" y="52" width="150" height="52" class="svg-accfill" rx="2"/>
+          <text x="281" y="76" text-anchor="middle" class="acct">1,200万円</text>
+          <text x="281" y="94" text-anchor="middle" class="lbl">新築住宅の控除（1戸につき）</text>
+
+          <text x="376" y="84" text-anchor="middle" class="big" fill="var(--muted)">×</text>
+
+          <rect x="396" y="52" width="120" height="52" class="svg-bluefill" rx="2"/>
+          <text x="456" y="76" text-anchor="middle" class="dimt">3%</text>
+          <text x="456" y="94" text-anchor="middle" class="lbl">住宅の税率（本則4%）</text>
+
+          <text x="536" y="84" text-anchor="middle" class="big" fill="var(--muted)">＝</text>
+
+          <rect x="556" y="52" width="148" height="52" class="svg-ink" rx="2"/>
+          <text x="630" y="84" text-anchor="middle">税額</text>
+
+          <text x="16" y="28" class="lbl">新築住宅を取得したとき</text>
+          <text x="16" y="136" class="lbl">認定長期優良住宅なら控除額は1,300万円　／　床面積 50㎡以上240㎡以下（貸家共同住宅は40㎡以上）</text>
+        </svg>
+        <figcaption>Fig.2 — 控除してから税率を掛ける（課税標準の特例）</figcaption>
+      </figure>
+
+      <div class="scroll">
+        <table>
+          <caption>不動産取得税の3つの特例</caption>
+          <thead><tr><th>特例</th><th>内容</th><th>要件</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><strong>宅地の課税標準</strong></td>
+              <td>価格の <strong class="no">1/2</strong> を課税標準とする</td>
+              <td>2027年3月31日までの取得（宅地評価土地）</td>
+            </tr>
+            <tr>
+              <td><strong>新築住宅の控除</strong></td>
+              <td>課税標準から <strong>1,200万円</strong> 控除<br>認定長期優良住宅は <strong>1,300万円</strong></td>
+              <td>床面積 <strong>50㎡以上240㎡以下</strong><br>（貸家である共同住宅等は <strong>40㎡以上</strong>240㎡以下）<br><span class="tri">自己の居住用でなくてもよい</span></td>
+            </tr>
+            <tr>
+              <td><strong>既存（中古）住宅の控除</strong></td>
+              <td>新築された時期に応じた額を控除<br><span class="lbl">最高1,200万円</span></td>
+              <td>床面積 <strong>50㎡以上240㎡以下</strong><br><span class="no">取得者が自己の居住用に供すること</span><br>新耐震基準に適合すること</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="call trap">
+        <span class="tag">ひっかけ</span>
+        <p><strong>新築住宅の控除に「自己の居住用」という要件はない。</strong>賃貸用のアパートでも、床面積要件を満たせば1戸ごとに1,200万円が控除される。<br>
+        これに対し<strong>中古住宅の控除は自己の居住用に限る</strong>。新築と中古で結論が違うのがそのまま出題される。</p>
+      </div>
+
+      <div class="call trap">
+        <span class="tag">ひっかけ</span>
+        <p><strong>税率3%の対象は「土地」と「住宅」。住宅以外の家屋（店舗・事務所・倉庫）は4%のまま。</strong><br>
+        また、<strong>課税標準1/2の特例は「宅地」だけ</strong>で、家屋には適用されない。「土地と住宅のいずれも課税標準が2分の1になる」は誤り。</p>
+      </div>
+    </section>
+
+    <!-- 04 -->
+    <section id="kotei">
+      <h2 class="sec"><span class="num">04</span>固定資産税</h2>
+
+      <div class="scroll">
+        <table>
+          <thead><tr><th>項目</th><th>内容</th></tr></thead>
+          <tbody>
+            <tr><td><strong>賦課期日</strong></td><td><strong>1月1日</strong></td></tr>
+            <tr><td><strong>納税義務者</strong></td><td>賦課期日現在、<strong>固定資産課税台帳に所有者として登録されている者</strong></td></tr>
+            <tr><td>例外①</td><td class="tri"><strong>質権</strong>または<strong>100年より永い存続期間の定めのある地上権</strong>の目的である土地は、その<strong>質権者・地上権者</strong>が納税義務者</td></tr>
+            <tr><td>例外②</td><td>所有者が賦課期日前に死亡していた場合は、<strong>現に所有している者</strong>（相続人等）</td></tr>
+            <tr><td><strong>課税標準</strong></td><td>固定資産課税台帳に登録された<strong>価格</strong></td></tr>
+            <tr><td>価格の決定</td><td><strong>市町村長</strong>が、<strong>総務大臣</strong>の定める固定資産評価基準に基づいて決定し、<strong>3月31日</strong>までに台帳に登録</td></tr>
+            <tr><td><strong>評価替え</strong></td><td><strong>3年ごと</strong>の<strong>基準年度</strong>に行う。第二年度・第三年度は原則<strong>据置き</strong></td></tr>
+            <tr><td><strong>標準税率</strong></td><td><strong>1.4%</strong>（制限税率なし）</td></tr>
+            <tr><td><strong>免税点</strong></td><td>土地 <strong>30万円</strong>／家屋 <strong>20万円</strong>／償却資産 <strong>150万円</strong></td></tr>
+            <tr><td>納期</td><td><strong>4月・7月・12月・翌年2月</strong>中において市町村の条例で定める</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="call trap">
+        <span class="tag">ひっかけ</span>
+        <p><strong>年の途中で売却しても、その年の固定資産税は1月1日の所有者（売主）が全額納める。</strong>実務では日割り精算するが、それは当事者間の約束にすぎず、<strong>市町村に対する納税義務者は変わらない</strong>。「買主が納税義務者となる」は誤り。</p>
+      </div>
+
+      <div class="call exam">
+        <span class="tag">よく出る</span>
+        <p><strong>価格を決めるのは市町村長、基準を定めるのは総務大臣。</strong>「都道府県知事が価格を決定する」は誤り。<br>
+        <strong>評価替えは3年に1度</strong>で、間の2年は据え置くのが原則。ただし地目の変更や家屋の増改築などがあれば、基準年度以外でも価格を修正する。</p>
+      </div>
+    </section>
+
+    <!-- 05 -->
+    <section id="kotei-tokurei">
+      <h2 class="sec"><span class="num">05</span>住宅用地の特例</h2>
+      <p class="lead">固定資産税で最も出るのがここ。<em>200㎡を境に1/6と1/3</em>という数字だけは絶対に落とさない。</p>
+
+      <figure class="plate">
+        <svg viewBox="0 0 720 240" role="img" aria-label="住宅用地の課税標準の特例の図。1戸あたり200平方メートル以下の部分は小規模住宅用地として課税標準が6分の1になり、200平方メートルを超える部分は一般住宅用地として3分の1になる。">
+          <text x="16" y="30" class="lbl">住宅1戸あたりの敷地面積</text>
+
+          <rect x="16" y="52" width="230" height="86" class="svg-accfill" rx="2"/>
+          <text x="131" y="86" text-anchor="middle" class="acct">小規模住宅用地</text>
+          <text x="131" y="106" text-anchor="middle">200㎡以下の部分</text>
+          <text x="131" y="128" text-anchor="middle" class="big" fill="var(--accent)">× 1/6</text>
+
+          <rect x="246" y="52" width="440" height="86" class="svg-bluefill" rx="2"/>
+          <text x="466" y="86" text-anchor="middle" class="dimt">一般住宅用地</text>
+          <text x="466" y="106" text-anchor="middle">200㎡を超える部分</text>
+          <text x="466" y="128" text-anchor="middle" class="big" fill="var(--blue)">× 1/3</text>
+
+          <line x1="16" y1="156" x2="246" y2="156" class="svg-dim"/>
+          <line x1="16" y1="150" x2="16" y2="162" class="svg-dim"/>
+          <line x1="246" y1="150" x2="246" y2="162" class="svg-dim"/>
+          <text x="131" y="176" text-anchor="middle" class="dimt">200㎡</text>
+
+          <line x1="246" y1="156" x2="686" y2="156" class="svg-hair"/>
+          <line x1="686" y1="150" x2="686" y2="162" class="svg-hair"/>
+          <text x="466" y="176" text-anchor="middle" class="lbl">家屋の床面積の10倍まで</text>
+
+          <text x="16" y="206" class="lbl">※ 特例が受けられるのは「住宅の敷地」だけ。更地・駐車場・店舗の敷地には適用されない</text>
+          <text x="16" y="224" class="lbl">※ 200㎡を超えたら全部が1/3になるのではなく、200㎡までの部分は1/6のまま（面積で切り分ける）</text>
+        </svg>
+        <figcaption>Fig.3 — 200㎡で切り分ける。全体が切り替わるのではない</figcaption>
+      </figure>
+
+      <h3>新築住宅の税額の減額</h3>
+      <div class="scroll">
+        <table>
+          <thead><tr><th>項目</th><th>内容</th></tr></thead>
+          <tbody>
+            <tr><td><strong>減額の内容</strong></td><td>床面積 <strong>120㎡</strong> までの部分に対応する<strong>税額</strong>を <strong>1/2</strong></td></tr>
+            <tr><td><strong>期間</strong></td><td>新築後 <strong>3年度分</strong><br><strong>3階建以上の中高層耐火建築物</strong>は <strong class="no">5年度分</strong></td></tr>
+            <tr><td>床面積要件</td><td><strong>50㎡以上280㎡以下</strong>（貸家である共同住宅等は40㎡以上280㎡以下）</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="call trap">
+        <span class="tag">ひっかけ</span>
+        <p><strong>住宅用地の特例は「課税標準」を減らし、新築住宅の特例は「税額」を減らす。</strong>減らす対象が違う。<br>
+        さらに数字が3系統あるので混同しやすい ——<strong>住宅用地は200㎡</strong>、<strong>新築住宅の減額は120㎡まで・上限280㎡</strong>、<strong>不動産取得税は上限240㎡</strong>。税目と場面をセットで覚える。</p>
+      </div>
+
+      <div class="call tip">
+        <span class="tag">覚え方</span>
+        <p>「<strong>小さいほど手厚い</strong>」と考えると符号を間違えない。200㎡以下という<strong>ささやかな敷地</strong>ほど大きく減る（1/6）。生活の器を守るための制度なので、更地や駐車場には適用されない。</p>
+      </div>
+    </section>
+
+    <!-- 06 -->
+    <section id="daicho">
+      <h2 class="sec"><span class="num">06</span>台帳・縦覧・不服申立て</h2>
+
+      <div class="scroll">
+        <table>
+          <thead><tr><th>制度</th><th>誰が</th><th>いつ・どこへ</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><strong>閲覧</strong><br><span class="lbl">自分の資産の課税台帳を見る</span></td>
+              <td>納税義務者、借地人・借家人など</td>
+              <td><strong>いつでも</strong>／市町村</td>
+            </tr>
+            <tr>
+              <td><strong>縦覧</strong><br><span class="lbl">他人の資産と価格を見比べる</span></td>
+              <td class="tri"><strong>納税者</strong>（土地・家屋それぞれの）</td>
+              <td><strong>毎年4月1日</strong>から、<strong>4月20日</strong>または<strong>最初の納期限の日</strong>のいずれか遅い日以後の日まで</td>
+            </tr>
+            <tr>
+              <td><strong>審査の申出</strong><br><span class="lbl">価格が不服</span></td>
+              <td>納税者</td>
+              <td class="no"><strong>固定資産評価審査委員会</strong>へ<br>納税通知書の交付を受けた日後<strong>3か月以内</strong></td>
+            </tr>
+            <tr>
+              <td>審査請求<br><span class="lbl">価格以外（税額の計算誤りなど）が不服</span></td>
+              <td>納税者</td>
+              <td><strong>市町村長</strong>へ</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="call trap">
+        <span class="tag">ひっかけ</span>
+        <p><strong>価格への不服は「固定資産評価審査委員会」、それ以外は「市町村長」。</strong>宛先の入れ替えが定番。<br>
+        <strong>縦覧は「納税者」限定</strong>で、しかも<strong>他人の土地・家屋の価格を見比べるため</strong>の制度。自分の台帳を見る「閲覧」とは目的も期間も違う。</p>
+      </div>
+    </section>
+
+    <!-- 07 -->
+    <section id="toshikeikaku">
+      <h2 class="sec"><span class="num">07</span>都市計画税</h2>
+      <p>単独で1問になることはまずないが、固定資産税の選択肢に紛れ込む。</p>
+
+      <div class="scroll">
+        <table>
+          <thead><tr><th>項目</th><th>内容</th></tr></thead>
+          <tbody>
+            <tr><td>課税主体</td><td><strong>市町村</strong>（目的税）</td></tr>
+            <tr><td>課税対象</td><td>原則として<strong>市街化区域内</strong>の土地・家屋。<span class="no">償却資産は対象外</span></td></tr>
+            <tr><td>納税義務者</td><td>1月1日現在の所有者</td></tr>
+            <tr><td><strong>制限税率</strong></td><td class="no"><strong>0.3%</strong>（固定資産税と違い、上限がある）</td></tr>
+            <tr><td>徴収</td><td>固定資産税と<strong>あわせて</strong>賦課徴収できる</td></tr>
+            <tr><td>住宅用地の特例</td><td>あり。ただし割合が違う（<strong>200㎡以下は1/3</strong>、超える部分は2/3）</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="call exam">
+        <span class="tag">よく出る</span>
+        <p><strong>制限税率があるのは都市計画税（0.3%）だけ。</strong>不動産取得税にも固定資産税にも制限税率はない。この非対称が問われる。</p>
+      </div>
+    </section>
+
+    <!-- 08 -->
+    <section id="deru">
+      <h2 class="sec"><span class="num">08</span>よく出る論点</h2>
+      <div class="scroll">
+        <table>
+          <thead><tr><th class="n">順位</th><th>論点</th><th>要点</th></tr></thead>
+          <tbody>
+            <tr><td class="n">1</td><td><strong>住宅用地の特例</strong></td><td>200㎡以下は1/6、超える部分は1/3</td></tr>
+            <tr><td class="n">2</td><td><strong>課税主体</strong></td><td>取得税＝都道府県、固定資産税＝市町村</td></tr>
+            <tr><td class="n">3</td><td>免税点</td><td>取得税10/23/12、固定30/20/150</td></tr>
+            <tr><td class="n">4</td><td>相続と贈与</td><td>相続は非課税、贈与は課税</td></tr>
+            <tr><td class="n">5</td><td>賦課期日</td><td>1月1日。年の途中の売却でも売主が納める</td></tr>
+            <tr><td class="n">6</td><td>新築住宅の控除1,200万円</td><td>自己居住用でなくてよい。床面積50〜240㎡</td></tr>
+            <tr><td class="n">7</td><td>新築住宅の税額1/2</td><td>120㎡まで・3年度（中高層耐火は5年度）</td></tr>
+            <tr><td class="n">8</td><td>評価替え</td><td>3年ごとの基準年度。間は据置き</td></tr>
+            <tr><td class="n">9</td><td>審査の申出</td><td>価格は固定資産評価審査委員会へ3か月以内</td></tr>
+            <tr><td class="n">10</td><td>制限税率</td><td>都市計画税0.3%のみ。他の2つにはない</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 09 -->
+    <section id="hikkake">
+      <h2 class="sec"><span class="num">09</span>ひっかけ一覧</h2>
+      <div class="scroll">
+        <table class="traps">
+          <thead><tr><th>こう書かれたら疑う</th><th>正しくは</th></tr></thead>
+          <tbody>
+            <tr><td>不動産取得税は市町村が課する</td><td><strong>都道府県</strong></td></tr>
+            <tr><td>固定資産税は都道府県が課する</td><td><strong>市町村</strong></td></tr>
+            <tr><td>相続により取得した不動産にも不動産取得税が課される</td><td><strong>非課税</strong></td></tr>
+            <tr><td>贈与による取得は無償なので非課税である</td><td><strong>課税</strong>される</td></tr>
+            <tr><td>登記をしなければ不動産取得税は課されない</td><td>登記の有無を<strong>問わない</strong></td></tr>
+            <tr><td>不動産取得税の税率は一律4%である</td><td>土地・住宅は<strong>3%</strong></td></tr>
+            <tr><td>課税標準1/2の特例は土地・家屋の双方に適用される</td><td><strong>宅地</strong>のみ</td></tr>
+            <tr><td>新築住宅の1,200万円控除は自己の居住用に限る</td><td>新築は<strong>居住用要件なし</strong>（中古は必要）</td></tr>
+            <tr><td>不動産取得税・固定資産税は申告納付である</td><td>どちらも<strong>普通徴収</strong></td></tr>
+            <tr><td>固定資産税の納税義務者は年の途中で所有者となった者</td><td><strong>1月1日</strong>現在の所有者</td></tr>
+            <tr><td>固定資産税の税率は1.4%を超えてはならない</td><td>1.4%は<strong>標準</strong>税率。制限税率はない</td></tr>
+            <tr><td>固定資産の価格は都道府県知事が決定する</td><td><strong>市町村長</strong>が決定（基準は総務大臣）</td></tr>
+            <tr><td>評価替えは毎年行われる</td><td><strong>3年ごと</strong>の基準年度</td></tr>
+            <tr><td>200㎡を超える住宅用地は全体が1/3になる</td><td>200㎡までは<strong>1/6</strong>のまま。面積で切り分ける</td></tr>
+            <tr><td>住宅用地の特例は更地にも適用される</td><td><strong>住宅の敷地</strong>に限る</td></tr>
+            <tr><td>新築住宅の税額減額は床面積280㎡まで1/2になる</td><td>減額されるのは<strong>120㎡まで</strong>の部分</td></tr>
+            <tr><td>新築住宅の減額期間はすべて3年度分である</td><td>3階建以上の中高層耐火建築物は<strong>5年度分</strong></td></tr>
+            <tr><td>価格に不服があるときは市町村長に審査請求する</td><td><strong>固定資産評価審査委員会</strong>に審査の申出</td></tr>
+            <tr><td>縦覧はいつでもできる</td><td><strong>4月1日から</strong>の一定期間のみ（閲覧はいつでも可）</td></tr>
+            <tr><td>都市計画税にも制限税率はない</td><td><strong>0.3%</strong>の制限税率がある</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 10 -->
+    <section id="suji">
+      <h2 class="sec"><span class="num">10</span>数字まとめ</h2>
+      <p class="masthead-note">右上の「数値を隠す」で自己テストできる。</p>
+      <div class="nums" id="numgrid">
+        <div class="nc" tabindex="0"><span class="v">4% / 3%</span><span class="d">不動産取得税の標準税率／土地・住宅の特例税率</span></div>
+        <div class="nc" tabindex="0"><span class="v">1.4%</span><span class="d">固定資産税の標準税率（制限税率なし）</span></div>
+        <div class="nc" tabindex="0"><span class="v">0.3%</span><span class="d">都市計画税の制限税率</span></div>
+        <div class="nc" tabindex="0"><span class="v">10 / 23 / 12万円</span><span class="d">不動産取得税の免税点（土地／家屋の建築／家屋のその他）</span></div>
+        <div class="nc" tabindex="0"><span class="v">30 / 20 / 150万円</span><span class="d">固定資産税の免税点（土地／家屋／償却資産）</span></div>
+        <div class="nc" tabindex="0"><span class="v">1/2</span><span class="d">宅地の課税標準の特例（不動産取得税・2027年3月31日まで）</span></div>
+        <div class="nc" tabindex="0"><span class="v">1,200万円</span><span class="d">新築住宅の課税標準の控除（認定長期優良住宅は1,300万円）</span></div>
+        <div class="nc" tabindex="0"><span class="v">50〜240㎡</span><span class="d">不動産取得税の住宅特例の床面積（貸家共同住宅は40㎡以上）</span></div>
+        <div class="nc" tabindex="0"><span class="v">6か月 / 1年</span><span class="d">新築家屋のみなし取得の時期（一般／宅建業者等）</span></div>
+        <div class="nc" tabindex="0"><span class="v">1月1日</span><span class="d">固定資産税の賦課期日</span></div>
+        <div class="nc" tabindex="0"><span class="v">200㎡</span><span class="d">住宅用地の特例の境目（以下は1/6、超は1/3）</span></div>
+        <div class="nc" tabindex="0"><span class="v">120㎡</span><span class="d">新築住宅の税額1/2が適用される床面積の上限</span></div>
+        <div class="nc" tabindex="0"><span class="v">3年度 / 5年度</span><span class="d">新築住宅の税額減額の期間（一般／3階建以上の中高層耐火建築物）</span></div>
+        <div class="nc" tabindex="0"><span class="v">50〜280㎡</span><span class="d">新築住宅の税額減額の床面積要件</span></div>
+        <div class="nc" tabindex="0"><span class="v">3年</span><span class="d">固定資産の評価替えの周期（基準年度）</span></div>
+        <div class="nc" tabindex="0"><span class="v">3月31日</span><span class="d">市町村長が価格を決定し台帳に登録する期限</span></div>
+        <div class="nc" tabindex="0"><span class="v">4月1日〜</span><span class="d">縦覧期間の初日（終期は4月20日か最初の納期限の遅い方）</span></div>
+        <div class="nc" tabindex="0"><span class="v">3か月</span><span class="d">価格への審査の申出の期限（納税通知書の交付を受けた日後）</span></div>
+        <div class="nc" tabindex="0"><span class="v">4・7・12・2月</span><span class="d">固定資産税の納期（市町村の条例で定める）</span></div>
+        <div class="nc" tabindex="0"><span class="v">100年</span><span class="d">これより永い存続期間の地上権があると、地上権者が納税義務者</span></div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <h4>出典</h4>
+    <ul>
+      <li>地方税法（昭和25年法律第226号） — <a href="https://laws.e-gov.go.jp/law/325AC0000000226">e-Gov法令検索</a></li>
+      <li>総務省 不動産取得税（税率・課税標準の特例・免税点） — <a href="https://www.soumu.go.jp/main_sosiki/jichi_zeisei/czaisei/czaisei_seido/149764_09.html">soumu.go.jp</a></li>
+      <li>総務省 固定資産税（住宅用地の特例・新築住宅の減額） — <a href="https://www.soumu.go.jp/main_sosiki/jichi_zeisei/czaisei/czaisei_seido/149764_10.html">soumu.go.jp</a></li>
+      <li>総務省 固定資産税の縦覧制度・審査の申出 — <a href="https://www.soumu.go.jp/main_sosiki/jichi_zeisei/czaisei/czaisei_seido/ichiran09_r01.html">soumu.go.jp</a></li>
+    </ul>
+    <div class="sibling">
+      <a href="../index.html">総目次</a>
+      <a href="横断早見表.html">税その他 横断早見表</a>
+      <a href="国税.html">← 国税</a>
+      <a href="価格の評定.html">価格の評定 →</a>
+    </div>
+  </footer>
+
+</div>
+
+<script>
+  (function () {
+    var root = document.documentElement;
+    document.getElementById('theme').addEventListener('click', function () {
+      if (root.getAttribute('data-theme')) { root.removeAttribute('data-theme'); return; }
+      var dark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      root.setAttribute('data-theme', dark ? 'light' : 'dark');
+    });
+    var maskBtn = document.getElementById('mask');
+    var grid = document.getElementById('numgrid');
+    maskBtn.addEventListener('click', function () {
+      var on = grid.classList.toggle('masked');
+      maskBtn.setAttribute('aria-pressed', String(on));
+      maskBtn.textContent = on ? '数値を表示' : '数値を隠す';
+    });
+    var links = Array.prototype.slice.call(document.querySelectorAll('nav.rail ol a'));
+    var map = {};
+    links.forEach(function (a) { map[a.getAttribute('href').slice(1)] = a; });
+    var seen = [];
+    var obs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        var i = seen.indexOf(e.target.id);
+        if (e.isIntersecting && i < 0) seen.push(e.target.id);
+        if (!e.isIntersecting && i >= 0) seen.splice(i, 1);
+      });
+      links.forEach(function (a) { a.classList.remove('on'); });
+      if (seen.length) {
+        var order = Object.keys(map);
+        seen.sort(function (a, b) { return order.indexOf(a) - order.indexOf(b); });
+        map[seen[0]].classList.add('on');
+      }
+    }, { rootMargin: '-10% 0px -70% 0px' });
+    document.querySelectorAll('main section').forEach(function (s) { obs.observe(s); });
+  })();
+</script>

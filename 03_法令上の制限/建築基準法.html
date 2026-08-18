@@ -1,0 +1,1291 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>建築基準法 — 宅建士試験 2026年度</title>
+
+<style>
+  :root {
+    --paper:   #EBEDE9;
+    --surface: #F8F9F6;
+    --sunk:    #E1E4DE;
+    --ink:     #151F2A;
+    --muted:   #5D6B78;
+    --rule:    #CDD2CB;
+    --hair:    #DCE0D9;
+    --accent:  #B8342A;
+    --accent-soft: #F3DEDB;
+    --blue:    #2A5F86;
+    --blue-soft:   #DCE6EE;
+    --shadow:  0 1px 2px rgba(21,31,42,.06), 0 8px 24px -16px rgba(21,31,42,.28);
+
+    --font-display: "Hiragino Mincho ProN", "Yu Mincho", "YuMincho", "Noto Serif JP", serif;
+    --font-body: "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Yu Gothic", "YuGothic", "Noto Sans JP", system-ui, sans-serif;
+    --font-mono: ui-monospace, "SFMono-Regular", "SF Mono", Menlo, Consolas, monospace;
+
+    --measure: 68ch;
+    --s1: .35rem; --s2: .7rem; --s3: 1.1rem; --s4: 1.7rem; --s5: 2.6rem; --s6: 4rem;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper:   #0D1B29;
+      --surface: #132534;
+      --sunk:    #0A1622;
+      --ink:     #DAE4EC;
+      --muted:   #8CA1B3;
+      --rule:    #26415A;
+      --hair:    #1D3448;
+      --accent:  #FF7059;
+      --accent-soft: #3A1F1D;
+      --blue:    #6FB6DC;
+      --blue-soft:   #14293A;
+      --shadow:  0 1px 2px rgba(0,0,0,.4), 0 8px 24px -16px rgba(0,0,0,.8);
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper:   #0D1B29;
+    --surface: #132534;
+    --sunk:    #0A1622;
+    --ink:     #DAE4EC;
+    --muted:   #8CA1B3;
+    --rule:    #26415A;
+    --hair:    #1D3448;
+    --accent:  #FF7059;
+    --accent-soft: #3A1F1D;
+    --blue:    #6FB6DC;
+    --blue-soft:   #14293A;
+    --shadow:  0 1px 2px rgba(0,0,0,.4), 0 8px 24px -16px rgba(0,0,0,.8);
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.9;
+    -webkit-font-smoothing: antialiased;
+    font-feature-settings: "palt" 1;
+  }
+
+  .wrap {
+    display: grid;
+    grid-template-columns: 15.5rem minmax(0, 1fr);
+    gap: var(--s6);
+    max-width: 78rem;
+    margin: 0 auto;
+    padding: 0 var(--s4) var(--s6);
+    align-items: start;
+  }
+  @media (max-width: 60rem) {
+    .wrap { grid-template-columns: minmax(0,1fr); gap: var(--s4); padding: 0 var(--s3) var(--s5); }
+  }
+
+  /* ---------- masthead ---------- */
+  .masthead {
+    grid-column: 1 / -1;
+    padding: var(--s5) 0 var(--s4);
+    border-bottom: 2px solid var(--ink);
+    margin-bottom: var(--s2);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: var(--s3);
+  }
+  .eyebrow {
+    font-family: var(--font-mono);
+    font-size: .72rem;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    color: var(--muted);
+    display: flex;
+    align-items: center;
+    gap: .6em;
+  }
+  .eyebrow::before {
+    content: "";
+    width: 2.2rem; height: 1px;
+    background: var(--accent);
+  }
+  h1 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: clamp(2rem, 1.4rem + 2.6vw, 3.1rem);
+    line-height: 1.2;
+    letter-spacing: .04em;
+    margin: var(--s2) 0 var(--s3);
+    text-wrap: balance;
+  }
+  .facts {
+    display: flex; flex-wrap: wrap; gap: 0 var(--s3);
+    font-size: .82rem; color: var(--muted);
+    list-style: none; margin: 0; padding: 0;
+  }
+  .facts b {
+    font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums;
+    color: var(--ink); font-weight: 600;
+  }
+  .toggles { display: flex; gap: var(--s1); }
+  button {
+    font-family: var(--font-body);
+    font-size: .78rem;
+    color: var(--muted);
+    background: var(--surface);
+    border: 1px solid var(--rule);
+    border-radius: 2px;
+    padding: .4em .9em;
+    cursor: pointer;
+    transition: color .15s, border-color .15s;
+  }
+  button:hover { color: var(--ink); border-color: var(--ink); }
+  button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  button[aria-pressed="true"] { color: var(--accent); border-color: var(--accent); }
+
+  /* ---------- contents rail ---------- */
+  nav.rail {
+    position: sticky; top: var(--s3);
+    font-size: .82rem;
+    max-height: calc(100vh - 3rem);
+    overflow-y: auto;
+    padding-bottom: var(--s3);
+  }
+  nav.rail h2 {
+    font-family: var(--font-mono);
+    font-size: .68rem; letter-spacing: .16em; text-transform: uppercase;
+    color: var(--muted); margin: 0 0 var(--s2); font-weight: 500;
+  }
+  nav.rail ol { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
+  nav.rail a {
+    display: block; padding: .3em 0 .3em .9em;
+    color: var(--muted); text-decoration: none;
+    border-left: 2px solid var(--hair);
+    line-height: 1.5;
+  }
+  nav.rail a:hover { color: var(--ink); border-left-color: var(--rule); }
+  nav.rail a.on { color: var(--ink); border-left-color: var(--accent); font-weight: 600; }
+  nav.rail a .num {
+    font-family: var(--font-mono); font-size: .72rem; color: var(--muted); margin-right: .5em;
+  }
+  @media (max-width: 60rem) {
+    nav.rail { position: static; max-height: none; border-bottom: 1px solid var(--rule); padding-bottom: var(--s3); }
+    nav.rail ol { display: grid; grid-template-columns: repeat(auto-fill, minmax(9rem, 1fr)); gap: 0 var(--s2); }
+  }
+
+  /* ---------- prose ---------- */
+  main { min-width: 0; }
+  section { padding-top: var(--s5); scroll-margin-top: var(--s3); }
+  section > * { max-width: var(--measure); }
+  section > figure, section > .full, section > .scroll { max-width: none; }
+
+  h2.sec {
+    font-family: var(--font-display);
+    font-size: clamp(1.45rem, 1.2rem + .9vw, 1.9rem);
+    font-weight: 600; letter-spacing: .04em;
+    margin: 0 0 var(--s3);
+    padding-bottom: var(--s2);
+    border-bottom: 1px solid var(--rule);
+    display: flex; align-items: baseline; gap: .7em;
+    max-width: none;
+  }
+  h2.sec .num {
+    font-family: var(--font-mono); font-size: .8rem; letter-spacing: .1em;
+    color: var(--accent); font-weight: 500;
+  }
+  h3 {
+    font-family: var(--font-body);
+    font-size: 1.06rem; font-weight: 700; letter-spacing: .02em;
+    margin: var(--s4) 0 var(--s2);
+    padding-left: .7em;
+    border-left: 3px solid var(--ink);
+  }
+  h4 {
+    font-size: .88rem; font-weight: 700; color: var(--muted);
+    letter-spacing: .06em; margin: var(--s3) 0 var(--s1);
+  }
+  p { margin: 0 0 var(--s3); }
+  a { color: var(--blue); text-underline-offset: .2em; }
+  strong { font-weight: 700; }
+  em { font-style: normal; background: linear-gradient(transparent 62%, var(--accent-soft) 62%); font-weight: 600; }
+  ul, ol { margin: 0 0 var(--s3); padding-left: 1.3em; }
+  li { margin-bottom: var(--s1); }
+  .lead { font-size: 1.05rem; color: var(--muted); }
+
+  /* ---------- callouts ---------- */
+  .call {
+    max-width: var(--measure);
+    margin: 0 0 var(--s3);
+    padding: var(--s3) var(--s3) var(--s3) var(--s4);
+    background: var(--surface);
+    border: 1px solid var(--hair);
+    border-left: 3px solid var(--rule);
+    border-radius: 2px;
+    font-size: .94rem;
+  }
+  .call > :last-child { margin-bottom: 0; }
+  .call .tag {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: .68rem; letter-spacing: .16em; text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: var(--s1);
+  }
+  .call.trap   { border-left-color: var(--accent); background: var(--accent-soft); }
+  .call.trap .tag { color: var(--accent); }
+  .call.exam   { border-left-color: var(--ink); }
+  .call.exam .tag { color: var(--ink); }
+  .call.rev    { border-left-color: var(--accent); border-style: dashed; border-left-style: solid; }
+  .call.rev .tag { color: var(--accent); }
+  .call.tip    { border-left-color: var(--blue); background: var(--blue-soft); }
+  .call.tip .tag { color: var(--blue); }
+
+  /* ---------- tables ---------- */
+  .scroll { overflow-x: auto; margin: 0 0 var(--s3); -webkit-overflow-scrolling: touch; }
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    font-size: .88rem;
+    line-height: 1.6;
+  }
+  caption {
+    text-align: left; font-size: .78rem; color: var(--muted);
+    padding-bottom: var(--s1); font-family: var(--font-mono); letter-spacing: .08em;
+  }
+  th, td { padding: .62em .8em; text-align: left; vertical-align: top; border-bottom: 1px solid var(--hair); }
+  thead th {
+    font-size: .74rem; letter-spacing: .1em; color: var(--muted); font-weight: 600;
+    border-bottom: 1px solid var(--ink); white-space: nowrap;
+  }
+  tbody tr:hover { background: var(--surface); }
+  td.n, th.n { text-align: center; font-family: var(--font-mono); font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .no  { color: var(--accent); font-weight: 700; }
+  .yes { color: var(--muted); }
+  .tri { color: var(--blue); }
+  table.matrix td.n { width: 3.2rem; }
+  table.matrix tbody th { font-weight: 500; font-size: .84rem; white-space: nowrap; }
+  table.matrix tr.hi { background: var(--accent-soft); }
+  table.matrix tr.hi th { font-weight: 700; }
+
+  /* ---------- figures ---------- */
+  figure { margin: 0 0 var(--s4); }
+  figure svg { display: block; width: 100%; height: auto; }
+  figcaption {
+    font-size: .78rem; color: var(--muted);
+    font-family: var(--font-mono); letter-spacing: .06em;
+    margin-top: var(--s2);
+    padding-top: var(--s1);
+    border-top: 1px solid var(--hair);
+  }
+  .plate {
+    background: var(--surface);
+    border: 1px solid var(--hair);
+    border-radius: 2px;
+    padding: var(--s3);
+  }
+  .svg-ink   { fill: none; stroke: var(--ink); stroke-width: 1.4; }
+  .svg-hair  { fill: none; stroke: var(--rule); stroke-width: 1; }
+  .svg-dim   { fill: none; stroke: var(--blue); stroke-width: 1; }
+  .svg-acc   { fill: none; stroke: var(--accent); stroke-width: 1.6; }
+  .svg-fill  { fill: var(--sunk); stroke: var(--rule); stroke-width: 1; }
+  .svg-accfill { fill: var(--accent-soft); stroke: var(--accent); stroke-width: 1.2; }
+  text { font-family: var(--font-body); fill: var(--ink); font-size: 12px; }
+  text.lbl { font-family: var(--font-mono); fill: var(--muted); font-size: 10.5px; letter-spacing: .06em; }
+  text.dimt { font-family: var(--font-mono); fill: var(--blue); font-size: 11px; }
+  text.acct { fill: var(--accent); font-size: 11.5px; font-weight: 700; }
+
+  /* ---------- overview columns ---------- */
+  .cols {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+    gap: var(--s2); margin-bottom: var(--s3);
+  }
+  .col {
+    background: var(--surface); border: 1px solid var(--hair); border-top: 3px solid var(--ink);
+    border-radius: 2px; padding: var(--s3);
+  }
+  .col.wide { border-top-color: var(--blue); }
+  .col h4 { margin-top: 0; color: var(--ink); font-size: 1rem; letter-spacing: .04em; }
+  .col p { font-size: .86rem; margin-bottom: var(--s2); color: var(--muted); }
+  .col ul { font-size: .86rem; padding-left: 1.1em; margin-bottom: 0; }
+  .scope {
+    display: inline-block; margin-top: var(--s2);
+    font-family: var(--font-mono); font-size: .7rem; letter-spacing: .08em;
+    padding: .25em .7em; border: 1px solid currentColor; border-radius: 999px;
+    color: var(--muted);
+  }
+  .col .scope.nation { color: var(--ink); }
+  .col .scope.city { color: var(--blue); }
+
+  /* ---------- old / new comparison ---------- */
+  .swap { display: grid; grid-template-columns: 1fr auto 1fr; gap: var(--s3); align-items: center; margin-bottom: var(--s3); }
+  @media (max-width: 44rem) { .swap { grid-template-columns: 1fr; } .swap .arrow { transform: rotate(90deg); justify-self: center; } }
+  .stack { display: flex; flex-direction: column; gap: var(--s1); }
+  .stack h4 { margin: 0 0 var(--s1); }
+  .row {
+    font-size: .85rem; padding: .6em .8em; border-radius: 2px;
+    background: var(--surface); border: 1px solid var(--hair);
+  }
+  .row .k { font-family: var(--font-mono); font-size: .72rem; color: var(--muted); letter-spacing: .08em; display: block; }
+  .row.dead { opacity: .55; text-decoration-color: var(--muted); }
+  .row.key { border-color: var(--accent); background: var(--accent-soft); }
+  .arrow { color: var(--muted); font-size: 1.4rem; }
+
+  /* ---------- decision ladder ---------- */
+  .ladder { display: flex; flex-direction: column; gap: var(--s2); margin-bottom: var(--s3); counter-reset: q; }
+  .q {
+    background: var(--surface); border: 1px solid var(--hair); border-radius: 2px;
+    padding: var(--s3);
+  }
+  .q > p { font-weight: 700; margin: 0 0 var(--s2); font-size: .95rem; }
+  .q > p::before {
+    counter-increment: q; content: "Q" counter(q);
+    font-family: var(--font-mono); font-size: .7rem; letter-spacing: .1em;
+    color: var(--accent); margin-right: .8em;
+  }
+  .branch { display: grid; grid-template-columns: repeat(auto-fit, minmax(13rem,1fr)); gap: var(--s2); }
+  .b {
+    font-size: .84rem; padding: .7em .9em; border-radius: 2px;
+    border: 1px solid var(--hair); background: var(--paper);
+  }
+  .b .k { font-family: var(--font-mono); font-size: .7rem; letter-spacing: .1em; color: var(--muted); display: block; }
+  .b.need { border-color: var(--accent); }
+  .b.need strong { color: var(--accent); }
+  .b.free { border-color: var(--rule); }
+
+  /* ---------- number cards ---------- */
+  .nums { display: grid; grid-template-columns: repeat(auto-fill, minmax(11.5rem, 1fr)); gap: var(--s2); }
+  .nc {
+    background: var(--surface); border: 1px solid var(--hair); border-radius: 2px;
+    padding: var(--s3) var(--s3) var(--s2);
+    display: flex; flex-direction: column; gap: var(--s1);
+  }
+  .nc .v {
+    font-family: var(--font-mono); font-variant-numeric: tabular-nums;
+    font-size: 1.35rem; font-weight: 600; letter-spacing: -.01em; line-height: 1.2;
+    color: var(--accent);
+  }
+  .nc .d { font-size: .8rem; color: var(--muted); line-height: 1.6; }
+  .nums.masked .v {
+    color: transparent; background: var(--rule); border-radius: 2px;
+    user-select: none;
+  }
+  .nums.masked .nc:hover .v, .nums.masked .nc:focus-within .v {
+    color: var(--accent); background: transparent;
+  }
+  .nc:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .masthead-note { font-size: .78rem; color: var(--muted); margin-bottom: var(--s2); }
+
+  /* ---------- traps table ---------- */
+  table.traps td:first-child { color: var(--muted); }
+  table.traps td:first-child::before { content: "「"; }
+  table.traps td:first-child::after  { content: "」"; }
+  table.traps td:last-child strong { color: var(--accent); }
+
+  footer {
+    grid-column: 1 / -1;
+    margin-top: var(--s6);
+    padding-top: var(--s3);
+    border-top: 1px solid var(--rule);
+    font-size: .8rem; color: var(--muted);
+  }
+  footer ul { list-style: none; padding: 0; }
+  footer li { margin-bottom: var(--s1); }
+  .todo {
+    font-family: var(--font-mono); font-size: .74rem;
+    border: 1px dashed var(--rule); border-radius: 2px;
+    padding: var(--s2) var(--s3); margin-top: var(--s3); color: var(--muted);
+  }
+  .sibling { display: flex; flex-wrap: wrap; gap: var(--s2); margin-top: var(--s3); }
+  .sibling a { font-size: .8rem; text-decoration: none; border: 1px solid var(--rule); border-radius: 2px; padding: .35em .8em; color: var(--muted); }
+  .sibling a:hover { color: var(--ink); border-color: var(--ink); }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; animation: none !important; scroll-behavior: auto !important; }
+  }
+  html { scroll-behavior: smooth; }
+  .eyebrow a { color:var(--accent); text-decoration:none; }
+  .eyebrow a:hover { text-decoration:underline; text-underline-offset:.2em; }
+  nav.rail a.home { border-left:none; padding:0 0 var(--s2); color:var(--accent);
+    font-family:var(--font-mono); font-size:.72rem; letter-spacing:.1em; }
+  nav.rail a.home:hover { color:var(--accent); text-decoration:underline; text-underline-offset:.2em; }
+</style>
+
+<div class="wrap">
+
+  <header class="masthead">
+    <div>
+      <div class="eyebrow"><a href="../index.html">← 総目次</a> &nbsp;/&nbsp; 03 法令上の制限 &nbsp;/&nbsp; 宅建士試験 2026年度</div>
+      <h1>建築基準法</h1>
+      <ul class="facts">
+        <li>法令基準日 <b>2026-04-01</b></li>
+        <li>出題数 <b>2問</b></li>
+        <li>目標 <b>1〜2問</b></li>
+        <li>更新 <b>2026-08-09</b></li>
+      </ul>
+    </div>
+    <div class="toggles">
+      <button id="mask" type="button" aria-pressed="false">数値を隠す</button>
+      <button id="theme" type="button">配色切替</button>
+    </div>
+  </header>
+
+  <nav class="rail" aria-label="目次">
+    <a class="home" href="../index.html">← 総目次</a>
+    <h2>Contents</h2>
+    <ol>
+      <li><a href="#overview"><span class="num">00</span>全体像</a></li>
+      <li><a href="#kakunin"><span class="num">01</span>建築確認</a></li>
+      <li><a href="#tantai"><span class="num">02</span>単体規定</a></li>
+      <li><a href="#doro"><span class="num">03</span>道路・接道義務</a></li>
+      <li><a href="#yoto"><span class="num">04</span>用途制限</a></li>
+      <li><a href="#kenpei"><span class="num">05</span>建蔽率</a></li>
+      <li><a href="#yoseki"><span class="num">06</span>容積率</a></li>
+      <li><a href="#takasa"><span class="num">07</span>高さ制限</a></li>
+      <li><a href="#boka"><span class="num">08</span>防火・準防火地域</a></li>
+      <li><a href="#kyotei"><span class="num">09</span>建築協定</a></li>
+      <li><a href="#deru"><span class="num">10</span>よく出る論点</a></li>
+      <li><a href="#hikkake"><span class="num">11</span>ひっかけ一覧</a></li>
+      <li><a href="#suji"><span class="num">12</span>数字まとめ</a></li>
+    </ol>
+  </nav>
+
+  <main>
+
+    <!-- ============ 00 ============ -->
+    <section id="overview">
+      <h2 class="sec"><span class="num">00</span>全体像</h2>
+      <p class="lead">建築基準法は <em>単体規定</em> と <em>集団規定</em> の2本柱。この区別がすべての出発点で、適用される場所が違う。</p>
+
+      <div class="cols">
+        <div class="col">
+          <h4>単体規定</h4>
+          <p>建物そのものの安全・衛生を守るルール。</p>
+          <ul>
+            <li>構造耐力／防火・避難</li>
+            <li>採光・換気・天井高</li>
+            <li>シックハウス・石綿</li>
+          </ul>
+          <span class="scope nation">全国どこでも適用</span>
+        </div>
+        <div class="col wide">
+          <h4>集団規定</h4>
+          <p>街並みを整えるルール。隣近所との関係を調整する。</p>
+          <ul>
+            <li>道路・接道義務</li>
+            <li>用途制限</li>
+            <li>建蔽率・容積率</li>
+            <li>高さ・斜線・日影</li>
+            <li>防火地域・準防火地域</li>
+          </ul>
+          <span class="scope city">原則 都市計画区域・準都市計画区域内のみ</span>
+        </div>
+        <div class="col">
+          <h4>建築確認</h4>
+          <p>上のルールを守っているかを着工前にチェックする手続。</p>
+          <ul>
+            <li>確認 → 中間検査 → 完了検査</li>
+            <li>2025年4月に区分が再編</li>
+          </ul>
+          <span class="scope">手続規定</span>
+        </div>
+      </div>
+
+      <div class="call trap">
+        <span class="tag">ひっかけ</span>
+        <p><strong>適用範囲の違いが第一の落とし穴。</strong>単体規定は全国で適用されるが、集団規定は原則として都市計画区域・準都市計画区域内でしか適用されない。「都市計画区域外の建物には接道義務がない」は<strong>正しい</strong>記述。</p>
+      </div>
+    </section>
+
+    <!-- ============ 01 ============ -->
+    <section id="kakunin">
+      <h2 class="sec"><span class="num">01</span>建築確認</h2>
+
+      <div class="call rev">
+        <span class="tag">2026年度の最重要改正</span>
+        <p><strong>2025年4月1日施行 — 「4号建築物」が廃止され、新2号・新3号に再編された。</strong>改正初年度にあたる今年の試験で最も狙われる論点。</p>
+      </div>
+
+      <h3>1-1　区分の再編</h3>
+
+      <div class="swap">
+        <div class="stack">
+          <h4>改正前 〜2025/3/31</h4>
+          <div class="row"><span class="k">1号</span>特殊建築物 200㎡超</div>
+          <div class="row dead"><span class="k">2号</span>木造 3階以上／500㎡超／高さ13m超／軒高9m超</div>
+          <div class="row dead"><span class="k">3号</span>木造以外 2階以上／200㎡超</div>
+          <div class="row dead"><span class="k">4号</span>それ以外の小規模（審査省略＝4号特例）</div>
+        </div>
+        <div class="arrow" aria-hidden="true">→</div>
+        <div class="stack">
+          <h4>改正後 2025/4/1〜</h4>
+          <div class="row"><span class="k">1号</span>特殊建築物 200㎡超</div>
+          <div class="row key"><span class="k">新2号</span>階数2以上 <strong>または</strong> 延べ面積200㎡超<br>— 構造の別を問わない</div>
+          <div class="row"><span class="k">新3号</span>階数1 かつ 200㎡以下（都市計画区域等内）</div>
+        </div>
+      </div>
+
+      <div class="call trap">
+        <span class="tag">ひっかけ</span>
+        <p><strong>「木造」「木造以外」という区分はもう存在しない。</strong>改正前の教材や令和6年度以前の過去問には「木造は3階以上または500㎡超」と書かれているが、現在は誤り。過去問演習でこの論点だけ答えが変わる。</p>
+      </div>
+
+      <h3>1-2　確認が必要な行為</h3>
+
+      <div class="ladder">
+        <div class="q">
+          <p>新築するとき</p>
+          <div class="branch">
+            <div class="b need"><span class="k">1号・2号</span><strong>全国どこでも必要</strong></div>
+            <div class="b"><span class="k">3号</span>都市計画区域・準都市計画区域等内でのみ必要</div>
+          </div>
+        </div>
+        <div class="q">
+          <p>増築・改築・移転するとき</p>
+          <div class="branch">
+            <div class="b free"><span class="k">床面積10㎡以内</span>原則 <strong>不要</strong></div>
+            <div class="b need"><span class="k">防火地域・準防火地域内</span><strong>面積を問わず必要</strong></div>
+            <div class="b"><span class="k">10㎡超</span>新築と同じ判定</div>
+          </div>
+        </div>
+        <div class="q">
+          <p>大規模の修繕・模様替をするとき</p>
+          <div class="branch">
+            <div class="b need"><span class="k">1号・2号</span><strong>必要</strong></div>
+            <div class="b free"><span class="k">新3号</span>不要</div>
+          </div>
+        </div>
+        <div class="q">
+          <p>用途変更をするとき</p>
+          <div class="branch">
+            <div class="b need"><span class="k">200㎡超の特殊建築物になる</span><strong>必要</strong></div>
+            <div class="b free"><span class="k">類似の用途相互間</span>不要</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="scroll">
+        <table>
+          <caption>行為 × 区分</caption>
+          <thead>
+            <tr><th>行為</th><th class="n">1号<br>特殊建築物200㎡超</th><th class="n">新2号<br>階数2以上 or 200㎡超</th><th class="n">新3号<br>平屋かつ200㎡以下</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>新築</td><td class="n">全国</td><td class="n">全国</td><td class="n tri">都市計画区域等内のみ</td></tr>
+            <tr><td>増築・改築・移転</td><td class="n">全国</td><td class="n">全国</td><td class="n tri">都市計画区域等内のみ</td></tr>
+            <tr><td><strong>大規模の修繕・模様替</strong></td><td class="n">必要</td><td class="n">必要</td><td class="n no">不要</td></tr>
+            <tr><td>用途変更</td><td class="n">必要</td><td class="n">—</td><td class="n">—</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="call tip">
+        <span class="tag">覚え方</span>
+        <p><strong>「10㎡セーフは、火のないところだけ」</strong>。防火地域内で床面積5㎡の増築 → 確認不要、は誤り。</p>
+      </div>
+
+      <h3>1-3　手続の流れと期間</h3>
+
+      <figure class="plate">
+        <svg viewBox="0 0 720 190" role="img" aria-label="建築確認から検査済証までの流れ。確認申請の審査は1号・2号が35日以内、3号が7日以内。完了検査は工事完了から4日以内に到達するよう申請し、受理から7日以内に検査。">
+          <line x1="24" y1="96" x2="696" y2="96" class="svg-hair"/>
+
+          <g>
+            <circle cx="60" cy="96" r="6" class="svg-ink" fill="var(--paper)"/>
+            <text x="60" y="76" text-anchor="middle">確認申請</text>
+            <text x="60" y="128" text-anchor="middle" class="lbl">STEP 1</text>
+          </g>
+
+          <path d="M66 96 H 214" class="svg-dim" stroke-dasharray="3 3"/>
+          <text x="140" y="88" text-anchor="middle" class="dimt">35日 / 7日</text>
+
+          <g>
+            <circle cx="220" cy="96" r="6" class="svg-ink" fill="var(--paper)"/>
+            <text x="220" y="76" text-anchor="middle">確認済証</text>
+            <text x="220" y="128" text-anchor="middle" class="lbl">STEP 2</text>
+          </g>
+
+          <g>
+            <rect x="232" y="86" width="122" height="20" class="svg-fill" rx="2"/>
+            <text x="293" y="100" text-anchor="middle" class="lbl">着工 → 中間検査</text>
+          </g>
+
+          <g>
+            <circle cx="392" cy="96" r="6" class="svg-ink" fill="var(--paper)"/>
+            <text x="392" y="76" text-anchor="middle">工事完了</text>
+            <text x="392" y="128" text-anchor="middle" class="lbl">STEP 3</text>
+          </g>
+
+          <path d="M398 96 H 500" class="svg-dim" stroke-dasharray="3 3"/>
+          <text x="449" y="88" text-anchor="middle" class="dimt">4日以内に到達</text>
+
+          <g>
+            <circle cx="506" cy="96" r="6" class="svg-ink" fill="var(--paper)"/>
+            <text x="506" y="76" text-anchor="middle">完了検査申請</text>
+            <text x="506" y="128" text-anchor="middle" class="lbl">STEP 4</text>
+          </g>
+
+          <path d="M512 96 H 620" class="svg-dim" stroke-dasharray="3 3"/>
+          <text x="566" y="88" text-anchor="middle" class="dimt">7日以内に検査</text>
+
+          <g>
+            <circle cx="626" cy="96" r="6" class="svg-acc" fill="var(--paper)"/>
+            <text x="626" y="76" text-anchor="middle" class="acct">検査済証</text>
+            <text x="626" y="128" text-anchor="middle" class="lbl">STEP 5</text>
+          </g>
+
+          <path d="M626 136 V 158 H 392" class="svg-acc" stroke-dasharray="4 3"/>
+          <text x="500" y="174" text-anchor="middle" class="acct">1号・2号はここまで使用できない（仮使用認定を除く）</text>
+        </svg>
+        <figcaption>Fig.1 — 確認申請から使用開始まで</figcaption>
+      </figure>
+
+      <div class="scroll">
+        <table>
+          <thead><tr><th>論点</th><th>内容</th></tr></thead>
+          <tbody>
+            <tr><td>確認の審査期間</td><td><strong>1号・2号：35日以内</strong>／<strong>3号：7日以内</strong>（1号・2号は最大35日延長可）</td></tr>
+            <tr><td>完了検査の申請</td><td>工事完了日から<strong>4日以内に到達</strong>するように申請する</td></tr>
+            <tr><td>完了検査の実施</td><td>申請受理から<strong>7日以内</strong></td></tr>
+            <tr><td>使用開始の制限</td><td><strong>1号・2号</strong>は検査済証の交付を受けるまで使用不可。3号は完了検査申請後すぐ使用可</td></tr>
+            <tr><td>仮使用</td><td>特定行政庁・建築主事・指定確認検査機関の仮使用認定があれば使用可</td></tr>
+            <tr><td>不服申立て</td><td><strong>建築審査会</strong>へ審査請求（建築審査会は特定行政庁に置かれる）</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="call trap">
+        <span class="tag">ひっかけ</span>
+        <p>使用制限がかかるのは<strong>1号・2号だけ</strong>。新3号（平屋200㎡以下）は検査済証を待たずに使える。なお改正で戸建て2階建てが新2号に移ったため、<strong>ごく普通の2階建て住宅も検査済証がないと使えなくなった</strong>。</p>
+      </div>
+    </section>
+
+    <!-- ============ 02 ============ -->
+    <section id="tantai">
+      <h2 class="sec"><span class="num">02</span>単体規定</h2>
+      <p>全国で適用される、建物そのもののルール。数値の暗記が中心。</p>
+
+      <h3>2-1　採光・換気・天井高</h3>
+      <div class="scroll">
+        <table>
+          <thead><tr><th>項目</th><th class="n">基準</th><th>対象</th></tr></thead>
+          <tbody>
+            <tr><td>採光</td><td class="n">床面積の <strong>1/7</strong> 以上</td><td><strong>住宅の居室</strong></td></tr>
+            <tr><td>採光の緩和</td><td class="n"><strong>1/10</strong> まで</td><td>床面で50ルクス以上の照明設備を設けた場合（令和5年4月1日施行）</td></tr>
+            <tr><td>換気</td><td class="n">床面積の <strong>1/20</strong> 以上</td><td><strong>すべての居室</strong></td></tr>
+            <tr><td>天井の高さ</td><td class="n"><strong>2.1m</strong> 以上</td><td>居室</td></tr>
+            <tr><td>階段の踊場</td><td class="n">高さ <strong>4m</strong> 超</td><td>踊場の設置義務</td></tr>
+            <tr><td>地階の居室</td><td class="n">—</td><td>壁・床に防湿の措置等</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="call exam">
+        <span class="tag">よく出る</span>
+        <p>採光が必要なのは<strong>住宅の居室</strong>、換気が必要なのは<strong>すべての居室</strong>。そもそも「居室」でない便所・浴室・廊下・倉庫には採光義務がない。</p>
+      </div>
+
+      <h3>2-2　防火・避難・衛生</h3>
+      <div class="scroll">
+        <table>
+          <thead><tr><th>項目</th><th>基準</th></tr></thead>
+          <tbody>
+            <tr><td>防火壁等</td><td>延べ面積 <strong>1,000㎡超</strong> は1,000㎡以内ごとに区画。<strong>耐火建築物・準耐火建築物は適用除外</strong></td></tr>
+            <tr><td>避雷設備</td><td>高さ <strong>20m超</strong> の建築物</td></tr>
+            <tr><td>非常用の昇降機</td><td>高さ <strong>31m超</strong> の建築物</td></tr>
+            <tr><td>石綿（アスベスト）</td><td>添加した建築材料の<strong>使用禁止</strong>（緩和なし）</td></tr>
+            <tr><td>クロルピリホス</td><td><strong>使用禁止</strong></td></tr>
+            <tr><td>ホルムアルデヒド</td><td><strong>使用制限</strong>（居室の種類・換気回数に応じた面積制限）</td></tr>
+            <tr><td>換気設備</td><td>原則、居室を有する建築物に機械換気設備等</td></tr>
+            <tr><td>便所</td><td>下水道法の処理区域内は<strong>水洗便所</strong>以外にできない</td></tr>
+            <tr><td>長屋・共同住宅の界壁</td><td>小屋裏まで達する遮音構造（一定の場合は緩和）</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="call tip">
+        <span class="tag">覚え方</span>
+        <p><strong>「20で雷、31でエレベーター、1000で防火壁」</strong></p>
+      </div>
+    </section>
+
+    <!-- ============ 03 ============ -->
+    <section id="doro">
+      <h2 class="sec"><span class="num">03</span>道路・接道義務</h2>
+
+      <h3>3-1　建築基準法上の道路</h3>
+      <div class="scroll">
+        <table>
+          <thead><tr><th>区分</th><th>内容</th></tr></thead>
+          <tbody>
+            <tr><td><strong>1項道路</strong></td><td>幅員 <strong>4m以上</strong>（特定行政庁の指定区域内は6m以上）。道路法の道路／開発道路／既存道路／2年以内に執行予定の計画道路／位置指定道路</td></tr>
+            <tr><td><strong>2項道路</strong><br>（みなし道路）</td><td>幅員4m未満だが、法施行時に現に建築物が立ち並んでいて特定行政庁が指定したもの。<strong>セットバックが必要</strong></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>3-2　セットバック</h3>
+
+      <figure class="plate">
+        <svg viewBox="0 0 720 250" role="img" aria-label="2項道路のセットバック。原則は道路の中心線から水平距離2mの線が境界線とみなされる。片側ががけ地等の場合はがけ地側の境界線から水平距離4mの線が境界線となる。">
+          <text x="12" y="18" class="lbl">原則</text>
+          <text x="380" y="18" class="lbl">片側ががけ地・川・線路敷のとき</text>
+
+          <!-- ===== 原則 ===== -->
+          <g>
+            <!-- existing road edges -->
+            <line x1="30" y1="40" x2="30" y2="150" class="svg-hair"/>
+            <line x1="330" y1="40" x2="330" y2="150" class="svg-hair"/>
+            <!-- buildings -->
+            <rect x="30" y="52" width="70" height="46" class="svg-fill" rx="1"/>
+            <text x="65" y="80" text-anchor="middle" class="lbl">敷地A</text>
+            <rect x="260" y="52" width="70" height="46" class="svg-fill" rx="1"/>
+            <text x="295" y="80" text-anchor="middle" class="lbl">敷地B</text>
+            <!-- centre line -->
+            <line x1="180" y1="34" x2="180" y2="156" class="svg-dim" stroke-dasharray="8 3 2 3"/>
+            <text x="180" y="30" text-anchor="middle" class="dimt">中心線</text>
+            <!-- deemed boundaries -->
+            <line x1="120" y1="40" x2="120" y2="150" class="svg-acc"/>
+            <line x1="240" y1="40" x2="240" y2="150" class="svg-acc"/>
+            <!-- setback hatch -->
+            <rect x="100" y="52" width="20" height="46" class="svg-accfill"/>
+            <rect x="240" y="52" width="20" height="46" class="svg-accfill"/>
+            <!-- dimensions -->
+            <line x1="120" y1="120" x2="180" y2="120" class="svg-dim"/>
+            <path d="M124 116 L120 120 L124 124 M176 116 L180 120 L176 124" class="svg-dim"/>
+            <text x="150" y="114" text-anchor="middle" class="dimt">2m</text>
+            <line x1="180" y1="120" x2="240" y2="120" class="svg-dim"/>
+            <path d="M184 116 L180 120 L184 124 M236 116 L240 120 L236 124" class="svg-dim"/>
+            <text x="210" y="114" text-anchor="middle" class="dimt">2m</text>
+            <line x1="120" y1="168" x2="240" y2="168" class="svg-dim"/>
+            <path d="M124 164 L120 168 L124 172 M236 164 L240 168 L236 172" class="svg-dim"/>
+            <text x="180" y="184" text-anchor="middle" class="dimt">幅員4mを確保</text>
+            <text x="110" y="206" text-anchor="middle" class="acct">後退部分</text>
+            <text x="110" y="222" text-anchor="middle" class="lbl">敷地面積に算入しない</text>
+            <path d="M110 196 L110 104" class="svg-acc" stroke-dasharray="3 3"/>
+          </g>
+
+          <!-- ===== がけ地 ===== -->
+          <g>
+            <line x1="400" y1="40" x2="400" y2="150" class="svg-hair"/>
+            <line x1="690" y1="40" x2="690" y2="150" class="svg-hair"/>
+            <!-- cliff hatch -->
+            <rect x="400" y="40" width="60" height="110" class="svg-fill"/>
+            <path d="M400 50 l60 -10 M400 70 l60 -10 M400 90 l60 -10 M400 110 l60 -10 M400 130 l60 -10 M400 150 l60 -10" class="svg-hair"/>
+            <text x="430" y="168" text-anchor="middle" class="lbl">がけ地</text>
+            <!-- building -->
+            <rect x="620" y="52" width="70" height="46" class="svg-fill" rx="1"/>
+            <text x="655" y="80" text-anchor="middle" class="lbl">敷地B</text>
+            <!-- deemed boundary -->
+            <line x1="600" y1="40" x2="600" y2="150" class="svg-acc"/>
+            <rect x="600" y="52" width="20" height="46" class="svg-accfill"/>
+            <!-- dimension from cliff -->
+            <line x1="460" y1="120" x2="600" y2="120" class="svg-dim"/>
+            <path d="M464 116 L460 120 L464 124 M596 116 L600 120 L596 124" class="svg-dim"/>
+            <text x="530" y="114" text-anchor="middle" class="dimt">4m</text>
+            <text x="530" y="184" text-anchor="middle" class="acct">がけ地側の境界線から4m</text>
+            <text x="530" y="206" text-anchor="middle" class="lbl">中心線から2mではない</text>
+          </g>
+        </svg>
+        <figcaption>Fig.2 — 2項道路のセットバック</figcaption>
+      </figure>
+
+      <div class="call trap">
+        <span class="tag">ひっかけ</span>
+        <p>セットバック部分は <strong>敷地面積に算入されない</strong>。建蔽率・容積率の計算で分母から外れる。計算問題での頻出ひっかけ。</p>
+      </div>
+
+      <h3>3-3　接道義務</h3>
+      <div class="scroll">
+        <table>
+          <thead><tr><th>論点</th><th>内容</th></tr></thead>
+          <tbody>
+            <tr><td>原則</td><td>建築物の敷地は、道路に <strong>2m以上</strong> 接しなければならない</td></tr>
+            <tr><td>適用除外</td><td><strong>自動車専用道路</strong>には接道義務なし（接しても義務を満たさない）</td></tr>
+            <tr><td>例外</td><td>敷地の周囲に広い空地があり、特定行政庁が<strong>建築審査会の同意</strong>を得て許可した場合</td></tr>
+            <tr><td>条例による付加</td><td>特殊建築物・階数3以上等について、地方公共団体は条例で制限を<strong>付加できる</strong>（緩和は不可）</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>3-4　道路内の建築制限</h3>
+      <p>原則、道路内に建築物や擁壁は建築できない。ただし例外がある。</p>
+      <div class="scroll">
+        <table>
+          <thead><tr><th>例外</th><th>必要な手続</th></tr></thead>
+          <tbody>
+            <tr><td><strong>地盤面下に設ける建築物</strong>（地下街など）</td><td class="no">許可も不要</td></tr>
+            <tr><td>公衆便所・巡査派出所等</td><td>特定行政庁が通行上支障がないと認めて<strong>許可</strong></td></tr>
+            <tr><td>公共用歩廊（アーケード）等</td><td>特定行政庁が<strong>建築審査会の同意</strong>を得て許可</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="call tip">
+        <span class="tag">覚え方</span>
+        <p><strong>「地下ならフリーパス」</strong>。地盤面下の建築物だけは許可すら要らない。</p>
+      </div>
+    </section>
+
+    <!-- ============ 04 ============ -->
+    <section id="yoto">
+      <h2 class="sec"><span class="num">04</span>用途制限</h2>
+      <p>13の用途地域ごとに建てられる建物が決まっている。すべて覚えるのは非効率なので、<em>境目</em>だけを押さえる。</p>
+
+      <div class="scroll">
+        <table>
+          <caption>建てられない地域はどこか</caption>
+          <thead><tr><th>用途</th><th>建てられない地域</th></tr></thead>
+          <tbody>
+            <tr><td><strong>住宅・共同住宅・図書館・老人ホーム</strong></td><td class="no">工業専用地域のみ</td></tr>
+            <tr><td><strong>神社・寺院・教会／保育所／診療所／公衆浴場／巡査派出所</strong></td><td class="no">なし（全地域OK）</td></tr>
+            <tr><td>幼稚園・小学校・中学校・高校</td><td>工業・工業専用</td></tr>
+            <tr><td><strong>大学・高専・専修学校／病院</strong></td><td>第一種低層・第二種低層・田園住居・工業・工業専用</td></tr>
+            <tr><td><strong>ホテル・旅館</strong></td><td>第一種低層・第二種低層・田園住居・第一種中高層・第二種中高層・工業・工業専用</td></tr>
+            <tr><td>カラオケボックス</td><td>第一種低層・第二種低層・田園住居・第一種中高層・第二種中高層</td></tr>
+            <tr><td>劇場・映画館（客席200㎡以上）</td><td>近隣商業・商業・準工業<strong>以外</strong>すべて</td></tr>
+            <tr><td>劇場・映画館（客席200㎡未満）</td><td>準住居でも建てられる</td></tr>
+            <tr><td>危険性・環境悪化のおそれが大きい工場</td><td>工業・工業専用<strong>のみ</strong>可</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="call tip">
+        <span class="tag">覚え方</span>
+        <p><strong>「住めないのは工専だけ」「大学と病院は低層に建たない」「ホテルは中高層まで建たない」</strong>。<br>低層住専に「大学は建たないが小学校は建つ」が引っかけの定番。</p>
+      </div>
+
+      <div class="call trap">
+        <span class="tag">ひっかけ</span>
+        <p>敷地が2つ以上の用途地域にまたがる場合 → <strong>敷地の「過半」が属する地域</strong>の用途制限が敷地全体に適用される。<strong>面積按分ではない</strong>。按分するのは建蔽率・容積率のほう。</p>
+      </div>
+    </section>
+
+    <!-- ============ 05 ============ -->
+    <section id="kenpei">
+      <h2 class="sec"><span class="num">05</span>建蔽率</h2>
+      <p class="lead">建蔽率 ＝ 建築面積 ÷ 敷地面積</p>
+
+      <figure class="plate">
+        <svg viewBox="0 0 720 210" role="img" aria-label="建蔽率の緩和。特定行政庁指定の角地で10分の1加算、防火地域内の耐火建築物等または準防火地域内の耐火・準耐火建築物等で10分の1加算、両方該当で10分の2加算。指定建蔽率80％かつ防火地域内の耐火建築物等では制限がなくなる。">
+          <!-- base bar -->
+          <text x="12" y="30" class="lbl">指定建蔽率 60% の場合</text>
+
+          <rect x="12" y="46" width="300" height="30" class="svg-fill" rx="2"/>
+          <text x="162" y="66" text-anchor="middle">指定建蔽率</text>
+          <text x="330" y="66" class="dimt">60%</text>
+
+          <rect x="12" y="90" width="300" height="30" class="svg-fill" rx="2"/>
+          <rect x="312" y="90" width="50" height="30" class="svg-accfill" rx="2"/>
+          <text x="337" y="110" text-anchor="middle" class="acct">+10</text>
+          <text x="380" y="110" class="lbl">特定行政庁指定の角地</text>
+          <text x="640" y="110" class="dimt">70%</text>
+
+          <rect x="12" y="134" width="300" height="30" class="svg-fill" rx="2"/>
+          <rect x="312" y="134" width="50" height="30" class="svg-accfill" rx="2"/>
+          <text x="337" y="154" text-anchor="middle" class="acct">+10</text>
+          <text x="380" y="154" class="lbl">防火地域内の耐火建築物等／準防火地域内の耐火・準耐火建築物等</text>
+          <text x="640" y="154" class="dimt">70%</text>
+
+          <rect x="12" y="178" width="300" height="30" class="svg-fill" rx="2"/>
+          <rect x="312" y="178" width="100" height="30" class="svg-accfill" rx="2"/>
+          <text x="362" y="198" text-anchor="middle" class="acct">+20</text>
+          <text x="430" y="198" class="lbl">両方に該当</text>
+          <text x="640" y="198" class="dimt">80%</text>
+        </svg>
+        <figcaption>Fig.3 — 建蔽率の緩和は足し算で考える</figcaption>
+      </figure>
+
+      <div class="scroll">
+        <table>
+          <thead><tr><th class="n">加算</th><th>条件</th></tr></thead>
+          <tbody>
+            <tr><td class="n">+1/10</td><td>特定行政庁が指定する<strong>角地</strong></td></tr>
+            <tr><td class="n">+1/10</td><td><strong>防火地域内</strong>の耐火建築物等／<strong>準防火地域内</strong>の耐火建築物等・準耐火建築物等</td></tr>
+            <tr><td class="n">+2/10</td><td>上の両方に該当</td></tr>
+            <tr><td class="n no">制限なし<br>（100%）</td><td>指定建蔽率が <strong>80%</strong> の地域内で、<strong>防火地域内</strong>にある<strong>耐火建築物等</strong></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>適用除外（建蔽率の制限を受けないもの）— 巡査派出所・公衆便所・公共用歩廊、公園・広場・道路・川等の内にあって特定行政庁が安全上支障がないと認めて許可したもの。</p>
+
+      <div class="call trap">
+        <span class="tag">ひっかけ</span>
+        <p><strong>準防火地域内の耐火建築物でも +1/10 の緩和を受けられる</strong>（2019年改正で対象が拡大）。古い教材では「防火地域内のみ」となっていることがある。</p>
+      </div>
+    </section>
+
+    <!-- ============ 06 ============ -->
+    <section id="yoseki">
+      <h2 class="sec"><span class="num">06</span>容積率</h2>
+      <p class="lead">容積率 ＝ 延べ面積 ÷ 敷地面積</p>
+
+      <div class="ladder">
+        <div class="q">
+          <p>前面道路の幅員は12m以上か</p>
+          <div class="branch">
+            <div class="b free"><span class="k">12m以上</span>指定容積率がそのまま適用される</div>
+            <div class="b need"><span class="k">12m未満</span><strong>①指定容積率</strong> と <strong>②幅員(m)×法定乗数</strong> を比べて<strong>小さい方</strong></div>
+          </div>
+        </div>
+        <div class="q">
+          <p>法定乗数はどちらか</p>
+          <div class="branch">
+            <div class="b"><span class="k">住居系の用途地域</span><strong>4/10</strong></div>
+            <div class="b"><span class="k">住居系以外</span><strong>6/10</strong></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="scroll">
+        <table>
+          <thead><tr><th>論点</th><th>内容</th></tr></thead>
+          <tbody>
+            <tr><td>前面道路が2つ以上</td><td><strong>幅の広い方</strong>を前面道路とする</td></tr>
+            <tr><td>特定道路の緩和</td><td>幅員 <strong>15m以上</strong> の道路（特定道路）から <strong>70m以内</strong> にある敷地は加算あり</td></tr>
+            <tr><td>敷地が2以上の地域にわたる</td><td><strong>加重平均</strong>（面積按分）</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>6-1　延べ面積に算入しないもの</h3>
+      <div class="scroll">
+        <table>
+          <thead><tr><th>部分</th><th class="n">不算入の限度</th></tr></thead>
+          <tbody>
+            <tr><td>エレベーターの昇降路</td><td class="n">全部</td></tr>
+            <tr><td>共同住宅・老人ホーム等の<strong>共用の廊下・階段</strong></td><td class="n">全部</td></tr>
+            <tr><td>地階の住宅・老人ホーム等の部分</td><td class="n">住宅部分の <strong>1/3</strong></td></tr>
+            <tr><td>自動車車庫等</td><td class="n">延べ面積の <strong>1/5</strong></td></tr>
+            <tr><td>宅配ボックス</td><td class="n">全体の <strong>1/100</strong></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="call tip">
+        <span class="tag">覚え方</span>
+        <p><strong>「エレベーターと共用廊下はタダ、地下は1/3、車庫は1/5」</strong></p>
+      </div>
+
+      <h3>6-2　敷地が2以上の地域にわたるとき</h3>
+      <div class="scroll">
+        <table>
+          <caption>扱いが項目ごとに違う — 最頻出の比較</caption>
+          <thead><tr><th>項目</th><th>取扱い</th></tr></thead>
+          <tbody>
+            <tr><td>用途制限</td><td><strong>過半</strong>の属する地域の制限を敷地全体に</td></tr>
+            <tr><td>建蔽率・容積率</td><td><strong>加重平均</strong></td></tr>
+            <tr><td>防火地域・準防火地域</td><td><strong>厳しい方</strong>の規制を建物全体に（防火壁で区画されていれば例外）</td></tr>
+            <tr><td>高さ制限（斜線）</td><td>それぞれの地域ごとに適用</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ============ 07 ============ -->
+    <section id="takasa">
+      <h2 class="sec"><span class="num">07</span>高さ制限</h2>
+
+      <p><strong>絶対高さ制限</strong> — 第一種低層住居専用地域・第二種低層住居専用地域・<strong>田園住居地域</strong>で、都市計画により <strong>10m または 12m</strong>。</p>
+
+      <div class="scroll">
+        <table class="matrix">
+          <caption>覚えるのは「✕」の場所だけ</caption>
+          <thead>
+            <tr><th>用途地域</th><th class="n">絶対高さ</th><th class="n">道路斜線</th><th class="n">隣地斜線</th><th class="n">北側斜線</th><th class="n">日影規制</th></tr>
+          </thead>
+          <tbody>
+            <tr class="hi"><th>第一種低層住居専用</th><td class="n yes">○</td><td class="n yes">○</td><td class="n no">✕</td><td class="n yes">○</td><td class="n yes">○</td></tr>
+            <tr class="hi"><th>第二種低層住居専用</th><td class="n yes">○</td><td class="n yes">○</td><td class="n no">✕</td><td class="n yes">○</td><td class="n yes">○</td></tr>
+            <tr class="hi"><th>田園住居</th><td class="n yes">○</td><td class="n yes">○</td><td class="n no">✕</td><td class="n yes">○</td><td class="n yes">○</td></tr>
+            <tr><th>第一種中高層住居専用</th><td class="n">—</td><td class="n yes">○</td><td class="n yes">○</td><td class="n tri">△</td><td class="n yes">○</td></tr>
+            <tr><th>第二種中高層住居専用</th><td class="n">—</td><td class="n yes">○</td><td class="n yes">○</td><td class="n tri">△</td><td class="n yes">○</td></tr>
+            <tr><th>第一種住居</th><td class="n">—</td><td class="n yes">○</td><td class="n yes">○</td><td class="n">—</td><td class="n yes">○</td></tr>
+            <tr><th>第二種住居</th><td class="n">—</td><td class="n yes">○</td><td class="n yes">○</td><td class="n">—</td><td class="n yes">○</td></tr>
+            <tr><th>準住居</th><td class="n">—</td><td class="n yes">○</td><td class="n yes">○</td><td class="n">—</td><td class="n yes">○</td></tr>
+            <tr><th>近隣商業</th><td class="n">—</td><td class="n yes">○</td><td class="n yes">○</td><td class="n">—</td><td class="n yes">○</td></tr>
+            <tr class="hi"><th>商業</th><td class="n">—</td><td class="n yes">○</td><td class="n yes">○</td><td class="n">—</td><td class="n no">✕</td></tr>
+            <tr><th>準工業</th><td class="n">—</td><td class="n yes">○</td><td class="n yes">○</td><td class="n">—</td><td class="n yes">○</td></tr>
+            <tr class="hi"><th>工業</th><td class="n">—</td><td class="n yes">○</td><td class="n yes">○</td><td class="n">—</td><td class="n no">✕</td></tr>
+            <tr class="hi"><th>工業専用</th><td class="n">—</td><td class="n yes">○</td><td class="n yes">○</td><td class="n">—</td><td class="n no">✕</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p style="font-size:.8rem;color:var(--muted)">△ ＝ 日影規制が適用される場合は北側斜線の適用なし</p>
+
+      <div class="call exam">
+        <span class="tag">よく出る</span>
+        <ul style="margin-bottom:0">
+          <li><strong>隣地斜線がないのは低層3地域</strong>（一低層・二低層・田園住居）— 絶対高さ制限があるので不要</li>
+          <li><strong>北側斜線があるのは低層3地域＋中高層2地域</strong>の5つだけ</li>
+          <li><strong>日影規制がないのは商業・工業・工業専用</strong>の3つだけ</li>
+          <li>道路斜線は<strong>すべての地域</strong>で適用</li>
+        </ul>
+      </div>
+
+      <div class="call trap">
+        <span class="tag">ひっかけ</span>
+        <p>日影規制の応用論点が2つ。<br>
+        ① 対象区域<strong>外</strong>にある <strong>高さ10m超</strong>の建築物でも、冬至日に対象区域内に日影を生じさせるなら<strong>対象区域内にあるものとみなす</strong>。<br>
+        ② 同一敷地内に2以上の建築物がある場合は<strong>一の建築物とみなして</strong>日影を判定する。</p>
+      </div>
+
+      <h3>7-1　その他の集団規定</h3>
+      <div class="scroll">
+        <table>
+          <thead><tr><th>制度</th><th>内容</th></tr></thead>
+          <tbody>
+            <tr><td>外壁の後退距離</td><td>低層住専・田園住居で都市計画に定めた場合、<strong>1.5m または 1m</strong></td></tr>
+            <tr><td>敷地面積の最低限度</td><td>都市計画で定める。<strong>200㎡を超えてはならない</strong></td></tr>
+            <tr><td>高度地区</td><td>都市計画で建築物の高さの最高限度・最低限度を定める</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ============ 08 ============ -->
+    <section id="boka">
+      <h2 class="sec"><span class="num">08</span>防火地域・準防火地域</h2>
+
+      <figure class="plate">
+        <svg viewBox="0 0 720 230" role="img" aria-label="横軸に延べ面積、縦軸に階数をとったチャート。防火地域では階数3以上（地階を含む）または延べ面積100平方メートル超で耐火建築物等が必要。準防火地域では地階を除く階数4以上または延べ面積1500平方メートル超で耐火建築物等が必要。">
+          <!-- LEFT: 防火地域 -->
+          <g>
+            <text x="12" y="20" class="lbl">防火地域</text>
+            <!-- 耐火建築物等が必要な領域 -->
+            <rect x="200" y="45" width="130" height="145" class="svg-accfill"/>
+            <rect x="75" y="45" width="125" height="80" class="svg-accfill"/>
+            <text x="265" y="92" text-anchor="middle" class="acct">耐火建築物等</text>
+            <!-- 緩い領域 -->
+            <rect x="75" y="125" width="125" height="65" class="svg-fill"/>
+            <text x="137" y="162" text-anchor="middle" class="lbl">耐火 or 準耐火</text>
+            <!-- axes -->
+            <line x1="75" y1="190" x2="330" y2="190" class="svg-ink"/>
+            <line x1="75" y1="190" x2="75" y2="45" class="svg-ink"/>
+            <text x="75" y="36" class="lbl">階数</text>
+            <text x="330" y="206" text-anchor="end" class="lbl">延べ面積</text>
+            <!-- ticks -->
+            <line x1="69" y1="125" x2="75" y2="125" class="svg-ink"/>
+            <text x="63" y="122" text-anchor="end" class="dimt">3</text>
+            <text x="63" y="137" text-anchor="end" class="lbl">地階を含む</text>
+            <line x1="200" y1="190" x2="200" y2="196" class="svg-ink"/>
+            <text x="200" y="208" text-anchor="middle" class="dimt">100㎡</text>
+          </g>
+          <!-- RIGHT: 準防火地域 -->
+          <g>
+            <text x="392" y="20" class="lbl">準防火地域</text>
+            <rect x="590" y="45" width="110" height="145" class="svg-accfill"/>
+            <rect x="455" y="45" width="135" height="65" class="svg-accfill"/>
+            <text x="645" y="92" text-anchor="middle" class="acct">耐火建築物等</text>
+            <rect x="455" y="110" width="135" height="80" class="svg-fill"/>
+            <text x="522" y="155" text-anchor="middle" class="lbl">技術的基準に適合</text>
+            <line x1="455" y1="190" x2="700" y2="190" class="svg-ink"/>
+            <line x1="455" y1="190" x2="455" y2="45" class="svg-ink"/>
+            <text x="455" y="36" class="lbl">階数</text>
+            <text x="700" y="206" text-anchor="end" class="lbl">延べ面積</text>
+            <line x1="449" y1="110" x2="455" y2="110" class="svg-ink"/>
+            <text x="443" y="107" text-anchor="end" class="dimt">4</text>
+            <text x="443" y="122" text-anchor="end" class="lbl">地階を除く</text>
+            <line x1="590" y1="190" x2="590" y2="196" class="svg-ink"/>
+            <text x="590" y="208" text-anchor="middle" class="dimt">1,500㎡</text>
+          </g>
+        </svg>
+        <figcaption>Fig.4 — 耐火建築物等が必要になる領域</figcaption>
+      </figure>
+
+      <div class="scroll">
+        <table>
+          <thead><tr><th></th><th>防火地域</th><th>準防火地域</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><strong>耐火建築物等</strong>が必要</td>
+              <td>階数 <strong>3以上（地階を含む）</strong><br>または 延べ面積 <strong>100㎡超</strong></td>
+              <td>地階を除く階数 <strong>4以上</strong><br>または 延べ面積 <strong>1,500㎡超</strong></td>
+            </tr>
+            <tr><td>それ以外</td><td>耐火建築物等または準耐火建築物等</td><td>一定の技術的基準に適合</td></tr>
+            <tr>
+              <td><strong>看板・広告塔等</strong></td>
+              <td>屋上に設けるもの、または高さ <strong>3m超</strong> のものは<strong>不燃材料</strong>で造る／覆う</td>
+              <td class="no">規制なし</td>
+            </tr>
+            <tr><td>隣地境界線</td><td colspan="2">外壁が<strong>耐火構造</strong>なら、隣地境界線に<strong>接して</strong>設けることができる</td></tr>
+            <tr><td>屋根</td><td colspan="2">政令で定める技術的基準に適合させる</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="call tip">
+        <span class="tag">覚え方</span>
+        <p><strong>「防火は3階100㎡、準防火は4階1,500㎡」</strong>。防火地域の階数は<strong>地階を含む</strong>、準防火地域は<strong>地階を除く</strong>という非対称がひっかけどころ。</p>
+      </div>
+    </section>
+
+    <!-- ============ 09 ============ -->
+    <section id="kyotei">
+      <h2 class="sec"><span class="num">09</span>建築協定</h2>
+
+      <div class="scroll">
+        <table>
+          <thead><tr><th>論点</th><th>内容</th></tr></thead>
+          <tbody>
+            <tr><td>前提</td><td>市町村の<strong>条例</strong>で建築協定を締結できる旨を定めている区域内であること</td></tr>
+            <tr><td>締結・変更</td><td>土地所有者等の<strong>全員の合意</strong> ＋ 特定行政庁の<strong>認可</strong></td></tr>
+            <tr><td><strong>廃止</strong></td><td class="no">過半数の合意 ＋ 特定行政庁の認可</td></tr>
+            <tr><td>一人協定</td><td>1人しか所有者がいない土地でも締結できる。認可の公告日から <strong>3年以内</strong> に2人以上になった時から効力を生じる</td></tr>
+            <tr><td>効力</td><td>認可の公告後に土地所有者等になった者にも及ぶ</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="call trap">
+        <span class="tag">ひっかけ</span>
+        <p><strong>締結は全員、廃止は過半数。</strong>「廃止も全員の合意が必要」は誤り。<em>作るのは難しく、やめるのは簡単</em>と覚える。</p>
+      </div>
+    </section>
+
+    <!-- ============ 10 ============ -->
+    <section id="deru">
+      <h2 class="sec"><span class="num">10</span>よく出る論点</h2>
+      <p>優先度の高い順。時間がないときは上から潰す。</p>
+      <div class="scroll">
+        <table>
+          <thead><tr><th class="n">順位</th><th>論点</th><th>要点</th></tr></thead>
+          <tbody>
+            <tr><td class="n">1</td><td><strong>建築確認の要否</strong></td><td>1号／新2号／新3号の区分、10㎡ルールと防火地域の例外 — <span class="no">改正初年度で最有力</span></td></tr>
+            <tr><td class="n">2</td><td>用途制限</td><td>住宅＝工業専用のみ不可／大学・病院／ホテル／全地域OK組</td></tr>
+            <tr><td class="n">3</td><td>建蔽率・容積率の計算</td><td>前面道路12m未満の乗数、セットバック、加重平均</td></tr>
+            <tr><td class="n">4</td><td>斜線制限・日影規制</td><td>隣地斜線のない3地域、日影のない3地域</td></tr>
+            <tr><td class="n">5</td><td>防火地域・準防火地域</td><td>3階100㎡／4階1,500㎡</td></tr>
+            <tr><td class="n">6</td><td>接道義務・2項道路</td><td>2m以上接道、セットバックは敷地面積に不算入</td></tr>
+            <tr><td class="n">7</td><td>単体規定の数値</td><td>採光1/7、換気1/20、天井高2.1m、避雷20m、昇降機31m</td></tr>
+            <tr><td class="n">8</td><td>建築協定</td><td>締結は全員・廃止は過半数</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ============ 11 ============ -->
+    <section id="hikkake">
+      <h2 class="sec"><span class="num">11</span>ひっかけ一覧</h2>
+      <div class="scroll">
+        <table class="traps">
+          <thead><tr><th>こう書かれたら疑う</th><th>正しくは</th></tr></thead>
+          <tbody>
+            <tr><td>木造3階建て以上は確認が必要</td><td><strong>木造か否かは無関係</strong>。階数2以上 or 200㎡超で新2号</td></tr>
+            <tr><td>10㎡以内の増築は常に確認不要</td><td>防火地域・準防火地域内では<strong>面積を問わず必要</strong></td></tr>
+            <tr><td>大規模の修繕はすべて確認が必要</td><td>新3号（平屋200㎡以下）は<strong>不要</strong></td></tr>
+            <tr><td>完了検査は工事完了から4日以内に申請</td><td>4日以内に<strong>到達</strong>するように申請</td></tr>
+            <tr><td>集団規定は全国で適用される</td><td>原則<strong>都市計画区域・準都市計画区域内のみ</strong></td></tr>
+            <tr><td>セットバック部分も敷地面積に入る</td><td><strong>算入しない</strong></td></tr>
+            <tr><td>用途地域をまたぐ敷地は面積按分</td><td>用途制限は<strong>過半</strong>。按分するのは建蔽率・容積率</td></tr>
+            <tr><td>防火地域と準防火地域にまたがると、それぞれの規制</td><td><strong>厳しい方（防火地域）</strong>の規制が建物全体に</td></tr>
+            <tr><td>低層住居専用地域にも隣地斜線がある</td><td><strong>ない</strong>（絶対高さ制限があるため）</td></tr>
+            <tr><td>商業地域にも日影規制がある</td><td><strong>ない</strong>（商業・工業・工業専用は対象外）</td></tr>
+            <tr><td>準防火地域の看板も不燃材料</td><td>看板規制は<strong>防火地域のみ</strong></td></tr>
+            <tr><td>建築協定の廃止は全員の合意</td><td><strong>過半数</strong>で足りる</td></tr>
+            <tr><td>診療所は工業専用地域に建てられない</td><td><strong>建てられる</strong>（全用途地域OK）</td></tr>
+            <tr><td>採光は必ず1/7以上</td><td>50ルクス以上の照明設備があれば <strong>1/10</strong> まで緩和</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ============ 12 ============ -->
+    <section id="suji">
+      <h2 class="sec"><span class="num">12</span>数字まとめ</h2>
+      <p class="masthead-note">右上の「数値を隠す」で自己テストできる。隠した状態でもカードにカーソルを合わせる／フォーカスすると答えが出る。</p>
+
+      <div class="nums" id="numgrid">
+        <div class="nc" tabindex="0"><span class="v">200㎡超</span><span class="d">1号建築物（特殊建築物）／新2号の延べ面積要件／用途変更で確認が必要になる規模</span></div>
+        <div class="nc" tabindex="0"><span class="v">階数2以上</span><span class="d">新2号建築物の要件（構造を問わない）</span></div>
+        <div class="nc" tabindex="0"><span class="v">10㎡</span><span class="d">増改築移転で確認不要になる上限（防火・準防火地域を除く）</span></div>
+        <div class="nc" tabindex="0"><span class="v">35日 / 7日</span><span class="d">確認の審査期間（1号・2号／3号）</span></div>
+        <div class="nc" tabindex="0"><span class="v">4日 / 7日</span><span class="d">完了検査の申請到達期限／検査実施期限</span></div>
+        <div class="nc" tabindex="0"><span class="v">4m（6m）</span><span class="d">建築基準法上の道路の幅員（特定行政庁の指定区域）</span></div>
+        <div class="nc" tabindex="0"><span class="v">2m / 4m</span><span class="d">セットバック — 中心線から2m、がけ地側からは4m</span></div>
+        <div class="nc" tabindex="0"><span class="v">2m</span><span class="d">接道義務</span></div>
+        <div class="nc" tabindex="0"><span class="v">12m</span><span class="d">容積率で前面道路幅員の乗数を使う分かれ目</span></div>
+        <div class="nc" tabindex="0"><span class="v">4/10・6/10</span><span class="d">前面道路幅員の法定乗数（住居系／その他）</span></div>
+        <div class="nc" tabindex="0"><span class="v">15m・70m</span><span class="d">特定道路の緩和（幅員15m以上の道路から70m以内）</span></div>
+        <div class="nc" tabindex="0"><span class="v">1/3・1/5・1/100</span><span class="d">容積率不算入 — 地階の住宅／車庫／宅配ボックス</span></div>
+        <div class="nc" tabindex="0"><span class="v">1/10・2/10</span><span class="d">建蔽率の緩和（角地／防火地域内耐火）／両方該当</span></div>
+        <div class="nc" tabindex="0"><span class="v">80% → 100%</span><span class="d">建蔽率80%の地域＋防火地域＋耐火建築物等 ＝ 制限なし</span></div>
+        <div class="nc" tabindex="0"><span class="v">10m・12m</span><span class="d">低層住専・田園住居の絶対高さ制限</span></div>
+        <div class="nc" tabindex="0"><span class="v">3階・100㎡</span><span class="d">防火地域で耐火建築物等が必要（階数は地階を含む）</span></div>
+        <div class="nc" tabindex="0"><span class="v">4階・1,500㎡</span><span class="d">準防火地域で耐火建築物等が必要（階数は地階を除く）</span></div>
+        <div class="nc" tabindex="0"><span class="v">3m</span><span class="d">防火地域で看板等が不燃材料になる高さ</span></div>
+        <div class="nc" tabindex="0"><span class="v">1/7（1/10）</span><span class="d">住宅の居室の採光（照明設備があれば緩和）</span></div>
+        <div class="nc" tabindex="0"><span class="v">1/20</span><span class="d">居室の換気</span></div>
+        <div class="nc" tabindex="0"><span class="v">2.1m</span><span class="d">居室の天井の高さ</span></div>
+        <div class="nc" tabindex="0"><span class="v">20m・31m</span><span class="d">避雷設備／非常用の昇降機</span></div>
+        <div class="nc" tabindex="0"><span class="v">1,000㎡</span><span class="d">防火壁等による区画（耐火・準耐火建築物は除く）</span></div>
+        <div class="nc" tabindex="0"><span class="v">1.5m・1m</span><span class="d">外壁の後退距離</span></div>
+        <div class="nc" tabindex="0"><span class="v">200㎡</span><span class="d">敷地面積の最低限度の上限</span></div>
+        <div class="nc" tabindex="0"><span class="v">3年</span><span class="d">一人協定が効力を生じるまでの期間</span></div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <h4>出典</h4>
+    <ul>
+      <li>建築基準法（昭和25年法律第201号）／同施行令 — <a href="https://laws.e-gov.go.jp/law/325AC0000000201">e-Gov法令検索</a></li>
+      <li>国土交通省「改正建築物省エネ法・建築基準法等に関する解説資料とQ&amp;A」 — <a href="https://www.mlit.go.jp/jutakukentiku/build/r4kaisei_document.html">mlit.go.jp</a></li>
+      <li>国土交通省「改正建築基準法の施行日前後における規定の適用に関する留意事項」 — <a href="https://www.mlit.go.jp/common/001745868.pdf">PDF</a></li>
+      <li>法第6条の新区分（令和7年4月1日〜）の整理 — <a href="https://f-kenkihou.com/archives/1413">いろはに建築基準法</a></li>
+      <li>令和5年4月1日施行 住宅の採光規定の見直し — <a href="https://kijunhou.com/relaxation-of-the-house-lighting/">建築基準法とらのまき。</a></li>
+    </ul>
+    <div class="sibling">
+      <a href="../index.html">総目次</a>
+      <a href="その他の法令と早見表.html">横断早見表</a>
+      <a href="都市計画法.html">都市計画法</a>
+      <a href="国土利用計画法.html">国土利用計画法</a>
+      <a href="農地法.html">農地法</a>
+      <a href="土地区画整理法.html">土地区画整理法</a>
+      <a href="盛土規制法.html">盛土規制法</a>
+    </div>
+    <div class="todo">TODO — 用途制限（別表第二）の詳細な面積要件（第一種住居3,000㎡、第二種中高層1,500㎡等）は e-Gov の別表第二で条文を確認のうえ、必要なら「用途制限一覧」として分離する。</div>
+  </footer>
+
+</div>
+
+<script>
+  (function () {
+    var root = document.documentElement;
+
+    document.getElementById('theme').addEventListener('click', function () {
+      var now = root.getAttribute('data-theme');
+      if (now) { root.removeAttribute('data-theme'); return; }
+      var dark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      root.setAttribute('data-theme', dark ? 'light' : 'dark');
+    });
+
+    var maskBtn = document.getElementById('mask');
+    var grid = document.getElementById('numgrid');
+    maskBtn.addEventListener('click', function () {
+      var on = grid.classList.toggle('masked');
+      maskBtn.setAttribute('aria-pressed', String(on));
+      maskBtn.textContent = on ? '数値を表示' : '数値を隠す';
+    });
+
+    var links = Array.prototype.slice.call(document.querySelectorAll('nav.rail ol a'));
+    var map = {};
+    links.forEach(function (a) { map[a.getAttribute('href').slice(1)] = a; });
+    var seen = [];
+    var obs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        var i = seen.indexOf(e.target.id);
+        if (e.isIntersecting && i < 0) seen.push(e.target.id);
+        if (!e.isIntersecting && i >= 0) seen.splice(i, 1);
+      });
+      links.forEach(function (a) { a.classList.remove('on'); });
+      if (seen.length) {
+        var order = Object.keys(map);
+        seen.sort(function (a, b) { return order.indexOf(a) - order.indexOf(b); });
+        map[seen[0]].classList.add('on');
+      }
+    }, { rootMargin: '-10% 0px -70% 0px' });
+    document.querySelectorAll('main section').forEach(function (s) { obs.observe(s); });
+  })();
+</script>
