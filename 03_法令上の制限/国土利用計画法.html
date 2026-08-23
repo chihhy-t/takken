@@ -143,6 +143,39 @@
   .sibling a { font-size:.8rem; text-decoration:none; border:1px solid var(--rule); border-radius:2px; padding:.35em .8em; color:var(--muted); }
   .sibling a:hover { color:var(--ink); border-color:var(--ink); }
 
+  /* ── 肢別○×ドリル ── */
+  .drillbar { max-width:none; display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between;
+    gap:var(--s2); margin:0 0 var(--s3); padding:var(--s2) var(--s3); background:var(--surface);
+    border:1px solid var(--rule); border-radius:2px; position:sticky; top:0; z-index:5; }
+  .drillbar .score { font-family:var(--font-mono); font-size:.8rem; font-variant-numeric:tabular-nums;
+    color:var(--muted); letter-spacing:.04em; }
+  .drillbar .score b { color:var(--ink); font-weight:600; }
+  .drillbar .score .pct { color:var(--accent); font-weight:600; }
+  .drillbar .dbtns { display:flex; gap:var(--s1); }
+  ol.drill { max-width:none; list-style:none; margin:0; padding:0; counter-reset:dq; }
+  li.dq { counter-increment:dq; margin:0 0 var(--s2); padding:var(--s3);
+    background:var(--surface); border:1px solid var(--hair); border-left:3px solid var(--rule); border-radius:2px; }
+  li.dq > .s { margin:0; font-size:.95rem; line-height:1.85; max-width:var(--measure); }
+  li.dq > .s::before { content:counter(dq,decimal-leading-zero); font-family:var(--font-mono);
+    font-size:.72rem; letter-spacing:.08em; color:var(--muted); margin-right:.9em; }
+  li.dq .ch { display:flex; gap:var(--s1); margin-top:var(--s2); }
+  li.dq .ch button { font-family:var(--font-display); font-size:1.05rem; line-height:1; min-width:3.6rem; padding:.4em 0; }
+  li.dq .ch button[data-picked] { color:var(--ink); border-color:var(--ink); font-weight:700; }
+  li.dq .ex { display:none; margin-top:var(--s3); padding-top:var(--s2); border-top:1px solid var(--hair); }
+  li.dq.done .ex { display:block; }
+  li.dq .ex .verdict { display:block; font-family:var(--font-mono); font-size:.7rem; letter-spacing:.14em;
+    margin-bottom:var(--s1); }
+  li.dq .ex p { margin:0; font-size:.88rem; line-height:1.8; color:var(--muted); max-width:var(--measure); }
+  li.dq .ex p strong { color:var(--ink); font-weight:700; }
+  li.dq.ok { border-left-color:var(--blue); }
+  li.dq.ok .verdict { color:var(--blue); }
+  li.dq.ng { border-left-color:var(--accent); background:var(--accent-soft); }
+  li.dq.ng .verdict { color:var(--accent); }
+  li.dq.ng .ex p strong { color:var(--accent); }
+  ol.drill.onlyng li.dq:not(.ng) { display:none; }
+  .drilldone { font-size:.84rem; color:var(--muted); padding:var(--s3); border:1px dashed var(--rule);
+    border-radius:2px; text-align:center; }
+
   @media (prefers-reduced-motion: reduce){ *{ transition:none !important; animation:none !important; scroll-behavior:auto !important; } }
   html { scroll-behavior:smooth; }
   .eyebrow a { color:var(--accent); text-decoration:none; }
@@ -161,8 +194,9 @@
       <ul class="facts">
         <li>法令基準日 <b>2026-04-01</b></li>
         <li>出題数 <b>1問</b></li>
+        <li>ドリル <b>28肢</b></li>
         <li>目標 <b>確実に1問</b></li>
-        <li>更新 <b>2026-08-09</b></li>
+        <li>更新 <b>2026-08-23</b></li>
       </ul>
     </div>
     <div class="toggles">
@@ -184,6 +218,7 @@
       <li><a href="#deru"><span class="num">06</span>よく出る論点</a></li>
       <li><a href="#hikkake"><span class="num">07</span>ひっかけ一覧</a></li>
       <li><a href="#suji"><span class="num">08</span>数字まとめ</a></li>
+      <li><a href="#drill"><span class="num">09</span>肢別○×ドリル</a></li>
     </ol>
   </nav>
 
@@ -524,6 +559,165 @@
       </div>
     </section>
 
+    <!-- 09 -->
+    <section id="drill">
+      <h2 class="sec"><span class="num">09</span>肢別○×ドリル</h2>
+      <p class="lead">頻出論点の一問一答 <em>28肢</em>。○×を押すと理由が開く。<strong>理由を一言で言えなかった肢は、正解していても「要復習」に入れる</strong>のがこのドリルの使い方。</p>
+      <div class="call tip">
+        <span class="tag">回し方</span>
+        <p>1周目は全肢。2周目以降は「間違えた肢だけ」で回す。解答状況はこのブラウザに保存されるので、日をまたいでも続きから再開できる。</p>
+      </div>
+      <div class="drillbar">
+        <div class="score">解答 <b id="d-done">0</b> / 28　　正答 <b id="d-ok">0</b>　　正答率 <span class="pct" id="d-pct">—</span></div>
+        <div class="dbtns">
+          <button id="d-wrong" type="button" aria-pressed="false">間違えた肢だけ</button>
+          <button id="d-reset" type="button">リセット</button>
+        </div>
+      </div>
+      <ol class="drill">
+          <li class="dq" data-a="x">
+            <p class="s">事後届出は、土地の売主・買主の双方が行わなければならない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>事後届出の届出義務者は<strong>権利取得者（買主）のみ</strong>。売主は届出義務を負わない。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">事後届出は、都道府県知事に直接提出する。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>事後届出は<strong>市町村長を経由して</strong>知事に提出する。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">都道府県知事は、事後届出があった場合、対価の額について勧告することができる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>事後届出で勧告できるのは<strong>利用目的のみ</strong>。対価の額についての勧告ができるのは事前届出の場合。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">都道府県知事の勧告に従わなかった場合、その旨が公表されることがある。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>勧告に従わない場合、<strong>公表</strong>されることがあるが、契約自体は無効にならない。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">事後届出をしなかった場合、その土地売買契約は効力を生じない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>届出をしなくても<strong>契約は有効</strong>。ただし届出義務違反には罰則（6か月以下の拘禁刑または100万円以下の罰金）がある。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">市街化区域で事後届出が必要となる面積は、2,000㎡以上である。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>市街化区域は<strong>2,000㎡以上</strong>。「に・ご・いち」の語呂で2,000→5,000→10,000と覚える。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">市街化区域以外の都市計画区域で事後届出が必要となる面積は、5,000㎡以上である。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>市街化区域以外の都市計画区域（市街化調整区域・非線引き）は<strong>5,000㎡以上</strong>。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">準都市計画区域で事後届出が必要となる面積は、5,000㎡以上である。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>準都市計画区域は<strong>都市計画区域外</strong>として扱われるため、面積要件は<strong>10,000㎡以上</strong>。都市計画法の開発許可（3,000㎡）とは扱いが逆になる点に注意。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">都市計画区域外（準都市計画区域を除く）で事後届出が必要となる面積は、10,000㎡以上である。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>都市計画区域外は<strong>10,000㎡（1ha）以上</strong>。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">土地の贈与を受けた場合も、面積要件を満たせば事後届出が必要である。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>贈与は<strong>対価を伴わない</strong>ため「土地売買等の契約」にあたらず、届出は不要。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">相続によって土地を取得した場合、面積要件を満たせば事後届出が必要である。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>相続は<strong>契約によらない権利移転</strong>であるため届出は不要。理由は贈与（対価性を欠く）とは異なる。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">地上権や賃借権を設定する場合、権利金の授受がなくても事後届出の対象となる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>権利金等の対価がない地上権・賃借権の設定は<strong>対価性を欠く</strong>ため届出の対象外。賃料の支払いは対価にあたらない。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">市街化区域内で、3,000㎡の土地を2人の買主がそれぞれ1,500㎡ずつ取得した場合、いずれの買主も事後届出は不要である。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>面積要件は<strong>買主ごと</strong>に判定するため、各自1,500㎡（2,000㎡未満）であれば不要。売主側の分割は無関係。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">市街化区域内で、同一の買主が1,500㎡と1,000㎡の隣接地を別々の契約で取得した場合、事後届出は不要である。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>一団の土地として<strong>合計2,500㎡</strong>となり、2,000㎡以上のため届出が必要。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">農地法5条の許可を受けることを要する取引は、事後届出が不要である。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>届出が不要になるのは<strong>農地法3条</strong>の許可を要する場合のみ。<strong>5条の許可を要する場合は届出が必要</strong>。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">当事者の一方が国や地方公共団体である場合、事後届出は不要である。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>国・地方公共団体等が当事者の一方であれば届出は不要。<strong>双方が国等である必要はない</strong>。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">監視区域の面積要件は、法律で一律に定められている。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>監視区域の面積要件は<strong>都道府県の規則</strong>で定める。事後届出より小さい面積に設定できる。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">注視区域内での土地売買等の契約は、届出をした日から6週間を経過するまで締結することができない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>契約締結が制限されるのではなく、<strong>届出をしてから契約締結までの間に6週間の待機期間</strong>が設けられる（勧告等をしない旨の通知があればそれ以前でも可）。事後届出とは逆に、事前届出は契約前に行う。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">事前届出（注視区域）の届出義務者は、売主・買主の双方である。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>事前届出は<strong>当事者双方</strong>が届出義務を負う。事後届出（買主のみ）と異なる。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">規制区域内での土地売買等の契約は、都道府県知事の許可を受けなければ無効である。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>規制区域は<strong>許可制</strong>で、無許可の契約は無効。ただし規制区域の指定の実例はない。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">事後届出の期限は、契約締結後2週間以内である。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>事後届出は<strong>契約締結の日から2週間以内</strong>に行う。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">国土利用計画法に基づく事後届出をしなかった者には、6か月以下の拘禁刑または100万円以下の罰金が科される。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>無届・虚偽届出の罰則は<strong>6か月以下の拘禁刑または100万円以下の罰金</strong>。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">土地収用法により土地を収用される場合、事後届出は不要である。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>土地収用は<strong>契約によらない</strong>ため、土地売買等の契約にあたらず届出不要。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">民事調停法による調停に基づく土地の取得は、事後届出の対象となる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>民事調停に基づく場合は届出<strong>不要</strong>とされている。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">都道府県知事は、事後届出があった日から3週間以内（延長可）に勧告をすることができる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>勧告できる期間は<strong>3週間</strong>で、事情によりさらに3週間延長できる。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">共有持分の譲渡は、事後届出の対象となる「土地売買等の契約」にあたらない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>共有持分の譲渡も<strong>所有権の移転</strong>にあたるため対象となる。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">土地の交換は、双方に対価性があるため、事後届出の対象となりうる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>交換は互いに目的物を対価とする契約であり、<strong>対象となる</strong>。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">時効取得によって土地の所有権を得た場合、事後届出は不要である。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>時効取得は<strong>契約によらない</strong>ため届出不要。</p></div>
+          </li>
+      </ol>
+    </section>
+
   </main>
 
   <footer>
@@ -576,5 +770,75 @@
       }
     }, { rootMargin: '-10% 0px -70% 0px' });
     document.querySelectorAll('main section').forEach(function (s) { obs.observe(s); });
+  })();
+</script>
+
+<script>
+  /* 肢別○×ドリル */
+  (function () {
+    var sec = document.getElementById('drill');
+    if (!sec) return;
+    var list = sec.querySelector('ol.drill');
+    var items = Array.prototype.slice.call(list.querySelectorAll('li.dq'));
+    var key = 'takken-drill:' + (document.title || location.pathname);
+    var state = {};
+    try { state = JSON.parse(localStorage.getItem('' + key) || '{}') || {}; } catch (e) { state = {}; }
+    var elDone = document.getElementById('d-done');
+    var elOk = document.getElementById('d-ok');
+    var elPct = document.getElementById('d-pct');
+    var onlyBtn = document.getElementById('d-wrong');
+
+    function paint() {
+      var done = 0, ok = 0;
+      items.forEach(function (li, i) {
+        var picked = state[i];
+        li.classList.remove('done', 'ok', 'ng');
+        Array.prototype.forEach.call(li.querySelectorAll('.ch button'), function (b) {
+          b.removeAttribute('data-picked');
+        });
+        if (picked !== 'o' && picked !== 'x') return;
+        done++;
+        var ans = li.getAttribute('data-a');
+        var right = picked === ans;
+        if (right) ok++;
+        li.classList.add('done', right ? 'ok' : 'ng');
+        var b = li.querySelector('.ch button[data-v="' + picked + '"]');
+        if (b) b.setAttribute('data-picked', '1');
+        li.querySelector('.verdict').textContent =
+          right ? '正解　' + (ans === 'o' ? '○' : '×')
+                : '不正解　正解は ' + (ans === 'o' ? '○' : '×');
+      });
+      elDone.textContent = String(done);
+      elOk.textContent = String(ok);
+      elPct.textContent = done ? Math.round(ok / done * 100) + '%' : '—';
+      try { localStorage.setItem('' + key, JSON.stringify(state)); } catch (e) {}
+    }
+
+    list.addEventListener('click', function (e) {
+      var b = e.target;
+      while (b && b !== list && b.tagName !== 'BUTTON') b = b.parentNode;
+      if (!b || b.tagName !== 'BUTTON') return;
+      var li = b.parentNode.parentNode;
+      var i = items.indexOf(li);
+      if (i < 0) return;
+      state[i] = b.getAttribute('data-v');
+      paint();
+    });
+
+    onlyBtn.addEventListener('click', function () {
+      var on = list.classList.toggle('onlyng');
+      onlyBtn.setAttribute('aria-pressed', String(on));
+      onlyBtn.textContent = on ? 'すべて表示' : '間違えた肢だけ';
+    });
+
+    document.getElementById('d-reset').addEventListener('click', function () {
+      state = {};
+      list.classList.remove('onlyng');
+      onlyBtn.setAttribute('aria-pressed', 'false');
+      onlyBtn.textContent = '間違えた肢だけ';
+      paint();
+    });
+
+    paint();
   })();
 </script>

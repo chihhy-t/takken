@@ -146,6 +146,39 @@
   .sibling a { font-size:.8rem; text-decoration:none; border:1px solid var(--rule); border-radius:2px; padding:.35em .8em; color:var(--muted); }
   .sibling a:hover { color:var(--ink); border-color:var(--ink); }
 
+  /* ── 肢別○×ドリル ── */
+  .drillbar { max-width:none; display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between;
+    gap:var(--s2); margin:0 0 var(--s3); padding:var(--s2) var(--s3); background:var(--surface);
+    border:1px solid var(--rule); border-radius:2px; position:sticky; top:0; z-index:5; }
+  .drillbar .score { font-family:var(--font-mono); font-size:.8rem; font-variant-numeric:tabular-nums;
+    color:var(--muted); letter-spacing:.04em; }
+  .drillbar .score b { color:var(--ink); font-weight:600; }
+  .drillbar .score .pct { color:var(--accent); font-weight:600; }
+  .drillbar .dbtns { display:flex; gap:var(--s1); }
+  ol.drill { max-width:none; list-style:none; margin:0; padding:0; counter-reset:dq; }
+  li.dq { counter-increment:dq; margin:0 0 var(--s2); padding:var(--s3);
+    background:var(--surface); border:1px solid var(--hair); border-left:3px solid var(--rule); border-radius:2px; }
+  li.dq > .s { margin:0; font-size:.95rem; line-height:1.85; max-width:var(--measure); }
+  li.dq > .s::before { content:counter(dq,decimal-leading-zero); font-family:var(--font-mono);
+    font-size:.72rem; letter-spacing:.08em; color:var(--muted); margin-right:.9em; }
+  li.dq .ch { display:flex; gap:var(--s1); margin-top:var(--s2); }
+  li.dq .ch button { font-family:var(--font-display); font-size:1.05rem; line-height:1; min-width:3.6rem; padding:.4em 0; }
+  li.dq .ch button[data-picked] { color:var(--ink); border-color:var(--ink); font-weight:700; }
+  li.dq .ex { display:none; margin-top:var(--s3); padding-top:var(--s2); border-top:1px solid var(--hair); }
+  li.dq.done .ex { display:block; }
+  li.dq .ex .verdict { display:block; font-family:var(--font-mono); font-size:.7rem; letter-spacing:.14em;
+    margin-bottom:var(--s1); }
+  li.dq .ex p { margin:0; font-size:.88rem; line-height:1.8; color:var(--muted); max-width:var(--measure); }
+  li.dq .ex p strong { color:var(--ink); font-weight:700; }
+  li.dq.ok { border-left-color:var(--blue); }
+  li.dq.ok .verdict { color:var(--blue); }
+  li.dq.ng { border-left-color:var(--accent); background:var(--accent-soft); }
+  li.dq.ng .verdict { color:var(--accent); }
+  li.dq.ng .ex p strong { color:var(--accent); }
+  ol.drill.onlyng li.dq:not(.ng) { display:none; }
+  .drilldone { font-size:.84rem; color:var(--muted); padding:var(--s3); border:1px dashed var(--rule);
+    border-radius:2px; text-align:center; }
+
   @media (prefers-reduced-motion: reduce){ *{ transition:none !important; animation:none !important; scroll-behavior:auto !important; } }
   html { scroll-behavior:smooth; }
   .eyebrow a { color:var(--accent); text-decoration:none; }
@@ -164,8 +197,9 @@
       <ul class="facts">
         <li>法令基準日 <b>2026-04-01</b></li>
         <li>出題数 <b>1問</b></li>
+        <li>ドリル <b>25肢</b></li>
         <li>目標 <b>確実に1問</b></li>
-        <li>更新 <b>2026-08-09</b></li>
+        <li>更新 <b>2026-08-23</b></li>
       </ul>
     </div>
     <div class="toggles">
@@ -187,6 +221,7 @@
       <li><a href="#deru"><span class="num">06</span>よく出る論点</a></li>
       <li><a href="#hikkake"><span class="num">07</span>ひっかけ一覧</a></li>
       <li><a href="#suji"><span class="num">08</span>数字まとめ</a></li>
+      <li><a href="#drill"><span class="num">09</span>肢別○×ドリル</a></li>
     </ol>
   </nav>
 
@@ -461,6 +496,150 @@
       </div>
     </section>
 
+    <!-- 09 -->
+    <section id="drill">
+      <h2 class="sec"><span class="num">09</span>肢別○×ドリル</h2>
+      <p class="lead">頻出論点の一問一答 <em>25肢</em>。○×を押すと理由が開く。<strong>理由を一言で言えなかった肢は、正解していても「要復習」に入れる</strong>のがこのドリルの使い方。</p>
+      <div class="call tip">
+        <span class="tag">回し方</span>
+        <p>1周目は全肢。2周目以降は「間違えた肢だけ」で回す。解答状況はこのブラウザに保存されるので、日をまたいでも続きから再開できる。</p>
+      </div>
+      <div class="drillbar">
+        <div class="score">解答 <b id="d-done">0</b> / 25　　正答 <b id="d-ok">0</b>　　正答率 <span class="pct" id="d-pct">—</span></div>
+        <div class="dbtns">
+          <button id="d-wrong" type="button" aria-pressed="false">間違えた肢だけ</button>
+          <button id="d-reset" type="button">リセット</button>
+        </div>
+      </div>
+      <ol class="drill">
+          <li class="dq" data-a="x">
+            <p class="s">農地かどうかは、登記簿上の地目によって判断される。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>農地の判定は<strong>現況主義</strong>による。登記地目が山林でも、現に耕作されていれば農地にあたる。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">登記地目が「田」であっても、現に宅地化していれば農地法上の農地にはあたらない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>現況で判断するため、地目が「田」でも<strong>実際の利用状況が優先</strong>される。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">耕作放棄地は、耕作しようとすればできる状態であっても農地にはあたらない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>耕作可能な状態であれば<strong>農地にあたる</strong>。放棄されているというだけでは農地でなくなるわけではない。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">農地を農地のまま売買する場合の許可権者は、都道府県知事である。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>3条（権利移動）の許可権者は<strong>農業委員会</strong>。都道府県知事等が許可権者になるのは4条・5条（転用・転用目的の権利移動）。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">自己所有の農地を自ら宅地に転用する場合の許可権者は、農業委員会である。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>4条（転用）の許可権者は<strong>都道府県知事等</strong>（指定市町村では市町村長）。農業委員会が許可権者になるのは3条のみ。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">農地を転用する目的で第三者に売却する場合、5条の許可を受ける必要がある。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>5条（転用目的の権利移動）は、農地・採草放牧地を転用目的で譲渡・貸借する場合の許可。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">採草放牧地を転用して駐車場にする場合、4条の許可が必要である。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>4条（自己転用）の対象は<strong>農地のみ</strong>であり、<strong>採草放牧地の転用は対象外</strong>。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">4haを超える農地の転用には、農林水産大臣の許可が必要である。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>農林水産大臣の許可という制度は<strong>2016年に廃止</strong>され、面積を問わず<strong>都道府県知事等</strong>に一元化された。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">市街化区域内の農地を農地のまま売買する場合、3条の許可は不要で、農業委員会への届出で足りる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p><strong>3条には市街化区域の特例はなく、許可が必要</strong>。届出で足りる特例があるのは4条・5条のみ。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">市街化区域内の農地を転用する場合、あらかじめ農業委員会に届け出れば、都道府県知事等の許可は不要である。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>4条・5条には市街化区域の特例があり、<strong>あらかじめ届出</strong>をすれば許可は不要になる。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">国や都道府県が公用または公共用に供するために農地を転用する場合、原則として許可が必要である。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>国・都道府県が転用する場合は原則として<strong>許可不要</strong>（学校・病院等は知事等との協議が成立すれば許可があったものとみなされる）。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">相続によって農地を取得する場合、3条の許可を受ける必要がある。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>相続は<strong>意思表示によらない権利移転</strong>であり、3条の許可は不要。ただし<strong>遅滞なく農業委員会へ届け出る</strong>義務がある。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">相続人以外の者への特定遺贈により農地を取得する場合、3条の許可は不要である。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>包括遺贈・相続人への特定遺贈は許可不要だが、<strong>相続人以外への特定遺贈には3条の許可が必要</strong>。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">2アール未満の農地を農業用施設に自ら転用する場合、4条の許可は不要である。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p><strong>2アール未満</strong>の自己の農業用施設への転用は、4条の許可が不要とされる小規模な例外。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">3条・5条の許可を受けずに締結した契約は、当然に無効となる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>無許可の契約は<strong>効力を生じない（無効）</strong>。所有権も移転しない。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">無許可で農地を転用した場合、都道府県知事等は工事の停止や原状回復を命ずることができる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>違反者に対しては<strong>工事停止命令・原状回復命令</strong>を発することができる。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">無許可転用等の罰則は、個人については3年以下の拘禁刑または300万円以下の罰金である。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p><strong>3年以下の拘禁刑または300万円以下の罰金</strong>。法人には1億円以下の罰金（両罰規定）が科される。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">農地の賃借権は、登記をしなければ第三者に対抗することができない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>農地の賃借権は<strong>引渡し</strong>があれば、その後の所有権取得者に対抗できる。登記は不要。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">農地の賃貸借の解約をするには、農業委員会の許可を受けなければならない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>農地の賃貸借の<strong>解除・解約・更新拒絶には都道府県知事の許可</strong>が必要。農業委員会ではない（3条の許可権者と混同しやすい）。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">農地の賃貸借契約において、期間満了の1年前から6か月前までの間に更新拒絶の通知をしなければ、従前と同一の条件で更新したものとみなされる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>この期間内に通知しなければ<strong>法定更新</strong>される。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">農地の賃貸借の存続期間の上限は、50年である。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>民法の賃貸借の上限に従い<strong>50年</strong>が上限。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">かつて存在した3条許可の下限面積要件（50アール）は、2023年4月1日に廃止された。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>下限面積要件は<strong>2023年4月1日に廃止</strong>された。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">土地収用法により農地が収用される場合、3条・4条・5条いずれの許可も不要である。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>土地収用法による収用・使用の場合は<strong>いずれの許可も不要</strong>。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">農事調停による農地の権利移動は、3条の許可が必要である。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>農事調停による場合は<strong>3条の許可は不要</strong>とされている。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">採草放牧地を農地のまま貸借する場合も、3条の許可の対象となる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>3条の対象は<strong>農地・採草放牧地の双方</strong>。5条も同様に両方が対象になるが、4条は農地のみが対象。</p></div>
+          </li>
+      </ol>
+    </section>
+
   </main>
 
   <footer>
@@ -514,5 +693,75 @@
       }
     }, { rootMargin: '-10% 0px -70% 0px' });
     document.querySelectorAll('main section').forEach(function (s) { obs.observe(s); });
+  })();
+</script>
+
+<script>
+  /* 肢別○×ドリル */
+  (function () {
+    var sec = document.getElementById('drill');
+    if (!sec) return;
+    var list = sec.querySelector('ol.drill');
+    var items = Array.prototype.slice.call(list.querySelectorAll('li.dq'));
+    var key = 'takken-drill:' + (document.title || location.pathname);
+    var state = {};
+    try { state = JSON.parse(localStorage.getItem('' + key) || '{}') || {}; } catch (e) { state = {}; }
+    var elDone = document.getElementById('d-done');
+    var elOk = document.getElementById('d-ok');
+    var elPct = document.getElementById('d-pct');
+    var onlyBtn = document.getElementById('d-wrong');
+
+    function paint() {
+      var done = 0, ok = 0;
+      items.forEach(function (li, i) {
+        var picked = state[i];
+        li.classList.remove('done', 'ok', 'ng');
+        Array.prototype.forEach.call(li.querySelectorAll('.ch button'), function (b) {
+          b.removeAttribute('data-picked');
+        });
+        if (picked !== 'o' && picked !== 'x') return;
+        done++;
+        var ans = li.getAttribute('data-a');
+        var right = picked === ans;
+        if (right) ok++;
+        li.classList.add('done', right ? 'ok' : 'ng');
+        var b = li.querySelector('.ch button[data-v="' + picked + '"]');
+        if (b) b.setAttribute('data-picked', '1');
+        li.querySelector('.verdict').textContent =
+          right ? '正解　' + (ans === 'o' ? '○' : '×')
+                : '不正解　正解は ' + (ans === 'o' ? '○' : '×');
+      });
+      elDone.textContent = String(done);
+      elOk.textContent = String(ok);
+      elPct.textContent = done ? Math.round(ok / done * 100) + '%' : '—';
+      try { localStorage.setItem('' + key, JSON.stringify(state)); } catch (e) {}
+    }
+
+    list.addEventListener('click', function (e) {
+      var b = e.target;
+      while (b && b !== list && b.tagName !== 'BUTTON') b = b.parentNode;
+      if (!b || b.tagName !== 'BUTTON') return;
+      var li = b.parentNode.parentNode;
+      var i = items.indexOf(li);
+      if (i < 0) return;
+      state[i] = b.getAttribute('data-v');
+      paint();
+    });
+
+    onlyBtn.addEventListener('click', function () {
+      var on = list.classList.toggle('onlyng');
+      onlyBtn.setAttribute('aria-pressed', String(on));
+      onlyBtn.textContent = on ? 'すべて表示' : '間違えた肢だけ';
+    });
+
+    document.getElementById('d-reset').addEventListener('click', function () {
+      state = {};
+      list.classList.remove('onlyng');
+      onlyBtn.setAttribute('aria-pressed', 'false');
+      onlyBtn.textContent = '間違えた肢だけ';
+      paint();
+    });
+
+    paint();
   })();
 </script>

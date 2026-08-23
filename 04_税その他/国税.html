@@ -146,6 +146,39 @@
   .sibling a { font-size:.8rem; text-decoration:none; border:1px solid var(--rule); border-radius:2px; padding:.35em .8em; color:var(--muted); }
   .sibling a:hover { color:var(--ink); border-color:var(--ink); }
 
+  /* ── 肢別○×ドリル ── */
+  .drillbar { max-width:none; display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between;
+    gap:var(--s2); margin:0 0 var(--s3); padding:var(--s2) var(--s3); background:var(--surface);
+    border:1px solid var(--rule); border-radius:2px; position:sticky; top:0; z-index:5; }
+  .drillbar .score { font-family:var(--font-mono); font-size:.8rem; font-variant-numeric:tabular-nums;
+    color:var(--muted); letter-spacing:.04em; }
+  .drillbar .score b { color:var(--ink); font-weight:600; }
+  .drillbar .score .pct { color:var(--accent); font-weight:600; }
+  .drillbar .dbtns { display:flex; gap:var(--s1); }
+  ol.drill { max-width:none; list-style:none; margin:0; padding:0; counter-reset:dq; }
+  li.dq { counter-increment:dq; margin:0 0 var(--s2); padding:var(--s3);
+    background:var(--surface); border:1px solid var(--hair); border-left:3px solid var(--rule); border-radius:2px; }
+  li.dq > .s { margin:0; font-size:.95rem; line-height:1.85; max-width:var(--measure); }
+  li.dq > .s::before { content:counter(dq,decimal-leading-zero); font-family:var(--font-mono);
+    font-size:.72rem; letter-spacing:.08em; color:var(--muted); margin-right:.9em; }
+  li.dq .ch { display:flex; gap:var(--s1); margin-top:var(--s2); }
+  li.dq .ch button { font-family:var(--font-display); font-size:1.05rem; line-height:1; min-width:3.6rem; padding:.4em 0; }
+  li.dq .ch button[data-picked] { color:var(--ink); border-color:var(--ink); font-weight:700; }
+  li.dq .ex { display:none; margin-top:var(--s3); padding-top:var(--s2); border-top:1px solid var(--hair); }
+  li.dq.done .ex { display:block; }
+  li.dq .ex .verdict { display:block; font-family:var(--font-mono); font-size:.7rem; letter-spacing:.14em;
+    margin-bottom:var(--s1); }
+  li.dq .ex p { margin:0; font-size:.88rem; line-height:1.8; color:var(--muted); max-width:var(--measure); }
+  li.dq .ex p strong { color:var(--ink); font-weight:700; }
+  li.dq.ok { border-left-color:var(--blue); }
+  li.dq.ok .verdict { color:var(--blue); }
+  li.dq.ng { border-left-color:var(--accent); background:var(--accent-soft); }
+  li.dq.ng .verdict { color:var(--accent); }
+  li.dq.ng .ex p strong { color:var(--accent); }
+  ol.drill.onlyng li.dq:not(.ng) { display:none; }
+  .drilldone { font-size:.84rem; color:var(--muted); padding:var(--s3); border:1px dashed var(--rule);
+    border-radius:2px; text-align:center; }
+
   @media (prefers-reduced-motion: reduce){ *{ transition:none !important; animation:none !important; scroll-behavior:auto !important; } }
   html { scroll-behavior:smooth; }
   .eyebrow a { color:var(--accent); text-decoration:none; }
@@ -165,7 +198,7 @@
         <li>法令基準日 <b>2026-04-01</b></li>
         <li>出題 <b>問23／1問</b></li>
         <li>目標 <b>確実に1問</b></li>
-        <li>更新 <b>2026-08-11</b></li>
+        <li>更新 <b>2026-08-23</b></li>
       </ul>
     </div>
     <div class="toggles">
@@ -189,6 +222,7 @@
       <li><a href="#deru"><span class="num">08</span>よく出る論点</a></li>
       <li><a href="#hikkake"><span class="num">09</span>ひっかけ一覧</a></li>
       <li><a href="#suji"><span class="num">10</span>数字まとめ</a></li>
+      <li><a href="#drill"><span class="num">11</span>肢別○×ドリル</a></li>
     </ol>
   </nav>
 
@@ -705,6 +739,185 @@
       </div>
     </section>
 
+    <!-- 11 -->
+    <section id="drill">
+      <h2 class="sec"><span class="num">11</span>肢別○×ドリル</h2>
+      <p class="lead">頻出論点の一問一答 <em>32肢</em>。○×を押すと理由が開く。<strong>理由を一言で言えなかった肢は、正解していても「要復習」に入れる</strong>のがこのドリルの使い方。</p>
+      <div class="call tip">
+        <span class="tag">回し方</span>
+        <p>1周目は全肢。2周目以降は「間違えた肢だけ」で回す。解答状況はこのブラウザに保存されるので、日をまたいでも続きから再開できる。</p>
+      </div>
+      <div class="drillbar">
+        <div class="score">解答 <b id="d-done">0</b> / 32　　正答 <b id="d-ok">0</b>　　正答率 <span class="pct" id="d-pct">—</span></div>
+        <div class="dbtns">
+          <button id="d-wrong" type="button" aria-pressed="false">間違えた肢だけ</button>
+          <button id="d-reset" type="button">リセット</button>
+        </div>
+      </div>
+      <ol class="drill">
+          <li class="dq" data-a="x">
+            <p class="s">建物の賃貸借契約書には、印紙税が課される。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>建物の賃貸借契約書は<strong>不課税</strong>。課税されるのは土地の賃貸借契約書・地上権設定契約書（1号文書）。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">土地の賃貸借契約書には、印紙税が課される。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>土地の賃貸借契約書は1号文書として<strong>課税</strong>される。建物の賃貸借契約書との違いが最頻出。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">抵当権設定契約書には、印紙税が課される。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>抵当権の設定契約書は<strong>課税物件表にない</strong>ため不課税。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">贈与契約書の記載金額は、目的物の評価額として扱われる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>贈与契約書は対価がないため、評価額が記載されていても<strong>記載金額のない契約書（200円）</strong>として扱われる。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">契約金額を増額する変更契約書の記載金額は、変更後の金額全体である。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>増額変更の場合の記載金額は<strong>増加額のみ</strong>。全体の金額ではない。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">契約金額を減額する変更契約書は、記載金額のない契約書として印紙税額は200円である。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>減額変更の場合は<strong>記載金額なし（200円）</strong>として扱う。増額の場合とは異なる。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">交換契約書において双方の価額が記載されている場合、記載金額は交換差金の額である。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>双方の価額が記載されている場合は<strong>高い方の価額</strong>が記載金額になる。交換差金の額になるのは、差金のみが記載されている場合。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">1つの契約書に土地3,000万円・建物2,000万円の記載がある場合、記載金額は合計の5,000万円となる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>同一号の文書に2以上の契約金額が記載されている場合は<strong>合算</strong>する。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">課税文書に印紙を貼っていない場合、その契約は無効となる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>印紙を貼っていなくても<strong>契約自体は有効</strong>。印紙税法上の過怠税が課されるだけで、私法上の効力には影響しない。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">課税文書に印紙を貼らなかった場合の過怠税は、本来の印紙税額の2倍である。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>過怠税は本税に加え<strong>その2倍相当額を合わせた3倍</strong>（本税＋2倍）。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">印紙を貼ったが消印を忘れた場合の過怠税は、その印紙の額面と同額である。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>消印漏れの場合の過怠税は<strong>消印していない印紙の額面と同額</strong>。貼り忘れ（3倍）とは異なる扱い。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">1つの契約書について売主用・買主用の2通を作成し、それぞれが1通ずつ保管する場合、印紙は1枚だけ貼ればよい。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p><strong>2通とも課税文書</strong>にあたり、それぞれに印紙税が課される。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">国と私人が共同で作成した文書のうち、私人が保存するものは非課税である。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>私人が保存する文書は<strong>国等が作成したものとみなされ非課税</strong>。国等が保存する文書は私人が作成したものとみなされ課税される。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">登録免許税の課税標準は、実際の売買価格である。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>課税標準は<strong>固定資産課税台帳の価格</strong>（固定資産税評価額）であり、実際の取引価格ではない。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">抵当権設定登記の登録免許税の課税標準は、不動産の価額である。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>抵当権設定登記の課税標準は<strong>債権金額</strong>。不動産の価額を基準とするのは所有権の登記など。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">住宅用家屋の軽減税率は、その敷地である土地にも適用される。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>軽減税率の対象は<strong>家屋のみ</strong>。土地には適用されない。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">贈与によって取得した住宅用家屋の所有権移転登記にも、登録免許税の軽減税率が適用される。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>軽減税率が適用される移転登記の原因は<strong>売買・競落に限られる</strong>。贈与・交換・相続には適用されない。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">住宅用家屋の登録免許税の軽減税率は、過去に一度適用を受けた者は再び受けることができない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>この軽減税率に<strong>回数制限はない</strong>。要件を満たせば何度でも適用を受けられる。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">住宅用家屋の軽減税率の適用要件となる床面積は、50㎡以上240㎡以下である。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>床面積要件は<strong>50㎡以上</strong>で、<strong>上限はない</strong>。240㎡以下という上限を付けた選択肢は誤り。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">表示に関する登記（分筆・合筆・建物の表題登記など）には、原則として登録免許税が課されない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>表示に関する登記は<strong>原則非課税</strong>。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">譲渡した年の1月1日において所有期間が5年を超えていれば、長期譲渡所得として扱われる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>所有期間の判定は<strong>譲渡した年の1月1日時点</strong>で行う。譲渡の日で判定するのではない。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">短期譲渡所得（所有期間5年以下）の税率は、所得税と住民税を合わせて39%である。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>短期譲渡所得の税率は<strong>所得税30%・住民税9%＝合計39%</strong>。長期は所得税15%・住民税5%＝20%。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">居住用財産の3,000万円特別控除の適用を受けるには、所有期間が10年を超えていなければならない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>3,000万円特別控除に<strong>所有期間の要件はない</strong>。10年超が必要なのは軽減税率の特例・買換え特例。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">居住用財産の3,000万円特別控除は、前年・前々年に同じ特例の適用を受けていなければ、毎年受けることができる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>前年・前々年に適用を受けていないことが要件であり、実質的に<strong>3年に1度</strong>しか受けられない。「毎年受けられる」は誤り。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">3,000万円特別控除と軽減税率の特例は、併用することができる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>この2つは<strong>併用可能</strong>。まず3,000万円を控除し、残額に軽減税率（14%）を適用する。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">特定居住用財産の買換え特例は、3,000万円特別控除や軽減税率の特例と併用することができる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>買換え特例は課税を<strong>繰り延べる</strong>制度であり、<strong>3,000万円控除・軽減税率のいずれとも併用できない</strong>。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">相続時精算課税制度を利用するには、原則として贈与者が60歳以上でなければならない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>原則は<strong>60歳以上の父母・祖父母</strong>が贈与者。ただし住宅取得等資金の贈与では年齢要件が不要になる。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">住宅取得等資金の贈与として相続時精算課税制度を利用する場合、贈与者の年齢要件は問われない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>住宅取得等資金の場合は<strong>60歳以上という年齢要件が不要</strong>になる特則がある。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">相続時精算課税制度を選択すると、特別控除2,500万円とは別に、年110万円の基礎控除を利用できる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>2024年1月1日施行の改正により、精算課税の中に<strong>年110万円の基礎控除</strong>が新設された。この分は相続財産に加算されない。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">相続時精算課税制度は、いったん選択すると撤回することができない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>選択は撤回できず、<strong>その贈与者からの贈与は以後すべて精算課税</strong>の対象となる。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">金銭の受取書（領収書）は、記載金額が5万円未満であれば非課税である。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>受取書（17号文書）は<strong>5万円未満</strong>および営業に関しないものが非課税。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">建物の工事請負契約書には、印紙税が課される。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>建物の工事請負契約書は<strong>2号文書として課税</strong>される。土地・建物の売買契約書（1号文書）とは区分が異なる。</p></div>
+          </li>
+      </ol>
+    </section>
+
   </main>
 
   <footer>
@@ -760,5 +973,75 @@
       }
     }, { rootMargin: '-10% 0px -70% 0px' });
     document.querySelectorAll('main section').forEach(function (s) { obs.observe(s); });
+  })();
+</script>
+
+<script>
+  /* 肢別○×ドリル */
+  (function () {
+    var sec = document.getElementById('drill');
+    if (!sec) return;
+    var list = sec.querySelector('ol.drill');
+    var items = Array.prototype.slice.call(list.querySelectorAll('li.dq'));
+    var key = 'takken-drill:' + (document.title || location.pathname);
+    var state = {};
+    try { state = JSON.parse(localStorage.getItem('' + key) || '{}') || {}; } catch (e) { state = {}; }
+    var elDone = document.getElementById('d-done');
+    var elOk = document.getElementById('d-ok');
+    var elPct = document.getElementById('d-pct');
+    var onlyBtn = document.getElementById('d-wrong');
+
+    function paint() {
+      var done = 0, ok = 0;
+      items.forEach(function (li, i) {
+        var picked = state[i];
+        li.classList.remove('done', 'ok', 'ng');
+        Array.prototype.forEach.call(li.querySelectorAll('.ch button'), function (b) {
+          b.removeAttribute('data-picked');
+        });
+        if (picked !== 'o' && picked !== 'x') return;
+        done++;
+        var ans = li.getAttribute('data-a');
+        var right = picked === ans;
+        if (right) ok++;
+        li.classList.add('done', right ? 'ok' : 'ng');
+        var b = li.querySelector('.ch button[data-v="' + picked + '"]');
+        if (b) b.setAttribute('data-picked', '1');
+        li.querySelector('.verdict').textContent =
+          right ? '正解　' + (ans === 'o' ? '○' : '×')
+                : '不正解　正解は ' + (ans === 'o' ? '○' : '×');
+      });
+      elDone.textContent = String(done);
+      elOk.textContent = String(ok);
+      elPct.textContent = done ? Math.round(ok / done * 100) + '%' : '—';
+      try { localStorage.setItem('' + key, JSON.stringify(state)); } catch (e) {}
+    }
+
+    list.addEventListener('click', function (e) {
+      var b = e.target;
+      while (b && b !== list && b.tagName !== 'BUTTON') b = b.parentNode;
+      if (!b || b.tagName !== 'BUTTON') return;
+      var li = b.parentNode.parentNode;
+      var i = items.indexOf(li);
+      if (i < 0) return;
+      state[i] = b.getAttribute('data-v');
+      paint();
+    });
+
+    onlyBtn.addEventListener('click', function () {
+      var on = list.classList.toggle('onlyng');
+      onlyBtn.setAttribute('aria-pressed', String(on));
+      onlyBtn.textContent = on ? 'すべて表示' : '間違えた肢だけ';
+    });
+
+    document.getElementById('d-reset').addEventListener('click', function () {
+      state = {};
+      list.classList.remove('onlyng');
+      onlyBtn.setAttribute('aria-pressed', 'false');
+      onlyBtn.textContent = '間違えた肢だけ';
+      paint();
+    });
+
+    paint();
   })();
 </script>

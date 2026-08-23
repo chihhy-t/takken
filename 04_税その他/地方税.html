@@ -146,6 +146,39 @@
   .sibling a { font-size:.8rem; text-decoration:none; border:1px solid var(--rule); border-radius:2px; padding:.35em .8em; color:var(--muted); }
   .sibling a:hover { color:var(--ink); border-color:var(--ink); }
 
+  /* ── 肢別○×ドリル ── */
+  .drillbar { max-width:none; display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between;
+    gap:var(--s2); margin:0 0 var(--s3); padding:var(--s2) var(--s3); background:var(--surface);
+    border:1px solid var(--rule); border-radius:2px; position:sticky; top:0; z-index:5; }
+  .drillbar .score { font-family:var(--font-mono); font-size:.8rem; font-variant-numeric:tabular-nums;
+    color:var(--muted); letter-spacing:.04em; }
+  .drillbar .score b { color:var(--ink); font-weight:600; }
+  .drillbar .score .pct { color:var(--accent); font-weight:600; }
+  .drillbar .dbtns { display:flex; gap:var(--s1); }
+  ol.drill { max-width:none; list-style:none; margin:0; padding:0; counter-reset:dq; }
+  li.dq { counter-increment:dq; margin:0 0 var(--s2); padding:var(--s3);
+    background:var(--surface); border:1px solid var(--hair); border-left:3px solid var(--rule); border-radius:2px; }
+  li.dq > .s { margin:0; font-size:.95rem; line-height:1.85; max-width:var(--measure); }
+  li.dq > .s::before { content:counter(dq,decimal-leading-zero); font-family:var(--font-mono);
+    font-size:.72rem; letter-spacing:.08em; color:var(--muted); margin-right:.9em; }
+  li.dq .ch { display:flex; gap:var(--s1); margin-top:var(--s2); }
+  li.dq .ch button { font-family:var(--font-display); font-size:1.05rem; line-height:1; min-width:3.6rem; padding:.4em 0; }
+  li.dq .ch button[data-picked] { color:var(--ink); border-color:var(--ink); font-weight:700; }
+  li.dq .ex { display:none; margin-top:var(--s3); padding-top:var(--s2); border-top:1px solid var(--hair); }
+  li.dq.done .ex { display:block; }
+  li.dq .ex .verdict { display:block; font-family:var(--font-mono); font-size:.7rem; letter-spacing:.14em;
+    margin-bottom:var(--s1); }
+  li.dq .ex p { margin:0; font-size:.88rem; line-height:1.8; color:var(--muted); max-width:var(--measure); }
+  li.dq .ex p strong { color:var(--ink); font-weight:700; }
+  li.dq.ok { border-left-color:var(--blue); }
+  li.dq.ok .verdict { color:var(--blue); }
+  li.dq.ng { border-left-color:var(--accent); background:var(--accent-soft); }
+  li.dq.ng .verdict { color:var(--accent); }
+  li.dq.ng .ex p strong { color:var(--accent); }
+  ol.drill.onlyng li.dq:not(.ng) { display:none; }
+  .drilldone { font-size:.84rem; color:var(--muted); padding:var(--s3); border:1px dashed var(--rule);
+    border-radius:2px; text-align:center; }
+
   @media (prefers-reduced-motion: reduce){ *{ transition:none !important; animation:none !important; scroll-behavior:auto !important; } }
   html { scroll-behavior:smooth; }
   .eyebrow a { color:var(--accent); text-decoration:none; }
@@ -165,7 +198,7 @@
         <li>法令基準日 <b>2026-04-01</b></li>
         <li>出題 <b>問24／1問</b></li>
         <li>目標 <b>確実に1問</b></li>
-        <li>更新 <b>2026-08-11</b></li>
+        <li>更新 <b>2026-08-23</b></li>
       </ul>
     </div>
     <div class="toggles">
@@ -189,6 +222,7 @@
       <li><a href="#deru"><span class="num">08</span>よく出る論点</a></li>
       <li><a href="#hikkake"><span class="num">09</span>ひっかけ一覧</a></li>
       <li><a href="#suji"><span class="num">10</span>数字まとめ</a></li>
+      <li><a href="#drill"><span class="num">11</span>肢別○×ドリル</a></li>
     </ol>
   </nav>
 
@@ -668,6 +702,160 @@
       </div>
     </section>
 
+    <!-- 11 -->
+    <section id="drill">
+      <h2 class="sec"><span class="num">11</span>肢別○×ドリル</h2>
+      <p class="lead">頻出論点の一問一答 <em>27肢</em>。○×を押すと理由が開く。<strong>理由を一言で言えなかった肢は、正解していても「要復習」に入れる</strong>のがこのドリルの使い方。</p>
+      <div class="call tip">
+        <span class="tag">回し方</span>
+        <p>1周目は全肢。2周目以降は「間違えた肢だけ」で回す。解答状況はこのブラウザに保存されるので、日をまたいでも続きから再開できる。</p>
+      </div>
+      <div class="drillbar">
+        <div class="score">解答 <b id="d-done">0</b> / 27　　正答 <b id="d-ok">0</b>　　正答率 <span class="pct" id="d-pct">—</span></div>
+        <div class="dbtns">
+          <button id="d-wrong" type="button" aria-pressed="false">間違えた肢だけ</button>
+          <button id="d-reset" type="button">リセット</button>
+        </div>
+      </div>
+      <ol class="drill">
+          <li class="dq" data-a="x">
+            <p class="s">不動産取得税は、市町村が課する税である。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>不動産取得税を課するのは<strong>都道府県</strong>。固定資産税が市町村（東京23区は都）の税である。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">固定資産税は、都道府県が課する税である。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>固定資産税を課するのは<strong>市町村</strong>。不動産取得税と課税主体が逆。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">相続によって不動産を取得した場合、不動産取得税が課される。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>相続による取得は<strong>非課税</strong>。本人の意思による取得ではないため。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">贈与によって不動産を取得した場合、無償であるため不動産取得税は課されない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>贈与は無償でも<strong>課税される</strong>。「無償だから非課税」という思い込みが誤り。相続との結論の違いが最頻出。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">不動産取得税は、登記をしていなければ課されない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>不動産取得税は<strong>登記の有無を問わず</strong>、所有権を現実に取得した事実に着目して課される。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">不動産取得税の標準税率は、土地・住宅について3%である（特例期間中）。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>本則4%のところ、土地・住宅は<strong>3%</strong>の特例税率が適用される（2027年3月31日まで）。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">宅地の課税標準を価格の1/2とする特例は、土地・家屋のいずれにも適用される。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>この特例は<strong>宅地（宅地評価土地）のみ</strong>に適用される。家屋には適用されない。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">新築住宅の1,200万円控除は、自己の居住用に取得した場合に限られる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>新築住宅の控除には<strong>居住用要件はない</strong>（貸家であっても対象）。中古住宅の特例には居住用等の要件がある点と混同しやすい。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">不動産取得税・固定資産税は、いずれも申告納付方式である。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>いずれも<strong>普通徴収</strong>（納税通知書が送られてくる方式）であり、申告納付ではない。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">固定資産税の納税義務者は、年の途中で所有者となった者である。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>納税義務者は<strong>賦課期日（1月1日）現在</strong>の所有者。年の途中で所有者が変わっても、その年の納税義務者は変わらない。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">固定資産税の標準税率は1.4%であり、これを超える税率を定めることはできない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>1.4%は<strong>標準税率</strong>であり、制限税率（上限）は設けられていない。市町村の条例でこれを超える税率も定められる。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">固定資産の価格は、都道府県知事が決定する。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>価格を決定するのは<strong>市町村長</strong>。総務大臣は評価の基準（固定資産評価基準）を定める。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">固定資産の評価替えは、毎年行われる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>評価替えは<strong>3年ごとの基準年度</strong>に行われ、第二年度・第三年度は原則として据え置かれる。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">200㎡を超える住宅用地は、敷地全体について課税標準が1/3になる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p><strong>200㎡までの部分は1/6のまま</strong>であり、超える部分だけが1/3になる。全体が切り替わるのではない。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">住宅用地の課税標準の特例は、更地にも適用される。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>この特例は<strong>住宅の敷地</strong>に限られる。更地・駐車場・店舗の敷地には適用されない。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">新築住宅の税額の減額措置は、床面積280㎡までの部分について税額が1/2になる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>税額が1/2になるのは<strong>床面積120㎡までの部分</strong>。280㎡は床面積要件（50〜280㎡）の上限。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">新築住宅の税額の減額期間は、すべての住宅について3年度分である。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>一般の住宅は3年度分だが、<strong>3階建以上の中高層耐火建築物等は5年度分</strong>に延長される。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">固定資産の価格について不服がある場合、市町村長に審査請求をする。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>価格についての不服は<strong>固定資産評価審査委員会</strong>への審査の申出による。市町村長へは、税額の計算誤りなど価格以外の事項について審査請求する。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">固定資産課税台帳の縦覧は、いつでも行うことができる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>縦覧は<strong>毎年4月1日から一定期間</strong>に限られる。いつでもできるのは自己の資産に関する「閲覧」。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">都市計画税は、制限税率が定められておらず、市町村が自由に税率を定められる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>都市計画税には<strong>0.3%の制限税率</strong>がある。固定資産税に制限税率がないのと対照的。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">都市計画税の課税対象は、原則として市街化区域内の土地・家屋である。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>都市計画税は原則として<strong>市街化区域内</strong>の土地・家屋を課税対象とする目的税。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">都市計画税は、住宅用地について固定資産税と同じ割合（200㎡以下1/6・超える部分1/3）の特例が適用される。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>都市計画税の住宅用地特例の割合は<strong>200㎡以下1/3・超える部分2/3</strong>であり、固定資産税とは割合が異なる。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">不動産取得税における土地の免税点は、10万円である。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>不動産取得税の免税点は<strong>土地10万円・家屋の建築23万円・家屋のその他12万円</strong>。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">固定資産税における土地の免税点は、30万円である。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>固定資産税の免税点は<strong>土地30万円・家屋20万円・償却資産150万円</strong>。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">質権または100年より永い存続期間の定めのある地上権の目的となっている土地は、所有者ではなく質権者・地上権者が固定資産税の納税義務者となる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>この場合は例外的に<strong>質権者・地上権者</strong>が納税義務者となる。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">固定資産税の賦課期日前に所有者が死亡していた場合、その相続人等、現に所有している者が納税義務者となる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>賦課期日前の死亡の場合は<strong>現に所有している者</strong>が納税義務者となる。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">固定資産税の納期は、4月・7月・12月・翌年2月中において市町村の条例で定める。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p><strong>4・7・12・2月</strong>の年4回が原則で、具体的な時期は市町村の条例で定める。</p></div>
+          </li>
+      </ol>
+    </section>
+
   </main>
 
   <footer>
@@ -721,5 +909,75 @@
       }
     }, { rootMargin: '-10% 0px -70% 0px' });
     document.querySelectorAll('main section').forEach(function (s) { obs.observe(s); });
+  })();
+</script>
+
+<script>
+  /* 肢別○×ドリル */
+  (function () {
+    var sec = document.getElementById('drill');
+    if (!sec) return;
+    var list = sec.querySelector('ol.drill');
+    var items = Array.prototype.slice.call(list.querySelectorAll('li.dq'));
+    var key = 'takken-drill:' + (document.title || location.pathname);
+    var state = {};
+    try { state = JSON.parse(localStorage.getItem('' + key) || '{}') || {}; } catch (e) { state = {}; }
+    var elDone = document.getElementById('d-done');
+    var elOk = document.getElementById('d-ok');
+    var elPct = document.getElementById('d-pct');
+    var onlyBtn = document.getElementById('d-wrong');
+
+    function paint() {
+      var done = 0, ok = 0;
+      items.forEach(function (li, i) {
+        var picked = state[i];
+        li.classList.remove('done', 'ok', 'ng');
+        Array.prototype.forEach.call(li.querySelectorAll('.ch button'), function (b) {
+          b.removeAttribute('data-picked');
+        });
+        if (picked !== 'o' && picked !== 'x') return;
+        done++;
+        var ans = li.getAttribute('data-a');
+        var right = picked === ans;
+        if (right) ok++;
+        li.classList.add('done', right ? 'ok' : 'ng');
+        var b = li.querySelector('.ch button[data-v="' + picked + '"]');
+        if (b) b.setAttribute('data-picked', '1');
+        li.querySelector('.verdict').textContent =
+          right ? '正解　' + (ans === 'o' ? '○' : '×')
+                : '不正解　正解は ' + (ans === 'o' ? '○' : '×');
+      });
+      elDone.textContent = String(done);
+      elOk.textContent = String(ok);
+      elPct.textContent = done ? Math.round(ok / done * 100) + '%' : '—';
+      try { localStorage.setItem('' + key, JSON.stringify(state)); } catch (e) {}
+    }
+
+    list.addEventListener('click', function (e) {
+      var b = e.target;
+      while (b && b !== list && b.tagName !== 'BUTTON') b = b.parentNode;
+      if (!b || b.tagName !== 'BUTTON') return;
+      var li = b.parentNode.parentNode;
+      var i = items.indexOf(li);
+      if (i < 0) return;
+      state[i] = b.getAttribute('data-v');
+      paint();
+    });
+
+    onlyBtn.addEventListener('click', function () {
+      var on = list.classList.toggle('onlyng');
+      onlyBtn.setAttribute('aria-pressed', String(on));
+      onlyBtn.textContent = on ? 'すべて表示' : '間違えた肢だけ';
+    });
+
+    document.getElementById('d-reset').addEventListener('click', function () {
+      state = {};
+      list.classList.remove('onlyng');
+      onlyBtn.setAttribute('aria-pressed', 'false');
+      onlyBtn.textContent = '間違えた肢だけ';
+      paint();
+    });
+
+    paint();
   })();
 </script>

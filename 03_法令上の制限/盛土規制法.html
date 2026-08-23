@@ -146,6 +146,39 @@
   .sibling a { font-size:.8rem; text-decoration:none; border:1px solid var(--rule); border-radius:2px; padding:.35em .8em; color:var(--muted); }
   .sibling a:hover { color:var(--ink); border-color:var(--ink); }
 
+  /* ── 肢別○×ドリル ── */
+  .drillbar { max-width:none; display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between;
+    gap:var(--s2); margin:0 0 var(--s3); padding:var(--s2) var(--s3); background:var(--surface);
+    border:1px solid var(--rule); border-radius:2px; position:sticky; top:0; z-index:5; }
+  .drillbar .score { font-family:var(--font-mono); font-size:.8rem; font-variant-numeric:tabular-nums;
+    color:var(--muted); letter-spacing:.04em; }
+  .drillbar .score b { color:var(--ink); font-weight:600; }
+  .drillbar .score .pct { color:var(--accent); font-weight:600; }
+  .drillbar .dbtns { display:flex; gap:var(--s1); }
+  ol.drill { max-width:none; list-style:none; margin:0; padding:0; counter-reset:dq; }
+  li.dq { counter-increment:dq; margin:0 0 var(--s2); padding:var(--s3);
+    background:var(--surface); border:1px solid var(--hair); border-left:3px solid var(--rule); border-radius:2px; }
+  li.dq > .s { margin:0; font-size:.95rem; line-height:1.85; max-width:var(--measure); }
+  li.dq > .s::before { content:counter(dq,decimal-leading-zero); font-family:var(--font-mono);
+    font-size:.72rem; letter-spacing:.08em; color:var(--muted); margin-right:.9em; }
+  li.dq .ch { display:flex; gap:var(--s1); margin-top:var(--s2); }
+  li.dq .ch button { font-family:var(--font-display); font-size:1.05rem; line-height:1; min-width:3.6rem; padding:.4em 0; }
+  li.dq .ch button[data-picked] { color:var(--ink); border-color:var(--ink); font-weight:700; }
+  li.dq .ex { display:none; margin-top:var(--s3); padding-top:var(--s2); border-top:1px solid var(--hair); }
+  li.dq.done .ex { display:block; }
+  li.dq .ex .verdict { display:block; font-family:var(--font-mono); font-size:.7rem; letter-spacing:.14em;
+    margin-bottom:var(--s1); }
+  li.dq .ex p { margin:0; font-size:.88rem; line-height:1.8; color:var(--muted); max-width:var(--measure); }
+  li.dq .ex p strong { color:var(--ink); font-weight:700; }
+  li.dq.ok { border-left-color:var(--blue); }
+  li.dq.ok .verdict { color:var(--blue); }
+  li.dq.ng { border-left-color:var(--accent); background:var(--accent-soft); }
+  li.dq.ng .verdict { color:var(--accent); }
+  li.dq.ng .ex p strong { color:var(--accent); }
+  ol.drill.onlyng li.dq:not(.ng) { display:none; }
+  .drilldone { font-size:.84rem; color:var(--muted); padding:var(--s3); border:1px dashed var(--rule);
+    border-radius:2px; text-align:center; }
+
   @media (prefers-reduced-motion: reduce){ *{ transition:none !important; animation:none !important; scroll-behavior:auto !important; } }
   html { scroll-behavior:smooth; }
   .eyebrow a { color:var(--accent); text-decoration:none; }
@@ -165,8 +198,9 @@
       <ul class="facts">
         <li>法令基準日 <b>2026-04-01</b></li>
         <li>出題数 <b>1問</b></li>
+        <li>ドリル <b>28肢</b></li>
         <li>目標 <b>確実に1問</b></li>
-        <li>更新 <b>2026-08-09</b></li>
+        <li>更新 <b>2026-08-23</b></li>
       </ul>
     </div>
     <div class="toggles">
@@ -189,6 +223,7 @@
       <li><a href="#deru"><span class="num">07</span>よく出る論点</a></li>
       <li><a href="#hikkake"><span class="num">08</span>ひっかけ一覧</a></li>
       <li><a href="#suji"><span class="num">09</span>数字まとめ</a></li>
+      <li><a href="#drill"><span class="num">10</span>肢別○×ドリル</a></li>
     </ol>
   </nav>
 
@@ -532,6 +567,165 @@
       </div>
     </section>
 
+    <!-- 10 -->
+    <section id="drill">
+      <h2 class="sec"><span class="num">10</span>肢別○×ドリル</h2>
+      <p class="lead">頻出論点の一問一答 <em>28肢</em>。○×を押すと理由が開く。<strong>理由を一言で言えなかった肢は、正解していても「要復習」に入れる</strong>のがこのドリルの使い方。</p>
+      <div class="call tip">
+        <span class="tag">回し方</span>
+        <p>1周目は全肢。2周目以降は「間違えた肢だけ」で回す。解答状況はこのブラウザに保存されるので、日をまたいでも続きから再開できる。</p>
+      </div>
+      <div class="drillbar">
+        <div class="score">解答 <b id="d-done">0</b> / 28　　正答 <b id="d-ok">0</b>　　正答率 <span class="pct" id="d-pct">—</span></div>
+        <div class="dbtns">
+          <button id="d-wrong" type="button" aria-pressed="false">間違えた肢だけ</button>
+          <button id="d-reset" type="button">リセット</button>
+        </div>
+      </div>
+      <ol class="drill">
+          <li class="dq" data-a="x">
+            <p class="s">「宅地造成」とは、もともと宅地である土地に盛土をして地盤面を高くする行為をいう。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>宅地造成とは<strong>宅地「以外」の土地を宅地にする</strong>ために行う盛土等をいう。もともと宅地の土地に盛土をする行為は「特定盛土等」にあたる。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">宅地とは、農地・採草放牧地・森林、および公共施設の用地以外の土地をいう。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>この法律上の「宅地」の定義は、<strong>農地・採草放牧地・森林・公共施設用地を除いた土地</strong>。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">宅地造成等工事規制区域内で、盛土により高さ1m超の崖を生じる工事を行う場合、都道府県知事等の許可が必要である。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>宅地造成等工事規制区域における盛土の許可基準は<strong>高さ1m超</strong>。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">宅地造成等工事規制区域内で、切土により高さ1m超の崖を生じる工事を行う場合、許可が必要である。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>切土で崖を生じる場合の基準は<strong>高さ2m超</strong>。盛土（1m超）より緩やか。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">宅地造成等工事規制区域内で、崖を生じない盛土であっても、高さ2mを超える場合は許可が必要である。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>崖を生じない盛土であっても<strong>高さ2m超</strong>であれば許可の対象となる。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">宅地造成等工事規制区域内で、盛土・切土をする土地の面積が500㎡を超える場合、許可が必要である。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>面積要件は<strong>500㎡超</strong>。崖の高さ要件とは別に、この面積要件だけでも対象になりうる。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">特定盛土等規制区域内で届出が必要となる規模は、宅地造成等工事規制区域内で許可が必要となる規模と同じである。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>特定盛土等規制区域の<strong>「届出」の規模は、宅地造成等工事規制区域の「許可」の規模と同一</strong>（1m超・2m超・2m超・2m超・500㎡超）。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">特定盛土等規制区域内で許可が必要となるのは、盛土で高さ2mを超える崖を生じる場合である。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>特定盛土等規制区域の<strong>「許可」</strong>規模は「2・5・5・5・3,000」。盛土は2m超が基準。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">特定盛土等規制区域内で許可が必要となる盛土・切土の面積は、3,000㎡を超える場合である。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>特定盛土等規制区域の許可の面積要件は<strong>3,000㎡超</strong>（届出の500㎡超より大きい）。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">特定盛土等規制区域内における届出は、工事に着手した後に行えばよい。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>特定盛土等規制区域の届出は<strong>着手する日の30日前まで</strong>に行わなければならない。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">盛土規制法の規制対象は、宅地造成に限られ、農地や森林への盛土は対象外である。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p><strong>農地・採草放牧地・森林への盛土等（特定盛土等・土石の堆積）も規制対象</strong>に含まれる。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">宅地造成等に関する工事の許可を受けるべき者は、工事主（工事の注文者、または自ら工事をする者）である。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>許可を受けるのは<strong>工事主</strong>。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">宅地造成等工事規制区域内の工事の許可権者は、都道府県知事（指定都市・中核市の区域内はその市長）である。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>許可権者は<strong>都道府県知事等</strong>。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">都道府県知事等は、宅地造成等に関する工事の許可に条件を付すことができない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>知事等は<strong>許可に条件を付すことができる</strong>。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">宅地造成等の工事の完了後は、知事等の検査を受け、検査済証の交付を受けなければならない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>工事完了後は<strong>完了検査</strong>を受け、検査済証の交付を受ける。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">無許可で宅地造成等の工事を行った場合の罰則は、個人については最大で3年以下の拘禁刑または1,000万円以下の罰金である。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>無許可工事等の罰則は個人<strong>最大3年以下・1,000万円以下</strong>、法人は<strong>3億円以下</strong>の罰金。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">宅地造成等工事規制区域の指定の際に現に工事を行っている工事主は、指定の日から21日以内に届け出なければならない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>区域指定時に工事中だった工事主の届出期限は<strong>指定の日から21日以内</strong>。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">高さ2mを超える擁壁を除却する工事を行う場合、着手する日の14日前までに届け出なければならない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p><strong>高さ2m超の擁壁等の除却工事</strong>は着手の14日前までの事前届出が必要。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">公共施設用地を宅地または農地等に転用した場合、転用した日から21日以内に届け出なければならない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>この届出の期限は<strong>転用した日から14日以内</strong>。21日は区域指定時に工事中だった場合の届出期限。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">宅地造成等工事規制区域内の土地の所有者・管理者・占有者は、常時安全な状態に維持する法的義務を負う。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>土地の保全義務は<strong>努力義務</strong>にとどまり、法的な強制力のある義務ではない。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">改善命令の相手方は、実際に造成工事を行った者に限られる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>改善命令の相手方は<strong>現在の所有者・管理者・占有者</strong>も含まれ、工事をした者に限られない。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">都道府県知事等は、災害防止のため必要があると認めるときは、土地の所有者等に対して勧告をすることができる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>勧告は災害防止のために<strong>知事等が行うことができる</strong>措置。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">造成宅地防災区域は、宅地造成等工事規制区域内の危険な宅地について指定される。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>造成宅地防災区域は<strong>宅地造成等工事規制区域の「外」</strong>の土地に指定される。2つの区域が重なることはない。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">造成宅地防災区域の指定は、擁壁の設置等により指定の事由がなくなれば解除される。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>災害発生のおそれがなくなれば<strong>指定は解除</strong>される。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">崖とは、地表面が水平面に対し30度を超える角度をなす土地で、硬岩盤以外のものをいう。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>崖の定義は<strong>30度を超える角度</strong>の斜面（硬岩盤を除く）。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">特定盛土等とは、宅地または農地等において行う盛土等で、周辺の地域に危害を及ぼしうるものをいう。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>特定盛土等の定義どおり。宅地以外を宅地にする「宅地造成」とは異なる概念。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">宅地造成等工事規制区域内で、土石の堆積を行う場合、高さが2mを超え、かつ面積が300㎡を超えるときに許可が必要である。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>土石の堆積の許可基準は<strong>高さ2m超かつ面積300㎡超</strong>（面積のみでも500㎡超なら対象）。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">特定盛土等規制区域内で土石の堆積を行う場合、許可が必要となるのは高さ5mを超え、かつ面積1,500㎡を超えるときである。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>特定盛土等規制区域の土石の堆積の許可基準は<strong>高さ5m超かつ面積1,500㎡超</strong>。</p></div>
+          </li>
+      </ol>
+    </section>
+
   </main>
 
   <footer>
@@ -587,5 +781,75 @@
       }
     }, { rootMargin: '-10% 0px -70% 0px' });
     document.querySelectorAll('main section').forEach(function (s) { obs.observe(s); });
+  })();
+</script>
+
+<script>
+  /* 肢別○×ドリル */
+  (function () {
+    var sec = document.getElementById('drill');
+    if (!sec) return;
+    var list = sec.querySelector('ol.drill');
+    var items = Array.prototype.slice.call(list.querySelectorAll('li.dq'));
+    var key = 'takken-drill:' + (document.title || location.pathname);
+    var state = {};
+    try { state = JSON.parse(localStorage.getItem('' + key) || '{}') || {}; } catch (e) { state = {}; }
+    var elDone = document.getElementById('d-done');
+    var elOk = document.getElementById('d-ok');
+    var elPct = document.getElementById('d-pct');
+    var onlyBtn = document.getElementById('d-wrong');
+
+    function paint() {
+      var done = 0, ok = 0;
+      items.forEach(function (li, i) {
+        var picked = state[i];
+        li.classList.remove('done', 'ok', 'ng');
+        Array.prototype.forEach.call(li.querySelectorAll('.ch button'), function (b) {
+          b.removeAttribute('data-picked');
+        });
+        if (picked !== 'o' && picked !== 'x') return;
+        done++;
+        var ans = li.getAttribute('data-a');
+        var right = picked === ans;
+        if (right) ok++;
+        li.classList.add('done', right ? 'ok' : 'ng');
+        var b = li.querySelector('.ch button[data-v="' + picked + '"]');
+        if (b) b.setAttribute('data-picked', '1');
+        li.querySelector('.verdict').textContent =
+          right ? '正解　' + (ans === 'o' ? '○' : '×')
+                : '不正解　正解は ' + (ans === 'o' ? '○' : '×');
+      });
+      elDone.textContent = String(done);
+      elOk.textContent = String(ok);
+      elPct.textContent = done ? Math.round(ok / done * 100) + '%' : '—';
+      try { localStorage.setItem('' + key, JSON.stringify(state)); } catch (e) {}
+    }
+
+    list.addEventListener('click', function (e) {
+      var b = e.target;
+      while (b && b !== list && b.tagName !== 'BUTTON') b = b.parentNode;
+      if (!b || b.tagName !== 'BUTTON') return;
+      var li = b.parentNode.parentNode;
+      var i = items.indexOf(li);
+      if (i < 0) return;
+      state[i] = b.getAttribute('data-v');
+      paint();
+    });
+
+    onlyBtn.addEventListener('click', function () {
+      var on = list.classList.toggle('onlyng');
+      onlyBtn.setAttribute('aria-pressed', String(on));
+      onlyBtn.textContent = on ? 'すべて表示' : '間違えた肢だけ';
+    });
+
+    document.getElementById('d-reset').addEventListener('click', function () {
+      state = {};
+      list.classList.remove('onlyng');
+      onlyBtn.setAttribute('aria-pressed', 'false');
+      onlyBtn.textContent = '間違えた肢だけ';
+      paint();
+    });
+
+    paint();
   })();
 </script>

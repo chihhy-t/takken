@@ -146,6 +146,39 @@
   .sibling a { font-size:.8rem; text-decoration:none; border:1px solid var(--rule); border-radius:2px; padding:.35em .8em; color:var(--muted); }
   .sibling a:hover { color:var(--ink); border-color:var(--ink); }
 
+  /* ── 肢別○×ドリル ── */
+  .drillbar { max-width:none; display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between;
+    gap:var(--s2); margin:0 0 var(--s3); padding:var(--s2) var(--s3); background:var(--surface);
+    border:1px solid var(--rule); border-radius:2px; position:sticky; top:0; z-index:5; }
+  .drillbar .score { font-family:var(--font-mono); font-size:.8rem; font-variant-numeric:tabular-nums;
+    color:var(--muted); letter-spacing:.04em; }
+  .drillbar .score b { color:var(--ink); font-weight:600; }
+  .drillbar .score .pct { color:var(--accent); font-weight:600; }
+  .drillbar .dbtns { display:flex; gap:var(--s1); }
+  ol.drill { max-width:none; list-style:none; margin:0; padding:0; counter-reset:dq; }
+  li.dq { counter-increment:dq; margin:0 0 var(--s2); padding:var(--s3);
+    background:var(--surface); border:1px solid var(--hair); border-left:3px solid var(--rule); border-radius:2px; }
+  li.dq > .s { margin:0; font-size:.95rem; line-height:1.85; max-width:var(--measure); }
+  li.dq > .s::before { content:counter(dq,decimal-leading-zero); font-family:var(--font-mono);
+    font-size:.72rem; letter-spacing:.08em; color:var(--muted); margin-right:.9em; }
+  li.dq .ch { display:flex; gap:var(--s1); margin-top:var(--s2); }
+  li.dq .ch button { font-family:var(--font-display); font-size:1.05rem; line-height:1; min-width:3.6rem; padding:.4em 0; }
+  li.dq .ch button[data-picked] { color:var(--ink); border-color:var(--ink); font-weight:700; }
+  li.dq .ex { display:none; margin-top:var(--s3); padding-top:var(--s2); border-top:1px solid var(--hair); }
+  li.dq.done .ex { display:block; }
+  li.dq .ex .verdict { display:block; font-family:var(--font-mono); font-size:.7rem; letter-spacing:.14em;
+    margin-bottom:var(--s1); }
+  li.dq .ex p { margin:0; font-size:.88rem; line-height:1.8; color:var(--muted); max-width:var(--measure); }
+  li.dq .ex p strong { color:var(--ink); font-weight:700; }
+  li.dq.ok { border-left-color:var(--blue); }
+  li.dq.ok .verdict { color:var(--blue); }
+  li.dq.ng { border-left-color:var(--accent); background:var(--accent-soft); }
+  li.dq.ng .verdict { color:var(--accent); }
+  li.dq.ng .ex p strong { color:var(--accent); }
+  ol.drill.onlyng li.dq:not(.ng) { display:none; }
+  .drilldone { font-size:.84rem; color:var(--muted); padding:var(--s3); border:1px dashed var(--rule);
+    border-radius:2px; text-align:center; }
+
   @media (prefers-reduced-motion: reduce){ *{ transition:none !important; animation:none !important; scroll-behavior:auto !important; } }
   html { scroll-behavior:smooth; }
   .eyebrow a { color:var(--accent); text-decoration:none; }
@@ -165,7 +198,7 @@
         <li>法令基準日 <b>2026-04-01</b></li>
         <li>出題 <b>問25／1問</b></li>
         <li>目標 <b>確実に1問</b></li>
-        <li>更新 <b>2026-08-11</b></li>
+        <li>更新 <b>2026-08-23</b></li>
       </ul>
     </div>
     <div class="toggles">
@@ -188,6 +221,7 @@
       <li><a href="#deru"><span class="num">07</span>よく出る論点</a></li>
       <li><a href="#hikkake"><span class="num">08</span>ひっかけ一覧</a></li>
       <li><a href="#suji"><span class="num">09</span>数字・キーワード</a></li>
+      <li><a href="#drill"><span class="num">10</span>肢別○×ドリル</a></li>
     </ol>
   </nav>
 
@@ -638,6 +672,175 @@
       </div>
     </section>
 
+    <!-- 10 -->
+    <section id="drill">
+      <h2 class="sec"><span class="num">10</span>肢別○×ドリル</h2>
+      <p class="lead">頻出論点の一問一答 <em>30肢</em>。○×を押すと理由が開く。<strong>理由を一言で言えなかった肢は、正解していても「要復習」に入れる</strong>のがこのドリルの使い方。</p>
+      <div class="call tip">
+        <span class="tag">回し方</span>
+        <p>1周目は全肢。2周目以降は「間違えた肢だけ」で回す。解答状況はこのブラウザに保存されるので、日をまたいでも続きから再開できる。</p>
+      </div>
+      <div class="drillbar">
+        <div class="score">解答 <b id="d-done">0</b> / 30　　正答 <b id="d-ok">0</b>　　正答率 <span class="pct" id="d-pct">—</span></div>
+        <div class="dbtns">
+          <button id="d-wrong" type="button" aria-pressed="false">間違えた肢だけ</button>
+          <button id="d-reset" type="button">リセット</button>
+        </div>
+      </div>
+      <ol class="drill">
+          <li class="dq" data-a="x">
+            <p class="s">地価公示は、国土交通大臣が行う。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>地価公示を実施するのは<strong>土地鑑定委員会</strong>（国土交通省に置かれる機関）。国土交通大臣自身が行うのではない。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">標準地の鑑定評価は、1人の不動産鑑定士に求めれば足りる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>標準地の鑑定評価は<strong>2人以上の不動産鑑定士</strong>に求める。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">公示区域には、国土利用計画法上の規制区域も含まれる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>公示区域からは<strong>規制区域が除かれる</strong>。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">標準地は、更地でなければ選定することができない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>標準地は<strong>建物や地上権等の権利が付いていても選定できる</strong>。「現況のまま」選定し、価格算定の段階で更地とみなす。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">標準地は、その地域の中で最も優れた土地から選定される。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>選定されるのは、土地の<strong>利用状況・環境等が「通常」と認められる</strong>土地。最も優れた土地ではない。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">標準地の正常な価格は、建物がある場合、その建物が存しないものとして算定する。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>選定は現況のまま行うが、<strong>価格の算定段階では建物・地上権等が存しないものとして</strong>（更地として）算定する。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">地価公示で公示されるのは、標準地の価格の総額である。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>公示されるのは<strong>単位面積当たりの価格</strong>（円/㎡）であり、総額ではない。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">地価公示の価格判定の基準日（価格時点）は、毎年1月1日である。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>地価公示の価格時点は<strong>毎年1月1日</strong>。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">地価公示の内容は、官報で公示される。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>標準地の価格・地積・形状・利用の現況等は<strong>官報</strong>で公示される。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">土地鑑定委員会は、公示した事項を記載した書面を関係市町村長に送付し、市町村長はこれを公衆の縦覧に供する。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p><strong>関係市町村長への送付と公衆の縦覧</strong>は市町村長の義務。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">不動産鑑定士は、公示区域内の土地の正常な価格を求めるとき、公示価格を指標として努めれば足りる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>不動産鑑定士については<strong>公示価格を規準としなければならない</strong>（義務）。「指標として努める」のは一般の土地取引を行う者の努力義務。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">一般の土地取引を行う者は、公示価格を規準として取引をしなければならない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>一般の土地取引を行う者は<strong>公示価格を指標として取引を行うよう努めなければならない</strong>（努力義務）。「規準としなければならない」のは義務であり、一般の取引には課されない。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">公共事業用地を取得する場合、その取得価格の算定にあたり公示価格を規準としなければならない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>公共事業用地の取得価格の算定は<strong>公示価格を規準とするもの</strong>とされる（義務）。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">土地収用の補償金額は、公示価格と同額としなければならない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>補償金額は<strong>公示価格を規準として算定した価格を考慮</strong>して定める。同額とすることまでは求められていない。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">公示価格を「規準とする」とは、標準地と対象土地の諸要因を比較し、両者の価格の間に均衡を保たせることをいう。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>「規準とする」の意味として条文で定義されている内容。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">不動産鑑定評価基準は、法律である。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>不動産鑑定評価基準は<strong>国土交通省が定める行政上の指針</strong>であり、法律ではない。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">鑑定評価における価格時点は、必ず鑑定評価を行った日である。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>価格時点は<strong>価格判定の基準日</strong>であり、鑑定評価を行った日に限られず、過去時点・将来時点を求めることもある。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">不動産の鑑定評価では、原則として複数の鑑定評価手法を適用すべきとされている。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p><strong>原則として複数の手法を併用</strong>する。1つの手法に決め打ちしない。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">借地権者が底地を併合して所有権を取得する場合の価格は、限定価格として求められる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>借地権者による底地の併合は<strong>限定価格</strong>の典型例（市場が相対的に限定される場合）。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">証券化対象不動産の評価は、限定価格によって求める。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>証券化対象不動産や民事再生法・会社更生法に基づく評価は<strong>特定価格</strong>によって求める。限定価格ではない。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">文化財である建造物の価格は、正常価格として求められる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>文化財である建造物は<strong>市場性を有しない</strong>ため<strong>特殊価格</strong>として求められる。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">限定価格は、市場性を有しない不動産について求める価格である。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>限定価格には<strong>市場性がある</strong>。市場が相対的に限定されるだけであり、市場性そのものがないのは特殊価格。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">原価法は、土地の価格を求める場合には適用することができない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>土地であっても、造成地・埋立地など<strong>再調達原価を適切に求められる場合には原価法を適用できる</strong>。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">収益還元法は、賃貸を目的とする不動産以外には適用することができない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>収益還元法は、自用の不動産についても<strong>賃貸を想定して適用できる</strong>。賃貸用に限られない。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">取引事例比較法において、特殊な事情のある取引事例は、事情補正ができる場合であっても採用してはならない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>特殊な事情のある事例でも、<strong>適切に事情補正ができれば採用できる</strong>。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">取引事例比較法において、投機的取引と認められる事例は、補正をすれば採用することができる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p><strong>投機的取引と認められる事例は採用してはならない</strong>。事情補正の対象にならない点が特殊事情の事例とは異なる。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">原価法で求める価格を積算価格、取引事例比較法で求める価格を比準価格という。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p><strong>原価法→積算価格、取引事例比較法→比準価格、収益還元法→収益価格</strong>という対応関係。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">収益価格は、純収益を還元利回りで乗じて求める。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>収益価格は純収益を還元利回りで<strong>割って（除して）</strong>求める（純収益 ÷ 還元利回り）。乗じるのではない。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">地域分析では標準的使用を、個別分析では最有効使用を判定する。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p><strong>地域分析→標準的使用、個別分析→最有効使用</strong>という役割分担。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">農地・採草放牧地・森林としての取引は、それ以外の用途にすることを目的とするものも含め、正常な価格の算定から除かれる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>除かれるのは<strong>農地等としての取引のみ</strong>。それ以外の用途にすることを目的とする取引（転用目的の取引）は<strong>含まれる</strong>（対象となる）。</p></div>
+          </li>
+      </ol>
+    </section>
+
   </main>
 
   <footer>
@@ -691,5 +894,75 @@
       }
     }, { rootMargin: '-10% 0px -70% 0px' });
     document.querySelectorAll('main section').forEach(function (s) { obs.observe(s); });
+  })();
+</script>
+
+<script>
+  /* 肢別○×ドリル */
+  (function () {
+    var sec = document.getElementById('drill');
+    if (!sec) return;
+    var list = sec.querySelector('ol.drill');
+    var items = Array.prototype.slice.call(list.querySelectorAll('li.dq'));
+    var key = 'takken-drill:' + (document.title || location.pathname);
+    var state = {};
+    try { state = JSON.parse(localStorage.getItem('' + key) || '{}') || {}; } catch (e) { state = {}; }
+    var elDone = document.getElementById('d-done');
+    var elOk = document.getElementById('d-ok');
+    var elPct = document.getElementById('d-pct');
+    var onlyBtn = document.getElementById('d-wrong');
+
+    function paint() {
+      var done = 0, ok = 0;
+      items.forEach(function (li, i) {
+        var picked = state[i];
+        li.classList.remove('done', 'ok', 'ng');
+        Array.prototype.forEach.call(li.querySelectorAll('.ch button'), function (b) {
+          b.removeAttribute('data-picked');
+        });
+        if (picked !== 'o' && picked !== 'x') return;
+        done++;
+        var ans = li.getAttribute('data-a');
+        var right = picked === ans;
+        if (right) ok++;
+        li.classList.add('done', right ? 'ok' : 'ng');
+        var b = li.querySelector('.ch button[data-v="' + picked + '"]');
+        if (b) b.setAttribute('data-picked', '1');
+        li.querySelector('.verdict').textContent =
+          right ? '正解　' + (ans === 'o' ? '○' : '×')
+                : '不正解　正解は ' + (ans === 'o' ? '○' : '×');
+      });
+      elDone.textContent = String(done);
+      elOk.textContent = String(ok);
+      elPct.textContent = done ? Math.round(ok / done * 100) + '%' : '—';
+      try { localStorage.setItem('' + key, JSON.stringify(state)); } catch (e) {}
+    }
+
+    list.addEventListener('click', function (e) {
+      var b = e.target;
+      while (b && b !== list && b.tagName !== 'BUTTON') b = b.parentNode;
+      if (!b || b.tagName !== 'BUTTON') return;
+      var li = b.parentNode.parentNode;
+      var i = items.indexOf(li);
+      if (i < 0) return;
+      state[i] = b.getAttribute('data-v');
+      paint();
+    });
+
+    onlyBtn.addEventListener('click', function () {
+      var on = list.classList.toggle('onlyng');
+      onlyBtn.setAttribute('aria-pressed', String(on));
+      onlyBtn.textContent = on ? 'すべて表示' : '間違えた肢だけ';
+    });
+
+    document.getElementById('d-reset').addEventListener('click', function () {
+      state = {};
+      list.classList.remove('onlyng');
+      onlyBtn.setAttribute('aria-pressed', 'false');
+      onlyBtn.textContent = '間違えた肢だけ';
+      paint();
+    });
+
+    paint();
   })();
 </script>

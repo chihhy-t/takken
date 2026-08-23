@@ -142,6 +142,39 @@
   .sibling a { font-size:.8rem; text-decoration:none; border:1px solid var(--rule); border-radius:2px; padding:.35em .8em; color:var(--muted); }
   .sibling a:hover { color:var(--ink); border-color:var(--ink); }
 
+  /* ── 肢別○×ドリル ── */
+  .drillbar { max-width:none; display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between;
+    gap:var(--s2); margin:0 0 var(--s3); padding:var(--s2) var(--s3); background:var(--surface);
+    border:1px solid var(--rule); border-radius:2px; position:sticky; top:0; z-index:5; }
+  .drillbar .score { font-family:var(--font-mono); font-size:.8rem; font-variant-numeric:tabular-nums;
+    color:var(--muted); letter-spacing:.04em; }
+  .drillbar .score b { color:var(--ink); font-weight:600; }
+  .drillbar .score .pct { color:var(--accent); font-weight:600; }
+  .drillbar .dbtns { display:flex; gap:var(--s1); }
+  ol.drill { max-width:none; list-style:none; margin:0; padding:0; counter-reset:dq; }
+  li.dq { counter-increment:dq; margin:0 0 var(--s2); padding:var(--s3);
+    background:var(--surface); border:1px solid var(--hair); border-left:3px solid var(--rule); border-radius:2px; }
+  li.dq > .s { margin:0; font-size:.95rem; line-height:1.85; max-width:var(--measure); }
+  li.dq > .s::before { content:counter(dq,decimal-leading-zero); font-family:var(--font-mono);
+    font-size:.72rem; letter-spacing:.08em; color:var(--muted); margin-right:.9em; }
+  li.dq .ch { display:flex; gap:var(--s1); margin-top:var(--s2); }
+  li.dq .ch button { font-family:var(--font-display); font-size:1.05rem; line-height:1; min-width:3.6rem; padding:.4em 0; }
+  li.dq .ch button[data-picked] { color:var(--ink); border-color:var(--ink); font-weight:700; }
+  li.dq .ex { display:none; margin-top:var(--s3); padding-top:var(--s2); border-top:1px solid var(--hair); }
+  li.dq.done .ex { display:block; }
+  li.dq .ex .verdict { display:block; font-family:var(--font-mono); font-size:.7rem; letter-spacing:.14em;
+    margin-bottom:var(--s1); }
+  li.dq .ex p { margin:0; font-size:.88rem; line-height:1.8; color:var(--muted); max-width:var(--measure); }
+  li.dq .ex p strong { color:var(--ink); font-weight:700; }
+  li.dq.ok { border-left-color:var(--blue); }
+  li.dq.ok .verdict { color:var(--blue); }
+  li.dq.ng { border-left-color:var(--accent); background:var(--accent-soft); }
+  li.dq.ng .verdict { color:var(--accent); }
+  li.dq.ng .ex p strong { color:var(--accent); }
+  ol.drill.onlyng li.dq:not(.ng) { display:none; }
+  .drilldone { font-size:.84rem; color:var(--muted); padding:var(--s3); border:1px dashed var(--rule);
+    border-radius:2px; text-align:center; }
+
   @media (prefers-reduced-motion: reduce){ *{ transition:none !important; animation:none !important; scroll-behavior:auto !important; } }
   html { scroll-behavior:smooth; }
   .eyebrow a { color:var(--accent); text-decoration:none; }
@@ -160,8 +193,9 @@
       <ul class="facts">
         <li>法令基準日 <b>2026-04-01</b></li>
         <li>出題数 <b>1問</b></li>
+        <li>ドリル <b>26肢</b></li>
         <li>目標 <b>確実に1問</b></li>
-        <li>更新 <b>2026-08-09</b></li>
+        <li>更新 <b>2026-08-23</b></li>
       </ul>
     </div>
     <div class="toggles">
@@ -184,6 +218,7 @@
       <li><a href="#deru"><span class="num">07</span>よく出る論点</a></li>
       <li><a href="#hikkake"><span class="num">08</span>ひっかけ一覧</a></li>
       <li><a href="#suji"><span class="num">09</span>数字まとめ</a></li>
+      <li><a href="#drill"><span class="num">10</span>肢別○×ドリル</a></li>
     </ol>
   </nav>
 
@@ -503,6 +538,155 @@
       </div>
     </section>
 
+    <!-- 10 -->
+    <section id="drill">
+      <h2 class="sec"><span class="num">10</span>肢別○×ドリル</h2>
+      <p class="lead">頻出論点の一問一答 <em>26肢</em>。○×を押すと理由が開く。<strong>理由を一言で言えなかった肢は、正解していても「要復習」に入れる</strong>のがこのドリルの使い方。</p>
+      <div class="call tip">
+        <span class="tag">回し方</span>
+        <p>1周目は全肢。2周目以降は「間違えた肢だけ」で回す。解答状況はこのブラウザに保存されるので、日をまたいでも続きから再開できる。</p>
+      </div>
+      <div class="drillbar">
+        <div class="score">解答 <b id="d-done">0</b> / 26　　正答 <b id="d-ok">0</b>　　正答率 <span class="pct" id="d-pct">—</span></div>
+        <div class="dbtns">
+          <button id="d-wrong" type="button" aria-pressed="false">間違えた肢だけ</button>
+          <button id="d-reset" type="button">リセット</button>
+        </div>
+      </div>
+      <ol class="drill">
+          <li class="dq" data-a="x">
+            <p class="s">土地区画整理事業は、都市計画区域外の土地でも施行することができる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>土地区画整理事業を施行できるのは<strong>都市計画区域内の土地に限られる</strong>。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">土地区画整理組合を設立するには、7人以上が共同して定款・事業計画を定め、都道府県知事の認可を受ける必要がある。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>組合施行の要件は<strong>7人以上の共同</strong>と知事の認可。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">組合設立の同意は、施行地区内の宅地の所有権者と借地権者を合計して2/3以上あればよい。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>同意は<strong>所有権者・借地権者のそれぞれについて2/3以上</strong>必要。合算するのではない。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">事業計画に反対した宅地の所有者は、組合員にならない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>施行地区内の宅地について所有権・借地権を有する者は<strong>すべて強制的に組合員となる</strong>。反対者も例外ではない。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">組合員は、組合に対して有する債権をもって賦課金の支払債務と相殺することができる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>組合員は<strong>賦課金の支払について相殺をもって組合に対抗できない</strong>。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">区画整理会社は、施行地区内の宅地の所有権者・借地権者が議決権の過半数を保有する株式会社でなければならない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>区画整理会社の要件として、地権者が<strong>議決権の過半数</strong>を保有することが求められる。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">個人施行者以外が定める換地計画は、原則として2週間、公衆の縦覧に供しなければならない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>換地計画の縦覧期間は<strong>2週間</strong>。利害関係者は縦覧期間満了の日の翌日から2週間以内に意見書を提出できる。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">仮換地の指定を受けた者は、仮換地を第三者に売却することができる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p><strong>処分（売却等）ができるのは従前の宅地</strong>。仮換地は使用収益できるが処分はできない。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">仮換地の指定を受けた後は、従前の宅地を売却することができなくなる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>従前の宅地は<strong>引き続き売却できる</strong>。できなくなるのは使用収益（実際に使うこと）。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">仮換地の指定があると、その効力発生日から直ちに仮換地の使用収益を開始できる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>指定の効力発生日と<strong>別に使用収益を開始できる日を定めることができる</strong>ため、必ずしも即座に使用収益できるとは限らない。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">土地区画整理事業の施行による建築行為等の制限は、都市計画決定があった時から始まる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>建築制限が始まるのは<strong>事業計画の決定の公告があった日後</strong>からであり、都市計画決定の時ではない。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">施行地区内で建築行為をするには、施行者の許可を受けなければならない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>許可権者は<strong>都道府県知事等</strong>（国土交通大臣が施行する場合は国土交通大臣）であり、施行者の許可ではない。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">建築制限の対象となる「移動の容易でない物件」とは、重量5トンを超えるものをいう。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>移動の容易でない物件の基準は<strong>重量5トン超</strong>。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">換地処分は、必ず工事完了後でなければ行うことができない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>原則は工事完了後だが、<strong>規準・規約・定款・施行規程に別段の定めがあれば工事完了前でも</strong>換地処分ができる。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">保留地は、換地処分の公告があった日に施行者が取得する。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>保留地の取得は<strong>公告があった日の「翌日」</strong>。「その日」ではない。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">換地を定めなかった従前の宅地に存する権利は、換地処分の公告があった日の翌日に消滅する。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>この権利は<strong>公告があった日が「終了した時」</strong>に消滅する。「翌日」に生じるのは換地のみなし・保留地取得等の<strong>発生側</strong>の効果。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">施行地区内の公共施設は、換地処分の公告後、原則として施行者が管理する。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>公共施設は原則として<strong>市町村の管理に属する</strong>。施行者が管理し続けるのではない。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">行使する利益がなくなった地役権は、換地処分の公告があった日が終了した時に消滅する。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p><strong>「消える側」の効果</strong>であり、換地を定めなかった宅地の権利消滅と同じタイミング（公告日の終了時）。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">清算金の額は、換地処分の公告があった日の翌日に確定する。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>清算金の確定は<strong>「生まれる側」の効果</strong>として公告の翌日に生じる。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">換地は、換地処分の公告があった日の翌日から従前の宅地とみなされる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>換地のみなし効果は<strong>公告の翌日</strong>から生じる。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">組合施行の土地区画整理事業では、保留地を事業費に充てるために自由に定めることができる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>組合・個人施行・区画整理会社では、事業費等に充てるため<strong>自由に保留地を定められる</strong>。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">地方公共団体が施行する土地区画整理事業では、保留地を自由に定めることができる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>公的施行では、施行後の宅地価額の総額が施行前を超える場合に、その<strong>差額の範囲内</strong>でのみ定められ、土地区画整理審議会の同意が必要。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">換地計画では、換地と従前の宅地について、位置・地積・土質・水利・利用状況・環境等が照応するように定めなければならない（換地照応の原則）。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p><strong>換地照応の原則</strong>として明文化されている。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">土地の所有者からの申出または同意があれば、その宅地について換地を定めないことができる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>申出・同意があれば換地を定めず、<strong>清算金で処理</strong>することができる。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">組合員たる地位は、施行地区内の宅地の所有権等を承継した者には引き継がれない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>組合員から所有権等を<strong>承継した者は、その組合員の地位も承継する</strong>。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">個人施行者が定める換地計画についても、都道府県知事の認可が必要である。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>換地計画は施行者が定めるが、<strong>個人施行者以外</strong>の場合に都道府県知事の認可が必要とされる。</p></div>
+          </li>
+      </ol>
+    </section>
+
   </main>
 
   <footer>
@@ -556,5 +740,75 @@
       }
     }, { rootMargin: '-10% 0px -70% 0px' });
     document.querySelectorAll('main section').forEach(function (s) { obs.observe(s); });
+  })();
+</script>
+
+<script>
+  /* 肢別○×ドリル */
+  (function () {
+    var sec = document.getElementById('drill');
+    if (!sec) return;
+    var list = sec.querySelector('ol.drill');
+    var items = Array.prototype.slice.call(list.querySelectorAll('li.dq'));
+    var key = 'takken-drill:' + (document.title || location.pathname);
+    var state = {};
+    try { state = JSON.parse(localStorage.getItem('' + key) || '{}') || {}; } catch (e) { state = {}; }
+    var elDone = document.getElementById('d-done');
+    var elOk = document.getElementById('d-ok');
+    var elPct = document.getElementById('d-pct');
+    var onlyBtn = document.getElementById('d-wrong');
+
+    function paint() {
+      var done = 0, ok = 0;
+      items.forEach(function (li, i) {
+        var picked = state[i];
+        li.classList.remove('done', 'ok', 'ng');
+        Array.prototype.forEach.call(li.querySelectorAll('.ch button'), function (b) {
+          b.removeAttribute('data-picked');
+        });
+        if (picked !== 'o' && picked !== 'x') return;
+        done++;
+        var ans = li.getAttribute('data-a');
+        var right = picked === ans;
+        if (right) ok++;
+        li.classList.add('done', right ? 'ok' : 'ng');
+        var b = li.querySelector('.ch button[data-v="' + picked + '"]');
+        if (b) b.setAttribute('data-picked', '1');
+        li.querySelector('.verdict').textContent =
+          right ? '正解　' + (ans === 'o' ? '○' : '×')
+                : '不正解　正解は ' + (ans === 'o' ? '○' : '×');
+      });
+      elDone.textContent = String(done);
+      elOk.textContent = String(ok);
+      elPct.textContent = done ? Math.round(ok / done * 100) + '%' : '—';
+      try { localStorage.setItem('' + key, JSON.stringify(state)); } catch (e) {}
+    }
+
+    list.addEventListener('click', function (e) {
+      var b = e.target;
+      while (b && b !== list && b.tagName !== 'BUTTON') b = b.parentNode;
+      if (!b || b.tagName !== 'BUTTON') return;
+      var li = b.parentNode.parentNode;
+      var i = items.indexOf(li);
+      if (i < 0) return;
+      state[i] = b.getAttribute('data-v');
+      paint();
+    });
+
+    onlyBtn.addEventListener('click', function () {
+      var on = list.classList.toggle('onlyng');
+      onlyBtn.setAttribute('aria-pressed', String(on));
+      onlyBtn.textContent = on ? 'すべて表示' : '間違えた肢だけ';
+    });
+
+    document.getElementById('d-reset').addEventListener('click', function () {
+      state = {};
+      list.classList.remove('onlyng');
+      onlyBtn.setAttribute('aria-pressed', 'false');
+      onlyBtn.textContent = '間違えた肢だけ';
+      paint();
+    });
+
+    paint();
   })();
 </script>

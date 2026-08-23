@@ -400,6 +400,39 @@
   .sibling a { font-size: .8rem; text-decoration: none; border: 1px solid var(--rule); border-radius: 2px; padding: .35em .8em; color: var(--muted); }
   .sibling a:hover { color: var(--ink); border-color: var(--ink); }
 
+  /* ── 肢別○×ドリル ── */
+  .drillbar { max-width:none; display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between;
+    gap:var(--s2); margin:0 0 var(--s3); padding:var(--s2) var(--s3); background:var(--surface);
+    border:1px solid var(--rule); border-radius:2px; position:sticky; top:0; z-index:5; }
+  .drillbar .score { font-family:var(--font-mono); font-size:.8rem; font-variant-numeric:tabular-nums;
+    color:var(--muted); letter-spacing:.04em; }
+  .drillbar .score b { color:var(--ink); font-weight:600; }
+  .drillbar .score .pct { color:var(--accent); font-weight:600; }
+  .drillbar .dbtns { display:flex; gap:var(--s1); }
+  ol.drill { max-width:none; list-style:none; margin:0; padding:0; counter-reset:dq; }
+  li.dq { counter-increment:dq; margin:0 0 var(--s2); padding:var(--s3);
+    background:var(--surface); border:1px solid var(--hair); border-left:3px solid var(--rule); border-radius:2px; }
+  li.dq > .s { margin:0; font-size:.95rem; line-height:1.85; max-width:var(--measure); }
+  li.dq > .s::before { content:counter(dq,decimal-leading-zero); font-family:var(--font-mono);
+    font-size:.72rem; letter-spacing:.08em; color:var(--muted); margin-right:.9em; }
+  li.dq .ch { display:flex; gap:var(--s1); margin-top:var(--s2); }
+  li.dq .ch button { font-family:var(--font-display); font-size:1.05rem; line-height:1; min-width:3.6rem; padding:.4em 0; }
+  li.dq .ch button[data-picked] { color:var(--ink); border-color:var(--ink); font-weight:700; }
+  li.dq .ex { display:none; margin-top:var(--s3); padding-top:var(--s2); border-top:1px solid var(--hair); }
+  li.dq.done .ex { display:block; }
+  li.dq .ex .verdict { display:block; font-family:var(--font-mono); font-size:.7rem; letter-spacing:.14em;
+    margin-bottom:var(--s1); }
+  li.dq .ex p { margin:0; font-size:.88rem; line-height:1.8; color:var(--muted); max-width:var(--measure); }
+  li.dq .ex p strong { color:var(--ink); font-weight:700; }
+  li.dq.ok { border-left-color:var(--blue); }
+  li.dq.ok .verdict { color:var(--blue); }
+  li.dq.ng { border-left-color:var(--accent); background:var(--accent-soft); }
+  li.dq.ng .verdict { color:var(--accent); }
+  li.dq.ng .ex p strong { color:var(--accent); }
+  ol.drill.onlyng li.dq:not(.ng) { display:none; }
+  .drilldone { font-size:.84rem; color:var(--muted); padding:var(--s3); border:1px dashed var(--rule);
+    border-radius:2px; text-align:center; }
+
   @media (prefers-reduced-motion: reduce) {
     * { transition: none !important; animation: none !important; scroll-behavior: auto !important; }
   }
@@ -420,8 +453,9 @@
       <ul class="facts">
         <li>法令基準日 <b>2026-04-01</b></li>
         <li>出題数 <b>2問</b></li>
+        <li>ドリル <b>36肢</b></li>
         <li>目標 <b>1〜2問</b></li>
-        <li>更新 <b>2026-08-09</b></li>
+        <li>更新 <b>2026-08-23</b></li>
       </ul>
     </div>
     <div class="toggles">
@@ -447,6 +481,7 @@
       <li><a href="#deru"><span class="num">10</span>よく出る論点</a></li>
       <li><a href="#hikkake"><span class="num">11</span>ひっかけ一覧</a></li>
       <li><a href="#suji"><span class="num">12</span>数字まとめ</a></li>
+      <li><a href="#drill"><span class="num">13</span>肢別○×ドリル</a></li>
     </ol>
   </nav>
 
@@ -1225,6 +1260,205 @@
       </div>
     </section>
 
+    <!-- 13 -->
+    <section id="drill">
+      <h2 class="sec"><span class="num">13</span>肢別○×ドリル</h2>
+      <p class="lead">頻出論点の一問一答 <em>36肢</em>。○×を押すと理由が開く。<strong>理由を一言で言えなかった肢は、正解していても「要復習」に入れる</strong>のがこのドリルの使い方。</p>
+      <div class="call tip">
+        <span class="tag">回し方</span>
+        <p>1周目は全肢。2周目以降は「間違えた肢だけ」で回す。解答状況はこのブラウザに保存されるので、日をまたいでも続きから再開できる。</p>
+      </div>
+      <div class="drillbar">
+        <div class="score">解答 <b id="d-done">0</b> / 36　　正答 <b id="d-ok">0</b>　　正答率 <span class="pct" id="d-pct">—</span></div>
+        <div class="dbtns">
+          <button id="d-wrong" type="button" aria-pressed="false">間違えた肢だけ</button>
+          <button id="d-reset" type="button">リセット</button>
+        </div>
+      </div>
+      <ol class="drill">
+          <li class="dq" data-a="o">
+            <p class="s">木造3階建て以上の建築物は、確認済証がなければ着工できない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>木造3階建ては新2号（<strong>階数2以上</strong>）に該当し、全国どこでも確認が必要。ただし「木造だから」ではなく階数・面積で判定する点に注意。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">2025年4月1日施行の改正後も、確認の要否は木造か木造以外かで区別される。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>改正により<strong>「木造」「木造以外」という区分は廃止</strong>され、構造の別を問わず「階数2以上または延べ面積200㎡超」（新2号）で判定するようになった。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">新3号建築物（階数1かつ延べ面積200㎡以下）は、都市計画区域等内であっても建築確認が不要である。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>新3号は<strong>都市計画区域・準都市計画区域等内でのみ確認が必要</strong>。区域外では不要。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">床面積10㎡以内の増築・改築・移転は、防火地域・準防火地域内であっても常に確認が不要である。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>10㎡以内の増改築等が確認不要になるのは原則の場合であり、<strong>防火地域・準防火地域内では面積を問わず確認が必要</strong>。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">完了検査は、工事完了の日から4日以内に建築主事等に到達するように申請しなければならない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>申請期限は<strong>4日以内に到達</strong>するように行う（発送ではなく到達）。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">建築基準法の集団規定は、全国どこでも適用される。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>集団規定（用途制限・容積率・建蔽率・高さ制限等）は、原則として<strong>都市計画区域・準都市計画区域内</strong>にのみ適用される。単体規定は全国適用。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">セットバックにより道路とみなされる部分は、敷地面積に算入される。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>セットバック部分は<strong>敷地面積に算入されない</strong>。建蔽率・容積率の計算上も除外する。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">建築基準法上の道路は、原則として幅員4m以上である。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>1項道路の原則は<strong>幅員4m以上</strong>（特定行政庁の指定区域内は6m以上）。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">2項道路のセットバックは、道路の中心線から4mの位置まで後退する。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>原則は<strong>道路の中心線から2m</strong>後退する。片側ががけ地・川・線路敷のときは、その境界線から4m後退する。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">敷地が2つ以上の用途地域にまたがる場合、用途制限はそれぞれの地域の面積で按分して適用される。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>用途制限は<strong>敷地の過半が属する地域</strong>の制限が敷地全体に適用される。面積按分されるのは建蔽率・容積率のほう。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">指定建蔽率60%の地域で、特定行政庁が指定する角地にある耐火建築物等は、建蔽率が70%になる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>角地の指定による<strong>+10%</strong>の緩和が適用される（さらに防火地域内の耐火建築物等の要件も満たせば追加で+10%）。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">建蔽率が80%に指定されている防火地域内で、耐火建築物等を建てる場合、建蔽率の制限は適用されない（100%）。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p><strong>指定建蔽率80%の地域＋防火地域＋耐火建築物等</strong>の組み合わせでは建蔽率の制限を受けない。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">前面道路の幅員が12m以上ある場合、指定容積率がそのまま適用される。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>前面道路の幅員が<strong>12m以上</strong>なら容積率の低減計算は不要で、指定容積率どおりになる。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">前面道路の幅員が12m未満の場合、住居系の用途地域では幅員(m)×6/10で計算した容積率と指定容積率を比較する。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>住居系の用途地域の法定乗数は<strong>4/10</strong>。6/10は住居系以外に用いる乗数。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">幅員15m以上の特定道路から70m以内にある敷地は、容積率の緩和を受けられることがある。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p><strong>特定道路（幅員15m以上）から70m以内</strong>の敷地には容積率の加算がある。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">エレベーターの昇降路の部分は、延べ面積に算入しない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>エレベーターの昇降路は<strong>全部</strong>が延べ面積に不算入。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">自動車車庫等の部分は、延べ面積の1/3を上限として算入しない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>自動車車庫等の不算入の上限は<strong>延べ面積の1/5</strong>。地階の住宅部分の不算入上限（住宅部分の1/3）と混同しやすい。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">第一種低層住居専用地域には、絶対高さ制限が定められる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>第一種・第二種低層住居専用地域、田園住居地域には都市計画により<strong>10mまたは12m</strong>の絶対高さ制限が定められる。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">第一種低層住居専用地域には、隣地斜線制限が適用される。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>低層3地域（一低層・二低層・田園住居）には<strong>隣地斜線制限は適用されない</strong>。絶対高さ制限があるため不要とされる。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">商業地域には、日影規制が適用される。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>日影規制の対象外なのは<strong>商業地域・工業地域・工業専用地域</strong>の3つ。商業地域には適用されない。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">北側斜線制限は、低層住居専用地域と中高層住居専用地域にのみ適用される。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>北側斜線が適用されるのは<strong>低層3地域＋中高層2地域の合計5地域</strong>のみ。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">防火地域内では、階数3以上（地階を含む）または延べ面積100㎡超の建築物は耐火建築物等としなければならない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>防火地域の基準は<strong>階数3以上（地階を含む）または延べ面積100㎡超</strong>。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">準防火地域内で耐火建築物等が必要となるのは、階数4以上（地階を除く）または延べ面積1,500㎡超の場合である。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>準防火地域の基準は<strong>階数4以上（地階を除く）または延べ面積1,500㎡超</strong>。防火地域より緩やか。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">建築物の敷地が防火地域と準防火地域にまたがる場合、それぞれの部分に応じた規制が適用される。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>敷地が2つの地域にまたがる場合は、<strong>厳しい方（防火地域）の規制が建物全体に適用される</strong>。部分ごとに規制が分かれるのではない。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">準防火地域内に設ける看板・広告塔等は、不燃材料で造り、または覆わなければならない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>看板等の不燃材料規制は<strong>防火地域のみ</strong>。準防火地域には適用されない。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">建築協定を廃止するには、土地所有者等全員の合意と特定行政庁の認可が必要である。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>廃止は<strong>過半数の合意</strong>で足りる。締結・変更には全員の合意が必要だが、廃止は緩和されている。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">建築協定は、土地の所有者が1人しかいない場合でも締結することができる（一人協定）。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>一人協定は認可の公告日から<strong>3年以内</strong>に2人以上の所有者等になった時から効力を生ずる。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">診療所は、工業専用地域には建築することができない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>神社・寺院・教会、保育所、<strong>診療所</strong>、公衆浴場、巡査派出所は<strong>すべての用途地域で建築できる</strong>。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">住宅・共同住宅は、工業専用地域にも建築することができる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>住宅・共同住宅・図書館・老人ホームが<strong>建てられないのは工業専用地域のみ</strong>。裏を返せば工業専用地域には建てられない。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">住宅の居室の採光に必要な開口部の面積は、原則として床面積の1/7以上である。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>採光の基準は<strong>床面積の1/7以上</strong>。床面で50ルクス以上の照明設備があれば1/10まで緩和される。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">居室の換気に必要な開口部の面積は、床面積の1/20以上である。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>換気の基準は<strong>床面積の1/20以上</strong>で、住宅の居室に限らずすべての居室に適用される。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">居室の天井の高さは、2.1m以上でなければならない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>居室の天井高の基準は<strong>2.1m以上</strong>。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">高さ20mを超える建築物には、原則として避雷設備を設けなければならない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>避雷設備の基準は<strong>高さ20m超</strong>。非常用の昇降機は高さ31m超が基準。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">特殊建築物で200㎡を超えるもの（1号建築物）の建築確認は、全国どこでも必要である。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>1号（特殊建築物・200㎡超）と新2号は<strong>全国どこでも</strong>確認が必要。新3号のみ都市計画区域等内に限られる。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">延べ面積1,000㎡を超える建築物には、原則として防火壁等による区画が必要である。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>防火壁等の設置基準は<strong>延べ面積1,000㎡超</strong>（1,000㎡以内ごとに区画）。ただし耐火建築物・準耐火建築物は適用除外。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">劇場・映画館で客席の床面積が200㎡未満のものは、準住居地域にも建築することができる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>客席200㎡未満の劇場・映画館は<strong>準住居地域</strong>でも建築可能。200㎡以上になると建てられる地域が限定される。</p></div>
+          </li>
+      </ol>
+    </section>
+
   </main>
 
   <footer>
@@ -1287,5 +1521,75 @@
       }
     }, { rootMargin: '-10% 0px -70% 0px' });
     document.querySelectorAll('main section').forEach(function (s) { obs.observe(s); });
+  })();
+</script>
+
+<script>
+  /* 肢別○×ドリル */
+  (function () {
+    var sec = document.getElementById('drill');
+    if (!sec) return;
+    var list = sec.querySelector('ol.drill');
+    var items = Array.prototype.slice.call(list.querySelectorAll('li.dq'));
+    var key = 'takken-drill:' + (document.title || location.pathname);
+    var state = {};
+    try { state = JSON.parse(localStorage.getItem('' + key) || '{}') || {}; } catch (e) { state = {}; }
+    var elDone = document.getElementById('d-done');
+    var elOk = document.getElementById('d-ok');
+    var elPct = document.getElementById('d-pct');
+    var onlyBtn = document.getElementById('d-wrong');
+
+    function paint() {
+      var done = 0, ok = 0;
+      items.forEach(function (li, i) {
+        var picked = state[i];
+        li.classList.remove('done', 'ok', 'ng');
+        Array.prototype.forEach.call(li.querySelectorAll('.ch button'), function (b) {
+          b.removeAttribute('data-picked');
+        });
+        if (picked !== 'o' && picked !== 'x') return;
+        done++;
+        var ans = li.getAttribute('data-a');
+        var right = picked === ans;
+        if (right) ok++;
+        li.classList.add('done', right ? 'ok' : 'ng');
+        var b = li.querySelector('.ch button[data-v="' + picked + '"]');
+        if (b) b.setAttribute('data-picked', '1');
+        li.querySelector('.verdict').textContent =
+          right ? '正解　' + (ans === 'o' ? '○' : '×')
+                : '不正解　正解は ' + (ans === 'o' ? '○' : '×');
+      });
+      elDone.textContent = String(done);
+      elOk.textContent = String(ok);
+      elPct.textContent = done ? Math.round(ok / done * 100) + '%' : '—';
+      try { localStorage.setItem('' + key, JSON.stringify(state)); } catch (e) {}
+    }
+
+    list.addEventListener('click', function (e) {
+      var b = e.target;
+      while (b && b !== list && b.tagName !== 'BUTTON') b = b.parentNode;
+      if (!b || b.tagName !== 'BUTTON') return;
+      var li = b.parentNode.parentNode;
+      var i = items.indexOf(li);
+      if (i < 0) return;
+      state[i] = b.getAttribute('data-v');
+      paint();
+    });
+
+    onlyBtn.addEventListener('click', function () {
+      var on = list.classList.toggle('onlyng');
+      onlyBtn.setAttribute('aria-pressed', String(on));
+      onlyBtn.textContent = on ? 'すべて表示' : '間違えた肢だけ';
+    });
+
+    document.getElementById('d-reset').addEventListener('click', function () {
+      state = {};
+      list.classList.remove('onlyng');
+      onlyBtn.setAttribute('aria-pressed', 'false');
+      onlyBtn.textContent = '間違えた肢だけ';
+      paint();
+    });
+
+    paint();
   })();
 </script>
