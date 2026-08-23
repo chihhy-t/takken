@@ -144,6 +144,39 @@
   .sibling a { font-size:.8rem; text-decoration:none; border:1px solid var(--rule); border-radius:2px; padding:.35em .8em; color:var(--muted); }
   .sibling a:hover { color:var(--ink); border-color:var(--ink); }
 
+  /* ── 肢別○×ドリル ── */
+  .drillbar { max-width:none; display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between;
+    gap:var(--s2); margin:0 0 var(--s3); padding:var(--s2) var(--s3); background:var(--surface);
+    border:1px solid var(--rule); border-radius:2px; position:sticky; top:0; z-index:5; }
+  .drillbar .score { font-family:var(--font-mono); font-size:.8rem; font-variant-numeric:tabular-nums;
+    color:var(--muted); letter-spacing:.04em; }
+  .drillbar .score b { color:var(--ink); font-weight:600; }
+  .drillbar .score .pct { color:var(--accent); font-weight:600; }
+  .drillbar .dbtns { display:flex; gap:var(--s1); }
+  ol.drill { max-width:none; list-style:none; margin:0; padding:0; counter-reset:dq; }
+  li.dq { counter-increment:dq; margin:0 0 var(--s2); padding:var(--s3);
+    background:var(--surface); border:1px solid var(--hair); border-left:3px solid var(--rule); border-radius:2px; }
+  li.dq > .s { margin:0; font-size:.95rem; line-height:1.85; max-width:var(--measure); }
+  li.dq > .s::before { content:counter(dq,decimal-leading-zero); font-family:var(--font-mono);
+    font-size:.72rem; letter-spacing:.08em; color:var(--muted); margin-right:.9em; }
+  li.dq .ch { display:flex; gap:var(--s1); margin-top:var(--s2); }
+  li.dq .ch button { font-family:var(--font-display); font-size:1.05rem; line-height:1; min-width:3.6rem; padding:.4em 0; }
+  li.dq .ch button[data-picked] { color:var(--ink); border-color:var(--ink); font-weight:700; }
+  li.dq .ex { display:none; margin-top:var(--s3); padding-top:var(--s2); border-top:1px solid var(--hair); }
+  li.dq.done .ex { display:block; }
+  li.dq .ex .verdict { display:block; font-family:var(--font-mono); font-size:.7rem; letter-spacing:.14em;
+    margin-bottom:var(--s1); }
+  li.dq .ex p { margin:0; font-size:.88rem; line-height:1.8; color:var(--muted); max-width:var(--measure); }
+  li.dq .ex p strong { color:var(--ink); font-weight:700; }
+  li.dq.ok { border-left-color:var(--blue); }
+  li.dq.ok .verdict { color:var(--blue); }
+  li.dq.ng { border-left-color:var(--accent); background:var(--accent-soft); }
+  li.dq.ng .verdict { color:var(--accent); }
+  li.dq.ng .ex p strong { color:var(--accent); }
+  ol.drill.onlyng li.dq:not(.ng) { display:none; }
+  .drilldone { font-size:.84rem; color:var(--muted); padding:var(--s3); border:1px dashed var(--rule);
+    border-radius:2px; text-align:center; }
+
   @media (prefers-reduced-motion: reduce){ *{ transition:none !important; animation:none !important; scroll-behavior:auto !important; } }
   html { scroll-behavior:smooth; }
   .eyebrow a { color:var(--accent); text-decoration:none; }
@@ -162,8 +195,9 @@
       <ul class="facts">
         <li>法令基準日 <b>2026-04-01</b></li>
         <li>出題数 <b>約3問</b></li>
+        <li>ドリル <b>36肢</b></li>
         <li>目標 <b>全問正解</b></li>
-        <li>更新 <b>2026-08-09</b></li>
+        <li>更新 <b>2026-08-23</b></li>
       </ul>
     </div>
     <div class="toggles">
@@ -188,6 +222,7 @@
       <li><a href="#deru"><span class="num">09</span>よく出る論点</a></li>
       <li><a href="#hikkake"><span class="num">10</span>ひっかけ一覧</a></li>
       <li><a href="#suji"><span class="num">11</span>数字まとめ</a></li>
+      <li><a href="#drill"><span class="num">12</span>肢別○×ドリル</a></li>
     </ol>
   </nav>
 
@@ -632,6 +667,205 @@
       </div>
     </section>
 
+    <!-- 12 -->
+    <section id="drill">
+      <h2 class="sec"><span class="num">12</span>肢別○×ドリル</h2>
+      <p class="lead">頻出論点の一問一答 <em>36肢</em>。○×を押すと理由が開く。<strong>理由を一言で言えなかった肢は、正解していても「要復習」に入れる</strong>のがこのドリルの使い方。</p>
+      <div class="call tip">
+        <span class="tag">回し方</span>
+        <p>1周目は全肢。2周目以降は「間違えた肢だけ」で回す。解答状況はこのブラウザに保存されるので、日をまたいでも続きから再開できる。</p>
+      </div>
+      <div class="drillbar">
+        <div class="score">解答 <b id="d-done">0</b> / 36　　正答 <b id="d-ok">0</b>　　正答率 <span class="pct" id="d-pct">—</span></div>
+        <div class="dbtns">
+          <button id="d-wrong" type="button" aria-pressed="false">間違えた肢だけ</button>
+          <button id="d-reset" type="button">リセット</button>
+        </div>
+      </div>
+      <ol class="drill">
+          <li class="dq" data-a="x">
+            <p class="s">誇大広告は、それによって契約が成立しなければ違反にならない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>誇大広告は<strong>広告をした時点で違反が成立</strong>する。契約の成否や実害の有無は問わない。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">実在しない物件や、取引する意思のない物件の広告（おとり広告）も誇大広告の禁止に違反する。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>おとり広告も<strong>誇大広告等の禁止</strong>に該当する。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">「近くに駅ができる予定」といった将来の環境に関する誇大な表示は規制の対象外である。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>誇大広告の対象事項には<strong>将来の利用制限・環境・交通の利便</strong>も含まれるため、不確実な将来利益をうたう広告も規制される。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">誇大広告等の禁止に違反した場合の罰則は、6か月以下の拘禁刑または100万円以下の罰金である。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>併科もあり得る。あわせて監督処分の対象にもなる。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">建築確認の申請中である旨を明示すれば、工事完了前の建物について売買の広告をすることができる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>開発許可・建築確認等の<strong>処分を受けた後でなければ、一切広告することができない</strong>。申請中の明示では足りない。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">工事完了前の建物について、売買の契約を締結することはできないが、貸借の契約は締結することができる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>契約締結の制限は<strong>貸借だけ例外的に許される</strong>。売買・交換の契約はできない。広告はいずれも一律禁止である点と対比される。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">工事完了前の建物について、貸借の広告をすることができる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p><strong>広告はすべて禁止</strong>（売買・交換・貸借を問わない）。契約は貸借だけ例外的にできるが、広告にその例外はない。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">広告をする際に取引態様を明示していれば、注文を受けたときに改めて明示する必要はない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>広告時の明示に加え、<strong>注文を受けたときも遅滞なく</strong>取引態様の別を明示しなければならない。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">取引態様の明示は、書面で行わなければならない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>明示の方法に決まりはなく、<strong>口頭でもよい</strong>。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">一般媒介契約では、依頼者は他の宅建業者に重ねて媒介を依頼することができる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>一般媒介は他の業者への重複依頼を制限しない。専任媒介・専属専任媒介ではできない。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">専属専任媒介契約の依頼者は、自ら発見した相手方と直接契約することができる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>専属専任媒介では<strong>自己発見取引が禁止</strong>される。専任媒介では自己発見取引ができる点と対比される。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">専任媒介契約の有効期間を6か月と定めた場合、その媒介契約自体が無効となる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>契約自体は有効で、有効期間が<strong>3か月に短縮</strong>される。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">専任媒介契約は、依頼者からの申出がなくても自動更新する旨の特約を定めることができる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>更新は<strong>依頼者からの申出があるときに限り</strong>できる。自動更新の特約は認められない。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">専任媒介契約では、業務処理状況を2週間に1回以上、依頼者に報告しなければならない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>専任媒介は<strong>2週間に1回以上</strong>、専属専任媒介は<strong>1週間に1回以上</strong>の報告義務がある。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">専属専任媒介契約では、契約締結日から5日以内（休業日を除く）に指定流通機構へ登録しなければならない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>専属専任媒介は<strong>5日以内</strong>、専任媒介は<strong>7日以内</strong>（いずれも休業日を除く）。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">指定流通機構への登録事項には、依頼者の氏名が含まれる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p><strong>依頼者の氏名は登録事項ではない</strong>。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">一般媒介契約では、媒介契約書面（34条の2書面）を交付する必要はない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p><strong>3類型すべてで書面の交付が必要</strong>。一般媒介であっても省略できない。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">媒介契約書面には、宅建士が記名押印しなければならない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>媒介契約書面に記名押印するのは<strong>宅建業者</strong>であり、宅建士ではない。35条・37条書面（宅建士の記名）と混同しやすい。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">媒介契約書面は、2022年の改正後も押印が必要である。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>媒介契約書面（34条の2書面）は押印がなお必要。<strong>押印が廃止されたのは35条書面・37条書面</strong>であり、媒介契約書面は対象外。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">価額について意見を述べるときは、その根拠を書面で明らかにしなければならない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>根拠の明示は<strong>口頭でもよい</strong>。書面である必要はない。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">2025年1月1日施行の規則改正により、指定流通機構に登録した物件の取引状況を登録・更新することが義務づけられた。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>いわゆる<strong>囲い込み防止</strong>のルール。虚偽の登録が確認されると指示処分等の対象になる。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">売買の契約が成立したときは、指定流通機構に対して買主の氏名を通知しなければならない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>成約の通知事項は<strong>登録番号・取引価格・契約の成立した年月日</strong>の3つ。買主の氏名は含まれない。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">手付について分割払いを認めることにより契約の締結を誘引する行為は禁止される。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p><strong>手付の分割払い・後払い・約束手形の受領</strong>による誘引は手付貸与等の禁止に違反する。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">手付金を減額して契約を勧める行為は、手付貸与等の禁止に違反する。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p><strong>手付金の減額は違反にならない</strong>。業者が損をするだけで買主を借金漬けにするわけではないため。禁止されるのは貸付け・分割払い・後払いなど信用を供与する行為。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">利益を生ずることが確実であると誤解させる断定的判断の提供は、故意でなければ違反とならない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>断定的判断の提供は<strong>故意でなくても違反</strong>となる。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">宅建業者は、業務上知り得た秘密について、宅建業を営まなくなった後は他に漏らしても違反にならない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>守秘義務は<strong>宅建業を営まなくなった後も継続</strong>する。従業者も同様の義務を負う。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">不当な履行遅延の禁止の対象となるのは、登記・引渡し・対価の支払の3つに限られる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>対象は<strong>登記・引渡し・対価の支払</strong>の3つのみ。重要事項説明の遅延などは含まれない。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">供託所等の説明は、契約が成立するまでに、書面を交付して行わなければならない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>供託所等の説明は、契約成立までに行う点は正しいが、<strong>書面の交付までは不要</strong>。宅建士が行う必要もない。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">供託所等の説明は、相手方が宅建業者である場合には不要である。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>宅建業者間の取引では<strong>供託所等の説明は不要</strong>。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">事務所には専任の宅建士の設置義務があるが、契約を締結する案内所にはその義務はない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>契約を締結し、または申込みを受ける案内所にも<strong>専任の宅建士を1人以上</strong>置かなければならない。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">契約も申込みも行わない単なる展示会場には、標識の掲示義務もない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>契約や申込みを扱わない案内所であっても<strong>標識の掲示は必要</strong>。専任の宅建士の設置や届出が不要になるだけ。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">案内所等の届出は、業務を開始する日の10日前までに、免許権者および所在地の都道府県知事の両方に対して行う。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>届出先は<strong>免許権者と所在地を管轄する知事の2か所</strong>。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">他の宅建業者が売主である物件の所在場所で業務を行う場合、標識の掲示は不要である。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>その場合は<strong>売主の標識</strong>を掲示する必要がある。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">深夜や長時間に及ぶ勧誘により相手方の私生活の平穏を害する行為は禁止される。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>威迫行為の禁止に含まれる行為として規制される。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">相手方が契約しない旨の意思を表示したにもかかわらず勧誘を継続する行為は禁止される。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>勧誘の際の禁止行為として、再勧誘は禁止されている。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">重要な事実の不告知等（47条1号）の罰則は、2年以下の拘禁刑または300万円以下の罰金であり、法人には1億円以下の罰金が科される。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>宅建業法違反の中でも重い部類に位置づけられる。</p></div>
+          </li>
+      </ol>
+    </section>
+
   </main>
 
   <footer>
@@ -684,5 +918,75 @@
       }
     }, { rootMargin: '-10% 0px -70% 0px' });
     document.querySelectorAll('main section').forEach(function (s) { obs.observe(s); });
+  })();
+</script>
+
+<script>
+  /* 肢別○×ドリル */
+  (function () {
+    var sec = document.getElementById('drill');
+    if (!sec) return;
+    var list = sec.querySelector('ol.drill');
+    var items = Array.prototype.slice.call(list.querySelectorAll('li.dq'));
+    var key = 'takken-drill:' + (document.title || location.pathname);
+    var state = {};
+    try { state = JSON.parse(localStorage.getItem('' + key) || '{}') || {}; } catch (e) { state = {}; }
+    var elDone = document.getElementById('d-done');
+    var elOk = document.getElementById('d-ok');
+    var elPct = document.getElementById('d-pct');
+    var onlyBtn = document.getElementById('d-wrong');
+
+    function paint() {
+      var done = 0, ok = 0;
+      items.forEach(function (li, i) {
+        var picked = state[i];
+        li.classList.remove('done', 'ok', 'ng');
+        Array.prototype.forEach.call(li.querySelectorAll('.ch button'), function (b) {
+          b.removeAttribute('data-picked');
+        });
+        if (picked !== 'o' && picked !== 'x') return;
+        done++;
+        var ans = li.getAttribute('data-a');
+        var right = picked === ans;
+        if (right) ok++;
+        li.classList.add('done', right ? 'ok' : 'ng');
+        var b = li.querySelector('.ch button[data-v="' + picked + '"]');
+        if (b) b.setAttribute('data-picked', '1');
+        li.querySelector('.verdict').textContent =
+          right ? '正解　' + (ans === 'o' ? '○' : '×')
+                : '不正解　正解は ' + (ans === 'o' ? '○' : '×');
+      });
+      elDone.textContent = String(done);
+      elOk.textContent = String(ok);
+      elPct.textContent = done ? Math.round(ok / done * 100) + '%' : '—';
+      try { localStorage.setItem('' + key, JSON.stringify(state)); } catch (e) {}
+    }
+
+    list.addEventListener('click', function (e) {
+      var b = e.target;
+      while (b && b !== list && b.tagName !== 'BUTTON') b = b.parentNode;
+      if (!b || b.tagName !== 'BUTTON') return;
+      var li = b.parentNode.parentNode;
+      var i = items.indexOf(li);
+      if (i < 0) return;
+      state[i] = b.getAttribute('data-v');
+      paint();
+    });
+
+    onlyBtn.addEventListener('click', function () {
+      var on = list.classList.toggle('onlyng');
+      onlyBtn.setAttribute('aria-pressed', String(on));
+      onlyBtn.textContent = on ? 'すべて表示' : '間違えた肢だけ';
+    });
+
+    document.getElementById('d-reset').addEventListener('click', function () {
+      state = {};
+      list.classList.remove('onlyng');
+      onlyBtn.setAttribute('aria-pressed', 'false');
+      onlyBtn.textContent = '間違えた肢だけ';
+      paint();
+    });
+
+    paint();
   })();
 </script>

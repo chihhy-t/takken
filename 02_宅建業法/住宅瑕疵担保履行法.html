@@ -143,6 +143,39 @@
   .sibling a { font-size:.8rem; text-decoration:none; border:1px solid var(--rule); border-radius:2px; padding:.35em .8em; color:var(--muted); }
   .sibling a:hover { color:var(--ink); border-color:var(--ink); }
 
+  /* ── 肢別○×ドリル ── */
+  .drillbar { max-width:none; display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between;
+    gap:var(--s2); margin:0 0 var(--s3); padding:var(--s2) var(--s3); background:var(--surface);
+    border:1px solid var(--rule); border-radius:2px; position:sticky; top:0; z-index:5; }
+  .drillbar .score { font-family:var(--font-mono); font-size:.8rem; font-variant-numeric:tabular-nums;
+    color:var(--muted); letter-spacing:.04em; }
+  .drillbar .score b { color:var(--ink); font-weight:600; }
+  .drillbar .score .pct { color:var(--accent); font-weight:600; }
+  .drillbar .dbtns { display:flex; gap:var(--s1); }
+  ol.drill { max-width:none; list-style:none; margin:0; padding:0; counter-reset:dq; }
+  li.dq { counter-increment:dq; margin:0 0 var(--s2); padding:var(--s3);
+    background:var(--surface); border:1px solid var(--hair); border-left:3px solid var(--rule); border-radius:2px; }
+  li.dq > .s { margin:0; font-size:.95rem; line-height:1.85; max-width:var(--measure); }
+  li.dq > .s::before { content:counter(dq,decimal-leading-zero); font-family:var(--font-mono);
+    font-size:.72rem; letter-spacing:.08em; color:var(--muted); margin-right:.9em; }
+  li.dq .ch { display:flex; gap:var(--s1); margin-top:var(--s2); }
+  li.dq .ch button { font-family:var(--font-display); font-size:1.05rem; line-height:1; min-width:3.6rem; padding:.4em 0; }
+  li.dq .ch button[data-picked] { color:var(--ink); border-color:var(--ink); font-weight:700; }
+  li.dq .ex { display:none; margin-top:var(--s3); padding-top:var(--s2); border-top:1px solid var(--hair); }
+  li.dq.done .ex { display:block; }
+  li.dq .ex .verdict { display:block; font-family:var(--font-mono); font-size:.7rem; letter-spacing:.14em;
+    margin-bottom:var(--s1); }
+  li.dq .ex p { margin:0; font-size:.88rem; line-height:1.8; color:var(--muted); max-width:var(--measure); }
+  li.dq .ex p strong { color:var(--ink); font-weight:700; }
+  li.dq.ok { border-left-color:var(--blue); }
+  li.dq.ok .verdict { color:var(--blue); }
+  li.dq.ng { border-left-color:var(--accent); background:var(--accent-soft); }
+  li.dq.ng .verdict { color:var(--accent); }
+  li.dq.ng .ex p strong { color:var(--accent); }
+  ol.drill.onlyng li.dq:not(.ng) { display:none; }
+  .drilldone { font-size:.84rem; color:var(--muted); padding:var(--s3); border:1px dashed var(--rule);
+    border-radius:2px; text-align:center; }
+
   @media (prefers-reduced-motion: reduce){ *{ transition:none !important; animation:none !important; scroll-behavior:auto !important; } }
   html { scroll-behavior:smooth; }
   .eyebrow a { color:var(--accent); text-decoration:none; }
@@ -162,8 +195,9 @@
       <ul class="facts">
         <li>法令基準日 <b>2026-04-01</b></li>
         <li>出題数 <b>1問</b></li>
+        <li>ドリル <b>28肢</b></li>
         <li>目標 <b>確実に1問</b></li>
-        <li>更新 <b>2026-08-09</b></li>
+        <li>更新 <b>2026-08-23</b></li>
       </ul>
     </div>
     <div class="toggles">
@@ -185,6 +219,7 @@
       <li><a href="#deru"><span class="num">06</span>よく出る論点</a></li>
       <li><a href="#hikkake"><span class="num">07</span>ひっかけ一覧</a></li>
       <li><a href="#suji"><span class="num">08</span>数字まとめ</a></li>
+      <li><a href="#drill"><span class="num">09</span>肢別○×ドリル</a></li>
     </ol>
   </nav>
 
@@ -432,6 +467,165 @@
       </div>
     </section>
 
+    <!-- 09 -->
+    <section id="drill">
+      <h2 class="sec"><span class="num">09</span>肢別○×ドリル</h2>
+      <p class="lead">頻出論点の一問一答 <em>28肢</em>。○×を押すと理由が開く。<strong>理由を一言で言えなかった肢は、正解していても「要復習」に入れる</strong>のがこのドリルの使い方。</p>
+      <div class="call tip">
+        <span class="tag">回し方</span>
+        <p>1周目は全肢。2周目以降は「間違えた肢だけ」で回す。解答状況はこのブラウザに保存されるので、日をまたいでも続きから再開できる。</p>
+      </div>
+      <div class="drillbar">
+        <div class="score">解答 <b id="d-done">0</b> / 28　　正答 <b id="d-ok">0</b>　　正答率 <span class="pct" id="d-pct">—</span></div>
+        <div class="dbtns">
+          <button id="d-wrong" type="button" aria-pressed="false">間違えた肢だけ</button>
+          <button id="d-reset" type="button">リセット</button>
+        </div>
+      </div>
+      <ol class="drill">
+          <li class="dq" data-a="o">
+            <p class="s">資力確保措置の義務を負うのは、宅建業者が自ら売主となり、買主が宅建業者でない新築住宅の売買に限られる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p><strong>「自ら売主」かつ「買主が宅建業者でない」</strong>という8種制限と同じ入口に加え、対象が新築住宅に限られる。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">宅建業者が媒介を行う新築住宅の売買にも、資力確保措置の義務がある。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>資力確保措置の義務を負うのは<strong>自ら売主となる場合のみ</strong>。媒介・代理では義務が生じない。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">買主が宅建業者である場合でも、売主の宅建業者は資力確保措置を講じなければならない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p><strong>買主が宅建業者であれば資力確保措置は不要</strong>。8種制限と同じ考え方。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">建設業者が請け負った新築住宅について、発注者が建設業者でない場合も資力確保措置の義務がある（品確法上の瑕疵担保責任とは別に）。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>住宅瑕疵担保履行法は請負人である<strong>建設業者</strong>にも同様の資力確保措置を義務づけている。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">新築住宅とは、建設工事の完了の日から2年を経過していない住宅のことをいう。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>新築住宅の要件は<strong>完成から1年を経過していないもの</strong>であり、かつ人の居住の用に供したことがないもの。2年ではない。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">一度でも人が居住した住宅は、完成から1年以内であっても新築住宅にはあたらない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>新築住宅の要件は「①新たに建設された②未入居③完成から1年以内」の<strong>3つすべてを満たす</strong>必要がある。一度でも居住されれば②を満たさない。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">完成から半年しか経っていない住宅であれば、誰も住んでいない限り常に新築住宅として扱われる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>3要件（新築・未入居・完成から1年以内）をすべて満たすため新築住宅にあたる。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">資力確保措置には、住宅販売瑕疵担保保証金の供託と、住宅販売瑕疵担保責任保険契約の締結の2つの方法があり、住宅ごとにどちらかを選べる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p><strong>供託と保険を住宅ごとに選択</strong>でき、併用も可能。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">床面積55㎡以下の住宅は、資力確保措置の対象戸数を数える際、2戸をもって1戸と数える。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>小規模な住戸ばかりの物件で必要額が過大にならないようにする調整規定。供託・保険のいずれにも共通する。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">住宅販売瑕疵担保責任保険契約の保険金額は、1,000万円以上でなければならない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>保険金額は<strong>2,000万円以上</strong>でなければならない。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">住宅販売瑕疵担保責任保険契約の有効期間は、引渡しから5年以上でなければならない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>保険の有効期間は<strong>引渡しから10年以上</strong>でなければならない。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">売主は、住宅販売瑕疵担保責任保険契約を自由に解除することができる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p><strong>買主の承諾がなければ解除できない</strong>。売主の都合で買主の保護を外すことを防ぐ規定。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">保険付きの住宅について、瑕疵をめぐる紛争が生じた場合、指定住宅紛争処理機関による紛争処理を利用することができる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>保険契約が付されている住宅には、この紛争処理制度の利用が認められる。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">売主が倒産した場合、保証金を供託している場合は買主が供託金から直接還付を受け、保険の場合も買主が直接保険金を請求できる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>いずれの方法でも、売主の倒産時に買主が直接的に資力の確保を受けられる仕組みになっている。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">基準日は、3月31日と9月30日の年2回である。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>現在の基準日は<strong>3月31日の年1回</strong>。かつては年2回だったため、古い教材との混同に注意。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">資力確保措置の状況は、基準日から1か月以内に免許権者へ届け出なければならない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>届出期限は<strong>基準日から3週間以内</strong>。1か月ではない。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">基準日における供託額は、基準日前10年間に引き渡した新築住宅の戸数に応じて算定する。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>供託・保険とも<strong>基準日前10年間</strong>の引渡し実績を基準に必要な資力を算定する。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">資力確保措置の届出をしない場合、基準日の翌日から起算して30日を経過した日以後、新たな契約を締結できなくなる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>契約締結が禁止されるのは<strong>基準日の翌日から起算して50日を経過した日以後</strong>。30日ではない。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">届出をしていない場合に禁止されるのは、新たに自ら売主となる新築住宅の売買契約の締結であり、既存の契約の履行や媒介業務は禁止されない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>禁止されるのは<strong>新たな契約の締結のみ</strong>であり、業務全体が止まるわけではない。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">資力確保措置に関する説明は、宅建士が書面を交付して行わなければならない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>この説明は<strong>宅建士でなくてもよい</strong>が、営業保証金の供託所等の説明と異なり<strong>書面の交付が必要</strong>。両者は逆の性質を持つので混同しやすい。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">資力確保措置に関する買主への説明は、売買契約を締結するまでに行わなければならない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p><strong>契約を締結するまで</strong>に、書面を交付して供託所の所在地等を説明する。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">保険により資力確保措置を講じている場合も、供託所等の説明と同様の書面交付による説明が必要である。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>書面交付による説明が必要なのは<strong>供託により資力を確保している場合</strong>。保険で措置している場合は、この説明の対象外。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">品確法上の10年間の瑕疵担保責任（構造耐力上主要な部分・雨水の浸入を防止する部分）は、特約で短縮することができる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>10年責任は<strong>短縮できない</strong>。買主に不利な特約は無効。20年まで伸長する特約は可能。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">品確法の10年責任の対象は、構造耐力上主要な部分と雨水の浸入を防止する部分の2つである。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>この<strong>2つの部分</strong>について、引渡しから10年間の瑕疵担保責任を負う。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">住宅販売瑕疵担保保証金を供託した場合、その保管期間の上限は基準日前5年間の引渡し実績である。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>供託額の算定基準は<strong>基準日前10年間</strong>の引渡し実績であり、5年ではない。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">資力確保措置の義務を負う売主は、宅建業者に限られ、建設業者には課されない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p><strong>建設業者（請負人）にも同様の義務</strong>が課される。発注者が建設業者でない場合が対象。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">基準日ごとの届出を怠った場合、監督処分や罰則の対象にもなり得る。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>契約締結の禁止に加えて、<strong>監督処分・罰則の対象</strong>にもなる。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">資力確保措置の説明の相手方が宅建業者であっても、書面を交付して説明しなければならない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>この説明制度自体は買主保護のための規定であり、<strong>買主が宅建業者であれば適用対象から外れる</strong>（資力確保措置自体が不要になるため）。</p></div>
+          </li>
+      </ol>
+    </section>
+
   </main>
 
   <footer>
@@ -485,5 +679,75 @@
       }
     }, { rootMargin: '-10% 0px -70% 0px' });
     document.querySelectorAll('main section').forEach(function (s) { obs.observe(s); });
+  })();
+</script>
+
+<script>
+  /* 肢別○×ドリル */
+  (function () {
+    var sec = document.getElementById('drill');
+    if (!sec) return;
+    var list = sec.querySelector('ol.drill');
+    var items = Array.prototype.slice.call(list.querySelectorAll('li.dq'));
+    var key = 'takken-drill:' + (document.title || location.pathname);
+    var state = {};
+    try { state = JSON.parse(localStorage.getItem('' + key) || '{}') || {}; } catch (e) { state = {}; }
+    var elDone = document.getElementById('d-done');
+    var elOk = document.getElementById('d-ok');
+    var elPct = document.getElementById('d-pct');
+    var onlyBtn = document.getElementById('d-wrong');
+
+    function paint() {
+      var done = 0, ok = 0;
+      items.forEach(function (li, i) {
+        var picked = state[i];
+        li.classList.remove('done', 'ok', 'ng');
+        Array.prototype.forEach.call(li.querySelectorAll('.ch button'), function (b) {
+          b.removeAttribute('data-picked');
+        });
+        if (picked !== 'o' && picked !== 'x') return;
+        done++;
+        var ans = li.getAttribute('data-a');
+        var right = picked === ans;
+        if (right) ok++;
+        li.classList.add('done', right ? 'ok' : 'ng');
+        var b = li.querySelector('.ch button[data-v="' + picked + '"]');
+        if (b) b.setAttribute('data-picked', '1');
+        li.querySelector('.verdict').textContent =
+          right ? '正解　' + (ans === 'o' ? '○' : '×')
+                : '不正解　正解は ' + (ans === 'o' ? '○' : '×');
+      });
+      elDone.textContent = String(done);
+      elOk.textContent = String(ok);
+      elPct.textContent = done ? Math.round(ok / done * 100) + '%' : '—';
+      try { localStorage.setItem('' + key, JSON.stringify(state)); } catch (e) {}
+    }
+
+    list.addEventListener('click', function (e) {
+      var b = e.target;
+      while (b && b !== list && b.tagName !== 'BUTTON') b = b.parentNode;
+      if (!b || b.tagName !== 'BUTTON') return;
+      var li = b.parentNode.parentNode;
+      var i = items.indexOf(li);
+      if (i < 0) return;
+      state[i] = b.getAttribute('data-v');
+      paint();
+    });
+
+    onlyBtn.addEventListener('click', function () {
+      var on = list.classList.toggle('onlyng');
+      onlyBtn.setAttribute('aria-pressed', String(on));
+      onlyBtn.textContent = on ? 'すべて表示' : '間違えた肢だけ';
+    });
+
+    document.getElementById('d-reset').addEventListener('click', function () {
+      state = {};
+      list.classList.remove('onlyng');
+      onlyBtn.setAttribute('aria-pressed', 'false');
+      onlyBtn.textContent = '間違えた肢だけ';
+      paint();
+    });
+
+    paint();
   })();
 </script>

@@ -143,6 +143,39 @@
   .sibling a { font-size:.8rem; text-decoration:none; border:1px solid var(--rule); border-radius:2px; padding:.35em .8em; color:var(--muted); }
   .sibling a:hover { color:var(--ink); border-color:var(--ink); }
 
+  /* ── 肢別○×ドリル ── */
+  .drillbar { max-width:none; display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between;
+    gap:var(--s2); margin:0 0 var(--s3); padding:var(--s2) var(--s3); background:var(--surface);
+    border:1px solid var(--rule); border-radius:2px; position:sticky; top:0; z-index:5; }
+  .drillbar .score { font-family:var(--font-mono); font-size:.8rem; font-variant-numeric:tabular-nums;
+    color:var(--muted); letter-spacing:.04em; }
+  .drillbar .score b { color:var(--ink); font-weight:600; }
+  .drillbar .score .pct { color:var(--accent); font-weight:600; }
+  .drillbar .dbtns { display:flex; gap:var(--s1); }
+  ol.drill { max-width:none; list-style:none; margin:0; padding:0; counter-reset:dq; }
+  li.dq { counter-increment:dq; margin:0 0 var(--s2); padding:var(--s3);
+    background:var(--surface); border:1px solid var(--hair); border-left:3px solid var(--rule); border-radius:2px; }
+  li.dq > .s { margin:0; font-size:.95rem; line-height:1.85; max-width:var(--measure); }
+  li.dq > .s::before { content:counter(dq,decimal-leading-zero); font-family:var(--font-mono);
+    font-size:.72rem; letter-spacing:.08em; color:var(--muted); margin-right:.9em; }
+  li.dq .ch { display:flex; gap:var(--s1); margin-top:var(--s2); }
+  li.dq .ch button { font-family:var(--font-display); font-size:1.05rem; line-height:1; min-width:3.6rem; padding:.4em 0; }
+  li.dq .ch button[data-picked] { color:var(--ink); border-color:var(--ink); font-weight:700; }
+  li.dq .ex { display:none; margin-top:var(--s3); padding-top:var(--s2); border-top:1px solid var(--hair); }
+  li.dq.done .ex { display:block; }
+  li.dq .ex .verdict { display:block; font-family:var(--font-mono); font-size:.7rem; letter-spacing:.14em;
+    margin-bottom:var(--s1); }
+  li.dq .ex p { margin:0; font-size:.88rem; line-height:1.8; color:var(--muted); max-width:var(--measure); }
+  li.dq .ex p strong { color:var(--ink); font-weight:700; }
+  li.dq.ok { border-left-color:var(--blue); }
+  li.dq.ok .verdict { color:var(--blue); }
+  li.dq.ng { border-left-color:var(--accent); background:var(--accent-soft); }
+  li.dq.ng .verdict { color:var(--accent); }
+  li.dq.ng .ex p strong { color:var(--accent); }
+  ol.drill.onlyng li.dq:not(.ng) { display:none; }
+  .drilldone { font-size:.84rem; color:var(--muted); padding:var(--s3); border:1px dashed var(--rule);
+    border-radius:2px; text-align:center; }
+
   @media (prefers-reduced-motion: reduce){ *{ transition:none !important; animation:none !important; scroll-behavior:auto !important; } }
   html { scroll-behavior:smooth; }
   .eyebrow a { color:var(--accent); text-decoration:none; }
@@ -161,8 +194,9 @@
       <ul class="facts">
         <li>法令基準日 <b>2026-04-01</b></li>
         <li>出題数 <b>約2問</b></li>
+        <li>ドリル <b>34肢</b></li>
         <li>目標 <b>全問正解</b></li>
-        <li>更新 <b>2026-08-09</b></li>
+        <li>更新 <b>2026-08-23</b></li>
       </ul>
     </div>
     <div class="toggles">
@@ -186,6 +220,7 @@
       <li><a href="#deru"><span class="num">08</span>よく出る論点</a></li>
       <li><a href="#hikkake"><span class="num">09</span>ひっかけ一覧</a></li>
       <li><a href="#suji"><span class="num">10</span>数字まとめ</a></li>
+      <li><a href="#drill"><span class="num">11</span>肢別○×ドリル</a></li>
     </ol>
   </nav>
 
@@ -649,6 +684,195 @@
       </div>
     </section>
 
+    <!-- 11 -->
+    <section id="drill">
+      <h2 class="sec"><span class="num">11</span>肢別○×ドリル</h2>
+      <p class="lead">頻出論点の一問一答 <em>34肢</em>。○×を押すと理由が開く。<strong>理由を一言で言えなかった肢は、正解していても「要復習」に入れる</strong>のがこのドリルの使い方。</p>
+      <div class="call tip">
+        <span class="tag">回し方</span>
+        <p>1周目は全肢。2周目以降は「間違えた肢だけ」で回す。解答状況はこのブラウザに保存されるので、日をまたいでも続きから再開できる。</p>
+      </div>
+      <div class="drillbar">
+        <div class="score">解答 <b id="d-done">0</b> / 34　　正答 <b id="d-ok">0</b>　　正答率 <span class="pct" id="d-pct">—</span></div>
+        <div class="dbtns">
+          <button id="d-wrong" type="button" aria-pressed="false">間違えた肢だけ</button>
+          <button id="d-reset" type="button">リセット</button>
+        </div>
+      </div>
+      <ol class="drill">
+          <li class="dq" data-a="x">
+            <p class="s">営業保証金は、金銭でしか供託することができない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p><strong>有価証券でも供託できる</strong>（国債は額面の100%、地方債・政府保証債は90%、その他は80%として評価）。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">国債証券は、額面金額の100%として評価される。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>供託する有価証券のうち国債は満額（<strong>100%</strong>）で評価される。地方債・政府保証債は90%、その他は80%。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">弁済業務保証金分担金は、金銭のほか有価証券でも納付することができる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p><strong>分担金は金銭のみ</strong>。有価証券で供託できるのは、協会が供託所に納める「弁済業務保証金」の段階。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">主たる事務所の営業保証金の額は1,000万円、その他の事務所は1か所につき500万円である。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p><strong>主たる事務所1,000万円、その他500万円／か所</strong>。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">弁済業務保証金分担金の額は、主たる事務所60万円、その他の事務所1か所につき30万円である。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>営業保証金の1,000万円・500万円に比べ、保証協会経由なら<strong>60万円・30万円</strong>と大幅に少額で済む。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">宅建業者は、営業保証金を供託すればただちに事業を開始することができる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>供託しただけでは足りず、<strong>その旨を免許権者に届け出た後でなければ</strong>事業を開始できない。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">保証協会の社員は、弁済業務保証金分担金を納付し、その旨を免許権者に届け出た後でなければ事業を開始できない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>保証協会の場合は<strong>協会が供託するので、社員となった時から事業を開始できる</strong>。届出は不要。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">保証協会の社員が事務所を新設したときは、その日から2週間以内に分担金を納付しなければならない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>事務所新設時の分担金納付期限は<strong>2週間以内</strong>。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">免許を受けてから3か月以内に営業保証金を供託した旨の届出がない場合、免許権者は直ちに免許を取り消さなければならない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>3か月以内に届出がないときは、免許権者は<strong>催告をしなければならない</strong>（義務）。取消しは、催告の到達から1か月以内に届出がないときに<strong>「取り消すことができる」</strong>（任意的取消し）。いきなり取り消すのではない。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">供託の届出の催告をしても届出がない場合、免許権者はその免許を取り消さなければならない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>催告到達から1か月以内に届出がない場合、免許権者は免許を<strong>「取り消すことができる」</strong>（任意的取消し）。「取り消さなければならない」は誤り。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">還付を受けることができるのは、宅建業に関し取引をした者であり、宅建業者は除かれる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p><strong>宅建業者は還付を受けられない</strong>。プロ同士の取引は保護の対象外。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">広告を請け負った業者が有する広告代金債権についても、営業保証金からの還付を受けることができる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>還付の対象は<strong>その取引により生じた債権</strong>に限られる。広告代金や内装工事代金などの債権は対象外。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">営業保証金から還付を受けるには、供託所に直接請求すればよい。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>営業保証金の還付は<strong>供託所に直接請求</strong>する。保証協会の弁済業務保証金の場合は協会の<strong>認証</strong>が別途必要になる点と対比される。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">保証協会の制度で還付を受けるには、供託所に直接請求すればよく、保証協会の認証は不要である。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>保証協会の制度では、還付を受けようとする者は<strong>保証協会の認証</strong>を受ける必要がある。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">保証協会の社員が社員となる前にした取引の相手方は、還付を受けることができない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>保証協会の特則により、<strong>社員となる前の取引の相手方も還付を受けられる</strong>。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">営業保証金の還付があった場合、免許権者から不足額を供託すべき旨の通知を受けた日から2週間以内に供託しなければならない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>還付による不足額の供託期限は<strong>通知から2週間以内</strong>。さらに供託した旨を2週間以内に免許権者へ届け出る。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">保証協会の社員は、還付充当金の納付の通知を受けた日から1か月以内に納付しなければ社員の地位を失う。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>還付充当金の納付期限は<strong>通知から2週間以内</strong>。1か月以内は特別弁済業務保証金分担金の期限。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">保証協会の社員が還付充当金を納付しなかった場合、業務停止処分を受ける。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>納付しなかった場合、<strong>社員の地位を失う</strong>のであって、直ちに業務停止処分を受けるわけではない。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">保証協会の社員がその地位を失った場合、その日から1週間以内に営業保証金を供託しなければならない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>地位を失った日から<strong>1週間以内</strong>に、自ら営業保証金を供託する必要がある。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">宅建業者は、複数の保証協会に加入することができる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>1つの宅建業者が加入できるのは<strong>1つの保証協会のみ</strong>（重複加入の禁止）。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">営業保証金を取り戻すには、原則として6か月を下らない一定期間内に申し出るべき旨を公告しなければならない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>取戻し事由が生じても、原則として<strong>公告</strong>をして、申出がなかったときに取り戻せる。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">宅建業者が保証協会の社員になった場合、営業保証金を取り戻すには公告が必要である。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>保証協会の社員になった場合の取戻しは<strong>公告不要</strong>。協会側の弁済業務保証金が担保として機能するため。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">取戻し事由の発生から10年が経過した場合、公告をせずに営業保証金を取り戻すことができる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>10年経過により債権が時効消滅するとみなされ、<strong>公告は不要</strong>になる。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">営業保証金を金銭と有価証券の両方で供託している場合でも、保管替えの請求により対応できる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p><strong>保管替えができるのは金銭のみで供託している場合だけ</strong>。有価証券が含まれる場合は、移転後の供託所に新たに供託し、従前の分を取り戻す（二重供託）。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">保証協会は、国土交通大臣の指定を受けて設立される。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>保証協会は<strong>国土交通大臣が指定</strong>する。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">保証協会は、新たに社員が加入したときは、遅滞なくその旨を国土交通大臣に報告すればよい。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>報告先は<strong>その社員である宅建業者の免許権者</strong>であり、報告は「直ちに」行う。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">弁済業務保証金分担金は、社員となる日までに納付しなければならない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>分担金は<strong>社員となる日まで</strong>に協会に納付する。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">保証協会は、分担金の納付を受けた日から2週間以内に弁済業務保証金を供託しなければならない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>協会が供託所へ供託する期限は<strong>1週間以内</strong>。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">保証協会の必須業務は、苦情の解決・研修・弁済業務の3つである。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>苦情の解決・研修・弁済業務は<strong>必須業務</strong>。一般保証業務や手付金等保管事業は任意業務。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">手付金等保管事業は、保証協会の必須業務の一つである。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>手付金等保管事業は<strong>任意業務</strong>。8種制限の保全措置における「指定保管機関」にあたる。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">保証協会は、社員の苦情の解決にあたり、社員に対して文書・口頭による説明や資料の提出を求めることができる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>社員は正当な理由がなければこれを拒めない。解決の結果は社員に周知させる。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">特別弁済業務保証金分担金の納付の通知を受けた社員が、通知から1か月以内に納付しないときは、社員の地位を失う。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>還付充当金（2週間以内）と異なり、特別弁済業務保証金分担金の期限は<strong>1か月以内</strong>。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">宅建業者が保証協会の社員でなくなった旨は、免許権者に直ちに報告される。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>保証協会は社員がその地位を失ったときも、直ちにその旨を免許権者に報告する。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">営業保証金として国債を供託する場合、地方債よりも評価額の割合が低い。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>評価は<strong>国債100% &gt; 地方債・政府保証債90% &gt; その他80%</strong>の順で、国債が最も高く評価される。</p></div>
+          </li>
+      </ol>
+    </section>
+
   </main>
 
   <footer>
@@ -699,5 +923,75 @@
       }
     }, { rootMargin: '-10% 0px -70% 0px' });
     document.querySelectorAll('main section').forEach(function (s) { obs.observe(s); });
+  })();
+</script>
+
+<script>
+  /* 肢別○×ドリル */
+  (function () {
+    var sec = document.getElementById('drill');
+    if (!sec) return;
+    var list = sec.querySelector('ol.drill');
+    var items = Array.prototype.slice.call(list.querySelectorAll('li.dq'));
+    var key = 'takken-drill:' + (document.title || location.pathname);
+    var state = {};
+    try { state = JSON.parse(localStorage.getItem('' + key) || '{}') || {}; } catch (e) { state = {}; }
+    var elDone = document.getElementById('d-done');
+    var elOk = document.getElementById('d-ok');
+    var elPct = document.getElementById('d-pct');
+    var onlyBtn = document.getElementById('d-wrong');
+
+    function paint() {
+      var done = 0, ok = 0;
+      items.forEach(function (li, i) {
+        var picked = state[i];
+        li.classList.remove('done', 'ok', 'ng');
+        Array.prototype.forEach.call(li.querySelectorAll('.ch button'), function (b) {
+          b.removeAttribute('data-picked');
+        });
+        if (picked !== 'o' && picked !== 'x') return;
+        done++;
+        var ans = li.getAttribute('data-a');
+        var right = picked === ans;
+        if (right) ok++;
+        li.classList.add('done', right ? 'ok' : 'ng');
+        var b = li.querySelector('.ch button[data-v="' + picked + '"]');
+        if (b) b.setAttribute('data-picked', '1');
+        li.querySelector('.verdict').textContent =
+          right ? '正解　' + (ans === 'o' ? '○' : '×')
+                : '不正解　正解は ' + (ans === 'o' ? '○' : '×');
+      });
+      elDone.textContent = String(done);
+      elOk.textContent = String(ok);
+      elPct.textContent = done ? Math.round(ok / done * 100) + '%' : '—';
+      try { localStorage.setItem('' + key, JSON.stringify(state)); } catch (e) {}
+    }
+
+    list.addEventListener('click', function (e) {
+      var b = e.target;
+      while (b && b !== list && b.tagName !== 'BUTTON') b = b.parentNode;
+      if (!b || b.tagName !== 'BUTTON') return;
+      var li = b.parentNode.parentNode;
+      var i = items.indexOf(li);
+      if (i < 0) return;
+      state[i] = b.getAttribute('data-v');
+      paint();
+    });
+
+    onlyBtn.addEventListener('click', function () {
+      var on = list.classList.toggle('onlyng');
+      onlyBtn.setAttribute('aria-pressed', String(on));
+      onlyBtn.textContent = on ? 'すべて表示' : '間違えた肢だけ';
+    });
+
+    document.getElementById('d-reset').addEventListener('click', function () {
+      state = {};
+      list.classList.remove('onlyng');
+      onlyBtn.setAttribute('aria-pressed', 'false');
+      onlyBtn.textContent = '間違えた肢だけ';
+      paint();
+    });
+
+    paint();
   })();
 </script>

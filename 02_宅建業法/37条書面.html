@@ -151,6 +151,39 @@
   .sibling a { font-size:.8rem; text-decoration:none; border:1px solid var(--rule); border-radius:2px; padding:.35em .8em; color:var(--muted); }
   .sibling a:hover { color:var(--ink); border-color:var(--ink); }
 
+  /* ── 肢別○×ドリル ── */
+  .drillbar { max-width:none; display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between;
+    gap:var(--s2); margin:0 0 var(--s3); padding:var(--s2) var(--s3); background:var(--surface);
+    border:1px solid var(--rule); border-radius:2px; position:sticky; top:0; z-index:5; }
+  .drillbar .score { font-family:var(--font-mono); font-size:.8rem; font-variant-numeric:tabular-nums;
+    color:var(--muted); letter-spacing:.04em; }
+  .drillbar .score b { color:var(--ink); font-weight:600; }
+  .drillbar .score .pct { color:var(--accent); font-weight:600; }
+  .drillbar .dbtns { display:flex; gap:var(--s1); }
+  ol.drill { max-width:none; list-style:none; margin:0; padding:0; counter-reset:dq; }
+  li.dq { counter-increment:dq; margin:0 0 var(--s2); padding:var(--s3);
+    background:var(--surface); border:1px solid var(--hair); border-left:3px solid var(--rule); border-radius:2px; }
+  li.dq > .s { margin:0; font-size:.95rem; line-height:1.85; max-width:var(--measure); }
+  li.dq > .s::before { content:counter(dq,decimal-leading-zero); font-family:var(--font-mono);
+    font-size:.72rem; letter-spacing:.08em; color:var(--muted); margin-right:.9em; }
+  li.dq .ch { display:flex; gap:var(--s1); margin-top:var(--s2); }
+  li.dq .ch button { font-family:var(--font-display); font-size:1.05rem; line-height:1; min-width:3.6rem; padding:.4em 0; }
+  li.dq .ch button[data-picked] { color:var(--ink); border-color:var(--ink); font-weight:700; }
+  li.dq .ex { display:none; margin-top:var(--s3); padding-top:var(--s2); border-top:1px solid var(--hair); }
+  li.dq.done .ex { display:block; }
+  li.dq .ex .verdict { display:block; font-family:var(--font-mono); font-size:.7rem; letter-spacing:.14em;
+    margin-bottom:var(--s1); }
+  li.dq .ex p { margin:0; font-size:.88rem; line-height:1.8; color:var(--muted); max-width:var(--measure); }
+  li.dq .ex p strong { color:var(--ink); font-weight:700; }
+  li.dq.ok { border-left-color:var(--blue); }
+  li.dq.ok .verdict { color:var(--blue); }
+  li.dq.ng { border-left-color:var(--accent); background:var(--accent-soft); }
+  li.dq.ng .verdict { color:var(--accent); }
+  li.dq.ng .ex p strong { color:var(--accent); }
+  ol.drill.onlyng li.dq:not(.ng) { display:none; }
+  .drilldone { font-size:.84rem; color:var(--muted); padding:var(--s3); border:1px dashed var(--rule);
+    border-radius:2px; text-align:center; }
+
   @media (prefers-reduced-motion: reduce){ *{ transition:none !important; animation:none !important; scroll-behavior:auto !important; } }
   html { scroll-behavior:smooth; }
   .eyebrow a { color:var(--accent); text-decoration:none; }
@@ -169,8 +202,9 @@
       <ul class="facts">
         <li>法令基準日 <b>2026-04-01</b></li>
         <li>出題数 <b>1〜2問</b></li>
+        <li>ドリル <b>32肢</b></li>
         <li>目標 <b>全問正解</b></li>
-        <li>更新 <b>2026-08-09</b></li>
+        <li>更新 <b>2026-08-23</b></li>
       </ul>
     </div>
     <div class="toggles">
@@ -190,6 +224,7 @@
       <li><a href="#deru"><span class="num">04</span>よく出る論点</a></li>
       <li><a href="#hikkake"><span class="num">05</span>ひっかけ一覧</a></li>
       <li><a href="#matome"><span class="num">06</span>暗記カード</a></li>
+      <li><a href="#drill"><span class="num">07</span>肢別○×ドリル</a></li>
     </ol>
   </nav>
 
@@ -439,6 +474,185 @@
       </div>
     </section>
 
+    <!-- 07 -->
+    <section id="drill">
+      <h2 class="sec"><span class="num">07</span>肢別○×ドリル</h2>
+      <p class="lead">頻出論点の一問一答 <em>32肢</em>。○×を押すと理由が開く。<strong>理由を一言で言えなかった肢は、正解していても「要復習」に入れる</strong>のがこのドリルの使い方。</p>
+      <div class="call tip">
+        <span class="tag">回し方</span>
+        <p>1周目は全肢。2周目以降は「間違えた肢だけ」で回す。解答状況はこのブラウザに保存されるので、日をまたいでも続きから再開できる。</p>
+      </div>
+      <div class="drillbar">
+        <div class="score">解答 <b id="d-done">0</b> / 32　　正答 <b id="d-ok">0</b>　　正答率 <span class="pct" id="d-pct">—</span></div>
+        <div class="dbtns">
+          <button id="d-wrong" type="button" aria-pressed="false">間違えた肢だけ</button>
+          <button id="d-reset" type="button">リセット</button>
+        </div>
+      </div>
+      <ol class="drill">
+          <li class="dq" data-a="x">
+            <p class="s">37条書面は、買主にのみ交付すればよい。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>37条書面は<strong>両当事者</strong>に交付する。35条書面（取得者・借主のみ）と対比される。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">37条書面は、宅建士が交付しなければならない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>宅建士が行うのは<strong>記名</strong>まで。<strong>交付自体は宅建業者の義務</strong>であって、宅建士でなくても交付できる。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">37条書面を交付する際には、宅建士証を提示しなければならない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>37条書面の交付にあたり<strong>宅建士証の提示は不要</strong>。提示が必要なのは35条の重要事項説明の場面。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">買主が宅建業者である場合、37条書面の交付を省略することができる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>37条書面は<strong>業者間取引でも交付を省略できない</strong>。省略できるのは35条の説明のみ。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">37条書面は、契約が成立するまでの間に交付しなければならない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>37条書面は<strong>契約成立後、遅滞なく</strong>交付する。契約前に交付するのではない。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">代金の額、支払時期、支払方法は、37条書面の必要的記載事項である。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>代金等の額・支払時期・支払方法は<strong>必ず記載</strong>しなければならない事項。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">宅地建物の引渡しの時期は、定めがあるときに記載すればよい任意的記載事項である。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>引渡しの時期は<strong>必要的記載事項</strong>であり、必ず記載する。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">移転登記の申請の時期は、35条書面で説明する事項である。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>移転登記の申請時期は<strong>35条では説明せず、37条書面の必要的記載事項</strong>。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">危険負担（天災その他不可抗力による損害の負担）に関する定めは、定めがあるときに37条書面へ記載する任意的記載事項である。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>危険負担は<strong>任意的記載事項</strong>。定めがなければ記載する必要はない。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">租税その他の公課の負担に関する定めは、貸借の場合にも37条書面へ記載しなければならない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>租税公課の負担に関する定めは<strong>売買・交換のみ</strong>の記載事項で、貸借では記載不要（所有権が動かないため）。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">既存建物について、当事者双方が確認した構造耐力上主要な部分等の状況は、貸借の場合も37条書面の必要的記載事項である。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>この事項は<strong>売買・交換のみ</strong>の必要的記載事項で、貸借では記載不要。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">契約の解除に関する定めは、35条書面では説明が不要だが、37条書面では定めがあるときに記載する。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>契約の解除に関する事項は<strong>35条でも説明が必要</strong>（定めがなければその旨を説明する）。37条では定めがあるときに記載する任意的記載事項。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">損害賠償額の予定・違約金に関する定めは、37条書面の任意的記載事項である。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>定めがあるときにのみ記載すればよい任意的記載事項。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">契約不適合責任の履行を確保するための措置の概要は、35条・37条のいずれでも扱われる事項である。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>35条では<strong>措置を講ずるかどうかとその概要</strong>を説明し、37条では<strong>定めがあるときに任意的記載事項</strong>として記載する。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">契約不適合責任の具体的な内容についての定めは、35条書面の記載事項である。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>責任の内容そのものについての定めは<strong>37条の任意的記載事項</strong>であり、35条の説明事項ではない。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">金銭の貸借のあっせんについて、その内容は35条で説明し、あっせんが不成立のときの措置は35条・37条の両方で扱われる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>あっせんの内容自体は35条のみだが、<strong>不成立のときの措置は35条・37条の双方</strong>で扱われる。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">登記された権利の種類・内容や登記名義人は、37条書面の記載事項である。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>これらは<strong>35条の説明事項</strong>であり、37条書面には記載しない。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">手付金等の保全措置の概要は、37条書面の記載事項である。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>手付金等の保全措置の概要は<strong>35条の説明事項</strong>であり、37条書面には記載しない。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">代金等以外に授受される金銭がある場合、その額と目的は35条・37条のいずれでも扱う事項だが、授受の時期は37条にのみ記載する。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>額と目的は両方の書面に関係するが、<strong>授受の時期は37条書面のみ</strong>の記載事項。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">建物の貸借の場合、37条書面には当事者の氏名・住所や宅地建物を特定する表示を記載する必要はない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>当事者の氏名・住所、物件を特定する表示は<strong>売買・貸借を問わず</strong>必要的記載事項。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">建物の貸借において、37条書面に借賃の額・支払時期・支払方法を記載しなければならない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>代金・交換差金・<strong>借賃</strong>の額等は貸借でも必要的記載事項。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">37条書面に代えて電磁的方法により提供するには、相手方の承諾を得る必要がある。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>35条書面と同様、<strong>相手方の承諾</strong>が必要。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">37条書面を交付しなかった場合の罰則は、50万円以下の罰金である。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>書面不交付は<strong>50万円以下の罰金</strong>の対象。指示処分・業務停止処分の対象にもなる。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">35条書面は契約するかどうかの判断材料として、37条書面は合意した契約内容の記録として機能する。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p><strong>35条＝判断材料、37条＝内容の記録（証拠）</strong>という目的の違いから、交付相手や説明の要否などすべての違いが導ける。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">37条書面の必要的記載事項は、売買・交換の場合、貸借より多い。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>貸借では既存建物の状況確認・移転登記の時期など<strong>5つの事項が記載不要</strong>になるため、売買・交換のほうが必要的記載事項が多い。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">既存建物の売買における構造耐力上主要な部分等の状況について当事者双方が確認した事項は、必要的記載事項である。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>既存建物の売買・交換における必要的記載事項の一つ。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">宅地建物を特定するために必要な表示は、任意的記載事項である。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>物件を特定する表示は<strong>必要的記載事項</strong>であり、必ず記載する。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">37条書面に記載する当事者の氏名・住所は、宅建士が確認しなければならない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>37条書面の記載・交付は業者の義務であり、宅建士固有の確認義務ではない（宅建士が行うのは記名のみ）。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">貸借の場合、租税公課の負担、危険負担、契約不適合責任に関する定めのいずれも37条書面に記載しない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p><strong>危険負担と契約解除・損害賠償の定めは貸借でも任意的記載事項として記載できる</strong>。貸借で一律に記載不要となるのは、既存建物の状況確認・移転登記の時期・ローンあっせん不成立時の措置・契約不適合責任・租税公課の負担の5つ。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">移転登記の申請時期と引渡しの時期は、いずれも定めがある場合にのみ記載する任意的記載事項である。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>この2つはいずれも<strong>必要的記載事項</strong>であり、必ず記載しなければならない。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">37条書面には宅建士の記名が必要だが、押印は不要である。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>2022年5月18日施行の改正により押印は廃止され、<strong>記名のみ</strong>でよい。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">37条書面の交付の相手方が宅建業者であっても、記載事項を省略することはできない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>37条書面は証拠としての性質を持つため、相手方の属性にかかわらず<strong>記載事項は一律</strong>。</p></div>
+          </li>
+      </ol>
+    </section>
+
   </main>
 
   <footer>
@@ -490,5 +704,75 @@
       }
     }, { rootMargin: '-10% 0px -70% 0px' });
     document.querySelectorAll('main section').forEach(function (s) { obs.observe(s); });
+  })();
+</script>
+
+<script>
+  /* 肢別○×ドリル */
+  (function () {
+    var sec = document.getElementById('drill');
+    if (!sec) return;
+    var list = sec.querySelector('ol.drill');
+    var items = Array.prototype.slice.call(list.querySelectorAll('li.dq'));
+    var key = 'takken-drill:' + (document.title || location.pathname);
+    var state = {};
+    try { state = JSON.parse(localStorage.getItem('' + key) || '{}') || {}; } catch (e) { state = {}; }
+    var elDone = document.getElementById('d-done');
+    var elOk = document.getElementById('d-ok');
+    var elPct = document.getElementById('d-pct');
+    var onlyBtn = document.getElementById('d-wrong');
+
+    function paint() {
+      var done = 0, ok = 0;
+      items.forEach(function (li, i) {
+        var picked = state[i];
+        li.classList.remove('done', 'ok', 'ng');
+        Array.prototype.forEach.call(li.querySelectorAll('.ch button'), function (b) {
+          b.removeAttribute('data-picked');
+        });
+        if (picked !== 'o' && picked !== 'x') return;
+        done++;
+        var ans = li.getAttribute('data-a');
+        var right = picked === ans;
+        if (right) ok++;
+        li.classList.add('done', right ? 'ok' : 'ng');
+        var b = li.querySelector('.ch button[data-v="' + picked + '"]');
+        if (b) b.setAttribute('data-picked', '1');
+        li.querySelector('.verdict').textContent =
+          right ? '正解　' + (ans === 'o' ? '○' : '×')
+                : '不正解　正解は ' + (ans === 'o' ? '○' : '×');
+      });
+      elDone.textContent = String(done);
+      elOk.textContent = String(ok);
+      elPct.textContent = done ? Math.round(ok / done * 100) + '%' : '—';
+      try { localStorage.setItem('' + key, JSON.stringify(state)); } catch (e) {}
+    }
+
+    list.addEventListener('click', function (e) {
+      var b = e.target;
+      while (b && b !== list && b.tagName !== 'BUTTON') b = b.parentNode;
+      if (!b || b.tagName !== 'BUTTON') return;
+      var li = b.parentNode.parentNode;
+      var i = items.indexOf(li);
+      if (i < 0) return;
+      state[i] = b.getAttribute('data-v');
+      paint();
+    });
+
+    onlyBtn.addEventListener('click', function () {
+      var on = list.classList.toggle('onlyng');
+      onlyBtn.setAttribute('aria-pressed', String(on));
+      onlyBtn.textContent = on ? 'すべて表示' : '間違えた肢だけ';
+    });
+
+    document.getElementById('d-reset').addEventListener('click', function () {
+      state = {};
+      list.classList.remove('onlyng');
+      onlyBtn.setAttribute('aria-pressed', 'false');
+      onlyBtn.textContent = '間違えた肢だけ';
+      paint();
+    });
+
+    paint();
   })();
 </script>

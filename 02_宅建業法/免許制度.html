@@ -152,6 +152,39 @@
   .sibling a { font-size:.8rem; text-decoration:none; border:1px solid var(--rule); border-radius:2px; padding:.35em .8em; color:var(--muted); }
   .sibling a:hover { color:var(--ink); border-color:var(--ink); }
 
+  /* ── 肢別○×ドリル ── */
+  .drillbar { max-width:none; display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between;
+    gap:var(--s2); margin:0 0 var(--s3); padding:var(--s2) var(--s3); background:var(--surface);
+    border:1px solid var(--rule); border-radius:2px; position:sticky; top:0; z-index:5; }
+  .drillbar .score { font-family:var(--font-mono); font-size:.8rem; font-variant-numeric:tabular-nums;
+    color:var(--muted); letter-spacing:.04em; }
+  .drillbar .score b { color:var(--ink); font-weight:600; }
+  .drillbar .score .pct { color:var(--accent); font-weight:600; }
+  .drillbar .dbtns { display:flex; gap:var(--s1); }
+  ol.drill { max-width:none; list-style:none; margin:0; padding:0; counter-reset:dq; }
+  li.dq { counter-increment:dq; margin:0 0 var(--s2); padding:var(--s3);
+    background:var(--surface); border:1px solid var(--hair); border-left:3px solid var(--rule); border-radius:2px; }
+  li.dq > .s { margin:0; font-size:.95rem; line-height:1.85; max-width:var(--measure); }
+  li.dq > .s::before { content:counter(dq,decimal-leading-zero); font-family:var(--font-mono);
+    font-size:.72rem; letter-spacing:.08em; color:var(--muted); margin-right:.9em; }
+  li.dq .ch { display:flex; gap:var(--s1); margin-top:var(--s2); }
+  li.dq .ch button { font-family:var(--font-display); font-size:1.05rem; line-height:1; min-width:3.6rem; padding:.4em 0; }
+  li.dq .ch button[data-picked] { color:var(--ink); border-color:var(--ink); font-weight:700; }
+  li.dq .ex { display:none; margin-top:var(--s3); padding-top:var(--s2); border-top:1px solid var(--hair); }
+  li.dq.done .ex { display:block; }
+  li.dq .ex .verdict { display:block; font-family:var(--font-mono); font-size:.7rem; letter-spacing:.14em;
+    margin-bottom:var(--s1); }
+  li.dq .ex p { margin:0; font-size:.88rem; line-height:1.8; color:var(--muted); max-width:var(--measure); }
+  li.dq .ex p strong { color:var(--ink); font-weight:700; }
+  li.dq.ok { border-left-color:var(--blue); }
+  li.dq.ok .verdict { color:var(--blue); }
+  li.dq.ng { border-left-color:var(--accent); background:var(--accent-soft); }
+  li.dq.ng .verdict { color:var(--accent); }
+  li.dq.ng .ex p strong { color:var(--accent); }
+  ol.drill.onlyng li.dq:not(.ng) { display:none; }
+  .drilldone { font-size:.84rem; color:var(--muted); padding:var(--s3); border:1px dashed var(--rule);
+    border-radius:2px; text-align:center; }
+
   @media (prefers-reduced-motion: reduce){ *{ transition:none !important; animation:none !important; scroll-behavior:auto !important; } }
   html { scroll-behavior:smooth; }
   .eyebrow a { color:var(--accent); text-decoration:none; }
@@ -170,8 +203,9 @@
       <ul class="facts">
         <li>法令基準日 <b>2026-04-01</b></li>
         <li>出題数 <b>約3問</b></li>
+        <li>ドリル <b>35肢</b></li>
         <li>目標 <b>全問正解</b></li>
-        <li>更新 <b>2026-08-09</b></li>
+        <li>更新 <b>2026-08-23</b></li>
       </ul>
     </div>
     <div class="toggles">
@@ -196,6 +230,7 @@
       <li><a href="#deru"><span class="num">09</span>よく出る論点</a></li>
       <li><a href="#hikkake"><span class="num">10</span>ひっかけ一覧</a></li>
       <li><a href="#suji"><span class="num">11</span>数字まとめ</a></li>
+      <li><a href="#drill"><span class="num">12</span>肢別○×ドリル</a></li>
     </ol>
   </nav>
 
@@ -621,6 +656,200 @@
       </div>
     </section>
 
+    <!-- 12 -->
+    <section id="drill">
+      <h2 class="sec"><span class="num">12</span>肢別○×ドリル</h2>
+      <p class="lead">頻出論点の一問一答 <em>35肢</em>。○×を押すと理由が開く。<strong>理由を一言で言えなかった肢は、正解していても「要復習」に入れる</strong>のがこのドリルの使い方。</p>
+      <div class="call tip">
+        <span class="tag">回し方</span>
+        <p>1周目は全肢。2周目以降は「間違えた肢だけ」で回す。解答状況はこのブラウザに保存されるので、日をまたいでも続きから再開できる。</p>
+      </div>
+      <div class="drillbar">
+        <div class="score">解答 <b id="d-done">0</b> / 35　　正答 <b id="d-ok">0</b>　　正答率 <span class="pct" id="d-pct">—</span></div>
+        <div class="dbtns">
+          <button id="d-wrong" type="button" aria-pressed="false">間違えた肢だけ</button>
+          <button id="d-reset" type="button">リセット</button>
+        </div>
+      </div>
+      <ol class="drill">
+          <li class="dq" data-a="x">
+            <p class="s">自己の所有するアパートを不特定多数の者に反復継続して賃貸する行為には、免許が必要である。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p><strong>自ら貸借は宅地建物取引業の「取引」にあたらない</strong>ので免許は不要。管理を他人に任せていても同じ。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">自ら所有する宅地を分譲するために反復継続して売却する行為には、免許が必要である。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p><strong>自ら売買</strong>は取引にあたる。反復継続の意思をもって不特定多数に売却する以上、免許が必要。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">用途地域内にある農地は、現に耕作されていても宅地にあたる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>宅地とは<strong>建物の敷地に供せられる土地</strong>で、用途地域内の土地は道路・公園・河川・広場・水路を<strong>除き</strong>すべて宅地とみなされる。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">大臣免許か知事免許かは、取引の対象となる物件の所在地によって決まる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p><strong>事務所の所在</strong>で決まる。2以上の都道府県に事務所があれば大臣免許、1つの都道府県内のみなら知事免許。物件の所在地は無関係。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">国土交通大臣の免許を受けている業者は、他県の物件を取り扱うことができない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>大臣免許・知事免許のいずれも<strong>全国で取引できる</strong>。免許の区分は事務所の所在に基づくだけで、営業エリアを制限するものではない。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">国および地方公共団体が宅地建物の取引を行う場合、免許は不要である。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>国・地方公共団体には<strong>宅建業法の規定自体が適用されない</strong>ため免許不要。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">信託会社が宅地建物取引業を営む場合、宅建業法の規定は一切適用されない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>信託会社は<strong>国土交通大臣への届出で免許は不要</strong>になるが、<strong>宅建業法の規定自体は適用される</strong>（大臣免許業者とみなされる）。国・地方公共団体との違いに注意。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">農業協同組合が宅地建物の分譲を行う場合、免許は不要である。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>農業協同組合や社会福祉法人などに<strong>特別な扱いはなく</strong>、免許が必要。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">破産管財人が裁判所の許可を得て破産財団に属する不動産を売却する場合、免許は不要である。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>裁判所の関与のもとで行われる換価行為であり、免許は不要とされる。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">免許の有効期間は、大臣免許・知事免許とも5年である。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>免許の種類にかかわらず<strong>有効期間は5年</strong>で統一されている。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">免許の更新の申請は、有効期間満了の日の1か月前までに行わなければならない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p><strong>満了日の90日前から30日前まで</strong>の間に申請する。1か月前ではない。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">更新の申請をしたが有効期間満了までに処分がされない場合、その業者は無免許営業となる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>処分がされるまでの間、<strong>従前の免許はなお効力を有する</strong>ので無免許にはならない。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">更新後の新免許の有効期間は、処分がされた日から5年間である。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p><strong>従前の免許の有効期間満了日の翌日から</strong>起算して5年間。処分日からではない。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">本店では宅建業を営んでいないが支店で営んでいる場合、本店は事務所にあたらない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p><strong>支店で宅建業を営んでいれば本店も事務所にあたる</strong>。本店は名目上の存在であっても事務所として扱われる。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">契約締結の権限を有する使用人を置く継続的な施設は、事務所にあたる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>そのような施設は<strong>事務所</strong>として、専任の宅建士の設置や標識の掲示等の義務が生じる。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">事務所には報酬額を掲示しなければならないが、契約を締結する案内所には掲示の義務はない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>報酬額の掲示は<strong>事務所のみ</strong>の義務。標識は案内所にも必要だが、報酬額の掲示までは求められない。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">従業者名簿は、最終の記載をした日から10年間保存しなければならない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>従業者名簿の<strong>保存期間は10年間</strong>。取引の関係者から請求があれば閲覧させなければならない。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">帳簿は、取引の関係者から請求があったときは閲覧させなければならない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p><strong>閲覧義務があるのは従業者名簿のみ</strong>。帳簿に閲覧義務はない。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">帳簿の保存期間は、各事業年度の閉鎖後5年間である。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>原則<strong>5年間</strong>。ただし自ら売主となる新築住宅に係るものは<strong>10年間</strong>保存する。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">2025年4月1日施行の規則改正により、従業者名簿の記載事項から生年月日・住所・性別が削除された。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>現在の記載事項は氏名・従業者証明書番号・職務内容・宅建士か否か・従業者となった年月日等に限られる。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">事務所を管轄する都道府県が変わる場合、免許換えをしないと業務停止処分を受ける。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>免許換えを怠ると<strong>業務停止ではなく免許取消し（必要的取消事由）</strong>となる。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">免許換えによって受けた新しい免許の有効期間は、従前の免許の残存期間を引き継ぐ。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>残存期間は引き継がず、<strong>新規と同じく5年</strong>となる。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">破産手続開始の決定を受けて復権を得ない者は、復権後5年を経過しないと免許を受けられない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>破産者は<strong>復権を得れば直ちに</strong>免許を受けられる。5年待つ必要はない。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">拘禁刑に処せられ、その執行を猶予された者は、猶予期間が満了しても5年間は免許を受けられない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>執行猶予が付いた場合、<strong>猶予期間の満了により直ちに</strong>免許を受けられる（刑の言渡しの効力自体が失われるため）。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">拘禁刑以上の刑に処せられた者は、罪名を問わず刑の執行を終わった日から5年間は免許を受けられない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>拘禁刑以上の刑は<strong>罪名を問わず</strong>欠格事由となり、期間は5年。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">過失傷害の罪により罰金の刑に処せられた者は、5年間免許を受けられない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>罰金刑で欠格となるのは<strong>宅建業法違反・暴力団関係・傷害罪等の限定列挙</strong>にあたる場合のみ。過失傷害は含まれない。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">宅建業者の役員の住所に変更があったときは、30日以内に免許権者へ変更の届出をしなければならない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>変更の届出が必要なのは<strong>商号、役員・本人及び政令で定める使用人の氏名、事務所の名称・所在地、専任宅建士の氏名</strong>であり、役員個人の住所は届出事項に含まれない。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">専任の宅建士の住所に変更があったときは、変更の届出をしなければならない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>届出が必要なのは専任の宅建士の<strong>氏名</strong>のみで、住所は対象外。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">宅建業者が死亡した場合、その相続人は届出の時に免許が失効したものとして扱われる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>死亡の場合、免許は<strong>死亡の時</strong>に失効する。届出は相続人が知った日から30日以内に行う。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">宅建業者である法人が破産手続開始の決定を受けた場合、破産管財人が30日以内に届け出る。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>破産の場合の届出義務者は<strong>破産管財人</strong>。免許は届出の時に失効する。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">宅建業者である法人が合併により消滅した場合、消滅した法人の代表役員であった者が届け出る。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>合併消滅の場合の届出義務者は<strong>消滅した法人の代表役員であった者</strong>。免許は<strong>合併の時</strong>に失効する（届出の時ではない）。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">免許が取り消された場合、その業者はすでに締結していた契約に基づく取引についても直ちに一切の行為ができなくなる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>免許の失効・取消し後も、<strong>既存の契約に基づく取引を結了する目的の範囲内では</strong>なお宅建業者とみなされる。新たな契約は締結できない。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">免許を受けずに宅地建物取引業を営む旨の表示や広告をする行為は、実際に取引をしなくても違反となる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>無免許表示の禁止であり、表示・広告をした時点で違反となる。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">自己の名義をもって他人に宅地建物取引業を営ませることは禁止されているが、表示や広告をさせることまでは禁止されていない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>名義貸しの禁止は、営業させることに加えて<strong>表示・広告をさせることも禁止</strong>している。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">無免許営業を行った場合の罰則は、宅建業法違反の中で最も重い部類に属する。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p><strong>3年以下の拘禁刑または300万円以下の罰金</strong>（併科あり）で、法人には1億円以下の罰金が科される。</p></div>
+          </li>
+      </ol>
+    </section>
+
   </main>
 
   <footer>
@@ -671,5 +900,75 @@
       }
     }, { rootMargin: '-10% 0px -70% 0px' });
     document.querySelectorAll('main section').forEach(function (s) { obs.observe(s); });
+  })();
+</script>
+
+<script>
+  /* 肢別○×ドリル */
+  (function () {
+    var sec = document.getElementById('drill');
+    if (!sec) return;
+    var list = sec.querySelector('ol.drill');
+    var items = Array.prototype.slice.call(list.querySelectorAll('li.dq'));
+    var key = 'takken-drill:' + (document.title || location.pathname);
+    var state = {};
+    try { state = JSON.parse(localStorage.getItem('' + key) || '{}') || {}; } catch (e) { state = {}; }
+    var elDone = document.getElementById('d-done');
+    var elOk = document.getElementById('d-ok');
+    var elPct = document.getElementById('d-pct');
+    var onlyBtn = document.getElementById('d-wrong');
+
+    function paint() {
+      var done = 0, ok = 0;
+      items.forEach(function (li, i) {
+        var picked = state[i];
+        li.classList.remove('done', 'ok', 'ng');
+        Array.prototype.forEach.call(li.querySelectorAll('.ch button'), function (b) {
+          b.removeAttribute('data-picked');
+        });
+        if (picked !== 'o' && picked !== 'x') return;
+        done++;
+        var ans = li.getAttribute('data-a');
+        var right = picked === ans;
+        if (right) ok++;
+        li.classList.add('done', right ? 'ok' : 'ng');
+        var b = li.querySelector('.ch button[data-v="' + picked + '"]');
+        if (b) b.setAttribute('data-picked', '1');
+        li.querySelector('.verdict').textContent =
+          right ? '正解　' + (ans === 'o' ? '○' : '×')
+                : '不正解　正解は ' + (ans === 'o' ? '○' : '×');
+      });
+      elDone.textContent = String(done);
+      elOk.textContent = String(ok);
+      elPct.textContent = done ? Math.round(ok / done * 100) + '%' : '—';
+      try { localStorage.setItem('' + key, JSON.stringify(state)); } catch (e) {}
+    }
+
+    list.addEventListener('click', function (e) {
+      var b = e.target;
+      while (b && b !== list && b.tagName !== 'BUTTON') b = b.parentNode;
+      if (!b || b.tagName !== 'BUTTON') return;
+      var li = b.parentNode.parentNode;
+      var i = items.indexOf(li);
+      if (i < 0) return;
+      state[i] = b.getAttribute('data-v');
+      paint();
+    });
+
+    onlyBtn.addEventListener('click', function () {
+      var on = list.classList.toggle('onlyng');
+      onlyBtn.setAttribute('aria-pressed', String(on));
+      onlyBtn.textContent = on ? 'すべて表示' : '間違えた肢だけ';
+    });
+
+    document.getElementById('d-reset').addEventListener('click', function () {
+      state = {};
+      list.classList.remove('onlyng');
+      onlyBtn.setAttribute('aria-pressed', 'false');
+      onlyBtn.textContent = '間違えた肢だけ';
+      paint();
+    });
+
+    paint();
   })();
 </script>

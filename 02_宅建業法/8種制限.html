@@ -154,6 +154,39 @@
   .sibling a { font-size:.8rem; text-decoration:none; border:1px solid var(--rule); border-radius:2px; padding:.35em .8em; color:var(--muted); }
   .sibling a:hover { color:var(--ink); border-color:var(--ink); }
 
+  /* ── 肢別○×ドリル ── */
+  .drillbar { max-width:none; display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between;
+    gap:var(--s2); margin:0 0 var(--s3); padding:var(--s2) var(--s3); background:var(--surface);
+    border:1px solid var(--rule); border-radius:2px; position:sticky; top:0; z-index:5; }
+  .drillbar .score { font-family:var(--font-mono); font-size:.8rem; font-variant-numeric:tabular-nums;
+    color:var(--muted); letter-spacing:.04em; }
+  .drillbar .score b { color:var(--ink); font-weight:600; }
+  .drillbar .score .pct { color:var(--accent); font-weight:600; }
+  .drillbar .dbtns { display:flex; gap:var(--s1); }
+  ol.drill { max-width:none; list-style:none; margin:0; padding:0; counter-reset:dq; }
+  li.dq { counter-increment:dq; margin:0 0 var(--s2); padding:var(--s3);
+    background:var(--surface); border:1px solid var(--hair); border-left:3px solid var(--rule); border-radius:2px; }
+  li.dq > .s { margin:0; font-size:.95rem; line-height:1.85; max-width:var(--measure); }
+  li.dq > .s::before { content:counter(dq,decimal-leading-zero); font-family:var(--font-mono);
+    font-size:.72rem; letter-spacing:.08em; color:var(--muted); margin-right:.9em; }
+  li.dq .ch { display:flex; gap:var(--s1); margin-top:var(--s2); }
+  li.dq .ch button { font-family:var(--font-display); font-size:1.05rem; line-height:1; min-width:3.6rem; padding:.4em 0; }
+  li.dq .ch button[data-picked] { color:var(--ink); border-color:var(--ink); font-weight:700; }
+  li.dq .ex { display:none; margin-top:var(--s3); padding-top:var(--s2); border-top:1px solid var(--hair); }
+  li.dq.done .ex { display:block; }
+  li.dq .ex .verdict { display:block; font-family:var(--font-mono); font-size:.7rem; letter-spacing:.14em;
+    margin-bottom:var(--s1); }
+  li.dq .ex p { margin:0; font-size:.88rem; line-height:1.8; color:var(--muted); max-width:var(--measure); }
+  li.dq .ex p strong { color:var(--ink); font-weight:700; }
+  li.dq.ok { border-left-color:var(--blue); }
+  li.dq.ok .verdict { color:var(--blue); }
+  li.dq.ng { border-left-color:var(--accent); background:var(--accent-soft); }
+  li.dq.ng .verdict { color:var(--accent); }
+  li.dq.ng .ex p strong { color:var(--accent); }
+  ol.drill.onlyng li.dq:not(.ng) { display:none; }
+  .drilldone { font-size:.84rem; color:var(--muted); padding:var(--s3); border:1px dashed var(--rule);
+    border-radius:2px; text-align:center; }
+
   @media (prefers-reduced-motion: reduce){ *{ transition:none !important; animation:none !important; scroll-behavior:auto !important; } }
   html { scroll-behavior:smooth; }
   .eyebrow a { color:var(--accent); text-decoration:none; }
@@ -172,8 +205,9 @@
       <ul class="facts">
         <li>法令基準日 <b>2026-04-01</b></li>
         <li>出題数 <b>約3問</b></li>
+        <li>ドリル <b>36肢</b></li>
         <li>目標 <b>全問正解</b></li>
-        <li>更新 <b>2026-08-09</b></li>
+        <li>更新 <b>2026-08-23</b></li>
       </ul>
     </div>
     <div class="toggles">
@@ -198,6 +232,7 @@
       <li><a href="#deru"><span class="num">09</span>よく出る論点</a></li>
       <li><a href="#hikkake"><span class="num">10</span>ひっかけ一覧</a></li>
       <li><a href="#suji"><span class="num">11</span>数字まとめ</a></li>
+      <li><a href="#drill"><span class="num">12</span>肢別○×ドリル</a></li>
     </ol>
   </nav>
 
@@ -586,6 +621,205 @@
       </div>
     </section>
 
+    <!-- 12 -->
+    <section id="drill">
+      <h2 class="sec"><span class="num">12</span>肢別○×ドリル</h2>
+      <p class="lead">頻出論点の一問一答 <em>36肢</em>。○×を押すと理由が開く。<strong>理由を一言で言えなかった肢は、正解していても「要復習」に入れる</strong>のがこのドリルの使い方。</p>
+      <div class="call tip">
+        <span class="tag">回し方</span>
+        <p>1周目は全肢。2周目以降は「間違えた肢だけ」で回す。解答状況はこのブラウザに保存されるので、日をまたいでも続きから再開できる。</p>
+      </div>
+      <div class="drillbar">
+        <div class="score">解答 <b id="d-done">0</b> / 36　　正答 <b id="d-ok">0</b>　　正答率 <span class="pct" id="d-pct">—</span></div>
+        <div class="dbtns">
+          <button id="d-wrong" type="button" aria-pressed="false">間違えた肢だけ</button>
+          <button id="d-reset" type="button">リセット</button>
+        </div>
+      </div>
+      <ol class="drill">
+          <li class="dq" data-a="x">
+            <p class="s">8種制限は、宅建業者が媒介・代理をする取引にも適用される。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>8種制限は<strong>宅建業者が自ら売主</strong>となる取引にのみ適用される。媒介・代理の場合は適用されない。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">買主が宅建業者である場合、8種制限は適用されない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>8種制限は<strong>宅建業者でない者が買主</strong>となる場合を保護する制度。買主が宅建業者なら適用されない。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">宅建業者が自ら売主となる取引で、代金の20%を超える額の手付を受領する特約は無効である。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p><strong>手付の額は代金の2/10（20%）が上限</strong>。これを超える特約は無効。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">買主が自ら申し出た自宅で契約をした場合、クーリング・オフをすることができる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>買主が自ら指定した自宅や勤務先は<strong>事務所等として扱われ</strong>、クーリング・オフできない。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">喫茶店で契約をした場合、クーリング・オフをすることができる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>喫茶店は事務所等にあたらないため、<strong>クーリング・オフができる</strong>。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">土地に定着したテント張りの案内所で契約した場合、クーリング・オフをすることができる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>土地に定着した案内所（テント張りでも土地に定着していれば）は事務所等にあたる。<strong>土地に定着していない</strong>簡易なテント等の場合にクーリング・オフができる。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">クーリング・オフの通知は、口頭で行うことができる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>クーリング・オフは<strong>書面で行わなければならない</strong>。口頭では効力を生じない。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">クーリング・オフの効力は、書面を発した時に生じる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p><strong>発信主義</strong>が採られており、書面が到達する前でも発した時点で効力が生じる。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">クーリング・オフができる期間は、書面でその旨を告げられた日から8日間である。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p><strong>8日間</strong>。この告知がなければ期間は進行しない。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">買主が物件の引渡しを受けた場合、クーリング・オフをすることはできない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>引渡しを受けただけではクーリング・オフは可能。<strong>引渡しを受け、かつ代金全額を支払った</strong>場合に初めてできなくなる。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">クーリング・オフがされた場合、宅建業者は買主に対して損害賠償や違約金を請求することができる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>クーリング・オフによる解除では、<strong>損害賠償も違約金も請求できない</strong>。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">買主に不利な特約でクーリング・オフの規定に反するものは無効である。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>クーリング・オフに関する規定は片面的強行規定で、買主に不利な特約は無効。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">自分（売主）が履行に着手していれば、買主が着手していなくても手付解除をされることはない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>手付解除ができなくなるのは<strong>相手方が履行に着手した後</strong>。自分が着手していても、相手方未着手なら解除される可能性がある。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">売主が手付解除をするには、手付の倍額を償還する旨を通知すれば足りる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>口頭の通知では足りず、<strong>倍額を現実に提供</strong>しなければならない。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">違約手付とする特約を結んでいれば、買主は手付放棄による解除をすることができない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>宅建業者が自ら売主となる場合、手付は<strong>名目を問わず常に解約手付</strong>として扱われる。違約手付とする特約は排除される。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">損害賠償額の予定と違約金を合算した額が代金の20%を超える特約は、超える部分のみが無効となる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>特約全体が無効になるのではなく、<strong>20%を超える部分だけ</strong>が無効。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">損害賠償額の予定をしていない場合、宅建業者は代金の20%を超える実損害を請求することができない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>予定をしていなければ<strong>実損額を請求</strong>でき、20%の上限もかからない。上限があるのはあくまで予定・違約金を定めた場合。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">未完成物件について、代金の5%かつ1,000万円以下の手付金を受領する場合、保全措置は不要である。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>未完成物件で保全措置が必要になるのは手付金等の額が<strong>代金の5%を超える場合</strong>、または<strong>1,000万円を超える場合</strong>。ちょうど5%・1,000万円以下なら不要。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">完成物件について、代金のちょうど10%の手付金を受領する場合、保全措置が必要である。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>完成物件で保全措置が必要になるのは代金の<strong>10%を「超える」場合</strong>。ちょうど10%なら不要。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">未完成物件で手付金として代金の5%、さらに中間金として6%を受領する場合、それぞれ基準以下なので保全措置は不要である。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>保全措置の要否は<strong>受領する額の累計</strong>で判断する。5%＋6%＝11%となり基準の5%を超えるため、保全措置が必要になる。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">未完成物件についても、手付金等寄託契約による保全措置を利用することができる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>手付金等寄託契約による保全措置が使えるのは<strong>完成物件のみ</strong>。未完成物件では銀行等による保証または保険事業者による保証保険による。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">宅建業者が自ら売主となる場合、契約不適合責任の通知期間について「契約締結の日から2年」とする特約は有効である。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>特約で有効にできるのは<strong>「引渡しの日から2年以上」</strong>とするものに限られる。契約締結の日を起算点とする特約は買主に不利であり無効。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">契約不適合責任について特約を結ばない場合、民法の原則どおり不適合を知った時から1年以内に通知すればよい。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>特約がなければ<strong>民法の原則（知った時から1年）</strong>が適用される。8種制限で有効にできるのはこれより買主に不利にならない特約のみ。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">他人物である宅地建物について、宅建業者が停止条件付きで取得する契約を結んでいれば、自ら売主として売却することができる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p><strong>停止条件付きの契約では不可</strong>。条件が成就するかどうか不確実なため。取得に関する<strong>予約</strong>であれば売却できる。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">割賦販売契約において、賦払金の支払いがない場合、20日以上の相当な期間を定めて書面で催告すれば契約を解除することができる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>催告期間は<strong>30日以上</strong>でなければならない（かつ書面による）。20日では不足。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">割賦販売において、代金の3/10を超える額の支払いを受けた場合、宅建業者は所有権を留保することができない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>代金の<strong>3/10を超える</strong>支払いを受けた後は、原則として所有権を留保できず、登記等の移転が必要になる。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">クーリング・オフは、書面で告げられた日から8日を経過すると、たとえ告知の内容に不備があってもできなくなる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p><strong>告知が適法な内容でなければ8日間の起算が始まらない</strong>。不備があれば期間は進行せず、8日を経過してもクーリング・オフができる。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">買主が自ら指定した仮設テント張りの案内所以外の場所（土地に定着していないもの）で契約した場合、クーリング・オフができる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p><strong>土地に定着していない</strong>簡易な案内所は事務所等にあたらないため、クーリング・オフができる。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">宅建業者が媒介をする取引において、代金の20%を超える手付を定めることは、8種制限に違反する。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>8種制限は<strong>自ら売主となる場合にのみ適用</strong>される。媒介・代理の取引には適用されないため、手付の額に法律上の上限はない（当事者間の合意による）。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">完成物件で保全措置が必要になる手付金等の額の基準は、代金の10%を超える場合、または1,000万円を超える場合のいずれかである。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p><strong>10%超</strong>または<strong>1,000万円超</strong>のいずれかに該当すれば保全措置が必要になる（いずれか低いほうの基準で保護される）。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">宅建業者が保全措置を講じずに手付金等を受領しても、買主に不利益がなければ問題ない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>保全措置を講じずに基準額を超える手付金等を受領する行為は8種制限違反であり、監督処分・罰則の対象となる。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">自己の所有に属しない宅地建物であっても、宅建業者が取得契約の予約をしている場合は、自ら売主として売買契約を締結することができる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>予約であれば取得の見込みが法的に担保されるため、他人物売買が許容される。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">宅建業者が自ら売主となる場合の担保責任に関する特約は、買主に不利なものであっても常に有効である。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>民法の原則より<strong>買主に不利な特約は原則として無効</strong>。有効にできるのは「引渡しの日から2年以上」とする通知期間の特約のみ。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">クーリング・オフによる契約の解除があった場合、宅建業者はすでに受領した手付金や代金を返還しなければならない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>クーリング・オフにより契約は遡って効力を失うため、受領済みの金銭は速やかに返還する。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">宅建業者は、割賦販売の契約において賦払金の支払いを受ける際、常に所有権を留保しなければならない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>所有権の留保が原則として禁止されるのは<strong>代金の3/10を超える支払いを受けた後</strong>。それまでは留保することができる。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">手付金等の保全措置は、売買契約の締結前に講じなければならない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>保全措置は<strong>手付金等を受領する前</strong>に講じればよい。契約締結前である必要はない。</p></div>
+          </li>
+      </ol>
+    </section>
+
   </main>
 
   <footer>
@@ -637,5 +871,75 @@
       }
     }, { rootMargin: '-10% 0px -70% 0px' });
     document.querySelectorAll('main section').forEach(function (s) { obs.observe(s); });
+  })();
+</script>
+
+<script>
+  /* 肢別○×ドリル */
+  (function () {
+    var sec = document.getElementById('drill');
+    if (!sec) return;
+    var list = sec.querySelector('ol.drill');
+    var items = Array.prototype.slice.call(list.querySelectorAll('li.dq'));
+    var key = 'takken-drill:' + (document.title || location.pathname);
+    var state = {};
+    try { state = JSON.parse(localStorage.getItem('' + key) || '{}') || {}; } catch (e) { state = {}; }
+    var elDone = document.getElementById('d-done');
+    var elOk = document.getElementById('d-ok');
+    var elPct = document.getElementById('d-pct');
+    var onlyBtn = document.getElementById('d-wrong');
+
+    function paint() {
+      var done = 0, ok = 0;
+      items.forEach(function (li, i) {
+        var picked = state[i];
+        li.classList.remove('done', 'ok', 'ng');
+        Array.prototype.forEach.call(li.querySelectorAll('.ch button'), function (b) {
+          b.removeAttribute('data-picked');
+        });
+        if (picked !== 'o' && picked !== 'x') return;
+        done++;
+        var ans = li.getAttribute('data-a');
+        var right = picked === ans;
+        if (right) ok++;
+        li.classList.add('done', right ? 'ok' : 'ng');
+        var b = li.querySelector('.ch button[data-v="' + picked + '"]');
+        if (b) b.setAttribute('data-picked', '1');
+        li.querySelector('.verdict').textContent =
+          right ? '正解　' + (ans === 'o' ? '○' : '×')
+                : '不正解　正解は ' + (ans === 'o' ? '○' : '×');
+      });
+      elDone.textContent = String(done);
+      elOk.textContent = String(ok);
+      elPct.textContent = done ? Math.round(ok / done * 100) + '%' : '—';
+      try { localStorage.setItem('' + key, JSON.stringify(state)); } catch (e) {}
+    }
+
+    list.addEventListener('click', function (e) {
+      var b = e.target;
+      while (b && b !== list && b.tagName !== 'BUTTON') b = b.parentNode;
+      if (!b || b.tagName !== 'BUTTON') return;
+      var li = b.parentNode.parentNode;
+      var i = items.indexOf(li);
+      if (i < 0) return;
+      state[i] = b.getAttribute('data-v');
+      paint();
+    });
+
+    onlyBtn.addEventListener('click', function () {
+      var on = list.classList.toggle('onlyng');
+      onlyBtn.setAttribute('aria-pressed', String(on));
+      onlyBtn.textContent = on ? 'すべて表示' : '間違えた肢だけ';
+    });
+
+    document.getElementById('d-reset').addEventListener('click', function () {
+      state = {};
+      list.classList.remove('onlyng');
+      onlyBtn.setAttribute('aria-pressed', 'false');
+      onlyBtn.textContent = '間違えた肢だけ';
+      paint();
+    });
+
+    paint();
   })();
 </script>

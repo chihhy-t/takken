@@ -158,6 +158,39 @@
   .sibling a { font-size:.8rem; text-decoration:none; border:1px solid var(--rule); border-radius:2px; padding:.35em .8em; color:var(--muted); }
   .sibling a:hover { color:var(--ink); border-color:var(--ink); }
 
+  /* ── 肢別○×ドリル ── */
+  .drillbar { max-width:none; display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between;
+    gap:var(--s2); margin:0 0 var(--s3); padding:var(--s2) var(--s3); background:var(--surface);
+    border:1px solid var(--rule); border-radius:2px; position:sticky; top:0; z-index:5; }
+  .drillbar .score { font-family:var(--font-mono); font-size:.8rem; font-variant-numeric:tabular-nums;
+    color:var(--muted); letter-spacing:.04em; }
+  .drillbar .score b { color:var(--ink); font-weight:600; }
+  .drillbar .score .pct { color:var(--accent); font-weight:600; }
+  .drillbar .dbtns { display:flex; gap:var(--s1); }
+  ol.drill { max-width:none; list-style:none; margin:0; padding:0; counter-reset:dq; }
+  li.dq { counter-increment:dq; margin:0 0 var(--s2); padding:var(--s3);
+    background:var(--surface); border:1px solid var(--hair); border-left:3px solid var(--rule); border-radius:2px; }
+  li.dq > .s { margin:0; font-size:.95rem; line-height:1.85; max-width:var(--measure); }
+  li.dq > .s::before { content:counter(dq,decimal-leading-zero); font-family:var(--font-mono);
+    font-size:.72rem; letter-spacing:.08em; color:var(--muted); margin-right:.9em; }
+  li.dq .ch { display:flex; gap:var(--s1); margin-top:var(--s2); }
+  li.dq .ch button { font-family:var(--font-display); font-size:1.05rem; line-height:1; min-width:3.6rem; padding:.4em 0; }
+  li.dq .ch button[data-picked] { color:var(--ink); border-color:var(--ink); font-weight:700; }
+  li.dq .ex { display:none; margin-top:var(--s3); padding-top:var(--s2); border-top:1px solid var(--hair); }
+  li.dq.done .ex { display:block; }
+  li.dq .ex .verdict { display:block; font-family:var(--font-mono); font-size:.7rem; letter-spacing:.14em;
+    margin-bottom:var(--s1); }
+  li.dq .ex p { margin:0; font-size:.88rem; line-height:1.8; color:var(--muted); max-width:var(--measure); }
+  li.dq .ex p strong { color:var(--ink); font-weight:700; }
+  li.dq.ok { border-left-color:var(--blue); }
+  li.dq.ok .verdict { color:var(--blue); }
+  li.dq.ng { border-left-color:var(--accent); background:var(--accent-soft); }
+  li.dq.ng .verdict { color:var(--accent); }
+  li.dq.ng .ex p strong { color:var(--accent); }
+  ol.drill.onlyng li.dq:not(.ng) { display:none; }
+  .drilldone { font-size:.84rem; color:var(--muted); padding:var(--s3); border:1px dashed var(--rule);
+    border-radius:2px; text-align:center; }
+
   @media (prefers-reduced-motion: reduce){ *{ transition:none !important; animation:none !important; scroll-behavior:auto !important; } }
   html { scroll-behavior:smooth; }
   .eyebrow a { color:var(--accent); text-decoration:none; }
@@ -176,8 +209,9 @@
       <ul class="facts">
         <li>法令基準日 <b>2026-04-01</b></li>
         <li>出題数 <b>1問</b></li>
+        <li>ドリル <b>28肢</b></li>
         <li>目標 <b>確実に1問</b></li>
-        <li>更新 <b>2026-08-09</b></li>
+        <li>更新 <b>2026-08-23</b></li>
       </ul>
     </div>
     <div class="toggles">
@@ -202,6 +236,7 @@
       <li><a href="#deru"><span class="num">09</span>よく出る論点</a></li>
       <li><a href="#hikkake"><span class="num">10</span>ひっかけ一覧</a></li>
       <li><a href="#suji"><span class="num">11</span>数字まとめ</a></li>
+      <li><a href="#drill"><span class="num">12</span>肢別○×ドリル</a></li>
     </ol>
   </nav>
 
@@ -586,6 +621,165 @@
       </div>
     </section>
 
+    <!-- 12 -->
+    <section id="drill">
+      <h2 class="sec"><span class="num">12</span>肢別○×ドリル</h2>
+      <p class="lead">頻出論点の一問一答 <em>28肢</em>。○×を押すと理由が開く。<strong>理由を一言で言えなかった肢は、正解していても「要復習」に入れる</strong>のがこのドリルの使い方。</p>
+      <div class="call tip">
+        <span class="tag">回し方</span>
+        <p>1周目は全肢。2周目以降は「間違えた肢だけ」で回す。解答状況はこのブラウザに保存されるので、日をまたいでも続きから再開できる。</p>
+      </div>
+      <div class="drillbar">
+        <div class="score">解答 <b id="d-done">0</b> / 28　　正答 <b id="d-ok">0</b>　　正答率 <span class="pct" id="d-pct">—</span></div>
+        <div class="dbtns">
+          <button id="d-wrong" type="button" aria-pressed="false">間違えた肢だけ</button>
+          <button id="d-reset" type="button">リセット</button>
+        </div>
+      </div>
+      <ol class="drill">
+          <li class="dq" data-a="x">
+            <p class="s">報酬額の速算式は、消費税込みの代金額にそのまま当てはめる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>速算式は<strong>税抜の代金額</strong>に当てはめる。税込のまま計算すると報酬が過大になる。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">土地の代金についても、消費税を抜いてから速算式を適用する。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p><strong>土地の譲渡は消費税が非課税</strong>なので、そもそも税を抜く必要がない。建物部分についてのみ税抜処理をする。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">税抜代金が200万円以下の部分の速算率は5%である。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p><strong>200万円以下は5%</strong>、200万円超400万円以下は4%＋2万円、400万円超は3%＋6万円。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">課税事業者である宅建業者は、算出した報酬額に1.1を掛けて消費税を上乗せすることができる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>課税事業者は<strong>× 1.1</strong>（消費税10%相当）を上乗せする。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">免税事業者である宅建業者も、報酬額に1.1を掛けて請求することができる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>免税事業者が上乗せできるのは<strong>× 1.04</strong>（仕入れに係る消費税相当額）にとどまる。1.1は課税事業者のみ。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">代理を行う場合、依頼者から速算式の2倍、相手方からも2倍の報酬を受け取ることができる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>代理の報酬の上限は<strong>速算式の2倍</strong>だが、これは依頼者・相手方<strong>双方を合わせた上限</strong>であり、それぞれから2倍ずつ受け取れるわけではない。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">1つの取引に2つの宅建業者が関与する場合、それぞれの業者が取引全体の2倍まで報酬を受け取ることができる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p><strong>取引全体で受け取れる報酬の合計が2倍以内</strong>に制限される。関与する業者の数にかかわらず総額の上限は変わらない。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">交換の媒介における報酬の基準額は、交換する両物件の価額の差額を基準とする。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>交換の場合は<strong>価額の高いほうの物件の価額</strong>を基準に速算式を適用する。差額ではない。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">居住用建物の貸借の媒介において、依頼者の承諾がなくても貸主から借賃の1か月分を受け取ることができる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>承諾がない場合、居住用建物の貸借で一方から受け取れるのは<strong>借賃の0.5か月分（税込0.55か月分）</strong>まで。1か月分を受け取るには依頼者の<strong>承諾</strong>が必要。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">居住用建物の貸借において貸主から1か月分の報酬を受け取るための承諾は、媒介の依頼を受けるにあたって得る必要がある。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>承諾のタイミングは<strong>媒介の依頼を受けるにあたって</strong>であり、契約成立後の事後承諾では足りない。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">居住用建物以外の貸借の媒介では、権利金の額を基準として報酬額を計算することができる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>権利金方式が使えるのは<strong>居住用建物以外</strong>（店舗・事務所・宅地など）の場合。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">居住用建物の貸借であっても、権利金があれば権利金方式で報酬額を計算することができる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>権利金方式は<strong>居住用建物以外の貸借に限られる</strong>。居住用建物の貸借では使えない。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">敷金は、権利金として報酬額の計算に用いることができる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>敷金は<strong>契約終了時に返還される</strong>性質のものであり、権利金にはあたらない。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">低廉な空家等の特例の対象は、税抜代金が400万円以下の物件である。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>2024年7月1日の改正により、対象は<strong>800万円以下</strong>に拡大された。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">低廉な空家等の特例による報酬は、売主からしか受け取ることができない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>この特例による報酬は<strong>買主からも受領できる</strong>（媒介の場合、売主・買主それぞれから33万円以内）。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">低廉な空家等の特例による媒介報酬の上限は、税込33万円である。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>媒介は<strong>33万円以内</strong>、代理はその2倍の<strong>66万円以内</strong>。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">低廉な空家等の特例を適用するには、あらかじめ依頼者に説明し、合意を得る必要がある。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>通常の計算額を超える報酬を受け取ることになるため、<strong>事前の説明と合意</strong>が要件となる。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">長期の空家等の貸借の特例では、借主からも通常より多い報酬を受け取ることができる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>この特例が及ぶのは<strong>貸主から受ける報酬のみ</strong>（税込2.2か月分まで）。借主からの報酬額には影響しない。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">依頼者から特別に依頼されて行った広告の実費は、報酬とは別に請求することができる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p><strong>依頼者の依頼による特別の広告費用</strong>は、報酬の上限とは別に実費で請求できる。依頼によらない通常の広告費用は請求できない。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">400万円超600万円以下の部分についての速算率は3%である。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>400万円超の部分はすべて<strong>3%＋6万円</strong>という一本の式で計算する。600万円で区切りが変わることはない。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">税抜代金が500万円の物件を売買した場合の媒介報酬は、200万円まで5%・200万円超400万円以下は4%・400万円超は3%とそれぞれ計算して合算する。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p><strong>階段状に区分して計算し合算する</strong>のが速算式の考え方であり、簡略化した3%＋6万円の式も同じ結果になる。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">貸借の媒介において、依頼者の承諾があれば、報酬総額として借賃の1.1か月分（税込）まで受け取ることができる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p><strong>貸主・借主の双方から受け取る合計は1.1か月分（税込）</strong>が上限。承諾があれば内訳を1か月分・0.1か月分のように調整できる。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">居住用建物の貸借で依頼者の承諾がない場合、貸主・借主あわせて借賃の1.1か月分を受け取ることができる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>承諾がない場合、<strong>貸主・借主それぞれから0.5か月分（合計で1か月分）が上限</strong>。1.1か月分（合計の上限）を受け取れるのは承諾がある場合。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">低廉な空家等の特例は、通常の代理報酬の上限を超えて依頼者から報酬を受け取ることを認めるものである。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>現地調査等の費用がかさむ低廉な物件について、<strong>通常の速算式の上限を超える報酬</strong>を認める特例。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">報酬額の制限に違反して超過報酬を受領した場合の罰則は、6か月以下の拘禁刑または100万円以下の罰金である。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>報酬の超過受領は誇大広告等と同じ<strong>6月以下・100万円以下</strong>の罰則区分にあたる。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">空家等の売買の媒介における現地調査等に要する費用は、依頼者との合意にかかわらず常に別途請求できる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>低廉な空家等の特例を適用するには<strong>あらかじめ説明し合意を得ること</strong>が要件であり、無条件に別途請求できるわけではない。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">税抜代金が200万円の場合の速算式による報酬額は10万円である。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>200万円 × 5% = 10万円。ここに消費税分（課税事業者なら×1.1）を上乗せする。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">宅建業者は、依頼者の承諾を得れば、報酬額の制限を超える額を受け取ることができる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>報酬額の制限は<strong>強行規定</strong>であり、依頼者の承諾があっても上限を超える受領は認められない（低廉な空家等の特例など法定の例外を除く）。</p></div>
+          </li>
+      </ol>
+    </section>
+
   </main>
 
   <footer>
@@ -638,5 +832,75 @@
       }
     }, { rootMargin: '-10% 0px -70% 0px' });
     document.querySelectorAll('main section').forEach(function (s) { obs.observe(s); });
+  })();
+</script>
+
+<script>
+  /* 肢別○×ドリル */
+  (function () {
+    var sec = document.getElementById('drill');
+    if (!sec) return;
+    var list = sec.querySelector('ol.drill');
+    var items = Array.prototype.slice.call(list.querySelectorAll('li.dq'));
+    var key = 'takken-drill:' + (document.title || location.pathname);
+    var state = {};
+    try { state = JSON.parse(localStorage.getItem('' + key) || '{}') || {}; } catch (e) { state = {}; }
+    var elDone = document.getElementById('d-done');
+    var elOk = document.getElementById('d-ok');
+    var elPct = document.getElementById('d-pct');
+    var onlyBtn = document.getElementById('d-wrong');
+
+    function paint() {
+      var done = 0, ok = 0;
+      items.forEach(function (li, i) {
+        var picked = state[i];
+        li.classList.remove('done', 'ok', 'ng');
+        Array.prototype.forEach.call(li.querySelectorAll('.ch button'), function (b) {
+          b.removeAttribute('data-picked');
+        });
+        if (picked !== 'o' && picked !== 'x') return;
+        done++;
+        var ans = li.getAttribute('data-a');
+        var right = picked === ans;
+        if (right) ok++;
+        li.classList.add('done', right ? 'ok' : 'ng');
+        var b = li.querySelector('.ch button[data-v="' + picked + '"]');
+        if (b) b.setAttribute('data-picked', '1');
+        li.querySelector('.verdict').textContent =
+          right ? '正解　' + (ans === 'o' ? '○' : '×')
+                : '不正解　正解は ' + (ans === 'o' ? '○' : '×');
+      });
+      elDone.textContent = String(done);
+      elOk.textContent = String(ok);
+      elPct.textContent = done ? Math.round(ok / done * 100) + '%' : '—';
+      try { localStorage.setItem('' + key, JSON.stringify(state)); } catch (e) {}
+    }
+
+    list.addEventListener('click', function (e) {
+      var b = e.target;
+      while (b && b !== list && b.tagName !== 'BUTTON') b = b.parentNode;
+      if (!b || b.tagName !== 'BUTTON') return;
+      var li = b.parentNode.parentNode;
+      var i = items.indexOf(li);
+      if (i < 0) return;
+      state[i] = b.getAttribute('data-v');
+      paint();
+    });
+
+    onlyBtn.addEventListener('click', function () {
+      var on = list.classList.toggle('onlyng');
+      onlyBtn.setAttribute('aria-pressed', String(on));
+      onlyBtn.textContent = on ? 'すべて表示' : '間違えた肢だけ';
+    });
+
+    document.getElementById('d-reset').addEventListener('click', function () {
+      state = {};
+      list.classList.remove('onlyng');
+      onlyBtn.setAttribute('aria-pressed', 'false');
+      onlyBtn.textContent = '間違えた肢だけ';
+      paint();
+    });
+
+    paint();
   })();
 </script>

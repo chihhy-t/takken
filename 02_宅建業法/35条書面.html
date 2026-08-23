@@ -148,6 +148,39 @@
   .sibling a { font-size:.8rem; text-decoration:none; border:1px solid var(--rule); border-radius:2px; padding:.35em .8em; color:var(--muted); }
   .sibling a:hover { color:var(--ink); border-color:var(--ink); }
 
+  /* ── 肢別○×ドリル ── */
+  .drillbar { max-width:none; display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between;
+    gap:var(--s2); margin:0 0 var(--s3); padding:var(--s2) var(--s3); background:var(--surface);
+    border:1px solid var(--rule); border-radius:2px; position:sticky; top:0; z-index:5; }
+  .drillbar .score { font-family:var(--font-mono); font-size:.8rem; font-variant-numeric:tabular-nums;
+    color:var(--muted); letter-spacing:.04em; }
+  .drillbar .score b { color:var(--ink); font-weight:600; }
+  .drillbar .score .pct { color:var(--accent); font-weight:600; }
+  .drillbar .dbtns { display:flex; gap:var(--s1); }
+  ol.drill { max-width:none; list-style:none; margin:0; padding:0; counter-reset:dq; }
+  li.dq { counter-increment:dq; margin:0 0 var(--s2); padding:var(--s3);
+    background:var(--surface); border:1px solid var(--hair); border-left:3px solid var(--rule); border-radius:2px; }
+  li.dq > .s { margin:0; font-size:.95rem; line-height:1.85; max-width:var(--measure); }
+  li.dq > .s::before { content:counter(dq,decimal-leading-zero); font-family:var(--font-mono);
+    font-size:.72rem; letter-spacing:.08em; color:var(--muted); margin-right:.9em; }
+  li.dq .ch { display:flex; gap:var(--s1); margin-top:var(--s2); }
+  li.dq .ch button { font-family:var(--font-display); font-size:1.05rem; line-height:1; min-width:3.6rem; padding:.4em 0; }
+  li.dq .ch button[data-picked] { color:var(--ink); border-color:var(--ink); font-weight:700; }
+  li.dq .ex { display:none; margin-top:var(--s3); padding-top:var(--s2); border-top:1px solid var(--hair); }
+  li.dq.done .ex { display:block; }
+  li.dq .ex .verdict { display:block; font-family:var(--font-mono); font-size:.7rem; letter-spacing:.14em;
+    margin-bottom:var(--s1); }
+  li.dq .ex p { margin:0; font-size:.88rem; line-height:1.8; color:var(--muted); max-width:var(--measure); }
+  li.dq .ex p strong { color:var(--ink); font-weight:700; }
+  li.dq.ok { border-left-color:var(--blue); }
+  li.dq.ok .verdict { color:var(--blue); }
+  li.dq.ng { border-left-color:var(--accent); background:var(--accent-soft); }
+  li.dq.ng .verdict { color:var(--accent); }
+  li.dq.ng .ex p strong { color:var(--accent); }
+  ol.drill.onlyng li.dq:not(.ng) { display:none; }
+  .drilldone { font-size:.84rem; color:var(--muted); padding:var(--s3); border:1px dashed var(--rule);
+    border-radius:2px; text-align:center; }
+
   @media (prefers-reduced-motion: reduce){ *{ transition:none !important; animation:none !important; scroll-behavior:auto !important; } }
   html { scroll-behavior:smooth; }
   .eyebrow a { color:var(--accent); text-decoration:none; }
@@ -166,8 +199,9 @@
       <ul class="facts">
         <li>法令基準日 <b>2026-04-01</b></li>
         <li>出題数 <b>2〜3問</b></li>
+        <li>ドリル <b>34肢</b></li>
         <li>目標 <b>全問正解</b></li>
-        <li>更新 <b>2026-08-09</b></li>
+        <li>更新 <b>2026-08-23</b></li>
       </ul>
     </div>
     <div class="toggles">
@@ -189,6 +223,7 @@
       <li><a href="#deru"><span class="num">06</span>よく出る論点</a></li>
       <li><a href="#hikkake"><span class="num">07</span>ひっかけ一覧</a></li>
       <li><a href="#suji"><span class="num">08</span>数字まとめ</a></li>
+      <li><a href="#drill"><span class="num">09</span>肢別○×ドリル</a></li>
     </ol>
   </nav>
 
@@ -541,6 +576,195 @@
       </div>
     </section>
 
+    <!-- 09 -->
+    <section id="drill">
+      <h2 class="sec"><span class="num">09</span>肢別○×ドリル</h2>
+      <p class="lead">頻出論点の一問一答 <em>34肢</em>。○×を押すと理由が開く。<strong>理由を一言で言えなかった肢は、正解していても「要復習」に入れる</strong>のがこのドリルの使い方。</p>
+      <div class="call tip">
+        <span class="tag">回し方</span>
+        <p>1周目は全肢。2周目以降は「間違えた肢だけ」で回す。解答状況はこのブラウザに保存されるので、日をまたいでも続きから再開できる。</p>
+      </div>
+      <div class="drillbar">
+        <div class="score">解答 <b id="d-done">0</b> / 34　　正答 <b id="d-ok">0</b>　　正答率 <span class="pct" id="d-pct">—</span></div>
+        <div class="dbtns">
+          <button id="d-wrong" type="button" aria-pressed="false">間違えた肢だけ</button>
+          <button id="d-reset" type="button">リセット</button>
+        </div>
+      </div>
+      <ol class="drill">
+          <li class="dq" data-a="x">
+            <p class="s">重要事項の説明は、専任の宅建士が行わなければならない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>宅建士であれば足り、<strong>専任である必要はない</strong>。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">重要事項説明は、売主に対しても行わなければならない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>説明の相手方は<strong>取得しようとする者・借りようとする者</strong>のみ。売主・貸主には説明不要。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">相手方が宅建業者である場合、35条書面の交付自体を省略することができる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>相手方が宅建業者でも<strong>書面の交付は必要</strong>。省略できるのは口頭による<strong>説明</strong>のみ。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">重要事項の説明は、契約が成立した後、遅滞なく行えばよい。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>重要事項説明は<strong>契約が成立するまでの間</strong>に行う。契約後では意味がない。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">建物の貸借において、私道に関する負担について説明しなければならない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>私道負担の説明が必要なのは<strong>宅地の売買・貸借と建物の売買</strong>。<strong>建物の貸借では不要</strong>。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">建物の貸借において、手付金等の保全措置について説明しなければならない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>手付金等の保全措置の説明は<strong>売買・交換のみ</strong>。貸借には適用されない。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">建物の貸借において、契約の期間や更新に関する事項を説明しなければならない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>契約の期間・更新に関する事項は<strong>貸借</strong>の重要事項として説明する。売買では問題にならない。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">石綿の使用の有無について、宅建業者が自ら調査を実施したうえで説明しなければならない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>業者に<strong>調査の実施義務はない</strong>。既存の<strong>調査記録があるときに、その内容を説明</strong>すれば足りる。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">すべての建物について、耐震診断の内容を説明しなければならない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p><strong>昭和56年6月1日以降に新築の工事に着手した建物は対象外</strong>。また業者に診断の実施義務もない。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">水害ハザードマップが作成されていない場合、その旨を説明すれば足りる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>ハザードマップが未作成のときは、その旨を説明すればよい（説明義務自体はなくならない）。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">代金の額は、35条書面において説明しなければならない事項である。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>代金の額は<strong>35条では説明しない</strong>。<strong>37条書面の必要的記載事項</strong>。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">契約不適合責任の具体的な内容（修補や損害賠償の範囲など）は、35条書面で説明しなければならない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>35条で説明するのは<strong>契約不適合責任の履行を確保するための措置を講ずるかどうかとその概要</strong>であり、責任の内容そのものではない。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">代金・借賃以外に授受される金銭がある場合、その額と授受の目的を説明しなければならない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>手付金・敷金・礼金などが該当し、<strong>額と目的</strong>の両方を説明する。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">建物状況調査（インスペクション）を実施しているかどうかにかかわらず、業者は自ら調査を実施しなければならない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>業者に<strong>調査の実施義務はない</strong>。実施しているかどうかと、実施している場合はその結果の概要を説明すれば足りる。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">建物状況調査が「実施している」とされるのは、調査から1年以内（鉄筋コンクリート造等の共同住宅は2年以内）のものである。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>木造等は<strong>1年以内</strong>、鉄筋コンクリート造・鉄骨鉄筋コンクリート造の共同住宅等は<strong>2年以内</strong>。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">造成宅地防災区域内にあるかどうかは、売買のときのみ説明すればよい。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>造成宅地防災区域・土砂災害警戒区域・津波災害警戒区域は、いずれも<strong>売買・貸借を問わず</strong>区域内にあるときは説明する。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">区分所有建物の貸借において、専有部分の用途その他の利用制限に関する規約の定めを説明しなければならない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>貸借で必要な追加事項は<strong>利用制限の規約</strong>と<strong>管理受託者</strong>の2つのうちの1つ。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">区分所有建物の貸借において、計画的な維持修繕積立金の額や規約の定めを説明しなければならない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>修繕積立金に関する事項は<strong>売買・交換のみ</strong>の説明事項で、貸借では不要。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">区分所有建物の売買において、共用部分に関する規約の定めがまだ案の段階であれば、説明する必要はない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>規約が<strong>案の段階でも説明する必要がある</strong>。「まだ成立していないので不要」は誤り。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">区分所有建物の貸借において、管理が委託されているときは、その委託を受けている者の氏名・住所を説明しなければならない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>管理受託者に関する事項は、貸借でも説明が必要な数少ない項目の一つ。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">2026年4月1日施行の改正により、区分所有建物の貸借においても管理者等が管理業者であるか否かを説明しなければならなくなった。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>この改正で追加された説明事項は<strong>売買・交換のみ</strong>が対象。貸借には適用されない。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">計画的な維持修繕費用の積立てについては、規約の定めと既に積み立てられている額の両方を説明しなければならない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>「定め」と「額」のどちらか一方だけでは不十分。両方が説明事項。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">IT重説では、宅建士証の提示を省略することができる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>IT重説でも<strong>宅建士証の提示は省略できない</strong>。画面越しに提示し、相手方が視認できたことを確認する必要がある。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">IT重説を行うには、事前に35条書面（または電磁的方法による提供）を相手方に届けておく必要がある。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>IT重説の要件の一つとして、事前の書面（電磁的方法可）の到達が求められる。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">35条書面に代えて電磁的方法により提供するには、相手方の承諾が必要である。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>承諾なしに一方的に電磁的方法で送りつけることはできない。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">35条書面には宅建士の記名と押印がともに必要である。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>2022年5月18日施行の改正により、<strong>押印は廃止され記名のみ</strong>でよい。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">登記された権利の種類・内容だけでなく、移転登記の申請時期についても35条書面で説明する。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>移転登記の<strong>申請時期は35条では説明しない</strong>。登記名義人や権利の種類・内容は35条の説明事項だが、申請時期は37条書面の記載事項。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">支払金・預り金の保全措置については、措置を講ずるかどうかとその概要を説明しなければならない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>この保全措置の説明は<strong>売買・貸借を問わず</strong>必要。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">金銭の貸借のあっせんがある場合、あっせんの内容と、あっせんが成立しないときの措置を説明しなければならない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>ローン特約に相当する内容として、両方を説明する。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">未完成物件については、工事完了時の形状・構造等を説明しなければならない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>未完成物件では、売買・貸借を問わず完成時の形状・構造等を説明する。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">既存建物について、建築・維持保全の状況に関する書類の保存状況は、売買・貸借を問わず説明しなければならない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>この事項は<strong>建物の売買</strong>の場合の説明事項で、<strong>建物の貸借では不要</strong>。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">住宅性能評価を受けた新築住宅であることは、貸借であっても説明しなければならない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>住宅性能評価に関する事項は<strong>売買のみ</strong>の説明事項で、貸借（建物・宅地とも）は対象外。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">法令に基づく制限の概要は、宅地の売買・貸借では全面的に説明が必要だが、建物の貸借では一部のみ説明すればよい。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>法令上の制限は宅地の取引で幅広く説明が必要な一方、<strong>建物の貸借では一部の制限のみ</strong>が対象となる。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">宅建士証を提示しないまま重要事項説明を行った場合の制裁は、罰金刑である。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>宅建士証の不提示は<strong>罰金ではなく10万円以下の過料</strong>。刑罰ではなく行政上の秩序罰にとどまる。</p></div>
+          </li>
+      </ol>
+    </section>
+
   </main>
 
   <footer>
@@ -593,5 +817,75 @@
       }
     }, { rootMargin: '-10% 0px -70% 0px' });
     document.querySelectorAll('main section').forEach(function (s) { obs.observe(s); });
+  })();
+</script>
+
+<script>
+  /* 肢別○×ドリル */
+  (function () {
+    var sec = document.getElementById('drill');
+    if (!sec) return;
+    var list = sec.querySelector('ol.drill');
+    var items = Array.prototype.slice.call(list.querySelectorAll('li.dq'));
+    var key = 'takken-drill:' + (document.title || location.pathname);
+    var state = {};
+    try { state = JSON.parse(localStorage.getItem('' + key) || '{}') || {}; } catch (e) { state = {}; }
+    var elDone = document.getElementById('d-done');
+    var elOk = document.getElementById('d-ok');
+    var elPct = document.getElementById('d-pct');
+    var onlyBtn = document.getElementById('d-wrong');
+
+    function paint() {
+      var done = 0, ok = 0;
+      items.forEach(function (li, i) {
+        var picked = state[i];
+        li.classList.remove('done', 'ok', 'ng');
+        Array.prototype.forEach.call(li.querySelectorAll('.ch button'), function (b) {
+          b.removeAttribute('data-picked');
+        });
+        if (picked !== 'o' && picked !== 'x') return;
+        done++;
+        var ans = li.getAttribute('data-a');
+        var right = picked === ans;
+        if (right) ok++;
+        li.classList.add('done', right ? 'ok' : 'ng');
+        var b = li.querySelector('.ch button[data-v="' + picked + '"]');
+        if (b) b.setAttribute('data-picked', '1');
+        li.querySelector('.verdict').textContent =
+          right ? '正解　' + (ans === 'o' ? '○' : '×')
+                : '不正解　正解は ' + (ans === 'o' ? '○' : '×');
+      });
+      elDone.textContent = String(done);
+      elOk.textContent = String(ok);
+      elPct.textContent = done ? Math.round(ok / done * 100) + '%' : '—';
+      try { localStorage.setItem('' + key, JSON.stringify(state)); } catch (e) {}
+    }
+
+    list.addEventListener('click', function (e) {
+      var b = e.target;
+      while (b && b !== list && b.tagName !== 'BUTTON') b = b.parentNode;
+      if (!b || b.tagName !== 'BUTTON') return;
+      var li = b.parentNode.parentNode;
+      var i = items.indexOf(li);
+      if (i < 0) return;
+      state[i] = b.getAttribute('data-v');
+      paint();
+    });
+
+    onlyBtn.addEventListener('click', function () {
+      var on = list.classList.toggle('onlyng');
+      onlyBtn.setAttribute('aria-pressed', String(on));
+      onlyBtn.textContent = on ? 'すべて表示' : '間違えた肢だけ';
+    });
+
+    document.getElementById('d-reset').addEventListener('click', function () {
+      state = {};
+      list.classList.remove('onlyng');
+      onlyBtn.setAttribute('aria-pressed', 'false');
+      onlyBtn.textContent = '間違えた肢だけ';
+      paint();
+    });
+
+    paint();
   })();
 </script>

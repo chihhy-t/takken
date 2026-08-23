@@ -144,6 +144,39 @@
   .sibling a { font-size:.8rem; text-decoration:none; border:1px solid var(--rule); border-radius:2px; padding:.35em .8em; color:var(--muted); }
   .sibling a:hover { color:var(--ink); border-color:var(--ink); }
 
+  /* ── 肢別○×ドリル ── */
+  .drillbar { max-width:none; display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between;
+    gap:var(--s2); margin:0 0 var(--s3); padding:var(--s2) var(--s3); background:var(--surface);
+    border:1px solid var(--rule); border-radius:2px; position:sticky; top:0; z-index:5; }
+  .drillbar .score { font-family:var(--font-mono); font-size:.8rem; font-variant-numeric:tabular-nums;
+    color:var(--muted); letter-spacing:.04em; }
+  .drillbar .score b { color:var(--ink); font-weight:600; }
+  .drillbar .score .pct { color:var(--accent); font-weight:600; }
+  .drillbar .dbtns { display:flex; gap:var(--s1); }
+  ol.drill { max-width:none; list-style:none; margin:0; padding:0; counter-reset:dq; }
+  li.dq { counter-increment:dq; margin:0 0 var(--s2); padding:var(--s3);
+    background:var(--surface); border:1px solid var(--hair); border-left:3px solid var(--rule); border-radius:2px; }
+  li.dq > .s { margin:0; font-size:.95rem; line-height:1.85; max-width:var(--measure); }
+  li.dq > .s::before { content:counter(dq,decimal-leading-zero); font-family:var(--font-mono);
+    font-size:.72rem; letter-spacing:.08em; color:var(--muted); margin-right:.9em; }
+  li.dq .ch { display:flex; gap:var(--s1); margin-top:var(--s2); }
+  li.dq .ch button { font-family:var(--font-display); font-size:1.05rem; line-height:1; min-width:3.6rem; padding:.4em 0; }
+  li.dq .ch button[data-picked] { color:var(--ink); border-color:var(--ink); font-weight:700; }
+  li.dq .ex { display:none; margin-top:var(--s3); padding-top:var(--s2); border-top:1px solid var(--hair); }
+  li.dq.done .ex { display:block; }
+  li.dq .ex .verdict { display:block; font-family:var(--font-mono); font-size:.7rem; letter-spacing:.14em;
+    margin-bottom:var(--s1); }
+  li.dq .ex p { margin:0; font-size:.88rem; line-height:1.8; color:var(--muted); max-width:var(--measure); }
+  li.dq .ex p strong { color:var(--ink); font-weight:700; }
+  li.dq.ok { border-left-color:var(--blue); }
+  li.dq.ok .verdict { color:var(--blue); }
+  li.dq.ng { border-left-color:var(--accent); background:var(--accent-soft); }
+  li.dq.ng .verdict { color:var(--accent); }
+  li.dq.ng .ex p strong { color:var(--accent); }
+  ol.drill.onlyng li.dq:not(.ng) { display:none; }
+  .drilldone { font-size:.84rem; color:var(--muted); padding:var(--s3); border:1px dashed var(--rule);
+    border-radius:2px; text-align:center; }
+
   @media (prefers-reduced-motion: reduce){ *{ transition:none !important; animation:none !important; scroll-behavior:auto !important; } }
   html { scroll-behavior:smooth; }
   .eyebrow a { color:var(--accent); text-decoration:none; }
@@ -162,8 +195,9 @@
       <ul class="facts">
         <li>法令基準日 <b>2026-04-01</b></li>
         <li>出題数 <b>約2問</b></li>
+        <li>ドリル <b>35肢</b></li>
         <li>目標 <b>全問正解</b></li>
-        <li>更新 <b>2026-08-09</b></li>
+        <li>更新 <b>2026-08-23</b></li>
       </ul>
     </div>
     <div class="toggles">
@@ -188,6 +222,7 @@
       <li><a href="#deru"><span class="num">09</span>よく出る論点</a></li>
       <li><a href="#hikkake"><span class="num">10</span>ひっかけ一覧</a></li>
       <li><a href="#suji"><span class="num">11</span>数字まとめ</a></li>
+      <li><a href="#drill"><span class="num">12</span>肢別○×ドリル</a></li>
     </ol>
   </nav>
 
@@ -546,6 +581,200 @@
       </div>
     </section>
 
+    <!-- 12 -->
+    <section id="drill">
+      <h2 class="sec"><span class="num">12</span>肢別○×ドリル</h2>
+      <p class="lead">頻出論点の一問一答 <em>35肢</em>。○×を押すと理由が開く。<strong>理由を一言で言えなかった肢は、正解していても「要復習」に入れる</strong>のがこのドリルの使い方。</p>
+      <div class="call tip">
+        <span class="tag">回し方</span>
+        <p>1周目は全肢。2周目以降は「間違えた肢だけ」で回す。解答状況はこのブラウザに保存されるので、日をまたいでも続きから再開できる。</p>
+      </div>
+      <div class="drillbar">
+        <div class="score">解答 <b id="d-done">0</b> / 35　　正答 <b id="d-ok">0</b>　　正答率 <span class="pct" id="d-pct">—</span></div>
+        <div class="dbtns">
+          <button id="d-wrong" type="button" aria-pressed="false">間違えた肢だけ</button>
+          <button id="d-reset" type="button">リセット</button>
+        </div>
+      </div>
+      <ol class="drill">
+          <li class="dq" data-a="x">
+            <p class="s">宅建士の登録は、住所地の都道府県知事に申請する。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>登録先は<strong>試験に合格した都道府県の知事</strong>。住所地や勤務地の知事ではない。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">登録を受けるには、2年以上の実務経験または国土交通大臣の登録を受けた登録実務講習の修了が必要である。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p><strong>2年以上の実務経験</strong>、またはこれに代わる<strong>登録実務講習の修了</strong>のいずれかが必要。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">宅建士の登録には有効期間があり、5年ごとに更新しなければならない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p><strong>登録に有効期間はない</strong>。消除されない限り一生有効。5年の有効期間があるのは宅建士証。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">宅建業に係る営業の許可を受けた未成年者は、登録を受けることができる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>未成年者であっても、営業の許可を受けて成年者と同一の行為能力を有する者は登録できる。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">登録の欠格事由は、免許の欠格要件と全く同じである。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>免許の欠格要件と共通するものが多いが、<strong>登録消除処分を受けた者や、消除の聴聞公示後に自ら登録の消除を申請した者など、宅建士だけに上乗せされた事由が3つある</strong>。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">事務禁止処分の期間中に本人の申請により登録が消除された場合、その禁止期間が満了すれば直ちに再登録できる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>禁止期間中に自ら登録を消除しても、<strong>その禁止期間が満了するまでは登録を受けられない</strong>。処分からの逃げ得を防ぐ規定。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">宅建士の氏名・住所・本籍に変更があったときは、遅滞なく変更の登録を申請しなければならない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>変更の登録の期限は<strong>遅滞なく</strong>。宅建業者の変更の届出（30日以内）と混同しやすい。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">宅建士が死亡した場合、その相続人は死亡の事実を知った日から30日以内に届け出なければならない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>死亡等の届出は<strong>知った日から30日以内</strong>。届出義務者は相続人。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">宅建士が破産手続開始の決定を受けた場合、破産管財人が30日以内に届け出る。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>宅建士本人の破産の場合、届出義務者は<strong>本人</strong>。宅建業者の破産（破産管財人が届出）と入れ替えられやすい。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">登録の移転は、現に登録している知事の管轄外にある宅建業者の事務所に勤務先を変更した場合にすることができる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>登録の移転ができるのは、管轄外の事務所に<strong>現に勤務し、または勤務しようとするとき</strong>。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">宅建士は、勤務先の事務所の所在が変わったときは、登録の移転をしなければならない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>登録の移転は<strong>任意</strong>であり、義務ではない。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">住所を他の都道府県に移転しただけで、登録の移転を申請することができる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p><strong>住所の移転だけでは登録の移転はできない</strong>。あくまで勤務先の事務所の管轄が変わる場合に限られる。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">事務禁止処分を受けている期間中でも、登録の移転を申請することができる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p><strong>事務禁止処分の期間中は登録の移転を申請できない</strong>。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">登録の移転に伴って交付される宅建士証の有効期間は、5年にリセットされる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>移転後に交付される宅建士証の有効期間は<strong>従前の宅建士証の残存期間</strong>。免許換え（新免許は5年）と結論が逆になる点に注意。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">登録の移転に伴って宅建士証の交付を受ける場合、法定講習を受講する必要はない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>登録の移転による交付では法定講習は不要。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">宅建士証の有効期間は5年である。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>登録には有効期間がないが、<strong>宅建士証の有効期間は5年</strong>。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">宅建士証の交付を受けるには、原則として交付の申請前6か月以内に行われる法定講習を受講しなければならない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p><strong>申請前6月以内</strong>の講習が必要。ただし試験合格から1年以内に交付を受ける場合は不要。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">試験に合格してから1年以内に宅建士証の交付を受ける場合、法定講習は不要である。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>合格直後は知識が新しいとみなされ、法定講習が免除される。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">重要事項説明の際、宅建士証は相手方から提示を求められたときに提示すれば足りる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>重要事項説明の場面では、<strong>相手方の請求の有無にかかわらず</strong>必ず提示しなければならない。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">重要事項説明の際に宅建士証を提示しなかった場合、10万円以下の過料に処せられる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>提示義務違反の制裁は<strong>10万円以下の過料</strong>（刑罰ではなく行政上の秩序罰）。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">宅建士は、登録が消除されたときは、速やかに宅建士証を返納しなければならない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>登録の消除・宅建士証の効力喪失の場合は<strong>返納</strong>する。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">宅建士は、事務禁止処分を受けたときは、速やかに宅建士証を返納しなければならない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>事務禁止処分の場合は<strong>返納ではなく提出</strong>。交付を受けた知事に提出し、禁止期間満了後に請求すれば返還される。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">事務禁止処分による宅建士証の提出先は、処分をした知事である。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>提出先・返還先はいずれも<strong>宅建士証の交付を受けた知事</strong>であり、処分をした知事ではない（両者が異なる場合がある）。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">重要事項の説明は、専任の宅建士が行わなければならない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>説明・記名の<strong>独占業務に「専任」の要件はない</strong>。宅建士でありさえすれば、専任でなくても行える。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">37条書面への記名は宅建士が行うが、書面の交付自体は宅建士でなくてもできる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>宅建士が行うのは<strong>記名</strong>まで。書面の交付は業者の義務であって宅建士固有の業務ではない。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">35条書面・37条書面のいずれも、宅建士の記名に加えて押印が必要である。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>2022年5月18日施行の改正により、<strong>押印は廃止され記名のみ</strong>でよくなった。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">事務所には、業務に従事する者5人に1人以上の割合で専任の宅建士を置かなければならない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>事務所の設置基準は<strong>5人に1人以上</strong>。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">契約を締結し、または申込みを受ける案内所には、専任の宅建士を1人以上置かなければならない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>契約や申込みを扱わない単なる展示会場等には専任の宅建士の設置義務はない（標識のみ必要）。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">事務所の専任の宅建士が不足した場合、1か月以内に補充等の措置をとらなければならない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>専任の宅建士が不足したときの措置期限は<strong>2週間以内</strong>。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">宅建業者（法人の役員・個人業者本人）自身が宅建士であるとき、その者が主として業務に従事する事務所については、その事務所の専任の宅建士とみなされる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>別途専任の宅建士を置かなくても、自らその要件を満たすものとみなされる。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">契約を締結する案内所を設置する場合、業務を開始する日の10日前までに、免許権者にのみ届け出れば足りる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>届出先は<strong>免許権者および案内所の所在地を管轄する都道府県知事の2か所</strong>。免許権者だけでは足りない。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">宅建士は、公正かつ誠実に事務を行うとともに、宅建業に関連する業務に従事する者との連携に努めなければならない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>宅建士の業務処理の原則として定められている。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">宅建士の信用失墜行為の禁止は、職務として行った行為に限られる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>信用失墜行為の禁止は<strong>私的な行為も含む</strong>。宅建士としての信用・品位を害する行為であれば職務外でも対象となる。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">宅建業者の変更の届出の期限は30日以内であり、宅建士の変更の登録の期限も同じく30日以内である。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>宅建業者の変更の届出は<strong>30日以内</strong>だが、宅建士の変更の登録は<strong>遅滞なく</strong>であり、期限が異なる。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">宅建士が心身の故障により宅建士の事務を適正に行うことができなくなった場合、本人・法定代理人・同居の親族のいずれかが30日以内に届け出る。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>この場合の届出義務者は本人に限らず、法定代理人・同居の親族も含まれる。</p></div>
+          </li>
+      </ol>
+    </section>
+
   </main>
 
   <footer>
@@ -596,5 +825,75 @@
       }
     }, { rootMargin: '-10% 0px -70% 0px' });
     document.querySelectorAll('main section').forEach(function (s) { obs.observe(s); });
+  })();
+</script>
+
+<script>
+  /* 肢別○×ドリル */
+  (function () {
+    var sec = document.getElementById('drill');
+    if (!sec) return;
+    var list = sec.querySelector('ol.drill');
+    var items = Array.prototype.slice.call(list.querySelectorAll('li.dq'));
+    var key = 'takken-drill:' + (document.title || location.pathname);
+    var state = {};
+    try { state = JSON.parse(localStorage.getItem('' + key) || '{}') || {}; } catch (e) { state = {}; }
+    var elDone = document.getElementById('d-done');
+    var elOk = document.getElementById('d-ok');
+    var elPct = document.getElementById('d-pct');
+    var onlyBtn = document.getElementById('d-wrong');
+
+    function paint() {
+      var done = 0, ok = 0;
+      items.forEach(function (li, i) {
+        var picked = state[i];
+        li.classList.remove('done', 'ok', 'ng');
+        Array.prototype.forEach.call(li.querySelectorAll('.ch button'), function (b) {
+          b.removeAttribute('data-picked');
+        });
+        if (picked !== 'o' && picked !== 'x') return;
+        done++;
+        var ans = li.getAttribute('data-a');
+        var right = picked === ans;
+        if (right) ok++;
+        li.classList.add('done', right ? 'ok' : 'ng');
+        var b = li.querySelector('.ch button[data-v="' + picked + '"]');
+        if (b) b.setAttribute('data-picked', '1');
+        li.querySelector('.verdict').textContent =
+          right ? '正解　' + (ans === 'o' ? '○' : '×')
+                : '不正解　正解は ' + (ans === 'o' ? '○' : '×');
+      });
+      elDone.textContent = String(done);
+      elOk.textContent = String(ok);
+      elPct.textContent = done ? Math.round(ok / done * 100) + '%' : '—';
+      try { localStorage.setItem('' + key, JSON.stringify(state)); } catch (e) {}
+    }
+
+    list.addEventListener('click', function (e) {
+      var b = e.target;
+      while (b && b !== list && b.tagName !== 'BUTTON') b = b.parentNode;
+      if (!b || b.tagName !== 'BUTTON') return;
+      var li = b.parentNode.parentNode;
+      var i = items.indexOf(li);
+      if (i < 0) return;
+      state[i] = b.getAttribute('data-v');
+      paint();
+    });
+
+    onlyBtn.addEventListener('click', function () {
+      var on = list.classList.toggle('onlyng');
+      onlyBtn.setAttribute('aria-pressed', String(on));
+      onlyBtn.textContent = on ? 'すべて表示' : '間違えた肢だけ';
+    });
+
+    document.getElementById('d-reset').addEventListener('click', function () {
+      state = {};
+      list.classList.remove('onlyng');
+      onlyBtn.setAttribute('aria-pressed', 'false');
+      onlyBtn.textContent = '間違えた肢だけ';
+      paint();
+    });
+
+    paint();
   })();
 </script>

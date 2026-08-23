@@ -145,6 +145,39 @@
   .sibling a { font-size:.8rem; text-decoration:none; border:1px solid var(--rule); border-radius:2px; padding:.35em .8em; color:var(--muted); }
   .sibling a:hover { color:var(--ink); border-color:var(--ink); }
 
+  /* ── 肢別○×ドリル ── */
+  .drillbar { max-width:none; display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between;
+    gap:var(--s2); margin:0 0 var(--s3); padding:var(--s2) var(--s3); background:var(--surface);
+    border:1px solid var(--rule); border-radius:2px; position:sticky; top:0; z-index:5; }
+  .drillbar .score { font-family:var(--font-mono); font-size:.8rem; font-variant-numeric:tabular-nums;
+    color:var(--muted); letter-spacing:.04em; }
+  .drillbar .score b { color:var(--ink); font-weight:600; }
+  .drillbar .score .pct { color:var(--accent); font-weight:600; }
+  .drillbar .dbtns { display:flex; gap:var(--s1); }
+  ol.drill { max-width:none; list-style:none; margin:0; padding:0; counter-reset:dq; }
+  li.dq { counter-increment:dq; margin:0 0 var(--s2); padding:var(--s3);
+    background:var(--surface); border:1px solid var(--hair); border-left:3px solid var(--rule); border-radius:2px; }
+  li.dq > .s { margin:0; font-size:.95rem; line-height:1.85; max-width:var(--measure); }
+  li.dq > .s::before { content:counter(dq,decimal-leading-zero); font-family:var(--font-mono);
+    font-size:.72rem; letter-spacing:.08em; color:var(--muted); margin-right:.9em; }
+  li.dq .ch { display:flex; gap:var(--s1); margin-top:var(--s2); }
+  li.dq .ch button { font-family:var(--font-display); font-size:1.05rem; line-height:1; min-width:3.6rem; padding:.4em 0; }
+  li.dq .ch button[data-picked] { color:var(--ink); border-color:var(--ink); font-weight:700; }
+  li.dq .ex { display:none; margin-top:var(--s3); padding-top:var(--s2); border-top:1px solid var(--hair); }
+  li.dq.done .ex { display:block; }
+  li.dq .ex .verdict { display:block; font-family:var(--font-mono); font-size:.7rem; letter-spacing:.14em;
+    margin-bottom:var(--s1); }
+  li.dq .ex p { margin:0; font-size:.88rem; line-height:1.8; color:var(--muted); max-width:var(--measure); }
+  li.dq .ex p strong { color:var(--ink); font-weight:700; }
+  li.dq.ok { border-left-color:var(--blue); }
+  li.dq.ok .verdict { color:var(--blue); }
+  li.dq.ng { border-left-color:var(--accent); background:var(--accent-soft); }
+  li.dq.ng .verdict { color:var(--accent); }
+  li.dq.ng .ex p strong { color:var(--accent); }
+  ol.drill.onlyng li.dq:not(.ng) { display:none; }
+  .drilldone { font-size:.84rem; color:var(--muted); padding:var(--s3); border:1px dashed var(--rule);
+    border-radius:2px; text-align:center; }
+
   @media (prefers-reduced-motion: reduce){ *{ transition:none !important; animation:none !important; scroll-behavior:auto !important; } }
   html { scroll-behavior:smooth; }
   .eyebrow a { color:var(--accent); text-decoration:none; }
@@ -163,8 +196,9 @@
       <ul class="facts">
         <li>法令基準日 <b>2026-04-01</b></li>
         <li>出題数 <b>1問</b></li>
+        <li>ドリル <b>34肢</b></li>
         <li>目標 <b>確実に1問</b></li>
-        <li>更新 <b>2026-08-09</b></li>
+        <li>更新 <b>2026-08-23</b></li>
       </ul>
     </div>
     <div class="toggles">
@@ -187,6 +221,7 @@
       <li><a href="#deru"><span class="num">07</span>よく出る論点</a></li>
       <li><a href="#hikkake"><span class="num">08</span>ひっかけ一覧</a></li>
       <li><a href="#suji"><span class="num">09</span>数字まとめ</a></li>
+      <li><a href="#drill"><span class="num">10</span>肢別○×ドリル</a></li>
     </ol>
   </nav>
 
@@ -559,6 +594,195 @@
       </div>
     </section>
 
+    <!-- 10 -->
+    <section id="drill">
+      <h2 class="sec"><span class="num">10</span>肢別○×ドリル</h2>
+      <p class="lead">頻出論点の一問一答 <em>34肢</em>。○×を押すと理由が開く。<strong>理由を一言で言えなかった肢は、正解していても「要復習」に入れる</strong>のがこのドリルの使い方。</p>
+      <div class="call tip">
+        <span class="tag">回し方</span>
+        <p>1周目は全肢。2周目以降は「間違えた肢だけ」で回す。解答状況はこのブラウザに保存されるので、日をまたいでも続きから再開できる。</p>
+      </div>
+      <div class="drillbar">
+        <div class="score">解答 <b id="d-done">0</b> / 34　　正答 <b id="d-ok">0</b>　　正答率 <span class="pct" id="d-pct">—</span></div>
+        <div class="dbtns">
+          <button id="d-wrong" type="button" aria-pressed="false">間違えた肢だけ</button>
+          <button id="d-reset" type="button">リセット</button>
+        </div>
+      </div>
+      <ol class="drill">
+          <li class="dq" data-a="x">
+            <p class="s">宅建業者に対する免許取消処分は、免許権者だけでなく業務地を管轄する知事もすることができる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p><strong>免許取消処分ができるのは免許権者のみ</strong>。業務地の知事は指示処分・業務停止処分はできるが、免許取消しはできない。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">他県で業務上の違反をした宅建業者に対し、その業務地を管轄する知事は指示処分をすることができる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>指示処分・業務停止処分は<strong>業務地を管轄する知事（免許権者以外）も</strong>行うことができる。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">宅建士に対する登録消除処分は、登録している知事以外の知事もすることができる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p><strong>登録消除処分ができるのは登録をしている知事のみ</strong>。事務を行う場所を管轄する知事は指示処分・事務禁止処分はできるが、登録消除はできない。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">宅建士の事務を行う場所を管轄する知事は、その宅建士に対して指示処分・事務禁止処分をすることができる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>登録先の知事でなくても、<strong>事務を行う場所を管轄する知事</strong>は指示処分・事務禁止処分ができる。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">業務地の知事が宅建業者に対して処分をしたときは、遅滞なく免許権者にその旨を通知しなければならない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>免許権者以外の知事が処分した場合、<strong>免許権者への通知</strong>が義務づけられている。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">業務停止処分は、2年以内の期間を定めて行うことができる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>業務停止処分の期間は<strong>1年以内</strong>。事務禁止処分も同じく1年以内。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">不正の手段により免許を受けたことが判明した場合、免許権者は免許を取り消すことができる（任意的取消し）。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>不正の手段による免許取得は<strong>必要的取消事由</strong>であり、「取り消さなければならない」。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">免許に付した条件に違反した場合、免許権者は必ず免許を取り消さなければならない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>条件違反は<strong>任意的取消事由</strong>（取り消すことが「できる」）。必要的取消しではない。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">免許を受けてから1年以内に事業を開始せず、または引き続き1年以上事業を休止した場合、免許は必要的に取り消される。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>事業の不開始・長期休止は<strong>必要的取消事由</strong>にあたる。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">任意的取消事由は、免許の条件違反・営業保証金の不供託・事務所の所在不明の3つである。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>この3つが<strong>任意的取消し</strong>の事由。いずれも「悪意があるとは限らない」ケースであることが共通点。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">宅建士の登録消除処分には、任意的なものと必要的なものの両方がある。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p><strong>登録消除処分はすべて必要的</strong>。免許取消しと異なり、宅建士の登録消除に任意的なものはない。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">処分をしようとするときは、公開による聴聞を行わなければならない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>監督処分に先立つ聴聞は<strong>公開</strong>で行う。非公開ではない。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">宅建業者の事務所の所在地または所在を確知できない場合、免許を取り消すには聴聞が必要である。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>この場合は、公告してから<strong>30日</strong>を経過しても申出がないときに取り消すことができ、<strong>聴聞は不要</strong>。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">指示処分をしたときは、その旨を公告しなければならない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>公告が必要なのは<strong>業務停止処分と免許取消処分</strong>。指示処分は公告されない。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">宅建士に対する指示処分・事務禁止処分・登録消除処分は、いずれも公告される。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p><strong>宅建士への処分はいずれも公告されない</strong>。公告されるのは宅建業者への業務停止処分・免許取消処分のみ。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">宅建業者が指示処分を受けた場合、その旨は宅建業者名簿に登載される。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>公告はされないが、<strong>宅建業者名簿には登載される</strong>ので、一切公にされないわけではない。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">国土交通大臣は、すべての宅建業者に対して報告を求め、立入検査をすることができる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>国土交通大臣の監督権限はすべての宅建業者に及ぶ。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">都道府県知事は、自県の免許を受けていない他県の宅建業者に対しては、報告要求や立入検査をすることができない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>都道府県知事は、<strong>当該都道府県の区域内で業務を行う宅建業者</strong>であれば、他県の免許業者に対しても報告要求・立入検査ができる。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">無免許営業・不正の手段による免許取得・名義貸し・業務停止処分違反の罰則は、3年以下の拘禁刑または300万円以下の罰金である。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>これらは宅建業法違反の中で<strong>最も重い法定刑</strong>。法人には1億円以下の罰金（法人重科）。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">誇大広告等の禁止に違反した場合、法人には1億円以下の罰金が科される。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>法人重科の対象となるのは<strong>無免許営業・不正免許取得・名義貸し・業務停止処分違反・重要な事実の不告知等の5つのみ</strong>。誇大広告等は含まれない（法人にも通常の罰金上限が適用される）。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">重要な事実の不告知等（47条1号）の罰則は、2年以下の拘禁刑または300万円以下の罰金であり、法人重科の対象でもある。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>この行為は法人重科の対象となる<strong>5つの行為の一つ</strong>。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">不当に高額の報酬を要求する行為の罰則は、1年以下の拘禁刑または100万円以下の罰金である。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>実際に受領していなくても、<strong>要求しただけ</strong>で違反となる。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">誇大広告等の禁止違反と報酬額の制限を超える報酬の受領は、いずれも6か月以下の拘禁刑または100万円以下の罰金である。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>両者は同じ法定刑の区分に属する。片方だけを重くする選択肢は誤り。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">35条書面・37条書面を交付しなかった場合の罰則は、50万円以下の罰金である。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>書面の不交付、従業者名簿・帳簿の不備、案内所等の届出違反、専任の宅建士の設置義務違反なども同じ<strong>50万円以下の罰金</strong>の区分。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">重要事項説明の際に宅建士証を提示しなかった場合の制裁は、罰金刑である。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>宅建士証まわりの違反（不提示・返納義務違反）は<strong>10万円以下の過料</strong>であり、罰金（刑罰）ではなく行政上の秩序罰。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">宅建業法に違反していなくても、他の法令に違反した場合に監督処分の対象となることがある。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>宅建業に関し<strong>他の法令に違反</strong>した場合も、宅建業者としての不適格性を理由に監督処分の対象となりうる。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">2025年6月1日の刑法改正により、宅建業法上の「懲役」の表記はすべて「拘禁刑」に置き換わったが、刑の重さや制度自体に変更はない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>表記の変更にとどまり、<strong>罰則の実質的な重さは変わっていない</strong>。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">業務停止処分事由に該当し、情状が特に重い場合は、免許を取り消すことができる（任意的取消し）。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>業務停止処分事由に該当し情状が特に重い場合は<strong>必要的取消事由</strong>。不正取得・業務停止処分違反と同じグループに属する。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">免許換えが必要であるにもかかわらず新免許を受けていない場合、免許は必要的に取り消される。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>免許換えの懈怠は<strong>必要的取消事由</strong>。</p></div>
+          </li>
+          <li class="dq" data-a="x">
+            <p class="s">廃業等の届出がないまま廃業等の事実が判明した場合、免許は任意的に取り消される。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>この場合も<strong>必要的取消事由</strong>にあたる。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">所在を確知できない場合の免許取消しについて、公告から30日を経過しても申出がなければ取り消すことができる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>この場合は聴聞が不要な代わりに、<strong>公告から30日</strong>という猶予が設けられている。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">宅建士への指示処分の事由には、他人に自己の名義の使用を許し、その他人が宅建士である旨の表示をさせたことが含まれる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>名義貸しにあたる行為として、宅建士に対する指示処分の事由となる。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">事務禁止処分の事由に該当し情状が特に重い場合、または事務禁止処分に違反した場合は、登録消除処分となる。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>この2つは登録消除処分の事由に含まれ、<strong>必要的</strong>に処分される。</p></div>
+          </li>
+          <li class="dq" data-a="o">
+            <p class="s">国土交通大臣が消費者保護に関する処分をしようとするときは、あらかじめ内閣総理大臣に協議しなければならない。</p>
+            <div class="ch"><button type="button" data-v="o">○</button><button type="button" data-v="x">×</button></div>
+            <div class="ex"><span class="verdict"></span><p>消費者保護に関する処分については、事前に<strong>内閣総理大臣との協議</strong>が求められる。</p></div>
+          </li>
+      </ol>
+    </section>
+
   </main>
 
   <footer>
@@ -611,5 +835,75 @@
       }
     }, { rootMargin: '-10% 0px -70% 0px' });
     document.querySelectorAll('main section').forEach(function (s) { obs.observe(s); });
+  })();
+</script>
+
+<script>
+  /* 肢別○×ドリル */
+  (function () {
+    var sec = document.getElementById('drill');
+    if (!sec) return;
+    var list = sec.querySelector('ol.drill');
+    var items = Array.prototype.slice.call(list.querySelectorAll('li.dq'));
+    var key = 'takken-drill:' + (document.title || location.pathname);
+    var state = {};
+    try { state = JSON.parse(localStorage.getItem('' + key) || '{}') || {}; } catch (e) { state = {}; }
+    var elDone = document.getElementById('d-done');
+    var elOk = document.getElementById('d-ok');
+    var elPct = document.getElementById('d-pct');
+    var onlyBtn = document.getElementById('d-wrong');
+
+    function paint() {
+      var done = 0, ok = 0;
+      items.forEach(function (li, i) {
+        var picked = state[i];
+        li.classList.remove('done', 'ok', 'ng');
+        Array.prototype.forEach.call(li.querySelectorAll('.ch button'), function (b) {
+          b.removeAttribute('data-picked');
+        });
+        if (picked !== 'o' && picked !== 'x') return;
+        done++;
+        var ans = li.getAttribute('data-a');
+        var right = picked === ans;
+        if (right) ok++;
+        li.classList.add('done', right ? 'ok' : 'ng');
+        var b = li.querySelector('.ch button[data-v="' + picked + '"]');
+        if (b) b.setAttribute('data-picked', '1');
+        li.querySelector('.verdict').textContent =
+          right ? '正解　' + (ans === 'o' ? '○' : '×')
+                : '不正解　正解は ' + (ans === 'o' ? '○' : '×');
+      });
+      elDone.textContent = String(done);
+      elOk.textContent = String(ok);
+      elPct.textContent = done ? Math.round(ok / done * 100) + '%' : '—';
+      try { localStorage.setItem('' + key, JSON.stringify(state)); } catch (e) {}
+    }
+
+    list.addEventListener('click', function (e) {
+      var b = e.target;
+      while (b && b !== list && b.tagName !== 'BUTTON') b = b.parentNode;
+      if (!b || b.tagName !== 'BUTTON') return;
+      var li = b.parentNode.parentNode;
+      var i = items.indexOf(li);
+      if (i < 0) return;
+      state[i] = b.getAttribute('data-v');
+      paint();
+    });
+
+    onlyBtn.addEventListener('click', function () {
+      var on = list.classList.toggle('onlyng');
+      onlyBtn.setAttribute('aria-pressed', String(on));
+      onlyBtn.textContent = on ? 'すべて表示' : '間違えた肢だけ';
+    });
+
+    document.getElementById('d-reset').addEventListener('click', function () {
+      state = {};
+      list.classList.remove('onlyng');
+      onlyBtn.setAttribute('aria-pressed', 'false');
+      onlyBtn.textContent = '間違えた肢だけ';
+      paint();
+    });
+
+    paint();
   })();
 </script>
