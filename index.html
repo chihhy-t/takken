@@ -150,8 +150,8 @@
   <div class="stats">
     <div class="stat hot">
       <span class="k">試験日まで</span>
-      <span class="v">63<span class="u">日</span></span>
-      <span class="n">2026-08-16 時点／合格発表 11月25日(水)</span>
+      <span class="v" id="dleft">44<span class="u">日</span></span>
+      <span class="n"><span id="dbase">2026-09-04</span> 時点／合格発表 11月25日(水)</span>
     </div>
     <div class="stat hot">
       <span class="k">カバー済み</span>
@@ -510,7 +510,7 @@
 
   <footer>
     <p>試験情報の出典：<a href="https://www.retio.or.jp/exam/schedule/">不動産適正取引推進機構（RETIO）</a>／条文：<a href="https://laws.e-gov.go.jp/">e-Gov法令検索</a><br>
-    最終更新 2026-08-23</p>
+    最終更新 2026-09-04</p>
   </footer>
 
 </div>
@@ -522,4 +522,20 @@
     var dark = window.matchMedia('(prefers-color-scheme: dark)').matches;
     root.setAttribute('data-theme', dark ? 'light' : 'dark');
   });
+
+  // 試験日カウントダウン。表示時点で再計算するので手動更新は不要
+  (function () {
+    var exam  = new Date(2026, 9, 18);   // 2026-10-18(日)
+    var now   = new Date();
+    var today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+    var days  = Math.round((exam - today) / 86400000);
+    var el   = document.getElementById('dleft');
+    var base = document.getElementById('dbase');
+    if (!el || !base) return;
+    var p = function (n) { return (n < 10 ? '0' : '') + n; };
+    base.textContent = today.getFullYear() + '-' + p(today.getMonth() + 1) + '-' + p(today.getDate());
+    if (days > 0) { el.innerHTML = days + '<span class="u">日</span>'; }
+    else if (days === 0) { el.innerHTML = '<span class="u">本番</span>'; }
+    else { el.innerHTML = '<span class="u">終了</span>'; }
+  })();
 </script>
